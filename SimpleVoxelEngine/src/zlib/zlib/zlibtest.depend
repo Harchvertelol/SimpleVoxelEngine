@@ -1,0 +1,253 @@
+# depslib dependency file v1.0
+1315660550 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\adler32.c
+	"zutil.h"
+
+1364154478 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\zutil.h
+	"zlib.h"
+	<stddef.h>
+	<string.h>
+	<stdlib.h>
+	<alloc.h>
+	<malloc.h>
+	<malloc.h>
+	<unix.h>
+	<stdio.h>
+
+1367159028 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\zlib.h
+	"zconf.h"
+
+1367153830 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\zconf.h
+	<windows.h>
+	<limits.h>
+	<sys/types.h>
+	<stdarg.h>
+	<stddef.h>
+	<unistd.h>
+	<unixio.h>
+
+1344805360 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\compress.c
+	"zlib.h"
+
+1335705492 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\crc32.c
+	<stdio.h>
+	"zutil.h"
+	"crc32.h"
+
+1335705492 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\crc32.h
+
+1367153830 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\deflate.c
+	"deflate.h"
+
+1338621402 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\deflate.h
+	"zutil.h"
+
+1348947474 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\examples\zran.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"zlib.h"
+
+1266070368 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\gzclose.c
+	"gzguts.h"
+
+1365865446 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\gzguts.h
+	<stdio.h>
+	"zlib.h"
+	<string.h>
+	<stdlib.h>
+	<limits.h>
+	<fcntl.h>
+	<stddef.h>
+	<io.h>
+	<windows.h>
+	<errno.h>
+
+1364154478 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\gzlib.c
+	"gzguts.h"
+
+1364154478 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\gzread.c
+	"gzguts.h"
+
+1365865446 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\gzwrite.c
+	"gzguts.h"
+	<stdarg.h>
+
+1344805360 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\infback.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+	"inffixed.h"
+
+1271614526 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\inftrees.h
+
+1261751528 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\inflate.h
+
+1271614560 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\inffast.h
+
+1317835952 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\inffixed.h
+
+1364154478 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\inffast.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+
+1344805360 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\inflate.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+	"inffixed.h"
+	<stdio.h>
+
+1367153830 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\inftrees.c
+	"zutil.h"
+	"inftrees.h"
+
+1344805360 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\trees.c
+	"deflate.h"
+	<ctype.h>
+	"trees.h"
+	<stdio.h>
+
+1271575958 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\trees.h
+
+1344805360 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\uncompr.c
+	"zlib.h"
+
+1344805360 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\zutil.c
+	"zutil.h"
+	"gzguts.h"
+
+1420208550 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\examples\main.cpp
+	<iostream>
+	<zlib.h>
+
+1420210560 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib-1.2.8\main.cpp
+	<iostream>
+	<fstream>
+	<zlib.h>
+
+1315660550 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\adler32.c
+	"zutil.h"
+
+1364154478 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\zutil.h
+	"zlib.h"
+	<stddef.h>
+	<string.h>
+	<stdlib.h>
+	<alloc.h>
+	<malloc.h>
+	<malloc.h>
+	<unix.h>
+	<stdio.h>
+
+1367159028 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\zlib.h
+	"zconf.h"
+
+1367153830 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\zconf.h
+	<windows.h>
+	<limits.h>
+	<sys/types.h>
+	<stdarg.h>
+	<stddef.h>
+	<unistd.h>
+	<unixio.h>
+
+1344805360 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\compress.c
+	"zlib.h"
+
+1335705492 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\crc32.c
+	<stdio.h>
+	"zutil.h"
+	"crc32.h"
+
+1335705492 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\crc32.h
+
+1367153830 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\deflate.c
+	"deflate.h"
+
+1338621402 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\deflate.h
+	"zutil.h"
+
+1266070368 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\gzclose.c
+	"gzguts.h"
+
+1365865446 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\gzguts.h
+	<stdio.h>
+	"zlib.h"
+	<string.h>
+	<stdlib.h>
+	<limits.h>
+	<fcntl.h>
+	<stddef.h>
+	<io.h>
+	<windows.h>
+	<errno.h>
+
+1364154478 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\gzlib.c
+	"gzguts.h"
+
+1364154478 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\gzread.c
+	"gzguts.h"
+
+1365865446 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\gzwrite.c
+	"gzguts.h"
+	<stdarg.h>
+
+1344805360 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\infback.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+	"inffixed.h"
+
+1271614526 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\inftrees.h
+
+1261751528 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\inflate.h
+
+1271614560 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\inffast.h
+
+1317835952 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\inffixed.h
+
+1364154478 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\inffast.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+
+1344805360 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\inflate.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+	"inffixed.h"
+	<stdio.h>
+
+1367153830 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\inftrees.c
+	"zutil.h"
+	"inftrees.h"
+
+1420213436 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\main.cpp
+	<iostream>
+	<fstream>
+	<zlib.h>
+	<zlib.h>
+	<limits.h>
+
+1344805360 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\trees.c
+	"deflate.h"
+	<ctype.h>
+	"trees.h"
+	<stdio.h>
+
+1271575958 d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\trees.h
+
+1344805360 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\uncompr.c
+	"zlib.h"
+
+1344805360 source:d:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\zlib\zlib\zutil.c
+	"zutil.h"
+	"gzguts.h"
+

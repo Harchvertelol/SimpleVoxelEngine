@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="TestProject3" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/TestProject3" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Debug/" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="../SimpleVoxelEngine/lib/Debug/libSimpleVoxelEngine.a" />
+					<Add library="../IrrSimpleVoxelEngine/lib/Debug/libIrrSimpleVoxelEngine.a" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/TestProject3" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Release/" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="../SimpleVoxelEngine/lib/Release/libSimpleVoxelEngine.a" />
+					<Add library="../IrrSimpleVoxelEngine/lib/Release/libIrrSimpleVoxelEngine.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-std=c++11" />
+			<Add directory="../SimpleVoxelEngine/include" />
+			<Add directory="../IrrSimpleVoxelEngine/include" />
+			<Add directory="E:/SDK/irrlicht-1.8.5/include" />
+		</Compiler>
+		<Linker>
+			<Add library="E:/SDK/irrlicht-1.8.5/lib/Win32-gcc/libIrrlicht.a" />
+		</Linker>
+		<Unit filename="XEffects/CScreenQuad.h" />
+		<Unit filename="XEffects/CShaderPre.cpp" />
+		<Unit filename="XEffects/CShaderPre.h" />
+		<Unit filename="XEffects/EffectCB.h" />
+		<Unit filename="XEffects/EffectHandler.cpp" />
+		<Unit filename="XEffects/EffectHandler.h" />
+		<Unit filename="XEffects/EffectShaders.h" />
+		<Unit filename="XEffects/XEffects.h" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

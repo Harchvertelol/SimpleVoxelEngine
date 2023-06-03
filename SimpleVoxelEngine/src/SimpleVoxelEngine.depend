@@ -1,0 +1,353 @@
+# depslib dependency file v1.0
+1419173534 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\additional\argbcolor.cpp
+	"Additional/ARGBColor.h"
+
+1419173478 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\additional\argbcolor.h
+	<map>
+
+1420724437 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\additional\referencecounter.cpp
+	"Additional/ReferenceCounter.h"
+
+1420729499 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\additional\referencecounter.h
+
+1419111774 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\argbcolorvoxel.cpp
+	"ARGBColorVoxel.h"
+	"Engine.h"
+
+1419110978 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\argbcolorvoxel.h
+	"SimpleVoxelObject.h"
+	"Additional/ARGBColor.h"
+
+1418932548 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\simplevoxelobject.h
+	<fstream>
+	"Defines.h"
+	"VoxelAddress.h"
+	"VoxelInfo.h"
+
+1448149423 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\defines.h
+	<string>
+
+1418932288 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\voxeladdress.h
+	<map>
+	"Additional/Vector3d.h"
+
+1448054285 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\additional\vector3d.h
+	<cmath>
+	"WorkFunctions.h"
+	"Defines.h"
+
+1440007308 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\workfunctions.h
+	<sstream>
+	<map>
+	"Defines.h"
+
+1418862168 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\voxelinfo.h
+
+1434114714 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\engine.h
+	<map>
+	"Defines.h"
+	"Logger.h"
+	"World.h"
+
+1448149414 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\logger.h
+	<string>
+	"Defines.h"
+	"Additional/ReferenceCounter.h"
+
+1447969506 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\world.h
+	<string>
+	"Additional/Vector3d.h"
+	"ChunkVoxelObject.h"
+	"IniParser/PostParsingStruct.h"
+	"Defines.h"
+	"VoxelAddress.h"
+	"WorldGenerator.h"
+	"SimpleVoxelObjectTransparentTester.h"
+	"ChunksSaveLoadController.h"
+
+1440004586 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\chunkvoxelobject.h
+	<map>
+	"SimpleVoxelObject.h"
+	"Additional/Vector3d.h"
+	"Defines.h"
+	"Logger.h"
+	"VoxelsForRendering.h"
+	"VoxelAddress.h"
+
+1418932236 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\voxelsforrendering.h
+	<map>
+	"VoxelForRendering.h"
+
+1418932348 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\voxelforrendering.h
+	<map>
+	"Additional/Vector3d.h"
+	"VoxelInfo.h"
+
+1419363636 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\iniparser\postparsingstruct.h
+	<map>
+	<string>
+
+1434361059 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\worldgenerator.h
+	"ChunkVoxelObject.h"
+	"Additional/Vector3d.h"
+
+1418932372 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\simplevoxelobjecttransparenttester.h
+	"SimpleVoxelObject.h"
+
+1419367812 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\chunkssaveloadcontroller.h
+	"ChunkVoxelObject.h"
+
+1440007410 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\chunkssaveloadcontroller.cpp
+	"ChunksSaveLoadController.h"
+	"World.h"
+	"WorkFunctions.h"
+	<map>
+
+1448149489 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\chunkvoxelobject.cpp
+	"ChunkVoxelObject.h"
+	<fstream>
+	"Engine.h"
+	"World.h"
+	"ARGBColorVoxel.h"
+	"Defines.h"
+
+1440007425 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\engine.cpp
+	"Engine.h"
+
+1440007436 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\iniparser\parserinfofile.cpp
+	<fstream>
+	<iostream>
+	"IniParser/ParserInfoFile.h"
+	"IniParser/PostParsingStruct.h"
+	"Defines.h"
+	"WorkFunctions.h"
+
+1419363618 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\include\iniparser\parserinfofile.h
+	<string>
+	"PostParsingStruct.h"
+
+1419363690 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\iniparser\postparsingstruct.cpp
+	"IniParser/PostParsingStruct.h"
+	<iostream>
+
+1448149468 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\logger.cpp
+	"Logger.h"
+	<iostream>
+	"Defines.h"
+
+1419171162 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\simplevoxelobject.cpp
+	"SimpleVoxelObject.h"
+	"Engine.h"
+	"World.h"
+
+1406819262 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\simplevoxelobjecttransparenttester.cpp
+	"SimpleVoxelObjectTransparentTester.h"
+
+1407507684 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\voxeladdress.cpp
+	"VoxelAddress.h"
+	"Engine.h"
+	"Defines.h"
+
+1418861888 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\voxelforrendering.cpp
+	"VoxelForRendering.h"
+
+1408193220 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\voxelsforrendering.cpp
+	"VoxelsForRendering.h"
+
+1457976658 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\workfunctions.cpp
+	"WorkFunctions.h"
+	<stdlib.h>
+	<sys/io.h>
+	<unistd.h>
+	<sys/stat.h>
+	<io.h>
+	<direct.h>
+
+1536701993 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\world.cpp
+	"World.h"
+	<cstdlib>
+	"Engine.h"
+	"WorkFunctions.h"
+	"IniParser/ParserInfoFile.h"
+	"Defines.h"
+
+1406819188 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork\simplevoxelengine\src\worldgenerator.cpp
+	"WorldGenerator.h"
+	"World.h"
+
+1419173534 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\additional\argbcolor.cpp
+	"Additional/ARGBColor.h"
+
+1419173478 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\additional\argbcolor.h
+	<map>
+
+1420724437 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\additional\referencecounter.cpp
+	"Additional/ReferenceCounter.h"
+
+1420729499 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\additional\referencecounter.h
+
+1419111774 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\argbcolorvoxel.cpp
+	"ARGBColorVoxel.h"
+	"Engine.h"
+
+1419110978 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\argbcolorvoxel.h
+	"SimpleVoxelObject.h"
+	"Additional/ARGBColor.h"
+
+1418932548 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\simplevoxelobject.h
+	<fstream>
+	"Defines.h"
+	"VoxelAddress.h"
+	"VoxelInfo.h"
+
+1448149423 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\defines.h
+	<string>
+
+1418932288 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\voxeladdress.h
+	<map>
+	"Additional/Vector3d.h"
+
+1448054285 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\additional\vector3d.h
+	<cmath>
+	"WorkFunctions.h"
+	"Defines.h"
+
+1440007308 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\workfunctions.h
+	<sstream>
+	<map>
+	"Defines.h"
+
+1418862168 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\voxelinfo.h
+
+1434114714 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\engine.h
+	<map>
+	"Defines.h"
+	"Logger.h"
+	"World.h"
+
+1448149414 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\logger.h
+	<string>
+	"Defines.h"
+	"Additional/ReferenceCounter.h"
+
+1447969506 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\world.h
+	<string>
+	"Additional/Vector3d.h"
+	"ChunkVoxelObject.h"
+	"IniParser/PostParsingStruct.h"
+	"Defines.h"
+	"VoxelAddress.h"
+	"WorldGenerator.h"
+	"SimpleVoxelObjectTransparentTester.h"
+	"ChunksSaveLoadController.h"
+
+1440004586 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\chunkvoxelobject.h
+	<map>
+	"SimpleVoxelObject.h"
+	"Additional/Vector3d.h"
+	"Defines.h"
+	"Logger.h"
+	"VoxelsForRendering.h"
+	"VoxelAddress.h"
+
+1418932236 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\voxelsforrendering.h
+	<map>
+	"VoxelForRendering.h"
+
+1418932348 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\voxelforrendering.h
+	<map>
+	"Additional/Vector3d.h"
+	"VoxelInfo.h"
+
+1419363636 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\iniparser\postparsingstruct.h
+	<map>
+	<string>
+
+1434361059 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\worldgenerator.h
+	"ChunkVoxelObject.h"
+	"Additional/Vector3d.h"
+
+1418932372 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\simplevoxelobjecttransparenttester.h
+	"SimpleVoxelObject.h"
+
+1419367812 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\chunkssaveloadcontroller.h
+	"ChunkVoxelObject.h"
+
+1440007410 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\chunkssaveloadcontroller.cpp
+	"ChunksSaveLoadController.h"
+	"World.h"
+	"WorkFunctions.h"
+	<map>
+
+1448149489 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\chunkvoxelobject.cpp
+	"ChunkVoxelObject.h"
+	<fstream>
+	"Engine.h"
+	"World.h"
+	"ARGBColorVoxel.h"
+	"Defines.h"
+
+1440007425 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\engine.cpp
+	"Engine.h"
+
+1440007436 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\iniparser\parserinfofile.cpp
+	<fstream>
+	<iostream>
+	"IniParser/ParserInfoFile.h"
+	"IniParser/PostParsingStruct.h"
+	"Defines.h"
+	"WorkFunctions.h"
+
+1419363618 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\include\iniparser\parserinfofile.h
+	<string>
+	"PostParsingStruct.h"
+
+1419363690 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\iniparser\postparsingstruct.cpp
+	"IniParser/PostParsingStruct.h"
+	<iostream>
+
+1448149468 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\logger.cpp
+	"Logger.h"
+	<iostream>
+	"Defines.h"
+
+1419171162 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\simplevoxelobject.cpp
+	"SimpleVoxelObject.h"
+	"Engine.h"
+	"World.h"
+
+1406819262 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\simplevoxelobjecttransparenttester.cpp
+	"SimpleVoxelObjectTransparentTester.h"
+
+1407507684 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\voxeladdress.cpp
+	"VoxelAddress.h"
+	"Engine.h"
+	"Defines.h"
+
+1418861888 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\voxelforrendering.cpp
+	"VoxelForRendering.h"
+
+1408193220 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\voxelsforrendering.cpp
+	"VoxelsForRendering.h"
+
+1457976658 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\workfunctions.cpp
+	"WorkFunctions.h"
+	<stdlib.h>
+	<sys/io.h>
+	<unistd.h>
+	<sys/stat.h>
+	<io.h>
+	<direct.h>
+
+1536701993 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\world.cpp
+	"World.h"
+	<cstdlib>
+	"Engine.h"
+	"WorkFunctions.h"
+	"IniParser/ParserInfoFile.h"
+	"Defines.h"
+
+1406819188 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\simplevoxelengine\src\worldgenerator.cpp
+	"WorldGenerator.h"
+	"World.h"
+

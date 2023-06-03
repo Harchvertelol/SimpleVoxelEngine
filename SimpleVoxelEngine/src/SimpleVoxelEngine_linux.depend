@@ -1,0 +1,144 @@
+# depslib dependency file v1.0
+1404065302 source:/home/wya/EnginesCompile/SimpleVoxelEngine/src/Additional/ARGBColor.cpp
+	"Additional/ARGBColor.h"
+
+1404065299 /home/wya/EnginesCompile/SimpleVoxelEngine/include/Additional/ARGBColor.h
+	<map>
+
+1406815517 source:/home/wya/EnginesCompile/SimpleVoxelEngine/src/Engine.cpp
+	"Engine.h"
+
+1406821489 /home/wya/EnginesCompile/SimpleVoxelEngine/include/Engine.h
+	<map>
+	"Defines.h"
+	"Logger.h"
+	"World.h"
+
+1403869082 /home/wya/EnginesCompile/SimpleVoxelEngine/include/Defines.h
+	<string>
+
+1390982774 /home/wya/EnginesCompile/SimpleVoxelEngine/include/Logger.h
+	<string>
+	"Defines.h"
+
+1406821478 /home/wya/EnginesCompile/SimpleVoxelEngine/include/World.h
+	<cstring>
+	"Additional/Vector3d.h"
+	"SimpleVoxelObject.h"
+	"IniParser/PostParsingStruct.h"
+	"Defines.h"
+	"VoxelAddress.h"
+	"WorldGenerator.h"
+	"SimpleVoxelObjectTransparentTester.h"
+
+1404064853 /home/wya/EnginesCompile/SimpleVoxelEngine/include/Additional/Vector3d.h
+	<map>
+	<cmath>
+	"WorkFunction.h"
+	"Defines.h"
+
+1391008721 /home/wya/EnginesCompile/SimpleVoxelEngine/include/WorkFunction.h
+	<sstream>
+	<map>
+
+1404923642 /home/wya/EnginesCompile/SimpleVoxelEngine/include/SimpleVoxelObject.h
+	<map>
+	"Additional/Vector3d.h"
+	"Additional/ARGBColor.h"
+	"Defines.h"
+	"Logger.h"
+	"OtherVoxelInfo.h"
+	"VoxelsForRendering.h"
+	"VoxelAddress.h"
+
+1403630898 /home/wya/EnginesCompile/SimpleVoxelEngine/include/OtherVoxelInfo.h
+	<string>
+
+1390671829 /home/wya/EnginesCompile/SimpleVoxelEngine/include/VoxelsForRendering.h
+	<map>
+	"VoxelForRendering.h"
+
+1390859515 /home/wya/EnginesCompile/SimpleVoxelEngine/include/VoxelForRendering.h
+	<map>
+	"Additional/Vector3d.h"
+	"Additional/ARGBColor.h"
+	"OtherVoxelInfo.h"
+
+1391100135 /home/wya/EnginesCompile/SimpleVoxelEngine/include/VoxelAddress.h
+	<map>
+	"Additional/Vector3d.h"
+
+1406821309 /home/wya/EnginesCompile/SimpleVoxelEngine/include/IniParser/PostParsingStruct.h
+	<map>
+	<cstring>
+
+1406815574 /home/wya/EnginesCompile/SimpleVoxelEngine/include/WorldGenerator.h
+	"SimpleVoxelObject.h"
+	"Additional/Vector3d.h"
+
+1406815649 /home/wya/EnginesCompile/SimpleVoxelEngine/include/SimpleVoxelObjectTransparentTester.h
+	"SimpleVoxelObject.h"
+
+1406821194 source:/home/wya/EnginesCompile/SimpleVoxelEngine/src/IniParser/ParserInfoFile.cpp
+	<fstream>
+	<iostream>
+	"IniParser/ParserInfoFile.h"
+	"IniParser/PostParsingStruct.h"
+	"Defines.h"
+	"WorkFunction.h"
+
+1406821165 /home/wya/EnginesCompile/SimpleVoxelEngine/include/IniParser/ParserInfoFile.h
+	<cstring>
+	"PostParsingStruct.h"
+
+1406821232 source:/home/wya/EnginesCompile/SimpleVoxelEngine/src/IniParser/PostParsingStruct.cpp
+	"IniParser/PostParsingStruct.h"
+	<iostream>
+
+1404306378 source:/home/wya/EnginesCompile/SimpleVoxelEngine/src/Logger.cpp
+	"Logger.h"
+	<iostream>
+	"Defines.h"
+
+1390588299 source:/home/wya/EnginesCompile/SimpleVoxelEngine/src/OtherVoxelInfo.cpp
+	"OtherVoxelInfo.h"
+
+1406813765 source:/home/wya/EnginesCompile/SimpleVoxelEngine/src/SimpleVoxelObject.cpp
+	"SimpleVoxelObject.h"
+	"Engine.h"
+	"World.h"
+	"Defines.h"
+
+1406815662 source:/home/wya/EnginesCompile/SimpleVoxelEngine/src/SimpleVoxelObjectTransparentTester.cpp
+	"SimpleVoxelObjectTransparentTester.h"
+
+1391107387 source:/home/wya/EnginesCompile/SimpleVoxelEngine/src/VoxelAddress.cpp
+	"VoxelAddress.h"
+	"Engine.h"
+	"Defines.h"
+
+1390859515 source:/home/wya/EnginesCompile/SimpleVoxelEngine/src/VoxelForRendering.cpp
+	"VoxelForRendering.h"
+
+1390671663 source:/home/wya/EnginesCompile/SimpleVoxelEngine/src/VoxelsForRendering.cpp
+	"VoxelsForRendering.h"
+
+1406817862 source:/home/wya/EnginesCompile/SimpleVoxelEngine/src/World.cpp
+	<stdlib.h>
+	"World.h"
+	"Engine.h"
+	"WorkFunction.h"
+	"IniParser/ParserInfoFile.h"
+	"Defines.h"
+
+1406815587 source:/home/wya/EnginesCompile/SimpleVoxelEngine/src/WorldGenerator.cpp
+	"WorldGenerator.h"
+	"World.h"
+
+1406987861 source:/home/wya/EnginesCompile/SimpleVoxelEngine/src/WorkFunction.cpp
+	"WorkFunction.h"
+	<stdlib.h>
+	<sys/io.h>
+	<unistd.h>
+	<io.h>
+
