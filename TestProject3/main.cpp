@@ -503,7 +503,7 @@ class MyFactoryChunkMeshSceneNode : public FactoryChunkMeshSceneNode //Описываем
             if(((MyVoxelInfo*)t)->s_Id == 0) s_TempMeshRes = getMeshCubeFaces(vxl, s_TempMeshs, vector3df(1,1,1)); //Получаем меш куба по видимым граням
             else s_TempMeshRes = getMeshCubeFaces(vxl, s_TempMesh, vector3df(1,1,1));
             s_MeshManipulator->setVertexColors(s_TempMeshRes, ((MyVoxelInfo*)t)->s_LightColor);
-            s_TempMeshRes->getMeshBuffer(0)->getMaterial().MaterialTypeParam = pack_textureBlendFunc(EBF_SRC_ALPHA, EBF_DST_ALPHA);
+            s_TempMeshRes->getMeshBuffer(0)->getMaterial().MaterialTypeParam = pack_textureBlendFunc(EBF_SRC_ALPHA, EBF_DST_ALPHA, EMFN_MODULATE_4X);
             //if(((MyVoxelInfo*)t)->s_Id == 12) s_TempMeshRes->getMeshBuffer(0)->getMaterial().ColorMask = ECP_RGB;
             return s_TempMeshRes; //Отдаём наш меш генератору нод
         }
@@ -1050,6 +1050,8 @@ int main()
     delete s_IrrlichtCreationParameters;
     //...
     if (device == 0) return 1;
+    ILogger* logger = device->getLogger();
+    logger->setLogLevel(ELL_ERROR);
     IVideoDriver* driver = device->getVideoDriver();
     driver->setTextureCreationFlag(video::ETCF_ALWAYS_32_BIT, true);
     ISceneManager* smgr = device->getSceneManager();
