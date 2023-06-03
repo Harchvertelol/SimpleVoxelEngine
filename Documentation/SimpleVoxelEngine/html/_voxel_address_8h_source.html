@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>SimpleVoxelEngine: Исходный файл VoxelAddress.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Воксельный движок</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li class="current"><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Файлы</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_a81b5585c26ee11ef3f8637bee9e603c.html">jane</a></li><li class="navelem"><a class="el" href="dir_a87058c2edbd9f58c6f2635354598c68.html">Информатика</a></li><li class="navelem"><a class="el" href="dir_9ce0018b5864768711f69410f7e6df2b.html">c++</a></li><li class="navelem"><a class="el" href="dir_eea9b0c3eef2307c57166cdd45f56f4e.html">Графика(движки)</a></li><li class="navelem"><a class="el" href="dir_bd0a5ceea3a5bd1dc90d43f3000c4e2f.html">Irrlicht</a></li><li class="navelem"><a class="el" href="dir_25cec2ae9268a684d598f049d6333b22.html">Воксели</a></li><li class="navelem"><a class="el" href="dir_39ecb1a257347a703824a93feae6f833.html">MyVoxelWork</a></li><li class="navelem"><a class="el" href="dir_fe9ba0f9e257059b21256fb9d79583ef.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="dir_19a2cd1bac5932778934840f305deb7b.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">VoxelAddress.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SimpleVoxelEngine__VoxelAddress_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SimpleVoxelEngine__VoxelAddress_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Additional/Vector3d.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">namespace </span>Core</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <span class="keyword">class </span>Engine;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">   22</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a890e4ef11279b1df77fabe719c9f65f3">VoxelAddress</a>(<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a>* eng);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a890e4ef11279b1df77fabe719c9f65f3">VoxelAddress</a>(<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a>&amp;);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a68b4f721c1d27c5ae547d5fdf54d6681">~VoxelAddress</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a448a50832cab0aa1a072f5a4b8cece13">setLevelShift</a>(<span class="keywordtype">int</span> shift, <span class="keywordtype">bool</span> up = <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                <span class="keywordtype">int</span> <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#aafc90a8e1d6cdddce36115d08f76d481">getLevelShift</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a742f5296692e48589425da90853980f2">isUp</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#af40510e00ce47a1e9e85a845e1bd2d8f">addNextVector</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> vect);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a12af2836ab51c2b76f7a0a5eb7e7773d">addVector</a>(<span class="keywordtype">int</span> ind, <a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> vect);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="keywordtype">int</span> <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a9903d624b61e42374501e372f251ba72">getLastVectInd</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a75c3db8e37e870d200b8d6bf83257ee0">getLastVector</a>();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a5c8c147894a5daf3ee25ecaf5749a944">getVector</a>(<span class="keywordtype">int</span> ind);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                std::map&lt; int, SimpleVoxelEngine::Additional::Vector3d&lt;int&gt; &gt; <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a22771096ea25f13fb04ea9fa2f6814fa">getAddress</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#acdc35056a4bcf0ed5153f0c867bbdccf">deleteLastVector</a>();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a>&amp; <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a34732b083d543fed6bbfd9d6796f821f">operator=</a>(<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a>&amp;);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a>* <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a4d09dd26a268ac12cd34a767b88a40f6">getEngine</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a>* s_Engine;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                std::map&lt; int, SimpleVoxelEngine::Additional::Vector3d&lt;int&gt; &gt; s_Address;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="keywordtype">int</span> s_LevelShift;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                <span class="keywordtype">bool</span> s_Up;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                <span class="keywordtype">int</span> s_LastVectInd;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        };</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html_a742f5296692e48589425da90853980f2"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a742f5296692e48589425da90853980f2">SimpleVoxelEngine::Core::VoxelAddress::isUp</a></div><div class="ttdeci">bool isUp() const </div><div class="ttdoc">Устаревшая функция. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html_a75c3db8e37e870d200b8d6bf83257ee0"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a75c3db8e37e870d200b8d6bf83257ee0">SimpleVoxelEngine::Core::VoxelAddress::getLastVector</a></div><div class="ttdeci">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; getLastVector()</div><div class="ttdoc">Получение последнего вектора в списке адреса. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html_acdc35056a4bcf0ed5153f0c867bbdccf"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#acdc35056a4bcf0ed5153f0c867bbdccf">SimpleVoxelEngine::Core::VoxelAddress::deleteLastVector</a></div><div class="ttdeci">bool deleteLastVector()</div><div class="ttdoc">Удаление последнего вектора. </div></div>
+<div class="ttc" id="namespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Главное пространство имён движка. Всё находится в нём. </div><div class="ttdef"><b>Definition:</b> <a href="_a_r_g_b_color_8h_source.html#l00006">ARGBColor.h:6</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_engine_html"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_engine.html">SimpleVoxelEngine::Core::Engine</a></div><div class="ttdoc">Воксельный движок. </div><div class="ttdef"><b>Definition:</b> <a href="_engine_8h_source.html#l00017">Engine.h:17</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html_aafc90a8e1d6cdddce36115d08f76d481"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#aafc90a8e1d6cdddce36115d08f76d481">SimpleVoxelEngine::Core::VoxelAddress::getLevelShift</a></div><div class="ttdeci">int getLevelShift() const </div><div class="ttdoc">Устаревшая функция. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html_a22771096ea25f13fb04ea9fa2f6814fa"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a22771096ea25f13fb04ea9fa2f6814fa">SimpleVoxelEngine::Core::VoxelAddress::getAddress</a></div><div class="ttdeci">std::map&lt; int, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; &gt; getAddress() const </div><div class="ttdoc">Получение map с адресом. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a></div><div class="ttdoc">Адрес вокселя. </div><div class="ttdef"><b>Definition:</b> <a href="_voxel_address_8h_source.html#l00022">VoxelAddress.h:22</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html_a5c8c147894a5daf3ee25ecaf5749a944"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a5c8c147894a5daf3ee25ecaf5749a944">SimpleVoxelEngine::Core::VoxelAddress::getVector</a></div><div class="ttdeci">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; getVector(int ind)</div><div class="ttdoc">Получение вектора по индексу. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html_a34732b083d543fed6bbfd9d6796f821f"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a34732b083d543fed6bbfd9d6796f821f">SimpleVoxelEngine::Core::VoxelAddress::operator=</a></div><div class="ttdeci">VoxelAddress &amp; operator=(VoxelAddress &amp;)</div><div class="ttdoc">Оператор присваивания. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html_a4d09dd26a268ac12cd34a767b88a40f6"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a4d09dd26a268ac12cd34a767b88a40f6">SimpleVoxelEngine::Core::VoxelAddress::getEngine</a></div><div class="ttdeci">Engine * getEngine() const </div><div class="ttdoc">Получение движка. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html_af40510e00ce47a1e9e85a845e1bd2d8f"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#af40510e00ce47a1e9e85a845e1bd2d8f">SimpleVoxelEngine::Core::VoxelAddress::addNextVector</a></div><div class="ttdeci">void addNextVector(SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</div><div class="ttdoc">Добавление вектора в адрес в конец списка. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html_a448a50832cab0aa1a072f5a4b8cece13"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a448a50832cab0aa1a072f5a4b8cece13">SimpleVoxelEngine::Core::VoxelAddress::setLevelShift</a></div><div class="ttdeci">void setLevelShift(int shift, bool up=true)</div><div class="ttdoc">Устаревшая функция. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_additional_1_1_vector3d_html"><div class="ttname"><a href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a></div><div class="ttdoc">Шаблонный класс 3d вектора. </div><div class="ttdef"><b>Definition:</b> <a href="_vector3d_8h_source.html#l00016">Vector3d.h:16</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html_a9903d624b61e42374501e372f251ba72"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a9903d624b61e42374501e372f251ba72">SimpleVoxelEngine::Core::VoxelAddress::getLastVectInd</a></div><div class="ttdeci">int getLastVectInd() const </div><div class="ttdoc">Получение последнего индекса. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html_a12af2836ab51c2b76f7a0a5eb7e7773d"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a12af2836ab51c2b76f7a0a5eb7e7773d">SimpleVoxelEngine::Core::VoxelAddress::addVector</a></div><div class="ttdeci">bool addVector(int ind, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</div><div class="ttdoc">Добавление вектора в адрес по индексу. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html_a68b4f721c1d27c5ae547d5fdf54d6681"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a68b4f721c1d27c5ae547d5fdf54d6681">SimpleVoxelEngine::Core::VoxelAddress::~VoxelAddress</a></div><div class="ttdeci">~VoxelAddress()</div><div class="ttdoc">Стандартный деструктор. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html_a890e4ef11279b1df77fabe719c9f65f3"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html#a890e4ef11279b1df77fabe719c9f65f3">SimpleVoxelEngine::Core::VoxelAddress::VoxelAddress</a></div><div class="ttdeci">VoxelAddress(Engine *eng)</div><div class="ttdoc">Стандартный конструктор. </div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:21. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

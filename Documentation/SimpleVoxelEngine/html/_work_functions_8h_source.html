@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>SimpleVoxelEngine: Исходный файл WorkFunctions.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Воксельный движок</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li class="current"><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Файлы</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_a81b5585c26ee11ef3f8637bee9e603c.html">jane</a></li><li class="navelem"><a class="el" href="dir_a87058c2edbd9f58c6f2635354598c68.html">Информатика</a></li><li class="navelem"><a class="el" href="dir_9ce0018b5864768711f69410f7e6df2b.html">c++</a></li><li class="navelem"><a class="el" href="dir_eea9b0c3eef2307c57166cdd45f56f4e.html">Графика(движки)</a></li><li class="navelem"><a class="el" href="dir_bd0a5ceea3a5bd1dc90d43f3000c4e2f.html">Irrlicht</a></li><li class="navelem"><a class="el" href="dir_25cec2ae9268a684d598f049d6333b22.html">Воксели</a></li><li class="navelem"><a class="el" href="dir_39ecb1a257347a703824a93feae6f833.html">MyVoxelWork</a></li><li class="navelem"><a class="el" href="dir_fe9ba0f9e257059b21256fb9d79583ef.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="dir_19a2cd1bac5932778934840f305deb7b.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">WorkFunctions.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef WORKFUNCTION_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define WORKFUNCTION_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Defines.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="namespace_work_functions.html">   12</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_work_functions.html">WorkFunctions</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="namespace_work_functions_1_1_word_functions.html">   15</a></span>&#160;    <span class="keyword">namespace </span>WordFunctions</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        std::string <a class="code" href="namespace_work_functions_1_1_word_functions.html#a8eb0caf990506c20a67ec01f0ec4b91a">FirstWord</a>(std::string str);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        std::string <a class="code" href="namespace_work_functions_1_1_word_functions.html#a63632f1b19f47f03fac2f63a3e96d709">RemoveFirstWord</a>(std::string str);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    };</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="namespace_work_functions_1_1_parser_functions.html">   29</a></span>&#160;    <span class="keyword">namespace </span>ParserFunctions</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        std::string <a class="code" href="namespace_work_functions_1_1_parser_functions.html#a05b42b1be12c9226e07073096def1688">getNameMainVariable</a>(std::string str);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        std::string <a class="code" href="namespace_work_functions_1_1_parser_functions.html#a8ec96bf911eb8f80b15b6803149eff00">getNameSecondaryVariable</a>(std::string str);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        std::string <a class="code" href="namespace_work_functions_1_1_parser_functions.html#a04b0690cbfe1beb87ff0f1fafd3941b4">getValueSecondaryVariable</a>(std::string str);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="namespace_work_functions_1_1_parser_functions.html#a50243dc5327ab1d2aa93e0ef956e3f2a">splitMass</a>(std::map&lt;int,int&gt;* mas, <span class="keywordtype">int</span> size, <span class="keywordtype">int</span> point, std::string str, std::string splitter);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="namespace_work_functions_1_1_parser_functions.html#ad7dcd304ece36dd49d424a1c14ac0104">splitMassString</a>(std::map&lt;int,std::string&gt;* mas, <span class="keywordtype">int</span> size, <span class="keywordtype">int</span> point, std::string str, std::string splitter);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        std::string <a class="code" href="namespace_work_functions_1_1_parser_functions.html#a46066ff346255b0b10ca33f7ddea61a7">addMainVariableString</a>(std::string str, std::string name, std::string splitter);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        std::string <a class="code" href="namespace_work_functions_1_1_parser_functions.html#aa311dfb6e9e4609c56bd6c5cfe75a963">addSecondaryVariableString</a>(std::string str, std::string name, std::string value, std::string splitter);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    };</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="namespace_work_functions_1_1_convert_functions.html">   81</a></span>&#160;    <span class="keyword">namespace </span>ConvertFunctions</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        std::string <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">itos</a>(<span class="keywordtype">int</span> number);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        std::string <a class="code" href="namespace_work_functions_1_1_convert_functions.html#a98cdbc7ed004b8a875e3b1657c3dcd34">ftos</a>(<span class="keywordtype">float</span> number);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    };</div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="namespace_work_functions_1_1_math_functions.html">   97</a></span>&#160;    <span class="keyword">namespace </span>MathFunctions</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="namespace_work_functions_1_1_math_functions.html#a0bc5186f8b3d3306da59049b5d8e3625">roundNumber</a>(<span class="keywordtype">int</span> number, <span class="keywordtype">int</span> divide, <span class="keywordtype">int</span> change);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    };</div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="namespace_work_functions_1_1_file_functions.html">  109</a></span>&#160;    <span class="keyword">namespace </span>FileFunctions</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="namespace_work_functions_1_1_file_functions.html#a6b4f1dea7c7fa97cf16192603e0cb2d9">fileExists</a>(std::string name);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="namespace_work_functions_1_1_file_functions.html#acdff5c4f5fd989a086a7cccb5c011b5c">createFolders</a>(std::string folder, std::string foldersplitter = <a class="code" href="namespace_simple_voxel_engine_1_1_defines_1_1_s_t_r_i_n_g___c_o_n_s_t_a_n_t_s.html#a044c83a501e27560802283dee03bdfa8">SimpleVoxelEngine::Defines::STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER</a>);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    };</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;};</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="namespace_work_functions_1_1_parser_functions_html_a05b42b1be12c9226e07073096def1688"><div class="ttname"><a href="namespace_work_functions_1_1_parser_functions.html#a05b42b1be12c9226e07073096def1688">WorkFunctions::ParserFunctions::getNameMainVariable</a></div><div class="ttdeci">std::string getNameMainVariable(std::string str)</div><div class="ttdoc">Получение имени блока. </div></div>
+<div class="ttc" id="namespace_work_functions_1_1_parser_functions_html_a04b0690cbfe1beb87ff0f1fafd3941b4"><div class="ttname"><a href="namespace_work_functions_1_1_parser_functions.html#a04b0690cbfe1beb87ff0f1fafd3941b4">WorkFunctions::ParserFunctions::getValueSecondaryVariable</a></div><div class="ttdeci">std::string getValueSecondaryVariable(std::string str)</div><div class="ttdoc">Получение значения переменной (из строки вида NAME=VALUE). </div></div>
+<div class="ttc" id="namespace_simple_voxel_engine_1_1_defines_1_1_s_t_r_i_n_g___c_o_n_s_t_a_n_t_s_html_a044c83a501e27560802283dee03bdfa8"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_defines_1_1_s_t_r_i_n_g___c_o_n_s_t_a_n_t_s.html#a044c83a501e27560802283dee03bdfa8">SimpleVoxelEngine::Defines::STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER</a></div><div class="ttdeci">const std::string DEFAULT_FOLDER_SPLITTER</div><div class="ttdoc">Стандартный разделитель папок. </div><div class="ttdef"><b>Definition:</b> <a href="_defines_8h_source.html#l00051">Defines.h:51</a></div></div>
+<div class="ttc" id="namespace_work_functions_1_1_file_functions_html_a6b4f1dea7c7fa97cf16192603e0cb2d9"><div class="ttname"><a href="namespace_work_functions_1_1_file_functions.html#a6b4f1dea7c7fa97cf16192603e0cb2d9">WorkFunctions::FileFunctions::fileExists</a></div><div class="ttdeci">bool fileExists(std::string name)</div><div class="ttdoc">Проверка существования файла. </div></div>
+<div class="ttc" id="namespace_work_functions_1_1_parser_functions_html_aa311dfb6e9e4609c56bd6c5cfe75a963"><div class="ttname"><a href="namespace_work_functions_1_1_parser_functions.html#aa311dfb6e9e4609c56bd6c5cfe75a963">WorkFunctions::ParserFunctions::addSecondaryVariableString</a></div><div class="ttdeci">std::string addSecondaryVariableString(std::string str, std::string name, std::string value, std::string splitter)</div><div class="ttdoc">Добавление в строку переменной. </div></div>
+<div class="ttc" id="namespace_work_functions_1_1_math_functions_html_a0bc5186f8b3d3306da59049b5d8e3625"><div class="ttname"><a href="namespace_work_functions_1_1_math_functions.html#a0bc5186f8b3d3306da59049b5d8e3625">WorkFunctions::MathFunctions::roundNumber</a></div><div class="ttdeci">int roundNumber(int number, int divide, int change)</div><div class="ttdoc">Округление числа. </div></div>
+<div class="ttc" id="namespace_work_functions_1_1_parser_functions_html_ad7dcd304ece36dd49d424a1c14ac0104"><div class="ttname"><a href="namespace_work_functions_1_1_parser_functions.html#ad7dcd304ece36dd49d424a1c14ac0104">WorkFunctions::ParserFunctions::splitMassString</a></div><div class="ttdeci">int splitMassString(std::map&lt; int, std::string &gt; *mas, int size, int point, std::string str, std::string splitter)</div><div class="ttdoc">Разделение строки в массив string. </div></div>
+<div class="ttc" id="namespace_work_functions_1_1_file_functions_html_acdff5c4f5fd989a086a7cccb5c011b5c"><div class="ttname"><a href="namespace_work_functions_1_1_file_functions.html#acdff5c4f5fd989a086a7cccb5c011b5c">WorkFunctions::FileFunctions::createFolders</a></div><div class="ttdeci">bool createFolders(std::string folder, std::string foldersplitter=SimpleVoxelEngine::Defines::STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER)</div><div class="ttdoc">Функция создания папок. </div></div>
+<div class="ttc" id="namespace_work_functions_1_1_word_functions_html_a63632f1b19f47f03fac2f63a3e96d709"><div class="ttname"><a href="namespace_work_functions_1_1_word_functions.html#a63632f1b19f47f03fac2f63a3e96d709">WorkFunctions::WordFunctions::RemoveFirstWord</a></div><div class="ttdeci">std::string RemoveFirstWord(std::string str)</div><div class="ttdoc">Удаление первого слова. </div></div>
+<div class="ttc" id="namespace_work_functions_1_1_word_functions_html_a8eb0caf990506c20a67ec01f0ec4b91a"><div class="ttname"><a href="namespace_work_functions_1_1_word_functions.html#a8eb0caf990506c20a67ec01f0ec4b91a">WorkFunctions::WordFunctions::FirstWord</a></div><div class="ttdeci">std::string FirstWord(std::string str)</div><div class="ttdoc">Получение первого слова. </div></div>
+<div class="ttc" id="namespace_work_functions_1_1_parser_functions_html_a46066ff346255b0b10ca33f7ddea61a7"><div class="ttname"><a href="namespace_work_functions_1_1_parser_functions.html#a46066ff346255b0b10ca33f7ddea61a7">WorkFunctions::ParserFunctions::addMainVariableString</a></div><div class="ttdeci">std::string addMainVariableString(std::string str, std::string name, std::string splitter)</div><div class="ttdoc">Добавление в строку блока. </div></div>
+<div class="ttc" id="namespace_work_functions_1_1_parser_functions_html_a50243dc5327ab1d2aa93e0ef956e3f2a"><div class="ttname"><a href="namespace_work_functions_1_1_parser_functions.html#a50243dc5327ab1d2aa93e0ef956e3f2a">WorkFunctions::ParserFunctions::splitMass</a></div><div class="ttdeci">int splitMass(std::map&lt; int, int &gt; *mas, int size, int point, std::string str, std::string splitter)</div><div class="ttdoc">Разделение строки в массив int. </div></div>
+<div class="ttc" id="namespace_work_functions_1_1_convert_functions_html_a98cdbc7ed004b8a875e3b1657c3dcd34"><div class="ttname"><a href="namespace_work_functions_1_1_convert_functions.html#a98cdbc7ed004b8a875e3b1657c3dcd34">WorkFunctions::ConvertFunctions::ftos</a></div><div class="ttdeci">std::string ftos(float number)</div><div class="ttdoc">Конвертация float в string. </div></div>
+<div class="ttc" id="namespace_work_functions_html"><div class="ttname"><a href="namespace_work_functions.html">WorkFunctions</a></div><div class="ttdoc">Отдельное пространство имён со специальными функциями для работы. </div><div class="ttdef"><b>Definition:</b> <a href="_work_functions_8h_source.html#l00012">WorkFunctions.h:12</a></div></div>
+<div class="ttc" id="namespace_work_functions_1_1_parser_functions_html_a8ec96bf911eb8f80b15b6803149eff00"><div class="ttname"><a href="namespace_work_functions_1_1_parser_functions.html#a8ec96bf911eb8f80b15b6803149eff00">WorkFunctions::ParserFunctions::getNameSecondaryVariable</a></div><div class="ttdeci">std::string getNameSecondaryVariable(std::string str)</div><div class="ttdoc">Получение имени переменной (из строки вида NAME=VALUE). </div></div>
+<div class="ttc" id="namespace_work_functions_1_1_convert_functions_html_ac81888ad93acc220392595e0ff3b9dc1"><div class="ttname"><a href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a></div><div class="ttdeci">std::string itos(int number)</div><div class="ttdoc">Конвертация int в string. </div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:21. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>SimpleVoxelEngine: Класс ParserInfoFile</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Воксельный движок</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
+      <li><a href="hierarchy.html"><span>Иерархия&#160;классов</span></a></li>
+      <li><a href="functions.html"><span>Члены&#160;классов</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceIniParser.html">IniParser</a></li><li class="navelem"><a class="el" href="classIniParser_1_1ParserInfoFile.html">ParserInfoFile</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="classIniParser_1_1ParserInfoFile-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Класс ParserInfoFile</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Класс для обработки ini-файлов.  
+ <a href="classIniParser_1_1ParserInfoFile.html#details">Подробнее...</a></p>
+
+<p><code>#include &quot;<a class="el" href="ParserInfoFile_8h_source.html">ParserInfoFile.h</a>&quot;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:aea1018a5bf5e9198e4fbfdc7c912a749"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aea1018a5bf5e9198e4fbfdc7c912a749"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIniParser_1_1ParserInfoFile.html#aea1018a5bf5e9198e4fbfdc7c912a749">ParserInfoFile</a> ()</td></tr>
+<tr class="memdesc:aea1018a5bf5e9198e4fbfdc7c912a749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный конструктор. <br /></td></tr>
+<tr class="separator:aea1018a5bf5e9198e4fbfdc7c912a749"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a902679e963aacde5e73727e6d7eeddd0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a902679e963aacde5e73727e6d7eeddd0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIniParser_1_1ParserInfoFile.html#a902679e963aacde5e73727e6d7eeddd0">~ParserInfoFile</a> ()</td></tr>
+<tr class="memdesc:a902679e963aacde5e73727e6d7eeddd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный деструктор. <br /></td></tr>
+<tr class="separator:a902679e963aacde5e73727e6d7eeddd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a361ef45f985e79d0e75887385ed9fdf2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classIniParser_1_1PostParsingStruct.html">PostParsingStruct</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIniParser_1_1ParserInfoFile.html#a361ef45f985e79d0e75887385ed9fdf2">getParsedFromFile</a> (std::string filename, bool log=true)</td></tr>
+<tr class="memdesc:a361ef45f985e79d0e75887385ed9fdf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение результата обработки из файла.  <a href="#a361ef45f985e79d0e75887385ed9fdf2">Подробнее...</a><br /></td></tr>
+<tr class="separator:a361ef45f985e79d0e75887385ed9fdf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91b2fc2a61eaab95ed11ffa6a4d22b91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classIniParser_1_1PostParsingStruct.html">PostParsingStruct</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIniParser_1_1ParserInfoFile.html#a91b2fc2a61eaab95ed11ffa6a4d22b91">getParsedFromString</a> (std::string str, std::string splitter)</td></tr>
+<tr class="memdesc:a91b2fc2a61eaab95ed11ffa6a4d22b91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение результата обработки из строки.  <a href="#a91b2fc2a61eaab95ed11ffa6a4d22b91">Подробнее...</a><br /></td></tr>
+<tr class="separator:a91b2fc2a61eaab95ed11ffa6a4d22b91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac00a904db9e870b4fac3c2786e101cf5"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIniParser_1_1ParserInfoFile.html#ac00a904db9e870b4fac3c2786e101cf5">convertPostParsingStructToString</a> (<a class="el" href="classIniParser_1_1PostParsingStruct.html">PostParsingStruct</a> *pps, std::string splitter)</td></tr>
+<tr class="memdesc:ac00a904db9e870b4fac3c2786e101cf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конвертация <a class="el" href="classIniParser_1_1PostParsingStruct.html" title="Класс, который заполняется в результате обработки ini-файла. ">PostParsingStruct</a> в строку.  <a href="#ac00a904db9e870b4fac3c2786e101cf5">Подробнее...</a><br /></td></tr>
+<tr class="separator:ac00a904db9e870b4fac3c2786e101cf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b11043e87f4a1a26e477cb1d42dc1af"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIniParser_1_1ParserInfoFile.html#a8b11043e87f4a1a26e477cb1d42dc1af">writeParsedToFile</a> (<a class="el" href="classIniParser_1_1PostParsingStruct.html">PostParsingStruct</a> *pps, std::string filename, bool log=true)</td></tr>
+<tr class="memdesc:a8b11043e87f4a1a26e477cb1d42dc1af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Запись <a class="el" href="classIniParser_1_1PostParsingStruct.html" title="Класс, который заполняется в результате обработки ini-файла. ">PostParsingStruct</a> в файл.  <a href="#a8b11043e87f4a1a26e477cb1d42dc1af">Подробнее...</a><br /></td></tr>
+<tr class="separator:a8b11043e87f4a1a26e477cb1d42dc1af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Класс для обработки ini-файлов. </p>
+<p>Данный класс загружает и обрабатывает ini-файлы, выдавая результатом заполненную <a class="el" href="classIniParser_1_1PostParsingStruct.html" title="Класс, который заполняется в результате обработки ini-файла. ">PostParsingStruct</a>. </p>
+
+<p>См. определение в файле <a class="el" href="ParserInfoFile_8h_source.html">ParserInfoFile.h</a> строка <a class="el" href="ParserInfoFile_8h_source.html#l00013">13</a></p>
+</div><h2 class="groupheader">Методы</h2>
+<a class="anchor" id="ac00a904db9e870b4fac3c2786e101cf5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string convertPostParsingStructToString </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classIniParser_1_1PostParsingStruct.html">PostParsingStruct</a> *&#160;</td>
+          <td class="paramname"><em>pps</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>splitter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Конвертация <a class="el" href="classIniParser_1_1PostParsingStruct.html" title="Класс, который заполняется в результате обработки ini-файла. ">PostParsingStruct</a> в строку. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pps</td><td>Конвертируемый <a class="el" href="classIniParser_1_1PostParsingStruct.html" title="Класс, который заполняется в результате обработки ini-файла. ">PostParsingStruct</a>. </td></tr>
+    <tr><td class="paramname">splitter</td><td>Разделитель в строке вместо переноса на новую строку. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает строку, которая является результатом конвертации. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a361ef45f985e79d0e75887385ed9fdf2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classIniParser_1_1PostParsingStruct.html">PostParsingStruct</a>* getParsedFromFile </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>log</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение результата обработки из файла. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>Имя файла, который надо обработать. </td></tr>
+    <tr><td class="paramname">log</td><td>Вывод лога ошибок в консоль. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает указатель на <a class="el" href="classIniParser_1_1PostParsingStruct.html" title="Класс, который заполняется в результате обработки ini-файла. ">PostParsingStruct</a>. Он равен NULL, если обработка прошла неудачно. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a91b2fc2a61eaab95ed11ffa6a4d22b91"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classIniParser_1_1PostParsingStruct.html">PostParsingStruct</a>* getParsedFromString </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>splitter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение результата обработки из строки. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>Строка, которую надо обработать. </td></tr>
+    <tr><td class="paramname">splitter</td><td>Разделитель в строке вместо переноса на новую строку. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает указатель на <a class="el" href="classIniParser_1_1PostParsingStruct.html" title="Класс, который заполняется в результате обработки ini-файла. ">PostParsingStruct</a>. Он равен NULL, если обработка прошла неудачно. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8b11043e87f4a1a26e477cb1d42dc1af"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool writeParsedToFile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classIniParser_1_1PostParsingStruct.html">PostParsingStruct</a> *&#160;</td>
+          <td class="paramname"><em>pps</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>log</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Запись <a class="el" href="classIniParser_1_1PostParsingStruct.html" title="Класс, который заполняется в результате обработки ini-файла. ">PostParsingStruct</a> в файл. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pps</td><td>Записываемая <a class="el" href="classIniParser_1_1PostParsingStruct.html" title="Класс, который заполняется в результате обработки ini-файла. ">PostParsingStruct</a>. </td></tr>
+    <tr><td class="paramname">filename</td><td>Имя файла, куда идёт запись. </td></tr>
+    <tr><td class="paramname">log</td><td>Вывод лога ошибок в консоль. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true в случае успеха, в противном случае возвращает false. </dd></dl>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li><a class="el" href="ParserInfoFile_8h_source.html">ParserInfoFile.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по SimpleVoxelEngine. Последние изменения: Чт 25 Дек 2014 04:13:21. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>IrrSimpleVoxelEngine: Класс SimpleVoxelEngine::IrrEngine::ChunksMeshBlock</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">IrrSimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Враппер для воксельного движка на irrlicht</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
+      <li><a href="hierarchy.html"><span>Иерархия&#160;классов</span></a></li>
+      <li><a href="functions.html"><span>Члены&#160;классов</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Друзья</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a></li><li class="navelem"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html">ChunksMeshBlock</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Класс SimpleVoxelEngine::IrrEngine::ChunksMeshBlock</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Класс, отвечающий за объединение чанков в общие блоки.  
+ <a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_chunks_mesh_block_8h_source.html">ChunksMeshBlock.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a793416e15653d31606043d694327d3f5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a793416e15653d31606043d694327d3f5">ChunksMeshBlock</a> (<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html">IrrSimpleVoxelEngine</a> *isve, irr::IrrlichtDevice *device)</td></tr>
+<tr class="memdesc:a793416e15653d31606043d694327d3f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный конструктор  <a href="#a793416e15653d31606043d694327d3f5">Подробнее...</a><br /></td></tr>
+<tr class="separator:a793416e15653d31606043d694327d3f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a491911302f4b40b8d4b8fee5bb609f79"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a491911302f4b40b8d4b8fee5bb609f79"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a491911302f4b40b8d4b8fee5bb609f79">~ChunksMeshBlock</a> ()</td></tr>
+<tr class="memdesc:a491911302f4b40b8d4b8fee5bb609f79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный деструктор. <br /></td></tr>
+<tr class="separator:a491911302f4b40b8d4b8fee5bb609f79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60beba4b38e921c873bc68714c694857"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a60beba4b38e921c873bc68714c694857">setSize</a> (int x, int y, int z)</td></tr>
+<tr class="memdesc:a60beba4b38e921c873bc68714c694857"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка размера блока.  <a href="#a60beba4b38e921c873bc68714c694857">Подробнее...</a><br /></td></tr>
+<tr class="separator:a60beba4b38e921c873bc68714c694857"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8b74cd264bb1c497fb446eda7ebaca9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#ac8b74cd264bb1c497fb446eda7ebaca9">setScale</a> (int scale)</td></tr>
+<tr class="memdesc:ac8b74cd264bb1c497fb446eda7ebaca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка множителя масштабирования SimpleVoxelObject.  <a href="#ac8b74cd264bb1c497fb446eda7ebaca9">Подробнее...</a><br /></td></tr>
+<tr class="separator:ac8b74cd264bb1c497fb446eda7ebaca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46d36f96f21996aa444026f22bbf421d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a46d36f96f21996aa444026f22bbf421d">setMesh</a> (irr::scene::IMesh *mesh, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</td></tr>
+<tr class="memdesc:a46d36f96f21996aa444026f22bbf421d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавления меша в блок из чанков.  <a href="#a46d36f96f21996aa444026f22bbf421d">Подробнее...</a><br /></td></tr>
+<tr class="separator:a46d36f96f21996aa444026f22bbf421d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83e922b72eea8c1a0c8ec2383fbe0455"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a83e922b72eea8c1a0c8ec2383fbe0455">deleteMesh</a> (SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</td></tr>
+<tr class="memdesc:a83e922b72eea8c1a0c8ec2383fbe0455"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаление меша из блока из чанков.  <a href="#a83e922b72eea8c1a0c8ec2383fbe0455">Подробнее...</a><br /></td></tr>
+<tr class="separator:a83e922b72eea8c1a0c8ec2383fbe0455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a112807cb028331b63aa5ef525e0d74b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a112807cb028331b63aa5ef525e0d74b8">update</a> (int id, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect, bool occlusionqueries=false)</td></tr>
+<tr class="memdesc:a112807cb028331b63aa5ef525e0d74b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обновление блока.  <a href="#a112807cb028331b63aa5ef525e0d74b8">Подробнее...</a><br /></td></tr>
+<tr class="separator:a112807cb028331b63aa5ef525e0d74b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0253edcd19467bed94e641b14d9a5a7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a0253edcd19467bed94e641b14d9a5a7a">isWaitUpdate</a> ()</td></tr>
+<tr class="memdesc:a0253edcd19467bed94e641b14d9a5a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка состояния ожидания обновления блока чанков.  <a href="#a0253edcd19467bed94e641b14d9a5a7a">Подробнее...</a><br /></td></tr>
+<tr class="separator:a0253edcd19467bed94e641b14d9a5a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af873b9cbb2d107f8469df8f612b084b0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#af873b9cbb2d107f8469df8f612b084b0">isEmpty</a> ()</td></tr>
+<tr class="memdesc:af873b9cbb2d107f8469df8f612b084b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка наличия чанков в блоке.  <a href="#af873b9cbb2d107f8469df8f612b084b0">Подробнее...</a><br /></td></tr>
+<tr class="separator:af873b9cbb2d107f8469df8f612b084b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b739a9a838d31e94f9f70e2d4595282"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a9b739a9a838d31e94f9f70e2d4595282">getNumberOfMeshes</a> ()</td></tr>
+<tr class="memdesc:a9b739a9a838d31e94f9f70e2d4595282"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение числа склеиваемых мешей в блоке.  <a href="#a9b739a9a838d31e94f9f70e2d4595282">Подробнее...</a><br /></td></tr>
+<tr class="separator:a9b739a9a838d31e94f9f70e2d4595282"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab57602a52d0546775910b54f1115a58"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#aab57602a52d0546775910b54f1115a58">isRenderChunk</a> (SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</td></tr>
+<tr class="memdesc:aab57602a52d0546775910b54f1115a58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка чанка на отрисовку.  <a href="#aab57602a52d0546775910b54f1115a58">Подробнее...</a><br /></td></tr>
+<tr class="separator:aab57602a52d0546775910b54f1115a58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbb41464d74c114ca71203899805499b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#adbb41464d74c114ca71203899805499b">testOcclusionQuerie</a> ()</td></tr>
+<tr class="memdesc:adbb41464d74c114ca71203899805499b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка на прохождение условия Occlusion Queries.  <a href="#adbb41464d74c114ca71203899805499b">Подробнее...</a><br /></td></tr>
+<tr class="separator:adbb41464d74c114ca71203899805499b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f0d645dde7e967b6abf6c6dfe84edbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a5f0d645dde7e967b6abf6c6dfe84edbd">setHardwareMappingHint</a> (irr::scene::E_HARDWARE_MAPPING mapping, irr::scene::E_BUFFER_TYPE typebuffer)</td></tr>
+<tr class="memdesc:a5f0d645dde7e967b6abf6c6dfe84edbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка hardware mapping hint.  <a href="#a5f0d645dde7e967b6abf6c6dfe84edbd">Подробнее...</a><br /></td></tr>
+<tr class="separator:a5f0d645dde7e967b6abf6c6dfe84edbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f1cd815a3e6958c508bd3660ded63f4"><td class="memItemLeft" align="right" valign="top">irr::scene::IMeshSceneNode *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a2f1cd815a3e6958c508bd3660ded63f4">getMeshSceneNode</a> ()</td></tr>
+<tr class="memdesc:a2f1cd815a3e6958c508bd3660ded63f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение указателя на ноду блока чанков.  <a href="#a2f1cd815a3e6958c508bd3660ded63f4">Подробнее...</a><br /></td></tr>
+<tr class="separator:a2f1cd815a3e6958c508bd3660ded63f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab178f9e2ea1d65ca0b5ab06d04b6db11"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#ab178f9e2ea1d65ca0b5ab06d04b6db11">isRenderMesh</a> (SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</td></tr>
+<tr class="memdesc:ab178f9e2ea1d65ca0b5ab06d04b6db11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение состояние отрисовки заданного подмеша.  <a href="#ab178f9e2ea1d65ca0b5ab06d04b6db11">Подробнее...</a><br /></td></tr>
+<tr class="separator:ab178f9e2ea1d65ca0b5ab06d04b6db11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Класс, отвечающий за объединение чанков в общие блоки. </p>
+<p>Это необходимо для уменьшения числа вызовов отрисовки. Но увеличение размера данного блока уменьшает скорость обновления чанка. Приходится искать золотую середину. </p>
+
+<p>См. определение в файле <a class="el" href="_chunks_mesh_block_8h_source.html">ChunksMeshBlock.h</a> строка <a class="el" href="_chunks_mesh_block_8h_source.html#l00020">20</a></p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a class="anchor" id="a793416e15653d31606043d694327d3f5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::ChunksMeshBlock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html">IrrSimpleVoxelEngine</a> *&#160;</td>
+          <td class="paramname"><em>isve</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">irr::IrrlichtDevice *&#160;</td>
+          <td class="paramname"><em>device</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Стандартный конструктор </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">isve</td><td>Указатель на враппер, в котором идёт обработка данного блока чанков. </td></tr>
+    <tr><td class="paramname">device</td><td>Указатель на IrrlichtDevice, который используется для отрисовки. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a class="anchor" id="a83e922b72eea8c1a0c8ec2383fbe0455"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::deleteMesh </td>
+          <td>(</td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>vect</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Удаление меша из блока из чанков. </p>
+<p>Удаляет меш по относительным координатам vect. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vect</td><td>Вектор удаляемого меша в относительных координатах кубоида из чанков. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a2f1cd815a3e6958c508bd3660ded63f4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">irr::scene::IMeshSceneNode* SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::getMeshSceneNode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение указателя на ноду блока чанков. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает указатель на Irrlicht-ноду чанков. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a9b739a9a838d31e94f9f70e2d4595282"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::getNumberOfMeshes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение числа склеиваемых мешей в блоке. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает число мешей для склейки. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af873b9cbb2d107f8469df8f612b084b0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::isEmpty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проверка наличия чанков в блоке. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если блок пустой, иначе false. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aab57602a52d0546775910b54f1115a58"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::isRenderChunk </td>
+          <td>(</td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>vect</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проверка чанка на отрисовку. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vect</td><td>Вектор (координаты) проверямого чанка на отрисовку в относительных координатах кубоида чанков. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если чанк отрисовывается, иначе false. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab178f9e2ea1d65ca0b5ab06d04b6db11"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::isRenderMesh </td>
+          <td>(</td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>vect</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение состояние отрисовки заданного подмеша. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vect</td><td>Вектор (координаты) проверяемого подмеша. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если подмеш отрисовывается, иначе false. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0253edcd19467bed94e641b14d9a5a7a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::isWaitUpdate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проверка состояния ожидания обновления блока чанков. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если блок ожидает обновления и не готов к работе, иначе false. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5f0d645dde7e967b6abf6c6dfe84edbd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::setHardwareMappingHint </td>
+          <td>(</td>
+          <td class="paramtype">irr::scene::E_HARDWARE_MAPPING&#160;</td>
+          <td class="paramname"><em>mapping</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">irr::scene::E_BUFFER_TYPE&#160;</td>
+          <td class="paramname"><em>typebuffer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка hardware mapping hint. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mapping</td><td>Тип mapping из Irrlicht. </td></tr>
+    <tr><td class="paramname">typebuffer</td><td>Тип буффера из Irrlicht. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a46d36f96f21996aa444026f22bbf421d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::setMesh </td>
+          <td>(</td>
+          <td class="paramtype">irr::scene::IMesh *&#160;</td>
+          <td class="paramname"><em>mesh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>vect</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавления меша в блок из чанков. </p>
+<p>Добавляет в общий меш новый. Если указатель равен NULL, то меш по координатам vect фактически будет удалён, но рекомендуется пользоваться специальной функцией <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a83e922b72eea8c1a0c8ec2383fbe0455" title="Удаление меша из блока из чанков. ">deleteMesh()</a>. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mesh</td><td>Добавляемый меш. </td></tr>
+    <tr><td class="paramname">vect</td><td>Вектор добавляемого меша в относительных координатах кубоида из чанков. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ac8b74cd264bb1c497fb446eda7ebaca9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::setScale </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>scale</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка множителя масштабирования SimpleVoxelObject. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scale</td><td>Множитель масштабирования. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a60beba4b38e921c873bc68714c694857"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::setSize </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>z</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка размера блока. </p>
+<p>Устанавливает размер куба из чанков, который объединяется в один меш. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Размер куба из чанков по X. </td></tr>
+    <tr><td class="paramname">y</td><td>Размер куба из чанков по Y. </td></tr>
+    <tr><td class="paramname">z</td><td>Размер куба из чанков по Z. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="adbb41464d74c114ca71203899805499b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::testOcclusionQuerie </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проверка на прохождение условия Occlusion Queries. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если блок чанков виден, иначе false. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a112807cb028331b63aa5ef525e0d74b8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::update </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>vect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>occlusionqueries</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Обновление блока. </p>
+<p>Обновляет общий меш, даёт возможность его использовать и рисовать. Эту функцию необходимо вызывать после вызова <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a46d36f96f21996aa444026f22bbf421d" title="Добавления меша в блок из чанков. ">setMesh()</a> или <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a83e922b72eea8c1a0c8ec2383fbe0455" title="Удаление меша из блока из чанков. ">deleteMesh()</a>. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Идентификатор мира, в котором находятся чанки. </td></tr>
+    <tr><td class="paramname">vect</td><td>Вектор блока чанков в глобальных координатах. </td></tr>
+    <tr><td class="paramname">occlusionqueries</td><td>Если имеет значение true, то используется Occlusion Queries. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li><a class="el" href="_chunks_mesh_block_8h_source.html">ChunksMeshBlock.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по IrrSimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:37. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

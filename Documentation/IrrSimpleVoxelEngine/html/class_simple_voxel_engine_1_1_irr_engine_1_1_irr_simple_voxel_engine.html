@@ -1,0 +1,1526 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>IrrSimpleVoxelEngine: Класс SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">IrrSimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Враппер для воксельного движка на irrlicht</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
+      <li><a href="hierarchy.html"><span>Иерархия&#160;классов</span></a></li>
+      <li><a href="functions.html"><span>Члены&#160;классов</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Друзья</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a></li><li class="navelem"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html">IrrSimpleVoxelEngine</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Класс SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Движок.  
+ <a href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_irr_simple_voxel_engine_8h_source.html">IrrSimpleVoxelEngine.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.png" usemap="#SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine_map" alt=""/>
+  <map id="SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine_map" name="SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine_map">
+</map>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:af36cdeb3e6ea2381bc858e388c2f6aa6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#af36cdeb3e6ea2381bc858e388c2f6aa6">IrrSimpleVoxelEngine</a> (irr::IrrlichtDevice *device)</td></tr>
+<tr class="memdesc:af36cdeb3e6ea2381bc858e388c2f6aa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный конструктор.  <a href="#af36cdeb3e6ea2381bc858e388c2f6aa6">Подробнее...</a><br /></td></tr>
+<tr class="separator:af36cdeb3e6ea2381bc858e388c2f6aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add12ca89f78c17c885264d5378b91cc8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#add12ca89f78c17c885264d5378b91cc8">IrrSimpleVoxelEngine</a> (irr::IrrlichtDevice *device, SimpleVoxelEngine::Debug::Logger *lgr)</td></tr>
+<tr class="memdesc:add12ca89f78c17c885264d5378b91cc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор с логгером.  <a href="#add12ca89f78c17c885264d5378b91cc8">Подробнее...</a><br /></td></tr>
+<tr class="separator:add12ca89f78c17c885264d5378b91cc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb0868089dd9d5c1fe470a144495fdc3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb0868089dd9d5c1fe470a144495fdc3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#adb0868089dd9d5c1fe470a144495fdc3">~IrrSimpleVoxelEngine</a> ()</td></tr>
+<tr class="memdesc:adb0868089dd9d5c1fe470a144495fdc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный деструктор. <br /></td></tr>
+<tr class="separator:adb0868089dd9d5c1fe470a144495fdc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e019c16bc64aad43285c98dd65d71c5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a7e019c16bc64aad43285c98dd65d71c5">addWorld</a> ()</td></tr>
+<tr class="memdesc:a7e019c16bc64aad43285c98dd65d71c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создание мира с параметрами по умолчанию.  <a href="#a7e019c16bc64aad43285c98dd65d71c5">Подробнее...</a><br /></td></tr>
+<tr class="separator:a7e019c16bc64aad43285c98dd65d71c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a86db94d5bd675e4a87b955997e6596"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a8a86db94d5bd675e4a87b955997e6596">addWorld</a> (SimpleVoxelEngine::Core::WorldCreatingParameters &amp;wcp)</td></tr>
+<tr class="memdesc:a8a86db94d5bd675e4a87b955997e6596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создание мира с указанными параметрами.  <a href="#a8a86db94d5bd675e4a87b955997e6596">Подробнее...</a><br /></td></tr>
+<tr class="separator:a8a86db94d5bd675e4a87b955997e6596"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e18ecff3e72c8420dc5a42a8ca3c755"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a1e18ecff3e72c8420dc5a42a8ca3c755">addWorld</a> (SimpleVoxelEngine::Core::World *wrld)</td></tr>
+<tr class="memdesc:a1e18ecff3e72c8420dc5a42a8ca3c755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавление мира к движку.  <a href="#a1e18ecff3e72c8420dc5a42a8ca3c755">Подробнее...</a><br /></td></tr>
+<tr class="separator:a1e18ecff3e72c8420dc5a42a8ca3c755"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7daf21a1ebff3c5f61f569fc80432da9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a7daf21a1ebff3c5f61f569fc80432da9">setSimpleVoxelObject</a> (int id, SimpleVoxelEngine::Core::VoxelAddress *vxladdr, SimpleVoxelEngine::Voxels::SimpleVoxelObject *svo, bool rewrite=false, bool immediatelyupdated=false)</td></tr>
+<tr class="memdesc:a7daf21a1ebff3c5f61f569fc80432da9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка SimpleVoxelObject по VoxelAddress.  <a href="#a7daf21a1ebff3c5f61f569fc80432da9">Подробнее...</a><br /></td></tr>
+<tr class="separator:a7daf21a1ebff3c5f61f569fc80432da9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e251fbac8ca927ee2f4ca01d872a246"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a4e251fbac8ca927ee2f4ca01d872a246">deleteSimpleVoxelObject</a> (int id, SimpleVoxelEngine::Core::VoxelAddress *vxladdr, bool immediatelyupdated=false)</td></tr>
+<tr class="memdesc:a4e251fbac8ca927ee2f4ca01d872a246"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаление SimpleVoxelObject по VoxelAddress.  <a href="#a4e251fbac8ca927ee2f4ca01d872a246">Подробнее...</a><br /></td></tr>
+<tr class="separator:a4e251fbac8ca927ee2f4ca01d872a246"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dd366ed95ff7ef6097cf93f6e43e264"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a4dd366ed95ff7ef6097cf93f6e43e264">addChunkForRendering</a> (int id, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect, bool load=false, bool loadframe=false, int sizeframe=1)</td></tr>
+<tr class="memdesc:a4dd366ed95ff7ef6097cf93f6e43e264"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавление чанка для отрисовки.  <a href="#a4dd366ed95ff7ef6097cf93f6e43e264">Подробнее...</a><br /></td></tr>
+<tr class="separator:a4dd366ed95ff7ef6097cf93f6e43e264"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23250f362f254ab3d41375c97783723e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a23250f362f254ab3d41375c97783723e">addChunksForRendering</a> (int id, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vectleftdown, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vectrightup, bool load=false, bool loadframe=false, int sizeframe=1)</td></tr>
+<tr class="memdesc:a23250f362f254ab3d41375c97783723e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавление чанков для отрисовки.  <a href="#a23250f362f254ab3d41375c97783723e">Подробнее...</a><br /></td></tr>
+<tr class="separator:a23250f362f254ab3d41375c97783723e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefe2cf11e8cdcbdf8363599907028514"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#aefe2cf11e8cdcbdf8363599907028514">deleteChunkForRendering</a> (int id, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect, bool unload=false, bool save=true, bool unloadframe=false, int sizeframe=1)</td></tr>
+<tr class="memdesc:aefe2cf11e8cdcbdf8363599907028514"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаление чанка из отрисовки.  <a href="#aefe2cf11e8cdcbdf8363599907028514">Подробнее...</a><br /></td></tr>
+<tr class="separator:aefe2cf11e8cdcbdf8363599907028514"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0c915d8918623930ae607059cbd6f46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#aa0c915d8918623930ae607059cbd6f46">deleteChunksForRendering</a> (int id, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vectleftdown, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vectrightup, bool unload=false, bool save=true, bool unloadframe=false, int sizeframe=1)</td></tr>
+<tr class="memdesc:aa0c915d8918623930ae607059cbd6f46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавление чанков для отрисовки.  <a href="#aa0c915d8918623930ae607059cbd6f46">Подробнее...</a><br /></td></tr>
+<tr class="separator:aa0c915d8918623930ae607059cbd6f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79761460919169da898c785c43088fa6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html">FactoryChunkMeshSceneNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a79761460919169da898c785c43088fa6">getFactoryChunkMeshSceneNode</a> ()</td></tr>
+<tr class="memdesc:a79761460919169da898c785c43088fa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение фабрики чанков.  <a href="#a79761460919169da898c785c43088fa6">Подробнее...</a><br /></td></tr>
+<tr class="separator:a79761460919169da898c785c43088fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77c9d389d655ac743fc6312645c1905e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a77c9d389d655ac743fc6312645c1905e">setFactoryChunkMeshSceneNode</a> (<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html">FactoryChunkMeshSceneNode</a> *fcmsn)</td></tr>
+<tr class="memdesc:a77c9d389d655ac743fc6312645c1905e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка фабрики чанков.  <a href="#a77c9d389d655ac743fc6312645c1905e">Подробнее...</a><br /></td></tr>
+<tr class="separator:a77c9d389d655ac743fc6312645c1905e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab428eb58b13f54f23d957daf983ac46f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_user_controller_for_thread.html">UserControllerForThread</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#ab428eb58b13f54f23d957daf983ac46f">getUserControllerForThread</a> ()</td></tr>
+<tr class="memdesc:ab428eb58b13f54f23d957daf983ac46f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение контроллера для вызова пользовательских функций в другом потоке.  <a href="#ab428eb58b13f54f23d957daf983ac46f">Подробнее...</a><br /></td></tr>
+<tr class="separator:ab428eb58b13f54f23d957daf983ac46f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e99db73968d7ad567554321e12b3deb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a7e99db73968d7ad567554321e12b3deb">setUserControllerForThread</a> (<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_user_controller_for_thread.html">UserControllerForThread</a> *usrcntrlforthread)</td></tr>
+<tr class="memdesc:a7e99db73968d7ad567554321e12b3deb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка контроллера для вызова пользовательских функций в другом потоке.  <a href="#a7e99db73968d7ad567554321e12b3deb">Подробнее...</a><br /></td></tr>
+<tr class="separator:a7e99db73968d7ad567554321e12b3deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3eb6190fd033dfe70ce52256013963e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a3eb6190fd033dfe70ce52256013963e2">update</a> ()</td></tr>
+<tr class="memdesc:a3eb6190fd033dfe70ce52256013963e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обновление всех объектов движка.  <a href="#a3eb6190fd033dfe70ce52256013963e2">Подробнее...</a><br /></td></tr>
+<tr class="separator:a3eb6190fd033dfe70ce52256013963e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d5a8a7846961947032bf8bcf81bd53d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#a6ecf5f4da4c4405f8a2d7a9f76031f0b">MODE_MAIN_THREAD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a1d5a8a7846961947032bf8bcf81bd53d">getModeMainThread</a> ()</td></tr>
+<tr class="memdesc:a1d5a8a7846961947032bf8bcf81bd53d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение состояния работы движка.  <a href="#a1d5a8a7846961947032bf8bcf81bd53d">Подробнее...</a><br /></td></tr>
+<tr class="separator:a1d5a8a7846961947032bf8bcf81bd53d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b5c11ed0f603681ff336765e6beb4eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a5b5c11ed0f603681ff336765e6beb4eb">start</a> ()</td></tr>
+<tr class="memdesc:a5b5c11ed0f603681ff336765e6beb4eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция для старта движка.  <a href="#a5b5c11ed0f603681ff336765e6beb4eb">Подробнее...</a><br /></td></tr>
+<tr class="separator:a5b5c11ed0f603681ff336765e6beb4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a442381d59957fee048d13289e3f3d6cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a442381d59957fee048d13289e3f3d6cb">stop</a> (bool wait=true)</td></tr>
+<tr class="memdesc:a442381d59957fee048d13289e3f3d6cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция для остановки движка.  <a href="#a442381d59957fee048d13289e3f3d6cb">Подробнее...</a><br /></td></tr>
+<tr class="separator:a442381d59957fee048d13289e3f3d6cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec74fa74e1ae1d2ecb17b5d3570d1a13"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#aec74fa74e1ae1d2ecb17b5d3570d1a13">isRun</a> ()</td></tr>
+<tr class="memdesc:aec74fa74e1ae1d2ecb17b5d3570d1a13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция проверки работы движка.  <a href="#aec74fa74e1ae1d2ecb17b5d3570d1a13">Подробнее...</a><br /></td></tr>
+<tr class="separator:aec74fa74e1ae1d2ecb17b5d3570d1a13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08698151fd7e64ba7de1299c6d0e4157"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a08698151fd7e64ba7de1299c6d0e4157">setMaxNumberOfThreadAddChunks</a> (unsigned int newvaluemaxnumberofthread)</td></tr>
+<tr class="memdesc:a08698151fd7e64ba7de1299c6d0e4157"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка максимального числа потоков для обработки заданий по созданию чанков.  <a href="#a08698151fd7e64ba7de1299c6d0e4157">Подробнее...</a><br /></td></tr>
+<tr class="separator:a08698151fd7e64ba7de1299c6d0e4157"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a452f398cf2cc642babdeeb2dbf035735"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a452f398cf2cc642babdeeb2dbf035735">getMaxNumberOfThreadAddChunks</a> ()</td></tr>
+<tr class="memdesc:a452f398cf2cc642babdeeb2dbf035735"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение максимального числа потоков для обработки заданий по созданию чанков.  <a href="#a452f398cf2cc642babdeeb2dbf035735">Подробнее...</a><br /></td></tr>
+<tr class="separator:a452f398cf2cc642babdeeb2dbf035735"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad06c56ae99a5f86d2a9309e51a1af147"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#ad06c56ae99a5f86d2a9309e51a1af147">setMaxNumberOfThreadUpdateChunks</a> (unsigned int newvaluemaxnumberofthread)</td></tr>
+<tr class="memdesc:ad06c56ae99a5f86d2a9309e51a1af147"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка максимального числа потоков для обработки заданий по обновлению чанков.  <a href="#ad06c56ae99a5f86d2a9309e51a1af147">Подробнее...</a><br /></td></tr>
+<tr class="separator:ad06c56ae99a5f86d2a9309e51a1af147"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e6d637e29f102bc32a1a8c7263a004f"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a0e6d637e29f102bc32a1a8c7263a004f">getMaxNumberOfThreadUpdateChunks</a> ()</td></tr>
+<tr class="memdesc:a0e6d637e29f102bc32a1a8c7263a004f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение максимального числа потоков для обработки заданий по обновлению чанков.  <a href="#a0e6d637e29f102bc32a1a8c7263a004f">Подробнее...</a><br /></td></tr>
+<tr class="separator:a0e6d637e29f102bc32a1a8c7263a004f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a063a7fc373f5af568dc14500927a5afc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a063a7fc373f5af568dc14500927a5afc">addMainTask</a> (<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task.html">Task</a> *_task)</td></tr>
+<tr class="memdesc:a063a7fc373f5af568dc14500927a5afc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавление задания в очередь.  <a href="#a063a7fc373f5af568dc14500927a5afc">Подробнее...</a><br /></td></tr>
+<tr class="separator:a063a7fc373f5af568dc14500927a5afc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae55221da8c54312d4d1ac4ae0e82c50e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#ae55221da8c54312d4d1ac4ae0e82c50e">addTaskUpdateChunks</a> (bool all=false)</td></tr>
+<tr class="memdesc:ae55221da8c54312d4d1ac4ae0e82c50e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавление задания на обновление чанков.  <a href="#ae55221da8c54312d4d1ac4ae0e82c50e">Подробнее...</a><br /></td></tr>
+<tr class="separator:ae55221da8c54312d4d1ac4ae0e82c50e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18fbb778cf0b559e229a386ef5cabb3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a18fbb778cf0b559e229a386ef5cabb3d">addTaskRunUserControllerForThread</a> (<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_parameters_for_thread_function.html">ParametersForThreadFunction</a> *par)</td></tr>
+<tr class="memdesc:a18fbb778cf0b559e229a386ef5cabb3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавление задания на выполнение пользовательской функции с заданными параметрами в другом потоке.  <a href="#a18fbb778cf0b559e229a386ef5cabb3d">Подробнее...</a><br /></td></tr>
+<tr class="separator:a18fbb778cf0b559e229a386ef5cabb3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa67d860f789329b926cbff325446ca52"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#aa67d860f789329b926cbff325446ca52">getWakeUpGarbageCollectorOncePerMilliseconds</a> ()</td></tr>
+<tr class="memdesc:aa67d860f789329b926cbff325446ca52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение времени периодичного пробуждения сборщика мусора для проверки на необходимость очистки.  <a href="#aa67d860f789329b926cbff325446ca52">Подробнее...</a><br /></td></tr>
+<tr class="separator:aa67d860f789329b926cbff325446ca52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70ab606b978f89fd03c0a3be791c54b0"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a70ab606b978f89fd03c0a3be791c54b0">getMaximumSizeOfQueueForStartCleaning</a> ()</td></tr>
+<tr class="memdesc:a70ab606b978f89fd03c0a3be791c54b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение минимального размера очереди, при котором будет произведена очистка мусора.  <a href="#a70ab606b978f89fd03c0a3be791c54b0">Подробнее...</a><br /></td></tr>
+<tr class="separator:a70ab606b978f89fd03c0a3be791c54b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a724fef3195926da26dbb7a329f1383"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a8a724fef3195926da26dbb7a329f1383">getAlwaysBeCleanedOncePerMillisecond</a> ()</td></tr>
+<tr class="memdesc:a8a724fef3195926da26dbb7a329f1383"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение периода, за который сборщик мусора в любом случае сделает очистку.  <a href="#a8a724fef3195926da26dbb7a329f1383">Подробнее...</a><br /></td></tr>
+<tr class="separator:a8a724fef3195926da26dbb7a329f1383"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a0cef7632e33d602c32b6e66f63be2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a7a0cef7632e33d602c32b6e66f63be2c">setWakeUpGarbageCollectorOncePerMilliseconds</a> (unsigned int value)</td></tr>
+<tr class="memdesc:a7a0cef7632e33d602c32b6e66f63be2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка времени периодичного пробуждения сборщика мусора для проверки на необходимость очистки.  <a href="#a7a0cef7632e33d602c32b6e66f63be2c">Подробнее...</a><br /></td></tr>
+<tr class="separator:a7a0cef7632e33d602c32b6e66f63be2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8862c24e53f16258b35308c251ee6a32"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a8862c24e53f16258b35308c251ee6a32">setMaximumSizeOfQueueForStartCleaning</a> (unsigned int value)</td></tr>
+<tr class="memdesc:a8862c24e53f16258b35308c251ee6a32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка минимального размера очереди, при котором будет произведена очистка мусора.  <a href="#a8862c24e53f16258b35308c251ee6a32">Подробнее...</a><br /></td></tr>
+<tr class="separator:a8862c24e53f16258b35308c251ee6a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad23eb400365653dbf092cb553d717b96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#ad23eb400365653dbf092cb553d717b96">setAlwaysBeCleanedOncePerMillisecond</a> (unsigned int value)</td></tr>
+<tr class="memdesc:ad23eb400365653dbf092cb553d717b96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка периода, за который сборщик мусора в любом случае сделает очистку.  <a href="#ad23eb400365653dbf092cb553d717b96">Подробнее...</a><br /></td></tr>
+<tr class="separator:ad23eb400365653dbf092cb553d717b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57f6aa87943c19aa31e012076dcdf485"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a57f6aa87943c19aa31e012076dcdf485">getAccessToTheSimpleVoxelEngine</a> ()</td></tr>
+<tr class="memdesc:a57f6aa87943c19aa31e012076dcdf485"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение прямого доступа к функциям и объектам движка <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine. ">SimpleVoxelEngine</a>.  <a href="#a57f6aa87943c19aa31e012076dcdf485">Подробнее...</a><br /></td></tr>
+<tr class="separator:a57f6aa87943c19aa31e012076dcdf485"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a989be9034c1e63c5e68e17d2c58a99a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a989be9034c1e63c5e68e17d2c58a99a7">freeAccessToTheSimpleVoxelEngine</a> ()</td></tr>
+<tr class="memdesc:a989be9034c1e63c5e68e17d2c58a99a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Возвращение полученного доступа.  <a href="#a989be9034c1e63c5e68e17d2c58a99a7">Подробнее...</a><br /></td></tr>
+<tr class="separator:a989be9034c1e63c5e68e17d2c58a99a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a449802c7406f319f9210b0156265ce5c"><td class="memItemLeft" align="right" valign="top">std::recursive_mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a449802c7406f319f9210b0156265ce5c">getLockAccessToTheSimpleVoxelEngine</a> ()</td></tr>
+<tr class="memdesc:a449802c7406f319f9210b0156265ce5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение блокировочного mutex доступа к <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine. ">SimpleVoxelEngine</a> по ссылке.  <a href="#a449802c7406f319f9210b0156265ce5c">Подробнее...</a><br /></td></tr>
+<tr class="separator:a449802c7406f319f9210b0156265ce5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd176ab0841a53352a84b12b96887eb5"><td class="memItemLeft" align="right" valign="top">irr::u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#abd176ab0841a53352a84b12b96887eb5">getTimeSafeThread</a> ()</td></tr>
+<tr class="memdesc:abd176ab0841a53352a84b12b96887eb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Потокобезопасная функция получение времени.  <a href="#abd176ab0841a53352a84b12b96887eb5">Подробнее...</a><br /></td></tr>
+<tr class="separator:abd176ab0841a53352a84b12b96887eb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade9fcc545b6cba54417fe8bc14fd3549"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#ade9fcc545b6cba54417fe8bc14fd3549">runIrrDevice</a> ()</td></tr>
+<tr class="memdesc:ade9fcc545b6cba54417fe8bc14fd3549"><td class="mdescLeft">&#160;</td><td class="mdescRight">Потокобезопасная функция, являющаяся аналогом run() в IrrlichtDevice.  <a href="#ade9fcc545b6cba54417fe8bc14fd3549">Подробнее...</a><br /></td></tr>
+<tr class="separator:ade9fcc545b6cba54417fe8bc14fd3549"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af634add32d1ec9de98d69030ad9b55d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#af634add32d1ec9de98d69030ad9b55d5">setSimpleVoxelObjectByGlobalVector</a> (int worldid, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect, SimpleVoxelEngine::Voxels::SimpleVoxelObject *svo, int level=1)</td></tr>
+<tr class="memdesc:af634add32d1ec9de98d69030ad9b55d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка SimpleVoxelObject по глобальным мировым координатам.  <a href="#af634add32d1ec9de98d69030ad9b55d5">Подробнее...</a><br /></td></tr>
+<tr class="separator:af634add32d1ec9de98d69030ad9b55d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3300d8c92f49349e5bdefbca984f260"><td class="memItemLeft" align="right" valign="top">SimpleVoxelEngine::Voxels::SimpleVoxelObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#ab3300d8c92f49349e5bdefbca984f260">getSimpleVoxelObjectByGlobalVector</a> (int worldid, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect, bool isexists=true, int level=1)</td></tr>
+<tr class="memdesc:ab3300d8c92f49349e5bdefbca984f260"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение SimpleVoxelObject по глобальным мировым координатам.  <a href="#ab3300d8c92f49349e5bdefbca984f260">Подробнее...</a><br /></td></tr>
+<tr class="separator:ab3300d8c92f49349e5bdefbca984f260"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95e27648ed1a77f0996fb7a7721f0209"><td class="memItemLeft" align="right" valign="top">SimpleVoxelEngine::Core::VoxelAddress *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a95e27648ed1a77f0996fb7a7721f0209">getAddressSimpleVoxelObjectByThreePoints</a> (int worldid, SimpleVoxelEngine::Additional::Vector3d&lt; float &gt; v1, SimpleVoxelEngine::Additional::Vector3d&lt; float &gt; v2, SimpleVoxelEngine::Additional::Vector3d&lt; float &gt; v3, SimpleVoxelEngine::Additional::Vector3d&lt; float &gt; lookvect, SimpleVoxelEngine::Defines::LevelSearchSimpleVoxelObject lssvo=SimpleVoxelEngine::Defines::LASTLEVEL, int level=1)</td></tr>
+<tr class="memdesc:a95e27648ed1a77f0996fb7a7721f0209"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение адреса SimpleVoxelObject по трём точкам в пространстве и вектору направления.  <a href="#a95e27648ed1a77f0996fb7a7721f0209">Подробнее...</a><br /></td></tr>
+<tr class="separator:a95e27648ed1a77f0996fb7a7721f0209"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc5626ce0627afe7bb090c876dd812be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adc5626ce0627afe7bb090c876dd812be"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#adc5626ce0627afe7bb090c876dd812be">threadMainQueueTaskController</a> ()</td></tr>
+<tr class="memdesc:adc5626ce0627afe7bb090c876dd812be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Контроллер главной очереди заданий. Запускается в другом потоке. Пользователю данная функция не нужна. <br /></td></tr>
+<tr class="separator:adc5626ce0627afe7bb090c876dd812be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae93febf36d0094be749286137ec2260f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae93febf36d0094be749286137ec2260f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#ae93febf36d0094be749286137ec2260f">threadAddChunkTaskController</a> ()</td></tr>
+<tr class="memdesc:ae93febf36d0094be749286137ec2260f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Контроллер очереди заданий для создания чанков. Запускается в другом потоке. Пользователю данная функция не нужна. <br /></td></tr>
+<tr class="separator:ae93febf36d0094be749286137ec2260f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c8a11f8261e5a94156cc6e02bac7670"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7c8a11f8261e5a94156cc6e02bac7670"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a7c8a11f8261e5a94156cc6e02bac7670">threadUpdateChunkTaskController</a> ()</td></tr>
+<tr class="memdesc:a7c8a11f8261e5a94156cc6e02bac7670"><td class="mdescLeft">&#160;</td><td class="mdescRight">Контроллер очереди заданий для обновления чанков. Запускается в другом потоке. Пользователю данная функция не нужна. <br /></td></tr>
+<tr class="separator:a7c8a11f8261e5a94156cc6e02bac7670"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d8a0d19d6be18bb6bce6f1f8162b23a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d8a0d19d6be18bb6bce6f1f8162b23a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a5d8a0d19d6be18bb6bce6f1f8162b23a">threadGarbageCollectorController</a> ()</td></tr>
+<tr class="memdesc:a5d8a0d19d6be18bb6bce6f1f8162b23a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Контроллер сборщика мусора. Запускается в другом потоке. Пользователю данная функция не нужна. <br /></td></tr>
+<tr class="separator:a5d8a0d19d6be18bb6bce6f1f8162b23a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ff423f749366a98b5e7b0db862ff74c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ff423f749366a98b5e7b0db862ff74c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a3ff423f749366a98b5e7b0db862ff74c">threadUserControllerForThread</a> ()</td></tr>
+<tr class="memdesc:a3ff423f749366a98b5e7b0db862ff74c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Контроллер для запуска пользовательских функция в другом потоке. Запускается в другом потоке. Пользователю данная функция не нужна. <br /></td></tr>
+<tr class="separator:a3ff423f749366a98b5e7b0db862ff74c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1bb0b0469edf6fb67f09b760dd48ef1"><td class="memItemLeft" align="right" valign="top">irr::IrrlichtDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#ad1bb0b0469edf6fb67f09b760dd48ef1">getIrrlichtDevice</a> ()</td></tr>
+<tr class="memdesc:ad1bb0b0469edf6fb67f09b760dd48ef1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение IrrlichtDevice.  <a href="#ad1bb0b0469edf6fb67f09b760dd48ef1">Подробнее...</a><br /></td></tr>
+<tr class="separator:ad1bb0b0469edf6fb67f09b760dd48ef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a0114a59bf66fe356c7aaae16da53df"><td class="memItemLeft" align="right" valign="top">std::mutex &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a4a0114a59bf66fe356c7aaae16da53df">getLockGettingTimeFromDevice</a> ()</td></tr>
+<tr class="memdesc:a4a0114a59bf66fe356c7aaae16da53df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение блокировочного mutex для работы с любыми функциями движка, использующими таймер.  <a href="#a4a0114a59bf66fe356c7aaae16da53df">Подробнее...</a><br /></td></tr>
+<tr class="separator:a4a0114a59bf66fe356c7aaae16da53df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Движок. </p>
+<p>Враппер для иррлихта, унаследован от самого движка. Является основным объектом для работы. Фактически вся работа и управление движком идёт через этот класс. </p>
+
+<p>См. определение в файле <a class="el" href="_irr_simple_voxel_engine_8h_source.html">IrrSimpleVoxelEngine.h</a> строка <a class="el" href="_irr_simple_voxel_engine_8h_source.html#l00042">42</a></p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a class="anchor" id="af36cdeb3e6ea2381bc858e388c2f6aa6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::IrrSimpleVoxelEngine </td>
+          <td>(</td>
+          <td class="paramtype">irr::IrrlichtDevice *&#160;</td>
+          <td class="paramname"><em>device</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Стандартный конструктор. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">device</td><td>Указатель на IrrlichtDevice, используемый для отрисовки. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="add12ca89f78c17c885264d5378b91cc8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::IrrSimpleVoxelEngine </td>
+          <td>(</td>
+          <td class="paramtype">irr::IrrlichtDevice *&#160;</td>
+          <td class="paramname"><em>device</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Debug::Logger *&#160;</td>
+          <td class="paramname"><em>lgr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Конструктор с логгером. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">device</td><td>Указатель на IrrlichtDevice, используемый для отрисовки. </td></tr>
+    <tr><td class="paramname">lgr</td><td>Указатель на логгер, который будет использовать движок. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a class="anchor" id="a4dd366ed95ff7ef6097cf93f6e43e264"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::addChunkForRendering </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>vect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>load</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>loadframe</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sizeframe</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавление чанка для отрисовки. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Идентификатор мира, в котором расположен чанк. </td></tr>
+    <tr><td class="paramname">vect</td><td>Вектор (координаты) чанка в мире. </td></tr>
+    <tr><td class="paramname">load</td><td>Если имеет значение true, то чанки будут загружены в случае отсутствия в памяти, иначе не будут. </td></tr>
+    <tr><td class="paramname">loadframe</td><td>Если имеет значение true, то будет загружена рамка вокруг чанка. </td></tr>
+    <tr><td class="paramname">sizeframe</td><td>Размер загружаемой кубической рамки. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a23250f362f254ab3d41375c97783723e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::addChunksForRendering </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>vectleftdown</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>vectrightup</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>load</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>loadframe</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sizeframe</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавление чанков для отрисовки. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Идентификатор мира, в котором расположены чанки. </td></tr>
+    <tr><td class="paramname">vectleftdown</td><td>Вектор (координаты) левого нижнего угла добавляемого кубоида чанков. </td></tr>
+    <tr><td class="paramname">vectrightup</td><td>Вектор (координаты) правого верхнего угла добавляемого кубоида чанков. </td></tr>
+    <tr><td class="paramname">load</td><td>Если имеет значение true, то чанки будут загружены в случае отсутствия в памяти, иначе не будут. </td></tr>
+    <tr><td class="paramname">loadframe</td><td>Если имеет значение true, то будет загружена рамка вокруг кубоида чанков. </td></tr>
+    <tr><td class="paramname">sizeframe</td><td>Размер загружаемой кубической рамки. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a063a7fc373f5af568dc14500927a5afc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::addMainTask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task.html">Task</a> *&#160;</td>
+          <td class="paramname"><em>_task</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавление задания в очередь. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_task</td><td>Указатель на задание, которое добавляется в очередь. Память, занимаемая этим объектом, будет очищена движком. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a18fbb778cf0b559e229a386ef5cabb3d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::addTaskRunUserControllerForThread </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_parameters_for_thread_function.html">ParametersForThreadFunction</a> *&#160;</td>
+          <td class="paramname"><em>par</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавление задания на выполнение пользовательской функции с заданными параметрами в другом потоке. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">par</td><td>Указатель на параметры, заданные пользователем. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae55221da8c54312d4d1ac4ae0e82c50e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::addTaskUpdateChunks </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>all</em> = <code>false</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавление задания на обновление чанков. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">all</td><td>Если имеет значение true, то будут обновлены все чанки, иначе только из очереди на обновление. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a7e019c16bc64aad43285c98dd65d71c5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::addWorld </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Создание мира с параметрами по умолчанию. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает идентификатор созданного мира или -1 в случае неудачи. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8a86db94d5bd675e4a87b955997e6596"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::addWorld </td>
+          <td>(</td>
+          <td class="paramtype">SimpleVoxelEngine::Core::WorldCreatingParameters &amp;&#160;</td>
+          <td class="paramname"><em>wcp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Создание мира с указанными параметрами. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">wcp</td><td>Параметры создания мира </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает идентификатор созданного мира или -1 в случае неудачи. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1e18ecff3e72c8420dc5a42a8ca3c755"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::addWorld </td>
+          <td>(</td>
+          <td class="paramtype">SimpleVoxelEngine::Core::World *&#160;</td>
+          <td class="paramname"><em>wrld</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавление мира к движку. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">wrld</td><td>Добавляемый мир. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает идентификатор добавленного мира (wrld) или -1 в случае неудачи. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aefe2cf11e8cdcbdf8363599907028514"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::deleteChunkForRendering </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>vect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>unload</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>save</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>unloadframe</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sizeframe</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Удаление чанка из отрисовки. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Идентификатор мира, в котором расположен чанк. </td></tr>
+    <tr><td class="paramname">vect</td><td>Вектор (координаты) чанка в мире. </td></tr>
+    <tr><td class="paramname">unload</td><td>Если имеет значение true, то чанки будут выгружены из памяти, иначе не будут. </td></tr>
+    <tr><td class="paramname">save</td><td>Если имеет значение true, то при выгрузке из памяти чанки будут сохранены, иначе не будут. </td></tr>
+    <tr><td class="paramname">unloadframe</td><td>Если имеет значение true, то будет выгружена из памяти рамка вокруг чанка. </td></tr>
+    <tr><td class="paramname">sizeframe</td><td>Размер выгружаемой из памяти кубической рамки. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa0c915d8918623930ae607059cbd6f46"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::deleteChunksForRendering </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>vectleftdown</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>vectrightup</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>unload</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>save</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>unloadframe</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sizeframe</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавление чанков для отрисовки. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Идентификатор мира, в котором расположены чанки. </td></tr>
+    <tr><td class="paramname">vectleftdown</td><td>Вектор (координаты) левого нижнего угла удаляемого кубоида чанков. </td></tr>
+    <tr><td class="paramname">vectrightup</td><td>Вектор (координаты) правого верхнего угла удаляемого кубоида чанков. </td></tr>
+    <tr><td class="paramname">unload</td><td>Если имеет значение true, то чанки будут выгружены из памяти, иначе не будут. </td></tr>
+    <tr><td class="paramname">save</td><td>Если имеет значение true, то при выгрузке из памяти чанки будут сохранены, иначе не будут. </td></tr>
+    <tr><td class="paramname">unloadframe</td><td>Если имеет значение true, то будет выгружена из памяти рамка вокруг кубоида чанков. </td></tr>
+    <tr><td class="paramname">sizeframe</td><td>Размер выгружаемой из памяти кубической рамки. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a4e251fbac8ca927ee2f4ca01d872a246"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::deleteSimpleVoxelObject </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Core::VoxelAddress *&#160;</td>
+          <td class="paramname"><em>vxladdr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>immediatelyupdated</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Удаление SimpleVoxelObject по VoxelAddress. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Идентификатор мира, в котором удаляем SimpleVoxelObject. </td></tr>
+    <tr><td class="paramname">vxladdr</td><td>Адрес вокселя, который надо удалить. </td></tr>
+    <tr><td class="paramname">immediatelyupdated</td><td>Если имеет значение true, то чанк будет обновлён немедленно. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a989be9034c1e63c5e68e17d2c58a99a7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::freeAccessToTheSimpleVoxelEngine </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Возвращение полученного доступа. </p>
+<p>Если доступ не вернуть, то движок зависнет. Поэтому, если функция сложная и имеет много точек выхода, рекомендуется получать блокировочный mutex и блокировать его с помощью lock_guard. </p>
+
+</div>
+</div>
+<a class="anchor" id="a57f6aa87943c19aa31e012076dcdf485"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::getAccessToTheSimpleVoxelEngine </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение прямого доступа к функциям и объектам движка <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine. ">SimpleVoxelEngine</a>. </p>
+<p>Данная функция выдаёт вызвавшему её потоку прямой доступ к функциям и объектам движка <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine. ">SimpleVoxelEngine</a>. При попытке работы напрямую с объектами или при прямом вызове функций движка <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine. ">SimpleVoxelEngine</a> без получения доступа возможны ошибки, так как движока <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine. ">SimpleVoxelEngine</a> не является потокобезопасным. Исключение составляет пользовательская функция, а именно из <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_user_controller_for_thread.html" title="Управляющий класс для работы пользовательской функции в другом потоке. ">UserControllerForThread</a>. В ней можно работать с чем угодно, не получая доступ к движку, но при этом нельзя делать никаких действий в других потоках, получая этот доступ. Иначе доступ также требуется получить в пользовательской функции. Но, к примеру, этот доступ можно получить при входе в функцию, а отдать при выходе. Если это кажется слишком сложным, то просто все действия, которые требует прямого доступа к <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine. ">SimpleVoxelEngine</a>, выполняйте в контроллере запуска пользовательских функций в другом потоке. </p>
+
+</div>
+</div>
+<a class="anchor" id="a95e27648ed1a77f0996fb7a7721f0209"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SimpleVoxelEngine::Core::VoxelAddress* SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::getAddressSimpleVoxelObjectByThreePoints </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>worldid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>v1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>v2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>v3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>lookvect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Defines::LevelSearchSimpleVoxelObject&#160;</td>
+          <td class="paramname"><em>lssvo</em> = <code>SimpleVoxelEngine::Defines::LASTLEVEL</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение адреса SimpleVoxelObject по трём точкам в пространстве и вектору направления. </p>
+<p>Вызов этой функции в другом потоке требует блокировку доступа при работе с любыми объектами или функциями <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine. ">SimpleVoxelEngine</a> в контроллере запуска пользовательских функций в другом потоке. Получает адрес SimpleVoxelObject по трём точкам, который он содержит, а также вектору, который в него направлен. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">worldid</td><td>Идентификатор мира, из которого хотим получить SimpleVoxelObject. </td></tr>
+    <tr><td class="paramname">v1</td><td>Первая точка. </td></tr>
+    <tr><td class="paramname">v2</td><td>Вторая точка. </td></tr>
+    <tr><td class="paramname">v3</td><td>Третья точка. </td></tr>
+    <tr><td class="paramname">lookvect</td><td>Направление взгляда (вектор, торчащий в воксель). </td></tr>
+    <tr><td class="paramname">lssvo</td><td>Тип поиска. Не используется. </td></tr>
+    <tr><td class="paramname">level</td><td>Уровень глубины погружения при поиске. Не используется. Весь поиск идёт на первом уровне. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает указатель на VoxelAddress объекта SimpleVoxelObject, который содержит три указанных точки, а также вектор направлен в него. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8a724fef3195926da26dbb7a329f1383"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::getAlwaysBeCleanedOncePerMillisecond </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение периода, за который сборщик мусора в любом случае сделает очистку. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает число миллисекунд, составляющие период, раз в который сборщик мусора будет производить отработку. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a79761460919169da898c785c43088fa6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html">FactoryChunkMeshSceneNode</a>* SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::getFactoryChunkMeshSceneNode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение фабрики чанков. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает указатель на установленную движку фабрику чанков. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad1bb0b0469edf6fb67f09b760dd48ef1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">irr::IrrlichtDevice* SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::getIrrlichtDevice </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение IrrlichtDevice. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает указатель на IrrlichtDevice, используемый для отрисовки в данном враппере. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a449802c7406f319f9210b0156265ce5c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::recursive_mutex&amp; SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::getLockAccessToTheSimpleVoxelEngine </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение блокировочного mutex доступа к <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine. ">SimpleVoxelEngine</a> по ссылке. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает ссылку на блокировочный mutex к <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine. ">SimpleVoxelEngine</a>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4a0114a59bf66fe356c7aaae16da53df"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex&amp; SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::getLockGettingTimeFromDevice </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение блокировочного mutex для работы с любыми функциями движка, использующими таймер. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает mutex, который необходимо блокировать при вызове функций Irrlicht, которые используют таймер. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a70ab606b978f89fd03c0a3be791c54b0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::getMaximumSizeOfQueueForStartCleaning </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение минимального размера очереди, при котором будет произведена очистка мусора. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает минимальный размер очереди, при котором будет произведена очистка мусора. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a452f398cf2cc642babdeeb2dbf035735"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::getMaxNumberOfThreadAddChunks </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение максимального числа потоков для обработки заданий по созданию чанков. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает максимальное число потоков для обработки заданий по созданию чанков. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0e6d637e29f102bc32a1a8c7263a004f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::getMaxNumberOfThreadUpdateChunks </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение максимального числа потоков для обработки заданий по обновлению чанков. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает максимальное число потоков для обработки заданий по обновлению чанков. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1d5a8a7846961947032bf8bcf81bd53d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#a6ecf5f4da4c4405f8a2d7a9f76031f0b">MODE_MAIN_THREAD</a> SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::getModeMainThread </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение состояния работы движка. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает текущее состояние работы движка. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab3300d8c92f49349e5bdefbca984f260"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SimpleVoxelEngine::Voxels::SimpleVoxelObject* SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::getSimpleVoxelObjectByGlobalVector </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>worldid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>vect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isexists</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение SimpleVoxelObject по глобальным мировым координатам. </p>
+<p>Вызов этой функции в другом потоке требует блокировку доступа при работе с любыми объектами или функциями <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine. ">SimpleVoxelEngine</a> в контроллере запуска пользовательских функций в другом потоке. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">worldid</td><td>Идентификатор мира, из которого хотим получить SimpleVoxelObject. </td></tr>
+    <tr><td class="paramname">vect</td><td>Глобальный вектор (мировые координаты) получаемого SimpleVoxelObject. </td></tr>
+    <tr><td class="paramname">isexists</td><td>Если имеет значение true, то система логирования выдаст предупреждение при отсутствии SimpleVoxelObject по данному адресу, иначе не выдаст. </td></tr>
+    <tr><td class="paramname">level</td><td>Уровень глобальной мировой координатной сетки, по которому прописаны координаты. Данный параметр пока не работает. Вся установка происходит на первом уровне. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает указатель на SimpleVoxelObject, расположенный по заданным координатам или NULL в случае его отсутствия. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abd176ab0841a53352a84b12b96887eb5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">irr::u32 SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::getTimeSafeThread </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Потокобезопасная функция получение времени. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает время аналогично getTime() в Irrlicht, но потокобезопасно. Рекомендуется использовать только её вместо getTime(). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab428eb58b13f54f23d957daf983ac46f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_user_controller_for_thread.html">UserControllerForThread</a>* SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::getUserControllerForThread </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение контроллера для вызова пользовательских функций в другом потоке. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает указатель на контроллер. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa67d860f789329b926cbff325446ca52"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::getWakeUpGarbageCollectorOncePerMilliseconds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение времени периодичного пробуждения сборщика мусора для проверки на необходимость очистки. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает число миллисекунд, которые составляют период пробуждения сборщика мусора для проверки на необходимость очистки. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aec74fa74e1ae1d2ecb17b5d3570d1a13"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::isRun </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция проверки работы движка. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если движок работает, иначе false, </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ade9fcc545b6cba54417fe8bc14fd3549"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::runIrrDevice </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Потокобезопасная функция, являющаяся аналогом run() в IrrlichtDevice. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает результат отработки функции run() в IrrlichtDevice. Рекомендуется пользоваться только ей вместо run(). </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad23eb400365653dbf092cb553d717b96"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::setAlwaysBeCleanedOncePerMillisecond </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка периода, за который сборщик мусора в любом случае сделает очистку. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Устанавливаемое число миллисекунд, составляющие период, раз в который сборщик мусора будет производить отработку. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a77c9d389d655ac743fc6312645c1905e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::setFactoryChunkMeshSceneNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html">FactoryChunkMeshSceneNode</a> *&#160;</td>
+          <td class="paramname"><em>fcmsn</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка фабрики чанков. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fcmsn</td><td>Указатель на устанавливаемую фабрику. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true в случае успеха, иначе false. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8862c24e53f16258b35308c251ee6a32"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::setMaximumSizeOfQueueForStartCleaning </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка минимального размера очереди, при котором будет произведена очистка мусора. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Устанавливаемый минимальный размер очереди, при котором будет произведена очистка мусора. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a08698151fd7e64ba7de1299c6d0e4157"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::setMaxNumberOfThreadAddChunks </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>newvaluemaxnumberofthread</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка максимального числа потоков для обработки заданий по созданию чанков. </p>
+<p>В связи с непонятыми ошибками данная функция пока ни на что ни влияет. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newvaluemaxnumberofthread</td><td>Новое значение максимального количества потоков для создания чанков. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true в случае успеха, иначе false. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad06c56ae99a5f86d2a9309e51a1af147"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::setMaxNumberOfThreadUpdateChunks </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>newvaluemaxnumberofthread</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка максимального числа потоков для обработки заданий по обновлению чанков. </p>
+<p>В связи с непонятыми ошибками данная функция пока ни на что ни влияет. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newvaluemaxnumberofthread</td><td>Новое значение максимального количества потоков для обновления чанков. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true в случае успеха, иначе false. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7daf21a1ebff3c5f61f569fc80432da9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::setSimpleVoxelObject </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Core::VoxelAddress *&#160;</td>
+          <td class="paramname"><em>vxladdr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Voxels::SimpleVoxelObject *&#160;</td>
+          <td class="paramname"><em>svo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>rewrite</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>immediatelyupdated</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка SimpleVoxelObject по VoxelAddress. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Идентификатор мира, в котором устанавливаем SimpleVoxelObject. </td></tr>
+    <tr><td class="paramname">vxladdr</td><td>Адрес вокселя. </td></tr>
+    <tr><td class="paramname">svo</td><td>Устанавливаемый SimpleVoxelObject. </td></tr>
+    <tr><td class="paramname">rewrite</td><td>Если имеет значение true, то SimpleVoxelObject будет перезаписан в случае существования. </td></tr>
+    <tr><td class="paramname">immediatelyupdated</td><td>Если имеет значение true, то чанк будет обновлён немедленно. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="af634add32d1ec9de98d69030ad9b55d5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::setSimpleVoxelObjectByGlobalVector </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>worldid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>vect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Voxels::SimpleVoxelObject *&#160;</td>
+          <td class="paramname"><em>svo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка SimpleVoxelObject по глобальным мировым координатам. </p>
+<p>Вызов этой функции в другом потоке требует блокировку доступа при работе с любыми объектами или функциями <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine. ">SimpleVoxelEngine</a> в контроллере запуска пользовательских функций в другом потоке. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">worldid</td><td>Идентификатор мира, в котором происходит установка SimpleVoxelObject. </td></tr>
+    <tr><td class="paramname">vect</td><td>Глобальный вектор (мировые координаты) устанавливаемого SimpleVoxelObject. </td></tr>
+    <tr><td class="paramname">svo</td><td>Указатель на устанавливаемый SimpleVoxelObject. </td></tr>
+    <tr><td class="paramname">level</td><td>Уровень глобальной мировой координатной сетки, по которому прописаны координаты. Данный параметр пока не работает. Вся установка происходит на первом уровне. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a7e99db73968d7ad567554321e12b3deb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::setUserControllerForThread </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_user_controller_for_thread.html">UserControllerForThread</a> *&#160;</td>
+          <td class="paramname"><em>usrcntrlforthread</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка контроллера для вызова пользовательских функций в другом потоке. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">usrcntrlforthread</td><td>Указатель на устанавливаемый контроллер. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true в случае успеха, иначе false. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7a0cef7632e33d602c32b6e66f63be2c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::setWakeUpGarbageCollectorOncePerMilliseconds </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка времени периодичного пробуждения сборщика мусора для проверки на необходимость очистки. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Устанавливаемое число миллисекунд, которые составляют период пробуждения сборщика мусора для проверки на необходимость очистки. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a5b5c11ed0f603681ff336765e6beb4eb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция для старта движка. </p>
+<p>Данную функцию надо вызывать для запуска движка. Инициализирует потоки. </p>
+
+</div>
+</div>
+<a class="anchor" id="a442381d59957fee048d13289e3f3d6cb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::stop </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>wait</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция для остановки движка. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">wait</td><td>Если имеет значение true, то ожидается завершение работы всех потоков, иначе не ожидается. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a3eb6190fd033dfe70ce52256013963e2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Обновление всех объектов движка. </p>
+<p>Данная функция является одной из главных для работы движка. </p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li><a class="el" href="_irr_simple_voxel_engine_8h_source.html">IrrSimpleVoxelEngine.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по IrrSimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:37. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

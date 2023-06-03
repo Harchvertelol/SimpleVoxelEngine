@@ -1,0 +1,475 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>SimpleVoxelEngine: Класс SimpleVoxelEngine::Core::VoxelForRendering</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Воксельный движок</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
+      <li><a href="hierarchy.html"><span>Иерархия&#160;классов</span></a></li>
+      <li><a href="functions.html"><span>Члены&#160;классов</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_core.html">Core</a></li><li class="navelem"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html">VoxelForRendering</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Класс SimpleVoxelEngine::Core::VoxelForRendering</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Информация для отрисовки вокселя.  
+ <a href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_voxel_for_rendering_8h_source.html">VoxelForRendering.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:ad7c61700ae65929cdd54e65a43470830"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad7c61700ae65929cdd54e65a43470830"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#ad7c61700ae65929cdd54e65a43470830">VoxelForRendering</a> ()</td></tr>
+<tr class="memdesc:ad7c61700ae65929cdd54e65a43470830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный конструктор. <br /></td></tr>
+<tr class="separator:ad7c61700ae65929cdd54e65a43470830"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6990decfd614274d91f0ecfa742800f3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6990decfd614274d91f0ecfa742800f3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#a6990decfd614274d91f0ecfa742800f3">VoxelForRendering</a> (const <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html">VoxelForRendering</a> &amp;)</td></tr>
+<tr class="memdesc:a6990decfd614274d91f0ecfa742800f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор копирования. <br /></td></tr>
+<tr class="separator:a6990decfd614274d91f0ecfa742800f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad33df61f71ddb6b4e31e750b14893117"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#ad33df61f71ddb6b4e31e750b14893117">VoxelForRendering</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt; pos, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt; rot, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt; scale)</td></tr>
+<tr class="memdesc:ad33df61f71ddb6b4e31e750b14893117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор с параметрами.  <a href="#ad33df61f71ddb6b4e31e750b14893117">Подробнее...</a><br /></td></tr>
+<tr class="separator:ad33df61f71ddb6b4e31e750b14893117"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0311fd3c1861abfe3688111c0a80803"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab0311fd3c1861abfe3688111c0a80803"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#ab0311fd3c1861abfe3688111c0a80803">~VoxelForRendering</a> ()</td></tr>
+<tr class="memdesc:ab0311fd3c1861abfe3688111c0a80803"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный деструктор. <br /></td></tr>
+<tr class="separator:ab0311fd3c1861abfe3688111c0a80803"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7581f78af128f919d347e5f017d59744"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a><br class="typebreak" />
+&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#a7581f78af128f919d347e5f017d59744">getPosition</a> () const </td></tr>
+<tr class="memdesc:a7581f78af128f919d347e5f017d59744"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение позиции вокселя в глобальных мировых координатах.  <a href="#a7581f78af128f919d347e5f017d59744">Подробнее...</a><br /></td></tr>
+<tr class="separator:a7581f78af128f919d347e5f017d59744"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87117f16cb4884a81adea8cbc43a6536"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a><br class="typebreak" />
+&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#a87117f16cb4884a81adea8cbc43a6536">getRotation</a> () const </td></tr>
+<tr class="memdesc:a87117f16cb4884a81adea8cbc43a6536"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение поворота вокселя в глобальных мировых координатах.  <a href="#a87117f16cb4884a81adea8cbc43a6536">Подробнее...</a><br /></td></tr>
+<tr class="separator:a87117f16cb4884a81adea8cbc43a6536"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a131db89eb2417815bd01cc4b720fb650"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a><br class="typebreak" />
+&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#a131db89eb2417815bd01cc4b720fb650">getScale</a> () const </td></tr>
+<tr class="memdesc:a131db89eb2417815bd01cc4b720fb650"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение масштабирования вокселя в глобальных мировых координатах.  <a href="#a131db89eb2417815bd01cc4b720fb650">Подробнее...</a><br /></td></tr>
+<tr class="separator:a131db89eb2417815bd01cc4b720fb650"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab26e72f394e9323b189384bd5579cb64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#ab26e72f394e9323b189384bd5579cb64">setPosition</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt; vect)</td></tr>
+<tr class="memdesc:ab26e72f394e9323b189384bd5579cb64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка позиции вокселя в глобальных мировых координатах.  <a href="#ab26e72f394e9323b189384bd5579cb64">Подробнее...</a><br /></td></tr>
+<tr class="separator:ab26e72f394e9323b189384bd5579cb64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36fa3d8c4d7f3c128cd0d1601f8aa4bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#a36fa3d8c4d7f3c128cd0d1601f8aa4bf">setRotation</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt; vect)</td></tr>
+<tr class="memdesc:a36fa3d8c4d7f3c128cd0d1601f8aa4bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка поворота вокселя в глобальных мировых координатах.  <a href="#a36fa3d8c4d7f3c128cd0d1601f8aa4bf">Подробнее...</a><br /></td></tr>
+<tr class="separator:a36fa3d8c4d7f3c128cd0d1601f8aa4bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35b6fdacd4781f9965cc44160cb24b53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#a35b6fdacd4781f9965cc44160cb24b53">setScale</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt; vect)</td></tr>
+<tr class="memdesc:a35b6fdacd4781f9965cc44160cb24b53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка масштабирования вокселя в глобальных мировых координатах.  <a href="#a35b6fdacd4781f9965cc44160cb24b53">Подробнее...</a><br /></td></tr>
+<tr class="separator:a35b6fdacd4781f9965cc44160cb24b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2f20a3e5ac937d0fa714e5ab22c6ffc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_voxel_info.html">VoxelInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#aa2f20a3e5ac937d0fa714e5ab22c6ffc">getVoxelInfo</a> () const </td></tr>
+<tr class="memdesc:aa2f20a3e5ac937d0fa714e5ab22c6ffc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получнеие информации о вокселе (<a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_voxel_info.html" title="Структура хранения информации о вокселе для отрисовки. Для введения своей информации необходимо насле...">VoxelInfo</a>)  <a href="#aa2f20a3e5ac937d0fa714e5ab22c6ffc">Подробнее...</a><br /></td></tr>
+<tr class="separator:aa2f20a3e5ac937d0fa714e5ab22c6ffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9409e5ead2055b3c043b54dc23039f35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#a9409e5ead2055b3c043b54dc23039f35">setVoxelInfo</a> (<a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_voxel_info.html">VoxelInfo</a> *vxlinfo)</td></tr>
+<tr class="memdesc:a9409e5ead2055b3c043b54dc23039f35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка <a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_voxel_info.html" title="Структура хранения информации о вокселе для отрисовки. Для введения своей информации необходимо насле...">VoxelInfo</a>.  <a href="#a9409e5ead2055b3c043b54dc23039f35">Подробнее...</a><br /></td></tr>
+<tr class="separator:a9409e5ead2055b3c043b54dc23039f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4daca7edd0fa57a48692bd2c89d05dad"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#a4daca7edd0fa57a48692bd2c89d05dad">isRenderFace</a> (int numb) const </td></tr>
+<tr class="memdesc:a4daca7edd0fa57a48692bd2c89d05dad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка на необходимость отрисовки грани.  <a href="#a4daca7edd0fa57a48692bd2c89d05dad">Подробнее...</a><br /></td></tr>
+<tr class="separator:a4daca7edd0fa57a48692bd2c89d05dad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cf0bfe2e6973c9b7e7bfb315be1dc18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#a4cf0bfe2e6973c9b7e7bfb315be1dc18">setRenderFace</a> (int numb, bool value)</td></tr>
+<tr class="memdesc:a4cf0bfe2e6973c9b7e7bfb315be1dc18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка грани для отрисовки.  <a href="#a4cf0bfe2e6973c9b7e7bfb315be1dc18">Подробнее...</a><br /></td></tr>
+<tr class="separator:a4cf0bfe2e6973c9b7e7bfb315be1dc18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94204ac5c674c526bc2de351a93c5d8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#a94204ac5c674c526bc2de351a93c5d8d">setRenderFaces</a> (bool *faces)</td></tr>
+<tr class="memdesc:a94204ac5c674c526bc2de351a93c5d8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка массива отрисовки граней  <a href="#a94204ac5c674c526bc2de351a93c5d8d">Подробнее...</a><br /></td></tr>
+<tr class="separator:a94204ac5c674c526bc2de351a93c5d8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad31103141e29a20cd8b34b822f880150"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad31103141e29a20cd8b34b822f880150"></a>
+<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html">VoxelForRendering</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html#ad31103141e29a20cd8b34b822f880150">operator=</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html">VoxelForRendering</a> &amp;)</td></tr>
+<tr class="memdesc:ad31103141e29a20cd8b34b822f880150"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор присваивания. <br /></td></tr>
+<tr class="separator:ad31103141e29a20cd8b34b822f880150"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Информация для отрисовки вокселя. </p>
+<p>В данном классе содержится полная информация для отрисовки вокселя. Есть возможность задания своих параметров. </p>
+
+<p>См. определение в файле <a class="el" href="_voxel_for_rendering_8h_source.html">VoxelForRendering.h</a> строка <a class="el" href="_voxel_for_rendering_8h_source.html#l00018">18</a></p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a class="anchor" id="ad33df61f71ddb6b4e31e750b14893117"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SimpleVoxelEngine::Core::VoxelForRendering::VoxelForRendering </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>rot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>scale</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Конструктор с параметрами. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>Вектор позиции вокселя в глобальных мировых координатах. </td></tr>
+    <tr><td class="paramname">rot</td><td>Вектор поворота вокселя в глобальных мировых координатах. </td></tr>
+    <tr><td class="paramname">scale</td><td>Вектор масштабирования вокселя в глобальных мировых координатах. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a class="anchor" id="a7581f78af128f919d347e5f017d59744"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt;float&gt; SimpleVoxelEngine::Core::VoxelForRendering::getPosition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение позиции вокселя в глобальных мировых координатах. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает вектор положения вокселя в глобальных мировых координатах. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a87117f16cb4884a81adea8cbc43a6536"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt;float&gt; SimpleVoxelEngine::Core::VoxelForRendering::getRotation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение поворота вокселя в глобальных мировых координатах. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает вектор поворота вокселя в глобальных мировых координатах. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a131db89eb2417815bd01cc4b720fb650"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt;float&gt; SimpleVoxelEngine::Core::VoxelForRendering::getScale </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение масштабирования вокселя в глобальных мировых координатах. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает вектор масштабирования вокселя в глобальных мировых координатах. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa2f20a3e5ac937d0fa714e5ab22c6ffc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_voxel_info.html">VoxelInfo</a>* SimpleVoxelEngine::Core::VoxelForRendering::getVoxelInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получнеие информации о вокселе (<a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_voxel_info.html" title="Структура хранения информации о вокселе для отрисовки. Для введения своей информации необходимо насле...">VoxelInfo</a>) </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает указатель на <a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_voxel_info.html" title="Структура хранения информации о вокселе для отрисовки. Для введения своей информации необходимо насле...">VoxelInfo</a>. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4daca7edd0fa57a48692bd2c89d05dad"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::Core::VoxelForRendering::isRenderFace </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numb</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проверка на необходимость отрисовки грани. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numb</td><td>Номер грани, которая проверяется для отрисовки. Массив имеет следующий порядок: (x2, x1, y2, y1, z2, z1), x2 - самое большое по X положение грани, перпендикулярной X, x1 - самое маленькое по X положение грани, перпендикулярной X. С остальными осями аналогично. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если грань необходимо отрисовать, иначе false. Так же false возвращается в случае numb &gt; 5. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab26e72f394e9323b189384bd5579cb64"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::Core::VoxelForRendering::setPosition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>vect</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка позиции вокселя в глобальных мировых координатах. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vect</td><td>Вектор позиции вокселя в глобальных мировых координатах. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a4cf0bfe2e6973c9b7e7bfb315be1dc18"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::Core::VoxelForRendering::setRenderFace </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка грани для отрисовки. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numb</td><td>Номер грани в массиве. </td></tr>
+    <tr><td class="paramname">value</td><td>Если имеет значение true, то грань рисуется, иначе нет. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a94204ac5c674c526bc2de351a93c5d8d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::Core::VoxelForRendering::setRenderFaces </td>
+          <td>(</td>
+          <td class="paramtype">bool *&#160;</td>
+          <td class="paramname"><em>faces</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка массива отрисовки граней </p>
+<p>Копирует массив faces в свой кэш. Поэтому после установки необходимо самому удалить массив faces в случае ненадобности. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">faces</td><td>Копируемый массив. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a36fa3d8c4d7f3c128cd0d1601f8aa4bf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::Core::VoxelForRendering::setRotation </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>vect</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка поворота вокселя в глобальных мировых координатах. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vect</td><td>Вектор поворота вокселя в глобальных мировых координатах. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a35b6fdacd4781f9965cc44160cb24b53"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::Core::VoxelForRendering::setScale </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>vect</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка масштабирования вокселя в глобальных мировых координатах. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vect</td><td>Вектор масштабирования вокселя в глобальных мировых координатах. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9409e5ead2055b3c043b54dc23039f35"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::Core::VoxelForRendering::setVoxelInfo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_voxel_info.html">VoxelInfo</a> *&#160;</td>
+          <td class="paramname"><em>vxlinfo</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка <a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_voxel_info.html" title="Структура хранения информации о вокселе для отрисовки. Для введения своей информации необходимо насле...">VoxelInfo</a>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vxlinfo</td><td>Указатель на устанавливаемое <a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_voxel_info.html" title="Структура хранения информации о вокселе для отрисовки. Для введения своей информации необходимо насле...">VoxelInfo</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li><a class="el" href="_voxel_for_rendering_8h_source.html">VoxelForRendering.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:22. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

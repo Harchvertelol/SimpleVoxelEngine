@@ -1,0 +1,478 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>SimpleVoxelEngine: Урок 3: Загрузка/сохранение мира и свой тип вокселей</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Воксельный движок</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li class="current"><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Урок 3: Загрузка/сохранение мира и свой тип вокселей </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>В этом уроке мы научимся сохранять и загружать мир, а также напишем свой тип вокселей, чтобы работать именно с ним. Начнём по порядку, подключим пространства имён и библиотеки: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstring&gt;</span> <span class="comment">// Для работы с std::string.</span></div>
+<div class="line"><span class="preprocessor">#include &lt;map&gt;</span> <span class="comment">// Для работы с std::map.</span></div>
+<div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span> <span class="comment">// Для работы с файловыми потоками.</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">using namespace </span>std; <span class="comment">// Для работы с std::string и файловыми потоками.</span></div>
+</div><!-- fragment --><p> И давайте опишем класс нашего нового вокселя, для этого унаследуем его от SimpleVoxelObject и дадим тип CUSTOM_VOXEL. Что же должен содержать наш воксель? Пусть это будет идентификатор блока. Тип unsgined int: </p><div class="fragment"><div class="line"><span class="keyword">class </span>Block : <span class="keyword">public</span> SimpleVoxelObject</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       Block(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>): <span class="comment">// Конструктор с заданием ID.</span></div>
+<div class="line">           SimpleVoxelObject(),</div>
+<div class="line">           s_Id(id)</div>
+<div class="line">       {</div>
+<div class="line">           setTypeVoxel(CUSTOM_VOXEL); <span class="comment">// Установили тип CUSTOM_VOXEL.</span></div>
+<div class="line">       }</div>
+<div class="line">       ~Block()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getId() <span class="comment">// Функция получения ID блока.</span></div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">return</span> s_Id;</div>
+<div class="line">       }</div>
+<div class="line">   <span class="keyword">private</span>:</div>
+<div class="line">       <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Отлично, это, в принципе, всё. Теперь перейдём к созданию класса для загрузки и сохранения мира. Для этого создадим класс, наследованный от ChunksSaveLoadController: </p><div class="fragment"><div class="line"><span class="keyword">class </span>MyChunksSaveLoadController : <span class="keyword">public</span> ChunksSaveLoadController</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">private</span>:</div>
+<div class="line">       map&lt; int, string &gt; s_Folders; <span class="comment">// Здесь будем хранить имя папки, где хранится мир (по ID мира)</span></div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       <span class="keywordtype">string</span> getFolder(<span class="keywordtype">int</span> worldid) <span class="comment">// С помощью этой функции мы будем получать название папки мира по ID мира.</span></div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">return</span> s_Folders[worldid];</div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordtype">void</span> setFolder(<span class="keywordtype">int</span> worldid, <span class="keywordtype">string</span> folder) <span class="comment">// А с помощью этой функции мы будем устанавливать миру его папку (опять же, по ID).</span></div>
+<div class="line">       {</div>
+<div class="line">           s_Folders[worldid] = folder;</div>
+<div class="line">       }</div>
+<div class="line">       MyChunksSaveLoadController(Engine* eng): <span class="comment">// Конструктор, для работы с логгером передадим в него указатель на движок.</span></div>
+<div class="line">           ChunksSaveLoadController(),</div>
+<div class="line">           s_Engine(eng) <span class="comment">// Переменная движка в нашем классе.</span></div>
+<div class="line">           {</div>
+<div class="line">               <span class="comment">//...</span></div>
+<div class="line">           }</div>
+</div><!-- fragment --><p> Настало время перейти к главным функциям - сохранения и загрузки. Начнём с сохранения. Для удобства понимания формат будет очень простым (и абсолютно нерабочим для реальной программы). Мы будем в текстовый файл подряд записывать все ID вокселей через пробел, в случае отсутствия вокселя будем записывать 0. Если же обнаруживаем неизвестный воксель, то запишем -1. В нашу функцию сохранения передаются указатель на чанк и его координаты в мировом пространстве: </p><div class="fragment"><div class="line"><span class="keywordtype">bool</span> saveChunk(ChunkVoxelObject* cvo, Vector3d&lt;int&gt; vect)</div>
+<div class="line">{</div>
+</div><!-- fragment --><p> Составим результирующие имя файла чанка. Сразу заметим, что это очень нерентабельно для сжатия и скосрости чтения/записи, но пока мы об этом не думаем: </p><div class="fragment"><div class="line"><span class="keywordtype">string</span> folder = s_Folders[cvo-&gt;getWorld()-&gt;getId()] + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + <span class="stringliteral">&quot;chunks&quot;</span>; <span class="comment">// Получили папку мира. В её подпапке &quot;chunks&quot; и будем хранить файлы чанков</span></div>
+<div class="line"><span class="keywordtype">string</span> filename = folder + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + <span class="stringliteral">&quot;chunk_&quot;</span> + vect.toString(STRING_CONSTANTS::DEFAULT_VECTOR_COORDINATES_SPLITTER); <span class="comment">// А вот и название файла, где будем хранить чанк. Пусть это будет chunk_%v, где %v есть вектор чанка.</span></div>
+</div><!-- fragment --><p> Логично, что записывать мы будем чанк в файл. Но что делать, если файла не существует, как и папок, в которых он должен лежать? Для этого с движком поставляется специальная функция, которая создаёт все папки по указанному пути, её и применим: </p><div class="fragment"><div class="line">ofstream filechunk(filename.c_str()); <span class="comment">// Открыли файл для записи.</span></div>
+<div class="line"><span class="keywordflow">if</span>(!filechunk) <span class="comment">// Если не смогли, то...</span></div>
+<div class="line">{</div>
+<div class="line">    <a class="code" href="namespace_work_functions_1_1_file_functions.html#acdff5c4f5fd989a086a7cccb5c011b5c">WorkFunctions::FileFunctions::createFolders</a>(folder, STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER); <span class="comment">// Создадим все папки.</span></div>
+<div class="line">    filechunk.open(filename.c_str(), ios::out|ios::app|ios::binary); <span class="comment">// Откроем ещё раз.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(!filechunk) <span class="comment">// Если неудача, то выходим из функции сохранения.</span></div>
+<div class="line">    {</div>
+<div class="line">        s_Engine-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;Chunk voxel not saved. Error open file for write. File: &quot;</span> + filename);</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Для экономии памяти в движке работает интеллектуальная система выделения пространства. Поэтому чанк вполне может быть абсолютно пустым, без выделенных контейнеров хранения. Проверим это. Для этого получим число ненулевых вокселей, которые есть в чанке. Если это число больше нуля, то контейнеры существуют, если равно нулю, то не существуют. </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> numberofnotnullsvos = cvo-&gt;getNumberOfNotNullSimpleVoxelObjects(); <span class="comment">// Получили число ненулевых вокселей в чанке</span></div>
+<div class="line">filechunk &lt;&lt; numberofnotnullsvos; <span class="comment">// Запишем это число в наш файл</span></div>
+<div class="line"><span class="keywordflow">if</span>(numberofnotnullsvos != 0) <span class="comment">// А вот чанк будем записывать только в том случае, если в нём есть воксели</span></div>
+<div class="line">{</div>
+</div><!-- fragment --><p> Отлично, файл создан и готов к записи самого чанка. Для начала получим массив указателей на все существующие в чанке SimpleVoxelObject (его размер составляет возведённое в куб значение длины ребра чанка). После этого начнём запись, для этого сначала получим размер ребра чанка, а потом просто пробежим по всему массиву, записывая в файл ID: </p><div class="fragment"><div class="line">   filechunk &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// А это мы запишем пробел между количеством ненулевых вокселей в чанке и следующей информацией</span></div>
+<div class="line">   SimpleVoxelObject** svos = cvo-&gt;getSimpleVoxelObjects(); <span class="comment">// Получили массив указателей на SimpleVoxelObjects.</span></div>
+<div class="line">   <span class="keywordtype">int</span> numbofpart = cvo-&gt;getNumberOfPartitions(); <span class="comment">// Получили размер ребра чанка.</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; numbofpart * numbofpart * numbofpart; i++) <span class="comment">// А вот и наш цикл.</span></div>
+<div class="line">   {</div>
+<div class="line">       <span class="keywordflow">if</span>(svos[i] &amp;&amp; svos[i]-&gt;getTypeVoxel() == CUSTOM_VOXEL) filechunk &lt;&lt; ((Block*)svos[i])-&gt;getId() &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// Если объект есть и наш, то запишем его ID.</span></div>
+<div class="line">       <span class="keywordflow">else</span> <span class="keywordflow">if</span>(!svos[i]) filechunk &lt;&lt; 0 &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// Если блок нулевой, то пишем ноль</span></div>
+<div class="line">       <span class="keywordflow">else</span> filechunk &lt;&lt; -1 &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// Если объект не наш, то запишем -1, но, по идее, все объекты должны быть &quot;наши&quot;, т.е. иметь тип CUSTOM_VOXEL.</span></div>
+<div class="line">   }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Вот и всё, осталось сообщить логгеру о чанке и завершить работу функции, закрыв файл и вернув true: </p><div class="fragment"><div class="line">   s_Engine-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;Chunk voxel saved. File: &quot;</span> + filename); <span class="comment">// Отправим стандартное сообщение о сохранении чанка.</span></div>
+<div class="line">   filechunk.close();</div>
+<div class="line">   <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Чанк сохранён. Настало время загрузить его. Это тоже просто: сначала откроем файл, потом определим, есть ли в нём ненулевые воксели, если есть, то прочитаем из файла массив ID и дадим задание на пересчёт видимости всех вокселей, так как не сохраняли эти данные (а, вообще говоря, сохранять надо, иначе скорость работы сильно упадёт). При этом есть нюанс. Дело в том, что в данный момент, при загрузке чанка, в нём с большой вероятностью (а в нашем случае со 100%) не созданы хранилища для вокселей и сопутствующих кэшированных данных. Но вызов любой из функций getSimpleVoxelObjects() и похожих (см. API) создаёт необходимые хранилища. Также хранилища можно создавать/удалять вручную с помощью функций createData()/deleteData(). </p><div class="fragment"><div class="line"><span class="keywordtype">bool</span> loadChunk(<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html">SimpleVoxelEngine::Voxels::ChunkVoxelObject</a>* cvo, <a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> vect)</div>
+<div class="line">{</div>
+<div class="line">   <span class="keywordtype">string</span> folder = s_Folders[cvo-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a5c1a4f5ba0bc2177cfa065086fdf9b8a">getWorld</a>()-&gt;<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a6fb68ef32eccd3146d5b8ef841fc837a">getId</a>()] + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + <span class="stringliteral">&quot;chunks&quot;</span>; <span class="comment">// Получили папку мира. В её подпапке &quot;chunks&quot; и будем хранить файлы чанков</span></div>
+<div class="line">   <span class="keywordtype">string</span> filename = folder + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + <span class="stringliteral">&quot;chunk_&quot;</span> + vect.<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a95af6b9c76613dda90289c3498da3b0e">toString</a>(STRING_CONSTANTS::DEFAULT_VECTOR_COORDINATES_SPLITTER); <span class="comment">// А вот и название файла, где будем хранить чанк.</span></div>
+<div class="line">                                                                                                                                                           <span class="comment">//Пусть это будет chunk_%v, где %v - вектор чанка.</span></div>
+<div class="line">   ifstream filechunk(filename.c_str()); <span class="comment">// Открыли файл для чтения.</span></div>
+<div class="line">   <span class="keywordflow">if</span>(!filechunk) <span class="comment">// Проверили, открылся ли файл.</span></div>
+<div class="line">   {</div>
+<div class="line">       s_Engine-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;Chunk voxel not loaded. Error open file for read. File: &quot;</span> + filename);</div>
+<div class="line">       <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">   }</div>
+<div class="line">   <span class="keywordtype">int</span> numberofnotnullsvos = 0; <span class="comment">// Количество ненулевых вокселей в чанке</span></div>
+<div class="line">   filechunk &gt;&gt; numberofnotnullsvos; <span class="comment">// Прочитаем количество ненулевых вокселей в чанке</span></div>
+<div class="line">   <span class="keywordflow">if</span>(numberofnotnullsvos != 0) <span class="comment">// Если есть ненулевые воксели, то читаем дальше чанк</span></div>
+<div class="line">   {</div>
+<div class="line">       cvo-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a68330e31df12cdca7065c4267c09e3f5">setNumberOfNotNullSimpleVoxelObjects</a>(numberofnotnullsvos); <span class="comment">// Установим чанку количество ненулевых вокселей. При работе с данными напрямую</span></div>
+<div class="line">                                                                       <span class="comment">// этот параметр необходимо редактировать вручную</span></div>
+<div class="line">       SimpleVoxelObject** svos = cvo-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a824f46d51d851f9dff326c7354c0a197">getSimpleVoxelObjects</a>(); <span class="comment">// Получили массив указателей на SimpleVoxelObjects.</span></div>
+<div class="line">       <span class="keywordtype">bool</span>* svocachevisible = cvo-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ad977cb01177a1038fb353c0282ee2a08">getReCalculateVisibleCacheSimpleVoxelObjects</a>(); <span class="comment">// Получим ещё и кэш видимости, чтобы потом устроить полный пересчёт.</span></div>
+<div class="line">       <span class="keywordtype">int</span> numbofpart = cvo-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a1d2bde923a3148fe1b3aea1adf5f23ab">getNumberOfPartitions</a>(); <span class="comment">// Получили размер ребра чанка.</span></div>
+<div class="line">       <span class="keywordtype">int</span> <span class="keywordtype">id</span> = 0; <span class="comment">// Сюда будем читать ID.</span></div>
+<div class="line">       Block* block; <span class="comment">// Переменная для хранения указателя на наш воксель.</span></div>
+<div class="line">       <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; numbofpart * numbofpart * numbofpart; i++) <span class="comment">// А вот и наш цикл.</span></div>
+<div class="line">       {</div>
+<div class="line">           filechunk &gt;&gt; id;</div>
+<div class="line">           <span class="keywordflow">if</span>(<span class="keywordtype">id</span> != -1 &amp;&amp; <span class="keywordtype">id</span> != 0) <span class="comment">// Если блок известен и ненулевой</span></div>
+<div class="line">           {</div>
+<div class="line">               block = <span class="keyword">new</span> Block(<span class="keywordtype">id</span>);</div>
+<div class="line">               <span class="keywordflow">if</span>(!block)</div>
+<div class="line">               {</div>
+<div class="line">                   s_Engine-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;Chunk voxel not loaded. Error creating Block. Folder: &quot;</span> + folder);</div>
+<div class="line">                   <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">               }</div>
+<div class="line">               svos[i] = block;</div>
+<div class="line">               svocachevisible[i] = <span class="keyword">true</span>; <span class="comment">// А вот и указываем, что надо пересчитать видимость.</span></div>
+<div class="line">           }</div>
+<div class="line">       }</div>
+<div class="line">   }</div>
+<div class="line">   s_Engine-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;Chunk voxel loaded. File: &quot;</span> + filename); <span class="comment">// Отправим стандартное сообщение о загрузке чанка.</span></div>
+<div class="line">   filechunk.close();</div>
+<div class="line">   <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Теперь надо описать функцию для проверки возможности загрузки чанка. Она принимает указатель на мир, в котором лежит чанк и вектор (координаты) этого самого чанка: </p><div class="fragment"><div class="line"><span class="keywordtype">bool</span> canLoad(World* wrld, Vector3d&lt;int&gt; vect)</div>
+<div class="line">{</div>
+<div class="line">   <span class="keywordtype">string</span> folder = s_Folders[wrld-&gt;getId()] + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + <span class="stringliteral">&quot;chunks&quot;</span>; <span class="comment">// Получили папку мира. В её подпапке &quot;chunks&quot; хранятся файлы чанков</span></div>
+<div class="line">   <span class="keywordtype">string</span> filename = folder + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + <span class="stringliteral">&quot;chunk_&quot;</span> + vect.toString(STRING_CONSTANTS::DEFAULT_VECTOR_COORDINATES_SPLITTER); <span class="comment">// А вот и название файла, где хранится чанк.</span></div>
+<div class="line">                                                                                                                                                           <span class="comment">// Это будет chunk_%v, где %v - вектор чанка.</span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a class="code" href="namespace_work_functions_1_1_file_functions.html#a6b4f1dea7c7fa97cf16192603e0cb2d9">WorkFunctions::FileFunctions::fileExists</a>(filename)) <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// Если файл существует, то можем загрузить.</span></div>
+<div class="line">   <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Иначе не можем.</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Ну и последний штрих: объявить s_Engine и закрыть класс: </p><div class="fragment"><div class="line">   <span class="keyword">private</span>:</div>
+<div class="line">       Engine* s_Engine;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Подключим также наш генератор мира из прошлого урока с небольшими изменениями, а именно будем устанавливать наши воксели, а в конце добавим сообщение о том, что генерация произошла: </p><div class="fragment"><div class="line"><span class="keyword">class </span>MyWorldGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       MyWorldGenerator():</div>
+<div class="line">           WorldGenerator()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       ~MyWorldGenerator()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> sizechunk)</div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; sizechunk; x++)</div>
+<div class="line">               <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; sizechunk; y++)</div>
+<div class="line">                   <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; sizechunk / 2; z++)</div>
+<div class="line">                   {</div>
+<div class="line">                        Block* block = <span class="keyword">new</span> Block(1); <span class="comment">// Пусть ID = 1.</span></div>
+<div class="line">                        <span class="keywordflow">if</span>(!block)</div>
+<div class="line">                        {</div>
+<div class="line">                            chunk-&gt;getWorld()-&gt;getEngine()-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;TestProject: Error generating chunk, Block not added&quot;</span>, <span class="keyword">true</span>);</div>
+<div class="line">                            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">                        }</div>
+<div class="line">                        chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), block, <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">                    }</div>
+<div class="line">            chunk-&gt;getWorld()-&gt;getEngine()-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;Chunk generating.&quot;</span>); <span class="comment">// Чтобы отличать загрузку чанка с диска от генерации.</span></div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">       }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Теперь опишем функцию main: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Создали логгер.</span></div>
+<div class="line">    Engine* sve = <span class="keyword">new</span> Engine(lgr); <span class="comment">// Создали движок, дав ему логгер.</span></div>
+<div class="line">    lgr-&gt;drop(); <span class="comment">// Нам лично больше логгер не нужен, отдадим его на обеспечение движку.</span></div>
+<div class="line">    WorldCreatingParameters wcp;</div>
+<div class="line">    wcp.s_SizeChunk = 16;</div>
+<div class="line">    <span class="keywordtype">int</span> worldid = sve-&gt;addWorld(wcp);</div>
+<div class="line">    World* wrld = sve-&gt;getWorld(worldid); <span class="comment">// Получили мир по идентификатору.</span></div>
+<div class="line">    MyWorldGenerator* mywrldgen = <span class="keyword">new</span> MyWorldGenerator; <span class="comment">// Создали наш генератор.</span></div>
+<div class="line">    wrld-&gt;setWorldGenerator(mywrldgen); <span class="comment">// Установили миру наш генератор.</span></div>
+</div><!-- fragment --><p> Создадим и подключим наш контроллер загрузки и сохранений и посмотрим на ID блока с координатами (0,0,0): </p><div class="fragment"><div class="line">    MyChunksSaveLoadController* mychunksslcntrl = <span class="keyword">new</span> MyChunksSaveLoadController(sve); <span class="comment">// Создали наш контроллер.</span></div>
+<div class="line">    mychunksslcntrl-&gt;setFolder(worldid, <span class="stringliteral">&quot;dataworlds/testfolderworld&quot;</span>); <span class="comment">// Установим папку для нашего мира</span></div>
+<div class="line">    wrld-&gt;setChunksSaveLoadController(mychunksslcntrl);</div>
+<div class="line">    wrld-&gt;loadChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Загрузили чанк.</span></div>
+<div class="line">    ChunkVoxelObject* chunk = wrld-&gt;getChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили чанк.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(!chunk) <span class="keywordflow">return</span> 1;</div>
+<div class="line">    SimpleVoxelObject* svo = chunk-&gt;getSimpleVoxelObject(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили объект.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(!svo || svo-&gt;getTypeVoxel() != <a class="code" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a44f50553de3e67b1031cb44f00869bba">CUSTOM_VOXEL</a>) <span class="keywordflow">return</span> 1; <span class="comment">// Проверили на ошибки.</span></div>
+<div class="line">    Block* block = (Block*)svo; <span class="comment">// Привели типы.</span></div>
+<div class="line">    sve-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;ID = &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(block-&gt;getId()));</div>
+<div class="line">    wrld-&gt;saveAllChunks(); <span class="comment">// Сохраним все чанки на диск.</span></div>
+<div class="line">    <span class="keyword">delete</span> sve; <span class="comment">// Удалили движок (автосохранение мира и чанков не происходит).</span></div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Вот и всё. Мы научились описывать свои типы вокселей и сохранять/загружать мир. При этом мы загружаем и сохраняем мир без сжатия и правильного распределения ресурсов. Это ложится уже на плечи конечного пользователя движка. И напоследок полностью весь код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstring&gt;</span> <span class="comment">// Для работы с std::string.</span></div>
+<div class="line"><span class="preprocessor">#include &lt;map&gt;</span> <span class="comment">// Для работы с std::map.</span></div>
+<div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span> <span class="comment">// Для работы с файловыми потоками.</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+<div class="line"><span class="keyword">using namespace </span>std; <span class="comment">// Для работы с std::string и файловыми потоками.</span></div>
+<div class="line"><span class="keyword">class </span>Block : <span class="keyword">public</span> SimpleVoxelObject</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       Block(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>): <span class="comment">// Конструктор с заданием ID.</span></div>
+<div class="line">           SimpleVoxelObject(),</div>
+<div class="line">           s_Id(id)</div>
+<div class="line">       {</div>
+<div class="line">           setTypeVoxel(CUSTOM_VOXEL); <span class="comment">// Установили тип CUSTOM_VOXEL.</span></div>
+<div class="line">       }</div>
+<div class="line">       ~Block()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getId() <span class="comment">// Функция получения ID блока.</span></div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">return</span> s_Id;</div>
+<div class="line">       }</div>
+<div class="line">   <span class="keyword">private</span>:</div>
+<div class="line">       <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+<div class="line"><span class="keyword">class </span>MyChunksSaveLoadController : <span class="keyword">public</span> ChunksSaveLoadController</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">private</span>:</div>
+<div class="line">        map&lt; int, string &gt; s_Folders; <span class="comment">// Здесь будем хранить имя папки, где хранится мир (по ID мира)</span></div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       <span class="keywordtype">string</span> getFolder(<span class="keywordtype">int</span> worldid) <span class="comment">// С помощью этой функции мы будем получать название папки мира по ID мира.</span></div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">return</span> s_Folders[worldid];</div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordtype">void</span> setFolder(<span class="keywordtype">int</span> worldid, <span class="keywordtype">string</span> folder) <span class="comment">// А с помощью этой функции мы будем устанавливать миру его папку (опять же, по ID).</span></div>
+<div class="line">       {</div>
+<div class="line">           s_Folders[worldid] = folder;</div>
+<div class="line">       }</div>
+<div class="line">       MyChunksSaveLoadController(Engine* eng): <span class="comment">// Конструктор, для работы с логгером передадим в него указатель на движок.</span></div>
+<div class="line">           ChunksSaveLoadController(),</div>
+<div class="line">           s_Engine(eng) <span class="comment">// Переменная движка в нашем классе.</span></div>
+<div class="line">           {</div>
+<div class="line">               <span class="comment">//...</span></div>
+<div class="line">           }</div>
+<div class="line">        <span class="keywordtype">bool</span> saveChunk(ChunkVoxelObject* cvo, Vector3d&lt;int&gt; vect)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordtype">string</span> folder = s_Folders[cvo-&gt;getWorld()-&gt;getId()] + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + <span class="stringliteral">&quot;chunks&quot;</span>; <span class="comment">// Получили папку мира. В её подпапке &quot;chunks&quot; и будем хранить файлы чанков</span></div>
+<div class="line">            <span class="keywordtype">string</span> filename = folder + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + <span class="stringliteral">&quot;chunk_&quot;</span> + vect.toString(STRING_CONSTANTS::DEFAULT_VECTOR_COORDINATES_SPLITTER); <span class="comment">// А вот и название файла, где будем хранить чанк.</span></div>
+<div class="line">                                                                                                                                                                    <span class="comment">// Пусть это будет chunk_%v, где %v - вектор чанка.</span></div>
+<div class="line">            ofstream filechunk(filename.c_str()); <span class="comment">// Открыли файл для записи.</span></div>
+<div class="line">            <span class="keywordflow">if</span>(!filechunk) <span class="comment">// Если не смогли, то...</span></div>
+<div class="line">            {</div>
+<div class="line">                <a class="code" href="namespace_work_functions_1_1_file_functions.html#acdff5c4f5fd989a086a7cccb5c011b5c">WorkFunctions::FileFunctions::createFolders</a>(folder, STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER); <span class="comment">// Создадим все папки.</span></div>
+<div class="line">                filechunk.open(filename.c_str(), ios::out|ios::app|ios::binary); <span class="comment">// Откроем ещё раз.</span></div>
+<div class="line">                <span class="keywordflow">if</span>(!filechunk) <span class="comment">// Если неудача, то выходим из функции сохранения.</span></div>
+<div class="line">                {</div>
+<div class="line">                    s_Engine-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;Chunk voxel not saved. Error open file for write. File: &quot;</span> + filename);</div>
+<div class="line">                    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">            <span class="keywordtype">int</span> numberofnotnullsvos = cvo-&gt;getNumberOfNotNullSimpleVoxelObjects(); <span class="comment">// Получили число ненулевых вокселей в чанке</span></div>
+<div class="line">            filechunk &lt;&lt; numberofnotnullsvos; <span class="comment">// Запишем это число в наш файл</span></div>
+<div class="line">            <span class="keywordflow">if</span>(numberofnotnullsvos != 0) <span class="comment">// А вот чанк будем записывать только в том случае, если в нём есть воксели</span></div>
+<div class="line">            {</div>
+<div class="line">                filechunk &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// А это мы запишем пробел между количеством ненулевых вокселей в чанке и следующей информацией</span></div>
+<div class="line">                SimpleVoxelObject** svos = cvo-&gt;getSimpleVoxelObjects(); <span class="comment">// Получили массив указателей на SimpleVoxelObjects.</span></div>
+<div class="line">                <span class="keywordtype">int</span> numbofpart = cvo-&gt;getNumberOfPartitions(); <span class="comment">// Получили размер ребра чанка.</span></div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; numbofpart * numbofpart * numbofpart; i++) <span class="comment">// А вот и наш цикл.</span></div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keywordflow">if</span>(svos[i] &amp;&amp; svos[i]-&gt;getTypeVoxel() == CUSTOM_VOXEL) filechunk &lt;&lt; ((Block*)svos[i])-&gt;getId() &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// Если объект есть и наш, то запишем его ID.</span></div>
+<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(!svos[i]) filechunk &lt;&lt; 0 &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// Если блок нулевой, то пишем ноль</span></div>
+<div class="line">                    <span class="keywordflow">else</span> filechunk &lt;&lt; -1 &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// Если объект не наш, то запишем -1, но, по идее, все объекты должны быть &quot;наши&quot;, т.е. иметь тип CUSTOM_VOXEL.</span></div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">            s_Engine-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;Chunk voxel saved. File: &quot;</span> + filename); <span class="comment">// Отправим стандартное сообщение о сохранении чанка.</span></div>
+<div class="line">            filechunk.close();</div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordtype">bool</span> loadChunk(<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html">SimpleVoxelEngine::Voxels::ChunkVoxelObject</a>* cvo, <a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> vect)</div>
+<div class="line">        {</div>
+<div class="line">           <span class="keywordtype">string</span> folder = s_Folders[cvo-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a5c1a4f5ba0bc2177cfa065086fdf9b8a">getWorld</a>()-&gt;<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a6fb68ef32eccd3146d5b8ef841fc837a">getId</a>()] + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + <span class="stringliteral">&quot;chunks&quot;</span>; <span class="comment">// Получили папку мира. В её подпапке &quot;chunks&quot; и будем хранить файлы чанков</span></div>
+<div class="line">           <span class="keywordtype">string</span> filename = folder + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + <span class="stringliteral">&quot;chunk_&quot;</span> + vect.<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a95af6b9c76613dda90289c3498da3b0e">toString</a>(STRING_CONSTANTS::DEFAULT_VECTOR_COORDINATES_SPLITTER); <span class="comment">// А вот и название файла, где будем хранить чанк.</span></div>
+<div class="line">                                                                                                                                                                   <span class="comment">// Пусть это будет chunk_%v, где %v - вектор чанка.</span></div>
+<div class="line">           ifstream filechunk(filename.c_str()); <span class="comment">// Открыли файл для чтения.</span></div>
+<div class="line">           <span class="keywordflow">if</span>(!filechunk) <span class="comment">// Проверили, открылся ли файл.</span></div>
+<div class="line">           {</div>
+<div class="line">               s_Engine-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;Chunk voxel not loaded. Error open file for read. File: &quot;</span> + filename);</div>
+<div class="line">               <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">           }</div>
+<div class="line">           <span class="keywordtype">int</span> numberofnotnullsvos = 0; <span class="comment">// Количество ненулевых вокселей в чанке</span></div>
+<div class="line">           filechunk &gt;&gt; numberofnotnullsvos; <span class="comment">// Прочитаем количество ненулевых вокселей в чанке</span></div>
+<div class="line">           <span class="keywordflow">if</span>(numberofnotnullsvos != 0) <span class="comment">// Если есть ненулевые воксели, то читаем дальше чанк</span></div>
+<div class="line">           {</div>
+<div class="line">               cvo-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a68330e31df12cdca7065c4267c09e3f5">setNumberOfNotNullSimpleVoxelObjects</a>(numberofnotnullsvos); <span class="comment">// Установим чанку количество ненулевых вокселей. При работе с данными напрямую</span></div>
+<div class="line">                                                                               <span class="comment">// этот параметр необходимо редактировать вручную</span></div>
+<div class="line">               SimpleVoxelObject** svos = cvo-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a824f46d51d851f9dff326c7354c0a197">getSimpleVoxelObjects</a>(); <span class="comment">// Получили массив указателей на SimpleVoxelObjects.</span></div>
+<div class="line">               <span class="keywordtype">bool</span>* svocachevisible = cvo-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ad977cb01177a1038fb353c0282ee2a08">getReCalculateVisibleCacheSimpleVoxelObjects</a>(); <span class="comment">// Получим ещё и кэш видимости, чтобы потом устроить полный пересчёт.</span></div>
+<div class="line">               <span class="keywordtype">int</span> numbofpart = cvo-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a1d2bde923a3148fe1b3aea1adf5f23ab">getNumberOfPartitions</a>(); <span class="comment">// Получили размер ребра чанка.</span></div>
+<div class="line">               <span class="keywordtype">int</span> <span class="keywordtype">id</span> = 0; <span class="comment">// Сюда будем читать ID.</span></div>
+<div class="line">               Block* block; <span class="comment">// Переменная для хранения указателя на наш воксель.</span></div>
+<div class="line">               <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; numbofpart * numbofpart * numbofpart; i++) <span class="comment">// А вот и наш цикл.</span></div>
+<div class="line">               {</div>
+<div class="line">                   filechunk &gt;&gt; id;</div>
+<div class="line">                   <span class="keywordflow">if</span>(<span class="keywordtype">id</span> != -1 &amp;&amp; <span class="keywordtype">id</span> != 0) <span class="comment">// Если блок известен и ненулевой</span></div>
+<div class="line">                   {</div>
+<div class="line">                       block = <span class="keyword">new</span> Block(<span class="keywordtype">id</span>);</div>
+<div class="line">                       <span class="keywordflow">if</span>(!block)</div>
+<div class="line">                       {</div>
+<div class="line">                           s_Engine-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;Chunk voxel not loaded. Error creating Block. Folder: &quot;</span> + folder);</div>
+<div class="line">                           <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">                       }</div>
+<div class="line">                       svos[i] = block;</div>
+<div class="line">                       svocachevisible[i] = <span class="keyword">true</span>; <span class="comment">// А вот и указываем, что надо пересчитать видимость.</span></div>
+<div class="line">                   }</div>
+<div class="line">               }</div>
+<div class="line">           }</div>
+<div class="line">           s_Engine-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;Chunk voxel loaded. File: &quot;</span> + filename); <span class="comment">// Отправим стандартное сообщение о загрузке чанка.</span></div>
+<div class="line">           filechunk.close();</div>
+<div class="line">           <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordtype">bool</span> canLoad(World* wrld, Vector3d&lt;int&gt; vect)</div>
+<div class="line">        {</div>
+<div class="line">           <span class="keywordtype">string</span> folder = s_Folders[wrld-&gt;getId()] + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + <span class="stringliteral">&quot;chunks&quot;</span>; <span class="comment">// Получили папку мира. В её подпапке &quot;chunks&quot; хранятся файлы чанков</span></div>
+<div class="line">           <span class="keywordtype">string</span> filename = folder + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + <span class="stringliteral">&quot;chunk_&quot;</span> + vect.toString(STRING_CONSTANTS::DEFAULT_VECTOR_COORDINATES_SPLITTER); <span class="comment">// А вот и название файла, где хранится чанк. Это будет chunk_%v, где %v есть вектор чанка.</span></div>
+<div class="line">           <span class="keywordflow">if</span>(<a class="code" href="namespace_work_functions_1_1_file_functions.html#a6b4f1dea7c7fa97cf16192603e0cb2d9">WorkFunctions::FileFunctions::fileExists</a>(filename)) <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// Если файл существует, то можем загрузить.</span></div>
+<div class="line">           <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Иначе не можем.</span></div>
+<div class="line">        }</div>
+<div class="line">    <span class="keyword">private</span>:</div>
+<div class="line">        Engine* s_Engine;</div>
+<div class="line">};</div>
+<div class="line"><span class="keyword">class </span>MyWorldGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       MyWorldGenerator():</div>
+<div class="line">           WorldGenerator()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       ~MyWorldGenerator()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> sizechunk)</div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; sizechunk; x++)</div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; sizechunk; y++)</div>
+<div class="line">                   <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; sizechunk / 2; z++)</div>
+<div class="line">                   {</div>
+<div class="line">                        Block* block = <span class="keyword">new</span> Block(1); <span class="comment">// Пусть ID = 1.</span></div>
+<div class="line">                        <span class="keywordflow">if</span>(!block)</div>
+<div class="line">                        {</div>
+<div class="line">                            chunk-&gt;getWorld()-&gt;getEngine()-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;TestProject: Error generating chunk, Block not added&quot;</span>, <span class="keyword">true</span>);</div>
+<div class="line">                            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">                        }</div>
+<div class="line">                        chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), block, <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">                    }</div>
+<div class="line">            chunk-&gt;getWorld()-&gt;getEngine()-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;Chunk generating.&quot;</span>); <span class="comment">// Чтобы отличать загрузку чанка с диска от генерации.</span></div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">       }</div>
+<div class="line">};</div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Создали логгер.</span></div>
+<div class="line">    Engine* sve = <span class="keyword">new</span> Engine(lgr); <span class="comment">// Создали движок, дав ему логгер.</span></div>
+<div class="line">    lgr-&gt;drop(); <span class="comment">// Нам лично больше логгер не нужен, отдадим его на обеспечение движку.</span></div>
+<div class="line">    WorldCreatingParameters wcp;</div>
+<div class="line">    wcp.s_SizeChunk = 16;</div>
+<div class="line">    <span class="keywordtype">int</span> worldid = sve-&gt;addWorld(wcp);</div>
+<div class="line">    World* wrld = sve-&gt;getWorld(worldid); <span class="comment">// Получили мир по идентификатору.</span></div>
+<div class="line">    MyWorldGenerator* mywrldgen = <span class="keyword">new</span> MyWorldGenerator; <span class="comment">// Создали наш генератор.</span></div>
+<div class="line">    wrld-&gt;setWorldGenerator(mywrldgen); <span class="comment">// Установили миру наш генератор.</span></div>
+<div class="line">    MyChunksSaveLoadController* mychunksslcntrl = <span class="keyword">new</span> MyChunksSaveLoadController(sve); <span class="comment">// Создали наш контроллер.</span></div>
+<div class="line">    mychunksslcntrl-&gt;setFolder(worldid, <span class="stringliteral">&quot;dataworlds/testfolderworld&quot;</span>); <span class="comment">// Установим папку для нашего мира</span></div>
+<div class="line">    wrld-&gt;setChunksSaveLoadController(mychunksslcntrl);</div>
+<div class="line">    wrld-&gt;loadChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Загрузили чанк.</span></div>
+<div class="line">    ChunkVoxelObject* chunk = wrld-&gt;getChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили чанк.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(!chunk) <span class="keywordflow">return</span> 1;</div>
+<div class="line">    SimpleVoxelObject* svo = chunk-&gt;getSimpleVoxelObject(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили объект.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(!svo || svo-&gt;getTypeVoxel() != <a class="code" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a44f50553de3e67b1031cb44f00869bba">CUSTOM_VOXEL</a>) <span class="keywordflow">return</span> 1; <span class="comment">// Проверили на ошибки.</span></div>
+<div class="line">    Block* block = (Block*)svo; <span class="comment">// Привели типы.</span></div>
+<div class="line">    sve-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;ID = &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(block-&gt;getId()));</div>
+<div class="line">    wrld-&gt;saveAllChunks(); <span class="comment">// Сохраним все чанки на диск.</span></div>
+<div class="line">    <span class="keyword">delete</span> sve; <span class="comment">// Удалили движок (автосохранение мира и чанков не происходит).</span></div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> На этот раз всё. Спасибо за интерес к движку.<br />
+ Автор: <b>Харч</b>. </p>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:22. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

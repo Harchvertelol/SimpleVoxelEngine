@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>IrrSimpleVoxelEngine: Исходный файл ThreadSafeType.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">IrrSimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Враппер для воксельного движка на irrlicht</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li class="current"><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Файлы</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Друзья</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_a81b5585c26ee11ef3f8637bee9e603c.html">jane</a></li><li class="navelem"><a class="el" href="dir_a87058c2edbd9f58c6f2635354598c68.html">Информатика</a></li><li class="navelem"><a class="el" href="dir_9ce0018b5864768711f69410f7e6df2b.html">c++</a></li><li class="navelem"><a class="el" href="dir_eea9b0c3eef2307c57166cdd45f56f4e.html">Графика(движки)</a></li><li class="navelem"><a class="el" href="dir_bd0a5ceea3a5bd1dc90d43f3000c4e2f.html">Irrlicht</a></li><li class="navelem"><a class="el" href="dir_25cec2ae9268a684d598f049d6333b22.html">Воксели</a></li><li class="navelem"><a class="el" href="dir_39ecb1a257347a703824a93feae6f833.html">MyVoxelWork</a></li><li class="navelem"><a class="el" href="dir_4e5641742efd570c45827e810f47202f.html">IrrSimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="dir_466aead8c830fe769aca150fb610a4c6.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">ThreadSafeType.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ThreadSafeType_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ThreadSafeType_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;mutex&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">namespace </span>IrrEngine</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    {</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="keyword">namespace </span>ThreadSafeTypes</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">   16</a></span>&#160;            <span class="keyword">template</span>&lt;<span class="keyword">typename</span> TYPE_Value&gt; <span class="keyword">class </span><a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#a36a3553e3386662fbc350971d1cf3f50">   20</a></span>&#160;                    <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#a36a3553e3386662fbc350971d1cf3f50">ThreadSafeType</a>():</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                        s_Value(false)</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                    {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                        <span class="comment">//...</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                    }</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#afaa7f695988e3425ea837f7350c5ee3e">   28</a></span>&#160;                    <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#afaa7f695988e3425ea837f7350c5ee3e">ThreadSafeType</a>(TYPE_Value value):</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                        s_Value(value)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                    {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                        <span class="comment">//...</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                    }</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#ac9040c5162a824c26be3bf0d6bbb0f78">   34</a></span>&#160;                    <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#ac9040c5162a824c26be3bf0d6bbb0f78">~ThreadSafeType</a>()</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                    {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                        <span class="comment">//...</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                    }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">   41</a></span>&#160;                    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">                    </span>{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                        std::lock_guard&lt;std::mutex&gt; locker(s_Mutex);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                        <span class="keywordflow">return</span> s_Value;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                    }</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#a9f40dde2b3560f7c7e3caea5e2256c8c">   49</a></span>&#160;                    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#a9f40dde2b3560f7c7e3caea5e2256c8c">setValue</a>(<span class="keywordtype">bool</span> value)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                    {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                        s_Mutex.lock();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                        s_Value = value;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                        s_Mutex.unlock();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    }</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#a7df400eab787f5f844900bed95e86b70">   56</a></span>&#160;                    <span class="keyword">inline</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#a7df400eab787f5f844900bed95e86b70">operator=</a>(<span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                    {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                        <span class="keywordflow">if</span>(<span class="keyword">this</span> != &amp;elem)</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                        {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                            <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#a9f40dde2b3560f7c7e3caea5e2256c8c">setValue</a>(elem.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>());</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                        }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    }</div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#a14ab19aafaa497db9bdd95dc1f1834d5">   65</a></span>&#160;                    <span class="keyword">inline</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#a14ab19aafaa497db9bdd95dc1f1834d5">operator=</a>(<span class="keyword">const</span> TYPE_Value value)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                        <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#a9f40dde2b3560f7c7e3caea5e2256c8c">setValue</a>(value);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    TYPE_Value s_Value;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    <span class="keyword">mutable</span> std::mutex s_Mutex;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            };</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a61503749d6181460ea72f52595f38834">   75</a></span>&#160;            <span class="keyword">template</span>&lt;<span class="keyword">class</span> TYPE_Value&gt; <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a61503749d6181460ea72f52595f38834">operator!</a>(<span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem)</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <span class="keywordflow">return</span> !(elem.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>());</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            }</div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#aa7a3f1d118543dd6a8f46266042b5fe7">   80</a></span>&#160;            <span class="keyword">template</span>&lt;<span class="keyword">class</span> TYPE_Value&gt; <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a3eaecf3c92bc4d4349346c6bbaa77937">operator==</a>(<span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem1, <span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem2)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="keywordflow">return</span> elem1.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>() == elem2.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            }</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a1accc3a3f30b01620cb5ff0e497b3a45">   85</a></span>&#160;            <span class="keyword">template</span>&lt;<span class="keyword">class</span> TYPE_Value&gt; <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a3eaecf3c92bc4d4349346c6bbaa77937">operator==</a>(<span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem, <span class="keyword">const</span> TYPE_Value value)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                <span class="keywordflow">return</span> elem.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>() == value;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            }</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#af7d4d50fd8eb0db731ede5cd89e88fef">   90</a></span>&#160;            <span class="keyword">template</span>&lt;<span class="keyword">class</span> TYPE_Value&gt; <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a42b6a8683ec6a064e2aabfcb90d54b6f">operator!=</a>(<span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem1, <span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem2)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                <span class="keywordflow">return</span> elem1.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>() != elem2.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>();</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            }</div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#aa7f4e30e4ad740f255a81f286a606188">   95</a></span>&#160;            <span class="keyword">template</span>&lt;<span class="keyword">class</span> TYPE_Value&gt; <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a42b6a8683ec6a064e2aabfcb90d54b6f">operator!=</a>(<span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem, <span class="keyword">const</span> TYPE_Value value)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="keywordflow">return</span> elem.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>() != value;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            }</div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a33a8167e517a541d6dead9878a1193a9">  100</a></span>&#160;            <span class="keyword">template</span>&lt;<span class="keyword">class</span> TYPE_Value&gt; <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a33a8167e517a541d6dead9878a1193a9">operator&amp;&amp;</a>(<span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem1, <span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem2)</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                <span class="keywordflow">return</span> elem1.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>() &amp;&amp; elem2.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            }</div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#ae03d6b20692331ddc7b4159f9b9eedcb">  105</a></span>&#160;            <span class="keyword">template</span>&lt;<span class="keyword">class</span> TYPE_Value&gt; <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#ae03d6b20692331ddc7b4159f9b9eedcb">operator||</a>(<span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem1, <span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem2)</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                <span class="keywordflow">return</span> elem1.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>() || elem2.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>();</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            }</div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a9cf2918ca8a313b180c047eef1b0004b">  110</a></span>&#160;            <span class="keyword">template</span>&lt;<span class="keyword">class</span> TYPE_Value&gt; <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a33a8167e517a541d6dead9878a1193a9">operator&amp;&amp;</a>(<span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem, <span class="keyword">const</span> TYPE_Value value)</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                <span class="keywordflow">return</span> elem.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>() &amp;&amp; value;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            }</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#ac74b923acfc41f9a62d281f4c519debc">  115</a></span>&#160;            <span class="keyword">template</span>&lt;<span class="keyword">class</span> TYPE_Value&gt; <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#ae03d6b20692331ddc7b4159f9b9eedcb">operator||</a>(<span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem, <span class="keyword">const</span> TYPE_Value value)</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                <span class="keywordflow">return</span> elem.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>() || value;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            }</div>
+<div class="line"><a name="l00120"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a36fbef2fdf66d72ba2dbb849666224c7">  120</a></span>&#160;            <span class="keyword">template</span>&lt;<span class="keyword">class</span> TYPE_Value&gt; <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a33a8167e517a541d6dead9878a1193a9">operator&amp;&amp;</a>(<span class="keyword">const</span> TYPE_Value value, <span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem)</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            {</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                <span class="keywordflow">return</span> elem.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>() &amp;&amp; value;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            }</div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a29862e8c2aa3c780336e9cbceec499b4">  125</a></span>&#160;            <span class="keyword">template</span>&lt;<span class="keyword">class</span> TYPE_Value&gt; <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#ae03d6b20692331ddc7b4159f9b9eedcb">operator||</a>(<span class="keyword">const</span> TYPE_Value value, <span class="keyword">const</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">ThreadSafeType&lt;TYPE_Value&gt;</a>&amp; elem)</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            {</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                <span class="keywordflow">return</span> elem.<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">getValue</a>() || value;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            }</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        }</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    }</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;}</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="namespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine. </div><div class="ttdef"><b>Definition:</b> <a href="_chunks_mesh_block_8h_source.html#l00010">ChunksMeshBlock.h:10</a></div></div>
+<div class="ttc" id="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_html_a3eaecf3c92bc4d4349346c6bbaa77937"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a3eaecf3c92bc4d4349346c6bbaa77937">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::operator==</a></div><div class="ttdeci">bool operator==(const ThreadSafeCounter&lt; TYPE_CounterValue &gt; &amp;elem1, const ThreadSafeCounter&lt; TYPE_CounterValue &gt; &amp;elem2)</div><div class="ttdoc">Оператор сравнения "равно" двух счётчиков для возможности использования счётчика как индексатора std:...</div><div class="ttdef"><b>Definition:</b> <a href="_thread_safe_counter_8h_source.html#l00238">ThreadSafeCounter.h:238</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type_html_a7df400eab787f5f844900bed95e86b70"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#a7df400eab787f5f844900bed95e86b70">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeType::operator=</a></div><div class="ttdeci">ThreadSafeType&lt; TYPE_Value &gt; &amp; operator=(const ThreadSafeType&lt; TYPE_Value &gt; &amp;elem)</div><div class="ttdoc">Оператор присваивания другому такому же типу. </div><div class="ttdef"><b>Definition:</b> <a href="_thread_safe_type_8h_source.html#l00056">ThreadSafeType.h:56</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type_html_ac9040c5162a824c26be3bf0d6bbb0f78"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#ac9040c5162a824c26be3bf0d6bbb0f78">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeType::~ThreadSafeType</a></div><div class="ttdeci">~ThreadSafeType()</div><div class="ttdoc">Стандартный деструктор. </div><div class="ttdef"><b>Definition:</b> <a href="_thread_safe_type_8h_source.html#l00034">ThreadSafeType.h:34</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type_html_a36a3553e3386662fbc350971d1cf3f50"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#a36a3553e3386662fbc350971d1cf3f50">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeType::ThreadSafeType</a></div><div class="ttdeci">ThreadSafeType()</div><div class="ttdoc">Стандартный конструктор. </div><div class="ttdef"><b>Definition:</b> <a href="_thread_safe_type_8h_source.html#l00020">ThreadSafeType.h:20</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type_html_a9f40dde2b3560f7c7e3caea5e2256c8c"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#a9f40dde2b3560f7c7e3caea5e2256c8c">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeType::setValue</a></div><div class="ttdeci">void setValue(bool value)</div><div class="ttdoc">Установка значения. </div><div class="ttdef"><b>Definition:</b> <a href="_thread_safe_type_8h_source.html#l00049">ThreadSafeType.h:49</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type_html"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeType</a></div><div class="ttdoc">В теории аналог любого типа, но потокобезопасный. </div><div class="ttdef"><b>Definition:</b> <a href="_thread_safe_type_8h_source.html#l00016">ThreadSafeType.h:16</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type_html_a14ab19aafaa497db9bdd95dc1f1834d5"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#a14ab19aafaa497db9bdd95dc1f1834d5">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeType::operator=</a></div><div class="ttdeci">ThreadSafeType&lt; TYPE_Value &gt; &amp; operator=(const TYPE_Value value)</div><div class="ttdoc">Оператор присваивания значению. </div><div class="ttdef"><b>Definition:</b> <a href="_thread_safe_type_8h_source.html#l00065">ThreadSafeType.h:65</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type_html_aacb6d2217b2278c29aa31fb142960fcf"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#aacb6d2217b2278c29aa31fb142960fcf">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeType::getValue</a></div><div class="ttdeci">bool getValue() const </div><div class="ttdoc">Получение значения. </div><div class="ttdef"><b>Definition:</b> <a href="_thread_safe_type_8h_source.html#l00041">ThreadSafeType.h:41</a></div></div>
+<div class="ttc" id="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_html_a61503749d6181460ea72f52595f38834"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a61503749d6181460ea72f52595f38834">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::operator!</a></div><div class="ttdeci">bool operator!(const ThreadSafeType&lt; TYPE_Value &gt; &amp;elem)</div><div class="ttdoc">Оператор отрицания. </div><div class="ttdef"><b>Definition:</b> <a href="_thread_safe_type_8h_source.html#l00075">ThreadSafeType.h:75</a></div></div>
+<div class="ttc" id="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_html_ae03d6b20692331ddc7b4159f9b9eedcb"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#ae03d6b20692331ddc7b4159f9b9eedcb">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::operator||</a></div><div class="ttdeci">bool operator||(const ThreadSafeType&lt; TYPE_Value &gt; &amp;elem1, const ThreadSafeType&lt; TYPE_Value &gt; &amp;elem2)</div><div class="ttdoc">Оператор "логическое ИЛИ" с другим таким же типом. </div><div class="ttdef"><b>Definition:</b> <a href="_thread_safe_type_8h_source.html#l00105">ThreadSafeType.h:105</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type_html_afaa7f695988e3425ea837f7350c5ee3e"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#afaa7f695988e3425ea837f7350c5ee3e">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeType::ThreadSafeType</a></div><div class="ttdeci">ThreadSafeType(TYPE_Value value)</div><div class="ttdoc">Конструктор с заданием значения. </div><div class="ttdef"><b>Definition:</b> <a href="_thread_safe_type_8h_source.html#l00028">ThreadSafeType.h:28</a></div></div>
+<div class="ttc" id="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_html_a33a8167e517a541d6dead9878a1193a9"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a33a8167e517a541d6dead9878a1193a9">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::operator&amp;&amp;</a></div><div class="ttdeci">bool operator&amp;&amp;(const ThreadSafeType&lt; TYPE_Value &gt; &amp;elem1, const ThreadSafeType&lt; TYPE_Value &gt; &amp;elem2)</div><div class="ttdoc">Оператор "логическое И" с другим таким же типом. </div><div class="ttdef"><b>Definition:</b> <a href="_thread_safe_type_8h_source.html#l00100">ThreadSafeType.h:100</a></div></div>
+<div class="ttc" id="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_html_a42b6a8683ec6a064e2aabfcb90d54b6f"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html#a42b6a8683ec6a064e2aabfcb90d54b6f">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::operator!=</a></div><div class="ttdeci">bool operator!=(const ThreadSafeCounter&lt; TYPE_CounterValue &gt; &amp;elem1, const ThreadSafeCounter&lt; TYPE_CounterValue &gt; &amp;elem2)</div><div class="ttdoc">Оператор сравнения "не равно" двух счётчиков для возможности использования счётчика как индексатора s...</div><div class="ttdef"><b>Definition:</b> <a href="_thread_safe_counter_8h_source.html#l00243">ThreadSafeCounter.h:243</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по IrrSimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:37. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

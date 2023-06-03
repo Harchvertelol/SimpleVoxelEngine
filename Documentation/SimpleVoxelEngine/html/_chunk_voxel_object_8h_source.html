@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>SimpleVoxelEngine: Исходный файл ChunkVoxelObject.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Воксельный движок</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li class="current"><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Файлы</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_a81b5585c26ee11ef3f8637bee9e603c.html">jane</a></li><li class="navelem"><a class="el" href="dir_a87058c2edbd9f58c6f2635354598c68.html">Информатика</a></li><li class="navelem"><a class="el" href="dir_9ce0018b5864768711f69410f7e6df2b.html">c++</a></li><li class="navelem"><a class="el" href="dir_eea9b0c3eef2307c57166cdd45f56f4e.html">Графика(движки)</a></li><li class="navelem"><a class="el" href="dir_bd0a5ceea3a5bd1dc90d43f3000c4e2f.html">Irrlicht</a></li><li class="navelem"><a class="el" href="dir_25cec2ae9268a684d598f049d6333b22.html">Воксели</a></li><li class="navelem"><a class="el" href="dir_39ecb1a257347a703824a93feae6f833.html">MyVoxelWork</a></li><li class="navelem"><a class="el" href="dir_fe9ba0f9e257059b21256fb9d79583ef.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="dir_19a2cd1bac5932778934840f305deb7b.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">ChunkVoxelObject.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SimpleVoxelEngine__ChunkVoxelObject_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SimpleVoxelEngine__ChunkVoxelObject_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;SimpleVoxelObject.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Additional/Vector3d.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Defines.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;Logger.h&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;VoxelsForRendering.h&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;VoxelAddress.h&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">namespace </span>Core</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keyword">class </span>Engine;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keyword">class </span>World;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    }</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">namespace </span>Voxels</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html">   26</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html">ChunkVoxelObject</a> : <span class="keyword">public</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#abe11bf496c2b7101112380ee2f8a882d">ChunkVoxelObject</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a9cf5e9b05abd70e539a47dc7da65622f">~ChunkVoxelObject</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelObject</a>* <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ae974646bf65c2b7c2ed880350526781a">getSimpleVoxelObject</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> vect);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a3d066c81324b90a6df95fb25ea9e859f">setSimpleVoxelObject</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> vect, <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a>* svo, <span class="keywordtype">bool</span> rewrite = <span class="keyword">false</span>, <span class="keywordtype">bool</span> setrecalculatearoundsvo = <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a4ae4286adb60fae8983a3abb130a4621">deleteSimpleVoxelObject</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> vect);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a1d2bde923a3148fe1b3aea1adf5f23ab">getNumberOfPartitions</a>();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a59b139a4d4d65bee82ad8be73224ea71">setNumberOfPartitions</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> numberofpartitions);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxels_for_rendering.html">SimpleVoxelEngine::Core::VoxelsForRendering</a>* <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#aa1c0830206ab0f2825909b73ea2fcda6">getVoxelsForRenderingStatic</a>(<span class="keywordtype">float</span> posscale = 1, <span class="keywordtype">float</span> rotscale = 1, <span class="keywordtype">float</span> scscale = 1, <span class="keywordtype">bool</span> faces = <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ad21e9b9331e327dc81f5e68481d786b8">addVoxelsForRenderingStatic</a>(<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxels_for_rendering.html">SimpleVoxelEngine::Core::VoxelsForRendering</a>* vxlfr, <span class="keywordtype">float</span> posscale = 1, <span class="keywordtype">float</span> rotscale = 1, <span class="keywordtype">float</span> scscale = 1, <span class="keywordtype">bool</span> faces = <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a19e7878ef541c4a10f9ff6217ab2c29e">isExistsInMemory</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> vect, <a class="code" href="namespace_simple_voxel_engine_1_1_defines.html#a51d92ebb561dde8d40ee24b5e3c06325">SimpleVoxelEngine::Defines::WHERE_SEARCH_IN_MEMORY</a> tpcache);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#aeedc88686fe9c2e538758708e3b79102">setVoxelAddress</a>(<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a>* vxladdr);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a>* <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a35ad7a23045cb4b40550e93990c69110">getVoxelAddress</a>();</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ab3271ee4ebfbf6e7a910056035a3bdb4">setLocationInVisibleCacheSimpleVoxelObject</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> vect, <span class="keywordtype">bool</span> vsb);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ac23719abd2ecc41ebd5440f46663a0e5">isInVisibleCacheSimpleVoxelObject</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> vect);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#afa7f6b2220dfae7a08ae993e0d181745">setReCalculateVisibleCache</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> vect);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a1998418453c72435f7c508299e5067f2">recalculateVisibleCache</a>(<span class="keywordtype">bool</span> full = <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a3145269d33b4306d362a878aeaa36934">isVisible</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> vect, <span class="keywordtype">bool</span>* renderfaces);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                <span class="keywordtype">bool</span>* <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a029ada7977838c60777d35b93911b1a9">getRenderFacesSimpleVoxelObjectInCache</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> vect);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a55c642072a1228ef1c99f8f7a6966f15">setWorld</a>(<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_world.html">SimpleVoxelEngine::Core::World</a>* wrld);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_world.html">SimpleVoxelEngine::Core::World</a>* <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a5c1a4f5ba0bc2177cfa065086fdf9b8a">getWorld</a>();</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelObject</a>** <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a824f46d51d851f9dff326c7354c0a197">getSimpleVoxelObjects</a>();</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                <span class="keywordtype">bool</span>* <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ad977cb01177a1038fb353c0282ee2a08">getReCalculateVisibleCacheSimpleVoxelObjects</a>();</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                <span class="keywordtype">bool</span>* <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ab4a1adb9aa6761531126915699922f98">getCacheVisibleSimpleVoxelObjects</a>();</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                <span class="keywordtype">bool</span>** <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a99343ff4f1ccb6a379d62fb7251bd5ff">getCacheVisibleSimpleVoxelObjectsRenderFaces</a>();</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#aa31ed6f2bae093f6380fc6d4c7caca4e">getNumberOfNotNullSimpleVoxelObjects</a>();</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a68330e31df12cdca7065c4267c09e3f5">setNumberOfNotNullSimpleVoxelObjects</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> notnullsvos);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a59577a1d3f1df5ce0355b14cf1cf31b4">createData</a>();</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ad7305f5867600ccaf72fffe94ef802f7">deleteData</a>();</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                <span class="keywordtype">int</span> getNumberInMemorySimpleVoxelObjectByVector(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a>);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a> getVectorSimpleVoxelObjectByNumberInMemory(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                <span class="keywordtype">void</span> setRecalculateVisibleCacheAroundOnChangeOneSimpleVoxelObject(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a>);</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                <span class="keywordtype">void</span> updateData();</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_world.html">SimpleVoxelEngine::Core::World</a>* s_World;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a>* s_Vxladdr;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a>** s_SimpleVoxelObjects;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                <span class="keywordtype">bool</span>* s_ReCalculateVisibleCacheSimpleVoxelObjects;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                <span class="keywordtype">bool</span>* s_CacheVisibleSimpleVoxelObjects;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                <span class="keywordtype">bool</span>** s_CacheVisibleSimpleVoxelObjectsRenderFaces;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> s_NumberOfPartitions;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_NumberOfNotNullSimpleVoxelObjects;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        };</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    }</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;}</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a59b139a4d4d65bee82ad8be73224ea71"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a59b139a4d4d65bee82ad8be73224ea71">SimpleVoxelEngine::Voxels::ChunkVoxelObject::setNumberOfPartitions</a></div><div class="ttdeci">bool setNumberOfPartitions(unsigned char numberofpartitions)</div><div class="ttdoc">Установка длины ребра куба чанка. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxels_for_rendering_html"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxels_for_rendering.html">SimpleVoxelEngine::Core::VoxelsForRendering</a></div><div class="ttdoc">Список вокселей для отрисовки. </div><div class="ttdef"><b>Definition:</b> <a href="_voxels_for_rendering_8h_source.html#l00015">VoxelsForRendering.h:15</a></div></div>
+<div class="ttc" id="namespace_simple_voxel_engine_1_1_defines_html_a51d92ebb561dde8d40ee24b5e3c06325"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_defines.html#a51d92ebb561dde8d40ee24b5e3c06325">SimpleVoxelEngine::Defines::WHERE_SEARCH_IN_MEMORY</a></div><div class="ttdeci">WHERE_SEARCH_IN_MEMORY</div><div class="ttdoc">Типы кэшей для поиска SimpleVoxelObject в чанке. </div><div class="ttdef"><b>Definition:</b> <a href="_defines_8h_source.html#l00041">Defines.h:41</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a3145269d33b4306d362a878aeaa36934"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a3145269d33b4306d362a878aeaa36934">SimpleVoxelEngine::Voxels::ChunkVoxelObject::isVisible</a></div><div class="ttdeci">bool isVisible(SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect, bool *renderfaces)</div><div class="ttdoc">Проверка SimpleVoxelObjects на видимость. </div></div>
+<div class="ttc" id="namespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Главное пространство имён движка. Всё находится в нём. </div><div class="ttdef"><b>Definition:</b> <a href="_a_r_g_b_color_8h_source.html#l00006">ARGBColor.h:6</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a99343ff4f1ccb6a379d62fb7251bd5ff"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a99343ff4f1ccb6a379d62fb7251bd5ff">SimpleVoxelEngine::Voxels::ChunkVoxelObject::getCacheVisibleSimpleVoxelObjectsRenderFaces</a></div><div class="ttdeci">bool ** getCacheVisibleSimpleVoxelObjectsRenderFaces()</div><div class="ttdoc">Получение массива видимости граней SimpleVoxelObject. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_aeedc88686fe9c2e538758708e3b79102"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#aeedc88686fe9c2e538758708e3b79102">SimpleVoxelEngine::Voxels::ChunkVoxelObject::setVoxelAddress</a></div><div class="ttdeci">bool setVoxelAddress(SimpleVoxelEngine::Core::VoxelAddress *vxladdr)</div><div class="ttdoc">Установка VoxelAddress чанку. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_voxel_address_html"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a></div><div class="ttdoc">Адрес вокселя. </div><div class="ttdef"><b>Definition:</b> <a href="_voxel_address_8h_source.html#l00022">VoxelAddress.h:22</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_core_1_1_world_html"><div class="ttname"><a href="class_simple_voxel_engine_1_1_core_1_1_world.html">SimpleVoxelEngine::Core::World</a></div><div class="ttdoc">Воксельный мир. </div><div class="ttdef"><b>Definition:</b> <a href="_world_8h_source.html#l00035">World.h:35</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object_html"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a></div><div class="ttdoc">Класс-родитель всех воксельных объектов. </div><div class="ttdef"><b>Definition:</b> <a href="_simple_voxel_object_8h_source.html#l00022">SimpleVoxelObject.h:22</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a9cf5e9b05abd70e539a47dc7da65622f"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a9cf5e9b05abd70e539a47dc7da65622f">SimpleVoxelEngine::Voxels::ChunkVoxelObject::~ChunkVoxelObject</a></div><div class="ttdeci">~ChunkVoxelObject()</div><div class="ttdoc">Стандартный деструктор. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_ad7305f5867600ccaf72fffe94ef802f7"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ad7305f5867600ccaf72fffe94ef802f7">SimpleVoxelEngine::Voxels::ChunkVoxelObject::deleteData</a></div><div class="ttdeci">void deleteData()</div><div class="ttdoc">Удалить необходимые хранилища для SimpleVoxelObject. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a55c642072a1228ef1c99f8f7a6966f15"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a55c642072a1228ef1c99f8f7a6966f15">SimpleVoxelEngine::Voxels::ChunkVoxelObject::setWorld</a></div><div class="ttdeci">bool setWorld(SimpleVoxelEngine::Core::World *wrld)</div><div class="ttdoc">Установка мира чанку. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a19e7878ef541c4a10f9ff6217ab2c29e"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a19e7878ef541c4a10f9ff6217ab2c29e">SimpleVoxelEngine::Voxels::ChunkVoxelObject::isExistsInMemory</a></div><div class="ttdeci">bool isExistsInMemory(SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect, SimpleVoxelEngine::Defines::WHERE_SEARCH_IN_MEMORY tpcache)</div><div class="ttdoc">Проверка существования SimpleVoxelObject в памяти. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a029ada7977838c60777d35b93911b1a9"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a029ada7977838c60777d35b93911b1a9">SimpleVoxelEngine::Voxels::ChunkVoxelObject::getRenderFacesSimpleVoxelObjectInCache</a></div><div class="ttdeci">bool * getRenderFacesSimpleVoxelObjectInCache(SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</div><div class="ttdoc">Получение массива видимости граней SimpleVoxelObject. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_ad977cb01177a1038fb353c0282ee2a08"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ad977cb01177a1038fb353c0282ee2a08">SimpleVoxelEngine::Voxels::ChunkVoxelObject::getReCalculateVisibleCacheSimpleVoxelObjects</a></div><div class="ttdeci">bool * getReCalculateVisibleCacheSimpleVoxelObjects()</div><div class="ttdoc">Получение массива установленных на пересчёт видимости SimpleVoxelObject. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a1998418453c72435f7c508299e5067f2"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a1998418453c72435f7c508299e5067f2">SimpleVoxelEngine::Voxels::ChunkVoxelObject::recalculateVisibleCache</a></div><div class="ttdeci">void recalculateVisibleCache(bool full=false)</div><div class="ttdoc">Пересчёт кэша видимости. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_ac23719abd2ecc41ebd5440f46663a0e5"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ac23719abd2ecc41ebd5440f46663a0e5">SimpleVoxelEngine::Voxels::ChunkVoxelObject::isInVisibleCacheSimpleVoxelObject</a></div><div class="ttdeci">bool isInVisibleCacheSimpleVoxelObject(SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</div><div class="ttdoc">Проверка видимости SimpleVoxelObject. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_ab4a1adb9aa6761531126915699922f98"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ab4a1adb9aa6761531126915699922f98">SimpleVoxelEngine::Voxels::ChunkVoxelObject::getCacheVisibleSimpleVoxelObjects</a></div><div class="ttdeci">bool * getCacheVisibleSimpleVoxelObjects()</div><div class="ttdoc">Получение массива видимости SimpleVoxelObject. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a3d066c81324b90a6df95fb25ea9e859f"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a3d066c81324b90a6df95fb25ea9e859f">SimpleVoxelEngine::Voxels::ChunkVoxelObject::setSimpleVoxelObject</a></div><div class="ttdeci">bool setSimpleVoxelObject(SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect, SimpleVoxelEngine::Voxels::SimpleVoxelObject *svo, bool rewrite=false, bool setrecalculatearoundsvo=true)</div><div class="ttdoc">Установка SimpleVoxelObject. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_ab3271ee4ebfbf6e7a910056035a3bdb4"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ab3271ee4ebfbf6e7a910056035a3bdb4">SimpleVoxelEngine::Voxels::ChunkVoxelObject::setLocationInVisibleCacheSimpleVoxelObject</a></div><div class="ttdeci">bool setLocationInVisibleCacheSimpleVoxelObject(SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect, bool vsb)</div><div class="ttdoc">Установка видимости или невидимости SimpleVoxelObject. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_additional_1_1_vector3d_html"><div class="ttname"><a href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a></div><div class="ttdoc">Шаблонный класс 3d вектора. </div><div class="ttdef"><b>Definition:</b> <a href="_vector3d_8h_source.html#l00016">Vector3d.h:16</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_afa7f6b2220dfae7a08ae993e0d181745"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#afa7f6b2220dfae7a08ae993e0d181745">SimpleVoxelEngine::Voxels::ChunkVoxelObject::setReCalculateVisibleCache</a></div><div class="ttdeci">bool setReCalculateVisibleCache(SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</div><div class="ttdoc">Установка SimpleVoxelObject для пересчёта видимости. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a4ae4286adb60fae8983a3abb130a4621"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a4ae4286adb60fae8983a3abb130a4621">SimpleVoxelEngine::Voxels::ChunkVoxelObject::deleteSimpleVoxelObject</a></div><div class="ttdeci">bool deleteSimpleVoxelObject(SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</div><div class="ttdoc">Удаление SimpleVoxelObject. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_ae974646bf65c2b7c2ed880350526781a"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ae974646bf65c2b7c2ed880350526781a">SimpleVoxelEngine::Voxels::ChunkVoxelObject::getSimpleVoxelObject</a></div><div class="ttdeci">SimpleVoxelObject * getSimpleVoxelObject(SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</div><div class="ttdoc">Получение SimpleVoxelObject по координатам внутри чанка. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html">SimpleVoxelEngine::Voxels::ChunkVoxelObject</a></div><div class="ttdoc">Чанк. </div><div class="ttdef"><b>Definition:</b> <a href="_chunk_voxel_object_8h_source.html#l00026">ChunkVoxelObject.h:26</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a1d2bde923a3148fe1b3aea1adf5f23ab"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a1d2bde923a3148fe1b3aea1adf5f23ab">SimpleVoxelEngine::Voxels::ChunkVoxelObject::getNumberOfPartitions</a></div><div class="ttdeci">unsigned char getNumberOfPartitions()</div><div class="ttdoc">Получение длины ребра куба чанка. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a35ad7a23045cb4b40550e93990c69110"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a35ad7a23045cb4b40550e93990c69110">SimpleVoxelEngine::Voxels::ChunkVoxelObject::getVoxelAddress</a></div><div class="ttdeci">SimpleVoxelEngine::Core::VoxelAddress * getVoxelAddress()</div><div class="ttdoc">Получение воксельного адреса чанка. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a824f46d51d851f9dff326c7354c0a197"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a824f46d51d851f9dff326c7354c0a197">SimpleVoxelEngine::Voxels::ChunkVoxelObject::getSimpleVoxelObjects</a></div><div class="ttdeci">SimpleVoxelObject ** getSimpleVoxelObjects()</div><div class="ttdoc">Получение массива всех SimpleVoxelObject. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a5c1a4f5ba0bc2177cfa065086fdf9b8a"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a5c1a4f5ba0bc2177cfa065086fdf9b8a">SimpleVoxelEngine::Voxels::ChunkVoxelObject::getWorld</a></div><div class="ttdeci">SimpleVoxelEngine::Core::World * getWorld()</div><div class="ttdoc">Получение мира. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_abe11bf496c2b7101112380ee2f8a882d"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#abe11bf496c2b7101112380ee2f8a882d">SimpleVoxelEngine::Voxels::ChunkVoxelObject::ChunkVoxelObject</a></div><div class="ttdeci">ChunkVoxelObject()</div><div class="ttdoc">Стандартный конструктор. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_ad21e9b9331e327dc81f5e68481d786b8"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ad21e9b9331e327dc81f5e68481d786b8">SimpleVoxelEngine::Voxels::ChunkVoxelObject::addVoxelsForRenderingStatic</a></div><div class="ttdeci">void addVoxelsForRenderingStatic(SimpleVoxelEngine::Core::VoxelsForRendering *vxlfr, float posscale=1, float rotscale=1, float scscale=1, bool faces=true)</div><div class="ttdoc">Добавление вокселей для рендеринга в существующий VoxelsForRendering. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a68330e31df12cdca7065c4267c09e3f5"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a68330e31df12cdca7065c4267c09e3f5">SimpleVoxelEngine::Voxels::ChunkVoxelObject::setNumberOfNotNullSimpleVoxelObjects</a></div><div class="ttdeci">void setNumberOfNotNullSimpleVoxelObjects(unsigned int notnullsvos)</div><div class="ttdoc">Установка количества ненулевых SimpleVoxelObject в чанке. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_a59577a1d3f1df5ce0355b14cf1cf31b4"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a59577a1d3f1df5ce0355b14cf1cf31b4">SimpleVoxelEngine::Voxels::ChunkVoxelObject::createData</a></div><div class="ttdeci">void createData()</div><div class="ttdoc">Создать необходимые хранилища для SimpleVoxelObject. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_aa1c0830206ab0f2825909b73ea2fcda6"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#aa1c0830206ab0f2825909b73ea2fcda6">SimpleVoxelEngine::Voxels::ChunkVoxelObject::getVoxelsForRenderingStatic</a></div><div class="ttdeci">SimpleVoxelEngine::Core::VoxelsForRendering * getVoxelsForRenderingStatic(float posscale=1, float rotscale=1, float scscale=1, bool faces=true)</div><div class="ttdoc">Получение статичной части воксельного мира (вокселей) для рендеринга. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object_html_aa31ed6f2bae093f6380fc6d4c7caca4e"><div class="ttname"><a href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#aa31ed6f2bae093f6380fc6d4c7caca4e">SimpleVoxelEngine::Voxels::ChunkVoxelObject::getNumberOfNotNullSimpleVoxelObjects</a></div><div class="ttdeci">unsigned int getNumberOfNotNullSimpleVoxelObjects()</div><div class="ttdoc">Получение количества ненулевых SimpleVoxelObject в чанке. </div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:21. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

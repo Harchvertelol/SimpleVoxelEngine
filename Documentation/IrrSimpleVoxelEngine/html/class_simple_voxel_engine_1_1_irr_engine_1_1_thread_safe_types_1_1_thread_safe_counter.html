@@ -1,0 +1,578 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>IrrSimpleVoxelEngine: Шаблон класса SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter&lt; TYPE_CounterValue &gt;</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">IrrSimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Враппер для воксельного движка на irrlicht</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
+      <li><a href="hierarchy.html"><span>Иерархия&#160;классов</span></a></li>
+      <li><a href="functions.html"><span>Члены&#160;классов</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Друзья</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html">ThreadSafeTypes</a></li><li class="navelem"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="#friends">Друзья</a> &#124;
+<a href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Шаблон класса SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter&lt; TYPE_CounterValue &gt;</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Потокобезопасный счётчик.  
+ <a href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_thread_safe_counter_8h_source.html">ThreadSafeCounter.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a37620c7104a57246310a0abcffd5b7e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a37620c7104a57246310a0abcffd5b7e3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a37620c7104a57246310a0abcffd5b7e3">ThreadSafeCounter</a> ()</td></tr>
+<tr class="memdesc:a37620c7104a57246310a0abcffd5b7e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный конструктор. <br /></td></tr>
+<tr class="separator:a37620c7104a57246310a0abcffd5b7e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab45cba44e5d4a2bb45b431f2490e737c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab45cba44e5d4a2bb45b431f2490e737c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#ab45cba44e5d4a2bb45b431f2490e737c">~ThreadSafeCounter</a> ()</td></tr>
+<tr class="memdesc:ab45cba44e5d4a2bb45b431f2490e737c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный деструктор. <br /></td></tr>
+<tr class="separator:ab45cba44e5d4a2bb45b431f2490e737c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4008b013e48eeb97d6f5acaf15c7647"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad4008b013e48eeb97d6f5acaf15c7647"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#ad4008b013e48eeb97d6f5acaf15c7647">ThreadSafeCounter</a> (const <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt; &amp;elem)</td></tr>
+<tr class="memdesc:ad4008b013e48eeb97d6f5acaf15c7647"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор копирования. <br /></td></tr>
+<tr class="separator:ad4008b013e48eeb97d6f5acaf15c7647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06d26a3f26000236e01b118a7bef38d1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a06d26a3f26000236e01b118a7bef38d1">ThreadSafeCounter</a> (const TYPE_CounterValue value)</td></tr>
+<tr class="memdesc:a06d26a3f26000236e01b118a7bef38d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по заданному значению.  <a href="#a06d26a3f26000236e01b118a7bef38d1">Подробнее...</a><br /></td></tr>
+<tr class="separator:a06d26a3f26000236e01b118a7bef38d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a221b84035fcb049fbde2e264a2422624"><td class="memItemLeft" align="right" valign="top">TYPE_CounterValue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a221b84035fcb049fbde2e264a2422624">increasePrefix</a> (TYPE_CounterValue value)</td></tr>
+<tr class="memdesc:a221b84035fcb049fbde2e264a2422624"><td class="mdescLeft">&#160;</td><td class="mdescRight">Префиксное увеличение значения счётчика.  <a href="#a221b84035fcb049fbde2e264a2422624">Подробнее...</a><br /></td></tr>
+<tr class="separator:a221b84035fcb049fbde2e264a2422624"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10278a0f7e47205112b68c495a049e02"><td class="memItemLeft" align="right" valign="top">TYPE_CounterValue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a10278a0f7e47205112b68c495a049e02">reducePrefix</a> (TYPE_CounterValue value)</td></tr>
+<tr class="memdesc:a10278a0f7e47205112b68c495a049e02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Префиксное уменьшение значения счётчика.  <a href="#a10278a0f7e47205112b68c495a049e02">Подробнее...</a><br /></td></tr>
+<tr class="separator:a10278a0f7e47205112b68c495a049e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e4dd337e9a33a4670b0bb5ba8fb7e40"><td class="memItemLeft" align="right" valign="top">TYPE_CounterValue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a2e4dd337e9a33a4670b0bb5ba8fb7e40">increasePostfix</a> (TYPE_CounterValue value)</td></tr>
+<tr class="memdesc:a2e4dd337e9a33a4670b0bb5ba8fb7e40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Постфиксное увеличение значения счётчика.  <a href="#a2e4dd337e9a33a4670b0bb5ba8fb7e40">Подробнее...</a><br /></td></tr>
+<tr class="separator:a2e4dd337e9a33a4670b0bb5ba8fb7e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dc746df2d8555c7277a764b33f04db2"><td class="memItemLeft" align="right" valign="top">TYPE_CounterValue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a3dc746df2d8555c7277a764b33f04db2">reducePostfix</a> (TYPE_CounterValue value)</td></tr>
+<tr class="memdesc:a3dc746df2d8555c7277a764b33f04db2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Постфиксное уменьшение значения счётчика.  <a href="#a3dc746df2d8555c7277a764b33f04db2">Подробнее...</a><br /></td></tr>
+<tr class="separator:a3dc746df2d8555c7277a764b33f04db2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf60e3f55a5891f1e05308dfc9faad76"><td class="memItemLeft" align="right" valign="top">TYPE_CounterValue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#acf60e3f55a5891f1e05308dfc9faad76">getValue</a> () const </td></tr>
+<tr class="memdesc:acf60e3f55a5891f1e05308dfc9faad76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение значения счётчика.  <a href="#acf60e3f55a5891f1e05308dfc9faad76">Подробнее...</a><br /></td></tr>
+<tr class="separator:acf60e3f55a5891f1e05308dfc9faad76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f77c3e84a7c79dfb9c8f3580d3551f1"><td class="memItemLeft" align="right" valign="top">TYPE_CounterValue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a8f77c3e84a7c79dfb9c8f3580d3551f1">subValuePostfix</a> (TYPE_CounterValue value)</td></tr>
+<tr class="memdesc:a8f77c3e84a7c79dfb9c8f3580d3551f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Постфиксное умножение.  <a href="#a8f77c3e84a7c79dfb9c8f3580d3551f1">Подробнее...</a><br /></td></tr>
+<tr class="separator:a8f77c3e84a7c79dfb9c8f3580d3551f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9e7a14b7cba1d5c0353590389b15c22"><td class="memItemLeft" align="right" valign="top">TYPE_CounterValue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#ab9e7a14b7cba1d5c0353590389b15c22">subValuePrefix</a> (TYPE_CounterValue value)</td></tr>
+<tr class="memdesc:ab9e7a14b7cba1d5c0353590389b15c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Префиксное умножение.  <a href="#ab9e7a14b7cba1d5c0353590389b15c22">Подробнее...</a><br /></td></tr>
+<tr class="separator:ab9e7a14b7cba1d5c0353590389b15c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9adf4925a0fb82bc1b41dd33c2e3b2c3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a9adf4925a0fb82bc1b41dd33c2e3b2c3">isNull</a> () const </td></tr>
+<tr class="memdesc:a9adf4925a0fb82bc1b41dd33c2e3b2c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка значения счётчика на значение "ноль".  <a href="#a9adf4925a0fb82bc1b41dd33c2e3b2c3">Подробнее...</a><br /></td></tr>
+<tr class="separator:a9adf4925a0fb82bc1b41dd33c2e3b2c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9196d76def9df8dc0f81106e63008672"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9196d76def9df8dc0f81106e63008672"></a>
+<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a><br class="typebreak" />
+&lt; TYPE_CounterValue &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a9196d76def9df8dc0f81106e63008672">operator=</a> (const <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt; &amp;elem)</td></tr>
+<tr class="memdesc:a9196d76def9df8dc0f81106e63008672"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор присваивания другому счётчику. <br /></td></tr>
+<tr class="separator:a9196d76def9df8dc0f81106e63008672"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a213a9a5ff4601d4836f733eb79e7b1f3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a213a9a5ff4601d4836f733eb79e7b1f3"></a>
+<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a><br class="typebreak" />
+&lt; TYPE_CounterValue &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a213a9a5ff4601d4836f733eb79e7b1f3">operator=</a> (const TYPE_CounterValue value)</td></tr>
+<tr class="memdesc:a213a9a5ff4601d4836f733eb79e7b1f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор присваивания другому значению. <br /></td></tr>
+<tr class="separator:a213a9a5ff4601d4836f733eb79e7b1f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a691124345e0567c3707f2ba81490c5ed"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a691124345e0567c3707f2ba81490c5ed"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a691124345e0567c3707f2ba81490c5ed">operator&lt;</a> (const <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt; &amp;elem) const </td></tr>
+<tr class="memdesc:a691124345e0567c3707f2ba81490c5ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "меньше" с другим счётчиком. <br /></td></tr>
+<tr class="separator:a691124345e0567c3707f2ba81490c5ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c16b18c18396b679626cfd278e7fd2d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c16b18c18396b679626cfd278e7fd2d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a6c16b18c18396b679626cfd278e7fd2d">operator&gt;</a> (const <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt; &amp;elem) const </td></tr>
+<tr class="memdesc:a6c16b18c18396b679626cfd278e7fd2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "больше" с другим счётчиком. <br /></td></tr>
+<tr class="separator:a6c16b18c18396b679626cfd278e7fd2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62cec3b182d0c4504153ea4a99372d9c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a62cec3b182d0c4504153ea4a99372d9c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a62cec3b182d0c4504153ea4a99372d9c">operator&lt;=</a> (const <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt; &amp;elem) const </td></tr>
+<tr class="memdesc:a62cec3b182d0c4504153ea4a99372d9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "меньше или равно" с другим счётчиком. <br /></td></tr>
+<tr class="separator:a62cec3b182d0c4504153ea4a99372d9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab818e21335683e6ce92adddce265a5f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab818e21335683e6ce92adddce265a5f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#aab818e21335683e6ce92adddce265a5f">operator&gt;=</a> (const <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt; &amp;elem) const </td></tr>
+<tr class="memdesc:aab818e21335683e6ce92adddce265a5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "больше или равно" с другим счётчиком. <br /></td></tr>
+<tr class="separator:aab818e21335683e6ce92adddce265a5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a6e0cbd44e338ca72652320a6e91e12"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3a6e0cbd44e338ca72652320a6e91e12"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a3a6e0cbd44e338ca72652320a6e91e12">operator&lt;</a> (const TYPE_CounterValue value) const </td></tr>
+<tr class="memdesc:a3a6e0cbd44e338ca72652320a6e91e12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "меньше" с другим значением. <br /></td></tr>
+<tr class="separator:a3a6e0cbd44e338ca72652320a6e91e12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70349b8648ddb825786a9e74df4dff3d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a70349b8648ddb825786a9e74df4dff3d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a70349b8648ddb825786a9e74df4dff3d">operator&gt;</a> (const TYPE_CounterValue value) const </td></tr>
+<tr class="memdesc:a70349b8648ddb825786a9e74df4dff3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "больше" с другим значением. <br /></td></tr>
+<tr class="separator:a70349b8648ddb825786a9e74df4dff3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6917e507331f8b7f127b3c592dac109b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6917e507331f8b7f127b3c592dac109b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a6917e507331f8b7f127b3c592dac109b">operator&lt;=</a> (const TYPE_CounterValue value) const </td></tr>
+<tr class="memdesc:a6917e507331f8b7f127b3c592dac109b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "меньше или равно" с другим значением. <br /></td></tr>
+<tr class="separator:a6917e507331f8b7f127b3c592dac109b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a592a38fc53feb577ea70aad86bb5cc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7a592a38fc53feb577ea70aad86bb5cc"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a7a592a38fc53feb577ea70aad86bb5cc">operator&gt;=</a> (const TYPE_CounterValue value) const </td></tr>
+<tr class="memdesc:a7a592a38fc53feb577ea70aad86bb5cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "больше или равно" с другим значением. <br /></td></tr>
+<tr class="separator:a7a592a38fc53feb577ea70aad86bb5cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af41ab55e435e8bfb41d5c90615c8463a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af41ab55e435e8bfb41d5c90615c8463a"></a>
+<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a><br class="typebreak" />
+&lt; TYPE_CounterValue &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#af41ab55e435e8bfb41d5c90615c8463a">operator+=</a> (const <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt; &amp;elem)</td></tr>
+<tr class="memdesc:af41ab55e435e8bfb41d5c90615c8463a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор увеличения счётчика на значение другого счётчика. <br /></td></tr>
+<tr class="separator:af41ab55e435e8bfb41d5c90615c8463a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac57729cf77006859aaf7e595323a25e7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac57729cf77006859aaf7e595323a25e7"></a>
+<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a><br class="typebreak" />
+&lt; TYPE_CounterValue &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#ac57729cf77006859aaf7e595323a25e7">operator-=</a> (const <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt; &amp;elem)</td></tr>
+<tr class="memdesc:ac57729cf77006859aaf7e595323a25e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор уменьшения счётчика на значение другого счётчика. <br /></td></tr>
+<tr class="separator:ac57729cf77006859aaf7e595323a25e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f5d3c71bbda6c1c93d85e3a9b8df440"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5f5d3c71bbda6c1c93d85e3a9b8df440"></a>
+<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a><br class="typebreak" />
+&lt; TYPE_CounterValue &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a5f5d3c71bbda6c1c93d85e3a9b8df440">operator+</a> (const <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt; &amp;elem) const </td></tr>
+<tr class="memdesc:a5f5d3c71bbda6c1c93d85e3a9b8df440"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сложения счётчика с другим счётчиком. <br /></td></tr>
+<tr class="separator:a5f5d3c71bbda6c1c93d85e3a9b8df440"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4fb2ff5f43ccbe18dbf095996e7f796"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab4fb2ff5f43ccbe18dbf095996e7f796"></a>
+<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a><br class="typebreak" />
+&lt; TYPE_CounterValue &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#ab4fb2ff5f43ccbe18dbf095996e7f796">operator-</a> (const <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt; &amp;elem) const </td></tr>
+<tr class="memdesc:ab4fb2ff5f43ccbe18dbf095996e7f796"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор вычитания счётчика из другого счётчика. <br /></td></tr>
+<tr class="separator:ab4fb2ff5f43ccbe18dbf095996e7f796"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Друзья</h2></td></tr>
+<tr class="memitem:acce236d0ed25f308e58d4eda4b6a5e8a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acce236d0ed25f308e58d4eda4b6a5e8a"></a>
+const <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a><br class="typebreak" />
+&lt; TYPE_CounterValue &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#acce236d0ed25f308e58d4eda4b6a5e8a">operator++</a> (<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt; &amp;elem)</td></tr>
+<tr class="memdesc:acce236d0ed25f308e58d4eda4b6a5e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Префиксный оператор инкремента. <br /></td></tr>
+<tr class="separator:acce236d0ed25f308e58d4eda4b6a5e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafb4dd244272bb64660c33bd4e92faea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aafb4dd244272bb64660c33bd4e92faea"></a>
+const <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a><br class="typebreak" />
+&lt; TYPE_CounterValue &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#aafb4dd244272bb64660c33bd4e92faea">operator++</a> (<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt; &amp;elem, int)</td></tr>
+<tr class="memdesc:aafb4dd244272bb64660c33bd4e92faea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Постфиксный оператор инкремента. <br /></td></tr>
+<tr class="separator:aafb4dd244272bb64660c33bd4e92faea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d6a880c3557984944bb40ed89c2a48d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3d6a880c3557984944bb40ed89c2a48d"></a>
+const <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a><br class="typebreak" />
+&lt; TYPE_CounterValue &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a3d6a880c3557984944bb40ed89c2a48d">operator--</a> (<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt; &amp;elem)</td></tr>
+<tr class="memdesc:a3d6a880c3557984944bb40ed89c2a48d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Префиксный оператор декремента. <br /></td></tr>
+<tr class="separator:a3d6a880c3557984944bb40ed89c2a48d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8f463ef70199f9fe96e3180160e92fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad8f463ef70199f9fe96e3180160e92fe"></a>
+const <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a><br class="typebreak" />
+&lt; TYPE_CounterValue &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#ad8f463ef70199f9fe96e3180160e92fe">operator--</a> (<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt; &amp;elem, int)</td></tr>
+<tr class="memdesc:ad8f463ef70199f9fe96e3180160e92fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Постфиксный оператор декремента. <br /></td></tr>
+<tr class="separator:ad8f463ef70199f9fe96e3180160e92fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><h3>template&lt;typename TYPE_CounterValue&gt;<br />
+class SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter&lt; TYPE_CounterValue &gt;</h3>
+
+<p>Потокобезопасный счётчик. </p>
+<p>Этот класс предоставляет потокобезопасный счётчик. </p>
+
+<p>См. определение в файле <a class="el" href="_thread_safe_counter_8h_source.html">ThreadSafeCounter.h</a> строка <a class="el" href="_thread_safe_counter_8h_source.html#l00015">15</a></p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a class="anchor" id="a06d26a3f26000236e01b118a7bef38d1"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TYPE_CounterValue&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt;::<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">ThreadSafeCounter</a> </td>
+          <td>(</td>
+          <td class="paramtype">const TYPE_CounterValue&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Конструктор по заданному значению. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Задаваемое значение. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>См. определение в файле <a class="el" href="_thread_safe_counter_8h_source.html">ThreadSafeCounter.h</a> строка <a class="el" href="_thread_safe_counter_8h_source.html#l00038">38</a></p>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a class="anchor" id="acf60e3f55a5891f1e05308dfc9faad76"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TYPE_CounterValue&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TYPE_CounterValue <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt;::getValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Получение значения счётчика. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает текущее значение счётчика. </dd></dl>
+
+<p>См. определение в файле <a class="el" href="_thread_safe_counter_8h_source.html">ThreadSafeCounter.h</a> строка <a class="el" href="_thread_safe_counter_8h_source.html#l00086">86</a></p>
+
+<p>Используется в <a class="el" href="_thread_safe_counter_8h_source.html#l00114">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter&lt; unsigned int &gt;::isNull()</a>, <a class="el" href="_thread_safe_counter_8h_source.html#l00283">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::operator+()</a>, <a class="el" href="_thread_safe_counter_8h_source.html#l00186">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter&lt; unsigned int &gt;::operator+=()</a>, <a class="el" href="_thread_safe_counter_8h_source.html#l00278">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::operator-()</a>, <a class="el" href="_thread_safe_counter_8h_source.html#l00192">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter&lt; unsigned int &gt;::operator-=()</a>, <a class="el" href="_thread_safe_counter_8h_source.html#l00138">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter&lt; unsigned int &gt;::operator&lt;()</a>, <a class="el" href="_thread_safe_counter_8h_source.html#l00148">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter&lt; unsigned int &gt;::operator&lt;=()</a>, <a class="el" href="_thread_safe_counter_8h_source.html#l00119">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter&lt; unsigned int &gt;::operator=()</a>, <a class="el" href="_thread_safe_counter_8h_source.html#l00238">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::operator==()</a>, <a class="el" href="_thread_safe_counter_8h_source.html#l00143">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter&lt; unsigned int &gt;::operator&gt;()</a>, <a class="el" href="_thread_safe_counter_8h_source.html#l00263">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::operator&gt;()</a>, <a class="el" href="_thread_safe_counter_8h_source.html#l00155">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter&lt; unsigned int &gt;::operator&gt;=()</a> и <a class="el" href="_thread_safe_counter_8h_source.html#l00273">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::operator&gt;=()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2e4dd337e9a33a4670b0bb5ba8fb7e40"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TYPE_CounterValue&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TYPE_CounterValue <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt;::increasePostfix </td>
+          <td>(</td>
+          <td class="paramtype">TYPE_CounterValue&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Постфиксное увеличение значения счётчика. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Значение, на которое увеличиваем. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает значение счётчика, которое стало после увеличения. </dd></dl>
+
+<p>См. определение в файле <a class="el" href="_thread_safe_counter_8h_source.html">ThreadSafeCounter.h</a> строка <a class="el" href="_thread_safe_counter_8h_source.html#l00067">67</a></p>
+
+<p>Используется в <a class="el" href="_thread_safe_counter_8h_source.html#l00186">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter&lt; unsigned int &gt;::operator+=()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a221b84035fcb049fbde2e264a2422624"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TYPE_CounterValue&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TYPE_CounterValue <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt;::increasePrefix </td>
+          <td>(</td>
+          <td class="paramtype">TYPE_CounterValue&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Префиксное увеличение значения счётчика. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Значение, на которое увеличиваем. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает значение счётчика, которое было до увеличения. </dd></dl>
+
+<p>См. определение в файле <a class="el" href="_thread_safe_counter_8h_source.html">ThreadSafeCounter.h</a> строка <a class="el" href="_thread_safe_counter_8h_source.html#l00047">47</a></p>
+
+</div>
+</div>
+<a class="anchor" id="a9adf4925a0fb82bc1b41dd33c2e3b2c3"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TYPE_CounterValue&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt;::isNull </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Проверка значения счётчика на значение "ноль". </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если счётчик имеет значение NULL, иначе false. </dd></dl>
+
+<p>См. определение в файле <a class="el" href="_thread_safe_counter_8h_source.html">ThreadSafeCounter.h</a> строка <a class="el" href="_thread_safe_counter_8h_source.html#l00114">114</a></p>
+
+</div>
+</div>
+<a class="anchor" id="a3dc746df2d8555c7277a764b33f04db2"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TYPE_CounterValue&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TYPE_CounterValue <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt;::reducePostfix </td>
+          <td>(</td>
+          <td class="paramtype">TYPE_CounterValue&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Постфиксное уменьшение значения счётчика. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Значение, на которое уменьшаем. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает значение счётчика, которое стало после уменьшения. </dd></dl>
+
+<p>См. определение в файле <a class="el" href="_thread_safe_counter_8h_source.html">ThreadSafeCounter.h</a> строка <a class="el" href="_thread_safe_counter_8h_source.html#l00077">77</a></p>
+
+<p>Используется в <a class="el" href="_thread_safe_counter_8h_source.html#l00192">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter&lt; unsigned int &gt;::operator-=()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a10278a0f7e47205112b68c495a049e02"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TYPE_CounterValue&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TYPE_CounterValue <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt;::reducePrefix </td>
+          <td>(</td>
+          <td class="paramtype">TYPE_CounterValue&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Префиксное уменьшение значения счётчика. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Значение, на которое уменьшаем. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает значение счётчика, которое было до уменьшения. </dd></dl>
+
+<p>См. определение в файле <a class="el" href="_thread_safe_counter_8h_source.html">ThreadSafeCounter.h</a> строка <a class="el" href="_thread_safe_counter_8h_source.html#l00057">57</a></p>
+
+</div>
+</div>
+<a class="anchor" id="a8f77c3e84a7c79dfb9c8f3580d3551f1"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TYPE_CounterValue&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TYPE_CounterValue <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt;::subValuePostfix </td>
+          <td>(</td>
+          <td class="paramtype">TYPE_CounterValue&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Постфиксное умножение. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Значение, на которое умножаем. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает значение счётчика, которое стало после умножения. </dd></dl>
+
+<p>См. определение в файле <a class="el" href="_thread_safe_counter_8h_source.html">ThreadSafeCounter.h</a> строка <a class="el" href="_thread_safe_counter_8h_source.html#l00095">95</a></p>
+
+</div>
+</div>
+<a class="anchor" id="ab9e7a14b7cba1d5c0353590389b15c22"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TYPE_CounterValue&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TYPE_CounterValue <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter</a>&lt; TYPE_CounterValue &gt;::subValuePrefix </td>
+          <td>(</td>
+          <td class="paramtype">TYPE_CounterValue&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Префиксное умножение. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Значение, на которое умножаем. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает значение счётчика, которое было до умножения. </dd></dl>
+
+<p>См. определение в файле <a class="el" href="_thread_safe_counter_8h_source.html">ThreadSafeCounter.h</a> строка <a class="el" href="_thread_safe_counter_8h_source.html#l00105">105</a></p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li><a class="el" href="_thread_safe_counter_8h_source.html">ThreadSafeCounter.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по IrrSimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:38. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

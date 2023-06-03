@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>SimpleVoxelEngine: Урок 2: Генератор мира и система ведения логов.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Воксельный движок</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li class="current"><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Урок 2: Генератор мира и система ведения логов. </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>В прошлом уроке мы создали мир, но он был пустой. Так не годится, мы же хотим его чем-то заполнять, верно? И тут на помощь к нам приходит генератор мира. Давайте, собственно, и займёмся его созданием. Начнём стандартно, подключим наши заголовочные файлы, а так же подключим пространства имён, чтобы не писать их каждый раз заново: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines;</div>
+</div><!-- fragment --><p> Но при работе с движком хочется знать, какие происходят ошибки, да и вообще неплохо бы информацию от движка получать. Поэтому подключим систему ведения логов, ей требуется пространство имён Debug: </p><div class="fragment"><div class="line"><span class="keyword">using namespace </span>Debug;</div>
+</div><!-- fragment --><p> Как создать и подключить логгер - узнаем позже, а сейчас займёмся генератором мира. Для этого создадим класс, унаследовав его от WorldGenerator, который является абстрактным классом: </p><div class="fragment"><div class="line"><span class="keyword">class </span>MyWorldGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       MyWorldGenerator(): <span class="comment">// Стандартный конструктор, вызываем конструктор предка.</span></div>
+<div class="line">           WorldGenerator()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       ~MyWorldGenerator() <span class="comment">// Стандартный деструктор, ничего не делает.</span></div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+</div><!-- fragment --><p> И теперь пришло время для написания самой главной функции - функции генерации чанка, она принимает указатель на чанк, который мы генерируем, и размер ребра чанка. Давайте заполним его наполовину снизу вокселями белого цвета: </p><div class="fragment"><div class="line"><span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> sizechunk)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; sizechunk; x++)</div>
+<div class="line">       <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; sizechunk; y++)</div>
+<div class="line">           <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; sizechunk / 2; z++) <span class="comment">// Делим на 2, чтобы только половину чанка заполнить.</span></div>
+<div class="line">           {</div>
+<div class="line">               ARGBColorVoxel* argbcolorvoxel = <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255,255,255,255));</div>
+</div><!-- fragment --><p> Ну а вдруг у нас произошли какие-то ошибки и воксель не создался? Давайте проверим это, и в случае ошибки отдадим системе логирования сообщение об ошибке: </p><div class="fragment"><div class="line">    <span class="keywordflow">if</span>(!argbcolorvoxel)</div>
+<div class="line">    {</div>
+<div class="line">        chunk-&gt;getWorld()-&gt;getEngine()-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;TestProject: Error generating chunk, ARGBColorVoxel not added&quot;</span>, <span class="keyword">true</span>); <span class="comment">// Последний параметр означает, что ошибка фатальна</span></div>
+<div class="line">                                                                                                                                                <span class="comment">// и рекомендуется закрыть программу.</span></div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    }</div>
+<div class="line">    chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), argbcolorvoxel, <span class="keyword">true</span>, <span class="keyword">false</span>); <span class="comment">// true означает, что мы перезапишем объект, если он существует, а следующее false означает,</span></div>
+<div class="line">                                                                                      <span class="comment">// что мы не будем говорить движку пересчитывать видимость окружающих его вокселей, так как</span></div>
+<div class="line">                                                                                      <span class="comment">// при генерации мира это не нужно в связи с тем, что каждый воксель и так будет пересчитан.</span></div>
+<div class="line">                                                                                      <span class="comment">// Так необходимо делать только если вы получаете информацию для отрисовки чанка после</span></div>
+<div class="line">                                                                                      <span class="comment">// генерации всех чанков вокруг него, иначе будут ошибки.</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Вот и всё, вернём true и закроем описание класса: </p><div class="fragment"><div class="line">           <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">       }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Остаётся ещё, конечно, вопрос, как же получить вектор чанка, который мы генерируем? Дело в том, что у класса ChunkVoxelObject есть метод getVoxelAddress(), который вернёт нам адрес чанка в мире, и, чтобы узнать вектор чанка, мы просто получаем нулевой вектор (chunk-&gt;getVoxelAddress()-&gt;getVector(0)). Подробнее об адресации вокселей мы расскажем в следующих уроках, а пока хватит и этих знаний. Ну и дело за малым - создать движок и подключить к нему созданный генератор и логгер и создать чанк, но при этом мы не хотим видеть стандартные сообщения логгера, как то про создание чанков и так далее, поэтому выключим их, всё остальное как в первом уроке: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">   Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Создали логгер.</span></div>
+<div class="line">   lgr-&gt;setPrintStandart(<span class="keyword">false</span>); <span class="comment">// Запретили вывод стандартных сообщений.</span></div>
+<div class="line">   Engine* sve = <span class="keyword">new</span> Engine(lgr); <span class="comment">// Создали движок, дав ему логгер.</span></div>
+<div class="line">   lgr-&gt;drop(); <span class="comment">// Нам лично больше логгер не нужен, отдадим его на обеспечение движку.</span></div>
+<div class="line">   WorldCreatingParameters wcp;</div>
+<div class="line">   wcp.<a class="code" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html#aecc3af27e658f5851c2d6fecf7d1b8df">s_SizeChunk</a> = 16;</div>
+<div class="line">   <span class="keywordtype">int</span> worldid = sve-&gt;addWorld(wcp);</div>
+<div class="line">   World* wrld = sve-&gt;getWorld(worldid); <span class="comment">// Получили мир по идентификатору.</span></div>
+</div><!-- fragment --><p> И вот тут мы создадим и подключим наш генератор и загрузим чанк, он будет сгенерирован с помощью нашего генератора: </p><div class="fragment"><div class="line">MyWorldGenerator* mywrldgen = <span class="keyword">new</span> MyWorldGenerator; <span class="comment">// Создали наш генератор.</span></div>
+<div class="line">wrld-&gt;setWorldGenerator(mywrldgen); <span class="comment">// Установили миру наш генератор.</span></div>
+<div class="line">wrld-&gt;loadChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Загрузили чанк.</span></div>
+</div><!-- fragment --><p> И давайте проверим действие нашего генератора: получим воксель с координатами (0, 0, 0) и выведем его цвет на экран с помощью логгера, а так как логгер воспринимает только std::string, то применим специальную функцию, идущую с движком, которая int преобразует в std::string. </p><div class="fragment"><div class="line">ChunkVoxelObject* chunk = wrld-&gt;getChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили чанк.</span></div>
+<div class="line"><span class="keywordflow">if</span>(!chunk) <span class="keywordflow">return</span> 1;</div>
+<div class="line">SimpleVoxelObject* svo = chunk-&gt;getSimpleVoxelObject(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили объект.</span></div>
+<div class="line"><span class="keywordflow">if</span>(!svo || svo-&gt;getTypeVoxel() != <a class="code" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a54d38305b02c53c7e79516eca37826e6">ARGBCOLOR</a>) <span class="keywordflow">return</span> 1; <span class="comment">// Проверили на ошибки.</span></div>
+<div class="line">ARGBColorVoxel* argbcolorvoxel = (ARGBColorVoxel*)svo; <span class="comment">// Привели типы.</span></div>
+<div class="line"><span class="keywordtype">int</span> a = argbcolorvoxel-&gt;getARGBColor().getA(); <span class="comment">// Получили цвета вокселя.</span></div>
+<div class="line"><span class="keywordtype">int</span> r = argbcolorvoxel-&gt;getARGBColor().getR();</div>
+<div class="line"><span class="keywordtype">int</span> g = argbcolorvoxel-&gt;getARGBColor().getG();</div>
+<div class="line"><span class="keywordtype">int</span> b = argbcolorvoxel-&gt;getARGBColor().getB();</div>
+<div class="line"><span class="comment">// Делаем тип WARNING, чтобы увидеть сообщение, так как стандартные мы отключили.</span></div>
+<div class="line">sve-&gt;registerEvent(EVENT_TYPE_WARNING, <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(a) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(r) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(g) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(b));</div>
+</div><!-- fragment --><p> Ну вот и всё, осталось удалить движок и завершить программу: </p><div class="fragment"><div class="line">   <span class="keyword">delete</span> sve;</div>
+<div class="line">   <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Ну и напоследок ещё раз полный код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">class </span>MyWorldGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       MyWorldGenerator(): <span class="comment">// Стандартный конструктор, вызываем конструктор предка.</span></div>
+<div class="line">           WorldGenerator()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       ~MyWorldGenerator() <span class="comment">// Стандартный деструктор, ничего не делает.</span></div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> sizechunk)</div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; sizechunk; x++)</div>
+<div class="line">              <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; sizechunk; y++)</div>
+<div class="line">                  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; sizechunk / 2; z++) <span class="comment">// Делим на 2, чтобы только половину чанка заполнить.</span></div>
+<div class="line">                  {</div>
+<div class="line">                      ARGBColorVoxel* argbcolorvoxel = <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255,255,255,255));</div>
+<div class="line">                       <span class="keywordflow">if</span>(!argbcolorvoxel)</div>
+<div class="line">                       {</div>
+<div class="line">                           chunk-&gt;getWorld()-&gt;getEngine()-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;TestProject: Error generating chunk, ARGBColorVoxel not added&quot;</span>, <span class="keyword">true</span>); <span class="comment">// Последний параметр означает, что ошибка фатальна</span></div>
+<div class="line">                                                                                                                                                                   <span class="comment">// и рекомендуется закрыть программу.</span></div>
+<div class="line">                           <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">                       }</div>
+<div class="line">                       chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), argbcolorvoxel, <span class="keyword">true</span>, <span class="keyword">false</span>); <span class="comment">// true означает, что мы перезапишем объект, если он существует, а следующее false означает,</span></div>
+<div class="line">                                                                                                         <span class="comment">// что мы не будем говорить движку пересчитывать видимость окружающих его вокселей, так как</span></div>
+<div class="line">                                                                                                         <span class="comment">// при генерации мира это не нужно в связи с тем, что каждый воксель и так будет пересчитан.</span></div>
+<div class="line">                                                                                                         <span class="comment">// Так необходимо делать только если вы получаете информацию для отрисовки чанка после</span></div>
+<div class="line">                                                                                                         <span class="comment">// генерации всех чанков вокруг него, иначе будут ошибки.</span></div>
+<div class="line">                   }</div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">       }</div>
+<div class="line">};</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Создали логгер.</span></div>
+<div class="line">    lgr-&gt;setPrintStandart(<span class="keyword">false</span>); <span class="comment">// Запретили вывод стандартных сообщений.</span></div>
+<div class="line">    Engine* sve = <span class="keyword">new</span> Engine(lgr); <span class="comment">// Создали движок, дав ему логгер.</span></div>
+<div class="line">    lgr-&gt;drop(); <span class="comment">// Нам лично больше логгер не нужен, отдадим его на обеспечение движку.</span></div>
+<div class="line">    WorldCreatingParameters wcp;</div>
+<div class="line">    wcp.s_SizeChunk = 16;</div>
+<div class="line">    <span class="keywordtype">int</span> worldid = sve-&gt;addWorld(wcp);</div>
+<div class="line">    World* wrld = sve-&gt;getWorld(worldid); <span class="comment">// Получили мир по идентификатору.</span></div>
+<div class="line">    MyWorldGenerator* mywrldgen = <span class="keyword">new</span> MyWorldGenerator; <span class="comment">// Создали наш генератор.</span></div>
+<div class="line">    wrld-&gt;setWorldGenerator(mywrldgen); <span class="comment">// Установили миру наш генератор.</span></div>
+<div class="line">    wrld-&gt;loadChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Загрузили чанк.</span></div>
+<div class="line">    ChunkVoxelObject* chunk = wrld-&gt;getChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили чанк.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(!chunk) <span class="keywordflow">return</span> 1;</div>
+<div class="line">    SimpleVoxelObject* svo = chunk-&gt;getSimpleVoxelObject(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили объект.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(!svo || svo-&gt;getTypeVoxel() != <a class="code" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a54d38305b02c53c7e79516eca37826e6">ARGBCOLOR</a>) <span class="keywordflow">return</span> 1; <span class="comment">// Проверили на ошибки.</span></div>
+<div class="line">    ARGBColorVoxel* argbcolorvoxel = (ARGBColorVoxel*)svo; <span class="comment">// Привели типы.</span></div>
+<div class="line">    <span class="keywordtype">int</span> a = argbcolorvoxel-&gt;getARGBColor().getA(); <span class="comment">// Получили цвета вокселя.</span></div>
+<div class="line">    <span class="keywordtype">int</span> r = argbcolorvoxel-&gt;getARGBColor().getR();</div>
+<div class="line">    <span class="keywordtype">int</span> g = argbcolorvoxel-&gt;getARGBColor().getG();</div>
+<div class="line">    <span class="keywordtype">int</span> b = argbcolorvoxel-&gt;getARGBColor().getB();</div>
+<div class="line">    <span class="comment">// Делаем тип WARNING, чтобы увидеть сообщение, так как стандартные мы отключили.</span></div>
+<div class="line">    sve-&gt;registerEvent(EVENT_TYPE_WARNING, <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(a) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(r) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(g) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(b));</div>
+<div class="line">    <span class="keyword">delete</span> sve;</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> В общем, вот пока и всё на этот раз. Спасибо за интерес к движку.<br />
+ Автор: <b>Харч</b>. </p>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:22. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

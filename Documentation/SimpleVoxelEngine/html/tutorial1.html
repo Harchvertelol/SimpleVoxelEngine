@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>SimpleVoxelEngine: Урок 1: Hello, world! или простейшие функции работы с движком.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Воксельный движок</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li class="current"><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Урок 1: Hello, world! или простейшие функции работы с движком. </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Итак, вы решили написать воксельное приложение и выбрали для этого движок <a class="el" href="namespace_simple_voxel_engine.html" title="Главное пространство имён движка. Всё находится в нём. ">SimpleVoxelEngine</a>. Начнём с самого простого. Первое, что надо сделать, это прочитать об <a href="ideas.html"><b>идеологии</b></a> движка и <a href="install.html"><b>как его настроить</b></a> для работы.<br />
+ После прочтения можно приступать к первому уроку. Давайте для начала подключим движок. Для этого надо подключить следующий заголовочный файл и начать описывать функцию main: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+</div><!-- fragment --><p> Ну и теперь давайте создадим наш воксельный движок, который и будет отвечать за всю работу с воксельными мирами: </p><div class="fragment"><div class="line"><a class="code" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">SimpleVoxelEngine::Core::Engine</a>* voxelengine = <span class="keyword">new</span> <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">SimpleVoxelEngine::Core::Engine</a>;</div>
+</div><!-- fragment --><p> Отлично! А теперь перейдём к главному - созданию и загрузке мира: </p><div class="fragment"><div class="line"><a class="code" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html">SimpleVoxelEngine::Core::WorldCreatingParameters</a> wcp;</div>
+<div class="line">wcp.<a class="code" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html#aecc3af27e658f5851c2d6fecf7d1b8df">s_SizeChunk</a> = 16;</div>
+<div class="line"><span class="keywordtype">int</span> worldid = voxelengine-&gt;<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_engine.html#a2d79da7893ad9fe3380b7d3eaff0fe5e">addWorld</a>(wcp);</div>
+</div><!-- fragment --><p> Что же мы тут сделали? На самом деле ничего страшного: всего лишь создали и зарегистрировали в движке мир, у которого размер ребра чанка 16 вокселей, что мы показали с помощью WorldCreatingParameters, т.е. в одном чанке будет 16^3 вокселей. А для работы с миром мы запомнили его идентификатор в переменную worldid. Без него невозможно получить доступ к миру. Давайте же теперь наконец-то получим в руки наш мир и поиграемся с ним: </p><div class="fragment"><div class="line"><a class="code" href="class_simple_voxel_engine_1_1_core_1_1_world.html">SimpleVoxelEngine::Core::World</a>* ourworld = voxelengine-&gt;<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_engine.html#aed41ee9400cbfe38e3b77c65958cd56d">getWorld</a>(worldid); <span class="comment">// Получили мир по идентификатору.</span></div>
+<div class="line"><span class="keywordflow">if</span>(!ourworld) <span class="keywordflow">return</span> 1; <span class="comment">// Если получили NULL, то мир не создан.</span></div>
+</div><!-- fragment --><p> Но просто получить мир недостаточно. Необходимо же как-то получить доступ к чанкам в нём, но в том-то и проблема - мир теоретически бесконечный (сколько хватит памяти компьютера), так что загружать разом его весь бессмысленно. Поэтому в данный момент в нём не загружено ничего. Давайте же загрузим один чанк: </p><div class="fragment"><div class="line">ourworld-&gt;<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a1009f033d5a01a05a3acf396e9acf45e">loadChunk</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a>(0,0,0));</div>
+</div><!-- fragment --><p> Итак, что мы получаем? Мы сказали миру произвести загрузку чанка с координатами (0,0,0), но, понятное дело, загрузить его с диска он не сможет (мы не сказали как, это в следующих уроках), поэтому он его пытается сгенерировать. Но, опять же, мы не создавали генератора мира (опять следующий урок), поэтому он выдаст предупреждение (увидели бы его, если бы подключили систему ведения логов) и создаст пустой чанк, вернув false. Нам пока хватит и этого. Ну что же, давайте возьмём чанк в руки: </p><div class="fragment"><div class="line"><a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html">SimpleVoxelEngine::Voxels::ChunkVoxelObject</a>* chunk = ourworld-&gt;<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a1c7ff77dd790d68dfa373ee320285660">getChunk</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a>(0,0,0));</div>
+<div class="line"><span class="keywordflow">if</span>(!chunk) <span class="keywordflow">return</span> 1;</div>
+</div><!-- fragment --><p> Мы попросили у движка указатель на чанк. Если же он не создаст чанк - выйдем из программы. Ну а с чанком мы можем уже делать что хотим. Например, возьмём и изменим в нём воксель по координатам (5,5,5) (все координаты тут от 0 до 15, так как размеры 16 на 16 на 16) на предустановленный воксель движка, хранящий только цвет, предварительно создав его и установив ему белый цвет, т.е. ARGB = (255,255,255,255): </p><div class="fragment"><div class="line"><a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_a_r_g_b_color_voxel.html">SimpleVoxelEngine::Voxels::ARGBColorVoxel</a>* argbcolor = <span class="keyword">new</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_a_r_g_b_color_voxel.html">SimpleVoxelEngine::Voxels::ARGBColorVoxel</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a>(255,255,255,255));</div>
+<div class="line">chunk-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a3d066c81324b90a6df95fb25ea9e859f">setSimpleVoxelObject</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a>(5,5,5), argbcolor, <span class="keyword">true</span>); <span class="comment">// Последний параметр поставлен на всякий случай: если там</span></div>
+<div class="line">                                                                                                   <span class="comment">// уже стоит воксель, то мы его перезапишем.</span></div>
+</div><!-- fragment --><p> Но что делать, если мы потеряли указатель, но нам позарез надо что-то изменить в каком-то вокселе? Всё тоже очень просто, получим его и установим ему чёрный цвет, т.е. ARGB = (0,0,0,0), но, что очень важно, после получения мы проверим тип вокселя, чтобы не сделать преобразование в не тот тип, который мы думаем, иначе получим ошибку сегментации: </p><div class="fragment"><div class="line"><a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a>* svo = chunk-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ae974646bf65c2b7c2ed880350526781a">getSimpleVoxelObject</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a>(5,5,5));</div>
+<div class="line"><span class="keywordflow">if</span>(!svo) <span class="keywordflow">return</span> 1; <span class="comment">// Мы же его устанавливали туда, значит он там есть. Если возвращает NULL - значит там ничего нет.</span></div>
+<div class="line"><span class="keywordflow">if</span>(svo-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html#a2abb9405bd6a30ae53bd659fc1db9577">getTypeVoxel</a>() == <a class="code" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a54d38305b02c53c7e79516eca37826e6">SimpleVoxelEngine::Defines::ARGBCOLOR</a>) <span class="comment">// Проверяем на тип вокселя.</span></div>
+<div class="line">{</div>
+<div class="line">   <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_a_r_g_b_color_voxel.html">SimpleVoxelEngine::Voxels::ARGBColorVoxel</a>* lostargbcolor = (<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_a_r_g_b_color_voxel.html">SimpleVoxelEngine::Voxels::ARGBColorVoxel</a>*)svo; <span class="comment">// Преобразуем полученный указатель в указатель на нужный воксель.</span></div>
+<div class="line">   lostargbcolor-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_a_r_g_b_color_voxel.html#aa6f89e06ce00ff7d66b7a31d0a191228">setARGBColor</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a>(0,0,0,0));</div>
+<div class="line">}</div>
+<div class="line"><span class="keywordflow">else</span> <span class="keywordflow">return</span> 1; <span class="comment">// Иначе ошибка, мы же устанавливали туда ARGBCOLOR воксель.</span></div>
+</div><!-- fragment --><p> Отлично, ну и теперь для полного счастья удалим его оттуда: </p><div class="fragment"><div class="line">chunk-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a4ae4286adb60fae8983a3abb130a4621">deleteSimpleVoxelObject</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a>(5,5,5));</div>
+</div><!-- fragment --><p> Вот и всё, простейшие действия с объектами мы освоили. Осталось удалить движок (ни в коем случае не применяйте оператор delete к полученным указателям от движка, об этом заботится сам движок, а вы получите ошибку сегментации) и завершить программу: </p><div class="fragment"><div class="line">   <span class="keyword">delete</span> voxelengine; <span class="comment">// После выполнения этого удаления все указатели, полученные до этого, становятся невалидными!</span></div>
+<div class="line">   <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Ну и напоследок ещё раз полный код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">SimpleVoxelEngine::Core::Engine</a>* voxelengine = <span class="keyword">new</span> <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">SimpleVoxelEngine::Core::Engine</a>;</div>
+<div class="line">    <a class="code" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html">SimpleVoxelEngine::Core::WorldCreatingParameters</a> wcp;</div>
+<div class="line">    wcp.<a class="code" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html#aecc3af27e658f5851c2d6fecf7d1b8df">s_SizeChunk</a> = 16;</div>
+<div class="line">    <span class="keywordtype">int</span> worldid = voxelengine-&gt;<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_engine.html#a2d79da7893ad9fe3380b7d3eaff0fe5e">addWorld</a>(wcp);</div>
+<div class="line">    <a class="code" href="class_simple_voxel_engine_1_1_core_1_1_world.html">SimpleVoxelEngine::Core::World</a>* ourworld = voxelengine-&gt;<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_engine.html#aed41ee9400cbfe38e3b77c65958cd56d">getWorld</a>(worldid); <span class="comment">// Получили мир по идентификатору.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(!ourworld) <span class="keywordflow">return</span> 1; <span class="comment">// Если получили NULL, то мир не создан.</span></div>
+<div class="line">    ourworld-&gt;<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a1009f033d5a01a05a3acf396e9acf45e">loadChunk</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a>(0,0,0));</div>
+<div class="line">    <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html">SimpleVoxelEngine::Voxels::ChunkVoxelObject</a>* chunk = ourworld-&gt;<a class="code" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a1c7ff77dd790d68dfa373ee320285660">getChunk</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a>(0,0,0));</div>
+<div class="line">    <span class="keywordflow">if</span>(!chunk) <span class="keywordflow">return</span> 1;</div>
+<div class="line">    <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_a_r_g_b_color_voxel.html">SimpleVoxelEngine::Voxels::ARGBColorVoxel</a>* argbcolor = <span class="keyword">new</span> <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_a_r_g_b_color_voxel.html">SimpleVoxelEngine::Voxels::ARGBColorVoxel</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a>(255,255,255,255));</div>
+<div class="line">    chunk-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a3d066c81324b90a6df95fb25ea9e859f">setSimpleVoxelObject</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a>(5,5,5), argbcolor, <span class="keyword">true</span>); <span class="comment">// Последний параметр поставлен на всякий случай: если там</span></div>
+<div class="line">                                                                                                       <span class="comment">// уже стоит воксель, то мы его перезапишем.</span></div>
+<div class="line">    <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a>* svo = chunk-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#ae974646bf65c2b7c2ed880350526781a">getSimpleVoxelObject</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a>(5,5,5));</div>
+<div class="line">    <span class="keywordflow">if</span>(!svo) <span class="keywordflow">return</span> 1; <span class="comment">// Мы же его устанавливали туда, значит он там есть. Если возвращает NULL - значит там ничего нет.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(svo-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html#a2abb9405bd6a30ae53bd659fc1db9577">getTypeVoxel</a>() == <a class="code" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a54d38305b02c53c7e79516eca37826e6">SimpleVoxelEngine::Defines::ARGBCOLOR</a>) <span class="comment">// Проверяем на тип вокселя.</span></div>
+<div class="line">    {</div>
+<div class="line">       <a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_a_r_g_b_color_voxel.html">SimpleVoxelEngine::Voxels::ARGBColorVoxel</a>* lostargbcolor = (<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_a_r_g_b_color_voxel.html">SimpleVoxelEngine::Voxels::ARGBColorVoxel</a>*)svo; <span class="comment">// Преобразуем полученный указатель в указатель на нужный воксель.</span></div>
+<div class="line">       lostargbcolor-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_a_r_g_b_color_voxel.html#aa6f89e06ce00ff7d66b7a31d0a191228">setARGBColor</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a>(0,0,0,0));</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">return</span> 1; <span class="comment">// Иначе ошибка, мы же устанавливали туда ARGBCOLOR воксель.</span></div>
+<div class="line">    chunk-&gt;<a class="code" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a4ae4286adb60fae8983a3abb130a4621">deleteSimpleVoxelObject</a>(<a class="code" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;</a>(5,5,5));</div>
+<div class="line">    <span class="keyword">delete</span> voxelengine; <span class="comment">// После выполнения этого удаления все указатели, полученные до этого, становятся невалидными!</span></div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> На этом первый урок заканчивается. Спасибо за интерес к движку.<br />
+ Автор: <b>Харч</b>. </p>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:22. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

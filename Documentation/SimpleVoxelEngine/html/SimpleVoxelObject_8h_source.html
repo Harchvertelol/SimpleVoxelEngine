@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>SimpleVoxelEngine: Исходный файл SimpleVoxelObject.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Воксельный движок</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li class="current"><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Файлы</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_a81b5585c26ee11ef3f8637bee9e603c.html">jane</a></li><li class="navelem"><a class="el" href="dir_a87058c2edbd9f58c6f2635354598c68.html">Информатика</a></li><li class="navelem"><a class="el" href="dir_9ce0018b5864768711f69410f7e6df2b.html">c++</a></li><li class="navelem"><a class="el" href="dir_eea9b0c3eef2307c57166cdd45f56f4e.html">Графика(движки)</a></li><li class="navelem"><a class="el" href="dir_bd0a5ceea3a5bd1dc90d43f3000c4e2f.html">Irrlicht</a></li><li class="navelem"><a class="el" href="dir_25cec2ae9268a684d598f049d6333b22.html">Воксели</a></li><li class="navelem"><a class="el" href="dir_39ecb1a257347a703824a93feae6f833.html">MyVoxelWork</a></li><li class="navelem"><a class="el" href="dir_fe9ba0f9e257059b21256fb9d79583ef.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="dir_19a2cd1bac5932778934840f305deb7b.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">SimpleVoxelObject.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SimpleVoxelEngine__SimpleVoxelObject_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SimpleVoxelEngine__SimpleVoxelObject_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Defines.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;VoxelAddress.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;VoxelInfo.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSimpleVoxelEngine.html">SimpleVoxelEngine</a></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">namespace </span>Core</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keyword">class </span>Engine;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keyword">class </span>World;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    }</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">namespace </span>Voxels</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject.html">   22</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject.html">SimpleVoxelObject</a></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                <a class="code" href="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject.html#a24ddfa5bccabac01383b7facaa801610">SimpleVoxelObject</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <span class="keyword">virtual</span> <a class="code" href="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject.html#a3d255f5704beb45b43618c807be7d01b">~SimpleVoxelObject</a>();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                <a class="code" href="namespaceSimpleVoxelEngine_1_1Defines.html#a2e008fbe9848ddb62fdc7783a4c50e76">SimpleVoxelEngine::Defines::TYPE_VOXEL</a> <a class="code" href="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject.html#a7759a02eb8c7f4c3e4fe2c36715791f2">getTypeVoxel</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject.html#a2c669c37ffc31769fa90e2280de79f6a">setTypeVoxel</a>(<a class="code" href="namespaceSimpleVoxelEngine_1_1Defines.html#a2e008fbe9848ddb62fdc7783a4c50e76">SimpleVoxelEngine::Defines::TYPE_VOXEL</a> tv);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                <span class="keyword">virtual</span> <a class="code" href="structSimpleVoxelEngine_1_1Core_1_1VoxelInfo.html">SimpleVoxelEngine::Core::VoxelInfo</a>* <a class="code" href="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject.html#a8f927fdbd34298d25ba2491ffc7cb9a8">getVoxelForRenderingInfo</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                <a class="code" href="namespaceSimpleVoxelEngine_1_1Defines.html#a2e008fbe9848ddb62fdc7783a4c50e76">SimpleVoxelEngine::Defines::TYPE_VOXEL</a> s_TypeVoxel;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        };</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject_html_a7759a02eb8c7f4c3e4fe2c36715791f2"><div class="ttname"><a href="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject.html#a7759a02eb8c7f4c3e4fe2c36715791f2">SimpleVoxelEngine::Voxels::SimpleVoxelObject::getTypeVoxel</a></div><div class="ttdeci">SimpleVoxelEngine::Defines::TYPE_VOXEL getTypeVoxel()</div><div class="ttdoc">Получение типа SimpleVoxelObject. </div></div>
+<div class="ttc" id="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject_html"><div class="ttname"><a href="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a></div><div class="ttdoc">Класс-родитель всех воксельных объектов. </div><div class="ttdef"><b>Definition:</b> <a href="SimpleVoxelObject_8h_source.html#l00022">SimpleVoxelObject.h:22</a></div></div>
+<div class="ttc" id="structSimpleVoxelEngine_1_1Core_1_1VoxelInfo_html"><div class="ttname"><a href="structSimpleVoxelEngine_1_1Core_1_1VoxelInfo.html">SimpleVoxelEngine::Core::VoxelInfo</a></div><div class="ttdoc">Структура хранения информации о вокселе для отрисовки. Для введения своей информации необходимо насле...</div><div class="ttdef"><b>Definition:</b> <a href="VoxelInfo_8h_source.html#l00016">VoxelInfo.h:16</a></div></div>
+<div class="ttc" id="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject_html_a3d255f5704beb45b43618c807be7d01b"><div class="ttname"><a href="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject.html#a3d255f5704beb45b43618c807be7d01b">SimpleVoxelEngine::Voxels::SimpleVoxelObject::~SimpleVoxelObject</a></div><div class="ttdeci">virtual ~SimpleVoxelObject()</div><div class="ttdoc">Стандартный деструктор. Создан виртуальным для наследования. </div></div>
+<div class="ttc" id="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject_html_a8f927fdbd34298d25ba2491ffc7cb9a8"><div class="ttname"><a href="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject.html#a8f927fdbd34298d25ba2491ffc7cb9a8">SimpleVoxelEngine::Voxels::SimpleVoxelObject::getVoxelForRenderingInfo</a></div><div class="ttdeci">virtual SimpleVoxelEngine::Core::VoxelInfo * getVoxelForRenderingInfo()</div><div class="ttdoc">Получение информации для рендеринга. </div></div>
+<div class="ttc" id="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject_html_a24ddfa5bccabac01383b7facaa801610"><div class="ttname"><a href="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject.html#a24ddfa5bccabac01383b7facaa801610">SimpleVoxelEngine::Voxels::SimpleVoxelObject::SimpleVoxelObject</a></div><div class="ttdeci">SimpleVoxelObject()</div><div class="ttdoc">Стандартный конструктор. </div></div>
+<div class="ttc" id="namespaceSimpleVoxelEngine_html"><div class="ttname"><a href="namespaceSimpleVoxelEngine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Главное пространство имён движка. Всё находится в нём. </div><div class="ttdef"><b>Definition:</b> <a href="ARGBColor_8h_source.html#l00006">ARGBColor.h:6</a></div></div>
+<div class="ttc" id="namespaceSimpleVoxelEngine_1_1Defines_html_a2e008fbe9848ddb62fdc7783a4c50e76"><div class="ttname"><a href="namespaceSimpleVoxelEngine_1_1Defines.html#a2e008fbe9848ddb62fdc7783a4c50e76">SimpleVoxelEngine::Defines::TYPE_VOXEL</a></div><div class="ttdeci">TYPE_VOXEL</div><div class="ttdoc">Типы SimpleVoxelObject. </div><div class="ttdef"><b>Definition:</b> <a href="Defines_8h_source.html#l00016">Defines.h:16</a></div></div>
+<div class="ttc" id="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject_html_a2c669c37ffc31769fa90e2280de79f6a"><div class="ttname"><a href="classSimpleVoxelEngine_1_1Voxels_1_1SimpleVoxelObject.html#a2c669c37ffc31769fa90e2280de79f6a">SimpleVoxelEngine::Voxels::SimpleVoxelObject::setTypeVoxel</a></div><div class="ttdeci">void setTypeVoxel(SimpleVoxelEngine::Defines::TYPE_VOXEL tv)</div><div class="ttdoc">Установка типа SimpleVoxelObject. </div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по SimpleVoxelEngine. Последние изменения: Чт 25 Дек 2014 04:13:20. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

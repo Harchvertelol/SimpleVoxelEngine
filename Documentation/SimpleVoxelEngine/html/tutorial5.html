@@ -1,0 +1,304 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>SimpleVoxelEngine: Урок 5: Получение, создание и обработка информации для отрисовки вокселей</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Воксельный движок</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li class="current"><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Урок 5: Получение, создание и обработка информации для отрисовки вокселей </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Вот мы и подошли к одному из основных моментов работы с воксельным движком. Конечно, здорово, когда мы работаем с воксельным миром, но он хранится в памяти. Мы его не видим. Не можем понять, как всё это выглядит. Для этого нам надо отрисовать воксели. И в этом уроке мы научимся получать и работать с информацией для отрисовки вокселей. Сразу говорю, что отрисовывать мы их не будем учиться, это дело графического движка, причём к моему движку можно подключить любой графический движок. Если вы не хотите писать враппер для какого-то движка, то этот урок для вас будет, скорее всего, наполовину бесполезен. Но даже для работы с готовым враппером (например, IrrSimpleVoxelEngine, враппером для Irrlicht, написанным тоже Харчем) надо знать, как отдавать информацию для отрисовки, а так же как её получать. Поэтому этот урок рекомендуется всем, несмотря на кажущуюся специфичность. Начнём, как обычно, с подключения библиотеки и пространств имён: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+</div><!-- fragment --><p> И подключим класс блока из третьего урока, но с небольшими изменениями, а именно добавим функцию, которая будет выдавать дополнительную информацию о вокселе. Но эту информацию надо где-то хранить, поэтому мы создадим дополнительную структуру, которую унаследуем от VoxelInfo: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>MyVoxelInfo : VoxelInfo <span class="comment">//Структура, в которой будем передавать информацию для отрисовки вокселя</span></div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">int</span> s_Id; <span class="comment">// Из информации у нас только ID блока.</span></div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Ну и опишем наш класс блока с дополнительной функцией: </p><div class="fragment"><div class="line"><span class="keyword">class </span>Block : <span class="keyword">public</span> SimpleVoxelObject</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       Block(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>): <span class="comment">// Конструктор с заданием ID.</span></div>
+<div class="line">           SimpleVoxelObject(),</div>
+<div class="line">           s_Id(id)</div>
+<div class="line">       {</div>
+<div class="line">           setTypeVoxel(CUSTOM_VOXEL); <span class="comment">// Установили тип CUSTOM_VOXEL.</span></div>
+<div class="line">       }</div>
+<div class="line">       ~Block()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getId() <span class="comment">// Функция получения ID блока.</span></div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">return</span> s_Id;</div>
+<div class="line">       }</div>
+<div class="line">       VoxelInfo* getVoxelForRenderingInfo() <span class="comment">//Получение информации о вокселе для отрисовки.</span></div>
+<div class="line">       {</div>
+<div class="line">           MyVoxelInfo* vxlnf = <span class="keyword">new</span> MyVoxelInfo; <span class="comment">// Создали объект для хранения данной информации.</span></div>
+<div class="line">           vxlnf-&gt;s_TypeVoxelInfo = <a class="code" href="namespace_simple_voxel_engine_1_1_core.html#adec4c82350c5166b7408436528dda10da065c8cdd24cf92109d600b6e5fe93109">CUSTOM_VOXEL_INFO</a>; <span class="comment">// Установили пользовательский тип для информации о вокселе.</span></div>
+<div class="line">           vxlnf-&gt;s_Id = s_Id; <span class="comment">// Заполнили поле ID.</span></div>
+<div class="line">           <span class="keywordflow">return</span> vxlnf; <span class="comment">// Отдали указатель на созданный экземпляр.</span></div>
+<div class="line">       }</div>
+<div class="line">   <span class="keyword">private</span>:</div>
+<div class="line">       <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> В принципе, это всё. Давайте возьмём теперь генератор мира из прошлых уроков: </p><div class="fragment"><div class="line"><span class="keyword">class </span>MyWorldGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       MyWorldGenerator():</div>
+<div class="line">           WorldGenerator()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       ~MyWorldGenerator()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> sizechunk)</div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; sizechunk; x++)</div>
+<div class="line">               <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; sizechunk; y++)</div>
+<div class="line">                   <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; sizechunk / 2; z++)</div>
+<div class="line">                   {</div>
+<div class="line">                        Block* block = <span class="keyword">new</span> Block(1); <span class="comment">// Пусть ID = 1.</span></div>
+<div class="line">                        <span class="keywordflow">if</span>(!block)</div>
+<div class="line">                        {</div>
+<div class="line">                            chunk-&gt;getWorld()-&gt;getEngine()-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;TestProject: Error generating chunk, Block not added&quot;</span>, <span class="keyword">true</span>);</div>
+<div class="line">                            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">                        }</div>
+<div class="line">                        chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), block, <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">                    }</div>
+<div class="line">            chunk-&gt;getWorld()-&gt;getEngine()-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;Chunk generating.&quot;</span>); <span class="comment">// Чтобы отличать загрузку чанка с диска от генерации.</span></div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">       }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Ну и стандартно создадим движок, мир, загрузим чанк: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Создали логгер.</span></div>
+<div class="line">    Engine* sve = <span class="keyword">new</span> Engine(lgr); <span class="comment">// Создали движок с логгером.</span></div>
+<div class="line">    lgr-&gt;drop(); <span class="comment">// Нам лично больше логгер не нужен, отдадим его на обеспечение движку.</span></div>
+<div class="line">    <span class="keywordtype">int</span> worldid = sve-&gt;addWorld(); <span class="comment">// Создадим стандартный мир.</span></div>
+<div class="line">    World* wrld = sve-&gt;getWorld(worldid); <span class="comment">// Получили мир по идентификатору.</span></div>
+<div class="line">    MyWorldGenerator* mywrldgen = <span class="keyword">new</span> MyWorldGenerator; <span class="comment">// Создали наш генератор.</span></div>
+<div class="line">    wrld-&gt;setWorldGenerator(mywrldgen); <span class="comment">// Установили миру наш генератор.</span></div>
+<div class="line">    wrld-&gt;loadChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Загрузили чанк.</span></div>
+<div class="line">    wrld-&gt;setMultiplePartition(<span class="keyword">true</span>); <span class="comment">// Установили миру одинаковое разбиение на всех уровнях. Настоятельно рекомендуется работать только с такими мирами. Так выше производительность.</span></div>
+<div class="line">    ChunkVoxelObject* chunk = wrld-&gt;getChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили чанк.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(!chunk) <span class="keywordflow">return</span> 1;</div>
+</div><!-- fragment --><p> Отлично, а теперь давайте получим из нашего чанка информацию для отрисовки. Для этого создадим указатель на экземпляр класса, который хранит всю информацию об отрисовке чанка и получим указатель с помощью специальной функции движка. При вызове этой функции происходит автоматический пересчёт всех видимых и невидимых граней вокселей, самих вокселей и так далее: </p><div class="fragment"><div class="line">VoxelsForRendering* vxlfrrnd = chunk-&gt;getVoxelsForRenderingStatic(); <span class="comment">// Собственно, получили всю информацию. Не использовали никаких масштабирований и сдвигов. Получили всё по стандарту.</span></div>
+</div><!-- fragment --><p> Ну и давайте посмотрим на наши воксели, а потом удалим движок и полученные нами данные: </p><div class="fragment"><div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; vxlfrrnd-&gt;getNumberOfVoxelsForRendering(); i++) <span class="comment">// Пробегаем все воксели в списке.</span></div>
+<div class="line">    {</div>
+<div class="line">       VoxelForRendering* vxlfr = vxlfrrnd-&gt;getVoxelForRendering(i); <span class="comment">// Получаем i-й воксель.</span></div>
+<div class="line">       Vector3d&lt;float&gt; vectpos = vxlfr-&gt;getPosition(); <span class="comment">// Получили вектор (координаты) позиции вокселя в пространстве.</span></div>
+<div class="line">       Vector3d&lt;float&gt; vectrot = vxlfr-&gt;getRotation(); <span class="comment">// Получили вектор (координаты) поворота вокселя в пространстве.</span></div>
+<div class="line">       Vector3d&lt;float&gt; vectscale = vxlfr-&gt;getScale(); <span class="comment">// Получили вектор (координаты) масштабирования вокселя в пространстве.</span></div>
+<div class="line">       <span class="keywordtype">bool</span> renderfaces[6]; <span class="comment">// Массив для хранения информации об отрисовке граней.</span></div>
+<div class="line">       <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; 6; j++) renderfaces[j] = vxlfr-&gt;isRenderFace(j); <span class="comment">// Запомнили информацию об отрисовке граней.</span></div>
+<div class="line">       <span class="comment">// Мы запоминали всё это для демонстрации, на деле проще пользоваться самим объектом VoxelForRendering.</span></div>
+<div class="line">       VoxelInfo* vxlnfo = vxlfr-&gt;getVoxelInfo(); <span class="comment">// Получили информацию для отрисовки.</span></div>
+<div class="line">       <span class="keywordflow">if</span>(vxlnfo &amp;&amp; vxlnfo-&gt;s_TypeVoxelInfo == CUSTOM_VOXEL_INFO) <span class="comment">// Если она установлена и является пользовательской.</span></div>
+<div class="line">       {</div>
+<div class="line">           MyVoxelInfo* myvxlnfo = (MyVoxelInfo*)vxlnfo; <span class="comment">// Преобразовали типы указателей.</span></div>
+<div class="line">           <span class="keywordflow">if</span>(i == 0) sve-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;(This ID get from VoxelInfo)ID = &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(myvxlnfo-&gt;s_Id)); <span class="comment">// Выведем ID у первого блока из списка, взятый из информации для отрисовки.</span></div>
+<div class="line">       }</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keyword">delete</span> vxlfrrnd; <span class="comment">// Удалили полученные данные, чтобы не было утечек памяти.</span></div>
+<div class="line">    <span class="keyword">delete</span> sve;</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Стандартно уже получим сообщения об ошибках сохранения. Не обращаем на них внимания. Ну вот, собственно, и всё. Напоследок опять полностью весь код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">struct </span>MyVoxelInfo : VoxelInfo <span class="comment">//Структура, в которой будем передавать информацию для отрисовки вокселя</span></div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">int</span> s_Id; <span class="comment">// Из информации у нас только ID блока.</span></div>
+<div class="line">};</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">class </span>Block : <span class="keyword">public</span> SimpleVoxelObject</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       Block(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>): <span class="comment">// Конструктор с заданием ID.</span></div>
+<div class="line">           SimpleVoxelObject(),</div>
+<div class="line">           s_Id(id)</div>
+<div class="line">       {</div>
+<div class="line">           setTypeVoxel(CUSTOM_VOXEL); <span class="comment">// Установили тип CUSTOM_VOXEL.</span></div>
+<div class="line">       }</div>
+<div class="line">       ~Block()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getId() <span class="comment">// Функция получения ID блока.</span></div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">return</span> s_Id;</div>
+<div class="line">       }</div>
+<div class="line">       VoxelInfo* getVoxelForRenderingInfo() <span class="comment">//Получение информации о вокселе для отрисовки.</span></div>
+<div class="line">       {</div>
+<div class="line">           MyVoxelInfo* vxlnf = <span class="keyword">new</span> MyVoxelInfo; <span class="comment">// Создали объект для хранения данной информации.</span></div>
+<div class="line">           vxlnf-&gt;s_TypeVoxelInfo = <a class="code" href="namespace_simple_voxel_engine_1_1_core.html#adec4c82350c5166b7408436528dda10da065c8cdd24cf92109d600b6e5fe93109">CUSTOM_VOXEL_INFO</a>; <span class="comment">// Установили пользовательский тип для информации о вокселе.</span></div>
+<div class="line">           vxlnf-&gt;s_Id = s_Id; <span class="comment">// Заполнили поле ID.</span></div>
+<div class="line">           <span class="keywordflow">return</span> vxlnf; <span class="comment">// Отдали указатель на созданный экземпляр.</span></div>
+<div class="line">       }</div>
+<div class="line">   <span class="keyword">private</span>:</div>
+<div class="line">       <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">class </span>MyWorldGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       MyWorldGenerator():</div>
+<div class="line">           WorldGenerator()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       ~MyWorldGenerator()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> sizechunk)</div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; sizechunk; x++)</div>
+<div class="line">               <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; sizechunk; y++)</div>
+<div class="line">                   <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; sizechunk / 2; z++)</div>
+<div class="line">                   {</div>
+<div class="line">                        Block* block = <span class="keyword">new</span> Block(1); <span class="comment">// Пусть ID = 1.</span></div>
+<div class="line">                        <span class="keywordflow">if</span>(!block)</div>
+<div class="line">                        {</div>
+<div class="line">                            chunk-&gt;getWorld()-&gt;getEngine()-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;TestProject: Error generating chunk, Block not added&quot;</span>, <span class="keyword">true</span>);</div>
+<div class="line">                            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">                        }</div>
+<div class="line">                        chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), block, <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">                    }</div>
+<div class="line">            chunk-&gt;getWorld()-&gt;getEngine()-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;Chunk generating.&quot;</span>); <span class="comment">// Чтобы отличать загрузку чанка с диска от генерации.</span></div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">       }</div>
+<div class="line">};</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Создали логгер.</span></div>
+<div class="line">    Engine* sve = <span class="keyword">new</span> Engine(lgr); <span class="comment">// Создали движок с логгером.</span></div>
+<div class="line">    lgr-&gt;drop(); <span class="comment">// Нам лично больше логгер не нужен, отдадим его на обеспечение движку.</span></div>
+<div class="line">    <span class="keywordtype">int</span> worldid = sve-&gt;addWorld(); <span class="comment">// Создадим стандартный мир.</span></div>
+<div class="line">    World* wrld = sve-&gt;getWorld(worldid); <span class="comment">// Получили мир по идентификатору.</span></div>
+<div class="line">    MyWorldGenerator* mywrldgen = <span class="keyword">new</span> MyWorldGenerator; <span class="comment">// Создали наш генератор.</span></div>
+<div class="line">    wrld-&gt;setWorldGenerator(mywrldgen); <span class="comment">// Установили миру наш генератор.</span></div>
+<div class="line">    wrld-&gt;loadChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Загрузили чанк.</span></div>
+<div class="line">    wrld-&gt;setMultiplePartition(<span class="keyword">true</span>); <span class="comment">// Установили миру одинаковое разбиение на всех уровнях. Настоятельно рекомендуется работать только с такими мирами. Так выше производительность.</span></div>
+<div class="line">    ChunkVoxelObject* chunk = wrld-&gt;getChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили чанк.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(!chunk) <span class="keywordflow">return</span> 1;</div>
+<div class="line">    VoxelsForRendering* vxlfrrnd = chunk-&gt;getVoxelsForRenderingStatic(); <span class="comment">// Собственно, получили всю информацию. Не использовали никаких масштабирований и сдвигов. Получили всё по стандарту.</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; vxlfrrnd-&gt;getNumberOfVoxelsForRendering(); i++) <span class="comment">// Пробегаем все воксели в списке.</span></div>
+<div class="line">    {</div>
+<div class="line">       VoxelForRendering* vxlfr = vxlfrrnd-&gt;getVoxelForRendering(i); <span class="comment">// Получаем i-й воксель.</span></div>
+<div class="line">       Vector3d&lt;float&gt; vectpos = vxlfr-&gt;getPosition(); <span class="comment">// Получили вектор (координаты) позиции вокселя в пространстве.</span></div>
+<div class="line">       Vector3d&lt;float&gt; vectrot = vxlfr-&gt;getRotation(); <span class="comment">// Получили вектор (координаты) поворота вокселя в пространстве.</span></div>
+<div class="line">       Vector3d&lt;float&gt; vectscale = vxlfr-&gt;getScale(); <span class="comment">// Получили вектор (координаты) масштабирования вокселя в пространстве.</span></div>
+<div class="line">       <span class="keywordtype">bool</span> renderfaces[6]; <span class="comment">// Массив для хранения информации об отрисовке граней.</span></div>
+<div class="line">       <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; 6; j++) renderfaces[j] = vxlfr-&gt;isRenderFace(j); <span class="comment">// Запомнили информацию об отрисовке граней.</span></div>
+<div class="line">       <span class="comment">// Мы запоминали всё это для демонстрации, на деле проще пользоваться самим объектом VoxelForRendering.</span></div>
+<div class="line">       VoxelInfo* vxlnfo = vxlfr-&gt;getVoxelInfo(); <span class="comment">// Получили информацию для отрисовки.</span></div>
+<div class="line">       <span class="keywordflow">if</span>(vxlnfo &amp;&amp; vxlnfo-&gt;s_TypeVoxelInfo == <a class="code" href="namespace_simple_voxel_engine_1_1_core.html#adec4c82350c5166b7408436528dda10da065c8cdd24cf92109d600b6e5fe93109">CUSTOM_VOXEL_INFO</a>) <span class="comment">// Если она установлена и является пользовательской.</span></div>
+<div class="line">       {</div>
+<div class="line">           MyVoxelInfo* myvxlnfo = (MyVoxelInfo*)vxlnfo; <span class="comment">// Преобразовали типы указателей.</span></div>
+<div class="line">           <span class="keywordflow">if</span>(i == 0) sve-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;(This ID get from VoxelInfo)ID = &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(myvxlnfo-&gt;s_Id)); <span class="comment">// Выведем ID у первого блока из списка, взятый из информации для отрисовки.</span></div>
+<div class="line">       }</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keyword">delete</span> vxlfrrnd; <span class="comment">// Удалили полученные данные, чтобы не было утечек памяти.</span></div>
+<div class="line">    <span class="keyword">delete</span> sve;</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Вот и всё. Спасибо за интерес к движку.<br />
+ Автор: <b>Харч</b>. </p>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:22. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

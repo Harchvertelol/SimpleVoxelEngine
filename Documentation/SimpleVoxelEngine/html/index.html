@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>SimpleVoxelEngine: Документация по SimpleVoxelEngine.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Воксельный движок</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li class="current"><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Документация по <a class="el" href="namespace_simple_voxel_engine.html" title="Главное пространство имён движка. Всё находится в нём. ">SimpleVoxelEngine</a>. </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="intro"></a>
+Введение</h1>
+<p>Движок <a class="el" href="namespace_simple_voxel_engine.html" title="Главное пространство имён движка. Всё находится в нём. ">SimpleVoxelEngine</a> является простым воксельным движком, автором которого является Харч. Он (движок) даёт быструю и довольно простую работу с воксельным миром "из коробки". Что такое воксельный мир? Это мир, который состоит из трёхмерных пикселей. В частности - из кубиков. Данный движок реализует любую возможность хранения и отрисовки вокселей. Он <b>не содержит</b> в себе механизма, который делает за пользователя отрисовку воксельного мира. Это ложится на плечи пользователей, но не стоит пугаться. Можно написать любые врапперы для любых графических движков с <a class="el" href="namespace_simple_voxel_engine.html" title="Главное пространство имён движка. Всё находится в нём. ">SimpleVoxelEngine</a>. В частности, автором <a class="el" href="namespace_simple_voxel_engine.html" title="Главное пространство имён движка. Всё находится в нём. ">SimpleVoxelEngine</a> был написан враппер для графического движка Irrlicht Engine: IrrSimpleVoxelEngine. <a class="el" href="namespace_simple_voxel_engine.html" title="Главное пространство имён движка. Всё находится в нём. ">SimpleVoxelEngine</a> реализует хранение и работу с воксельным миром, а так же берёт на себя все расчёты для правильной и быстрой отрисовки мира, предоставляя необходимые данные врапперу или пользователю.</p>
+<h1><a class="anchor" id="friststep"></a>
+С чего начать?</h1>
+<p><a href="ideas.html">Общие идеи работы движка</a>: Данный раздел содержит общие идеи, необходимые для понимания сути работы движка.<br />
+ <a href="install.html">Настройка движка</a>: Данный раздел содержит инструкции по настройке движка для работы.<br />
+ <a href="tutorials.html">Уроки</a>: Данный раздел содержит набор уроков по движку <a class="el" href="namespace_simple_voxel_engine.html" title="Главное пространство имён движка. Всё находится в нём. ">SimpleVoxelEngine</a>.<br />
+ <a href="author.html">Об авторе движка</a>: Данный раздел содержит информацию об авторе движка и людях, помогающих с его развитием.<br />
+</p>
+<h1><a class="anchor" id="links"></a>
+Быстрые ссылки</h1>
+<p><a href="namespaces.html">Пространства имён</a>: Очень удобно начинать изучение общей структуры движка отсюда.<br />
+ <a href="annotated.html">Список классов</a>: Список всех классов движка с описаниями.<br />
+ <a href="functions.html">Список функций</a>: Здесь удобно искать функции, если что-то забыл.<br />
+ <a href="changes.html">Изменения в движке</a>: Здесь прописываются изменения в движке по версиям.<br />
+</p>
+<h1><a class="anchor" id="examples"></a>
+Короткий пример</h1>
+<p>Пример простейшего приложения на <a class="el" href="namespace_simple_voxel_engine.html" title="Главное пространство имён движка. Всё находится в нём. ">SimpleVoxelEngine</a>.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a>&gt;</span> <span class="comment">// Подключили воксельный движок.</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>; <span class="comment">// Главное пространство имён движка.</span></div>
+<div class="line"><span class="keyword">using namespace </span>Core; <span class="comment">// Ядро, тут содержатся основные объекты.</span></div>
+<div class="line"><span class="keyword">using namespace </span>Additional; <span class="comment">//Дополнительные возможности, подключаем для использования Vector3d.</span></div>
+<div class="line"><span class="keyword">using namespace </span>Voxels; <span class="comment">// Подключение пространства имён вокселей.</span></div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    Engine* sve = <span class="keyword">new</span> Engine; <span class="comment">// Создали движок.</span></div>
+<div class="line">    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = sve-&gt;addWorld(); <span class="comment">// Создали мир по умолчани, запомнили ID мира. По умолчанию размер ребра чанка 16 вокселей.</span></div>
+<div class="line">    World* wrld = sve-&gt;getWorld(<span class="keywordtype">id</span>); <span class="comment">// Получили указатель на мир по его ID.</span></div>
+<div class="line">    wrld-&gt;loadChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Загрузили, а вернее сгенерировали пустой (так как не создавали генератора мира) чанк с координатами (0, 0, 0) в мире.</span></div>
+<div class="line">    ChunkVoxelObject* chunk = wrld-&gt;getChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили указатель на загруженный чанк.</span></div>
+<div class="line">    ARGBColorVoxel* argbclrvxl = <span class="keyword">new</span> ARGBColorVoxel; <span class="comment">// Создали предустановленный тип вокселя, у которого имеется только один параметр - ARGB цвет.</span></div>
+<div class="line">    argbclrvxl-&gt;setARGBColor(ARGBColor(255,255,255,255)); <span class="comment">// Установили его белым цветом.</span></div>
+<div class="line">    chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(2,2,2), argbclrvxl, <span class="keyword">true</span>); <span class="comment">// Поставили наш белый воксель в точку (2,2,2) в относительных координатах чанка.</span></div>
+<div class="line">    <span class="keyword">delete</span> sve; <span class="comment">// Удалили движок.</span></div>
+<div class="line">    <span class="keywordflow">return</span> 0; <span class="comment">// Вышли из программы.</span></div>
+<div class="line">}</div>
+</div><!-- fragment --> </div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:23. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

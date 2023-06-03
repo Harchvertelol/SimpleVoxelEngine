@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>SimpleVoxelEngine: Файл WorkFunction.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Воксельный движок</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li class="current"><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Файлы</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_a81b5585c26ee11ef3f8637bee9e603c.html">jane</a></li><li class="navelem"><a class="el" href="dir_a87058c2edbd9f58c6f2635354598c68.html">Информатика</a></li><li class="navelem"><a class="el" href="dir_9ce0018b5864768711f69410f7e6df2b.html">c++</a></li><li class="navelem"><a class="el" href="dir_eea9b0c3eef2307c57166cdd45f56f4e.html">Графика(движки)</a></li><li class="navelem"><a class="el" href="dir_bd0a5ceea3a5bd1dc90d43f3000c4e2f.html">Irrlicht</a></li><li class="navelem"><a class="el" href="dir_25cec2ae9268a684d598f049d6333b22.html">Воксели</a></li><li class="navelem"><a class="el" href="dir_39ecb1a257347a703824a93feae6f833.html">MyVoxelWork</a></li><li class="navelem"><a class="el" href="dir_fe9ba0f9e257059b21256fb9d79583ef.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="dir_19a2cd1bac5932778934840f305deb7b.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Пространства имен</a> &#124;
+<a href="#func-members">Функции</a>  </div>
+  <div class="headertitle">
+<div class="title">Файл WorkFunction.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+<code>#include &quot;<a class="el" href="_defines_8h_source.html">Defines.h</a>&quot;</code><br />
+</div>
+<p><a href="_work_function_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:namespace_work_function"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function.html">WorkFunction</a></td></tr>
+<tr class="memdesc:namespace_work_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Отдельное пространство имён со специальными функциями для работы. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_work_function_1_1_word_function"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_word_function.html">WorkFunction::WordFunction</a></td></tr>
+<tr class="memdesc:namespace_work_function_1_1_word_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функции для работы со словами. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_work_function_1_1_parser_function"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_parser_function.html">WorkFunction::ParserFunction</a></td></tr>
+<tr class="memdesc:namespace_work_function_1_1_parser_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функции для работы ParserInfoFile. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_work_function_1_1_convert_function"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_convert_function.html">WorkFunction::ConvertFunction</a></td></tr>
+<tr class="memdesc:namespace_work_function_1_1_convert_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функции конвертации типов. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_work_function_1_1_math_function"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_math_function.html">WorkFunction::MathFunction</a></td></tr>
+<tr class="memdesc:namespace_work_function_1_1_math_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Математические функции <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_work_function_1_1_file_function"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_file_function.html">WorkFunction::FileFunction</a></td></tr>
+<tr class="memdesc:namespace_work_function_1_1_file_function"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функции работы с файлами. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a63ed5c5bdbf0cee80a14e3cb03ab052d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_word_function.html#a63ed5c5bdbf0cee80a14e3cb03ab052d">WorkFunction::WordFunction::FirstWord</a> (std::string str)</td></tr>
+<tr class="memdesc:a63ed5c5bdbf0cee80a14e3cb03ab052d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение первого слова.  <a href="#a63ed5c5bdbf0cee80a14e3cb03ab052d">Подробнее...</a><br /></td></tr>
+<tr class="separator:a63ed5c5bdbf0cee80a14e3cb03ab052d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b4ab5736305ee175ac0a55fd4c7e2e1"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_word_function.html#a3b4ab5736305ee175ac0a55fd4c7e2e1">WorkFunction::WordFunction::RemoveFirstWord</a> (std::string str)</td></tr>
+<tr class="memdesc:a3b4ab5736305ee175ac0a55fd4c7e2e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаление первого слова.  <a href="#a3b4ab5736305ee175ac0a55fd4c7e2e1">Подробнее...</a><br /></td></tr>
+<tr class="separator:a3b4ab5736305ee175ac0a55fd4c7e2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad02b1252075fc4660098680a91400ebf"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_parser_function.html#ad02b1252075fc4660098680a91400ebf">WorkFunction::ParserFunction::getNameMainVariable</a> (std::string str)</td></tr>
+<tr class="memdesc:ad02b1252075fc4660098680a91400ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение имени блока.  <a href="#ad02b1252075fc4660098680a91400ebf">Подробнее...</a><br /></td></tr>
+<tr class="separator:ad02b1252075fc4660098680a91400ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3a3027ac9c17e809705c5c0ed81f64a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_parser_function.html#af3a3027ac9c17e809705c5c0ed81f64a">WorkFunction::ParserFunction::getNameSecondaryVariable</a> (std::string str)</td></tr>
+<tr class="memdesc:af3a3027ac9c17e809705c5c0ed81f64a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение имени переменной (из строки вида NAME=VALUE).  <a href="#af3a3027ac9c17e809705c5c0ed81f64a">Подробнее...</a><br /></td></tr>
+<tr class="separator:af3a3027ac9c17e809705c5c0ed81f64a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6809e24ed01f9533601344fd5e60a620"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_parser_function.html#a6809e24ed01f9533601344fd5e60a620">WorkFunction::ParserFunction::getValueSecondaryVariable</a> (std::string str)</td></tr>
+<tr class="memdesc:a6809e24ed01f9533601344fd5e60a620"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение значения переменной (из строки вида NAME=VALUE).  <a href="#a6809e24ed01f9533601344fd5e60a620">Подробнее...</a><br /></td></tr>
+<tr class="separator:a6809e24ed01f9533601344fd5e60a620"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d5820575ab13f447f015f4fa973a7fb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_parser_function.html#a6d5820575ab13f447f015f4fa973a7fb">WorkFunction::ParserFunction::splitMass</a> (std::map&lt; int, int &gt; *mas, int size, int point, std::string str, std::string splitter)</td></tr>
+<tr class="memdesc:a6d5820575ab13f447f015f4fa973a7fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Разделение строки в массив int.  <a href="#a6d5820575ab13f447f015f4fa973a7fb">Подробнее...</a><br /></td></tr>
+<tr class="separator:a6d5820575ab13f447f015f4fa973a7fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59f3f13e2c4c7a5bd8788c2e76186a8f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_parser_function.html#a59f3f13e2c4c7a5bd8788c2e76186a8f">WorkFunction::ParserFunction::splitMassString</a> (std::map&lt; int, std::string &gt; *mas, int size, int point, std::string str, std::string splitter)</td></tr>
+<tr class="memdesc:a59f3f13e2c4c7a5bd8788c2e76186a8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Разделение строки в массив string.  <a href="#a59f3f13e2c4c7a5bd8788c2e76186a8f">Подробнее...</a><br /></td></tr>
+<tr class="separator:a59f3f13e2c4c7a5bd8788c2e76186a8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4cbc6500bf53e4ed6fdfb4d475cfde7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_parser_function.html#ab4cbc6500bf53e4ed6fdfb4d475cfde7">WorkFunction::ParserFunction::addMainVariableString</a> (std::string str, std::string name, std::string splitter)</td></tr>
+<tr class="memdesc:ab4cbc6500bf53e4ed6fdfb4d475cfde7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавление в строку блока.  <a href="#ab4cbc6500bf53e4ed6fdfb4d475cfde7">Подробнее...</a><br /></td></tr>
+<tr class="separator:ab4cbc6500bf53e4ed6fdfb4d475cfde7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c28baf9681323408efb8e45e4d6a2e6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_parser_function.html#a4c28baf9681323408efb8e45e4d6a2e6">WorkFunction::ParserFunction::addSecondaryVariableString</a> (std::string str, std::string name, std::string value, std::string splitter)</td></tr>
+<tr class="memdesc:a4c28baf9681323408efb8e45e4d6a2e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавление в строку переменной.  <a href="#a4c28baf9681323408efb8e45e4d6a2e6">Подробнее...</a><br /></td></tr>
+<tr class="separator:a4c28baf9681323408efb8e45e4d6a2e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac50edab9ef2b7e81e470babc81b6f3d7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_convert_function.html#ac50edab9ef2b7e81e470babc81b6f3d7">WorkFunction::ConvertFunction::itos</a> (int number)</td></tr>
+<tr class="memdesc:ac50edab9ef2b7e81e470babc81b6f3d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конвертация int в string.  <a href="#ac50edab9ef2b7e81e470babc81b6f3d7">Подробнее...</a><br /></td></tr>
+<tr class="separator:ac50edab9ef2b7e81e470babc81b6f3d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2d9452a0ff21cdbc28de0daa814a2c0"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_convert_function.html#ab2d9452a0ff21cdbc28de0daa814a2c0">WorkFunction::ConvertFunction::ftos</a> (float number)</td></tr>
+<tr class="memdesc:ab2d9452a0ff21cdbc28de0daa814a2c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конвертация float в string.  <a href="#ab2d9452a0ff21cdbc28de0daa814a2c0">Подробнее...</a><br /></td></tr>
+<tr class="separator:ab2d9452a0ff21cdbc28de0daa814a2c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a351c03c4f65ea6db9c53f43fc2dd1074"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_math_function.html#a351c03c4f65ea6db9c53f43fc2dd1074">WorkFunction::MathFunction::roundNumber</a> (int number, int divide, int change)</td></tr>
+<tr class="memdesc:a351c03c4f65ea6db9c53f43fc2dd1074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Округление числа.  <a href="#a351c03c4f65ea6db9c53f43fc2dd1074">Подробнее...</a><br /></td></tr>
+<tr class="separator:a351c03c4f65ea6db9c53f43fc2dd1074"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c1666d2fa5d79a3e9fd556849aa5d67"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_file_function.html#a5c1666d2fa5d79a3e9fd556849aa5d67">WorkFunction::FileFunction::fileExists</a> (std::string name)</td></tr>
+<tr class="memdesc:a5c1666d2fa5d79a3e9fd556849aa5d67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка существования файла.  <a href="#a5c1666d2fa5d79a3e9fd556849aa5d67">Подробнее...</a><br /></td></tr>
+<tr class="separator:a5c1666d2fa5d79a3e9fd556849aa5d67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a3e1dbb39f61997e013b27780a04f27"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_work_function_1_1_file_function.html#a7a3e1dbb39f61997e013b27780a04f27">WorkFunction::FileFunction::createFolders</a> (std::string folder, std::string foldersplitter=<a class="el" href="namespace_simple_voxel_engine_1_1_defines_1_1_s_t_r_i_n_g___c_o_n_s_t_a_n_t_s.html#a044c83a501e27560802283dee03bdfa8">SimpleVoxelEngine::Defines::STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER</a>)</td></tr>
+<tr class="memdesc:a7a3e1dbb39f61997e013b27780a04f27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция создания папок.  <a href="#a7a3e1dbb39f61997e013b27780a04f27">Подробнее...</a><br /></td></tr>
+<tr class="separator:a7a3e1dbb39f61997e013b27780a04f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по SimpleVoxelEngine. Последние изменения: Чт 25 Дек 2014 04:11:39. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>SimpleVoxelEngine: Урок 4: Пользовательская прозрачность и адресация вокселей в глобальном пространстве</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Воксельный движок</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li class="current"><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Урок 4: Пользовательская прозрачность и адресация вокселей в глобальном пространстве </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>В этом уроке мы узнаем про то, как определить какие-либо прозрачные воксели (чтобы не удалялись грани), кроме существующей прозрачности, а именно кроме отсутствия вокселей. По умолчанию движок при отсечении невидимых граней использует то, что видны только те грани, около которых ничего нет. Но если мы хотим добавить свои типы вокселей, например, стекло? Как нам не удалять грани между стеклом и другими вокселями? Но при этом хочется удалять внутренние грани в стекле, так как они просто не нужны. И тут нам на помощь приходит SimpleVoxelObjectTransparentTester. Давайте воспользуемся им. Начнём стандартно - подключим движок и необходимые пространства имён: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+</div><!-- fragment --><p> Возьмём из прошлого урока описание блока: </p><div class="fragment"><div class="line"><span class="keyword">class </span>Block : <span class="keyword">public</span> SimpleVoxelObject</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       Block(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>): <span class="comment">// Конструктор с заданием ID.</span></div>
+<div class="line">           SimpleVoxelObject(),</div>
+<div class="line">           s_Id(id)</div>
+<div class="line">       {</div>
+<div class="line">           setTypeVoxel(CUSTOM_VOXEL); <span class="comment">// Установили тип CUSTOM_VOXEL.</span></div>
+<div class="line">       }</div>
+<div class="line">       ~Block()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getId() <span class="comment">// Функция получения ID блока.</span></div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">return</span> s_Id;</div>
+<div class="line">       }</div>
+<div class="line">   <span class="keyword">private</span>:</div>
+<div class="line">       <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> А теперь опишем наш класс для проверки на прозрачность, унаследуем его от SimpleVoxelObjectTransparentTester: </p><div class="fragment"><div class="line"><span class="keyword">class </span>MySimpleVoxelObjectTransparentTester : <span class="keyword">public</span> SimpleVoxelObjectTransparentTester</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       MySimpleVoxelObjectTransparentTester(): <span class="comment">// Стандартный конструктор.</span></div>
+<div class="line">           SimpleVoxelObjectTransparentTester()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+</div><!-- fragment --><p> И опишем главную его функцию, которая и отвечает за проверку на прозрачность. Алгоритм будет следующий: пусть у нас есть три типа блоков. ID = 1, 2, 3. ID = 1 будет землёй, ID = 2 будет стеклом, ID = 3 будет водой. Мы хотим, чтобы внутри этих объёмов блоков грани удалялись, но на границе их раздела не удалялись, так как мы хотим видеть воду сквозь стёкло. Опишем же это и закроем класс: </p><div class="fragment"><div class="line">    <span class="keywordtype">bool</span> isTransparent(SimpleVoxelObject* svo, SimpleVoxelObject* parent = 0)</div>
+<div class="line">    {</div>
+<div class="line">       Block* block = 0; <span class="comment">// Указатель на наш блок.</span></div>
+<div class="line">       Block* parentblock = 0; <span class="comment">// Указатель на блок, от которого идёт проверка на прозрачность.</span></div>
+<div class="line">       <span class="keywordflow">if</span>(svo-&gt;getTypeVoxel() != <a class="code" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a44f50553de3e67b1031cb44f00869bba">CUSTOM_VOXEL</a>) <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Если тип вокселя не наш, то делаем его непрозрачным.</span></div>
+<div class="line">       <span class="keywordflow">else</span> block = (Block*)svo; <span class="comment">// Преобразовали тип указателя.</span></div>
+<div class="line">       <span class="keywordflow">if</span>(parent-&gt;getTypeVoxel() == <a class="code" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a44f50553de3e67b1031cb44f00869bba">CUSTOM_VOXEL</a>) parentblock = (Block*)parent; <span class="comment">// Преобразовали тип указателя только в том случае, если он преобразуется.</span></div>
+<div class="line">       <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span> = block-&gt;getId(); <span class="comment">// Запомнили ID проверяемого блока.</span></div>
+<div class="line">       <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> idparent = 0; <span class="comment">// Положили по умолчанию ID родителя 0.</span></div>
+<div class="line">       <span class="keywordflow">if</span>(parentblock) idparent = parentblock-&gt;getId(); <span class="comment">// Если родитель нашего типа, то запомним его ID.</span></div>
+<div class="line">       <span class="keywordflow">if</span>(<span class="keywordtype">id</span> == 2) <span class="comment">// Рассматриваем ID = 2.</span></div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">if</span>(idparent == 2) <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Если у блока, от которого смотрим, ID тоже 2, то непрозрачен.</span></div>
+<div class="line">           <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// В остальных случаях прозрачен.</span></div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordflow">if</span>(<span class="keywordtype">id</span> == 3) <span class="comment">// Рассматриваем ID = 3.</span></div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">if</span>(idparent == 3) <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Если у блока, от которого смотрим, ID тоже 3, то непрозрачен.</span></div>
+<div class="line">           <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// В остальных случаях прозрачен.</span></div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Все остальные непрозрачны.</span></div>
+<div class="line">    }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Вот и всё. Давайте теперь возьмём генератор мира из прошлого урока: </p><div class="fragment"><div class="line"><span class="keyword">class </span>MyWorldGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       MyWorldGenerator():</div>
+<div class="line">           WorldGenerator()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       ~MyWorldGenerator()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> sizechunk)</div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; sizechunk; x++)</div>
+<div class="line">               <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; sizechunk; y++)</div>
+<div class="line">                   <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; sizechunk / 2; z++)</div>
+<div class="line">                   {</div>
+<div class="line">                        Block* block = <span class="keyword">new</span> Block(1); <span class="comment">// Пусть ID = 1.</span></div>
+<div class="line">                        <span class="keywordflow">if</span>(!block)</div>
+<div class="line">                        {</div>
+<div class="line">                            chunk-&gt;getWorld()-&gt;getEngine()-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;TestProject: Error generating chunk, Block not added&quot;</span>, <span class="keyword">true</span>);</div>
+<div class="line">                            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">                        }</div>
+<div class="line">                        chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), block, <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">                    }</div>
+<div class="line">            chunk-&gt;getWorld()-&gt;getEngine()-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;Chunk generating.&quot;</span>); <span class="comment">// Чтобы отличать загрузку чанка с диска от генерации.</span></div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">       }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Ну и займёмся созданием и подключением новых возможностей: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">   Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Создали логгер.</span></div>
+<div class="line">   Engine* sve = <span class="keyword">new</span> Engine(lgr); <span class="comment">// Создали движок с логгером.</span></div>
+<div class="line">   lgr-&gt;drop(); <span class="comment">// Нам лично больше логгер не нужен, отдадим его на обеспечение движку.</span></div>
+<div class="line">   <span class="keywordtype">int</span> worldid = sve-&gt;addWorld(); <span class="comment">// Создадим стандартный мир.</span></div>
+<div class="line">   World* wrld = sve-&gt;getWorld(worldid); <span class="comment">// Получили мир по идентификатору.</span></div>
+<div class="line">   MySimpleVoxelObjectTransparentTester* msvott = <span class="keyword">new</span> MySimpleVoxelObjectTransparentTester; <span class="comment">// Создали наш экземпляр для проверки на прозрачность.</span></div>
+<div class="line">   wrld-&gt;setSimpleVoxelObjectTransparentTester(msvott); <span class="comment">// Установили наш класс для проверки на прозрачность миру.</span></div>
+<div class="line">   MyWorldGenerator* mywrldgen = <span class="keyword">new</span> MyWorldGenerator; <span class="comment">// Создали наш генератор.</span></div>
+<div class="line">   wrld-&gt;setWorldGenerator(mywrldgen); <span class="comment">// Установили миру наш генератор.</span></div>
+<div class="line">   wrld-&gt;loadChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Загрузили чанк.</span></div>
+</div><!-- fragment --><p> Отлично, всё работает. Теперь давайте перейдём ко второй части урока и узнаем про глобальную адресацию вокселей в глобальном пространстве. Это объект VoxelAddress. Он представляет собой последовательность векторов, первый (вернее, нулевой) из которых указывает на координаты чанка, второй (вернее, первый) - на координаты следующего вокселя в глубину в чанке, следующий - адрес в нём и так далее, на сколько угодно вглубь. У нас пока всё на первом уровне погружения, поэтому наш VoxelAddress будет состоять из двух векторов. Первый будет координатами чанка, а второй координатами вокселя в чанке. Давайте получим из нашего чанка воксель с координатами (1,1,1). Для этого создадим VoxelAddress и добавим в него два вектора адресации: </p><div class="fragment"><div class="line">VoxelAddress vxladdr(sve); <span class="comment">// Создали наш воксельный адрес, дав ему указатель на движок.</span></div>
+<div class="line">vxladdr.addNextVector(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Координаты нашего чанка.</span></div>
+<div class="line">vxladdr.addNextVector(Vector3d&lt;int&gt;(1,1,1)); <span class="comment">// Координаты нашего вокселя.</span></div>
+</div><!-- fragment --><p> Ну и теперь попросим у мира воксель с данным адресом и выведем его ID: </p><div class="fragment"><div class="line">SimpleVoxelObject* svo = wrld-&gt;getSimpleVoxelObject(&amp;vxladdr, <span class="keyword">false</span>); <span class="comment">// Попросили у мира объект по нашему адресу, запретив выдавать предупреждения в случае его отсутствия.</span></div>
+<div class="line"><span class="keywordflow">if</span>(!svo || svo-&gt;getTypeVoxel() != <a class="code" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a44f50553de3e67b1031cb44f00869bba">CUSTOM_VOXEL</a>) <span class="keywordflow">return</span> 1; <span class="comment">// Проверили на ошибки.</span></div>
+<div class="line">Block* block = (Block*)svo; <span class="comment">// Привели типы.</span></div>
+<div class="line">sve-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;ID = &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(block-&gt;getId()));</div>
+</div><!-- fragment --><p> Ну и теперь давайте заодно изменим кубик по данному адресу, после этого удалим движок: </p><div class="fragment"><div class="line">   block = <span class="keyword">new</span> Block(2); <span class="comment">// Создали наш новый блок.</span></div>
+<div class="line">   wrld-&gt;setSimpleVoxelObject(&amp;vxladdr, block, <span class="keyword">true</span>); <span class="comment">// Установили наш блок по данному адресу, указав переписать воксель в случае наличия.</span></div>
+<div class="line">   <span class="keyword">delete</span> sve; <span class="comment">// Удалили движок.</span></div>
+<div class="line">   <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Ну и напоследок весь код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">class </span>Block : <span class="keyword">public</span> SimpleVoxelObject</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       Block(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>): <span class="comment">// Конструктор с заданием ID.</span></div>
+<div class="line">           SimpleVoxelObject(),</div>
+<div class="line">           s_Id(id)</div>
+<div class="line">       {</div>
+<div class="line">           setTypeVoxel(CUSTOM_VOXEL); <span class="comment">// Установили тип CUSTOM_VOXEL.</span></div>
+<div class="line">       }</div>
+<div class="line">       ~Block()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getId() <span class="comment">// Функция получения ID блока.</span></div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">return</span> s_Id;</div>
+<div class="line">       }</div>
+<div class="line">   <span class="keyword">private</span>:</div>
+<div class="line">       <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">class </span>MySimpleVoxelObjectTransparentTester : <span class="keyword">public</span> SimpleVoxelObjectTransparentTester</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">        MySimpleVoxelObjectTransparentTester(): <span class="comment">// Стандартный конструктор.</span></div>
+<div class="line">            SimpleVoxelObjectTransparentTester()</div>
+<div class="line">        {</div>
+<div class="line">            <span class="comment">//...</span></div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordtype">bool</span> isTransparent(SimpleVoxelObject* svo, SimpleVoxelObject* parent = 0)</div>
+<div class="line">        {</div>
+<div class="line">           Block* block = 0; <span class="comment">// Указатель на наш блок.</span></div>
+<div class="line">           Block* parentblock = 0; <span class="comment">// Указатель на блок, от которого идёт проверка на прозрачность.</span></div>
+<div class="line">           <span class="keywordflow">if</span>(svo-&gt;getTypeVoxel() != <a class="code" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a44f50553de3e67b1031cb44f00869bba">CUSTOM_VOXEL</a>) <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Если тип вокселя не наш, то делаем его непрозрачным.</span></div>
+<div class="line">           <span class="keywordflow">else</span> block = (Block*)svo; <span class="comment">// Преобразовали тип указателя.</span></div>
+<div class="line">           <span class="keywordflow">if</span>(parent-&gt;getTypeVoxel() == <a class="code" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a44f50553de3e67b1031cb44f00869bba">CUSTOM_VOXEL</a>) parentblock = (Block*)parent; <span class="comment">// Преобразовали тип указателя только в том случае, если он преобразуется.</span></div>
+<div class="line">           <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span> = block-&gt;getId(); <span class="comment">// Запомнили ID проверяемого блока.</span></div>
+<div class="line">           <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> idparent = 0; <span class="comment">// Положили по умолчанию ID родителя 0.</span></div>
+<div class="line">           <span class="keywordflow">if</span>(parentblock) idparent = parentblock-&gt;getId(); <span class="comment">// Если родитель нашего типа, то запомним его ID.</span></div>
+<div class="line">           <span class="keywordflow">if</span>(<span class="keywordtype">id</span> == 2) <span class="comment">// Рассматриваем ID = 2.</span></div>
+<div class="line">           {</div>
+<div class="line">               <span class="keywordflow">if</span>(idparent == 2) <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Если у блока, от которого смотрим, ID тоже 2, то непрозрачен.</span></div>
+<div class="line">               <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// В остальных случаях прозрачен.</span></div>
+<div class="line">           }</div>
+<div class="line">           <span class="keywordflow">if</span>(<span class="keywordtype">id</span> == 3) <span class="comment">// Рассматриваем ID = 3.</span></div>
+<div class="line">           {</div>
+<div class="line">               <span class="keywordflow">if</span>(idparent == 3) <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Если у блока, от которого смотрим, ID тоже 3, то непрозрачен.</span></div>
+<div class="line">              <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// В остальных случаях прозрачен.</span></div>
+<div class="line">           }</div>
+<div class="line">           <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Все остальные непрозрачны.</span></div>
+<div class="line">        }</div>
+<div class="line">};</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">class </span>MyWorldGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       MyWorldGenerator():</div>
+<div class="line">           WorldGenerator()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       ~MyWorldGenerator()</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//...</span></div>
+<div class="line">       }</div>
+<div class="line">       <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> sizechunk)</div>
+<div class="line">       {</div>
+<div class="line">           <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; sizechunk; x++)</div>
+<div class="line">               <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; sizechunk; y++)</div>
+<div class="line">                   <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; sizechunk / 2; z++)</div>
+<div class="line">                   {</div>
+<div class="line">                        Block* block = <span class="keyword">new</span> Block(1); <span class="comment">// Пусть ID = 1.</span></div>
+<div class="line">                        <span class="keywordflow">if</span>(!block)</div>
+<div class="line">                        {</div>
+<div class="line">                            chunk-&gt;getWorld()-&gt;getEngine()-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;TestProject: Error generating chunk, Block not added&quot;</span>, <span class="keyword">true</span>);</div>
+<div class="line">                            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">                        }</div>
+<div class="line">                        chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), block, <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">                    }</div>
+<div class="line">            chunk-&gt;getWorld()-&gt;getEngine()-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;Chunk generating.&quot;</span>); <span class="comment">// Чтобы отличать загрузку чанка с диска от генерации.</span></div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">       }</div>
+<div class="line">};</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Создали логгер.</span></div>
+<div class="line">    Engine* sve = <span class="keyword">new</span> Engine(lgr); <span class="comment">// Создали движок с логгером.</span></div>
+<div class="line">    lgr-&gt;drop(); <span class="comment">// Нам лично больше логгер не нужен, отдадим его на обеспечение движку.</span></div>
+<div class="line">    <span class="keywordtype">int</span> worldid = sve-&gt;addWorld(); <span class="comment">// Создадим стандартный мир.</span></div>
+<div class="line">    World* wrld = sve-&gt;getWorld(worldid); <span class="comment">// Получили мир по идентификатору.</span></div>
+<div class="line">    MySimpleVoxelObjectTransparentTester* msvott = <span class="keyword">new</span> MySimpleVoxelObjectTransparentTester; <span class="comment">// Создали наш экземпляр для проверки на прозрачность.</span></div>
+<div class="line">    wrld-&gt;setSimpleVoxelObjectTransparentTester(msvott); <span class="comment">// Установили наш класс для проверки на прозрачность миру.</span></div>
+<div class="line">    MyWorldGenerator* mywrldgen = <span class="keyword">new</span> MyWorldGenerator; <span class="comment">// Создали наш генератор.</span></div>
+<div class="line">    wrld-&gt;setWorldGenerator(mywrldgen); <span class="comment">// Установили миру наш генератор.</span></div>
+<div class="line">    wrld-&gt;loadChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Загрузили чанк.</span></div>
+<div class="line">    VoxelAddress vxladdr(sve);</div>
+<div class="line">    vxladdr.addNextVector(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Координаты нашего чанка.</span></div>
+<div class="line">    vxladdr.addNextVector(Vector3d&lt;int&gt;(1,1,1)); <span class="comment">// Координаты нашего вокселя.</span></div>
+<div class="line">    SimpleVoxelObject* svo = wrld-&gt;getSimpleVoxelObject(&amp;vxladdr, <span class="keyword">false</span>); <span class="comment">// Попросили у мира объект по нашему адресу, запретив выдавать предупреждения в случае его отсутствия.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(!svo || svo-&gt;getTypeVoxel() != <a class="code" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a44f50553de3e67b1031cb44f00869bba">CUSTOM_VOXEL</a>) <span class="keywordflow">return</span> 1; <span class="comment">// Проверили на ошибки.</span></div>
+<div class="line">    Block* block = (Block*)svo; <span class="comment">// Привели типы.</span></div>
+<div class="line">    sve-&gt;registerEvent(EVENT_TYPE_STANDART, <span class="stringliteral">&quot;ID = &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(block-&gt;getId()));</div>
+<div class="line">    block = <span class="keyword">new</span> Block(2); <span class="comment">// Создали наш новый блок.</span></div>
+<div class="line">    wrld-&gt;setSimpleVoxelObject(&amp;vxladdr, block, <span class="keyword">true</span>); <span class="comment">// Установили наш блок по данному адресу, указав переписать воксель в случае наличия.</span></div>
+<div class="line">    <span class="keyword">delete</span> sve; <span class="comment">// Удалили движок (автосохранение мира и чанков, если не хочется - можно поправить сам контроллер сохранений, переключив перед удалением в режим, когда он не сохраняет).</span></div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Вот пока и всё. Спасибо за интерес к движку.<br />
+ Автор: <b>Харч</b>. </p>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:22. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

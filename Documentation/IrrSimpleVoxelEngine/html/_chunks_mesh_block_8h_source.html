@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>IrrSimpleVoxelEngine: Исходный файл ChunksMeshBlock.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">IrrSimpleVoxelEngine
+   &#160;<span id="projectnumber">build 0.0.1</span>
+   </div>
+   <div id="projectbrief">Враппер для воксельного движка на irrlicht</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="pages.html"><span>Описания</span></a></li>
+      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li class="current"><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Файлы</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Друзья</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_a81b5585c26ee11ef3f8637bee9e603c.html">jane</a></li><li class="navelem"><a class="el" href="dir_a87058c2edbd9f58c6f2635354598c68.html">Информатика</a></li><li class="navelem"><a class="el" href="dir_9ce0018b5864768711f69410f7e6df2b.html">c++</a></li><li class="navelem"><a class="el" href="dir_eea9b0c3eef2307c57166cdd45f56f4e.html">Графика(движки)</a></li><li class="navelem"><a class="el" href="dir_bd0a5ceea3a5bd1dc90d43f3000c4e2f.html">Irrlicht</a></li><li class="navelem"><a class="el" href="dir_25cec2ae9268a684d598f049d6333b22.html">Воксели</a></li><li class="navelem"><a class="el" href="dir_39ecb1a257347a703824a93feae6f833.html">MyVoxelWork</a></li><li class="navelem"><a class="el" href="dir_4e5641742efd570c45827e810f47202f.html">IrrSimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="dir_466aead8c830fe769aca150fb610a4c6.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">ChunksMeshBlock.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ChunksMeshBlock_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ChunksMeshBlock_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;Additional/Vector3d.h&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;CBatchingMesh/CBatchingMesh.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine.html">   10</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine.html">   12</a></span>&#160;    <span class="keyword">namespace </span>IrrEngine</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keyword">class </span><a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html">IrrSimpleVoxelEngine</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html">   20</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html">ChunksMeshBlock</a></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a793416e15653d31606043d694327d3f5">ChunksMeshBlock</a>(<a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html">IrrSimpleVoxelEngine</a>* isve, irr::IrrlichtDevice* device);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a491911302f4b40b8d4b8fee5bb609f79">~ChunksMeshBlock</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a60beba4b38e921c873bc68714c694857">setSize</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> z);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#ac8b74cd264bb1c497fb446eda7ebaca9">setScale</a>(<span class="keywordtype">int</span> scale);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a46d36f96f21996aa444026f22bbf421d">setMesh</a>(irr::scene::IMesh* mesh, SimpleVoxelEngine::Additional::Vector3d&lt;int&gt; vect);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a83e922b72eea8c1a0c8ec2383fbe0455">deleteMesh</a>(SimpleVoxelEngine::Additional::Vector3d&lt;int&gt; vect);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a112807cb028331b63aa5ef525e0d74b8">update</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>, SimpleVoxelEngine::Additional::Vector3d&lt;int&gt; vect, <span class="keywordtype">bool</span> occlusionqueries = <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a0253edcd19467bed94e641b14d9a5a7a">isWaitUpdate</a>();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#af873b9cbb2d107f8469df8f612b084b0">isEmpty</a>();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a9b739a9a838d31e94f9f70e2d4595282">getNumberOfMeshes</a>();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#aab57602a52d0546775910b54f1115a58">isRenderChunk</a>(SimpleVoxelEngine::Additional::Vector3d&lt;int&gt; vect);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#adbb41464d74c114ca71203899805499b">testOcclusionQuerie</a>();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a5f0d645dde7e967b6abf6c6dfe84edbd">setHardwareMappingHint</a>(irr::scene::E_HARDWARE_MAPPING mapping, irr::scene::E_BUFFER_TYPE typebuffer);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                irr::scene::IMeshSceneNode* <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a2f1cd815a3e6958c508bd3660ded63f4">getMeshSceneNode</a>();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                <span class="keywordtype">bool</span> <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#ab178f9e2ea1d65ca0b5ab06d04b6db11">isRenderMesh</a>(SimpleVoxelEngine::Additional::Vector3d&lt;int&gt; vect);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                <span class="keywordtype">int</span> getNumberInMemoryIMeshByVector(SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                SimpleVoxelEngine::Additional::Vector3d&lt;int&gt; getVectorIMeshByNumberInMemory(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="keywordtype">int</span> s_SizeX;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                <span class="keywordtype">int</span> s_SizeY;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                <span class="keywordtype">int</span> s_SizeZ;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                irr::scene::IMesh** s_IMeshes;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                <span class="keywordtype">bool</span>* s_AddMeshesFlags;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                <span class="keywordtype">bool</span> s_UpdateIMeshesFlag;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                irr::scene::IMeshSceneNode* s_MeshSceneNode;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                <a class="code" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html">IrrSimpleVoxelEngine</a>* s_ISVE;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                <span class="keywordtype">bool</span> s_WaitUpdate;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                <a class="code" href="classirr_1_1scene_1_1_c_batching_mesh.html">irr::scene::CBatchingMesh</a>* s_Mesh;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                irr::IrrlichtDevice* s_Device;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                <span class="keywordtype">float</span> s_Scale;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_NumberOfMeshes;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                irr::scene::E_HARDWARE_MAPPING s_HardwareMappingHint;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                irr::scene::E_BUFFER_TYPE s_BufferType;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        };</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html_a112807cb028331b63aa5ef525e0d74b8"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a112807cb028331b63aa5ef525e0d74b8">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::update</a></div><div class="ttdeci">void update(int id, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect, bool occlusionqueries=false)</div><div class="ttdoc">Обновление блока. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html_a0253edcd19467bed94e641b14d9a5a7a"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a0253edcd19467bed94e641b14d9a5a7a">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::isWaitUpdate</a></div><div class="ttdeci">bool isWaitUpdate()</div><div class="ttdoc">Проверка состояния ожидания обновления блока чанков. </div></div>
+<div class="ttc" id="namespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine. </div><div class="ttdef"><b>Definition:</b> <a href="_chunks_mesh_block_8h_source.html#l00010">ChunksMeshBlock.h:10</a></div></div>
+<div class="ttc" id="classirr_1_1scene_1_1_c_batching_mesh_html"><div class="ttname"><a href="classirr_1_1scene_1_1_c_batching_mesh.html">irr::scene::CBatchingMesh</a></div><div class="ttdoc">Class for batching meshes. </div><div class="ttdef"><b>Definition:</b> <a href="_c_batching_mesh_8h_source.html#l00019">CBatchingMesh.h:19</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html_a5f0d645dde7e967b6abf6c6dfe84edbd"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a5f0d645dde7e967b6abf6c6dfe84edbd">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::setHardwareMappingHint</a></div><div class="ttdeci">void setHardwareMappingHint(irr::scene::E_HARDWARE_MAPPING mapping, irr::scene::E_BUFFER_TYPE typebuffer)</div><div class="ttdoc">Установка hardware mapping hint. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html_a60beba4b38e921c873bc68714c694857"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a60beba4b38e921c873bc68714c694857">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::setSize</a></div><div class="ttdeci">void setSize(int x, int y, int z)</div><div class="ttdoc">Установка размера блока. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html_a491911302f4b40b8d4b8fee5bb609f79"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a491911302f4b40b8d4b8fee5bb609f79">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::~ChunksMeshBlock</a></div><div class="ttdeci">~ChunksMeshBlock()</div><div class="ttdoc">Стандартный деструктор. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html_af873b9cbb2d107f8469df8f612b084b0"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#af873b9cbb2d107f8469df8f612b084b0">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::isEmpty</a></div><div class="ttdeci">bool isEmpty()</div><div class="ttdoc">Проверка наличия чанков в блоке. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock</a></div><div class="ttdoc">Класс, отвечающий за объединение чанков в общие блоки. </div><div class="ttdef"><b>Definition:</b> <a href="_chunks_mesh_block_8h_source.html#l00020">ChunksMeshBlock.h:20</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html_ab178f9e2ea1d65ca0b5ab06d04b6db11"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#ab178f9e2ea1d65ca0b5ab06d04b6db11">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::isRenderMesh</a></div><div class="ttdeci">bool isRenderMesh(SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</div><div class="ttdoc">Получение состояние отрисовки заданного подмеша. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html_a2f1cd815a3e6958c508bd3660ded63f4"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a2f1cd815a3e6958c508bd3660ded63f4">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::getMeshSceneNode</a></div><div class="ttdeci">irr::scene::IMeshSceneNode * getMeshSceneNode()</div><div class="ttdoc">Получение указателя на ноду блока чанков. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine_html"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a></div><div class="ttdoc">Движок. </div><div class="ttdef"><b>Definition:</b> <a href="_irr_simple_voxel_engine_8h_source.html#l00042">IrrSimpleVoxelEngine.h:42</a></div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html_a793416e15653d31606043d694327d3f5"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a793416e15653d31606043d694327d3f5">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::ChunksMeshBlock</a></div><div class="ttdeci">ChunksMeshBlock(IrrSimpleVoxelEngine *isve, irr::IrrlichtDevice *device)</div><div class="ttdoc">Стандартный конструктор </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html_a83e922b72eea8c1a0c8ec2383fbe0455"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a83e922b72eea8c1a0c8ec2383fbe0455">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::deleteMesh</a></div><div class="ttdeci">void deleteMesh(SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</div><div class="ttdoc">Удаление меша из блока из чанков. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html_a9b739a9a838d31e94f9f70e2d4595282"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a9b739a9a838d31e94f9f70e2d4595282">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::getNumberOfMeshes</a></div><div class="ttdeci">unsigned int getNumberOfMeshes()</div><div class="ttdoc">Получение числа склеиваемых мешей в блоке. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html_ac8b74cd264bb1c497fb446eda7ebaca9"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#ac8b74cd264bb1c497fb446eda7ebaca9">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::setScale</a></div><div class="ttdeci">void setScale(int scale)</div><div class="ttdoc">Установка множителя масштабирования SimpleVoxelObject. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html_adbb41464d74c114ca71203899805499b"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#adbb41464d74c114ca71203899805499b">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::testOcclusionQuerie</a></div><div class="ttdeci">bool testOcclusionQuerie()</div><div class="ttdoc">Проверка на прохождение условия Occlusion Queries. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html_aab57602a52d0546775910b54f1115a58"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#aab57602a52d0546775910b54f1115a58">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::isRenderChunk</a></div><div class="ttdeci">bool isRenderChunk(SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</div><div class="ttdoc">Проверка чанка на отрисовку. </div></div>
+<div class="ttc" id="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block_html_a46d36f96f21996aa444026f22bbf421d"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a46d36f96f21996aa444026f22bbf421d">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::setMesh</a></div><div class="ttdeci">void setMesh(irr::scene::IMesh *mesh, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</div><div class="ttdoc">Добавления меша в блок из чанков. </div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Документация по IrrSimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:36. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>
