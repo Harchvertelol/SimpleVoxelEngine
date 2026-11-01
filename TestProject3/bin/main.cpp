@@ -168,7 +168,7 @@ class MyWorldGenerator : public WorldGenerator //Создадим наш генератор мира
                             if(newsvo) chunk->setSimpleVoxelObject(Vector3d<int>(x,y,z), newsvo, true, false);
                         }
             }
-            world->getEngine()->registerEvent(EVENT_TYPE_STANDART, "Chunk generated.");
+            world->getEngine()->registerEvent(EVENT_TYPE_STANDARD, "Chunk generated.");
             return true;
         }
     private:
@@ -702,7 +702,7 @@ int main()
 
     //Начинаем подключать наш движок
     Logger* lgr = new Logger; //Создали логгер для получения сообщений
-    lgr->setPrintStandart(false); //Не хотим читать стандартные сообщения
+    lgr->setPrintStandard(false); //Не хотим читать стандартные сообщения
     IrrSimpleVoxelEngine* isve = new IrrSimpleVoxelEngine(device, lgr); //Создали движок
     MyController* mcntrlr = new MyController(isve); //Создали контроллер для работы в другом потоке
     isve->setUserControllerForThread(mcntrlr); //Установили контроллер движку

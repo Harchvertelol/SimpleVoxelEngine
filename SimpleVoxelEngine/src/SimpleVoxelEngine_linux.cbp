@@ -14,6 +14,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-DSVE_DEBUG_CHECKS" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -38,6 +39,7 @@
 		</Compiler>
 		<Unit filename="../include/ARGBColorVoxel.h" />
 		<Unit filename="../include/Additional/ARGBColor.h" />
+		<Unit filename="../include/Additional/ReferenceCounter.h" />
 		<Unit filename="../include/Additional/Vector3d.h" />
 		<Unit filename="../include/ChunkVoxelObject.h" />
 		<Unit filename="../include/ChunksSaveLoadController.h" />
@@ -46,7 +48,6 @@
 		<Unit filename="../include/IniParser/ParserInfoFile.h" />
 		<Unit filename="../include/IniParser/PostParsingStruct.h" />
 		<Unit filename="../include/Logger.h" />
-		<Unit filename="../include/OtherVoxelInfo.h" />
 		<Unit filename="../include/SimpleVoxelEngine.h" />
 		<Unit filename="../include/SimpleVoxelObject.h" />
 		<Unit filename="../include/SimpleVoxelObjectTransparentTester.h" />
@@ -54,24 +55,24 @@
 		<Unit filename="../include/VoxelForRendering.h" />
 		<Unit filename="../include/VoxelInfo.h" />
 		<Unit filename="../include/VoxelsForRendering.h" />
-		<Unit filename="../include/WorkFunction.h" />
+		<Unit filename="../include/WorkFunctions.h" />
 		<Unit filename="../include/World.h" />
 		<Unit filename="../include/WorldGenerator.h" />
 		<Unit filename="ARGBColorVoxel.cpp" />
 		<Unit filename="Additional/ARGBColor.cpp" />
+		<Unit filename="Additional/ReferenceCounter.cpp" />
 		<Unit filename="ChunkVoxelObject.cpp" />
 		<Unit filename="ChunksSaveLoadController.cpp" />
 		<Unit filename="Engine.cpp" />
 		<Unit filename="IniParser/ParserInfoFile.cpp" />
 		<Unit filename="IniParser/PostParsingStruct.cpp" />
 		<Unit filename="Logger.cpp" />
-		<Unit filename="OtherVoxelInfo.cpp" />
 		<Unit filename="SimpleVoxelObject.cpp" />
 		<Unit filename="SimpleVoxelObjectTransparentTester.cpp" />
 		<Unit filename="VoxelAddress.cpp" />
 		<Unit filename="VoxelForRendering.cpp" />
 		<Unit filename="VoxelsForRendering.cpp" />
-		<Unit filename="WorkFunction.cpp" />
+		<Unit filename="WorkFunctions.cpp" />
 		<Unit filename="World.cpp" />
 		<Unit filename="WorldGenerator.cpp" />
 		<Extensions>

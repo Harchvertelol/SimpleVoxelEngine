@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Урок 6: Стриминг чанков: загрузка вокруг игроков и границы мира.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IrrSimpleVoxelEngine
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tutorial6.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Урок 6: Стриминг чанков: загрузка вокруг игроков и границы мира. </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>До сих пор мы загружали чанки одной областью: addChunksForRendering() от одного угла до другого. Для маленькой сцены это удобно, но мир игры обычно намного больше памяти. Нужно, чтобы чанки загружались вокруг игрока, пока он идёт, а те, от которых он ушёл, выгружались (и сохранялись). Для этого во враппере есть стриминг: пул контроллеров (ChunkStreamingPool) и контроллеры (ChunkStreamingController) - "игроки" или "камеры", вокруг которых держится мир.</p>
+<p>В этом уроке камера летит над холмами туда и обратно, мир грузится вокруг неё, сзади выгружается с сохранением, а при возвращении загружается из сохранения - вместе с нашими изменениями. Рядом стоит второй игрок, вокруг которого мир загружен всегда, а в стороне - площадка, загруженная "вручную", без стриминга.</p>
+<h1 class="doxsection"><a class="anchor" id="tut6_world"></a>
+Мир: генератор, сохранение и границы</h1>
+<p>Блоки и фабрика - как в прошлых уроках (куб из видимых граней, цвет вершин по номеру блока). Генератор строит холмы высотой от 14 до 26 блоков, сверху трава: </p><div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> height = 20 + (int)(6 * sinf(gx * 0.1f) * cosf(gz * 0.13f));</div>
+</div><!-- fragment --><p> Генератор вызывается в потоке главной очереди для каждого чанка, которого нет ни в памяти, ни в сохранении (подробно о генераторе - в уроке 2 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>).</p>
+<p>Чтобы чанки при выгрузке не пропадали, нужен контроллер сохранения. Настоящий (в файлы) разобран в уроке 3 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>, а здесь для простоты сохраняем "в память": выгруженный чанк кладём в std::map, а при новой загрузке берём оттуда, а не из генератора. Мир сначала спрашивает canLoad(): если чанк сохранён - вызывается loadChunk(), иначе генератор: </p><div class="fragment"><div class="line"><span class="keywordtype">bool</span> canLoad(World*, Vector3d&lt;int&gt; vect) <span class="comment">// Сохранён ли чанк. Если нет - мир вызовет генератор.</span></div>
+<div class="line">{</div>
+<div class="line">    std::lock_guard&lt;std::mutex&gt; lock(s_Lock);</div>
+<div class="line">    <span class="keywordflow">return</span> s_Chunks.find(vect) != s_Chunks.end();</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Контроллер сохранения, как и генератор, вызывается в потоке главной очереди под блокировкой движка. Загрузка в нём устроена так же, как в уроке 3 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>: блоки кладутся прямо в массив getSimpleVoxelObjects(), для каждого ставится флаг "пересчитать видимость", а в конце - число непустых ячеек.</p>
+<p>Теперь границы мира. Бесконечным мир бывает только по горизонтали, а по высоте его обычно ограничивают. Границы задаёт ядро (World), подробно о них - в уроке 2 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>; здесь хватит одной строки: </p><div class="fragment"><div class="line">world-&gt;setChunksBounds(WORLD_AXIS_Y, 0, 2); <span class="comment">// Граница мира: чанки по Y только от 0 до 2 (высота 48 блоков).</span></div>
+</div><!-- fragment --><p> За границей чанков просто нет: они не загружаются и не генерируются (генератор для них не вызывается), а стриминг их не берёт, какой бы ни была область игрока, - без сообщений в логе (сколько таких чанков - s_OutOfBounds, о нём ниже). addChunksForRendering() тоже молча пропускает чанки за границей. Только одиночный World::loadChunk() для чанка за границей пишет в лог нарушение логики; как его выключить - в уроке 2 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>. Границы задавайте до start() (или под блокировкой движка).</p>
+<h1 class="doxsection"><a class="anchor" id="tut6_pool"></a>
+Пул стриминга</h1>
+<p>Пул один на движок, его создаёт и удаляет сам движок: getChunkStreamingPool(). Настройки пула: </p><div class="fragment"><div class="line">ChunkStreamingPool* pool = isve-&gt;getChunkStreamingPool();</div>
+<div class="line">pool-&gt;setMaxPendingActions(64); <span class="comment">// Сколько действий пула может ждать в главной очереди.</span></div>
+<div class="line">pool-&gt;setMaxLoadsPerStep(16); <span class="comment">// Сколько чанков за шаг ставится на загрузку.</span></div>
+<div class="line">pool-&gt;setMaxUnloadsPerStep(16); <span class="comment">// ... и на выгрузку.</span></div>
+<div class="line">pool-&gt;setSaveOnUnload(<span class="keyword">true</span>); <span class="comment">// Выгружаемые чанки сохранять (через MemorySaver).</span></div>
+</div><!-- fragment --><p> Здесь все значения - по умолчанию, их можно и не писать. Зачем пределы? Пул ставит задания в главную очередь движка: загрузку - по одному чанку на задание, ближние к игроку чанки первыми. Очередь заданий движка ничем не ограничена, и если игрок летит быстро, без пределов в неё попали бы тысячи заданий (и тысячи чанков, которые к моменту загрузки уже не нужны). С пределами в очереди не больше setMaxPendingActions() действий пула, а между ними успевают выполняться остальные задания - правки мира, сохранение, ваши функции UserControllerForThread: они не ждут, пока загрузится вся область. Больше пределы - быстрее загрузка, но дольше ждут остальные задания.</p>
+<p>setSaveOnUnload(true) - выгружаемые чанки сохраняются через контроллер сохранения мира. Если контроллера у мира нет, чанк просто выгружается (сохранять некуда). false - выгружать без сохранения (например, если мир всегда можно заново сгенерировать и игрок его не меняет).</p>
+<p>Ещё две настройки пула (здесь не меняются): setRetryDelayMilliseconds() - через сколько миллисекунд повторить загрузку или выгрузку, которая не удалась (генератор или контроллер вернул false; по умолчанию 2000), и setRecheckIntervalMilliseconds() - как часто перепроверять, что на самом деле загружено, даже если все стоят на месте (так пул замечает изменения не через него, например чанк, выгруженный вручную; по умолчанию 1000). Для каждой настройки есть и get...().</p>
+<h1 class="doxsection"><a class="anchor" id="tut6_controller"></a>
+Контроллер: игрок-камера</h1>
+<p>Контроллер создаёт пул: addController(имя, мир). Имя - любая строка, уникальная в пуле (например, имя игрока); если имя занято или мира нет, вернётся NULL. Контроллером владеет пул - не удаляйте его сами. </p><div class="fragment"><div class="line">ChunkStreamingController* player = pool-&gt;addController(<span class="stringliteral">&quot;camera&quot;</span>, <span class="keywordtype">id</span>);</div>
+<div class="line">player-&gt;setShape(STREAMING_SHAPE_CYLINDER);</div>
+<div class="line">player-&gt;setRadius(Vector3d&lt;int&gt;(3, 2, 3));</div>
+<div class="line">player-&gt;setUnloadMargin(1);</div>
+</div><!-- fragment --><p> Форма области (setShape()):</p><ul>
+<li>STREAMING_SHAPE_CUBOID - кубоид: чанки с |dx| &lt;= rx, |dy| &lt;= ry, |dz| &lt;= rz от чанка игрока (при радиусе 1 - 27 чанков);</li>
+<li>STREAMING_SHAPE_CYLINDER - цилиндр с вертикальной осью (по умолчанию): круг (эллипс) по X и Z радиусом на полчанка больше заданного (rx + 0.5), по Y - |dy| &lt;= ry (при радиусах (2, 0, 2) - 21 чанк, при (3, 0, 3) - 37);</li>
+<li>STREAMING_SHAPE_ELLIPSOID - шар или эллипсоид (тоже с запасом в полчанка; при радиусе 1 - 19 чанков). Для обычной игры удобен цилиндр: смотрят в основном вдаль, а не вверх и вниз.</li>
+</ul>
+<p>Радиусы (setRadius()) - в чанках по X, Y, Z, по умолчанию (4, 2, 4). У нас цилиндр радиусом 3 и высотой от -2 до +2 чанков от чанка камеры: по 37 чанков в слое. Камера на высоте 40 - в чанке Y = 2, область по Y - от 0 до 4, но слои 3 и 4 за границей мира, так что в отрисовке 3 слоя - 111 чанков. Помните, что число чанков растёт как квадрат (а для шара - как куб) радиуса: цилиндр радиусом 8 и высотой 9 слоёв - это уже около 2000 чанков.</p>
+<p>У области есть два "кольца":</p><ul>
+<li><b>кольцо данных</b>: чанки на один дальше радиуса загружаются в память, но не рисуются. Зачем? Видимость граней на краю чанка зависит от соседнего чанка. Если соседа нет в памяти, движок не знает, закрыта ли грань, и рисует её - на краю области появилась бы "стенка", которая исчезнет, когда сосед загрузится, и чанк пришлось бы перестраивать. Поэтому чанк области ставится в отрисовку, только когда загружены его соседи;</li>
+<li><b>запас выгрузки</b> (setUnloadMargin(), по умолчанию 1): уже взятый чанк отпускается, только когда он дальше радиуса плюс запас. Без запаса игрок, который ходит туда-сюда по границе чанка, заставлял бы пул на каждом шаге загружать и выгружать целый слой чанков.</li>
+</ul>
+<p>Для каждой настройки есть get...(): getShape(), getRadius(), getUnloadMargin(), а также getName() и getWorldId(). Проверить, попадает ли чанк в область, можно функцией isInArea(центр, чанк, extra): extra = 0 - сама область, 1 - с кольцом данных (например, чтобы не давать игроку ставить блоки там, где мир ещё не загружен).</p>
+<h1 class="doxsection"><a class="anchor" id="tut6_more"></a>
+Несколько игроков</h1>
+<p>Контроллеров может быть сколько угодно. Второй игрок у нас стоит на месте - его положение задано чанком: </p><div class="fragment"><div class="line">ChunkStreamingController* friendplayer = pool-&gt;addController(<span class="stringliteral">&quot;friend&quot;</span>, <span class="keywordtype">id</span>);</div>
+<div class="line">friendplayer-&gt;setShape(STREAMING_SHAPE_CUBOID);</div>
+<div class="line">friendplayer-&gt;setRadius(Vector3d&lt;int&gt;(1, 1, 1));</div>
+<div class="line">friendplayer-&gt;setChunkPosition(Vector3d&lt;int&gt;(8, 1, 0));</div>
+</div><!-- fragment --><p> Когда камера пролетает мимо, их области пересекаются. Общий чанк нужен обоим - у него два владельца, и выгрузится он, только когда не нужен ни одному. Владельцев чанка показывает getChunkOwners(мир, чанк) - набор имён контроллеров: </p><div class="fragment"><div class="line">std::set&lt;std::string&gt; owners = pool-&gt;getChunkOwners(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(8, 1, 0)); <span class="comment">// (пример, не из полного кода)</span></div>
+<div class="line"><span class="keywordflow">if</span>(owners.count(<span class="stringliteral">&quot;friend&quot;</span>)) { ... } <span class="comment">// Чанк держит &quot;друг&quot;.</span></div>
+</div><!-- fragment --><p> Остальное управление контроллерами: getController(имя) - контроллер по имени (или NULL), getControllerNames() - имена всех, removeController(имя) - удалить (указатель после этого недействителен; чанки, которые больше никому не нужны, выгрузятся на следующих шагах), removeAllControllers() - удалить все.</p>
+<h1 class="doxsection"><a class="anchor" id="tut6_manual"></a>
+Чанки "вручную", без стриминга</h1>
+<p>Старый способ никуда не делся: чанки можно загружать и убирать самому. </p><div class="fragment"><div class="line">isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(-8, 0, -1), Vector3d&lt;int&gt;(-7, 1, 1), <span class="keyword">true</span>, <span class="keyword">true</span>);</div>
+</div><!-- fragment --><p> addChunksForRendering(мир, угол, угол, load, loadframe, sizeframe) ставит в отрисовку кубоид чанков. load = true - загрузить (или сгенерировать) чанки, которых нет в памяти; с load = false чанки, которых нет в памяти, не появятся. loadframe = true - загрузить в память ещё и рамку толщиной sizeframe (по умолчанию 1) вокруг кубоида - это то же самое кольцо данных: без него на краях кубоида рисуются лишние грани. У нас рамка снизу (Y = -1) за границей мира - такие чанки просто пропускаются, без сообщений в логе. Для одного чанка есть addChunkForRendering(мир, чанк, load, loadframe, sizeframe).</p>
+<p>Убрать из отрисовки: deleteChunksForRendering(мир, угол, угол, unload, save, unloadframe, sizeframe) и deleteChunkForRendering(мир, чанк, unload, save, unloadframe, sizeframe): unload = true - ещё и выгрузить из памяти, save = true - перед выгрузкой сохранить (контроллером сохранения мира), unloadframe - выгрузить и рамку. </p><div class="fragment"><div class="line">isve-&gt;deleteChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(-8, 0, -1), Vector3d&lt;int&gt;(-7, 1, 1), <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">true</span>); <span class="comment">// (пример, не из полного кода)</span></div>
+</div><!-- fragment --><p> Все эти функции только ставят задания в главную очередь, выполнятся они после start().</p>
+<p>Пул и ручные чанки уживаются: чанки, загруженные или поставленные в отрисовку не пулом, пул не выгружает и не убирает из отрисовки - даже если игрок пришёл к ним и ушёл. А если чанк пула кто-то выгрузил вручную, а он ещё нужен игроку, пул загрузит его снова. Поэтому площадка в нашем примере остаётся на месте всё время.</p>
+<h1 class="doxsection"><a class="anchor" id="tut6_loop"></a>
+Главный цикл и экран загрузки</h1>
+<p>Камера у нас - обычная (не FPS): её ведёт сама программа. </p><div class="fragment"><div class="line">ICameraSceneNode* camera = device-&gt;getSceneManager()-&gt;addCameraSceneNode();</div>
+</div><!-- fragment --><p> Каждый кадр, в главном потоке, говорим контроллеру, где камера, и делаем шаг пула: </p><div class="fragment"><div class="line">player-&gt;setScenePosition(camera-&gt;getAbsolutePosition()); <span class="comment">// Где сейчас камера.</span></div>
+<div class="line">pool-&gt;step(); <span class="comment">// Шаг стриминга: какие чанки загрузить, а какие выгрузить.</span></div>
+<div class="line">isve-&gt;update();</div>
+</div><!-- fragment --><p> setScenePosition() принимает точку в координатах сцены Irrlicht, а пул сам переводит её в координаты мира через getWorldCoordinates() - с учётом родительской ноды мира и сдвига (урок 12). Есть и другие способы задать положение: setWorldPosition() - точка в координатах мира (как у getWorldCoordinates()), setChunkPosition() - сразу чанк. Каким способом задано положение, говорит getPositionMode(): STREAMING_POSITION_SCENE, STREAMING_POSITION_WORLD, STREAMING_POSITION_CHUNK или STREAMING_POSITION_NONE - ещё никак (такой контроллер ничего не загружает). Чанк, вокруг которого пул загружал область на последнем шаге, - getCenterChunk() (а hasCenterChunk() говорит, был ли уже такой шаг).</p>
+<p>step() - сердце стриминга. Шаг дешёвый: если ни один контроллер не перешёл в другой чанк и ничего не изменилось, он сразу возвращается. Если перешёл - пул сравнивает, какие чанки нужны, с тем, что на самом деле загружено и отрисовывается, и ставит задания в главную очередь. Все функции пула и контроллеров - только из главного потока (в отладочной сборке SVE_DEBUG_CHECKS это проверяется). Загружает чанки поток главной очереди, поэтому до start() задания только ждут.</p>
+<p>Пока область вокруг камеры не готова, показываем "экран загрузки" - здесь просто заголовок окна со счётчиком: </p><div class="fragment"><div class="line">ChunkStreamingState st = pool-&gt;getState(<span class="stringliteral">&quot;camera&quot;</span>);</div>
+<div class="line">...</div>
+<div class="line">if(pool-&gt;isAreaReady(<span class="stringliteral">&quot;camera&quot;</span>)) <span class="comment">// Можно играть.</span></div>
+</div><!-- fragment --><p> getState() возвращает ChunkStreamingState:</p><ul>
+<li>s_RenderWanted и s_Rendered - сколько чанков в области и сколько из них уже загружено и отрисовывается;</li>
+<li>s_MemoryWanted и s_Loaded - то же для области вместе с кольцом данных;</li>
+<li>s_Failed - сколько не загрузилось (пул повторит позже), s_OutOfBounds - сколько чанков области за границей мира (их нет и не будет; у нас - 74 чанка в слоях 3 и 4);</li>
+<li>s_PendingActions - сколько действий пула (всех контроллеров) ещё ждёт в очереди; то же число отдаёт pool-&gt;getPendingActions(). isAreaReady() - true, когда все чанки области загружены и отрисовываются. Меши при этом могут ещё строиться в фоне (ноды появятся через несколько кадров). Если игрок с гравитацией появится до готовности области, он провалится сквозь ещё не загруженный пол - поэтому и нужен экран загрузки.</li>
+</ul>
+<p>Когда область готова, ставим над холмом красную башню - она покажет, что изменения переживают выгрузку - и начинаем полёт: </p><div class="fragment"><div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 27; y &lt; 32; y++) <span class="comment">// Красная башня над холмом - проверим, что она переживёт выгрузку.</span></div>
+<div class="line">    isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(8, y, 8), <span class="keyword">new</span> Block(BLOCK_TOWER));</div>
+<div class="line">isve-&gt;addTaskUpdateChunks();</div>
+</div><!-- fragment --><p> Камера летит по X туда и обратно, от чанка 0 до чанка 16, за минуту: </p><div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">float</span> seconds = (device-&gt;getTimer()-&gt;getTime() - flightstart) / 1000.f;</div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">float</span> x = 8 + 128 * (1 - cosf(seconds * 0.1f)); <span class="comment">// Туда-обратно от 8 до 264 (чанки от 0 до 16) за минуту.</span></div>
+<div class="line">camera-&gt;setPosition(vector3df(x, 40, 8));</div>
+<div class="line">camera-&gt;setTarget(vector3df(x + 20, 20, 8));</div>
+</div><!-- fragment --><p> Впереди мир загружается, позади - выгружается и сохраняется в MemorySaver. Когда камера вернётся, чанки старта загрузятся уже из сохранения - вместе с башней. Чанки "друга" всё это время остаются на месте, площадка - тоже.</p>
+<h1 class="doxsection"><a class="anchor" id="tut6_end"></a>
+Завершение</h1>
+<div class="fragment"><div class="line">isve-&gt;stop();</div>
+<div class="line"><span class="keyword">delete</span> isve; <span class="comment">// Удаляет и пул с контроллерами, и мир (с генератором и MemorySaver).</span></div>
+</div><!-- fragment --><p> Пул с контроллерами удаляется вместе с движком (чанки при этом не трогаются). Если мир сохраняется в файлы, перед удалением движка сохраните и то, что ещё загружено (урок 11: saveAllChunks()).</p>
+<h1 class="doxsection"><a class="anchor" id="tut6_errors"></a>
+Типичные ошибки</h1>
+<ul>
+<li>Забыли pool-&gt;step() в цикле - ничего не грузится. Вызов step() из другого потока - ошибка (в отладочной сборке - сообщение в лог).</li>
+<li>Масштабы фабрики setPositionScale()/setSScale() не равны размеру чанка - точка камеры переводится не в тот чанк, и мир грузится "не там".</li>
+<li>Слишком большие радиусы - память и время загрузки растут как квадрат радиуса (у шара - как куб).</li>
+<li>Указатель на контроллер после removeController() или удаление контроллера через delete - контроллером владеет пул.</li>
+<li>Игрок с гравитацией до isAreaReady() - проваливается.</li>
+<li>Чанки, загруженные вручную, "почему-то не выгружаются" - пул не трогает чужие чанки, выгружайте их сами (deleteChunksForRendering()).</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="tut6_check"></a>
+Как проверить</h1>
+<p>Проверка урока (AI/AITests/tutorials/diag_tut6.cpp) двигает камеру не по времени, а по сценарию: ждёт готовности области, летит к "другу" (чанк (8, 1, 0) - два владельца), дальше до чанка 16 (старт выгружен и сохранён, чанки "друга" и площадка на месте) и обратно (башня загружена из сохранения).</p>
+<p>Ну и напоследок ещё раз полный код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;atomic&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;mutex&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">enum</span> BLOCKS { BLOCK_STONE = 1, BLOCK_GRASS = 2, BLOCK_TOWER = 3 }; <span class="comment">// Номера блоков (0 - &quot;пусто&quot; в сохранении).</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">struct </span>BlockInfo : VoxelInfo</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> s_Id;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>Block : <span class="keyword">public</span> SimpleVoxelObject</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    Block(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <span class="keywordtype">id</span>) : s_Id(id) { setTypeVoxel(CUSTOM_VOXEL); }</div>
+<div class="line">    VoxelInfo* getVoxelForRenderingInfo()</div>
+<div class="line">    {</div>
+<div class="line">        BlockInfo* info = <span class="keyword">new</span> BlockInfo;</div>
+<div class="line">        info-&gt;s_TypeVoxelInfo = CUSTOM_VOXEL_INFO;</div>
+<div class="line">        info-&gt;s_Id = s_Id;</div>
+<div class="line">        <span class="keywordflow">return</span> info;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> getId() { <span class="keywordflow">return</span> s_Id; }</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> s_Id;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Фабрика: куб из видимых граней, цвет вершин - по номеру блока.</span></div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        s_Plane = createFaceMesh();</div>
+<div class="line">        s_MeshManipulator = device-&gt;getSceneManager()-&gt;getMeshManipulator();</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); }</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">const</span> SColor colors[4] = { SColor(255, 255, 255, 255), SColor(255, 120, 120, 120), SColor(255, 60, 170, 60), SColor(255, 200, 40, 40) };</div>
+<div class="line">        IMesh* mesh = getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1));</div>
+<div class="line">        <span class="keywordflow">if</span>(mesh) s_MeshManipulator-&gt;setVertexColors(mesh, colors[((BlockInfo*)vxl-&gt;getVoxelInfo())-&gt;s_Id % 4]);</div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering*) { <span class="keywordflow">return</span> 0; }</div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Генератор: холмы высотой от 14 до 26 блоков (чанки по Y - 0 и 1), сверху трава.</span></div>
+<div class="line"><span class="comment">// Вызывается в потоке главной очереди для каждого чанка, которого нет ни в памяти, ни в сохранении.</span></div>
+<div class="line"><span class="keyword">class </span>MyGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> sizechunk)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">const</span> Vector3d&lt;int&gt; c = chunk-&gt;getVoxelAddress()-&gt;getVector(0); <span class="comment">// Координаты чанка (в чанках).</span></div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; sizechunk; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; sizechunk; z++)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">const</span> <span class="keywordtype">float</span> gx = c.getX() * sizechunk + x, gz = c.getZ() * sizechunk + z; <span class="comment">// Глобальные координаты столбца.</span></div>
+<div class="line">                <span class="keyword">const</span> <span class="keywordtype">int</span> height = 20 + (int)(6 * sinf(gx * 0.1f) * cosf(gz * 0.13f));</div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; sizechunk; y++)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keyword">const</span> <span class="keywordtype">int</span> gy = c.getY() * sizechunk + y;</div>
+<div class="line">                    <span class="keywordflow">if</span>(gy &lt;= height) chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), <span class="keyword">new</span> Block(gy == height ? BLOCK_GRASS : BLOCK_STONE), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Контроллер сохранения &quot;в память&quot;: выгруженный чанк хранится в std::map, при новой загрузке берётся оттуда,</span></div>
+<div class="line"><span class="comment">// а не из генератора - так изменения мира не пропадают при выгрузке. Настоящий контроллер (в файлы) - в уроке 3</span></div>
+<div class="line"><span class="comment">// SimpleVoxelEngine. Вызывается в потоке главной очереди под блокировкой движка.</span></div>
+<div class="line"><span class="keyword">class </span>MemorySaver : <span class="keyword">public</span> ChunksSaveLoadController</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MemorySaver() : s_Saved(0), s_Loaded(0) {}</div>
+<div class="line">    <span class="keywordtype">bool</span> saveChunk(ChunkVoxelObject* cvo, Vector3d&lt;int&gt; vect)</div>
+<div class="line">    {</div>
+<div class="line">        std::lock_guard&lt;std::mutex&gt; lock(s_Lock);</div>
+<div class="line">        std::vector&lt;unsigned char&gt;&amp; data = s_Chunks[vect];</div>
+<div class="line">        data.clear(); <span class="comment">// Пустой вектор - пустой чанк.</span></div>
+<div class="line">        <span class="keywordflow">if</span>(cvo-&gt;getNumberOfNotNullSimpleVoxelObjects() &gt; 0)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">const</span> <span class="keywordtype">int</span> n = cvo-&gt;getNumberOfPartitions();</div>
+<div class="line">            SimpleVoxelObject** svos = cvo-&gt;getSimpleVoxelObjects();</div>
+<div class="line">            data.resize(n * n * n, 0);</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; n * n * n; i++)</div>
+<div class="line">                <span class="keywordflow">if</span>(svos[i] &amp;&amp; svos[i]-&gt;getTypeVoxel() == CUSTOM_VOXEL) data[i] = ((Block*)svos[i])-&gt;getId();</div>
+<div class="line">        }</div>
+<div class="line">        s_Saved++;</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">bool</span> loadChunk(ChunkVoxelObject* cvo, Vector3d&lt;int&gt; vect)</div>
+<div class="line">    {</div>
+<div class="line">        std::lock_guard&lt;std::mutex&gt; lock(s_Lock);</div>
+<div class="line">        <span class="keyword">const</span> std::vector&lt;unsigned char&gt;&amp; data = s_Chunks[vect];</div>
+<div class="line">        s_Loaded++;</div>
+<div class="line">        <span class="keywordflow">if</span>(data.empty()) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">        SimpleVoxelObject** svos = cvo-&gt;getSimpleVoxelObjects();</div>
+<div class="line">        <span class="keywordtype">bool</span>* recalculate = cvo-&gt;getReCalculateVisibleCacheSimpleVoxelObjects(); <span class="comment">// Видимость граней посчитает движок.</span></div>
+<div class="line">        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> created = 0;</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; data.size(); i++)</div>
+<div class="line">            <span class="keywordflow">if</span>(data[i])</div>
+<div class="line">            {</div>
+<div class="line">                svos[i] = <span class="keyword">new</span> Block(data[i]);</div>
+<div class="line">                recalculate[i] = <span class="keyword">true</span>;</div>
+<div class="line">                created++;</div>
+<div class="line">            }</div>
+<div class="line">        cvo-&gt;setNumberOfNotNullSimpleVoxelObjects(created);</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">bool</span> canLoad(World*, Vector3d&lt;int&gt; vect) <span class="comment">// Сохранён ли чанк. Если нет - мир вызовет генератор.</span></div>
+<div class="line">    {</div>
+<div class="line">        std::lock_guard&lt;std::mutex&gt; lock(s_Lock);</div>
+<div class="line">        <span class="keywordflow">return</span> s_Chunks.find(vect) != s_Chunks.end();</div>
+<div class="line">    }</div>
+<div class="line">    std::mutex s_Lock; <span class="comment">// Сохранённое можно смотреть и из главного потока (например, для статистики); счётчики - атомарные.</span></div>
+<div class="line">    std::map&lt; Vector3d&lt;int&gt;, std::vector&lt;unsigned char&gt; &gt; s_Chunks;</div>
+<div class="line">    std::atomic&lt;int&gt; s_Saved; <span class="comment">// Сколько раз чанки сохранялись.</span></div>
+<div class="line">    std::atomic&lt;int&gt; s_Loaded; <span class="comment">// Сколько раз загружались из сохранения.</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(800, 600));</div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device);</div>
+<div class="line">    MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">    factory-&gt;setPositionScale(16);</div>
+<div class="line">    factory-&gt;setSScale(16);</div>
+<div class="line">    isve-&gt;setFactoryChunkMeshSceneNode(factory);</div>
+<div class="line">    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld();</div>
+<div class="line">    factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">    World* world = isve-&gt;getWorld(<span class="keywordtype">id</span>);</div>
+<div class="line">    world-&gt;setWorldGenerator(<span class="keyword">new</span> MyGenerator); <span class="comment">// Генератор и контроллер сохранения удалит мир.</span></div>
+<div class="line">    MemorySaver* saver = <span class="keyword">new</span> MemorySaver;</div>
+<div class="line">    world-&gt;setChunksSaveLoadController(saver);</div>
+<div class="line">    world-&gt;setChunksBounds(WORLD_AXIS_Y, 0, 2); <span class="comment">// Граница мира: чанки по Y только от 0 до 2 (высота 48 блоков).</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Пул стриминга и его настройки (здесь - значения по умолчанию).</span></div>
+<div class="line">    ChunkStreamingPool* pool = isve-&gt;getChunkStreamingPool();</div>
+<div class="line">    pool-&gt;setMaxPendingActions(64); <span class="comment">// Сколько действий пула может ждать в главной очереди.</span></div>
+<div class="line">    pool-&gt;setMaxLoadsPerStep(16); <span class="comment">// Сколько чанков за шаг ставится на загрузку.</span></div>
+<div class="line">    pool-&gt;setMaxUnloadsPerStep(16); <span class="comment">// ... и на выгрузку.</span></div>
+<div class="line">    pool-&gt;setSaveOnUnload(<span class="keyword">true</span>); <span class="comment">// Выгружаемые чанки сохранять (через MemorySaver).</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Игрок-камера: цилиндр радиусом 3 чанка, по высоте - 2 чанка вверх и вниз.</span></div>
+<div class="line">    ChunkStreamingController* player = pool-&gt;addController(<span class="stringliteral">&quot;camera&quot;</span>, <span class="keywordtype">id</span>);</div>
+<div class="line">    player-&gt;setShape(STREAMING_SHAPE_CYLINDER);</div>
+<div class="line">    player-&gt;setRadius(Vector3d&lt;int&gt;(3, 2, 3));</div>
+<div class="line">    player-&gt;setUnloadMargin(1);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Второй игрок (&quot;друг&quot;) стоит на месте в чанке (8, 1, 0): вокруг него мир загружен всегда.</span></div>
+<div class="line">    ChunkStreamingController* friendplayer = pool-&gt;addController(<span class="stringliteral">&quot;friend&quot;</span>, <span class="keywordtype">id</span>);</div>
+<div class="line">    friendplayer-&gt;setShape(STREAMING_SHAPE_CUBOID);</div>
+<div class="line">    friendplayer-&gt;setRadius(Vector3d&lt;int&gt;(1, 1, 1));</div>
+<div class="line">    friendplayer-&gt;setChunkPosition(Vector3d&lt;int&gt;(8, 1, 0));</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Площадка, загруженная вручную (без стриминга): пул её не выгружает, даже когда рядом никого нет.</span></div>
+<div class="line">    isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(-8, 0, -1), Vector3d&lt;int&gt;(-7, 1, 1), <span class="keyword">true</span>, <span class="keyword">true</span>);</div>
+<div class="line"> </div>
+<div class="line">    ICameraSceneNode* camera = device-&gt;getSceneManager()-&gt;addCameraSceneNode();</div>
+<div class="line">    camera-&gt;setPosition(vector3df(8, 40, 8));</div>
+<div class="line">    camera-&gt;setTarget(vector3df(28, 20, 8));</div>
+<div class="line">    isve-&gt;start();</div>
+<div class="line">    <span class="keywordtype">bool</span> ready = <span class="keyword">false</span>; <span class="comment">// Загружена ли область вокруг камеры в первый раз (до этого - &quot;экран загрузки&quot;).</span></div>
+<div class="line">    u32 flightstart = 0; <span class="comment">// Когда началась прогулка камеры.</span></div>
+<div class="line">    <span class="keywordflow">while</span>(isve-&gt;runIrrDevice())</div>
+<div class="line">    {</div>
+<div class="line">        player-&gt;setScenePosition(camera-&gt;getAbsolutePosition()); <span class="comment">// Где сейчас камера.</span></div>
+<div class="line">        pool-&gt;step(); <span class="comment">// Шаг стриминга: какие чанки загрузить, а какие выгрузить.</span></div>
+<div class="line">        isve-&gt;update();</div>
+<div class="line">        <span class="keywordflow">if</span>(!ready)</div>
+<div class="line">        {</div>
+<div class="line">            ChunkStreamingState st = pool-&gt;getState(<span class="stringliteral">&quot;camera&quot;</span>);</div>
+<div class="line">            stringw caption = L<span class="stringliteral">&quot;Loading: &quot;</span>;</div>
+<div class="line">            caption += st.s_Rendered;</div>
+<div class="line">            caption += L<span class="stringliteral">&quot; / &quot;</span>;</div>
+<div class="line">            caption += st.s_RenderWanted;</div>
+<div class="line">            device-&gt;setWindowCaption(caption.c_str());</div>
+<div class="line">            <span class="keywordflow">if</span>(pool-&gt;isAreaReady(<span class="stringliteral">&quot;camera&quot;</span>)) <span class="comment">// Можно играть.</span></div>
+<div class="line">            {</div>
+<div class="line">                ready = <span class="keyword">true</span>;</div>
+<div class="line">                flightstart = device-&gt;getTimer()-&gt;getTime();</div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 27; y &lt; 32; y++) <span class="comment">// Красная башня над холмом - проверим, что она переживёт выгрузку.</span></div>
+<div class="line">                    isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(8, y, 8), <span class="keyword">new</span> Block(BLOCK_TOWER));</div>
+<div class="line">                isve-&gt;addTaskUpdateChunks();</div>
+<div class="line">                device-&gt;setWindowCaption(L<span class="stringliteral">&quot;Streaming&quot;</span>);</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">const</span> <span class="keywordtype">float</span> seconds = (device-&gt;getTimer()-&gt;getTime() - flightstart) / 1000.f;</div>
+<div class="line">            <span class="keyword">const</span> <span class="keywordtype">float</span> x = 8 + 128 * (1 - cosf(seconds * 0.1f)); <span class="comment">// Туда-обратно от 8 до 264 (чанки от 0 до 16) за минуту.</span></div>
+<div class="line">            camera-&gt;setPosition(vector3df(x, 40, 8));</div>
+<div class="line">            camera-&gt;setTarget(vector3df(x + 20, 20, 8));</div>
+<div class="line">        }</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 100, 100, 140));</div>
+<div class="line">        device-&gt;getSceneManager()-&gt;drawAll();</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;endScene();</div>
+<div class="line">    }</div>
+<div class="line">    isve-&gt;stop();</div>
+<div class="line">    <span class="keyword">delete</span> isve; <span class="comment">// Удаляет и пул с контроллерами, и мир (с генератором и MemorySaver).</span></div>
+<div class="line">    device-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="a_irr_simple_voxel_engine_8h_html"><div class="ttname"><a href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a></div><div class="ttdoc">Главный заголовочный файл. Необходимо присоединять только его к проекту.</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">SimpleVoxelEngine::IrrEngine</a></div><div class="ttdoc">Главное пространство имён IrrSimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:13</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:11</div></div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="tutorials.html">Уроки по врапперу IrrSimpleVoxelEngine.</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

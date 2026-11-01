@@ -66,7 +66,7 @@ ARGBColor& SimpleVoxelEngine::Additional::ARGBColor::operator=(const ARGBColor& 
     return *this;
 }
 
-ARGBColor& SimpleVoxelEngine::Additional::ARGBColor::operator+=(ARGBColor& argbcolor)
+ARGBColor& SimpleVoxelEngine::Additional::ARGBColor::operator+=(const ARGBColor& argbcolor)
 {
     s_A += argbcolor.getA();
     s_Red += argbcolor.getR();
@@ -75,10 +75,13 @@ ARGBColor& SimpleVoxelEngine::Additional::ARGBColor::operator+=(ARGBColor& argbc
     return *this;
 }
 
-ARGBColor& SimpleVoxelEngine::Additional::ARGBColor::operator+(ARGBColor& argbcolor)
+//Исправлено: раньше возвращалась ссылка на локальную newargbcolor - после выхода из функции она указывала на
+//уничтоженный объект (неопределённое поведение, GCC предупреждал -Wreturn-local-addr). Теперь результат возвращается по значению.
+ARGBColor SimpleVoxelEngine::Additional::ARGBColor::operator+(const ARGBColor& argbcolor) const
 {
     ARGBColor newargbcolor(*this);
-    return newargbcolor += argbcolor;
+    newargbcolor += argbcolor;
+    return newargbcolor;
 }
 
 ARGBColor& SimpleVoxelEngine::Additional::ARGBColor::operator*=(unsigned char what)
@@ -87,24 +90,28 @@ ARGBColor& SimpleVoxelEngine::Additional::ARGBColor::operator*=(unsigned char wh
     return *this;
 }
 
-ARGBColor& SimpleVoxelEngine::Additional::ARGBColor::operator*(unsigned char what)
+//Исправлено так же, как operator+: возврат по значению.
+ARGBColor SimpleVoxelEngine::Additional::ARGBColor::operator*(unsigned char what) const
 {
     ARGBColor newargbcolor(*this);
-    return newargbcolor *= what;
+    newargbcolor *= what;
+    return newargbcolor;
 }
 
-ARGBColor& SimpleVoxelEngine::Additional::ARGBColor::operator-=(ARGBColor& argbcolor)
+ARGBColor& SimpleVoxelEngine::Additional::ARGBColor::operator-=(const ARGBColor& argbcolor)
 {
     return *this += argbcolor*(-1);
 }
 
-ARGBColor& SimpleVoxelEngine::Additional::ARGBColor::operator-(ARGBColor& argbcolor)
+//Исправлено так же, как operator+: возврат по значению.
+ARGBColor SimpleVoxelEngine::Additional::ARGBColor::operator-(const ARGBColor& argbcolor) const
 {
     ARGBColor newargbcolor( *this );
-    return newargbcolor -= argbcolor;
+    newargbcolor -= argbcolor;
+    return newargbcolor;
 }
 
-ARGBColor& SimpleVoxelEngine::Additional::operator*(unsigned char what, ARGBColor argbcolor)
+ARGBColor SimpleVoxelEngine::Additional::operator*(unsigned char what, ARGBColor argbcolor) //Возврат по значению (раньше - ссылка на параметр-копию).
 {
     return argbcolor*what;
 }

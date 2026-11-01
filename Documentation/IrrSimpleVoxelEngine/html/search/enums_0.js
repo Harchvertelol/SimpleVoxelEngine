@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mode_5fmain_5fthread',['MODE_MAIN_THREAD',['../namespace_simple_voxel_engine_1_1_irr_engine.html#a6ecf5f4da4c4405f8a2d7a9f76031f0b',1,'SimpleVoxelEngine::IrrEngine']]]
+  ['number_5fdefines_0',['NUMBER_DEFINES',['../namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3',1,'SimpleVoxelEngine::IrrEngine::IrrSVEDefines']]]
 ];

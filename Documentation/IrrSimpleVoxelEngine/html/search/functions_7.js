@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['nextreadkey',['nextReadKey',['../class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_vector.html#ac45be6b4271e83b9596b592cedb5dc97',1,'SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeVector']]],
-  ['nextwritekey',['nextWriteKey',['../class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_vector.html#ae4d18b0ed582b8c9ab3fab0aefe60ed6',1,'SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeVector']]]
+  ['movemesh_0',['moveMesh',['../classirr_1_1scene_1_1_c_batching_mesh.html#af2c8a3b9dffea225249b2c84b1575437',1,'irr::scene::CBatchingMesh']]],
+  ['movemeshbuffer_1',['moveMeshBuffer',['../classirr_1_1scene_1_1_c_batching_mesh.html#a468a4ebaf0ec5f53f36f438579855775',1,'irr::scene::CBatchingMesh']]]
 ];

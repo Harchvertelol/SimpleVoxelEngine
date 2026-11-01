@@ -19,9 +19,11 @@ namespace SimpleVoxelEngine
         {
             public:
                 //! Стандартный конструктор.
+                /*! Позиция и поворот (0,0,0), масштаб (1,1,1), видны все грани.
+                */
                 VoxelForRendering();
-                //! Конструктор копирования.
-                VoxelForRendering(const VoxelForRendering&);
+                //! Конструктор копирования запрещён: объект владеет VoxelInfo, и копия удалила бы его второй раз.
+                VoxelForRendering(const VoxelForRendering&) = delete;
                 //! Конструктор с параметрами.
                 /*! \param pos Вектор позиции вокселя в глобальных мировых координатах.
                 \param rot Вектор поворота вокселя в глобальных мировых координатах.
@@ -59,26 +61,29 @@ namespace SimpleVoxelEngine
                 */
                 VoxelInfo* getVoxelInfo() const;
                 //! Установка VoxelInfo.
-                /*! \param vxlinfo Указатель на устанавливаемое VoxelInfo
+                /*! Объект забирает vxlinfo и удалит его сам (прежний VoxelInfo удаляется сразу).
+                \param vxlinfo Указатель на устанавливаемое VoxelInfo
                 */
                 void setVoxelInfo(VoxelInfo* vxlinfo);
                 //! Проверка на необходимость отрисовки грани.
-                /*! \param numb Номер грани, которая проверяется для отрисовки. Массив имеет следующий порядок: (x2, x1, y2, y1, z2, z1), x2 - самое большое по X положение грани, перпендикулярной X, x1 - самое маленькое по X положение грани, перпендикулярной X. С остальными осями аналогично.
-                \return Возвращает true, если грань необходимо отрисовать, иначе false. Так же false возвращается в случае numb > 5.
+                /*! \param numb Номер грани, которая проверяется для отрисовки. Порядок граней: (x+, z+, x-, z-, y+, y-) - грани в
+                направлениях (1,0,0), (0,0,1), (-1,0,0), (0,0,-1), (0,1,0), (0,-1,0), как в World::isVisible(); x+ - грань с
+                наибольшим X, x- - с наименьшим, с остальными осями аналогично.
+                \return Возвращает true, если грань необходимо отрисовать, иначе false. Так же false возвращается в случае numb < 0 или numb > 5.
                 */
                 bool isRenderFace(int numb) const;
                 //! Установка грани для отрисовки.
-                /*! \param numb Номер грани в массиве.
+                /*! \param numb Номер грани в массиве (порядок - см. isRenderFace()).
                 \param value Если имеет значение true, то грань рисуется, иначе нет.
                 */
                 void setRenderFace(int numb, bool value);
                 //! Установка массива отрисовки граней
                 /*! Копирует массив faces в свой кэш. Поэтому после установки необходимо самому удалить массив faces в случае ненадобности.
-                \param faces Копируемый массив.
+                \param faces Копируемый массив из 6 элементов (порядок - см. isRenderFace()).
                 */
                 void setRenderFaces(bool* faces);
-                //! Оператор присваивания.
-                VoxelForRendering& operator=(VoxelForRendering&);
+                //! Оператор присваивания запрещён по той же причине, что и копирование.
+                VoxelForRendering& operator=(const VoxelForRendering&) = delete;
             private:
                 SimpleVoxelEngine::Additional::Vector3d<float> s_Position;
                 SimpleVoxelEngine::Additional::Vector3d<float> s_Rotation;

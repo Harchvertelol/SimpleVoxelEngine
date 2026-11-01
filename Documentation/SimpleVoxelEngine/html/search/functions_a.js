@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['recalculatevisiblecache',['recalculateVisibleCache',['../class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html#a1998418453c72435f7c508299e5067f2',1,'SimpleVoxelEngine::Voxels::ChunkVoxelObject']]],
-  ['referencecounter',['ReferenceCounter',['../class_simple_voxel_engine_1_1_additional_1_1_reference_counter.html#a8ed94a22db9fcb443a3d75487e8bc1bc',1,'SimpleVoxelEngine::Additional::ReferenceCounter']]],
-  ['registerevent',['registerEvent',['../class_simple_voxel_engine_1_1_core_1_1_engine.html#ac8be40525434878d6632f3aab051323c',1,'SimpleVoxelEngine::Core::Engine::registerEvent()'],['../class_simple_voxel_engine_1_1_debug_1_1_logger.html#a683474f7ab7d221f50310b9d483ed257',1,'SimpleVoxelEngine::Debug::Logger::registerEvent()']]],
-  ['removefirstword',['RemoveFirstWord',['../namespace_work_functions_1_1_word_functions.html#a63632f1b19f47f03fac2f63a3e96d709',1,'WorkFunctions::WordFunctions']]],
-  ['roundnumber',['roundNumber',['../namespace_work_functions_1_1_math_functions.html#a0bc5186f8b3d3306da59049b5d8e3625',1,'WorkFunctions::MathFunctions']]]
+  ['parserinfofile_0',['ParserInfoFile',['../class_ini_parser_1_1_parser_info_file.html#aec392d9d1d7fff20137c3c73bfa0e3f0',1,'IniParser::ParserInfoFile']]],
+  ['postparsingstruct_1',['PostParsingStruct',['../class_ini_parser_1_1_post_parsing_struct.html#a0a4deab8f98fe551ddbb38252cd1391c',1,'IniParser::PostParsingStruct']]],
+  ['progressiveloadchunks_2',['progressiveLoadChunks',['../class_simple_voxel_engine_1_1_core_1_1_world.html#ac022ebf05d3802fd592706398767a106',1,'SimpleVoxelEngine::Core::World']]]
 ];

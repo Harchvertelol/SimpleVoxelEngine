@@ -10,30 +10,23 @@ SimpleVoxelEngine::Core::VoxelForRendering::VoxelForRendering(Vector3d<float> po
     s_Scale(scale),
     s_VoxelInfo(0)
 {
-    //...
+    //Исправлено: флаги граней не инициализировались. Если информации о гранях нет (setIsFaces(false) у фабрики
+    //или ошибка получения кэша), рисовались случайные грани. Теперь по умолчанию видны все грани.
+    for(int i = 0; i < 6; i++) s_Faces[i] = true;
 }
 
 SimpleVoxelEngine::Core::VoxelForRendering::VoxelForRendering():
     s_Position(Vector3d<float>(0,0,0)),
     s_Rotation(Vector3d<float>(0,0,0)),
-    s_Scale(Vector3d<float>(0,0,0)),
+    s_Scale(Vector3d<float>(1,1,1)), //Исправлено: был масштаб (0,0,0) - воксель нулевого размера, невидимый.
     s_VoxelInfo(0)
 {
-    //...
+    for(int i = 0; i < 6; i++) s_Faces[i] = true; //Как и в другом конструкторе: по умолчанию видны все грани.
 }
 
-SimpleVoxelEngine::Core::VoxelForRendering::VoxelForRendering(const VoxelForRendering& vfr)
-{
-    if(this != &vfr)
-    {
-        s_Position = vfr.getPosition();
-        s_Rotation = vfr.getRotation();
-        s_Scale = vfr.getScale();
-        for(int i = 0; i < 6; i++) setRenderFace(i, vfr.isRenderFace(i));
-        if(s_VoxelInfo) delete s_VoxelInfo;
-        s_VoxelInfo = vfr.getVoxelInfo();
-    }
-}
+//Удалены конструктор копирования и operator= (теперь запрещены в заголовке): конструктор копирования удалял
+//неинициализированный указатель s_VoxelInfo, а оба копировали указатель на VoxelInfo, которым владеет объект, -
+//две копии удаляли одну и ту же информацию (двойное удаление). В движке объекты не копируются, только указатели.
 
 SimpleVoxelEngine::Core::VoxelForRendering::~VoxelForRendering()
 {
@@ -66,29 +59,15 @@ Vector3d<float> SimpleVoxelEngine::Core::VoxelForRendering::getScale() const
     return s_Scale;
 }
 
-VoxelForRendering& SimpleVoxelEngine::Core::VoxelForRendering::operator=(VoxelForRendering& vfr)
-{
-    if(this != &vfr)
-    {
-        s_Position = vfr.getPosition();
-        s_Rotation = vfr.getRotation();
-        s_Scale = vfr.getScale();
-        for(int i = 0; i < 6; i++) setRenderFace(i, vfr.isRenderFace(i));
-        if(s_VoxelInfo) delete s_VoxelInfo;
-        s_VoxelInfo = vfr.getVoxelInfo();
-    }
-    return *this;
-}
-
 bool SimpleVoxelEngine::Core::VoxelForRendering::isRenderFace(int numb) const
 {
-    if(numb > 5) return false;
+    if(numb < 0 || numb > 5) return false; //Исправлено: отрицательный номер читал за пределами массива.
     return s_Faces[numb];
 }
 
 void SimpleVoxelEngine::Core::VoxelForRendering::setRenderFace(int numb, bool value)
 {
-    if(numb > 5) return;
+    if(numb < 0 || numb > 5) return; //Исправлено: отрицательный номер писал за пределы массива.
     s_Faces[numb] = value;
 }
 

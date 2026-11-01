@@ -1,0 +1,530 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Класс SimpleVoxelEngine::IrrEngine::ChunkStreamingController</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IrrSimpleVoxelEngine
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html','','class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Класс SimpleVoxelEngine::IrrEngine::ChunkStreamingController</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Контроллер стриминга чанков - "игрок" или "камера", вокруг которых загружаются и отрисовываются чанки.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_chunk_streaming_controller_8h_source.html">ChunkStreamingController.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a86994538178f4846d503a6b3d04cd4be" id="r_a86994538178f4846d503a6b3d04cd4be"><td class="memItemLeft">const std::string &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a86994538178f4846d503a6b3d04cd4be">getName</a> () const</td></tr>
+<tr class="memdesc:a86994538178f4846d503a6b3d04cd4be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение имени контроллера.  <br /></td></tr>
+<tr class="memitem:a487bf31a8df1f2a748fdc6d1cf52db94" id="r_a487bf31a8df1f2a748fdc6d1cf52db94"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a487bf31a8df1f2a748fdc6d1cf52db94">getWorldId</a> () const</td></tr>
+<tr class="memdesc:a487bf31a8df1f2a748fdc6d1cf52db94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение идентификатора мира.  <br /></td></tr>
+<tr class="memitem:a8e5a5d5a7afb03ea75b4cdf30d1ce5a9" id="r_a8e5a5d5a7afb03ea75b4cdf30d1ce5a9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8e5a5d5a7afb03ea75b4cdf30d1ce5a9">setShape</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#aa86547f7717b96a87f885fe44a34a9ae">STREAMING_SHAPE</a> shape)</td></tr>
+<tr class="memdesc:a8e5a5d5a7afb03ea75b4cdf30d1ce5a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка формы области.  <br /></td></tr>
+<tr class="memitem:a953b9a615e5c69afa4df963205f332b9" id="r_a953b9a615e5c69afa4df963205f332b9"><td class="memItemLeft"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#aa86547f7717b96a87f885fe44a34a9ae">STREAMING_SHAPE</a>&#160;</td><td class="memItemRight"><a class="el" href="#a953b9a615e5c69afa4df963205f332b9">getShape</a> () const</td></tr>
+<tr class="memdesc:a953b9a615e5c69afa4df963205f332b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение формы области.  <br /></td></tr>
+<tr class="memitem:af24c3fd5c63cda8d277f4b6b7079005a" id="r_af24c3fd5c63cda8d277f4b6b7079005a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af24c3fd5c63cda8d277f4b6b7079005a">setRadius</a> (SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; radius)</td></tr>
+<tr class="memdesc:af24c3fd5c63cda8d277f4b6b7079005a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка радиусов области в чанках.  <br /></td></tr>
+<tr class="memitem:ace6c2518bcd756fc5e1059f45c677028" id="r_ace6c2518bcd756fc5e1059f45c677028"><td class="memItemLeft">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ace6c2518bcd756fc5e1059f45c677028">getRadius</a> () const</td></tr>
+<tr class="memdesc:ace6c2518bcd756fc5e1059f45c677028"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение радиусов области.  <br /></td></tr>
+<tr class="memitem:ab22c2f1da6bb217876d83ba97aff0026" id="r_ab22c2f1da6bb217876d83ba97aff0026"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab22c2f1da6bb217876d83ba97aff0026">setUnloadMargin</a> (int margin)</td></tr>
+<tr class="memdesc:ab22c2f1da6bb217876d83ba97aff0026"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка запаса выгрузки.  <br /></td></tr>
+<tr class="memitem:a7a15d0e46c46dc185d0d59c066655c3d" id="r_a7a15d0e46c46dc185d0d59c066655c3d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7a15d0e46c46dc185d0d59c066655c3d">getUnloadMargin</a> () const</td></tr>
+<tr class="memdesc:a7a15d0e46c46dc185d0d59c066655c3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение запаса выгрузки.  <br /></td></tr>
+<tr class="memitem:adba8b4d6fe2c988da05dfec9a5939ffa" id="r_adba8b4d6fe2c988da05dfec9a5939ffa"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#adba8b4d6fe2c988da05dfec9a5939ffa">setChunkPosition</a> (SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; chunk)</td></tr>
+<tr class="memdesc:adba8b4d6fe2c988da05dfec9a5939ffa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка положения - чанк.  <br /></td></tr>
+<tr class="memitem:a72194a57a7650555ea9ea77642926724" id="r_a72194a57a7650555ea9ea77642926724"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a72194a57a7650555ea9ea77642926724">setWorldPosition</a> (SimpleVoxelEngine::Additional::Vector3d&lt; float &gt; point)</td></tr>
+<tr class="memdesc:a72194a57a7650555ea9ea77642926724"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка положения - точка в координатах мира.  <br /></td></tr>
+<tr class="memitem:a4fbde844110a988c6b00de6694260f19" id="r_a4fbde844110a988c6b00de6694260f19"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4fbde844110a988c6b00de6694260f19">setScenePosition</a> (irr::core::vector3df point)</td></tr>
+<tr class="memdesc:a4fbde844110a988c6b00de6694260f19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка положения - точка в координатах сцены Irrlicht.  <br /></td></tr>
+<tr class="memitem:aae98a196a6bfd44528a79432df6fea50" id="r_aae98a196a6bfd44528a79432df6fea50"><td class="memItemLeft"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#a74683c6e007ac3228fae6c9407708687">STREAMING_POSITION_MODE</a>&#160;</td><td class="memItemRight"><a class="el" href="#aae98a196a6bfd44528a79432df6fea50">getPositionMode</a> () const</td></tr>
+<tr class="memdesc:aae98a196a6bfd44528a79432df6fea50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение способа, которым задано положение.  <br /></td></tr>
+<tr class="memitem:a998bbde3ebfd6b973613fbbc53560911" id="r_a998bbde3ebfd6b973613fbbc53560911"><td class="memItemLeft">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a998bbde3ebfd6b973613fbbc53560911">getCenterChunk</a> () const</td></tr>
+<tr class="memdesc:a998bbde3ebfd6b973613fbbc53560911"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение чанка контроллера.  <br /></td></tr>
+<tr class="memitem:a4f866c67b97cab26acfa799e4d325aa8" id="r_a4f866c67b97cab26acfa799e4d325aa8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4f866c67b97cab26acfa799e4d325aa8">hasCenterChunk</a> () const</td></tr>
+<tr class="memdesc:a4f866c67b97cab26acfa799e4d325aa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Был ли уже шаг пула с заданным положением.  <br /></td></tr>
+<tr class="memitem:a647b2a7c7904aedfa68ca3d00032f213" id="r_a647b2a7c7904aedfa68ca3d00032f213"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a647b2a7c7904aedfa68ca3d00032f213">isInArea</a> (SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; center, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; chunk, int extra) const</td></tr>
+<tr class="memdesc:a647b2a7c7904aedfa68ca3d00032f213"><td class="mdescLeft">&#160;</td><td class="mdescRight">Попадает ли чанк в область вокруг заданного центра.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
+Друзья</h2></td></tr>
+<tr class="memitem:a13ee8cc5dc56a0ffcd0155169ce3f8a9" id="r_a13ee8cc5dc56a0ffcd0155169ce3f8a9"><td class="memItemLeft"><a id="a13ee8cc5dc56a0ffcd0155169ce3f8a9" name="a13ee8cc5dc56a0ffcd0155169ce3f8a9"></a>
+class&#160;</td><td class="memItemRight"><b>ChunkStreamingPool</b></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Контроллер стриминга чанков - "игрок" или "камера", вокруг которых загружаются и отрисовываются чанки. </p>
+<p>Создаётся и удаляется только пулом (<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a364db84fb7807ef6746997d994b5adcf" title="Добавление контроллера.">ChunkStreamingPool::addController()</a>, removeController()). У контроллера свой мир, своя форма и радиусы области и своё положение. Сам контроллер ничего не загружает: каждый шаг пула (<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a7e58d846729bdbfcbd46963f21a87d63" title="Шаг пула: вызывать каждый кадр в главном потоке.">ChunkStreamingPool::step()</a>) пул по положениям всех контроллеров решает, какие чанки нужны, и ставит задания. Чанк может быть нужен нескольким контроллерам сразу (несколько игроков рядом) - тогда у него несколько владельцев, и выгружается он, только когда не нужен ни одному. Область: чанки формы <a class="el" href="#a953b9a615e5c69afa4df963205f332b9" title="Получение формы области.">getShape()</a> с радиусами <a class="el" href="#ace6c2518bcd756fc5e1059f45c677028" title="Получение радиусов области.">getRadius()</a> вокруг чанка контроллера отрисовываются; на один чанк дальше (кольцо данных) чанки только загружаются в память без отрисовки - чтобы на краю отрисованной области грани не рисовались там, где их потом закроет соседний чанк. Уже взятые чанки отпускаются только дальше радиуса + запас (<a class="el" href="#a7a15d0e46c46dc185d0d59c066655c3d" title="Получение запаса выгрузки.">getUnloadMargin()</a>): при хождении по границе чанка чанки не загружаются и не выгружаются туда-сюда. Все функции - только из главного потока (там же, где вызывается <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a7e58d846729bdbfcbd46963f21a87d63" title="Шаг пула: вызывать каждый кадр в главном потоке.">ChunkStreamingPool::step()</a>). </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
+<a id="a998bbde3ebfd6b973613fbbc53560911" name="a998bbde3ebfd6b973613fbbc53560911"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a998bbde3ebfd6b973613fbbc53560911">&#9670;&#160;</a></span>getCenterChunk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; SimpleVoxelEngine::IrrEngine::ChunkStreamingController::getCenterChunk </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение чанка контроллера. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает чанк, вокруг которого пул загружал область на последнем шаге (до первого шага с заданным положением - (0,0,0), см. <a class="el" href="#a4f866c67b97cab26acfa799e4d325aa8" title="Был ли уже шаг пула с заданным положением.">hasCenterChunk()</a>). </dd></dl>
+
+</div>
+</div>
+<a id="a86994538178f4846d503a6b3d04cd4be" name="a86994538178f4846d503a6b3d04cd4be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86994538178f4846d503a6b3d04cd4be">&#9670;&#160;</a></span>getName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; SimpleVoxelEngine::IrrEngine::ChunkStreamingController::getName </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение имени контроллера. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает имя (идентификатор) контроллера в пуле, например имя игрока. </dd></dl>
+
+</div>
+</div>
+<a id="aae98a196a6bfd44528a79432df6fea50" name="aae98a196a6bfd44528a79432df6fea50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae98a196a6bfd44528a79432df6fea50">&#9670;&#160;</a></span>getPositionMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#a74683c6e007ac3228fae6c9407708687">STREAMING_POSITION_MODE</a> SimpleVoxelEngine::IrrEngine::ChunkStreamingController::getPositionMode </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение способа, которым задано положение. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает способ (STREAMING_POSITION_NONE - положение ещё не задано). </dd></dl>
+
+</div>
+</div>
+<a id="ace6c2518bcd756fc5e1059f45c677028" name="ace6c2518bcd756fc5e1059f45c677028"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace6c2518bcd756fc5e1059f45c677028">&#9670;&#160;</a></span>getRadius()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; SimpleVoxelEngine::IrrEngine::ChunkStreamingController::getRadius </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение радиусов области. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает радиусы в чанках по X, Y, Z. </dd></dl>
+
+</div>
+</div>
+<a id="a953b9a615e5c69afa4df963205f332b9" name="a953b9a615e5c69afa4df963205f332b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a953b9a615e5c69afa4df963205f332b9">&#9670;&#160;</a></span>getShape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#aa86547f7717b96a87f885fe44a34a9ae">STREAMING_SHAPE</a> SimpleVoxelEngine::IrrEngine::ChunkStreamingController::getShape </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение формы области. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает форму области. </dd></dl>
+
+</div>
+</div>
+<a id="a7a15d0e46c46dc185d0d59c066655c3d" name="a7a15d0e46c46dc185d0d59c066655c3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a15d0e46c46dc185d0d59c066655c3d">&#9670;&#160;</a></span>getUnloadMargin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SimpleVoxelEngine::IrrEngine::ChunkStreamingController::getUnloadMargin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение запаса выгрузки. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает запас выгрузки в чанках. </dd></dl>
+
+</div>
+</div>
+<a id="a487bf31a8df1f2a748fdc6d1cf52db94" name="a487bf31a8df1f2a748fdc6d1cf52db94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a487bf31a8df1f2a748fdc6d1cf52db94">&#9670;&#160;</a></span>getWorldId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SimpleVoxelEngine::IrrEngine::ChunkStreamingController::getWorldId </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение идентификатора мира. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает идентификатор мира, в котором работает контроллер. </dd></dl>
+
+</div>
+</div>
+<a id="a4f866c67b97cab26acfa799e4d325aa8" name="a4f866c67b97cab26acfa799e4d325aa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f866c67b97cab26acfa799e4d325aa8">&#9670;&#160;</a></span>hasCenterChunk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::ChunkStreamingController::hasCenterChunk </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Был ли уже шаг пула с заданным положением. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если <a class="el" href="#a998bbde3ebfd6b973613fbbc53560911" title="Получение чанка контроллера.">getCenterChunk()</a> уже посчитан. </dd></dl>
+
+</div>
+</div>
+<a id="a647b2a7c7904aedfa68ca3d00032f213" name="a647b2a7c7904aedfa68ca3d00032f213"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a647b2a7c7904aedfa68ca3d00032f213">&#9670;&#160;</a></span>isInArea()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::ChunkStreamingController::isInArea </td>
+          <td>(</td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>center</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>chunk</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>extra</em></span>&#160;) const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Попадает ли чанк в область вокруг заданного центра. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">center</td><td>Центр области (чанк). </td></tr>
+    <tr><td class="paramname">chunk</td><td>Проверяемый чанк. </td></tr>
+    <tr><td class="paramname">extra</td><td>Сколько чанков добавить ко всем радиусам (0 - сама область, 1 - с кольцом данных и т.д.). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если чанк в области формы <a class="el" href="#a953b9a615e5c69afa4df963205f332b9" title="Получение формы области.">getShape()</a> с радиусами <a class="el" href="#ace6c2518bcd756fc5e1059f45c677028" title="Получение радиусов области.">getRadius()</a> + extra. </dd></dl>
+
+</div>
+</div>
+<a id="adba8b4d6fe2c988da05dfec9a5939ffa" name="adba8b4d6fe2c988da05dfec9a5939ffa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adba8b4d6fe2c988da05dfec9a5939ffa">&#9670;&#160;</a></span>setChunkPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunkStreamingController::setChunkPosition </td>
+          <td>(</td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>chunk</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка положения - чанк. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chunk</td><td>Вектор (координаты) чанка, вокруг которого загружается область. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af24c3fd5c63cda8d277f4b6b7079005a" name="af24c3fd5c63cda8d277f4b6b7079005a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af24c3fd5c63cda8d277f4b6b7079005a">&#9670;&#160;</a></span>setRadius()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunkStreamingController::setRadius </td>
+          <td>(</td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>radius</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка радиусов области в чанках. </p>
+<p>Радиусы по осям X, Y, Z (отрицательные заменяются на 0). 0 - только чанк контроллера по этой оси. Для цилиндра Y - половина высоты; если высота мира ограничена (World::setChunksBound()), чанки за границей не загружаются, сколько бы ни был радиус. По умолчанию (4, 2, 4). </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">radius</td><td>Радиусы. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4fbde844110a988c6b00de6694260f19" name="a4fbde844110a988c6b00de6694260f19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fbde844110a988c6b00de6694260f19">&#9670;&#160;</a></span>setScenePosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunkStreamingController::setScenePosition </td>
+          <td>(</td>
+          <td class="paramtype">irr::core::vector3df</td>          <td class="paramname"><span class="paramname"><em>point</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка положения - точка в координатах сцены Irrlicht. </p>
+<p>Например, camera-&gt;getAbsolutePosition(). Пул при шаге переводит её в координаты мира через <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#ab3a32d166b107577e879fc1f29072bc4" title="Пересчёт точки из координат сцены в координаты мира.">IrrSimpleVoxelEngine::getWorldCoordinates()</a> - учитываются родительская нода мира и сдвиг (<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_world3_d_info.html" title="Структура для хранения информации о положении мира и его чанков в пространстве.">World3DInfo</a>). </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">point</td><td>Точка в сцене. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8e5a5d5a7afb03ea75b4cdf30d1ce5a9" name="a8e5a5d5a7afb03ea75b4cdf30d1ce5a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e5a5d5a7afb03ea75b4cdf30d1ce5a9">&#9670;&#160;</a></span>setShape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunkStreamingController::setShape </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#aa86547f7717b96a87f885fe44a34a9ae">STREAMING_SHAPE</a></td>          <td class="paramname"><span class="paramname"><em>shape</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка формы области. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shape</td><td>Форма области (по умолчанию - цилиндр). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab22c2f1da6bb217876d83ba97aff0026" name="ab22c2f1da6bb217876d83ba97aff0026"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab22c2f1da6bb217876d83ba97aff0026">&#9670;&#160;</a></span>setUnloadMargin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunkStreamingController::setUnloadMargin </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>margin</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка запаса выгрузки. </p>
+<p>Чанк, уже взятый контроллером, отпускается, только когда он дальше радиуса + запас. По умолчанию 1. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">margin</td><td>Запас в чанках (отрицательный заменяется на 0). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a72194a57a7650555ea9ea77642926724" name="a72194a57a7650555ea9ea77642926724"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72194a57a7650555ea9ea77642926724">&#9670;&#160;</a></span>setWorldPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunkStreamingController::setWorldPosition </td>
+          <td>(</td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;</td>          <td class="paramname"><span class="paramname"><em>point</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка положения - точка в координатах мира. </p>
+<p>Координаты мира - те же, что возвращает <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#ab3a32d166b107577e879fc1f29072bc4" title="Пересчёт точки из координат сцены в координаты мира.">IrrSimpleVoxelEngine::getWorldCoordinates()</a>: чанк c занимает по каждой оси примерно [c * размер чанка, (c + 1) * размер чанка) (с точностью до половины вокселя - для стриминга это неважно). </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">point</td><td>Точка. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>E:/NeuroCoding/Claude/MyVoxelWork/IrrSimpleVoxelEngine/include/<a class="el" href="_chunk_streaming_controller_8h_source.html">ChunkStreamingController.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a></li><li class="navelem"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html">ChunkStreamingController</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

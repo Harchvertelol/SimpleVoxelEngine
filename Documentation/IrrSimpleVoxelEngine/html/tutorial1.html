@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Урок 1: Hello, world!</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IrrSimpleVoxelEngine
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tutorial1.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Урок 1: Hello, world! </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>В этом уроке мы нарисуем свой первый воксельный мир: один чанк с цветным полом 16x16 вокселей и камеру, которой можно по нему полетать. Это тот же пример, что и на главной странице документации, только теперь мы разберём его по строкам: зачем нужна каждая часть, в каком потоке она работает и что будет, если её забыть. Никаких файлов (моделей, текстур) для урока не нужно.</p>
+<p>Перед началом стоит пройти хотя бы первый урок <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a> (что такое мир, чанк, воксель) и настроить проект, как описано в разделе "Настройка движка": подключить папки include враппера, <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a> и Irrlicht, а библиотеки - в порядке "враппер, SimpleVoxelEngine, Irrlicht".</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut1_who"></a>
+Кто есть кто</h1>
+<p>В программе работают три участника:</p><ul>
+<li>Irrlicht - графический движок: окно, сцена, ноды, драйвер. Рисует именно он.</li>
+<li><a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a> (ядро) - хранит воксельный мир: миры, чанки, воксели, адреса; считает, какие грани вокселей видны. О графике он ничего не знает и сам по себе не потокобезопасен.</li>
+<li>IrrSimpleVoxelEngine (враппер) связывает их. Класс IrrSimpleVoxelEngine унаследован от Engine ядра, то есть это и есть движок <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>, только с графикой и потоками. Он превращает чанки в ноды Irrlicht, а всю тяжёлую работу (загрузку чанков, изменение мира, построение мешей) выполняет в фоновых потоках.</li>
+</ul>
+<p>Одного враппер не знает: как выглядит ваш воксель. Куб? Растение? Какого цвета, с какой текстурой? Это ему рассказывает фабрика - ваш класс, унаследованный от FactoryChunkMeshSceneNode. Без фабрики враппер не работает.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut1_include"></a>
+Подключаем</h1>
+<p>Начнём, как обычно, с заголовков и пространств имён: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span> <span class="comment">// Подключили враппер (он подключает и SimpleVoxelEngine).</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>; <span class="comment">// Главное пространство имён движка.</span></div>
+<div class="line"><span class="keyword">using namespace </span>Core; <span class="comment">// Ядро: World, VoxelForRendering и т.д.</span></div>
+<div class="line"><span class="keyword">using namespace </span>Voxels; <span class="comment">// Воксели, в том числе встроенный ARGBColorVoxel.</span></div>
+<div class="line"><span class="keyword">using namespace </span>Additional; <span class="comment">// Vector3d и ARGBColor.</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>; <span class="comment">// Сам враппер.</span></div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core; <span class="comment">// Irrlicht.</span></div>
+<div class="ttc" id="a_irr_simple_voxel_engine_8h_html"><div class="ttname"><a href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a></div><div class="ttdoc">Главный заголовочный файл. Необходимо присоединять только его к проекту.</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">SimpleVoxelEngine::IrrEngine</a></div><div class="ttdoc">Главное пространство имён IrrSimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:13</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:11</div></div>
+</div><!-- fragment --><p> Из враппера подключать нужно только <a class="el" href="_irr_simple_voxel_engine_8h.html" title="Главный заголовочный файл. Необходимо присоединять только его к проекту.">IrrSimpleVoxelEngine.h</a> - он сам подтянет и заголовки <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>, и всё остальное.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut1_factory"></a>
+Фабрика</h1>
+<p>Теперь самое интересное - фабрика. Когда враппер строит меш чанка, он берёт у ядра список видимых вокселей чанка и для каждого спрашивает у фабрики: "какой меш нарисовать на месте этого вокселя?". Потом склеивает все эти меши в один большой меш чанка, а из него делает ноду сцены. </p><div class="fragment"><div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        s_Plane = createFaceMesh(); <span class="comment">// Грань 1x1, из которой getMeshCubeFaces() собирает куб (файл модели не нужен).</span></div>
+<div class="line">        s_MeshManipulator = device-&gt;getSceneManager()-&gt;getMeshManipulator(); <span class="comment">// Всё, что требует Irrlicht, - здесь, в главном потоке.</span></div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); } <span class="comment">// Грань создали мы - мы её и удаляем.</span></div>
+</div><!-- fragment --><p> Конструктор получает устройство Irrlicht и враппер и передаёт их предку. Здесь же мы готовим всё, что понадобится при рисовании: грань куба и манипулятор мешей Irrlicht.</p>
+<p>createFaceMesh() - статическая функция фабрики: она создаёт квадрат 1x1 с центром в начале координат, лежащий в плоскости Oxz лицом вверх (+Y). Ровно из таких граней getMeshCubeFaces() собирает куб. Меш новый, поэтому, когда он больше не нужен, ему нужно сделать drop() - что мы и делаем в деструкторе. Саму фабрику удалит враппер (об этом ниже).</p>
+<p>Почему всё готовится в конструкторе? Потому что функции рисования фабрики вызываются не в главном потоке, а в потоках построения мешей. А трогать сцену и драйвер Irrlicht (загружать меши и текстуры, создавать ноды) можно только из главного потока - того, где создано окно и вызывается drawAll(). Конструктор фабрики работает в главном потоке, поэтому всё нужное создаём в нём.</p>
+<p>Дальше - две обязательные функции: </p><div class="fragment"><div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    <span class="comment">// Вызывается в потоках построения для каждого видимого вокселя: вернуть НОВЫЙ меш (враппер сам сделает ему drop()).</span></div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl)</div>
+<div class="line">    {</div>
+<div class="line">        IMesh* mesh = getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1)); <span class="comment">// Куб только из видимых граней.</span></div>
+<div class="line">        ARGBColor c = ((VoxelInfoARGBColor*)vxl-&gt;getVoxelInfo())-&gt;s_ARGBColor; <span class="comment">// Цвет нашего ARGBColorVoxel.</span></div>
+<div class="line">        <span class="keywordflow">if</span>(mesh) s_MeshManipulator-&gt;setVertexColors(mesh, SColor(c.getA(), c.getR(), c.getG(), c.getB()));</div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering*) { <span class="keywordflow">return</span> 0; } <span class="comment">// Все воксели - в одном уровне мешей (одном материале).</span></div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> getMeshVoxel() получает VoxelForRendering - "снимок" вокселя, сделанный ядром: его позицию и размер, видимость каждой из шести граней и информацию для отрисовки (VoxelInfo), которую дал сам воксель. Подробно о VoxelForRendering и VoxelInfo рассказано в уроке 5 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>. У встроенного ARGBColorVoxel информация - это VoxelInfoARGBColor с цветом, поэтому мы смело приводим тип: других вокселей в нашем мире нет. (Если в мире разные типы вокселей, сначала проверьте поле s_TypeVoxelInfo.)</p>
+<p>getMeshCubeFaces() собирает куб только из видимых граней: грань между двумя соседними вокселями не видна, и её в меше просто нет. Именно поэтому сплошной чанк из 4096 вокселей рисуется быстро - от него остаются только внешние грани. Третий параметр - множитель размера куба, (1, 1, 1) - куб ровно в размер вокселя.</p>
+<p>Меш вокселя задаётся в координатах вокселя (центр - в начале координат), а на нужное место его поставит сама фабрика. getMeshCubeFaces() возвращает новый меш, мы красим его вершины в цвет вокселя и отдаём врапперу; враппер вклеит меш в чанк и сам сделает ему drop(). Отдавать нужно именно новый меш: если вернуть, например, s_Plane, враппер сделает ему drop(), и грань удалится.</p>
+<p>setVertexColors() вызывать в потоке построения можно: манипулятор меняет только вершины переданного меша и сцены не касается. А вот, например, getVideoDriver()-&gt;getTexture() здесь вызывать уже нельзя.</p>
+<p>getMeshNumber() говорит, в какой уровень мешей попадёт воксель. Уровни - это части меша чанка со своими материалами (например, отдельный уровень для стекла или воды). У нас уровень один, номер 0. Подробнее - в уроке 9.</p>
+<p>И ещё одна приятная вещь: getMeshVoxel() и getMeshNumber() вызываются строго по одному, даже если потоков построения несколько, - враппер держит для этого свою блокировку. Поэтому общую грань s_Plane можно использовать без мьютексов. Как это помогает делать разные текстуры, расскажем в уроке 3.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut1_main"></a>
+Создаём движок и мир</h1>
+<p>Переходим к main(). Создаём устройство Irrlicht и враппер: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(800, 600)); <span class="comment">// Окно Irrlicht.</span></div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device); <span class="comment">// Создали враппер (внутри - движок SimpleVoxelEngine).</span></div>
+</div><!-- fragment --><p> Кстати, мы создали враппер без логгера. Это значит, что движок молчит обо всём - и об ошибках тоже: если что-то пойдёт не так, вы ничего не увидите. Для первого примера так проще, но в своих программах логгер лучше подключать сразу (как - в уроке 2).</p>
+<p>Теперь фабрика и её масштабы: </p><div class="fragment"><div class="line">MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">factory-&gt;setPositionScale(16); <span class="comment">// Масштабы - равны размеру чанка (16): один воксель - одна единица сцены.</span></div>
+<div class="line">factory-&gt;setSScale(16);</div>
+</div><!-- fragment --><p> Зачем масштабы? Ядро отдаёт позицию и размер вокселя в долях чанка: воксель чанка 16x16x16 имеет размер 1/16. Фабрика умножает позицию на setPositionScale(), а размер - на setSScale(). Ноды же чанков враппер ставит с шагом в размер чанка, то есть через 16 единиц. Поэтому оба масштаба ставьте равными размеру чанка: тогда воксель - ровно одна единица сцены, а чанки стоят вплотную. По умолчанию масштабы равны 1, и при чанке 16 воксели получаются крошечными (1/16), а между чанками - промежутки.</p>
+<p>Отдаём фабрику врапперу: </p><div class="fragment"><div class="line">isve-&gt;setFactoryChunkMeshSceneNode(factory); <span class="comment">// Фабрику - ДО создания мира. Удалит её враппер.</span></div>
+</div><!-- fragment --><p> С этого момента фабрикой владеет враппер: удалять её самим нельзя, её удалит delete isve. Ещё фабрика "замораживается": масштабы и другие основные настройки больше не меняются (такие вызовы вернут false и запишут ошибку в лог). Поэтому все такие настройки - до этой строки. Фабрика у движка одна, вторую он не примет. Получить установленную фабрику можно через isve-&gt;getFactoryChunkMeshSceneNode(), а устройство Irrlicht враппера - через isve-&gt;getIrrlichtDevice().</p>
+<p>Фабрику обязательно отдать до создания мира: addWorld() регистрирует мир и в фабрике, и без фабрики вернёт -1. Создаём мир: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld(); <span class="comment">// Мир по умолчанию: чанк 16x16x16 вокселей.</span></div>
+<div class="line">factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>); <span class="comment">// Без источников света: виден цвет вершин.</span></div>
+</div><!-- fragment --><p> addWorld() без параметров создаёт мир с чанками 16x16x16 и возвращает его идентификатор (или -1 при ошибке). Вызывать его можно только из главного потока.</p>
+<p>setMaterialFlag() ставит флаг материала нодам чанков: первый параметр - номер уровня мешей, второй - мир. Света в нашей сцене нет, и с включённым освещением всё было бы чёрным, поэтому освещение выключаем - и видим цвет вершин. Флаги материала можно менять и во время работы (тоже только из главного потока): они применяются и к уже созданным нодам.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut1_world"></a>
+Наполняем мир</h1>
+<div class="fragment"><div class="line">isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">true</span>); <span class="comment">// Загрузить (здесь - создать пустой) чанк (0,0,0).</span></div>
+</div><!-- fragment --><p> addChunksForRendering() добавляет в отрисовку все чанки кубоида от левого нижнего угла до правого верхнего (оба включительно) - у нас это один чанк (0, 0, 0). Сама функция ничего не загружает: она ставит задание в главную очередь заданий враппера, а выполнит его поток главной очереди после start(). Последний параметр load = true разрешает загрузить чанк, которого нет в памяти: его загрузит контроллер сохранения или создаст генератор мира (урок 2). У нас нет ни того, ни другого, поэтому чанк получится пустым (в логе было бы предупреждение об этом). С load = false чанк, которого нет в памяти, в отрисовку не попадёт - частая причина "ничего не рисуется".</p>
+<p>Теперь пол: </p><div class="fragment"><div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; 16; x++)</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; 16; z++) <span class="comment">// Пол из цветных вокселей 16x16.</span></div>
+<div class="line">    {</div>
+<div class="line">        ARGBColorVoxel* vxl = <span class="keyword">new</span> ARGBColorVoxel; <span class="comment">// Встроенный воксель с одним параметром - цветом.</span></div>
+<div class="line">        vxl-&gt;setARGBColor(ARGBColor(255, x * 16, 128, z * 16));</div>
+<div class="line">        isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(x, 0, z), vxl); <span class="comment">// Воксель забирает враппер.</span></div>
+<div class="line">    }</div>
+<div class="line">isve-&gt;addTaskUpdateChunks(); <span class="comment">// Перестроить изменённые чанки (один раз - после всех изменений).</span></div>
+</div><!-- fragment --><p> setSimpleVoxelObjectByGlobalVector() ставит воксель по глобальным координатам - номеру клетки во всём мире: чанк (0, 0, 0) занимает клетки от 0 до 15 по каждой оси, чанк (1, 0, 0) - от 16 до 31 и так далее (отрицательные координаты тоже работают). В каком чанке клетка и где она внутри чанка, враппер считает сам. Воксель после вызова принадлежит врапперу: не удаляйте его и не храните указатель на него.</p>
+<p>Эта функция потокобезопасна, но из главного потока она воксель сразу не ставит, а тоже кладёт задание в главную очередь. Задания выполняются строго по порядку, поэтому к моменту установки вокселей чанк (0, 0, 0) уже будет загружен. Если же к моменту выполнения чанка в памяти нет, воксель не ставится и удаляется (с предупреждением в логе).</p>
+<p>Где окажется воксель на экране? Блок с глобальными координатами k занимает отрезок от k - 0.5 до k + 0.5, то есть центры блоков лежат в целых точках. Наш пол занимает от -0.5 до 15.5 по X и Z, а его верх - на высоте 0.5.</p>
+<p>addTaskUpdateChunks() нужна потому, что мир не перестраивается сам при каждом изменении. Установка вокселя только помечает его чанк (и соседний, если воксель на краю чанка) "для обновления", а addTaskUpdateChunks() ставит все помеченные чанки на перестройку. Так 256 изменений дают одну перестройку чанка, а не 256. Вызывайте её один раз после пачки изменений. Забудете - изменения не появятся на экране (или появятся частично).</p>
+<p>Добавим камеру (FPS-камера: мышь - поворот, стрелки - движение): </p><div class="fragment"><div class="line">ICameraSceneNode* camera = device-&gt;getSceneManager()-&gt;addCameraSceneNodeFPS();</div>
+<div class="line">camera-&gt;setPosition(vector3df(8, 10, -10));</div>
+<div class="line">camera-&gt;setTarget(vector3df(8, 0, 8));</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="irrtut1_loop"></a>
+Запуск и главный цикл</h1>
+<div class="fragment"><div class="line">isve-&gt;start(); <span class="comment">// Запустили потоки враппера: дальше чанки строятся в фоне.</span></div>
+</div><!-- fragment --><p> start() запускает потоки враппера: поток главной очереди (он по порядку выполняет задания: загрузку чанков, установку вокселей и т.д.) и потоки построения мешей. Задания, поставленные до start(), начинают выполняться только теперь. Без start() ничего не загрузится и не построится - задания будут просто ждать. Запустить можно только движок с фабрикой. Работает ли движок (живы ли его потоки), скажет isRun(). </p><div class="fragment"><div class="line"><span class="keywordflow">while</span>(isve-&gt;runIrrDevice()) <span class="comment">// То же, что device-&gt;run(), но безопасно для потоков враппера.</span></div>
+<div class="line">{</div>
+<div class="line">    isve-&gt;update(); <span class="comment">// Каждый кадр в главном потоке: готовые меши чанков становятся нодами сцены.</span></div>
+<div class="line">    device-&gt;getVideoDriver()-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 100, 100, 140));</div>
+<div class="line">    device-&gt;getSceneManager()-&gt;drawAll();</div>
+<div class="line">    device-&gt;getVideoDriver()-&gt;endScene();</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> runIrrDevice() вызывает device-&gt;run() и заодно запоминает время таймера Irrlicht, чтобы другие потоки могли безопасно узнавать его через getTimeSafeThread() (обычный device-&gt;run() тоже работает: время запоминает и update()).</p>
+<p>update() - самая важная строка цикла. Потоки построения только готовят меши чанков, а в сцену их добавляет главный поток - внутри update(): создаёт и заменяет ноды чанков, склеивает соседние чанки в одну ноду, сортирует прозрачные треугольники. Вызывайте update() каждый кадр и только из главного потока. Забудете - на экране ничего не появится, а готовые меши так и будут ждать. Ноды чанков принадлежат врапперу: не удаляйте их сами.</p>
+<p>Остальное - обычный кадр Irrlicht.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut1_end"></a>
+Остановка и удаление</h1>
+<div class="fragment"><div class="line">    isve-&gt;stop(); <span class="comment">// Дождались выполнения всех заданий и остановили потоки.</span></div>
+<div class="line">    <span class="keyword">delete</span> isve; <span class="comment">// Удалили враппер, мир и фабрику.</span></div>
+<div class="line">    device-&gt;drop(); <span class="comment">// Последним - устройство Irrlicht.</span></div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> stop() ставит в конец главной очереди задание "стоп": все задания, поставленные раньше, будут выполнены, после чего потоки завершатся, а stop() их дождётся. После stop() потоки миром не пользуются, и с ним можно работать напрямую (например, сохранить - урок 11). Не вызывайте stop() из функций фабрики (они работают в потоках построения) и из пользовательских функций в потоке главной очереди (урок 10): поток ждал бы сам себя. У stop() есть параметр wait (по умолчанию true - дождаться потоков); stop(false) и повторный start() после остановки разобраны в уроке 10.</p>
+<p>delete isve убирает ноды чанков, удаляет фабрику и миры (если движок ещё работает, он сам сначала вызовет stop()). Устройство Irrlicht удаляем последним: фабрика и ноды чанков пользуются им до самого delete isve, и если сделать device-&gt;drop() раньше, программа упадёт при удалении враппера.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut1_errors"></a>
+Типичные ошибки</h1>
+<ul>
+<li>Ничего не рисуется: забыли isve-&gt;update() в цикле; забыли start(); фабрику отдали после addWorld() (addWorld() вернул -1); addChunksForRendering() с load = false для чанков, которых нет в памяти.</li>
+<li>Воксели крошечные, между чанками промежутки: setPositionScale() и setSScale() не равны размеру чанка.</li>
+<li>Изменения не видны: после установки вокселей не вызван addTaskUpdateChunks().</li>
+<li>Всё чёрное: освещение включено, а источников света в сцене нет (EMF_LIGHTING).</li>
+<li>Ошибок не видно совсем: движок создан без логгера.</li>
+<li>Масштаб или другие настройки фабрики "не действуют": они заданы после setFactoryChunkMeshSceneNode().</li>
+<li>Падения в случайных местах: в getMeshVoxel() трогают сцену или драйвер Irrlicht (это поток построения), или device-&gt;drop() вызван раньше delete isve.</li>
+<li>Программа зависла на выходе: stop() вызван из функции фабрики.</li>
+</ul>
+<p>В следующем уроке мы заведём свой тип вокселя, генератор мира и логгер и познакомимся с настройками враппера.</p>
+<p>Ну и напоследок ещё раз полный код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span> <span class="comment">// Подключили враппер (он подключает и SimpleVoxelEngine).</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>; <span class="comment">// Главное пространство имён движка.</span></div>
+<div class="line"><span class="keyword">using namespace </span>Core; <span class="comment">// Ядро: World, VoxelForRendering и т.д.</span></div>
+<div class="line"><span class="keyword">using namespace </span>Voxels; <span class="comment">// Воксели, в том числе встроенный ARGBColorVoxel.</span></div>
+<div class="line"><span class="keyword">using namespace </span>Additional; <span class="comment">// Vector3d и ARGBColor.</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>; <span class="comment">// Сам враппер.</span></div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core; <span class="comment">// Irrlicht.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Фабрика решает, как нарисовать каждый воксель. Без неё враппер не работает.</span></div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        s_Plane = createFaceMesh(); <span class="comment">// Грань 1x1, из которой getMeshCubeFaces() собирает куб (файл модели не нужен).</span></div>
+<div class="line">        s_MeshManipulator = device-&gt;getSceneManager()-&gt;getMeshManipulator(); <span class="comment">// Всё, что требует Irrlicht, - здесь, в главном потоке.</span></div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); } <span class="comment">// Грань создали мы - мы её и удаляем.</span></div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    <span class="comment">// Вызывается в потоках построения для каждого видимого вокселя: вернуть НОВЫЙ меш (враппер сам сделает ему drop()).</span></div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl)</div>
+<div class="line">    {</div>
+<div class="line">        IMesh* mesh = getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1)); <span class="comment">// Куб только из видимых граней.</span></div>
+<div class="line">        ARGBColor c = ((VoxelInfoARGBColor*)vxl-&gt;getVoxelInfo())-&gt;s_ARGBColor; <span class="comment">// Цвет нашего ARGBColorVoxel.</span></div>
+<div class="line">        <span class="keywordflow">if</span>(mesh) s_MeshManipulator-&gt;setVertexColors(mesh, SColor(c.getA(), c.getR(), c.getG(), c.getB()));</div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering*) { <span class="keywordflow">return</span> 0; } <span class="comment">// Все воксели - в одном уровне мешей (одном материале).</span></div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(800, 600)); <span class="comment">// Окно Irrlicht.</span></div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device); <span class="comment">// Создали враппер (внутри - движок SimpleVoxelEngine).</span></div>
+<div class="line">    MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">    factory-&gt;setPositionScale(16); <span class="comment">// Масштабы - равны размеру чанка (16): один воксель - одна единица сцены.</span></div>
+<div class="line">    factory-&gt;setSScale(16);</div>
+<div class="line">    isve-&gt;setFactoryChunkMeshSceneNode(factory); <span class="comment">// Фабрику - ДО создания мира. Удалит её враппер.</span></div>
+<div class="line">    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld(); <span class="comment">// Мир по умолчанию: чанк 16x16x16 вокселей.</span></div>
+<div class="line">    factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>); <span class="comment">// Без источников света: виден цвет вершин.</span></div>
+<div class="line">    isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">true</span>); <span class="comment">// Загрузить (здесь - создать пустой) чанк (0,0,0).</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; 16; x++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; 16; z++) <span class="comment">// Пол из цветных вокселей 16x16.</span></div>
+<div class="line">        {</div>
+<div class="line">            ARGBColorVoxel* vxl = <span class="keyword">new</span> ARGBColorVoxel; <span class="comment">// Встроенный воксель с одним параметром - цветом.</span></div>
+<div class="line">            vxl-&gt;setARGBColor(ARGBColor(255, x * 16, 128, z * 16));</div>
+<div class="line">            isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(x, 0, z), vxl); <span class="comment">// Воксель забирает враппер.</span></div>
+<div class="line">        }</div>
+<div class="line">    isve-&gt;addTaskUpdateChunks(); <span class="comment">// Перестроить изменённые чанки (один раз - после всех изменений).</span></div>
+<div class="line">    ICameraSceneNode* camera = device-&gt;getSceneManager()-&gt;addCameraSceneNodeFPS();</div>
+<div class="line">    camera-&gt;setPosition(vector3df(8, 10, -10));</div>
+<div class="line">    camera-&gt;setTarget(vector3df(8, 0, 8));</div>
+<div class="line">    isve-&gt;start(); <span class="comment">// Запустили потоки враппера: дальше чанки строятся в фоне.</span></div>
+<div class="line">    <span class="keywordflow">while</span>(isve-&gt;runIrrDevice()) <span class="comment">// То же, что device-&gt;run(), но безопасно для потоков враппера.</span></div>
+<div class="line">    {</div>
+<div class="line">        isve-&gt;update(); <span class="comment">// Каждый кадр в главном потоке: готовые меши чанков становятся нодами сцены.</span></div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 100, 100, 140));</div>
+<div class="line">        device-&gt;getSceneManager()-&gt;drawAll();</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;endScene();</div>
+<div class="line">    }</div>
+<div class="line">    isve-&gt;stop(); <span class="comment">// Дождались выполнения всех заданий и остановили потоки.</span></div>
+<div class="line">    <span class="keyword">delete</span> isve; <span class="comment">// Удалили враппер, мир и фабрику.</span></div>
+<div class="line">    device-&gt;drop(); <span class="comment">// Последним - устройство Irrlicht.</span></div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="tutorials.html">Уроки по врапперу IrrSimpleVoxelEngine.</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

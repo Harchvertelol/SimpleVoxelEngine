@@ -61,7 +61,7 @@
         Block* parentblock = 0; // ”казатель на блок, от которого идЄт проверка на прозрачность.
         if(svo->getTypeVoxel() != CUSTOM_VOXEL) return false; // ≈сли тип воксел€ не наш, то делаем его непрозрачным.
         else block = (Block*)svo; // ѕреобразовали тип указател€.
-        if(parent->getTypeVoxel() == CUSTOM_VOXEL) parentblock = (Block*)parent; // ѕреобразовали тип указател€ только в том случае, если он преобразуетс€.
+        if(parent && parent->getTypeVoxel() == CUSTOM_VOXEL) parentblock = (Block*)parent; // ѕреобразовали тип указател€ только в том случае, если он преобразуетс€. parent может быть NULL (например, у граней вложенного чанка) - провер€ем.
         unsigned int id = block->getId(); // «апомнили ID провер€емого блока.
         unsigned int idparent = 0; // ѕоложили по умолчанию ID родител€ 0.
         if(parentblock) idparent = parentblock->getId(); // ≈сли родитель нашего типа, то запомним его ID.
@@ -200,7 +200,7 @@
             Block* parentblock = 0; // ”казатель на блок, от которого идЄт проверка на прозрачность.
             if(svo->getTypeVoxel() != CUSTOM_VOXEL) return false; // ≈сли тип воксел€ не наш, то делаем его непрозрачным.
             else block = (Block*)svo; // ѕреобразовали тип указател€.
-            if(parent->getTypeVoxel() == CUSTOM_VOXEL) parentblock = (Block*)parent; // ѕреобразовали тип указател€ только в том случае, если он преобразуетс€.
+            if(parent && parent->getTypeVoxel() == CUSTOM_VOXEL) parentblock = (Block*)parent; // ѕреобразовали тип указател€ только в том случае, если он преобразуетс€. parent может быть NULL (например, у граней вложенного чанка) - провер€ем.
             unsigned int id = block->getId(); // «апомнили ID провер€емого блока.
             unsigned int idparent = 0; // ѕоложили по умолчанию ID родител€ 0.
             if(parentblock) idparent = parentblock->getId(); // ≈сли родитель нашего типа, то запомним его ID.
@@ -270,7 +270,7 @@
      sve->registerEvent(EVENT_TYPE_STANDARD, "ID = " + WorkFunctions::ConvertFunctions::itos(block->getId()));
      block = new Block(2); // —оздали наш новый блок.
      wrld->setSimpleVoxelObject(&vxladdr, block, true); // ”становили наш блок по данному адресу, указав переписать воксель в случае наличи€.
-     delete sve; // ”далили движок (автосохранение мира и чанков, если не хочетс€ - можно поправить сам контроллер сохранений, переключив перед удалением в режим, когда он не сохран€ет).
+     delete sve; // ”далили движок (автосохранени€ мира и чанков нет - чтобы сохранить, вызовите перед удалением wrld->saveAllChunks()).
      return 0;
  }
  \endcode

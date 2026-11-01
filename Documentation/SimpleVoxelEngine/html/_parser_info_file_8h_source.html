@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
-<title>SimpleVoxelEngine: Исходный файл ParserInfoFile.h</title>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SimpleVoxelEngine: Исходный файл E:/NeuroCoding/Claude/MyVoxelWork/SimpleVoxelEngine/include/IniParser/ParserInfoFile.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,117 +23,141 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">SimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Воксельный движок</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li><a href="pages.html"><span>Описания</span></a></li>
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li class="current"><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>Файлы</span></a></li>
-    </ul>
+  <div id="splitbar" class="ui-resizable-handle">
   </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('_parser_info_file_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_a81b5585c26ee11ef3f8637bee9e603c.html">jane</a></li><li class="navelem"><a class="el" href="dir_a87058c2edbd9f58c6f2635354598c68.html">Информатика</a></li><li class="navelem"><a class="el" href="dir_9ce0018b5864768711f69410f7e6df2b.html">c++</a></li><li class="navelem"><a class="el" href="dir_eea9b0c3eef2307c57166cdd45f56f4e.html">Графика(движки)</a></li><li class="navelem"><a class="el" href="dir_bd0a5ceea3a5bd1dc90d43f3000c4e2f.html">Irrlicht</a></li><li class="navelem"><a class="el" href="dir_25cec2ae9268a684d598f049d6333b22.html">Воксели</a></li><li class="navelem"><a class="el" href="dir_39ecb1a257347a703824a93feae6f833.html">MyVoxelWork</a></li><li class="navelem"><a class="el" href="dir_fe9ba0f9e257059b21256fb9d79583ef.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="dir_19a2cd1bac5932778934840f305deb7b.html">include</a></li><li class="navelem"><a class="el" href="dir_de84bd6b67bb0d7c62808838d70fda23.html">IniParser</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
-  <div class="headertitle">
-<div class="title">ParserInfoFile.h</div>  </div>
+  <div class="headertitle"><div class="title">ParserInfoFile.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef PARSERINFOFILE_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define PARSERINFOFILE_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;PostParsingStruct.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="namespace_ini_parser.html">    8</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_ini_parser.html">IniParser</a></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_ini_parser_1_1_parser_info_file.html">   13</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_ini_parser_1_1_parser_info_file.html">ParserInfoFile</a></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    {</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            <a class="code" href="class_ini_parser_1_1_parser_info_file.html#aec392d9d1d7fff20137c3c73bfa0e3f0">ParserInfoFile</a>();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <a class="code" href="class_ini_parser_1_1_parser_info_file.html#ada55fc6692b873f42a60a5a469b063d1">~ParserInfoFile</a>();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <a class="code" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a>* <a class="code" href="class_ini_parser_1_1_parser_info_file.html#a4258dc7dc8f167faa5cc89470594de13">getParsedFromFile</a>(std::string filename, <span class="keywordtype">bool</span> log = <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <a class="code" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a>* <a class="code" href="class_ini_parser_1_1_parser_info_file.html#a637dedc8e64b4004bed286ff73e4454a">getParsedFromString</a>(std::string str, std::string splitter);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            std::string <a class="code" href="class_ini_parser_1_1_parser_info_file.html#ac47c5803ba715a1d930ed71b1eb6e845">convertPostParsingStructToString</a>(<a class="code" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a>* pps, std::string splitter);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="class_ini_parser_1_1_parser_info_file.html#a62af083cc5d0505b5fa02893ca248448">writeParsedToFile</a>(<a class="code" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a>* pps, std::string filename, <span class="keywordtype">bool</span> log = <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    };</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="class_ini_parser_1_1_parser_info_file_html_ada55fc6692b873f42a60a5a469b063d1"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#ada55fc6692b873f42a60a5a469b063d1">IniParser::ParserInfoFile::~ParserInfoFile</a></div><div class="ttdeci">~ParserInfoFile()</div><div class="ttdoc">Стандартный деструктор. </div></div>
-<div class="ttc" id="class_ini_parser_1_1_post_parsing_struct_html"><div class="ttname"><a href="class_ini_parser_1_1_post_parsing_struct.html">IniParser::PostParsingStruct</a></div><div class="ttdoc">Класс, который заполняется в результате обработки ini-файла. </div><div class="ttdef"><b>Definition:</b> <a href="_post_parsing_struct_8h_source.html#l00013">PostParsingStruct.h:13</a></div></div>
-<div class="ttc" id="class_ini_parser_1_1_parser_info_file_html_aec392d9d1d7fff20137c3c73bfa0e3f0"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#aec392d9d1d7fff20137c3c73bfa0e3f0">IniParser::ParserInfoFile::ParserInfoFile</a></div><div class="ttdeci">ParserInfoFile()</div><div class="ttdoc">Стандартный конструктор. </div></div>
-<div class="ttc" id="class_ini_parser_1_1_parser_info_file_html_a4258dc7dc8f167faa5cc89470594de13"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#a4258dc7dc8f167faa5cc89470594de13">IniParser::ParserInfoFile::getParsedFromFile</a></div><div class="ttdeci">PostParsingStruct * getParsedFromFile(std::string filename, bool log=true)</div><div class="ttdoc">Получение результата обработки из файла. </div></div>
-<div class="ttc" id="class_ini_parser_1_1_parser_info_file_html"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html">IniParser::ParserInfoFile</a></div><div class="ttdoc">Класс для обработки ini-файлов. </div><div class="ttdef"><b>Definition:</b> <a href="_parser_info_file_8h_source.html#l00013">ParserInfoFile.h:13</a></div></div>
-<div class="ttc" id="namespace_ini_parser_html"><div class="ttname"><a href="namespace_ini_parser.html">IniParser</a></div><div class="ttdoc">Пространство имён, содержащее парсер ini файлов. </div><div class="ttdef"><b>Definition:</b> <a href="_parser_info_file_8h_source.html#l00008">ParserInfoFile.h:8</a></div></div>
-<div class="ttc" id="class_ini_parser_1_1_parser_info_file_html_ac47c5803ba715a1d930ed71b1eb6e845"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#ac47c5803ba715a1d930ed71b1eb6e845">IniParser::ParserInfoFile::convertPostParsingStructToString</a></div><div class="ttdeci">std::string convertPostParsingStructToString(PostParsingStruct *pps, std::string splitter)</div><div class="ttdoc">Конвертация PostParsingStruct в строку. </div></div>
-<div class="ttc" id="class_ini_parser_1_1_parser_info_file_html_a637dedc8e64b4004bed286ff73e4454a"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#a637dedc8e64b4004bed286ff73e4454a">IniParser::ParserInfoFile::getParsedFromString</a></div><div class="ttdeci">PostParsingStruct * getParsedFromString(std::string str, std::string splitter)</div><div class="ttdoc">Получение результата обработки из строки. </div></div>
-<div class="ttc" id="class_ini_parser_1_1_parser_info_file_html_a62af083cc5d0505b5fa02893ca248448"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#a62af083cc5d0505b5fa02893ca248448">IniParser::ParserInfoFile::writeParsedToFile</a></div><div class="ttdeci">bool writeParsedToFile(PostParsingStruct *pps, std::string filename, bool log=true)</div><div class="ttdoc">Запись PostParsingStruct в файл. </div></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef PARSERINFOFILE_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define PARSERINFOFILE_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;PostParsingStruct.h&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="foldopen" id="foldopen00008" data-start="{" data-end="}">
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="namespace_ini_parser.html">    8</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_ini_parser.html">IniParser</a></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span></div>
+<div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_ini_parser_1_1_parser_info_file.html">   13</a></span>    <span class="keyword">class </span><a class="code hl_function" href="class_ini_parser_1_1_parser_info_file.html#aec392d9d1d7fff20137c3c73bfa0e3f0">ParserInfoFile</a></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_ini_parser_1_1_parser_info_file.html#aec392d9d1d7fff20137c3c73bfa0e3f0">   17</a></span>            <a class="code hl_function" href="class_ini_parser_1_1_parser_info_file.html#aec392d9d1d7fff20137c3c73bfa0e3f0">ParserInfoFile</a>();</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_ini_parser_1_1_parser_info_file.html#ada55fc6692b873f42a60a5a469b063d1">   19</a></span>            <a class="code hl_function" href="class_ini_parser_1_1_parser_info_file.html#ada55fc6692b873f42a60a5a469b063d1">~ParserInfoFile</a>();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="class_ini_parser_1_1_parser_info_file.html#a7b9db8eab4e137fb66a3dee810e06571">   25</a></span>            <a class="code hl_class" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a>* <a class="code hl_function" href="class_ini_parser_1_1_parser_info_file.html#a7b9db8eab4e137fb66a3dee810e06571">getParsedFromFile</a>(std::string filename, <span class="keywordtype">bool</span> log = <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="class_ini_parser_1_1_parser_info_file.html#a844f79f5305cd24aab128fcfc899c24b">   31</a></span>            <a class="code hl_class" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a>* <a class="code hl_function" href="class_ini_parser_1_1_parser_info_file.html#a844f79f5305cd24aab128fcfc899c24b">getParsedFromString</a>(std::string str, std::string splitter);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="class_ini_parser_1_1_parser_info_file.html#ac47c5803ba715a1d930ed71b1eb6e845">   37</a></span>            std::string <a class="code hl_function" href="class_ini_parser_1_1_parser_info_file.html#ac47c5803ba715a1d930ed71b1eb6e845">convertPostParsingStructToString</a>(<a class="code hl_class" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a>* pps, std::string splitter);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="class_ini_parser_1_1_parser_info_file.html#a62af083cc5d0505b5fa02893ca248448">   44</a></span>            <span class="keywordtype">bool</span> <a class="code hl_function" href="class_ini_parser_1_1_parser_info_file.html#a62af083cc5d0505b5fa02893ca248448">writeParsedToFile</a>(<a class="code hl_class" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a>* pps, std::string filename, <span class="keywordtype">bool</span> log = <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    };</div>
+</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>};</div>
+</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_ini_parser_1_1_parser_info_file_html_a62af083cc5d0505b5fa02893ca248448"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#a62af083cc5d0505b5fa02893ca248448">IniParser::ParserInfoFile::writeParsedToFile</a></div><div class="ttdeci">bool writeParsedToFile(PostParsingStruct *pps, std::string filename, bool log=true)</div><div class="ttdoc">Запись PostParsingStruct в файл.</div></div>
+<div class="ttc" id="aclass_ini_parser_1_1_parser_info_file_html_a7b9db8eab4e137fb66a3dee810e06571"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#a7b9db8eab4e137fb66a3dee810e06571">IniParser::ParserInfoFile::getParsedFromFile</a></div><div class="ttdeci">PostParsingStruct * getParsedFromFile(std::string filename, bool log=true)</div><div class="ttdoc">Получение результата обработки из файла.</div></div>
+<div class="ttc" id="aclass_ini_parser_1_1_parser_info_file_html_a844f79f5305cd24aab128fcfc899c24b"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#a844f79f5305cd24aab128fcfc899c24b">IniParser::ParserInfoFile::getParsedFromString</a></div><div class="ttdeci">PostParsingStruct * getParsedFromString(std::string str, std::string splitter)</div><div class="ttdoc">Получение результата обработки из строки.</div></div>
+<div class="ttc" id="aclass_ini_parser_1_1_parser_info_file_html_ac47c5803ba715a1d930ed71b1eb6e845"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#ac47c5803ba715a1d930ed71b1eb6e845">IniParser::ParserInfoFile::convertPostParsingStructToString</a></div><div class="ttdeci">std::string convertPostParsingStructToString(PostParsingStruct *pps, std::string splitter)</div><div class="ttdoc">Конвертация PostParsingStruct в строку.</div></div>
+<div class="ttc" id="aclass_ini_parser_1_1_parser_info_file_html_ada55fc6692b873f42a60a5a469b063d1"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#ada55fc6692b873f42a60a5a469b063d1">IniParser::ParserInfoFile::~ParserInfoFile</a></div><div class="ttdeci">~ParserInfoFile()</div><div class="ttdoc">Стандартный деструктор.</div></div>
+<div class="ttc" id="aclass_ini_parser_1_1_parser_info_file_html_aec392d9d1d7fff20137c3c73bfa0e3f0"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#aec392d9d1d7fff20137c3c73bfa0e3f0">IniParser::ParserInfoFile::ParserInfoFile</a></div><div class="ttdeci">ParserInfoFile()</div><div class="ttdoc">Стандартный конструктор.</div></div>
+<div class="ttc" id="aclass_ini_parser_1_1_post_parsing_struct_html"><div class="ttname"><a href="class_ini_parser_1_1_post_parsing_struct.html">IniParser::PostParsingStruct</a></div><div class="ttdoc">Класс, который заполняется в результате обработки ini-файла.</div><div class="ttdef"><b>Определения</b> PostParsingStruct.h:14</div></div>
+<div class="ttc" id="anamespace_ini_parser_html"><div class="ttname"><a href="namespace_ini_parser.html">IniParser</a></div><div class="ttdoc">Пространство имён, содержащее парсер ini файлов.</div><div class="ttdef"><b>Определения</b> ParserInfoFile.h:9</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:21. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>SimpleVoxelEngine</b></li><li class="navelem"><b>include</b></li><li class="navelem"><b>IniParser</b></li><li class="navelem"><b>ParserInfoFile.h</b></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

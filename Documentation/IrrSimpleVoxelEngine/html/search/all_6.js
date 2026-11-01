@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lockdata',['LockData',['../struct_simple_voxel_engine_1_1_irr_engine_1_1_lock_data.html',1,'SimpleVoxelEngine::IrrEngine']]]
+  ['6_3a_20стриминг_20чанков_3a_20загрузка_20вокруг_20игроков_20и_20границы_20мира_0',['Урок 6: Стриминг чанков: загрузка вокруг игроков и границы мира.',['../tutorial6.html',1,'tutorials']]]
 ];

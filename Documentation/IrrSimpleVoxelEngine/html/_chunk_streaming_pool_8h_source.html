@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Исходный файл E:/NeuroCoding/Claude/MyVoxelWork/IrrSimpleVoxelEngine/include/ChunkStreamingPool.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IrrSimpleVoxelEngine
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('_chunk_streaming_pool_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ChunkStreamingPool.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef ChunkStreamingPool_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define ChunkStreamingPool_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;mutex&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;set&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;SimpleVoxelEngine.h&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;ChunkStreamingController.h&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;Task.h&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>{</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keyword">class </span><a class="code hl_class" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html">IrrSimpleVoxelEngine</a>;</div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html">   22</a></span>        <span class="keyword">struct </span><a class="code hl_struct" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html">ChunkStreamingState</a></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ad233bdd55eb87c6fc6a0886f8a87aed7">   24</a></span>            <span class="keywordtype">int</span> <a class="code hl_variable" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ad233bdd55eb87c6fc6a0886f8a87aed7">s_RenderWanted</a> = 0; </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ad9be74f23025a1faca35fe6125cce40e">   25</a></span>            <span class="keywordtype">int</span> <a class="code hl_variable" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ad9be74f23025a1faca35fe6125cce40e">s_Rendered</a> = 0; </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#a1f72706d2ea1684cb2fb843bdaad9027">   26</a></span>            <span class="keywordtype">int</span> <a class="code hl_variable" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#a1f72706d2ea1684cb2fb843bdaad9027">s_MemoryWanted</a> = 0; </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ac69572cccedbbf1e131778c5fdc8e223">   27</a></span>            <span class="keywordtype">int</span> <a class="code hl_variable" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ac69572cccedbbf1e131778c5fdc8e223">s_Loaded</a> = 0; </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#aa190b2bf5151b84f369e0871ad5ab3bd">   28</a></span>            <span class="keywordtype">int</span> <a class="code hl_variable" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#aa190b2bf5151b84f369e0871ad5ab3bd">s_Failed</a> = 0; </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#a5433a1f807e8a8e5e5f7570e95249d49">   29</a></span>            <span class="keywordtype">int</span> <a class="code hl_variable" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#a5433a1f807e8a8e5e5f7570e95249d49">s_OutOfBounds</a> = 0; </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ae334d15a2f03e74db15a6519a8bbac04">   30</a></span>            <span class="keywordtype">int</span> <a class="code hl_variable" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ae334d15a2f03e74db15a6519a8bbac04">s_PendingActions</a> = 0; </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        };</div>
+</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
+<div class="foldopen" id="foldopen00051" data-start="{" data-end="};">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html">   51</a></span>        <span class="keyword">class </span>ChunkStreamingPool</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a364db84fb7807ef6746997d994b5adcf">   59</a></span>                <a class="code hl_class" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html">ChunkStreamingController</a>* <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a364db84fb7807ef6746997d994b5adcf">addController</a>(<span class="keyword">const</span> std::string&amp; name, <span class="keywordtype">int</span> worldid);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#ab7cba0b56c2ef9bc7e2b9bbd68cc899a">   64</a></span>                <a class="code hl_class" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html">ChunkStreamingController</a>* <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#ab7cba0b56c2ef9bc7e2b9bbd68cc899a">getController</a>(<span class="keyword">const</span> std::string&amp; name);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#aa20fbebb747edba51d061f6562a7acee">   71</a></span>                <span class="keywordtype">bool</span> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#aa20fbebb747edba51d061f6562a7acee">removeController</a>(<span class="keyword">const</span> std::string&amp; name);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a1c8fc9abc8bb4cc220f8b496ff17ad91">   73</a></span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a1c8fc9abc8bb4cc220f8b496ff17ad91">removeAllControllers</a>();</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a3fcec1065736d3bfe60bee5703e574ce">   77</a></span>                std::vector&lt;std::string&gt; <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a3fcec1065736d3bfe60bee5703e574ce">getControllerNames</a>();</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a7e58d846729bdbfcbd46963f21a87d63">   81</a></span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a7e58d846729bdbfcbd46963f21a87d63">step</a>();</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a38f6e4118982e4526aebc2b857b55aa0">   85</a></span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a38f6e4118982e4526aebc2b857b55aa0">setMaxPendingActions</a>(<span class="keywordtype">int</span> value);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a773cd8191cfcc7af2bab41a2d116249d">   89</a></span>                <span class="keywordtype">int</span> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a773cd8191cfcc7af2bab41a2d116249d">getMaxPendingActions</a>();</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a46d0dd5b0463e8b5bafec1f71ea9e750">   93</a></span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a46d0dd5b0463e8b5bafec1f71ea9e750">setMaxLoadsPerStep</a>(<span class="keywordtype">int</span> value);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a06d9e2b42ba216e211dc15e8e84abf60">   97</a></span>                <span class="keywordtype">int</span> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a06d9e2b42ba216e211dc15e8e84abf60">getMaxLoadsPerStep</a>();</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#af35549cddb6f9ebc61f5ad5508fdd861">  101</a></span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#af35549cddb6f9ebc61f5ad5508fdd861">setMaxUnloadsPerStep</a>(<span class="keywordtype">int</span> value);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a2491cf07f1812424899e7515f9763911">  105</a></span>                <span class="keywordtype">int</span> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a2491cf07f1812424899e7515f9763911">getMaxUnloadsPerStep</a>();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a5a2adcf075a241210909a79eeafff438">  110</a></span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a5a2adcf075a241210909a79eeafff438">setSaveOnUnload</a>(<span class="keywordtype">bool</span> value);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a15ff107462ae1a196718c42453d2bed5">  114</a></span>                <span class="keywordtype">bool</span> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a15ff107462ae1a196718c42453d2bed5">getSaveOnUnload</a>();</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a8e3659d5f4de5af4cab1d4bf025ea480">  118</a></span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a8e3659d5f4de5af4cab1d4bf025ea480">setRetryDelayMilliseconds</a>(irr::u32 ms);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#aa1649ac9fb6d506c3c8eb340fe069e0c">  122</a></span>                irr::u32 <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#aa1649ac9fb6d506c3c8eb340fe069e0c">getRetryDelayMilliseconds</a>();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a689f1306d8b07a386a1b1fa3b215d58b">  127</a></span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a689f1306d8b07a386a1b1fa3b215d58b">setRecheckIntervalMilliseconds</a>(irr::u32 ms);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a47c9b0981edd9ffacb31b2f96203c288">  131</a></span>                irr::u32 <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a47c9b0981edd9ffacb31b2f96203c288">getRecheckIntervalMilliseconds</a>();</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a7f1f1192f4ad4bd3fc9696830817fc7f">  137</a></span>                <a class="code hl_struct" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html">ChunkStreamingState</a> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a7f1f1192f4ad4bd3fc9696830817fc7f">getState</a>(<span class="keyword">const</span> std::string&amp; name);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#accc620d712f34c5cadb16ec02c4aa927">  143</a></span>                <span class="keywordtype">bool</span> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#accc620d712f34c5cadb16ec02c4aa927">isAreaReady</a>(<span class="keyword">const</span> std::string&amp; name);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a980653439fc219dbf9ab9967d75ddd0a">  149</a></span>                std::set&lt;std::string&gt; <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a980653439fc219dbf9ab9967d75ddd0a">getChunkOwners</a>(<span class="keywordtype">int</span> worldid, SimpleVoxelEngine::Additional::Vector3d&lt;int&gt; vect);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#ac29a12a2cadf984f987f07e57f17fa23">  153</a></span>                <span class="keywordtype">int</span> <a class="code hl_function" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#ac29a12a2cadf984f987f07e57f17fa23">getPendingActions</a>();</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>                <span class="keyword">friend</span> <span class="keyword">class </span>IrrSimpleVoxelEngine;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                <span class="keyword">struct </span>Entry</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                    std::set&lt;std::string&gt; s_RenderOwners; </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                    std::set&lt;std::string&gt; s_MemoryOwners; </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                    <span class="keywordtype">bool</span> s_PoolLoaded = <span class="keyword">false</span>; </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                    <span class="keywordtype">bool</span> s_PoolRendered = <span class="keyword">false</span>; </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                    <span class="keywordtype">bool</span> s_Pending = <span class="keyword">false</span>; </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                    <span class="keywordtype">bool</span> s_Failed = <span class="keyword">false</span>; </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                    irr::u32 s_FailTime = 0; </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                    <span class="keywordtype">bool</span> s_UnloadFailed = <span class="keyword">false</span>; </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                    irr::u32 s_UnloadFailTime = 0; </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                };</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                <span class="keyword">struct </span>Candidate</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                {</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                    <span class="keywordtype">long</span> <span class="keywordtype">long</span> s_Distance; </div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                    <span class="keywordtype">int</span> s_WorldId; </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                    SimpleVoxelEngine::Additional::Vector3d&lt;int&gt; s_Vector; </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>                    <span class="keywordtype">bool</span> operator&lt;(<span class="keyword">const</span> Candidate&amp; other)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> s_Distance &lt; other.s_Distance; }</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                };</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>                ChunkStreamingPool(IrrSimpleVoxelEngine* isve);</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>                ~ChunkStreamingPool();</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>                <span class="keywordtype">void</span> updateControllerArea(ChunkStreamingController* c, <span class="keywordtype">bool</span> remove);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>                <span class="keywordtype">void</span> schedule(irr::u32 now);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>                <span class="keywordtype">long</span> <span class="keywordtype">long</span> distanceToOwners(<span class="keyword">const</span> Entry&amp; e, SimpleVoxelEngine::Additional::Vector3d&lt;int&gt; vect);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>                <span class="keywordtype">void</span> onActionDone(<span class="keywordtype">int</span> worldid, SimpleVoxelEngine::Additional::Vector3d&lt;int&gt; vect, <a class="code hl_enumeration" href="namespace_simple_voxel_engine_1_1_irr_engine.html#aa9222a7e17b78291dda436f10e65a06f">STREAM_CHUNK_ACTION</a> action, <a class="code hl_enumeration" href="namespace_simple_voxel_engine_1_1_irr_engine.html#a6a2991bcbb3cd1f3d6673f7c32f58589">STREAM_CHUNK_RESULT</a> result);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                IrrSimpleVoxelEngine* s_ISVE; </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                std::mutex s_Lock; </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>                std::map&lt;std::string, ChunkStreamingController*&gt; s_Controllers; </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>                std::map&lt; int, std::map&lt; SimpleVoxelEngine::Additional::Vector3d&lt;int&gt;, Entry &gt; &gt; s_Chunks; </div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>                <span class="keywordtype">int</span> s_MaxPendingActions; </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>                <span class="keywordtype">int</span> s_MaxLoadsPerStep; </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>                <span class="keywordtype">int</span> s_MaxUnloadsPerStep; </div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>                <span class="keywordtype">bool</span> s_SaveOnUnload; </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>                irr::u32 s_RetryDelay; </div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>                irr::u32 s_RecheckInterval; </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>                irr::u32 s_LastSchedule; </div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>                <span class="keywordtype">bool</span> s_NeedSchedule; </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                <span class="keywordtype">int</span> s_PendingActions; </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        };</div>
+</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    }</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>}</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller_html"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html">SimpleVoxelEngine::IrrEngine::ChunkStreamingController</a></div><div class="ttdoc">Контроллер стриминга чанков - &quot;игрок&quot; или &quot;камера&quot;, вокруг которых загружаются и отрисовываются чанки...</div><div class="ttdef"><b>Определения</b> ChunkStreamingController.h:43</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a06d9e2b42ba216e211dc15e8e84abf60"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a06d9e2b42ba216e211dc15e8e84abf60">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getMaxLoadsPerStep</a></div><div class="ttdeci">int getMaxLoadsPerStep()</div><div class="ttdoc">Получение предела загрузок за шаг.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a15ff107462ae1a196718c42453d2bed5"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a15ff107462ae1a196718c42453d2bed5">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getSaveOnUnload</a></div><div class="ttdeci">bool getSaveOnUnload()</div><div class="ttdoc">Сохраняются ли чанки при выгрузке.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a1c8fc9abc8bb4cc220f8b496ff17ad91"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a1c8fc9abc8bb4cc220f8b496ff17ad91">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::removeAllControllers</a></div><div class="ttdeci">void removeAllControllers()</div><div class="ttdoc">Удаление всех контроллеров (их чанки выгружаются на следующих шагах).</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a2491cf07f1812424899e7515f9763911"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a2491cf07f1812424899e7515f9763911">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getMaxUnloadsPerStep</a></div><div class="ttdeci">int getMaxUnloadsPerStep()</div><div class="ttdoc">Получение предела выгрузок за шаг.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a364db84fb7807ef6746997d994b5adcf"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a364db84fb7807ef6746997d994b5adcf">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::addController</a></div><div class="ttdeci">ChunkStreamingController * addController(const std::string &amp;name, int worldid)</div><div class="ttdoc">Добавление контроллера.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a38f6e4118982e4526aebc2b857b55aa0"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a38f6e4118982e4526aebc2b857b55aa0">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::setMaxPendingActions</a></div><div class="ttdeci">void setMaxPendingActions(int value)</div><div class="ttdoc">Сколько действий пула может одновременно ждать в главной очереди.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a3fcec1065736d3bfe60bee5703e574ce"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a3fcec1065736d3bfe60bee5703e574ce">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getControllerNames</a></div><div class="ttdeci">std::vector&lt; std::string &gt; getControllerNames()</div><div class="ttdoc">Получение имён всех контроллеров.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a46d0dd5b0463e8b5bafec1f71ea9e750"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a46d0dd5b0463e8b5bafec1f71ea9e750">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::setMaxLoadsPerStep</a></div><div class="ttdeci">void setMaxLoadsPerStep(int value)</div><div class="ttdoc">Сколько чанков за один шаг можно поставить на загрузку.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a47c9b0981edd9ffacb31b2f96203c288"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a47c9b0981edd9ffacb31b2f96203c288">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getRecheckIntervalMilliseconds</a></div><div class="ttdeci">irr::u32 getRecheckIntervalMilliseconds()</div><div class="ttdoc">Получение интервала перепроверки.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a5a2adcf075a241210909a79eeafff438"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a5a2adcf075a241210909a79eeafff438">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::setSaveOnUnload</a></div><div class="ttdeci">void setSaveOnUnload(bool value)</div><div class="ttdoc">Сохранять ли чанки при выгрузке.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a689f1306d8b07a386a1b1fa3b215d58b"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a689f1306d8b07a386a1b1fa3b215d58b">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::setRecheckIntervalMilliseconds</a></div><div class="ttdeci">void setRecheckIntervalMilliseconds(irr::u32 ms)</div><div class="ttdoc">Как часто перепроверять, что на самом деле загружено, даже если контроллеры стоят на месте.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a773cd8191cfcc7af2bab41a2d116249d"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a773cd8191cfcc7af2bab41a2d116249d">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getMaxPendingActions</a></div><div class="ttdeci">int getMaxPendingActions()</div><div class="ttdoc">Получение предела действий в очереди.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a7e58d846729bdbfcbd46963f21a87d63"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a7e58d846729bdbfcbd46963f21a87d63">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::step</a></div><div class="ttdeci">void step()</div><div class="ttdoc">Шаг пула: вызывать каждый кадр в главном потоке.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a7f1f1192f4ad4bd3fc9696830817fc7f"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a7f1f1192f4ad4bd3fc9696830817fc7f">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getState</a></div><div class="ttdeci">ChunkStreamingState getState(const std::string &amp;name)</div><div class="ttdoc">Состояние области контроллера.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a8e3659d5f4de5af4cab1d4bf025ea480"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a8e3659d5f4de5af4cab1d4bf025ea480">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::setRetryDelayMilliseconds</a></div><div class="ttdeci">void setRetryDelayMilliseconds(irr::u32 ms)</div><div class="ttdoc">Через сколько миллисекунд повторить загрузку (или выгрузку) чанка, которая не удалась.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_a980653439fc219dbf9ab9967d75ddd0a"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a980653439fc219dbf9ab9967d75ddd0a">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getChunkOwners</a></div><div class="ttdeci">std::set&lt; std::string &gt; getChunkOwners(int worldid, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</div><div class="ttdoc">Владельцы чанка.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_aa1649ac9fb6d506c3c8eb340fe069e0c"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#aa1649ac9fb6d506c3c8eb340fe069e0c">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getRetryDelayMilliseconds</a></div><div class="ttdeci">irr::u32 getRetryDelayMilliseconds()</div><div class="ttdoc">Получение времени до повтора загрузки.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_aa20fbebb747edba51d061f6562a7acee"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#aa20fbebb747edba51d061f6562a7acee">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::removeController</a></div><div class="ttdeci">bool removeController(const std::string &amp;name)</div><div class="ttdoc">Удаление контроллера.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_ab7cba0b56c2ef9bc7e2b9bbd68cc899a"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#ab7cba0b56c2ef9bc7e2b9bbd68cc899a">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getController</a></div><div class="ttdeci">ChunkStreamingController * getController(const std::string &amp;name)</div><div class="ttdoc">Получение контроллера.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_ac29a12a2cadf984f987f07e57f17fa23"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#ac29a12a2cadf984f987f07e57f17fa23">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getPendingActions</a></div><div class="ttdeci">int getPendingActions()</div><div class="ttdoc">Сколько действий пула ждёт в главной очереди.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_accc620d712f34c5cadb16ec02c4aa927"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#accc620d712f34c5cadb16ec02c4aa927">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::isAreaReady</a></div><div class="ttdeci">bool isAreaReady(const std::string &amp;name)</div><div class="ttdoc">Готова ли область контроллера.</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool_html_af35549cddb6f9ebc61f5ad5508fdd861"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#af35549cddb6f9ebc61f5ad5508fdd861">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::setMaxUnloadsPerStep</a></div><div class="ttdeci">void setMaxUnloadsPerStep(int value)</div><div class="ttdoc">Сколько чанков за один шаг можно поставить на выгрузку (и убрать из отрисовки).</div></div>
+<div class="ttc" id="aclass_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine_html"><div class="ttname"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a></div><div class="ttdoc">Движок.</div><div class="ttdef"><b>Определения</b> IrrSimpleVoxelEngine.h:46</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">SimpleVoxelEngine::IrrEngine</a></div><div class="ttdoc">Главное пространство имён IrrSimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:13</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html_a6a2991bcbb3cd1f3d6673f7c32f58589"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html#a6a2991bcbb3cd1f3d6673f7c32f58589">SimpleVoxelEngine::IrrEngine::STREAM_CHUNK_RESULT</a></div><div class="ttdeci">STREAM_CHUNK_RESULT</div><div class="ttdoc">Результат действия пула стриминга.</div><div class="ttdef"><b>Определения</b> Task.h:45</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html_aa9222a7e17b78291dda436f10e65a06f"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html#aa9222a7e17b78291dda436f10e65a06f">SimpleVoxelEngine::IrrEngine::STREAM_CHUNK_ACTION</a></div><div class="ttdeci">STREAM_CHUNK_ACTION</div><div class="ttdoc">Действие пула стриминга над одним чанком.</div><div class="ttdef"><b>Определения</b> Task.h:37</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:11</div></div>
+<div class="ttc" id="astruct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state_html"><div class="ttname"><a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html">SimpleVoxelEngine::IrrEngine::ChunkStreamingState</a></div><div class="ttdoc">Состояние области контроллера стриминга (см. ChunkStreamingPool::getState()).</div><div class="ttdef"><b>Определения</b> ChunkStreamingPool.h:23</div></div>
+<div class="ttc" id="astruct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state_html_a1f72706d2ea1684cb2fb843bdaad9027"><div class="ttname"><a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#a1f72706d2ea1684cb2fb843bdaad9027">SimpleVoxelEngine::IrrEngine::ChunkStreamingState::s_MemoryWanted</a></div><div class="ttdeci">int s_MemoryWanted</div><div class="ttdoc">Сколько чанков контроллер держит в памяти (область с кольцом данных).</div><div class="ttdef"><b>Определения</b> ChunkStreamingPool.h:26</div></div>
+<div class="ttc" id="astruct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state_html_a5433a1f807e8a8e5e5f7570e95249d49"><div class="ttname"><a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#a5433a1f807e8a8e5e5f7570e95249d49">SimpleVoxelEngine::IrrEngine::ChunkStreamingState::s_OutOfBounds</a></div><div class="ttdeci">int s_OutOfBounds</div><div class="ttdoc">Сколько чанков области за границами мира (World::setChunksBound()) - их нет, они не загружаются.</div><div class="ttdef"><b>Определения</b> ChunkStreamingPool.h:29</div></div>
+<div class="ttc" id="astruct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state_html_aa190b2bf5151b84f369e0871ad5ab3bd"><div class="ttname"><a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#aa190b2bf5151b84f369e0871ad5ab3bd">SimpleVoxelEngine::IrrEngine::ChunkStreamingState::s_Failed</a></div><div class="ttdeci">int s_Failed</div><div class="ttdoc">Сколько из них не загрузилось (ошибка генератора или контроллера загрузки; пул повторит позже).</div><div class="ttdef"><b>Определения</b> ChunkStreamingPool.h:28</div></div>
+<div class="ttc" id="astruct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state_html_ac69572cccedbbf1e131778c5fdc8e223"><div class="ttname"><a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ac69572cccedbbf1e131778c5fdc8e223">SimpleVoxelEngine::IrrEngine::ChunkStreamingState::s_Loaded</a></div><div class="ttdeci">int s_Loaded</div><div class="ttdoc">Сколько из них уже загружено в память.</div><div class="ttdef"><b>Определения</b> ChunkStreamingPool.h:27</div></div>
+<div class="ttc" id="astruct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state_html_ad233bdd55eb87c6fc6a0886f8a87aed7"><div class="ttname"><a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ad233bdd55eb87c6fc6a0886f8a87aed7">SimpleVoxelEngine::IrrEngine::ChunkStreamingState::s_RenderWanted</a></div><div class="ttdeci">int s_RenderWanted</div><div class="ttdoc">Сколько чанков контроллер держит в отрисовке (область).</div><div class="ttdef"><b>Определения</b> ChunkStreamingPool.h:24</div></div>
+<div class="ttc" id="astruct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state_html_ad9be74f23025a1faca35fe6125cce40e"><div class="ttname"><a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ad9be74f23025a1faca35fe6125cce40e">SimpleVoxelEngine::IrrEngine::ChunkStreamingState::s_Rendered</a></div><div class="ttdeci">int s_Rendered</div><div class="ttdoc">Сколько из них уже загружено и отрисовывается (меш может ещё строиться).</div><div class="ttdef"><b>Определения</b> ChunkStreamingPool.h:25</div></div>
+<div class="ttc" id="astruct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state_html_ae334d15a2f03e74db15a6519a8bbac04"><div class="ttname"><a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ae334d15a2f03e74db15a6519a8bbac04">SimpleVoxelEngine::IrrEngine::ChunkStreamingState::s_PendingActions</a></div><div class="ttdeci">int s_PendingActions</div><div class="ttdoc">Сколько действий пула всех контроллеров ещё ждёт в главной очереди.</div><div class="ttdef"><b>Определения</b> ChunkStreamingPool.h:30</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>IrrSimpleVoxelEngine</b></li><li class="navelem"><b>include</b></li><li class="navelem"><b>ChunkStreamingPool.h</b></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

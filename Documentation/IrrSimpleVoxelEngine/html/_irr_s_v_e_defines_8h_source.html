@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
-<title>IrrSimpleVoxelEngine: Исходный файл IrrSVEDefines.h</title>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Исходный файл E:/NeuroCoding/Claude/MyVoxelWork/IrrSimpleVoxelEngine/include/IrrSVEDefines.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,112 +23,150 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">IrrSimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Враппер для воксельного движка на irrlicht</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li><a href="pages.html"><span>Описания</span></a></li>
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li class="current"><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>Файлы</span></a></li>
-    </ul>
+  <div id="splitbar" class="ui-resizable-handle">
   </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('_irr_s_v_e_defines_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Друзья</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_a81b5585c26ee11ef3f8637bee9e603c.html">jane</a></li><li class="navelem"><a class="el" href="dir_a87058c2edbd9f58c6f2635354598c68.html">Информатика</a></li><li class="navelem"><a class="el" href="dir_9ce0018b5864768711f69410f7e6df2b.html">c++</a></li><li class="navelem"><a class="el" href="dir_eea9b0c3eef2307c57166cdd45f56f4e.html">Графика(движки)</a></li><li class="navelem"><a class="el" href="dir_bd0a5ceea3a5bd1dc90d43f3000c4e2f.html">Irrlicht</a></li><li class="navelem"><a class="el" href="dir_25cec2ae9268a684d598f049d6333b22.html">Воксели</a></li><li class="navelem"><a class="el" href="dir_39ecb1a257347a703824a93feae6f833.html">MyVoxelWork</a></li><li class="navelem"><a class="el" href="dir_4e5641742efd570c45827e810f47202f.html">IrrSimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="dir_466aead8c830fe769aca150fb610a4c6.html">include</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
-  <div class="headertitle">
-<div class="title">IrrSVEDefines.h</div>  </div>
+  <div class="headertitle"><div class="title">IrrSVEDefines.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef IrrSVEDefines_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define IrrSVEDefines_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="keyword">namespace </span>IrrEngine</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    {</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        <span class="keyword">namespace </span>IrrSVEDefines</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        {</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3">   11</a></span>&#160;            <span class="keyword">enum</span> <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3">NUMBER_DEFINES</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;            {</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a6c64b86a8a4f242e2d586b47feb0f98d">   13</a></span>&#160;                <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a6c64b86a8a4f242e2d586b47feb0f98d">DEFAULT_NUMBER_OF_THREAD_ADD_CHUNKS</a> = 1, </div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3af86c70f04793b400cea82f8e8443c5f8">   14</a></span>&#160;                <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3af86c70f04793b400cea82f8e8443c5f8">DEFAULT_NUMBER_OF_THREAD_UPDATE_CHUNKS</a> = 1, </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a98d3a516d5baa2fa31717bfd0476edef">   15</a></span>&#160;                <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a98d3a516d5baa2fa31717bfd0476edef">WAKE_UP_GARBAGE_COLLECTOR_ONCE_PER_MILLISECONDS</a> = 1000, </div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3ad5758c01d3943eea2b77a46376b29534">   16</a></span>&#160;                <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3ad5758c01d3943eea2b77a46376b29534">MAXIMUM_SIZE_OF_QUEUE_FOR_START_CLEANING</a> = 100000, </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a630523280ff52003ff8352dce2362f64">   17</a></span>&#160;                <a class="code" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a630523280ff52003ff8352dce2362f64">ALWAYS_BE_CLEANED_ONCE_PER_MILLISECOND</a> = 60000, </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                TIMER_OCCLUSION_QUERIES_IN_MILLISECONDS = 100 </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            };</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        }</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    }</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="namespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine. </div><div class="ttdef"><b>Definition:</b> <a href="_chunks_mesh_block_8h_source.html#l00010">ChunksMeshBlock.h:10</a></div></div>
-<div class="ttc" id="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html_afdf9968e4547e68deda475ee4517f5c3a98d3a516d5baa2fa31717bfd0476edef"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a98d3a516d5baa2fa31717bfd0476edef">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::WAKE_UP_GARBAGE_COLLECTOR_ONCE_PER_MILLISECONDS</a></div><div class="ttdoc">Раз за сколько миллисекунд просыпается сборщик мусора. </div><div class="ttdef"><b>Definition:</b> <a href="_irr_s_v_e_defines_8h_source.html#l00015">IrrSVEDefines.h:15</a></div></div>
-<div class="ttc" id="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html_afdf9968e4547e68deda475ee4517f5c3af86c70f04793b400cea82f8e8443c5f8"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3af86c70f04793b400cea82f8e8443c5f8">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::DEFAULT_NUMBER_OF_THREAD_UPDATE_CHUNKS</a></div><div class="ttdoc">Стандартное количество потоков для обновления чанков. В данный момент ни на что не влияет...</div><div class="ttdef"><b>Definition:</b> <a href="_irr_s_v_e_defines_8h_source.html#l00014">IrrSVEDefines.h:14</a></div></div>
-<div class="ttc" id="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html_afdf9968e4547e68deda475ee4517f5c3a6c64b86a8a4f242e2d586b47feb0f98d"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a6c64b86a8a4f242e2d586b47feb0f98d">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::DEFAULT_NUMBER_OF_THREAD_ADD_CHUNKS</a></div><div class="ttdoc">Стандартное количество потоков для создания чанков. В данный момент ни на что не влияет. </div><div class="ttdef"><b>Definition:</b> <a href="_irr_s_v_e_defines_8h_source.html#l00013">IrrSVEDefines.h:13</a></div></div>
-<div class="ttc" id="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html_afdf9968e4547e68deda475ee4517f5c3a630523280ff52003ff8352dce2362f64"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a630523280ff52003ff8352dce2362f64">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::ALWAYS_BE_CLEANED_ONCE_PER_MILLISECOND</a></div><div class="ttdoc">Независимо ни от чего раз в это количество миллисекунд сборщик мусора просыпается и чистит очереди...</div><div class="ttdef"><b>Definition:</b> <a href="_irr_s_v_e_defines_8h_source.html#l00017">IrrSVEDefines.h:17</a></div></div>
-<div class="ttc" id="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html_afdf9968e4547e68deda475ee4517f5c3ad5758c01d3943eea2b77a46376b29534"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3ad5758c01d3943eea2b77a46376b29534">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::MAXIMUM_SIZE_OF_QUEUE_FOR_START_CLEANING</a></div><div class="ttdoc">Если длина хотя бы одной очереди задач превысит данное значение, заработает сборщик мусора...</div><div class="ttdef"><b>Definition:</b> <a href="_irr_s_v_e_defines_8h_source.html#l00016">IrrSVEDefines.h:16</a></div></div>
-<div class="ttc" id="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html_afdf9968e4547e68deda475ee4517f5c3"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::NUMBER_DEFINES</a></div><div class="ttdeci">NUMBER_DEFINES</div><div class="ttdoc">Числовые константы. </div><div class="ttdef"><b>Definition:</b> <a href="_irr_s_v_e_defines_8h_source.html#l00011">IrrSVEDefines.h:11</a></div></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef IrrSVEDefines_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define IrrSVEDefines_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>{</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>    <span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>        <span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html">IrrSVEDefines</a></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>        {</div>
+<div class="foldopen" id="foldopen00011" data-start="{" data-end="};">
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3">   11</a></span>            <span class="keyword">enum</span> <a class="code hl_enumeration" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3">NUMBER_DEFINES</a></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>            {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a6c64b86a8a4f242e2d586b47feb0f98d">   13</a></span>                <a class="code hl_enumvalue" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a6c64b86a8a4f242e2d586b47feb0f98d">DEFAULT_NUMBER_OF_THREAD_ADD_CHUNKS</a> = 1, </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3af86c70f04793b400cea82f8e8443c5f8">   14</a></span>                <a class="code hl_enumvalue" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3af86c70f04793b400cea82f8e8443c5f8">DEFAULT_NUMBER_OF_THREAD_UPDATE_CHUNKS</a> = 1, </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>                <span class="comment">//Удалены WAKE_UP_GARBAGE_COLLECTOR_ONCE_PER_MILLISECONDS, MAXIMUM_SIZE_OF_QUEUE_FOR_START_CLEANING,</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>                <span class="comment">//ALWAYS_BE_CLEANED_ONCE_PER_MILLISECOND - настройки сборщика мусора, которого больше нет.</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a0223ac0bc4276306565966eb248dd222">   17</a></span>                <a class="code hl_enumvalue" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a0223ac0bc4276306565966eb248dd222">TIMER_OCCLUSION_QUERIES_IN_MILLISECONDS</a> = 100, </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>                <span class="comment">//Добавлено: Irrlicht удаляет Occlusion Query, которую не запускали больше 1000 кадров.</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a27c850b9052b2b2bb5eaac291e8c273a">   19</a></span>                <a class="code hl_enumvalue" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a27c850b9052b2b2bb5eaac291e8c273a">MAX_FRAMES_BETWEEN_OCCLUSION_QUERIES</a> = 900, </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3af248635d836505278742b53135b09d5a">   20</a></span>                <a class="code hl_enumvalue" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3af248635d836505278742b53135b09d5a">MAX_FRAMES_BETWEEN_OCCLUSION_QUERIES_LIMIT</a> = 1000, </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>                <span class="comment">//Добавлено: при загрузке чанки одного блока приходят в разных кадрах, и без ожидания блок склеивался</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>                <span class="comment">//бы по разу на каждый пришедший чанк. Ожидание ограничено, чтобы один долгий чанк не задерживал показ соседей.</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3ae315955bc7633ccaca947d22531f1d4e">   23</a></span>                <a class="code hl_enumvalue" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3ae315955bc7633ccaca947d22531f1d4e">MAX_DELAY_GLUE_BLOCK_CHUNKS_IN_MILLISECONDS</a> = 1000, </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>                <span class="comment">//Добавлено: потоки враппера не будятся через notify_one() (в winpthreads из MinGW 8.1 он иногда зависает навсегда).</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a9b883ff691084fb66d034b07ac26eda6">   25</a></span>                <a class="code hl_enumvalue" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a9b883ff691084fb66d034b07ac26eda6">THREAD_WAIT_INTERVAL_IN_MILLISECONDS</a> = 2 </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            };</div>
+</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#a8563b1c9d15b937af7ecf19a4af057d6">   30</a></span>            <span class="keyword">const</span> <span class="keywordtype">float</span> <a class="code hl_variable" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#a8563b1c9d15b937af7ecf19a4af057d6">TRANSPARENT_SORT_CAMERA_THRESHOLD</a> = 0.25f;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        }</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    }</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>}</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html">SimpleVoxelEngine::IrrEngine::IrrSVEDefines</a></div><div class="ttdoc">Пространство имён с предопределённым константами для работы движка.</div><div class="ttdef"><b>Определения</b> IrrSimpleVoxelEngine.h:36</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html_a8563b1c9d15b937af7ecf19a4af057d6"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#a8563b1c9d15b937af7ecf19a4af057d6">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::TRANSPARENT_SORT_CAMERA_THRESHOLD</a></div><div class="ttdeci">const float TRANSPARENT_SORT_CAMERA_THRESHOLD</div><div class="ttdoc">Насколько (в единицах сцены, в локальных координатах ноды) должна сместиться камера,...</div><div class="ttdef"><b>Определения</b> IrrSVEDefines.h:30</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html_afdf9968e4547e68deda475ee4517f5c3"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::NUMBER_DEFINES</a></div><div class="ttdeci">NUMBER_DEFINES</div><div class="ttdoc">Числовые константы.</div><div class="ttdef"><b>Определения</b> IrrSVEDefines.h:12</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html_afdf9968e4547e68deda475ee4517f5c3a0223ac0bc4276306565966eb248dd222"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a0223ac0bc4276306565966eb248dd222">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::TIMER_OCCLUSION_QUERIES_IN_MILLISECONDS</a></div><div class="ttdeci">@ TIMER_OCCLUSION_QUERIES_IN_MILLISECONDS</div><div class="ttdoc">Раз в это количество миллисекунд происходит пересчёт Occlusion Queries.</div><div class="ttdef"><b>Определения</b> IrrSVEDefines.h:17</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html_afdf9968e4547e68deda475ee4517f5c3a27c850b9052b2b2bb5eaac291e8c273a"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a27c850b9052b2b2bb5eaac291e8c273a">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::MAX_FRAMES_BETWEEN_OCCLUSION_QUERIES</a></div><div class="ttdeci">@ MAX_FRAMES_BETWEEN_OCCLUSION_QUERIES</div><div class="ttdoc">Occlusion Queries выполняются не реже, чем раз в это количество кадров (вызовов runOcclusionQueries()...</div><div class="ttdef"><b>Определения</b> IrrSVEDefines.h:19</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html_afdf9968e4547e68deda475ee4517f5c3a6c64b86a8a4f242e2d586b47feb0f98d"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a6c64b86a8a4f242e2d586b47feb0f98d">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::DEFAULT_NUMBER_OF_THREAD_ADD_CHUNKS</a></div><div class="ttdeci">@ DEFAULT_NUMBER_OF_THREAD_ADD_CHUNKS</div><div class="ttdoc">Стандартное количество потоков для создания чанков (теперь это реальное число потоков пула,...</div><div class="ttdef"><b>Определения</b> IrrSVEDefines.h:13</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html_afdf9968e4547e68deda475ee4517f5c3a9b883ff691084fb66d034b07ac26eda6"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a9b883ff691084fb66d034b07ac26eda6">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::THREAD_WAIT_INTERVAL_IN_MILLISECONDS</a></div><div class="ttdeci">@ THREAD_WAIT_INTERVAL_IN_MILLISECONDS</div><div class="ttdoc">Как часто поток очереди и потоки построения, когда им нечего делать, проверяют, не появилась ли работ...</div><div class="ttdef"><b>Определения</b> IrrSVEDefines.h:25</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html_afdf9968e4547e68deda475ee4517f5c3ae315955bc7633ccaca947d22531f1d4e"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3ae315955bc7633ccaca947d22531f1d4e">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::MAX_DELAY_GLUE_BLOCK_CHUNKS_IN_MILLISECONDS</a></div><div class="ttdeci">@ MAX_DELAY_GLUE_BLOCK_CHUNKS_IN_MILLISECONDS</div><div class="ttdoc">Сколько максимум склейка блока чанков может ждать, пока будут построены его новые чанки.</div><div class="ttdef"><b>Определения</b> IrrSVEDefines.h:23</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html_afdf9968e4547e68deda475ee4517f5c3af248635d836505278742b53135b09d5a"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3af248635d836505278742b53135b09d5a">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::MAX_FRAMES_BETWEEN_OCCLUSION_QUERIES_LIMIT</a></div><div class="ttdeci">@ MAX_FRAMES_BETWEEN_OCCLUSION_QUERIES_LIMIT</div><div class="ttdoc">Наибольшее допустимое значение setMaxFramesBetweenOcclusionQueries(): Irrlicht удаляет Occlusion Quer...</div><div class="ttdef"><b>Определения</b> IrrSVEDefines.h:20</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines_html_afdf9968e4547e68deda475ee4517f5c3af86c70f04793b400cea82f8e8443c5f8"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3af86c70f04793b400cea82f8e8443c5f8">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::DEFAULT_NUMBER_OF_THREAD_UPDATE_CHUNKS</a></div><div class="ttdeci">@ DEFAULT_NUMBER_OF_THREAD_UPDATE_CHUNKS</div><div class="ttdoc">Стандартное количество потоков для обновления чанков (реальное число потоков пула,...</div><div class="ttdef"><b>Определения</b> IrrSVEDefines.h:14</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">SimpleVoxelEngine::IrrEngine</a></div><div class="ttdoc">Главное пространство имён IrrSimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:13</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по IrrSimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:36. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>IrrSimpleVoxelEngine</b></li><li class="navelem"><b>include</b></li><li class="navelem"><b>IrrSVEDefines.h</b></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

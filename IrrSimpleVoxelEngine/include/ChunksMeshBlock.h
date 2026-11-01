@@ -37,7 +37,12 @@ namespace SimpleVoxelEngine
                 //! Установка множителя масштабирования SimpleVoxelObject.
                 /*! \param scale Множитель масштабирования.
                 */
-                void setScale(int scale);
+                void setScale(float scale); //Было int: дробный масштаб (например, 0.5) обрезался.
+                //! Установка размера ребра чанка мира (в вокселях).
+                /*! Нужен для расположения чанков внутри блока; задаётся контроллером при создании блока.
+                \param sizechunk Размер ребра чанка.
+                */
+                void setSizeChunk(int sizechunk);
                 //! Добавления меша в блок из чанков.
                 /*! Добавляет в общий меш новый. Если указатель равен NULL, то меш по координатам vect фактически будет удалён, но рекомендуется пользоваться специальной функцией deleteMesh().
                 \param mesh Добавляемый меш.
@@ -74,38 +79,73 @@ namespace SimpleVoxelEngine
                 */
                 bool isRenderChunk(SimpleVoxelEngine::Additional::Vector3d<int> vect);
                 //! Проверка на прохождение условия Occlusion Queries.
-                /*! \return Возвращает true, если блок чанков виден, иначе false.
+                /*! Показывает или скрывает ноду по результату проверки. При проверке по ограничивающему кубоиду нода, внутри
+                кубоида которой стоит камера (с запасом в две ближние плоскости отсечения), видна всегда.
+                \return Возвращает true, если блок чанков виден, иначе false.
                 */
                 bool testOcclusionQuerie();
                 //! Установка hardware mapping hint.
-                /*! \param mapping Тип mapping из Irrlicht.
+                /*! Применяется и к уже склеенному мешу (старые буферы в видеопамяти освобождаются).
+                Только в главном потоке.
+                \param mapping Тип mapping из Irrlicht.
                 \param typebuffer Тип буффера из Irrlicht.
                 */
                 void setHardwareMappingHint(irr::scene::E_HARDWARE_MAPPING mapping, irr::scene::E_BUFFER_TYPE typebuffer);
                 //! Получение указателя на ноду блока чанков.
-                /*! \return Возвращает указатель на Irrlicht-ноду чанков.
+                /*! Нода принадлежит блоку (блок держит на неё свою ссылку) - удалять её нельзя.
+                \return Возвращает указатель на Irrlicht-ноду чанков (NULL, если уровень пустой).
                 */
                 irr::scene::IMeshSceneNode* getMeshSceneNode();
-                //! Получение состояние отрисовки заданного подмеша.
-                /*! \param vect Вектор (координаты) проверяемого подмеша.
-                \return Возвращает true, если подмеш отрисовывается, иначе false.
+                //! Включение или выключение Occlusion Query у уже созданной ноды.
+                /*! При выключении нода снова показывается (её могла скрыть последняя проверка). Только в главном потоке.
+                \param value true - добавить ноде проверку, false - убрать.
                 */
-                bool isRenderMesh(SimpleVoxelEngine::Additional::Vector3d<int> vect);
+                void setOcclusionQuery(bool value);
+                //! Пометить блок для пересклейки в ближайшем update().
+                /*! Нужна, когда меняются настройки уровня, которые нельзя применить к готовой ноде (тип материала, родительская нода мира).
+                */
+                void requestUpdate();
+                //Удалено: isRenderMesh() - вызывалась только из удалённой ChunksMeshBlocksController::getNumberOfRenderMeshs().
+                //! Сортировка треугольников от дальних к ближним относительно камеры.
+                /*! Нужна для полупрозрачных материалов: они рисуются без записи в Z-буфер, поэтому
+                дальние грани должны рисоваться раньше ближних. Пересортировка происходит, только если
+                камера сместилась больше чем на TRANSPARENT_SORT_CAMERA_THRESHOLD или меш был перестроен.
+                Ноды блоков стоят в центре блока, поэтому Irrlicht правильнее сортирует и сами ноды между собой.
+                \param camerapos Позиция камеры в глобальных координатах сцены.
+                */
+                void sortTransparentTriangles(irr::core::vector3df camerapos);
             private:
+                bool s_NeedSortTransparent; //Меш перестроен - отсортировать при следующем вызове независимо от камеры.
+                irr::core::vector3df s_LastSortCameraPosition; //Позиция камеры (в координатах ноды) при последней сортировке.
+                //! Номер меша чанка в массиве блока по вектору чанка внутри блока.
+                /*! \param vect Вектор (координаты) чанка внутри блока.
+                \return Возвращает номер: x + sizex * y + sizex * sizey * z (вектор вне блока - 0 и ошибка в логе).
+                */
                 int getNumberInMemoryIMeshByVector(SimpleVoxelEngine::Additional::Vector3d<int>);
+                //! Освобождение видеопамяти буферов склеенного меша (перед его очисткой или удалением).
+                void removeHardwareBuffers();
+                //! Вектор чанка внутри блока по номеру его меша в массиве (обратная getNumberInMemoryIMeshByVector()).
+                /*! \param number Номер меша в массиве.
+                \return Возвращает вектор (координаты) чанка внутри блока.
+                */
                 SimpleVoxelEngine::Additional::Vector3d<int> getVectorIMeshByNumberInMemory(int);
+                //! Добавление ноде блока Occlusion Query (или замена формы у уже добавленной).
+                /*! Форма - ограничивающий кубоид меша или полный меш, по FactoryChunkMeshSceneNode::getOcclusionQueriesBoundingBox().
+                Только в главном потоке; ничего не делает, если ноды нет.
+                */
+                void addOcclusionQuery();
                 int s_SizeX;
                 int s_SizeY;
                 int s_SizeZ;
                 irr::scene::IMesh** s_IMeshes;
-                bool* s_AddMeshesFlags;
-                bool s_UpdateIMeshesFlag;
-                irr::scene::IMeshSceneNode* s_MeshSceneNode;
+                //Удалены s_AddMeshesFlags и s_UpdateIMeshesFlag: блок всегда склеивается целиком, флаги "что добавить" не нужны.
+                irr::scene::IMeshSceneNode* s_MeshSceneNode; //Изменено: блок держит на ноду свою ссылку (grab()) - пока он её не отпустит, нода не удалится.
                 IrrSimpleVoxelEngine* s_ISVE;
                 bool s_WaitUpdate;
                 irr::scene::CBatchingMesh* s_Mesh;
                 irr::IrrlichtDevice* s_Device;
                 float s_Scale;
+                int s_SizeChunk; //Размер ребра чанка мира (задаётся контроллером, без обращения к миру из главного потока).
                 unsigned int s_NumberOfMeshes;
                 irr::scene::E_HARDWARE_MAPPING s_HardwareMappingHint;
                 irr::scene::E_BUFFER_TYPE s_BufferType;

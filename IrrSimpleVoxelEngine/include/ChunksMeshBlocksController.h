@@ -2,6 +2,7 @@
 #define ChunksMeshBlocksController_H
 
 #include <map>
+#include <set>
 #include <vector>
 
 #include <irrlicht.h>
@@ -43,11 +44,15 @@ namespace SimpleVoxelEngine
                 */
                 void setSizeChunkMeshBlock(int x, int y, int z);
                  //! Установка множителя масштабирования SimpleVoxelObject для всех блоков чанков.
-                /*! Вызывает заморозку контроллера, более его менять нельзя.
-                С незамороженным контродлером работать нельзя.
+                /*! Менять можно только до заморозки контроллера.
                 \param scale Множитель масштабирования.
                 */
-                void setScale(int scale);
+                void setScale(float scale); //Было int: дробный масштаб обрезался.
+                //! Установка размера ребра чанка мира (в вокселях).
+                /*! Передаётся создаваемым блокам, чтобы им не обращаться к миру из главного потока.
+                \param sizechunk Размер ребра чанка.
+                */
+                void setSizeChunk(int sizechunk);
                 //! Установка меша в глобальное пространство.
                 /*! Устанавливает меш по глобальным координатам чанка.
                 \param numbermesh Номер уровня меша, в который идёт установка. Разным номерам можно давать разные свойства.
@@ -62,10 +67,24 @@ namespace SimpleVoxelEngine
                 */
                 void deleteMesh(int numbermesh, SimpleVoxelEngine::Additional::Vector3d<int> vect);
                 //! Обновление и обработка всей очереди ожидания.
-                /*! Обновляет все блоки чанков.
+                /*! Обновляет все блоки чанков, а также сортирует треугольники полупрозрачных уровней
+                относительно позиции камеры. Только для главного потока.
                 \param occlusionqueries Выполнять ли Occlusion Queries.
                 */
                 void update(bool occlusionqueries = false);
+                //! Удаление всех блоков чанков (ноды тоже удаляются), настройки контроллера сохраняются.
+                void clearBlocks();
+                //! Проверка уровня мешей на полупрозрачность.
+                /*! \param numbermesh Номер уровня.
+                \return Возвращает true, если материал уровня полупрозрачный (IMaterialRenderer::isTransparent()).
+                Для таких уровней отключается запись в Z-буфер и сортируются треугольники.
+                */
+                bool isTransparentLevel(int numbermesh);
+                //! Установка позиции активной камеры (вызывается фабрикой каждый кадр).
+                /*! Используется, только если позиция камеры не задана через updateCameraPosition().
+                \param vect Позиция активной камеры в глобальных координатах сцены.
+                */
+                void setActiveCameraPosition(irr::core::vector3df vect);
                 //! Проверка контроллера на заморозку.
                 /*! \return Возвращает true, если контроллер заморожен, иначе false.
                 */
@@ -76,7 +95,8 @@ namespace SimpleVoxelEngine
                 */
                 void clear();
                 //! Установка флага материала.
-                /*! \param numbermesh Номер уровня меша, для чанково которых идёт установка флага материала.
+                /*! Применяется и к уже созданным нодам уровня. Только в главном потоке.
+                \param numbermesh Номер уровня меша, для чанково которых идёт установка флага материала.
                 \param flag Irrlicht флаг.
                 \param value Значение флага.
                 */
@@ -91,13 +111,15 @@ namespace SimpleVoxelEngine
                 */
                 void updateOcclusionQueries();
                 //! Установка hardware mapping hint для всех чанков на указанном уровне.
-                /*! \param numbermesh Номер меша, которому устанавливаем значения.
+                /*! Применяется и к уже созданным блокам уровня. Только в главном потоке.
+                \param numbermesh Номер меша, которому устанавливаем значения.
                 \param mapping Тип mapping из Irrlicht.
                 \param typebuffer Тип буффера из Irrlicht.
                 */
                 void setHardwareMappingHint(int numbermesh, irr::scene::E_HARDWARE_MAPPING mapping, irr::scene::E_BUFFER_TYPE typebuffer);
                 //! Установка типа материала на указанном уровне.
-                /*! \param numbermesh Номер уровня, для нод которого происходит изменение типа материала.
+                /*! Уже созданные ноды уровня пересклеиваются в ближайшем update(). Только в главном потоке.
+                \param numbermesh Номер уровня, для нод которого происходит изменение типа материала.
                 \param newtype Новый Irrlicht материал.
                 */
                 void setMaterialType(int numbermesh, irr::video::E_MATERIAL_TYPE newtype);
@@ -110,32 +132,58 @@ namespace SimpleVoxelEngine
                 */
                 int getNumberOfMeshesSceneNodeForChunk();
                 //! Установка идентификатора всем нодам чанков на заданном уровне.
-                /*! \param numbermesh Номер уровня мешей, которым устанавливаем идентификатор.
+                /*! Применяется и к уже созданным нодам уровня. Только в главном потоке.
+                \param numbermesh Номер уровня мешей, которым устанавливаем идентификатор.
                 \param uid Устанавливаемый идентификатор.
                 */
                 void setID(int numbermesh, irr::s32 uid);
-                //! Получение числа отрисовывающихся мешей у чанка с заданными глобальными мировыми координатами.
-                /*! \param vect Вектор (координаты) чанка.
-                \return Возвращает число мешей, которые отрисовываются у чанка.
-                */
-                unsigned int getNumberOfRenderMeshs(SimpleVoxelEngine::Additional::Vector3d<int> vect);
+                //Удалено: getNumberOfRenderMeshs() - её вызывал только удалённый FactoryChunkMeshSceneNode::updateMeshChunk().
                 //! Обновление позиции камеры.
-                /*! \param vect Новая позиция камеры.
+                /*! После первого вызова позиция активной камеры сцены больше не используется.
+                \param vect Новая позиция камеры (глобальные координаты сцены), по ней сортируются полупрозрачные треугольники.
                 */
                 void updateCameraPosition(irr::core::vector3df vect);
+                //! Включение или выключение Occlusion Queries у уже созданных нод.
+                /*! Вызывается из FactoryChunkMeshSceneNode::setOcclusionQueries(). Только в главном потоке.
+                \param value true - добавить нодам проверки, false - убрать проверки и показать скрытые ноды.
+                */
+                void setOcclusionQueries(bool value);
+                //! Пересклейка уровня (или всех уровней) всех блоков в ближайшем update().
+                /*! Нужна, когда меняются настройки, которые нельзя применить к готовым нодам: тип материала уровня,
+                родительская нода мира или сдвиг его начала координат.
+                \param numbermesh Номер уровня; меньше 0 - все уровни.
+                */
+                void requestUpdateLevel(int numbermesh);
             private:
+                //! Вектор блока чанков, в который входит чанк (деление с округлением вниз на размеры блока).
+                /*! \param vect Вектор (координаты) чанка в мире.
+                \return Возвращает вектор блока (координаты его первого чанка).
+                */
                 SimpleVoxelEngine::Additional::Vector3d<int> getVectorChunksMeshBlockByWorldVectorChunk(SimpleVoxelEngine::Additional::Vector3d<int>);
+                //! Есть ли блок чанков в памяти контроллера.
+                /*! \param vect Вектор блока.
+                \return Возвращает true, если блок есть.
+                */
                 bool isExistsInMemoryChunksMeshBlock(SimpleVoxelEngine::Additional::Vector3d<int>);
+                //! Есть ли в блоке чанки, ещё ждущие первого меша (тогда склейка блока откладывается).
+                /*! \param vect Вектор блока.
+                \return Возвращает true, если хотя бы один чанк блока ещё ждёт свой первый меш.
+                */
+                bool hasChunksWaitingForMesh(SimpleVoxelEngine::Additional::Vector3d<int>);
                 int s_SizeX;
                 int s_SizeY;
                 int s_SizeZ;
                 float s_Scale;
+                int s_SizeChunk; //Размер ребра чанка мира.
                 int s_WorldId;
                 IrrSimpleVoxelEngine* s_ISVE;
                 irr::IrrlichtDevice* s_Device;
                 bool s_Freeze;
                 std::map< SimpleVoxelEngine::Additional::Vector3d<int>, SimpleVoxelEngine::IrrEngine::ChunksMeshBlock** > s_ChunksMeshBlocks;
                 std::map< SimpleVoxelEngine::Additional::Vector3d<int>, bool > s_ChunksMeshBlocksUpdateFlags;
+                std::map< SimpleVoxelEngine::Additional::Vector3d<int>, irr::u32 > s_DelayedBlocksSince; //С какого времени склейка блока отложена.
+                std::set< SimpleVoxelEngine::Additional::Vector3d<int> > s_BlocksWithNewChunks; //Блоки, в которые пришёл первый меш чанка (только их склейку можно откладывать).
+                std::set< SimpleVoxelEngine::Additional::Vector3d<int> > s_BlocksWithChangedChunks; //!< Блоки, где изменился или удалён меш уже построенного чанка, - их склейка не откладывается.
                 std::vector< MaterialFlagDefinition >* s_ChunkMeshSceneMaterialFlags;
                 irr::scene::E_HARDWARE_MAPPING* s_HardwareMappingHint;
                 irr::scene::E_BUFFER_TYPE* s_BufferType;
@@ -143,6 +191,8 @@ namespace SimpleVoxelEngine
                 irr::s32* s_IDs;
                 int s_NumberOfMeshesSceneNodeForChunk;
                 irr::core::vector3df s_CameraPosition;
+                bool s_CameraPositionSetByUser; //Позицию задал пользователь (updateCameraPosition) - активную камеру не используем.
+                bool s_HasCameraPosition; //Позиция камеры известна - можно сортировать прозрачные треугольники.
         };
     }
 }

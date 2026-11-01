@@ -16,6 +16,10 @@ namespace SimpleVoxelEngine
                 ReferenceCounter();
                 //! Стандартный деструктор.
                 virtual ~ReferenceCounter();
+                //! Копирование запрещено: копия унаследовала бы счётчик ссылок оригинала.
+                ReferenceCounter(const ReferenceCounter&) = delete;
+                //! Присваивание запрещено по той же причине.
+                ReferenceCounter& operator=(const ReferenceCounter&) = delete;
                 //! Увеличение числа ссылок на объект на единицу.
                 /*! Увеличивает число ссылок на объект на единицу.
                 */

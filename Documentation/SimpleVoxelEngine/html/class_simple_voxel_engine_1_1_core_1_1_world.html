@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>SimpleVoxelEngine: Класс SimpleVoxelEngine::Core::World</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,218 +23,222 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">SimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Воксельный движок</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li><a href="pages.html"><span>Описания</span></a></li>
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
-      <li><a href="hierarchy.html"><span>Иерархия&#160;классов</span></a></li>
-      <li><a href="functions.html"><span>Члены&#160;классов</span></a></li>
-    </ul>
+  <div id="splitbar" class="ui-resizable-handle">
   </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_simple_voxel_engine_1_1_core_1_1_world.html','','class_simple_voxel_engine_1_1_core_1_1_world-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_core.html">Core</a></li><li class="navelem"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html">World</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#pub-methods">Открытые члены</a> &#124;
-<a href="class_simple_voxel_engine_1_1_core_1_1_world-members.html">Полный список членов класса</a>  </div>
-  <div class="headertitle">
-<div class="title">Класс SimpleVoxelEngine::Core::World</div>  </div>
+  <div class="headertitle"><div class="title">Класс SimpleVoxelEngine::Core::World</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Воксельный мир.  
- <a href="class_simple_voxel_engine_1_1_core_1_1_world.html#details">Подробнее...</a></p>
+ <a href="#details">Подробнее...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_world_8h_source.html">World.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Открытые члены</h2></td></tr>
-<tr class="memitem:adb4d181ab9a6d1d1843a79d6c977df36"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#adb4d181ab9a6d1d1843a79d6c977df36">World</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a> *eng)</td></tr>
-<tr class="memdesc:adb4d181ab9a6d1d1843a79d6c977df36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный конструктор  <a href="#adb4d181ab9a6d1d1843a79d6c977df36">Подробнее...</a><br /></td></tr>
-<tr class="separator:adb4d181ab9a6d1d1843a79d6c977df36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a578035696730c275836f811800633d71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a578035696730c275836f811800633d71">World</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a> *eng, <a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html">WorldCreatingParameters</a> &amp;wcp)</td></tr>
-<tr class="memdesc:a578035696730c275836f811800633d71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор  <a href="#a578035696730c275836f811800633d71">Подробнее...</a><br /></td></tr>
-<tr class="separator:a578035696730c275836f811800633d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f894caa60c0f3254cf557b77fe62411"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8f894caa60c0f3254cf557b77fe62411"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a8f894caa60c0f3254cf557b77fe62411">~World</a> ()</td></tr>
-<tr class="memdesc:a8f894caa60c0f3254cf557b77fe62411"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный деструктор. Чанки не сохраняет. <br /></td></tr>
-<tr class="separator:a8f894caa60c0f3254cf557b77fe62411"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1009f033d5a01a05a3acf396e9acf45e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a1009f033d5a01a05a3acf396e9acf45e">loadChunk</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect)</td></tr>
-<tr class="memdesc:a1009f033d5a01a05a3acf396e9acf45e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Загрузка чанка.  <a href="#a1009f033d5a01a05a3acf396e9acf45e">Подробнее...</a><br /></td></tr>
-<tr class="separator:a1009f033d5a01a05a3acf396e9acf45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa7f25d88cdeb07477087eb9b20ba85f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#aaa7f25d88cdeb07477087eb9b20ba85f">loadChunks</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect, int cube_radius)</td></tr>
-<tr class="memdesc:aaa7f25d88cdeb07477087eb9b20ba85f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Загрузка блока чанков.  <a href="#aaa7f25d88cdeb07477087eb9b20ba85f">Подробнее...</a><br /></td></tr>
-<tr class="separator:aaa7f25d88cdeb07477087eb9b20ba85f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac022ebf05d3802fd592706398767a106"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#ac022ebf05d3802fd592706398767a106">progressiveLoadChunks</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect_old, int cube_radius_old, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect_new, int cube_radius_new, bool save=true)</td></tr>
-<tr class="memdesc:ac022ebf05d3802fd592706398767a106"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интеллектуальная загрузка чанков.  <a href="#ac022ebf05d3802fd592706398767a106">Подробнее...</a><br /></td></tr>
-<tr class="separator:ac022ebf05d3802fd592706398767a106"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65944a9aff3f825b78bf08cd405da48f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a65944a9aff3f825b78bf08cd405da48f">unloadChunk</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect, bool save=true, bool saveplace=false)</td></tr>
-<tr class="memdesc:a65944a9aff3f825b78bf08cd405da48f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выгрузка чанка из памяти.  <a href="#a65944a9aff3f825b78bf08cd405da48f">Подробнее...</a><br /></td></tr>
-<tr class="separator:a65944a9aff3f825b78bf08cd405da48f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c50c2ad0561e77e6476c6354ee50ca8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a7c50c2ad0561e77e6476c6354ee50ca8">unloadChunks</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect, int cube_radius, bool save=true)</td></tr>
-<tr class="memdesc:a7c50c2ad0561e77e6476c6354ee50ca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выгрузка чанков из памяти.  <a href="#a7c50c2ad0561e77e6476c6354ee50ca8">Подробнее...</a><br /></td></tr>
-<tr class="separator:a7c50c2ad0561e77e6476c6354ee50ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca3250456dd27945061b540f803355ef"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#aca3250456dd27945061b540f803355ef">saveChunk</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect)</td></tr>
-<tr class="memdesc:aca3250456dd27945061b540f803355ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сохранение чанка.  <a href="#aca3250456dd27945061b540f803355ef">Подробнее...</a><br /></td></tr>
-<tr class="separator:aca3250456dd27945061b540f803355ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc146e847c62291d897f4c3838454fe4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#abc146e847c62291d897f4c3838454fe4">saveChunks</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect, int cube_radius)</td></tr>
-<tr class="memdesc:abc146e847c62291d897f4c3838454fe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сохранение чанков.  <a href="#abc146e847c62291d897f4c3838454fe4">Подробнее...</a><br /></td></tr>
-<tr class="separator:abc146e847c62291d897f4c3838454fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36873bdd6c958f4eaea5eeae7e4ff5eb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a36873bdd6c958f4eaea5eeae7e4ff5eb">saveAllChunks</a> ()</td></tr>
-<tr class="memdesc:a36873bdd6c958f4eaea5eeae7e4ff5eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сохранение всех чанков, загруженных в память.  <a href="#a36873bdd6c958f4eaea5eeae7e4ff5eb">Подробнее...</a><br /></td></tr>
-<tr class="separator:a36873bdd6c958f4eaea5eeae7e4ff5eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c611c47e7b9f660619db96d512e1725"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a6c611c47e7b9f660619db96d512e1725">getSimpleVoxelObject</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, bool isexists=true)</td></tr>
-<tr class="memdesc:a6c611c47e7b9f660619db96d512e1725"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получить SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>.  <a href="#a6c611c47e7b9f660619db96d512e1725">Подробнее...</a><br /></td></tr>
-<tr class="separator:a6c611c47e7b9f660619db96d512e1725"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d51d7853ea5f09924984f5a4dc88825"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a1d51d7853ea5f09924984f5a4dc88825">setSimpleVoxelObject</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a> *addr, <a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *svo, bool rewrite=false)</td></tr>
-<tr class="memdesc:a1d51d7853ea5f09924984f5a4dc88825"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>.  <a href="#a1d51d7853ea5f09924984f5a4dc88825">Подробнее...</a><br /></td></tr>
-<tr class="separator:a1d51d7853ea5f09924984f5a4dc88825"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e92ad718487804acfd874fbcfa42a4e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a1e92ad718487804acfd874fbcfa42a4e">deleteSimpleVoxelObject</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr)</td></tr>
-<tr class="memdesc:a1e92ad718487804acfd874fbcfa42a4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаление SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>.  <a href="#a1e92ad718487804acfd874fbcfa42a4e">Подробнее...</a><br /></td></tr>
-<tr class="separator:a1e92ad718487804acfd874fbcfa42a4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c7ff77dd790d68dfa373ee320285660"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html">SimpleVoxelEngine::Voxels::ChunkVoxelObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a1c7ff77dd790d68dfa373ee320285660">getChunk</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect)</td></tr>
-<tr class="memdesc:a1c7ff77dd790d68dfa373ee320285660"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение чанка.  <a href="#a1c7ff77dd790d68dfa373ee320285660">Подробнее...</a><br /></td></tr>
-<tr class="separator:a1c7ff77dd790d68dfa373ee320285660"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64e06849c489b956241ac9db383b2eee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a64e06849c489b956241ac9db383b2eee">isExistsChunkInMemory</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect)</td></tr>
-<tr class="memdesc:a64e06849c489b956241ac9db383b2eee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка существования чанка в памяти.  <a href="#a64e06849c489b956241ac9db383b2eee">Подробнее...</a><br /></td></tr>
-<tr class="separator:a64e06849c489b956241ac9db383b2eee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1f54c51688c42ff25efb9fa35633c9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#ad1f54c51688c42ff25efb9fa35633c9d">getEngine</a> ()</td></tr>
-<tr class="memdesc:ad1f54c51688c42ff25efb9fa35633c9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение движка.  <a href="#ad1f54c51688c42ff25efb9fa35633c9d">Подробнее...</a><br /></td></tr>
-<tr class="separator:ad1f54c51688c42ff25efb9fa35633c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4536ba3d4bb8c8e342937cd2d6671929"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a4536ba3d4bb8c8e342937cd2d6671929">generateChunk</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect, bool createchunkinmemory=true)</td></tr>
-<tr class="memdesc:a4536ba3d4bb8c8e342937cd2d6671929"><td class="mdescLeft">&#160;</td><td class="mdescRight">Генерация чанка.  <a href="#a4536ba3d4bb8c8e342937cd2d6671929">Подробнее...</a><br /></td></tr>
-<tr class="separator:a4536ba3d4bb8c8e342937cd2d6671929"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fb68ef32eccd3146d5b8ef841fc837a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a6fb68ef32eccd3146d5b8ef841fc837a">getId</a> ()</td></tr>
-<tr class="memdesc:a6fb68ef32eccd3146d5b8ef841fc837a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение идентификатора мира.  <a href="#a6fb68ef32eccd3146d5b8ef841fc837a">Подробнее...</a><br /></td></tr>
-<tr class="separator:a6fb68ef32eccd3146d5b8ef841fc837a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd38b3e2d36e72ccd94d49fca2528b25"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#abd38b3e2d36e72ccd94d49fca2528b25">setId</a> (int id)</td></tr>
-<tr class="memdesc:abd38b3e2d36e72ccd94d49fca2528b25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка миру идентификатора.  <a href="#abd38b3e2d36e72ccd94d49fca2528b25">Подробнее...</a><br /></td></tr>
-<tr class="separator:abd38b3e2d36e72ccd94d49fca2528b25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15cc1e7d9cabb8bdc4c4f13cda7a44b6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a15cc1e7d9cabb8bdc4c4f13cda7a44b6">setWorldGenerator</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world_generator.html">SimpleVoxelEngine::Core::WorldGenerator</a> *wrldgen)</td></tr>
-<tr class="memdesc:a15cc1e7d9cabb8bdc4c4f13cda7a44b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка генератора мира.  <a href="#a15cc1e7d9cabb8bdc4c4f13cda7a44b6">Подробнее...</a><br /></td></tr>
-<tr class="separator:a15cc1e7d9cabb8bdc4c4f13cda7a44b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23daf8713741505019a8d9f5f06bd87e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world_generator.html">SimpleVoxelEngine::Core::WorldGenerator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a23daf8713741505019a8d9f5f06bd87e">getWorldGenerator</a> ()</td></tr>
-<tr class="memdesc:a23daf8713741505019a8d9f5f06bd87e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение генератора мира.  <a href="#a23daf8713741505019a8d9f5f06bd87e">Подробнее...</a><br /></td></tr>
-<tr class="separator:a23daf8713741505019a8d9f5f06bd87e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac483bd12541c15e735dd56d6235b07d9"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#ac483bd12541c15e735dd56d6235b07d9">getSizeChunk</a> ()</td></tr>
-<tr class="memdesc:ac483bd12541c15e735dd56d6235b07d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение размера ребра чанка.  <a href="#ac483bd12541c15e735dd56d6235b07d9">Подробнее...</a><br /></td></tr>
-<tr class="separator:ac483bd12541c15e735dd56d6235b07d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a681e6cc02907b8532093f1e369d817f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a681e6cc02907b8532093f1e369d817f4">getAddressSimpleVoxelObjectByShift</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect)</td></tr>
-<tr class="memdesc:a681e6cc02907b8532093f1e369d817f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение адреса SimpleVoxelObject по сдвигу.  <a href="#a681e6cc02907b8532093f1e369d817f4">Подробнее...</a><br /></td></tr>
-<tr class="separator:a681e6cc02907b8532093f1e369d817f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae141e150798d135bc3052d886e4b1480"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#ae141e150798d135bc3052d886e4b1480">setSimpleVoxelObjectTransparentTester</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_simple_voxel_object_transparent_tester.html">SimpleVoxelObjectTransparentTester</a> *svott)</td></tr>
-<tr class="memdesc:ae141e150798d135bc3052d886e4b1480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка контроллера прозрачности.  <a href="#ae141e150798d135bc3052d886e4b1480">Подробнее...</a><br /></td></tr>
-<tr class="separator:ae141e150798d135bc3052d886e4b1480"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea99e2a1ed0e66bfee1e3f1cb6f17178"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_simple_voxel_object_transparent_tester.html">SimpleVoxelObjectTransparentTester</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#aea99e2a1ed0e66bfee1e3f1cb6f17178">getSimpleVoxelObjectTransparentTester</a> ()</td></tr>
-<tr class="memdesc:aea99e2a1ed0e66bfee1e3f1cb6f17178"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение контроллера прозрачности.  <a href="#aea99e2a1ed0e66bfee1e3f1cb6f17178">Подробнее...</a><br /></td></tr>
-<tr class="separator:aea99e2a1ed0e66bfee1e3f1cb6f17178"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75f7d6cd5a3e528950bfad606fd3edbf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a75f7d6cd5a3e528950bfad606fd3edbf">isTransparent</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, <a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *parent=0)</td></tr>
-<tr class="memdesc:a75f7d6cd5a3e528950bfad606fd3edbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка на прозрачность по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>.  <a href="#a75f7d6cd5a3e528950bfad606fd3edbf">Подробнее...</a><br /></td></tr>
-<tr class="separator:a75f7d6cd5a3e528950bfad606fd3edbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5a7850af948b2d3b63c92dff66c6e60"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#ad5a7850af948b2d3b63c92dff66c6e60">getAddressSimpleVoxelObjectByThreePoints</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt; v1, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt; v2, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt; v3, float scale, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt; lookvect, <a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0">SimpleVoxelEngine::Defines::LevelSearchSimpleVoxelObject</a> lssvo=<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0a2d7f4ff4b3576f41f5a6847cc51d1858">SimpleVoxelEngine::Defines::LASTLEVEL</a>, int level=1)</td></tr>
-<tr class="memdesc:ad5a7850af948b2d3b63c92dff66c6e60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение адреса SimpleVoxelObject по трём точкам в пространстве и вектору направления.  <a href="#ad5a7850af948b2d3b63c92dff66c6e60">Подробнее...</a><br /></td></tr>
-<tr class="separator:ad5a7850af948b2d3b63c92dff66c6e60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeae524b5245e5d1b142bceaa919fd562"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#aeae524b5245e5d1b142bceaa919fd562">isVisible</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, bool *renderfaces, <a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *parent=0)</td></tr>
-<tr class="memdesc:aeae524b5245e5d1b142bceaa919fd562"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка на видимость SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>.  <a href="#aeae524b5245e5d1b142bceaa919fd562">Подробнее...</a><br /></td></tr>
-<tr class="separator:aeae524b5245e5d1b142bceaa919fd562"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac1ca60d32cf4f89ed228c8fcedc9343"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Additional::Vector3d</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#aac1ca60d32cf4f89ed228c8fcedc9343">getPosition</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, float posscale=1)</td></tr>
-<tr class="memdesc:aac1ca60d32cf4f89ed228c8fcedc9343"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение вектора позиции в глобальных мировых координатах SimpleVoxelObjects по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>.  <a href="#aac1ca60d32cf4f89ed228c8fcedc9343">Подробнее...</a><br /></td></tr>
-<tr class="separator:aac1ca60d32cf4f89ed228c8fcedc9343"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af76aefa9a5b158b8a7c9386a56b20dc9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Additional::Vector3d</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#af76aefa9a5b158b8a7c9386a56b20dc9">getRotation</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, float rotscale=1)</td></tr>
-<tr class="memdesc:af76aefa9a5b158b8a7c9386a56b20dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение вектора поворота в глобальных мировых координатах SimpleVoxelObjects по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>.  <a href="#af76aefa9a5b158b8a7c9386a56b20dc9">Подробнее...</a><br /></td></tr>
-<tr class="separator:af76aefa9a5b158b8a7c9386a56b20dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2be6cd12f18fec68351704c4a2d98afa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Additional::Vector3d</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a2be6cd12f18fec68351704c4a2d98afa">getScale</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, float scscale=1)</td></tr>
-<tr class="memdesc:a2be6cd12f18fec68351704c4a2d98afa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение вектора масштабирования в глобальных мировых координатах SimpleVoxelObjects по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>.  <a href="#a2be6cd12f18fec68351704c4a2d98afa">Подробнее...</a><br /></td></tr>
-<tr class="separator:a2be6cd12f18fec68351704c4a2d98afa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8056438ae5e5ffd8c3745b64412c149"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#ab8056438ae5e5ffd8c3745b64412c149">setMultiplePartition</a> (bool multpart)</td></tr>
-<tr class="memdesc:ab8056438ae5e5ffd8c3745b64412c149"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка типа разбиения чанков.  <a href="#ab8056438ae5e5ffd8c3745b64412c149">Подробнее...</a><br /></td></tr>
-<tr class="separator:ab8056438ae5e5ffd8c3745b64412c149"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a695f379c865c51d4555c902d6568e16d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a695f379c865c51d4555c902d6568e16d">isMultiplePartition</a> ()</td></tr>
-<tr class="memdesc:a695f379c865c51d4555c902d6568e16d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка на тип разбиения.  <a href="#a695f379c865c51d4555c902d6568e16d">Подробнее...</a><br /></td></tr>
-<tr class="separator:a695f379c865c51d4555c902d6568e16d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6332269d8335ffcb9daf647743be4ec6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a6332269d8335ffcb9daf647743be4ec6">setChunksSaveLoadController</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_chunks_save_load_controller.html">SimpleVoxelEngine::Core::ChunksSaveLoadController</a> *cslc)</td></tr>
-<tr class="memdesc:a6332269d8335ffcb9daf647743be4ec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка контроллера загрузки и сохранения чанков.  <a href="#a6332269d8335ffcb9daf647743be4ec6">Подробнее...</a><br /></td></tr>
-<tr class="separator:a6332269d8335ffcb9daf647743be4ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a912939ab8d3714ae70c9cef27313baf5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_chunks_save_load_controller.html">SimpleVoxelEngine::Core::ChunksSaveLoadController</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a912939ab8d3714ae70c9cef27313baf5">getChunksSaveLoadController</a> ()</td></tr>
-<tr class="memdesc:a912939ab8d3714ae70c9cef27313baf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение контроллера загрузки и сохранения чанков.  <a href="#a912939ab8d3714ae70c9cef27313baf5">Подробнее...</a><br /></td></tr>
-<tr class="separator:a912939ab8d3714ae70c9cef27313baf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c608b33539825e8fc56ecce1bc6b024"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html#a1c608b33539825e8fc56ecce1bc6b024">clear</a> (bool save=false)</td></tr>
-<tr class="memdesc:a1c608b33539825e8fc56ecce1bc6b024"><td class="mdescLeft">&#160;</td><td class="mdescRight">Очистка мира.  <a href="#a1c608b33539825e8fc56ecce1bc6b024">Подробнее...</a><br /></td></tr>
-<tr class="separator:a1c608b33539825e8fc56ecce1bc6b024"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb4d181ab9a6d1d1843a79d6c977df36" id="r_adb4d181ab9a6d1d1843a79d6c977df36"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#adb4d181ab9a6d1d1843a79d6c977df36">World</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a> *eng)</td></tr>
+<tr class="memdesc:adb4d181ab9a6d1d1843a79d6c977df36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный конструктор  <br /></td></tr>
+<tr class="memitem:a578035696730c275836f811800633d71" id="r_a578035696730c275836f811800633d71"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a578035696730c275836f811800633d71">World</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a> *eng, <a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html">WorldCreatingParameters</a> &amp;wcp)</td></tr>
+<tr class="memdesc:a578035696730c275836f811800633d71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор  <br /></td></tr>
+<tr class="memitem:a8f894caa60c0f3254cf557b77fe62411" id="r_a8f894caa60c0f3254cf557b77fe62411"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8f894caa60c0f3254cf557b77fe62411">~World</a> ()</td></tr>
+<tr class="memdesc:a8f894caa60c0f3254cf557b77fe62411"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный деструктор. Чанки не сохраняет.  <br /></td></tr>
+<tr class="memitem:abc3db314202a643eb887af3592dc6b2b" id="r_abc3db314202a643eb887af3592dc6b2b"><td class="memItemLeft"><a id="abc3db314202a643eb887af3592dc6b2b" name="abc3db314202a643eb887af3592dc6b2b"></a>
+&#160;</td><td class="memItemRight"><b>World</b> (const World &amp;)=delete</td></tr>
+<tr class="memdesc:abc3db314202a643eb887af3592dc6b2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Копирование запрещено: мир владеет чанками и контроллерами, копия удалила бы их второй раз. <br /></td></tr>
+<tr class="memitem:a42401b1f3a513578dce4c42e2d198ef1" id="r_a42401b1f3a513578dce4c42e2d198ef1"><td class="memItemLeft"><a id="a42401b1f3a513578dce4c42e2d198ef1" name="a42401b1f3a513578dce4c42e2d198ef1"></a>
+<a class="el" href="#adb4d181ab9a6d1d1843a79d6c977df36">World</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (const <a class="el" href="#adb4d181ab9a6d1d1843a79d6c977df36">World</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a42401b1f3a513578dce4c42e2d198ef1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Присваивание запрещено по той же причине, что и копирование. <br /></td></tr>
+<tr class="memitem:ae7bd484060fa675cbaa193259c99b559" id="r_ae7bd484060fa675cbaa193259c99b559"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae7bd484060fa675cbaa193259c99b559">loadChunk</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect, bool outboundserror=true)</td></tr>
+<tr class="memdesc:ae7bd484060fa675cbaa193259c99b559"><td class="mdescLeft">&#160;</td><td class="mdescRight">Загрузка чанка.  <br /></td></tr>
+<tr class="memitem:aaa7f25d88cdeb07477087eb9b20ba85f" id="r_aaa7f25d88cdeb07477087eb9b20ba85f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aaa7f25d88cdeb07477087eb9b20ba85f">loadChunks</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect, int cube_radius)</td></tr>
+<tr class="memdesc:aaa7f25d88cdeb07477087eb9b20ba85f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Загрузка блока чанков.  <br /></td></tr>
+<tr class="memitem:ac022ebf05d3802fd592706398767a106" id="r_ac022ebf05d3802fd592706398767a106"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ac022ebf05d3802fd592706398767a106">progressiveLoadChunks</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect_old, int cube_radius_old, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect_new, int cube_radius_new, bool save=true)</td></tr>
+<tr class="memdesc:ac022ebf05d3802fd592706398767a106"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интеллектуальная загрузка чанков.  <br /></td></tr>
+<tr class="memitem:a65944a9aff3f825b78bf08cd405da48f" id="r_a65944a9aff3f825b78bf08cd405da48f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a65944a9aff3f825b78bf08cd405da48f">unloadChunk</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect, bool save=true, bool saveplace=false)</td></tr>
+<tr class="memdesc:a65944a9aff3f825b78bf08cd405da48f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выгрузка чанка из памяти.  <br /></td></tr>
+<tr class="memitem:a7c50c2ad0561e77e6476c6354ee50ca8" id="r_a7c50c2ad0561e77e6476c6354ee50ca8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a7c50c2ad0561e77e6476c6354ee50ca8">unloadChunks</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect, int cube_radius, bool save=true)</td></tr>
+<tr class="memdesc:a7c50c2ad0561e77e6476c6354ee50ca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выгрузка чанков из памяти.  <br /></td></tr>
+<tr class="memitem:aca3250456dd27945061b540f803355ef" id="r_aca3250456dd27945061b540f803355ef"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aca3250456dd27945061b540f803355ef">saveChunk</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect)</td></tr>
+<tr class="memdesc:aca3250456dd27945061b540f803355ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сохранение чанка.  <br /></td></tr>
+<tr class="memitem:abc146e847c62291d897f4c3838454fe4" id="r_abc146e847c62291d897f4c3838454fe4"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abc146e847c62291d897f4c3838454fe4">saveChunks</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect, int cube_radius)</td></tr>
+<tr class="memdesc:abc146e847c62291d897f4c3838454fe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сохранение чанков.  <br /></td></tr>
+<tr class="memitem:a36873bdd6c958f4eaea5eeae7e4ff5eb" id="r_a36873bdd6c958f4eaea5eeae7e4ff5eb"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a36873bdd6c958f4eaea5eeae7e4ff5eb">saveAllChunks</a> ()</td></tr>
+<tr class="memdesc:a36873bdd6c958f4eaea5eeae7e4ff5eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сохранение всех чанков, загруженных в память.  <br /></td></tr>
+<tr class="memitem:a585140a0caa72126adb3a5361c72d1da" id="r_a585140a0caa72126adb3a5361c72d1da"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a585140a0caa72126adb3a5361c72d1da">getSimpleVoxelObject</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, bool isexists=true)</td></tr>
+<tr class="memdesc:a585140a0caa72126adb3a5361c72d1da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получить SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>.  <br /></td></tr>
+<tr class="memitem:a1d51d7853ea5f09924984f5a4dc88825" id="r_a1d51d7853ea5f09924984f5a4dc88825"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a1d51d7853ea5f09924984f5a4dc88825">setSimpleVoxelObject</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a> *addr, <a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *svo, bool rewrite=false)</td></tr>
+<tr class="memdesc:a1d51d7853ea5f09924984f5a4dc88825"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>.  <br /></td></tr>
+<tr class="memitem:a1e92ad718487804acfd874fbcfa42a4e" id="r_a1e92ad718487804acfd874fbcfa42a4e"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a1e92ad718487804acfd874fbcfa42a4e">deleteSimpleVoxelObject</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr)</td></tr>
+<tr class="memdesc:a1e92ad718487804acfd874fbcfa42a4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаление SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>.  <br /></td></tr>
+<tr class="memitem:a8f8bb456bfcff474ebec78a051e02a1e" id="r_a8f8bb456bfcff474ebec78a051e02a1e"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html">SimpleVoxelEngine::Voxels::ChunkVoxelObject</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a8f8bb456bfcff474ebec78a051e02a1e">getChunk</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect)</td></tr>
+<tr class="memdesc:a8f8bb456bfcff474ebec78a051e02a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение чанка.  <br /></td></tr>
+<tr class="memitem:a64e06849c489b956241ac9db383b2eee" id="r_a64e06849c489b956241ac9db383b2eee"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a64e06849c489b956241ac9db383b2eee">isExistsChunkInMemory</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect)</td></tr>
+<tr class="memdesc:a64e06849c489b956241ac9db383b2eee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка существования чанка в памяти.  <br /></td></tr>
+<tr class="memitem:af85b851427ff0d67cbd019d8069fd84e" id="r_af85b851427ff0d67cbd019d8069fd84e"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a> *&#160;</td><td class="memItemRight"><a class="el" href="#af85b851427ff0d67cbd019d8069fd84e">getEngine</a> ()</td></tr>
+<tr class="memdesc:af85b851427ff0d67cbd019d8069fd84e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение движка.  <br /></td></tr>
+<tr class="memitem:a87dc6793eba42b954527e904317853f6" id="r_a87dc6793eba42b954527e904317853f6"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a87dc6793eba42b954527e904317853f6">generateChunk</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect, bool createchunkinmemory=true, bool outboundserror=true)</td></tr>
+<tr class="memdesc:a87dc6793eba42b954527e904317853f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Генерация чанка.  <br /></td></tr>
+<tr class="memitem:a3f20defbd77e7571c3f2dd5939536ce7" id="r_a3f20defbd77e7571c3f2dd5939536ce7"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a3f20defbd77e7571c3f2dd5939536ce7">setChunksBound</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a27af4b8b7ce3b258558859f540e8d5df">SimpleVoxelEngine::Defines::WORLD_BOUND_SIDE</a> side, int chunkcoord)</td></tr>
+<tr class="memdesc:a3f20defbd77e7571c3f2dd5939536ce7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка границы мира с одной стороны.  <br /></td></tr>
+<tr class="memitem:a4f0d18692f684c2cb218bff2b3d33e4b" id="r_a4f0d18692f684c2cb218bff2b3d33e4b"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4f0d18692f684c2cb218bff2b3d33e4b">setChunksBounds</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a39da496e239c30c435260b9992e3cab8">SimpleVoxelEngine::Defines::WORLD_AXIS</a> axis, int mincoord, int maxcoord)</td></tr>
+<tr class="memdesc:a4f0d18692f684c2cb218bff2b3d33e4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка границ мира по оси сразу с двух сторон.  <br /></td></tr>
+<tr class="memitem:af5b913dae1ef85e1d4fced521f9f30c0" id="r_af5b913dae1ef85e1d4fced521f9f30c0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#af5b913dae1ef85e1d4fced521f9f30c0">setChunksBounds</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a39da496e239c30c435260b9992e3cab8">SimpleVoxelEngine::Defines::WORLD_AXIS</a> axis, int radius)</td></tr>
+<tr class="memdesc:af5b913dae1ef85e1d4fced521f9f30c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка границ мира по оси симметрично: от -radius до radius.  <br /></td></tr>
+<tr class="memitem:ac8059c98b4ca3f6f4fadf19707c0d124" id="r_ac8059c98b4ca3f6f4fadf19707c0d124"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac8059c98b4ca3f6f4fadf19707c0d124">removeChunksBound</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a27af4b8b7ce3b258558859f540e8d5df">SimpleVoxelEngine::Defines::WORLD_BOUND_SIDE</a> side)</td></tr>
+<tr class="memdesc:ac8059c98b4ca3f6f4fadf19707c0d124"><td class="mdescLeft">&#160;</td><td class="mdescRight">Снятие границы мира с одной стороны.  <br /></td></tr>
+<tr class="memitem:a8625835c72ef8e04bf52f3597adc86be" id="r_a8625835c72ef8e04bf52f3597adc86be"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8625835c72ef8e04bf52f3597adc86be">removeChunksBounds</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a39da496e239c30c435260b9992e3cab8">SimpleVoxelEngine::Defines::WORLD_AXIS</a> axis)</td></tr>
+<tr class="memdesc:a8625835c72ef8e04bf52f3597adc86be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Снятие границ мира по оси с обеих сторон.  <br /></td></tr>
+<tr class="memitem:a40deee9af2fea82164c623091317e30c" id="r_a40deee9af2fea82164c623091317e30c"><td class="memItemLeft"><a id="a40deee9af2fea82164c623091317e30c" name="a40deee9af2fea82164c623091317e30c"></a>
+void&#160;</td><td class="memItemRight"><b>removeAllChunksBounds</b> ()</td></tr>
+<tr class="memdesc:a40deee9af2fea82164c623091317e30c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Снятие всех границ мира. <br /></td></tr>
+<tr class="memitem:a9a23791bdbb91ebf920df9d852602975" id="r_a9a23791bdbb91ebf920df9d852602975"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a9a23791bdbb91ebf920df9d852602975">hasChunksBound</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a27af4b8b7ce3b258558859f540e8d5df">SimpleVoxelEngine::Defines::WORLD_BOUND_SIDE</a> side) const</td></tr>
+<tr class="memdesc:a9a23791bdbb91ebf920df9d852602975"><td class="mdescLeft">&#160;</td><td class="mdescRight">Есть ли граница мира с этой стороны.  <br /></td></tr>
+<tr class="memitem:afa22144950bd82ef9e230c889185a7e4" id="r_afa22144950bd82ef9e230c889185a7e4"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#afa22144950bd82ef9e230c889185a7e4">getChunksBound</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a27af4b8b7ce3b258558859f540e8d5df">SimpleVoxelEngine::Defines::WORLD_BOUND_SIDE</a> side) const</td></tr>
+<tr class="memdesc:afa22144950bd82ef9e230c889185a7e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение границы мира с одной стороны.  <br /></td></tr>
+<tr class="memitem:a3ceb2585929356f6403bc8023c91e8d6" id="r_a3ceb2585929356f6403bc8023c91e8d6"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a3ceb2585929356f6403bc8023c91e8d6">isChunkInBounds</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect) const</td></tr>
+<tr class="memdesc:a3ceb2585929356f6403bc8023c91e8d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Лежит ли чанк внутри границ мира.  <br /></td></tr>
+<tr class="memitem:a6fb68ef32eccd3146d5b8ef841fc837a" id="r_a6fb68ef32eccd3146d5b8ef841fc837a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a6fb68ef32eccd3146d5b8ef841fc837a">getId</a> ()</td></tr>
+<tr class="memdesc:a6fb68ef32eccd3146d5b8ef841fc837a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение идентификатора мира.  <br /></td></tr>
+<tr class="memitem:abd38b3e2d36e72ccd94d49fca2528b25" id="r_abd38b3e2d36e72ccd94d49fca2528b25"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abd38b3e2d36e72ccd94d49fca2528b25">setId</a> (int id)</td></tr>
+<tr class="memdesc:abd38b3e2d36e72ccd94d49fca2528b25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка миру идентификатора.  <br /></td></tr>
+<tr class="memitem:a15cc1e7d9cabb8bdc4c4f13cda7a44b6" id="r_a15cc1e7d9cabb8bdc4c4f13cda7a44b6"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a15cc1e7d9cabb8bdc4c4f13cda7a44b6">setWorldGenerator</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world_generator.html">SimpleVoxelEngine::Core::WorldGenerator</a> *wrldgen)</td></tr>
+<tr class="memdesc:a15cc1e7d9cabb8bdc4c4f13cda7a44b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка генератора мира.  <br /></td></tr>
+<tr class="memitem:a7f06adb3f9a2533fee6323eae467fbfc" id="r_a7f06adb3f9a2533fee6323eae467fbfc"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world_generator.html">SimpleVoxelEngine::Core::WorldGenerator</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a7f06adb3f9a2533fee6323eae467fbfc">getWorldGenerator</a> ()</td></tr>
+<tr class="memdesc:a7f06adb3f9a2533fee6323eae467fbfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение генератора мира.  <br /></td></tr>
+<tr class="memitem:ac483bd12541c15e735dd56d6235b07d9" id="r_ac483bd12541c15e735dd56d6235b07d9"><td class="memItemLeft">unsigned char&#160;</td><td class="memItemRight"><a class="el" href="#ac483bd12541c15e735dd56d6235b07d9">getSizeChunk</a> ()</td></tr>
+<tr class="memdesc:ac483bd12541c15e735dd56d6235b07d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение размера ребра чанка.  <br /></td></tr>
+<tr class="memitem:a3033df70b04cec87ac800df144cff40c" id="r_a3033df70b04cec87ac800df144cff40c"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a3033df70b04cec87ac800df144cff40c">getAddressSimpleVoxelObjectByShift</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect)</td></tr>
+<tr class="memdesc:a3033df70b04cec87ac800df144cff40c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение адреса SimpleVoxelObject по сдвигу.  <br /></td></tr>
+<tr class="memitem:ae141e150798d135bc3052d886e4b1480" id="r_ae141e150798d135bc3052d886e4b1480"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae141e150798d135bc3052d886e4b1480">setSimpleVoxelObjectTransparentTester</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_simple_voxel_object_transparent_tester.html">SimpleVoxelObjectTransparentTester</a> *svott)</td></tr>
+<tr class="memdesc:ae141e150798d135bc3052d886e4b1480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка контроллера прозрачности.  <br /></td></tr>
+<tr class="memitem:aa87b00a1b444203c91e96d003007e351" id="r_aa87b00a1b444203c91e96d003007e351"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_simple_voxel_object_transparent_tester.html">SimpleVoxelObjectTransparentTester</a> *&#160;</td><td class="memItemRight"><a class="el" href="#aa87b00a1b444203c91e96d003007e351">getSimpleVoxelObjectTransparentTester</a> ()</td></tr>
+<tr class="memdesc:aa87b00a1b444203c91e96d003007e351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение контроллера прозрачности.  <br /></td></tr>
+<tr class="memitem:a75f7d6cd5a3e528950bfad606fd3edbf" id="r_a75f7d6cd5a3e528950bfad606fd3edbf"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a75f7d6cd5a3e528950bfad606fd3edbf">isTransparent</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, <a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *parent=0)</td></tr>
+<tr class="memdesc:a75f7d6cd5a3e528950bfad606fd3edbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка на прозрачность по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>.  <br /></td></tr>
+<tr class="memitem:a8adf09adad4b99f94a87e3bac3a15d97" id="r_a8adf09adad4b99f94a87e3bac3a15d97"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a8adf09adad4b99f94a87e3bac3a15d97">isFaceTransparent</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect, <a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *parent=0)</td></tr>
+<tr class="memdesc:a8adf09adad4b99f94a87e3bac3a15d97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка грани вокселя на видимость.  <br /></td></tr>
+<tr class="memitem:ac657ad3e085b7671fda7b72f3ac867a7" id="r_ac657ad3e085b7671fda7b72f3ac867a7"><td class="memItemLeft">std::vector&lt; <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> * &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac657ad3e085b7671fda7b72f3ac867a7">getAddressesSimpleVoxelObjectsByFace</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt; vect, bool withempty=false)</td></tr>
+<tr class="memdesc:ac657ad3e085b7671fda7b72f3ac867a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение адресов всех соседей у грани вокселя.  <br /></td></tr>
+<tr class="memitem:a8499c95b6144ae946c5ec6f4aff740ab" id="r_a8499c95b6144ae946c5ec6f4aff740ab"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a8499c95b6144ae946c5ec6f4aff740ab">getAddressSimpleVoxelObjectByThreePoints</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt; v1, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt; v2, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt; v3, float scale, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt; lookvect, <a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0">SimpleVoxelEngine::Defines::LevelSearchSimpleVoxelObject</a> lssvo=<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0a2d7f4ff4b3576f41f5a6847cc51d1858">SimpleVoxelEngine::Defines::LASTLEVEL</a>, int level=1)</td></tr>
+<tr class="memdesc:a8499c95b6144ae946c5ec6f4aff740ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение адреса SimpleVoxelObject по трём точкам в пространстве и вектору направления.  <br /></td></tr>
+<tr class="memitem:a42a422771c58c6e9109caf32caad9277" id="r_a42a422771c58c6e9109caf32caad9277"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a42a422771c58c6e9109caf32caad9277">getAddressSimpleVoxelObjectByPoint</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt; point, float scale, <a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0">SimpleVoxelEngine::Defines::LevelSearchSimpleVoxelObject</a> lssvo=<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0a2d7f4ff4b3576f41f5a6847cc51d1858">SimpleVoxelEngine::Defines::LASTLEVEL</a>, int level=1)</td></tr>
+<tr class="memdesc:a42a422771c58c6e9109caf32caad9277"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение адреса SimpleVoxelObject, в котором лежит точка.  <br /></td></tr>
+<tr class="memitem:aeae524b5245e5d1b142bceaa919fd562" id="r_aeae524b5245e5d1b142bceaa919fd562"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aeae524b5245e5d1b142bceaa919fd562">isVisible</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, bool *renderfaces, <a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *parent=0)</td></tr>
+<tr class="memdesc:aeae524b5245e5d1b142bceaa919fd562"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка на видимость SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>.  <br /></td></tr>
+<tr class="memitem:a58ea57776eafcd9f9790335ea220a2b8" id="r_a58ea57776eafcd9f9790335ea220a2b8"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Additional::Vector3d</a>&lt; float &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a58ea57776eafcd9f9790335ea220a2b8">getPosition</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, float posscale=1)</td></tr>
+<tr class="memdesc:a58ea57776eafcd9f9790335ea220a2b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение вектора позиции в глобальных мировых координатах SimpleVoxelObjects по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>.  <br /></td></tr>
+<tr class="memitem:ac4d5bf58280bf454c59853ad5eba53c9" id="r_ac4d5bf58280bf454c59853ad5eba53c9"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Additional::Vector3d</a>&lt; float &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac4d5bf58280bf454c59853ad5eba53c9">getRotation</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, float rotscale=1)</td></tr>
+<tr class="memdesc:ac4d5bf58280bf454c59853ad5eba53c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение вектора поворота в глобальных мировых координатах SimpleVoxelObjects по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>.  <br /></td></tr>
+<tr class="memitem:aded978ad277e52b9ba5ac8e368c20146" id="r_aded978ad277e52b9ba5ac8e368c20146"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Additional::Vector3d</a>&lt; float &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aded978ad277e52b9ba5ac8e368c20146">getScale</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *addr, float scscale=1)</td></tr>
+<tr class="memdesc:aded978ad277e52b9ba5ac8e368c20146"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение вектора масштабирования в глобальных мировых координатах SimpleVoxelObjects по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>.  <br /></td></tr>
+<tr class="memitem:ab8056438ae5e5ffd8c3745b64412c149" id="r_ab8056438ae5e5ffd8c3745b64412c149"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab8056438ae5e5ffd8c3745b64412c149">setMultiplePartition</a> (bool multpart)</td></tr>
+<tr class="memdesc:ab8056438ae5e5ffd8c3745b64412c149"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка типа разбиения чанков.  <br /></td></tr>
+<tr class="memitem:a695f379c865c51d4555c902d6568e16d" id="r_a695f379c865c51d4555c902d6568e16d"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a695f379c865c51d4555c902d6568e16d">isMultiplePartition</a> ()</td></tr>
+<tr class="memdesc:a695f379c865c51d4555c902d6568e16d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверка на тип разбиения.  <br /></td></tr>
+<tr class="memitem:a6332269d8335ffcb9daf647743be4ec6" id="r_a6332269d8335ffcb9daf647743be4ec6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6332269d8335ffcb9daf647743be4ec6">setChunksSaveLoadController</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_chunks_save_load_controller.html">SimpleVoxelEngine::Core::ChunksSaveLoadController</a> *cslc)</td></tr>
+<tr class="memdesc:a6332269d8335ffcb9daf647743be4ec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка контроллера загрузки и сохранения чанков.  <br /></td></tr>
+<tr class="memitem:afd84dc1a440a4d4e5419e629d5431d04" id="r_afd84dc1a440a4d4e5419e629d5431d04"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_chunks_save_load_controller.html">SimpleVoxelEngine::Core::ChunksSaveLoadController</a> *&#160;</td><td class="memItemRight"><a class="el" href="#afd84dc1a440a4d4e5419e629d5431d04">getChunksSaveLoadController</a> ()</td></tr>
+<tr class="memdesc:afd84dc1a440a4d4e5419e629d5431d04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение контроллера загрузки и сохранения чанков.  <br /></td></tr>
+<tr class="memitem:a6b1142efdad36ad32d7798067319d2d8" id="r_a6b1142efdad36ad32d7798067319d2d8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6b1142efdad36ad32d7798067319d2d8">clear</a> (bool save=false)</td></tr>
+<tr class="memdesc:a6b1142efdad36ad32d7798067319d2d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Очистка мира.  <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
 <div class="textblock"><p>Воксельный мир. </p>
 <p>Данный класс является регистрируемым воксельным миром. Движок может содержать много воксельных миров. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
+<a id="adb4d181ab9a6d1d1843a79d6c977df36" name="adb4d181ab9a6d1d1843a79d6c977df36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb4d181ab9a6d1d1843a79d6c977df36">&#9670;&#160;</a></span>World() <span class="overload">[1/2]</span></h2>
 
-<p>См. определение в файле <a class="el" href="_world_8h_source.html">World.h</a> строка <a class="el" href="_world_8h_source.html#l00035">35</a></p>
-</div><h2 class="groupheader">Конструктор(ы)</h2>
-<a class="anchor" id="adb4d181ab9a6d1d1843a79d6c977df36"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">SimpleVoxelEngine::Core::World::World </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a> *&#160;</td>
-          <td class="paramname"><em>eng</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a> *</td>          <td class="paramname"><span class="paramname"><em>eng</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -247,26 +254,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a578035696730c275836f811800633d71"></a>
+<a id="a578035696730c275836f811800633d71" name="a578035696730c275836f811800633d71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a578035696730c275836f811800633d71">&#9670;&#160;</a></span>World() <span class="overload">[2/2]</span></h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">SimpleVoxelEngine::Core::World::World </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a> *&#160;</td>
-          <td class="paramname"><em>eng</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a> *</td>          <td class="paramname"><span class="paramname"><em>eng</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html">WorldCreatingParameters</a> &amp;&#160;</td>
-          <td class="paramname"><em>wcp</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype"><a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html">WorldCreatingParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>wcp</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -275,23 +277,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">eng</td><td>Движок, в котором этот мир зарегистрирован. </td></tr>
-    <tr><td class="paramname">wcp</td><td>Параметры создания мира. </td></tr>
+    <tr><td class="paramname">wcp</td><td>Параметры создания мира. Размер чанка 0 заменяется размером по умолчанию из <a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html" title="Структура, хранящая параметры для создания мира.">WorldCreatingParameters</a> (с ошибкой в логе). </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<h2 class="groupheader">Методы</h2>
-<a class="anchor" id="a1c608b33539825e8fc56ecce1bc6b024"></a>
+<a id="a8f894caa60c0f3254cf557b77fe62411" name="a8f894caa60c0f3254cf557b77fe62411"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f894caa60c0f3254cf557b77fe62411">&#9670;&#160;</a></span>~World()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void SimpleVoxelEngine::Core::World::clear </td>
+          <td class="memname">SimpleVoxelEngine::Core::World::~World </td>
           <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>save</em> = <code>false</code></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Стандартный деструктор. Чанки не сохраняет. </p>
+<p>Удаляет все чанки, а также контроллер загрузки и сохранения, генератор мира и контроллер прозрачности. </p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
+<a id="a6b1142efdad36ad32d7798067319d2d8" name="a6b1142efdad36ad32d7798067319d2d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b1142efdad36ad32d7798067319d2d8">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::Core::World::clear </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>save</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -300,28 +323,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 <p>Очистка мира. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramname">save</td><td>Сохранять ли чанки при очистке. Полностью выгружает все чанки из памяти, при этом выполняя сохранение. </td></tr>
+    <tr><td class="paramname">save</td><td>Сохранять ли чанки при очистке. Полностью выгружает все чанки из памяти, при этом выполняя сохранение. Чанк, который не удалось сохранить, тоже удаляется из памяти (с одной ошибкой в логе на чанк). Соседи на пересчёт не помечаются - удаляются все чанки. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает false, если какой-то чанк не удалось сохранить, иначе true. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a1e92ad718487804acfd874fbcfa42a4e"></a>
+<a id="a1e92ad718487804acfd874fbcfa42a4e" name="a1e92ad718487804acfd874fbcfa42a4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e92ad718487804acfd874fbcfa42a4e">&#9670;&#160;</a></span>deleteSimpleVoxelObject()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::deleteSimpleVoxelObject </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *&#160;</td>
-          <td class="paramname"><em>addr</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Удаление SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>. </p>
+<p>Удаление SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">addr</td><td>Адрес вокселя, который надо удалить. </td></tr>
@@ -332,26 +357,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a4536ba3d4bb8c8e342937cd2d6671929"></a>
+<a id="a87dc6793eba42b954527e904317853f6" name="a87dc6793eba42b954527e904317853f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87dc6793eba42b954527e904317853f6">&#9670;&#160;</a></span>generateChunk()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::generateChunk </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>vect</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>createchunkinmemory</em> = <code>true</code>&#160;</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>createchunkinmemory</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>, </td>
         </tr>
         <tr>
+          <td class="paramkey"></td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>outboundserror</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -360,7 +385,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 <p>Генерирует чанк с помощью установленного генератора. </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">vect</td><td>Вектор (координаты) генерируемого чанка. </td></tr>
-    <tr><td class="paramname">createchunkinmemory</td><td>Создавать ли чанк в памяти (ставить true, если чанк не существует в памяти, иначе генерация не произойдёт) </td></tr>
+    <tr><td class="paramname">createchunkinmemory</td><td>Создавать ли чанк в памяти (ставить true, если чанк не существует в памяти, иначе генерация не произойдёт). true для уже загруженного чанка и false для незагруженного - ошибка (false). Чанк, созданный здесь, при неудаче генерации удаляется. При генерации поверх уже загруженного чанка (false) чанк остаётся в памяти и при неудаче - с тем, что генератор успел записать; весь чанк помечается на пересчёт видимости. Подготовка после генерации - как в <a class="el" href="#ae7bd484060fa675cbaa193259c99b559" title="Загрузка чанка.">loadChunk()</a>. Чанк за границами мира не генерируется (генератор не вызывается). </td></tr>
+    <tr><td class="paramname">outboundserror</td><td>Писать ли в лог нарушение логики, если чанк за границами мира (false - молча вернуть false). </td></tr>
   </table>
   </dd>
 </dl>
@@ -368,32 +394,107 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a681e6cc02907b8532093f1e369d817f4"></a>
+<a id="ac657ad3e085b7671fda7b72f3ac867a7" name="ac657ad3e085b7671fda7b72f3ac867a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac657ad3e085b7671fda7b72f3ac867a7">&#9670;&#160;</a></span>getAddressesSimpleVoxelObjectsByFace()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a>* SimpleVoxelEngine::Core::World::getAddressSimpleVoxelObjectByShift </td>
+          <td class="memname">std::vector&lt; <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> * &gt; SimpleVoxelEngine::Core::World::getAddressesSimpleVoxelObjectsByFace </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>vect</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span>, </td>
         </tr>
         <tr>
+          <td class="paramkey"></td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>withempty</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение адресов всех соседей у грани вокселя. </p>
+<p>Возвращает ячейки, которые касаются грани с другой стороны, хотя бы частично, на любой глубине: блоки внутри вложенных чанков, более мелкие ячейки соседнего чанка с другим разбиением, а если сосед крупнее - адрес этого крупного блока (короче addr). Вложенные чанки в список не входят - вместо них их ячейки. Это те же ячейки, которые проверяет <a class="el" href="#a8adf09adad4b99f94a87e3bac3a15d97" title="Проверка грани вокселя на видимость.">isFaceTransparent()</a>. Порядок: по z, затем y, затем x на каждом уровне. В отличие от <a class="el" href="#a3033df70b04cec87ac800df144cff40c" title="Получение адреса SimpleVoxelObject по сдвигу.">getAddressSimpleVoxelObjectByShift()</a>, которая возвращает одну ячейку (у нижнего угла грани). </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">addr</td><td>Адрес вокселя. </td></tr>
+    <tr><td class="paramname">vect</td><td>Направление грани: единичный вектор вдоль оси, например (1,0,0) или (0,-1,0). </td></tr>
+    <tr><td class="paramname">withempty</td><td>true - включать и пустые ячейки (например, чтобы знать, куда можно поставить блок). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Список новых адресов - удаляет вызывающий. Пустой, если вокселя нет или соседний чанк не загружен. </dd></dl>
+
+</div>
+</div>
+<a id="a42a422771c58c6e9109caf32caad9277" name="a42a422771c58c6e9109caf32caad9277"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42a422771c58c6e9109caf32caad9277">&#9670;&#160;</a></span>getAddressSimpleVoxelObjectByPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a> * SimpleVoxelEngine::Core::World::getAddressSimpleVoxelObjectByPoint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt;</td>          <td class="paramname"><span class="paramname"><em>point</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>scale</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0">SimpleVoxelEngine::Defines::LevelSearchSimpleVoxelObject</a></td>          <td class="paramname"><span class="paramname"><em>lssvo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0a2d7f4ff4b3576f41f5a6847cc51d1858">SimpleVoxelEngine::Defines::LASTLEVEL</a></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>level</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение адреса SimpleVoxelObject, в котором лежит точка. </p>
+<p>Например, точка под курсором, чуть сдвинутая от грани вдоль взгляда: внутрь блока - чтобы найти блок, к камере - чтобы найти ячейку для установки. В отличие от <a class="el" href="#a8499c95b6144ae946c5ec6f4aff740ab" title="Получение адреса SimpleVoxelObject по трём точкам в пространстве и вектору направления.">getAddressSimpleVoxelObjectByThreePoints()</a>, находит ячейку именно в этом месте грани, а не у центра треугольника. Если точка лежит ровно на границе ячеек, берётся ячейка с большей координатой - поэтому точку нужно сдвинуть с грани. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">point</td><td>Точка в тех же координатах, что и точки <a class="el" href="#a8499c95b6144ae946c5ec6f4aff740ab" title="Получение адреса SimpleVoxelObject по трём точкам в пространстве и вектору направления.">getAddressSimpleVoxelObjectByThreePoints()</a>. </td></tr>
+    <tr><td class="paramname">scale</td><td>Масштабирование вокселей в пространстве (как в <a class="el" href="#a8499c95b6144ae946c5ec6f4aff740ab" title="Получение адреса SimpleVoxelObject по трём точкам в пространстве и вектору направления.">getAddressSimpleVoxelObjectByThreePoints()</a>). </td></tr>
+    <tr><td class="paramname">lssvo</td><td>Тип поиска: LASTLEVEL - спуск до вокселя, который не чанк, или до пустой ячейки; NUMBERLEVEL - до уровня level (пустая ячейка или воксель, который не чанк, выше уровня level - ошибка, NULL). </td></tr>
+    <tr><td class="paramname">level</td><td>Уровень глубины погружения при поиске (для NUMBERLEVEL). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает новый адрес (удаляет вызывающий): адрес вокселя или пустой ячейки, в которой лежит точка; адрес без векторов, если чанк не загружен; NULL при ошибке. </dd></dl>
+
+</div>
+</div>
+<a id="a3033df70b04cec87ac800df144cff40c" name="a3033df70b04cec87ac800df144cff40c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3033df70b04cec87ac800df144cff40c">&#9670;&#160;</a></span>getAddressSimpleVoxelObjectByShift()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a> * SimpleVoxelEngine::Core::World::getAddressSimpleVoxelObjectByShift </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Получение адреса SimpleVoxelObject по сдвигу. </p>
-<p>Интеллектуальное определение нового адреса SimpleVoxelObject из сдвига. Учитывает границы чанков. </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>Интеллектуальное определение нового адреса SimpleVoxelObject из сдвига. Учитывает границы чанков, вложенные чанки и разное разбиение чанков (считается точно, в целых числах). Находится ячейка, прилегающая к грани вокселя; результат не глубже addr (спуск останавливается на вокселе, который не чанк, или на пустой ячейке). Если ячейки соседа мельче вокселя, возвращается одна из прилегающих (у нижнего угла грани). Возвращает 0, если исходного вокселя нет или соседний чанк не загружен. </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">addr</td><td>Адрес вокселя, от которого идёт сдвиг. </td></tr>
     <tr><td class="paramname">vect</td><td>Вектор сдвига. </td></tr>
@@ -404,56 +505,46 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="ad5a7850af948b2d3b63c92dff66c6e60"></a>
+<a id="a8499c95b6144ae946c5ec6f4aff740ab" name="a8499c95b6144ae946c5ec6f4aff740ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8499c95b6144ae946c5ec6f4aff740ab">&#9670;&#160;</a></span>getAddressSimpleVoxelObjectByThreePoints()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a>* SimpleVoxelEngine::Core::World::getAddressSimpleVoxelObjectByThreePoints </td>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a> * SimpleVoxelEngine::Core::World::getAddressSimpleVoxelObjectByThreePoints </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt;&#160;</td>
-          <td class="paramname"><em>v1</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt;</td>          <td class="paramname"><span class="paramname"><em>v1</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt;&#160;</td>
-          <td class="paramname"><em>v2</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt;</td>          <td class="paramname"><span class="paramname"><em>v2</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt;&#160;</td>
-          <td class="paramname"><em>v3</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt;</td>          <td class="paramname"><span class="paramname"><em>v3</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>scale</em>, </td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>scale</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt;&#160;</td>
-          <td class="paramname"><em>lookvect</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; float &gt;</td>          <td class="paramname"><span class="paramname"><em>lookvect</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0">SimpleVoxelEngine::Defines::LevelSearchSimpleVoxelObject</a>&#160;</td>
-          <td class="paramname"><em>lssvo</em> = <code><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0a2d7f4ff4b3576f41f5a6847cc51d1858">SimpleVoxelEngine::Defines::LASTLEVEL</a></code>, </td>
+          <td class="paramtype"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0">SimpleVoxelEngine::Defines::LevelSearchSimpleVoxelObject</a></td>          <td class="paramname"><span class="paramname"><em>lssvo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0a2d7f4ff4b3576f41f5a6847cc51d1858">SimpleVoxelEngine::Defines::LASTLEVEL</a></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>level</em> = <code>1</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>level</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -466,24 +557,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
     <tr><td class="paramname">v3</td><td>Третья точка. </td></tr>
     <tr><td class="paramname">scale</td><td>Масштабирование вокселей в пространстве. </td></tr>
     <tr><td class="paramname">lookvect</td><td>Направление взгляда (вектор, торчащий в воксель). </td></tr>
-    <tr><td class="paramname">lssvo</td><td>Тип поиска. Не используется. </td></tr>
-    <tr><td class="paramname">level</td><td>Уровень глубины погружения при поиске. Не используется. Весь поиск идёт на первом уровне. </td></tr>
+    <tr><td class="paramname">lssvo</td><td>Тип поиска: LASTLEVEL - спуск до вокселя, который не чанк; NUMBERLEVEL - до уровня level (уровень = число векторов в адресе: 1 - чанк, 2 - воксель чанка...; пустая ячейка или воксель, который не чанк, выше уровня level - ошибка); AUTOLEVEL - как LASTLEVEL. </td></tr>
+    <tr><td class="paramname">level</td><td>Уровень глубины погружения при поиске (для NUMBERLEVEL). Работает и для граней вокселей вложенных чанков, и для чанков с любым разбиением. Сдвиг точки за грань учитывает точность float, поэтому поиск работает и далеко от начала координат (пока ячейка больше нескольких шагов float в этом месте). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Возвращает указатель на <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a> объекта SimpleVoxelObject, который содержит три указанных точки, а также вектор направлен в него. </dd></dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает новый адрес (удаляет вызывающий): адрес вокселя, в который направлен взгляд (при LASTLEVEL это может быть и пустая ячейка - например, место для установки блока, если взгляд направлен из блока); адрес без векторов, если чанк не загружен; NULL при ошибке: вырожденный треугольник, взгляд вдоль грани, точка на границе чанков, ошибка уровня NUMBERLEVEL. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a1c7ff77dd790d68dfa373ee320285660"></a>
+<a id="a8f8bb456bfcff474ebec78a051e02a1e" name="a8f8bb456bfcff474ebec78a051e02a1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f8bb456bfcff474ebec78a051e02a1e">&#9670;&#160;</a></span>getChunk()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html">SimpleVoxelEngine::Voxels::ChunkVoxelObject</a>* SimpleVoxelEngine::Core::World::getChunk </td>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html">SimpleVoxelEngine::Voxels::ChunkVoxelObject</a> * SimpleVoxelEngine::Core::World::getChunk </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>vect</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -500,14 +592,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a912939ab8d3714ae70c9cef27313baf5"></a>
+<a id="afa22144950bd82ef9e230c889185a7e4" name="afa22144950bd82ef9e230c889185a7e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa22144950bd82ef9e230c889185a7e4">&#9670;&#160;</a></span>getChunksBound()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_chunks_save_load_controller.html">SimpleVoxelEngine::Core::ChunksSaveLoadController</a>* SimpleVoxelEngine::Core::World::getChunksSaveLoadController </td>
+          <td class="memname">int SimpleVoxelEngine::Core::World::getChunksBound </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a27af4b8b7ce3b258558859f540e8d5df">SimpleVoxelEngine::Defines::WORLD_BOUND_SIDE</a></td>          <td class="paramname"><span class="paramname"><em>side</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение границы мира с одной стороны. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">side</td><td>Сторона границы. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает крайнюю допустимую координату чанка (если границы нет - 0, см. <a class="el" href="#a9a23791bdbb91ebf920df9d852602975" title="Есть ли граница мира с этой стороны.">hasChunksBound()</a>). </dd></dl>
+
+</div>
+</div>
+<a id="afd84dc1a440a4d4e5419e629d5431d04" name="afd84dc1a440a4d4e5419e629d5431d04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd84dc1a440a4d4e5419e629d5431d04">&#9670;&#160;</a></span>getChunksSaveLoadController()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_chunks_save_load_controller.html">SimpleVoxelEngine::Core::ChunksSaveLoadController</a> * SimpleVoxelEngine::Core::World::getChunksSaveLoadController </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -518,14 +638,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="ad1f54c51688c42ff25efb9fa35633c9d"></a>
+<a id="af85b851427ff0d67cbd019d8069fd84e" name="af85b851427ff0d67cbd019d8069fd84e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af85b851427ff0d67cbd019d8069fd84e">&#9670;&#160;</a></span>getEngine()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a>* SimpleVoxelEngine::Core::World::getEngine </td>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a> * SimpleVoxelEngine::Core::World::getEngine </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -536,14 +658,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a6fb68ef32eccd3146d5b8ef841fc837a"></a>
+<a id="a6fb68ef32eccd3146d5b8ef841fc837a" name="a6fb68ef32eccd3146d5b8ef841fc837a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fb68ef32eccd3146d5b8ef841fc837a">&#9670;&#160;</a></span>getId()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">int SimpleVoxelEngine::Core::World::getId </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -554,35 +678,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="aac1ca60d32cf4f89ed228c8fcedc9343"></a>
+<a id="a58ea57776eafcd9f9790335ea220a2b8" name="a58ea57776eafcd9f9790335ea220a2b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58ea57776eafcd9f9790335ea220a2b8">&#9670;&#160;</a></span>getPosition()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Additional::Vector3d</a>&lt;float&gt; SimpleVoxelEngine::Core::World::getPosition </td>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Additional::Vector3d</a>&lt; float &gt; SimpleVoxelEngine::Core::World::getPosition </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>posscale</em> = <code>1</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>posscale</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Получение вектора позиции в глобальных мировых координатах SimpleVoxelObjects по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
+<p>Получение вектора позиции в глобальных мировых координатах SimpleVoxelObjects по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>. </p>
+<p>Центр вокселя относительно центра его чанка. Воксели вложенного чанка ровно заполняют ячейку родителя. Чанки с любым разбиением выровнены одинаково (как чанк с разбиением <a class="el" href="#ac483bd12541c15e735dd56d6235b07d9" title="Получение размера ребра чанка.">getSizeChunk()</a>), поэтому стыкуются без щелей. </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">addr</td><td>Адрес SimpleVoxelObject. </td></tr>
-    <tr><td class="paramname">posscale</td><td>Масштаб позиции вокселей. </td></tr>
+    <tr><td class="paramname">posscale</td><td>Масштаб позиции вокселей (размер чанка в единицах сцены). </td></tr>
   </table>
   </dd>
 </dl>
@@ -590,31 +709,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="af76aefa9a5b158b8a7c9386a56b20dc9"></a>
+<a id="ac4d5bf58280bf454c59853ad5eba53c9" name="ac4d5bf58280bf454c59853ad5eba53c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4d5bf58280bf454c59853ad5eba53c9">&#9670;&#160;</a></span>getRotation()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Additional::Vector3d</a>&lt;float&gt; SimpleVoxelEngine::Core::World::getRotation </td>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Additional::Vector3d</a>&lt; float &gt; SimpleVoxelEngine::Core::World::getRotation </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>rotscale</em> = <code>1</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>rotscale</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Получение вектора поворота в глобальных мировых координатах SimpleVoxelObjects по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>. </p>
+<p>Получение вектора поворота в глобальных мировых координатах SimpleVoxelObjects по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">addr</td><td>Адрес SimpleVoxelObject. </td></tr>
@@ -626,35 +740,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a2be6cd12f18fec68351704c4a2d98afa"></a>
+<a id="aded978ad277e52b9ba5ac8e368c20146" name="aded978ad277e52b9ba5ac8e368c20146"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aded978ad277e52b9ba5ac8e368c20146">&#9670;&#160;</a></span>getScale()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Additional::Vector3d</a>&lt;float&gt; SimpleVoxelEngine::Core::World::getScale </td>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Additional::Vector3d</a>&lt; float &gt; SimpleVoxelEngine::Core::World::getScale </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>scscale</em> = <code>1</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>scscale</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Получение вектора масштабирования в глобальных мировых координатах SimpleVoxelObjects по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
+<p>Получение вектора масштабирования в глобальных мировых координатах SimpleVoxelObjects по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>. </p>
+<p>Размер вокселя = scscale / (произведение разбиений всех уровней адреса). </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">addr</td><td>Адрес SimpleVoxelObject. </td></tr>
-    <tr><td class="paramname">scscale</td><td>Масштабирование вокселей. </td></tr>
+    <tr><td class="paramname">scscale</td><td>Масштабирование вокселей (размер чанка в единицах сцены). </td></tr>
   </table>
   </dd>
 </dl>
@@ -662,35 +771,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a6c611c47e7b9f660619db96d512e1725"></a>
+<a id="a585140a0caa72126adb3a5361c72d1da" name="a585140a0caa72126adb3a5361c72d1da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a585140a0caa72126adb3a5361c72d1da">&#9670;&#160;</a></span>getSimpleVoxelObject()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a>* SimpleVoxelEngine::Core::World::getSimpleVoxelObject </td>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> * SimpleVoxelEngine::Core::World::getSimpleVoxelObject </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>isexists</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>isexists</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Получить SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>. </p>
+<p>Получить SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramname">addr</td><td>Указатель на <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>. </td></tr>
-    <tr><td class="paramname">isexists</td><td>Если имеет значение true, то система логирования выдаст предупреждение при отсутствии SimpleVoxelObject по данному адресу, иначе не выдаст. </td></tr>
+    <tr><td class="paramname">addr</td><td>Указатель на <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a> (не забирается, удаляет вызывающий). </td></tr>
+    <tr><td class="paramname">isexists</td><td>Если имеет значение true, то при отсутствии SimpleVoxelObject по данному адресу (или незагруженном чанке) в лог пишется ошибка (EVENT_TYPE_LOGIC_VIOLATION или EVENT_TYPE_ERROR), иначе ничего не пишется. </td></tr>
   </table>
   </dd>
 </dl>
@@ -698,14 +802,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="aea99e2a1ed0e66bfee1e3f1cb6f17178"></a>
+<a id="aa87b00a1b444203c91e96d003007e351" name="aa87b00a1b444203c91e96d003007e351"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa87b00a1b444203c91e96d003007e351">&#9670;&#160;</a></span>getSimpleVoxelObjectTransparentTester()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_simple_voxel_object_transparent_tester.html">SimpleVoxelObjectTransparentTester</a>* SimpleVoxelEngine::Core::World::getSimpleVoxelObjectTransparentTester </td>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_simple_voxel_object_transparent_tester.html">SimpleVoxelObjectTransparentTester</a> * SimpleVoxelEngine::Core::World::getSimpleVoxelObjectTransparentTester </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -716,14 +822,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="ac483bd12541c15e735dd56d6235b07d9"></a>
+<a id="ac483bd12541c15e735dd56d6235b07d9" name="ac483bd12541c15e735dd56d6235b07d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac483bd12541c15e735dd56d6235b07d9">&#9670;&#160;</a></span>getSizeChunk()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">unsigned char SimpleVoxelEngine::Core::World::getSizeChunk </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -734,14 +842,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a23daf8713741505019a8d9f5f06bd87e"></a>
+<a id="a7f06adb3f9a2533fee6323eae467fbfc" name="a7f06adb3f9a2533fee6323eae467fbfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f06adb3f9a2533fee6323eae467fbfc">&#9670;&#160;</a></span>getWorldGenerator()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world_generator.html">SimpleVoxelEngine::Core::WorldGenerator</a>* SimpleVoxelEngine::Core::World::getWorldGenerator </td>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world_generator.html">SimpleVoxelEngine::Core::WorldGenerator</a> * SimpleVoxelEngine::Core::World::getWorldGenerator </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -752,15 +862,68 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a64e06849c489b956241ac9db383b2eee"></a>
+<a id="a9a23791bdbb91ebf920df9d852602975" name="a9a23791bdbb91ebf920df9d852602975"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a23791bdbb91ebf920df9d852602975">&#9670;&#160;</a></span>hasChunksBound()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::Core::World::hasChunksBound </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a27af4b8b7ce3b258558859f540e8d5df">SimpleVoxelEngine::Defines::WORLD_BOUND_SIDE</a></td>          <td class="paramname"><span class="paramname"><em>side</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Есть ли граница мира с этой стороны. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">side</td><td>Сторона границы. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если граница задана. </dd></dl>
+
+</div>
+</div>
+<a id="a3ceb2585929356f6403bc8023c91e8d6" name="a3ceb2585929356f6403bc8023c91e8d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ceb2585929356f6403bc8023c91e8d6">&#9670;&#160;</a></span>isChunkInBounds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::Core::World::isChunkInBounds </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Лежит ли чанк внутри границ мира. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vect</td><td>Вектор (координаты) чанка. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если чанк не выходит ни за одну заданную границу (без границ - всегда true). </dd></dl>
+
+</div>
+</div>
+<a id="a64e06849c489b956241ac9db383b2eee" name="a64e06849c489b956241ac9db383b2eee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64e06849c489b956241ac9db383b2eee">&#9670;&#160;</a></span>isExistsChunkInMemory()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::isExistsChunkInMemory </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>vect</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -777,14 +940,53 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a695f379c865c51d4555c902d6568e16d"></a>
+<a id="a8adf09adad4b99f94a87e3bac3a15d97" name="a8adf09adad4b99f94a87e3bac3a15d97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8adf09adad4b99f94a87e3bac3a15d97">&#9670;&#160;</a></span>isFaceTransparent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::Core::World::isFaceTransparent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *</td>          <td class="paramname"><span class="paramname"><em>parent</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проверка грани вокселя на видимость. </p>
+<p>Проверяются все ячейки, которые касаются грани с другой стороны, в том числе ячейки вложенных чанков и более мелкие ячейки соседнего чанка с другим разбиением. Грань видима, если среди них есть пустая или прозрачная (по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_simple_voxel_object_transparent_tester.html" title="Система проверки SimpleVoxelObject на прозрачность.">SimpleVoxelObjectTransparentTester</a>; тестеру передаются только блоки, не чанки). Незагруженный соседний чанк и несуществующий воксель - грань видима. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">addr</td><td>Адрес вокселя. </td></tr>
+    <tr><td class="paramname">vect</td><td>Направление грани: единичный вектор вдоль оси, например (1,0,0) или (0,-1,0). </td></tr>
+    <tr><td class="paramname">parent</td><td>Воксель, грань которого проверяется (передаётся тестеру как parent; вложенный чанк - как NULL). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если грань нужно рисовать. </dd></dl>
+
+</div>
+</div>
+<a id="a695f379c865c51d4555c902d6568e16d" name="a695f379c865c51d4555c902d6568e16d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a695f379c865c51d4555c902d6568e16d">&#9670;&#160;</a></span>isMultiplePartition()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::isMultiplePartition </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -795,77 +997,66 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a75f7d6cd5a3e528950bfad606fd3edbf"></a>
+<a id="a75f7d6cd5a3e528950bfad606fd3edbf" name="a75f7d6cd5a3e528950bfad606fd3edbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75f7d6cd5a3e528950bfad606fd3edbf">&#9670;&#160;</a></span>isTransparent()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::isTransparent </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *&#160;</td>
-          <td class="paramname"><em>parent</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *</td>          <td class="paramname"><span class="paramname"><em>parent</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Проверка на прозрачность по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
+<p>Проверка на прозрачность по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>. </p>
+<p>Проверяется одна ячейка. Пустая ячейка и вложенный чанк считаются прозрачными, остальное решает <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_simple_voxel_object_transparent_tester.html" title="Система проверки SimpleVoxelObject на прозрачность.">SimpleVoxelObjectTransparentTester</a>. Для видимости грани используется <a class="el" href="#a8adf09adad4b99f94a87e3bac3a15d97" title="Проверка грани вокселя на видимость.">isFaceTransparent()</a>. </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">addr</td><td>Адрес проверяемого вокселя. </td></tr>
     <tr><td class="paramname">parent</td><td>Указатель на SimpleVoxelObject, от которого идёт проверка. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a> является прозрачным, иначе false. </dd></dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a> является прозрачным, иначе false. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="aeae524b5245e5d1b142bceaa919fd562"></a>
+<a id="aeae524b5245e5d1b142bceaa919fd562" name="aeae524b5245e5d1b142bceaa919fd562"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeae524b5245e5d1b142bceaa919fd562">&#9670;&#160;</a></span>isVisible()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::isVisible </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool *&#160;</td>
-          <td class="paramname"><em>renderfaces</em>, </td>
+          <td class="paramtype">bool *</td>          <td class="paramname"><span class="paramname"><em>renderfaces</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *&#160;</td>
-          <td class="paramname"><em>parent</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *</td>          <td class="paramname"><span class="paramname"><em>parent</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Проверка на видимость SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
+<p>Проверка на видимость SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>. </p>
+<p>Каждая грань проверяется через <a class="el" href="#a8adf09adad4b99f94a87e3bac3a15d97" title="Проверка грани вокселя на видимость.">isFaceTransparent()</a>. </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">addr</td><td>Указатель на адрес SimpleVoxelObject. </td></tr>
-    <tr><td class="paramname">renderfaces</td><td>Массив для заполнения видимости или невидимости граней SimpleVoxelObject. </td></tr>
+    <tr><td class="paramname">renderfaces</td><td>Массив из 6 элементов для заполнения видимости граней (может быть NULL) в порядке (x+, z+, x-, z-, y+, y-): грани в направлениях (1,0,0), (0,0,1), (-1,0,0), (0,0,-1), (0,1,0), (0,-1,0). </td></tr>
     <tr><td class="paramname">parent</td><td>Указатель на SimpleVoxelObject, который мы проверяем на видимость. </td></tr>
   </table>
   </dd>
@@ -874,116 +1065,109 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a1009f033d5a01a05a3acf396e9acf45e"></a>
+<a id="ae7bd484060fa675cbaa193259c99b559" name="ae7bd484060fa675cbaa193259c99b559"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7bd484060fa675cbaa193259c99b559">&#9670;&#160;</a></span>loadChunk()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::loadChunk </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>vect</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>outboundserror</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Загрузка чанка. </p>
-<p>Загружает чанк в память с диска. Если на диске его нет - генерирует с помощью установленного миру генератора. </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>Загружает чанк в память с диска. Если на диске его нет - генерирует с помощью установленного миру генератора. Если генератор не установлен - чанк остаётся пустым (это не ошибка). Если загрузка или генерация не удалась, чанк удаляется из памяти. После загрузки граничные воксели чанка и его соседей помечаются на пересчёт видимости, у вложенных чанков появляются адрес и мир, а счётчик непустых ячеек пересчитывается по массиву (контроллер загрузки может писать в массивы чанка напрямую и ставить счётчик сам - движок его поправит). Чанк за границами мира (<a class="el" href="#a3f20defbd77e7571c3f2dd5939536ce7" title="Установка границы мира с одной стороны.">setChunksBound()</a>) не загружается и не генерируется (генератор не вызывается). </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">vect</td><td>Вектор (координаты) загружаемого чанка. </td></tr>
+    <tr><td class="paramname">outboundserror</td><td>Писать ли в лог нарушение логики, если чанк за границами мира (false - молча вернуть false). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true в случае успеха, иначе false. </dd></dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true в случае успеха, иначе false (в том числе если чанк уже загружен - нарушение логики в логе - или лежит за границами мира). </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="aaa7f25d88cdeb07477087eb9b20ba85f"></a>
+<a id="aaa7f25d88cdeb07477087eb9b20ba85f" name="aaa7f25d88cdeb07477087eb9b20ba85f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa7f25d88cdeb07477087eb9b20ba85f">&#9670;&#160;</a></span>loadChunks()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::loadChunks </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>vect</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>cube_radius</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cube_radius</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Загрузка блока чанков. </p>
-<p>Загружает чанки в память с диска. Если на диске каких-то чанков нет - генерирует с помощью установленного миру генератора. Чанки загружается в кубическом радиусе cube_radius от vect. </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>Загружает чанки в память с диска. Если на диске каких-то чанков нет - генерирует с помощью установленного миру генератора. Чанки загружается в кубическом радиусе cube_radius от vect. Уже загруженные чанки и чанки за границами мира (<a class="el" href="#a3f20defbd77e7571c3f2dd5939536ce7" title="Установка границы мира с одной стороны.">setChunksBound()</a>) пропускаются без сообщений: загружается то, что в кубе может существовать. </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">vect</td><td>Вектор (координаты) центра загружаемого куба чанков. </td></tr>
-    <tr><td class="paramname">cube_radius</td><td>Кубический радиус. Общий размер куба будет (cube_radius + 1)^3. </td></tr>
+    <tr><td class="paramname">cube_radius</td><td>Кубический радиус (от 0). Общий размер куба будет (2 * cube_radius + 1)^3; 0 - один чанк vect. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true в случае успеха, иначе false. </dd></dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true в случае успеха, иначе false (радиус меньше 0 или какой-то чанк не загрузился). </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="ac022ebf05d3802fd592706398767a106"></a>
+<a id="ac022ebf05d3802fd592706398767a106" name="ac022ebf05d3802fd592706398767a106"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac022ebf05d3802fd592706398767a106">&#9670;&#160;</a></span>progressiveLoadChunks()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::progressiveLoadChunks </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>vect_old</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect_old</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>cube_radius_old</em>, </td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cube_radius_old</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>vect_new</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect_new</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>cube_radius_new</em>, </td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cube_radius_new</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>save</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>save</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Интеллектуальная загрузка чанков. </p>
-<p>Выгружает чанки из куба с центром в vect_old и радиусом cube_radius_old, которые не лежат в кубе с центром в vect_new радиусом cube_radius_new, потом загружает чанки из куба с центром в vect_new и радиусом cube_radius_new, которые не лежат в кубе с центром vect_old и радиусом cube_radius_old. Уже считается устаревшей и бессмысленной, так как не поддерживает многопоточности ни в каком плане. </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>Выгружает чанки из куба с центром в vect_old и радиусом cube_radius_old, которые не лежат в кубе с центром в vect_new радиусом cube_radius_new, потом загружает чанки из куба с центром в vect_new и радиусом cube_radius_new, которые не лежат в кубе с центром vect_old и радиусом cube_radius_old. Чанки, которых нет в памяти, при выгрузке пропускаются, уже загруженные и лежащие за границами мира при загрузке - тоже (без сообщений). </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">vect_old</td><td>Центр первого куба. </td></tr>
-    <tr><td class="paramname">cube_radius_old</td><td>Радиус первого куба. </td></tr>
+    <tr><td class="paramname">cube_radius_old</td><td>Радиус первого куба (от 0). </td></tr>
     <tr><td class="paramname">vect_new</td><td>Центр второго куба. </td></tr>
-    <tr><td class="paramname">cube_radius_new</td><td>Радиус второго куба. </td></tr>
+    <tr><td class="paramname">cube_radius_new</td><td>Радиус второго куба (от 0). </td></tr>
     <tr><td class="paramname">save</td><td>Выполнять ли сохранение выгружаемых чанков. </td></tr>
   </table>
   </dd>
@@ -992,14 +1176,66 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a36873bdd6c958f4eaea5eeae7e4ff5eb"></a>
+<a id="ac8059c98b4ca3f6f4fadf19707c0d124" name="ac8059c98b4ca3f6f4fadf19707c0d124"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8059c98b4ca3f6f4fadf19707c0d124">&#9670;&#160;</a></span>removeChunksBound()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::Core::World::removeChunksBound </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a27af4b8b7ce3b258558859f540e8d5df">SimpleVoxelEngine::Defines::WORLD_BOUND_SIDE</a></td>          <td class="paramname"><span class="paramname"><em>side</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Снятие границы мира с одной стороны. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">side</td><td>Сторона границы. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8625835c72ef8e04bf52f3597adc86be" name="a8625835c72ef8e04bf52f3597adc86be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8625835c72ef8e04bf52f3597adc86be">&#9670;&#160;</a></span>removeChunksBounds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::Core::World::removeChunksBounds </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a39da496e239c30c435260b9992e3cab8">SimpleVoxelEngine::Defines::WORLD_AXIS</a></td>          <td class="paramname"><span class="paramname"><em>axis</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Снятие границ мира по оси с обеих сторон. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">axis</td><td>Ось. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a36873bdd6c958f4eaea5eeae7e4ff5eb" name="a36873bdd6c958f4eaea5eeae7e4ff5eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36873bdd6c958f4eaea5eeae7e4ff5eb">&#9670;&#160;</a></span>saveAllChunks()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::saveAllChunks </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1010,15 +1246,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="aca3250456dd27945061b540f803355ef"></a>
+<a id="aca3250456dd27945061b540f803355ef" name="aca3250456dd27945061b540f803355ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca3250456dd27945061b540f803355ef">&#9670;&#160;</a></span>saveChunk()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::saveChunk </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>vect</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1035,58 +1272,153 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="abc146e847c62291d897f4c3838454fe4"></a>
+<a id="abc146e847c62291d897f4c3838454fe4" name="abc146e847c62291d897f4c3838454fe4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc146e847c62291d897f4c3838454fe4">&#9670;&#160;</a></span>saveChunks()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::saveChunks </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>vect</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>cube_radius</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cube_radius</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Сохранение чанков. </p>
-<p>Сохраняет куб чанков с центром в vect и радиусом cube_radius. </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>Сохраняет куб чанков с центром в vect и радиусом cube_radius. Чанки, которых нет в памяти, пропускаются. </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">vect</td><td>Центр куба. </td></tr>
-    <tr><td class="paramname">cube_radius</td><td>Кубический радиус. </td></tr>
+    <tr><td class="paramname">cube_radius</td><td>Кубический радиус (от 0; 0 - один чанк vect). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true в случае успеха, иначе false. </dd></dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true в случае успеха, иначе false (радиус меньше 0 или какой-то чанк не сохранился). </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a6332269d8335ffcb9daf647743be4ec6"></a>
+<a id="a3f20defbd77e7571c3f2dd5939536ce7" name="a3f20defbd77e7571c3f2dd5939536ce7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f20defbd77e7571c3f2dd5939536ce7">&#9670;&#160;</a></span>setChunksBound()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::Core::World::setChunksBound </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a27af4b8b7ce3b258558859f540e8d5df">SimpleVoxelEngine::Defines::WORLD_BOUND_SIDE</a></td>          <td class="paramname"><span class="paramname"><em>side</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>chunkcoord</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка границы мира с одной стороны. </p>
+<p>Мир ограничивается по координатам чанков: чанк за границей не загружается и не генерируется (<a class="el" href="#ae7bd484060fa675cbaa193259c99b559" title="Загрузка чанка.">loadChunk()</a>, <a class="el" href="#a87dc6793eba42b954527e904317853f6" title="Генерация чанка.">generateChunk()</a> возвращают false с нарушением логики в логе - его можно выключить параметром outboundserror = false; генератор не вызывается; <a class="el" href="#aaa7f25d88cdeb07477087eb9b20ba85f" title="Загрузка блока чанков.">loadChunks()</a> и <a class="el" href="#ac022ebf05d3802fd592706398767a106" title="Интеллектуальная загрузка чанков.">progressiveLoadChunks()</a> такие чанки пропускают молча), его как будто нет - на краю мира видны грани. Каждую из 6 сторон можно ограничить отдельно или оставить без границы (по умолчанию границ нет). Граница включительная: при setChunksBound(WORLD_BOUND_Y_MIN, 0) и setChunksBound(WORLD_BOUND_Y_MAX, 15) существуют чанки с Y от 0 до 15 (то же - setChunksBounds(WORLD_AXIS_Y, 0, 15)). Минимум, равный максимуму, допустим (один слой чанков). Уже загруженные чанки за новой границей не выгружаются - это делает пользователь. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">side</td><td>Сторона границы. </td></tr>
+    <tr><td class="paramname">chunkcoord</td><td>Крайняя допустимая координата чанка по этой стороне. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает false (граница не меняется, в логе - нарушение логики), если граница получилась бы за противоположной границей той же оси (минимум больше максимума); чтобы передвинуть обе, используйте <a class="el" href="#a4f0d18692f684c2cb218bff2b3d33e4b" title="Установка границ мира по оси сразу с двух сторон.">setChunksBounds()</a>. Иначе true. </dd></dl>
+
+</div>
+</div>
+<a id="a4f0d18692f684c2cb218bff2b3d33e4b" name="a4f0d18692f684c2cb218bff2b3d33e4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f0d18692f684c2cb218bff2b3d33e4b">&#9670;&#160;</a></span>setChunksBounds() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::Core::World::setChunksBounds </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a39da496e239c30c435260b9992e3cab8">SimpleVoxelEngine::Defines::WORLD_AXIS</a></td>          <td class="paramname"><span class="paramname"><em>axis</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>mincoord</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>maxcoord</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка границ мира по оси сразу с двух сторон. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">axis</td><td>Ось. </td></tr>
+    <tr><td class="paramname">mincoord</td><td>Наименьшая допустимая координата чанка по оси. </td></tr>
+    <tr><td class="paramname">maxcoord</td><td>Наибольшая допустимая координата чанка по оси. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает false (границы не меняются, в логе - нарушение логики), если mincoord больше maxcoord, иначе true. </dd></dl>
+
+</div>
+</div>
+<a id="af5b913dae1ef85e1d4fced521f9f30c0" name="af5b913dae1ef85e1d4fced521f9f30c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5b913dae1ef85e1d4fced521f9f30c0">&#9670;&#160;</a></span>setChunksBounds() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::Core::World::setChunksBounds </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a39da496e239c30c435260b9992e3cab8">SimpleVoxelEngine::Defines::WORLD_AXIS</a></td>          <td class="paramname"><span class="paramname"><em>axis</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>radius</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Установка границ мира по оси симметрично: от -radius до radius. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">axis</td><td>Ось. </td></tr>
+    <tr><td class="paramname">radius</td><td>Сколько чанков в каждую сторону от нулевого (0 - только чанки с координатой 0 по этой оси). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает false (границы не меняются, в логе - нарушение логики), если radius меньше 0, иначе true. </dd></dl>
+
+</div>
+</div>
+<a id="a6332269d8335ffcb9daf647743be4ec6" name="a6332269d8335ffcb9daf647743be4ec6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6332269d8335ffcb9daf647743be4ec6">&#9670;&#160;</a></span>setChunksSaveLoadController()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void SimpleVoxelEngine::Core::World::setChunksSaveLoadController </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_chunks_save_load_controller.html">SimpleVoxelEngine::Core::ChunksSaveLoadController</a> *&#160;</td>
-          <td class="paramname"><em>cslc</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_chunks_save_load_controller.html">SimpleVoxelEngine::Core::ChunksSaveLoadController</a> *</td>          <td class="paramname"><span class="paramname"><em>cslc</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Установка контроллера загрузки и сохранения чанков. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
+<p>Мир владеет контроллером: удаляет его в деструкторе и при замене другим (NULL - убрать и удалить текущий). </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">cslc</td><td>Указатель на устанавливаемый контроллер загруки и сохранения чанков. </td></tr>
   </table>
@@ -1095,15 +1427,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="abd38b3e2d36e72ccd94d49fca2528b25"></a>
+<a id="abd38b3e2d36e72ccd94d49fca2528b25" name="abd38b3e2d36e72ccd94d49fca2528b25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd38b3e2d36e72ccd94d49fca2528b25">&#9670;&#160;</a></span>setId()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::setId </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1120,22 +1453,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="ab8056438ae5e5ffd8c3745b64412c149"></a>
+<a id="ab8056438ae5e5ffd8c3745b64412c149" name="ab8056438ae5e5ffd8c3745b64412c149"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8056438ae5e5ffd8c3745b64412c149">&#9670;&#160;</a></span>setMultiplePartition()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void SimpleVoxelEngine::Core::World::setMultiplePartition </td>
           <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>multpart</em></td><td>)</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>multpart</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Установка типа разбиения чанков. </p>
-<p>Если имеет значение true, то все чанки имеют одинаковые размеры разбиения на всех уровнях. В этом случае проще поиск вокселей, а так же при рендеринге больше граней отсекаются. </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>true - пользователь обещает, что все чанки верхнего уровня разбиты одинаково (<a class="el" href="#ac483bd12541c15e735dd56d6235b07d9" title="Получение размера ребра чанка.">getSizeChunk()</a>). Тогда видимость граней чанков верхнего уровня считается быстрым путём (соседи берутся прямо из массивов); результат тот же, что и медленным путём. Поиск соседей, адресов и видимость при любом значении считаются точно (вложенные чанки и чанки с другим разбиением учитываются); если у соседнего чанка всё же другое разбиение, для этого чанка быстрый путь просто не используется. </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">multpart</td><td>Значение. </td></tr>
   </table>
@@ -1144,37 +1478,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a1d51d7853ea5f09924984f5a4dc88825"></a>
+<a id="a1d51d7853ea5f09924984f5a4dc88825" name="a1d51d7853ea5f09924984f5a4dc88825"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d51d7853ea5f09924984f5a4dc88825">&#9670;&#160;</a></span>setSimpleVoxelObject()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::setSimpleVoxelObject </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a> *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">SimpleVoxelEngine::Core::VoxelAddress</a> *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *&#160;</td>
-          <td class="paramname"><em>svo</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelEngine::Voxels::SimpleVoxelObject</a> *</td>          <td class="paramname"><span class="paramname"><em>svo</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>rewrite</em> = <code>false</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>rewrite</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Установка SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя. ">VoxelAddress</a>. </p>
+<p>Установка SimpleVoxelObject по <a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html" title="Адрес вокселя.">VoxelAddress</a>. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">addr</td><td>Адрес вокселя. </td></tr>
@@ -1183,86 +1511,82 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Возвращает</dt><dd>В случае успеха возвращает true, иначе false. </dd></dl>
+<dl class="section return"><dt>Возвращает</dt><dd>В случае успеха возвращает true, иначе false. При успехе svo принадлежит миру (удалять нельзя), при false мир его не забирает - удаляет вызывающий. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="ae141e150798d135bc3052d886e4b1480"></a>
+<a id="ae141e150798d135bc3052d886e4b1480" name="ae141e150798d135bc3052d886e4b1480"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae141e150798d135bc3052d886e4b1480">&#9670;&#160;</a></span>setSimpleVoxelObjectTransparentTester()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::setSimpleVoxelObjectTransparentTester </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_simple_voxel_object_transparent_tester.html">SimpleVoxelObjectTransparentTester</a> *&#160;</td>
-          <td class="paramname"><em>svott</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_simple_voxel_object_transparent_tester.html">SimpleVoxelObjectTransparentTester</a> *</td>          <td class="paramname"><span class="paramname"><em>svott</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Установка контроллера прозрачности. </p>
-<p>Контроллер прозрачности установить можно только один раз. </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>Контроллер прозрачности установить можно только один раз. Мир владеет им и удаляет его в деструкторе. </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">svott</td><td>Указатель на устанавливаемый контроллер прозрачности. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Возвращает</dt><dd>В случае успеха возвращает true, иначе false. </dd></dl>
+<dl class="section return"><dt>Возвращает</dt><dd>В случае успеха возвращает true, иначе false (контроллер уже установлен) - тогда мир svott не забирает, удаляет вызывающий. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a15cc1e7d9cabb8bdc4c4f13cda7a44b6"></a>
+<a id="a15cc1e7d9cabb8bdc4c4f13cda7a44b6" name="a15cc1e7d9cabb8bdc4c4f13cda7a44b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15cc1e7d9cabb8bdc4c4f13cda7a44b6">&#9670;&#160;</a></span>setWorldGenerator()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::setWorldGenerator </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world_generator.html">SimpleVoxelEngine::Core::WorldGenerator</a> *&#160;</td>
-          <td class="paramname"><em>wrldgen</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world_generator.html">SimpleVoxelEngine::Core::WorldGenerator</a> *</td>          <td class="paramname"><span class="paramname"><em>wrldgen</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Установка генератора мира. </p>
-<p>Возможно установить только один раз. </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>Возможно установить только один раз. Мир владеет генератором и удаляет его в деструкторе. </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">wrldgen</td><td>Указатель на устанавливаемый генератор мира. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Возвращает</dt><dd>В случае успеха возвращает true, иначе false. </dd></dl>
+<dl class="section return"><dt>Возвращает</dt><dd>В случае успеха возвращает true, иначе false (генератор уже установлен) - тогда мир wrldgen не забирает, удаляет вызывающий. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a65944a9aff3f825b78bf08cd405da48f"></a>
+<a id="a65944a9aff3f825b78bf08cd405da48f" name="a65944a9aff3f825b78bf08cd405da48f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65944a9aff3f825b78bf08cd405da48f">&#9670;&#160;</a></span>unloadChunk()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::unloadChunk </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>vect</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>save</em> = <code>true</code>, </td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>save</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>saveplace</em> = <code>false</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>saveplace</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1272,66 +1596,70 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
   <table class="params">
     <tr><td class="paramname">vect</td><td>Вектор (координаты) выгружаемого чанка. </td></tr>
     <tr><td class="paramname">save</td><td>Сохранять ли чанк на диск. </td></tr>
-    <tr><td class="paramname">saveplace</td><td>Сохранять ли место в контейнере под чанк. Параметр специфический и только для внутренней работы движка. Использовать не рекомендуется. </td></tr>
+    <tr><td class="paramname">saveplace</td><td>Сохранять ли место в контейнере под чанк. Параметр специфический и только для внутренней работы движка. Использовать не рекомендуется. Оставшаяся запись считается незагруженным чанком. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true в случае успеха, иначе false. </dd></dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true в случае успеха, иначе false (чанк не загружен или не сохранился - тогда он остаётся в памяти). </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a7c50c2ad0561e77e6476c6354ee50ca8"></a>
+<a id="a7c50c2ad0561e77e6476c6354ee50ca8" name="a7c50c2ad0561e77e6476c6354ee50ca8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c50c2ad0561e77e6476c6354ee50ca8">&#9670;&#160;</a></span>unloadChunks()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SimpleVoxelEngine::Core::World::unloadChunks </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>vect</em>, </td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>cube_radius</em>, </td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cube_radius</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>save</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>save</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Выгрузка чанков из памяти. </p>
-<p>Выгружает чанки из куба с центром в vect и радиусом cube_radius из памяти. </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>Выгружает чанки из куба с центром в vect и радиусом cube_radius из памяти. Чанки, которых нет в памяти, пропускаются (это не ошибка). </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramname">vect</td><td>Вектор (координаты) выгружаемого чанка. </td></tr>
-    <tr><td class="paramname">cube_radius</td><td>Радиус куба. </td></tr>
-    <tr><td class="paramname">save</td><td>Сохранять ли чанк на диск. </td></tr>
+    <tr><td class="paramname">vect</td><td>Вектор (координаты) центра куба. </td></tr>
+    <tr><td class="paramname">cube_radius</td><td>Радиус куба (от 0; 0 - один чанк vect). </td></tr>
+    <tr><td class="paramname">save</td><td>Сохранять ли чанки на диск. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true в случае успеха, иначе false. </dd></dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true в случае успеха, иначе false (радиус меньше 0 или какой-то чанк не сохранился - он остаётся в памяти). </dd></dl>
 
 </div>
 </div>
 <hr/>Объявления и описания членов класса находятся в файле:<ul>
-<li><a class="el" href="_world_8h_source.html">World.h</a></li>
+<li>E:/NeuroCoding/Claude/MyVoxelWork/SimpleVoxelEngine/include/<a class="el" href="_world_8h_source.html">World.h</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:23. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a href="namespace_simple_voxel_engine_1_1_core.html">Core</a></li><li class="navelem"><a href="class_simple_voxel_engine_1_1_core_1_1_world.html">World</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

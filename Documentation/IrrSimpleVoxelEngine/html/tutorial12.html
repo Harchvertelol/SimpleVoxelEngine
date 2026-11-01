@@ -1,0 +1,469 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Урок 12: Положение мира в сцене.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IrrSimpleVoxelEngine
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tutorial12.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Урок 12: Положение мира в сцене. </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>До сих пор наш мир стоял в начале координат сцены: блок с глобальными координатами (x, y, z) рисовался ровно в точке (x, y, z) сцены (при масштабах фабрики, равных размеру чанка). Но мир можно поставить куда угодно, повернуть, уменьшить, двигать прямо во время игры - и даже показывать несколько миров сразу: например, основной мир и летающий остров, корабль или вагон, который едет по своему пути. В этом уроке мы разберём:</p><ul>
+<li>структуру World3DInfo: родительскую ноду мира и сдвиг его начала координат;</li>
+<li>как двигать, поворачивать и масштабировать мир через родительскую ноду;</li>
+<li>как пересчитать точку сцены в координаты мира - getWorldCoordinates() (в главном потоке и в других);</li>
+<li>как поменять положение мира после создания - changeWorld3DInfo() и getWorld3DInfo();</li>
+<li>несколько миров одновременно.</li>
+</ul>
+<p>Подключения и фабрика - как в уроке 1 (одна фабрика рисует все миры движка): </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core;</div>
+<div class="ttc" id="a_irr_simple_voxel_engine_8h_html"><div class="ttname"><a href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a></div><div class="ttdoc">Главный заголовочный файл. Необходимо присоединять только его к проекту.</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">SimpleVoxelEngine::IrrEngine</a></div><div class="ttdoc">Главное пространство имён IrrSimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:13</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:11</div></div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="comment">// Фабрика - как в уроке 1: куб из видимых граней, цвет вершин - цвет вокселя. Одна фабрика рисует все миры.</span></div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        s_Plane = createFaceMesh();</div>
+<div class="line">        s_MeshManipulator = device-&gt;getSceneManager()-&gt;getMeshManipulator();</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); }</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl)</div>
+<div class="line">    {</div>
+<div class="line">        IMesh* mesh = getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1));</div>
+<div class="line">        ARGBColor c = ((VoxelInfoARGBColor*)vxl-&gt;getVoxelInfo())-&gt;s_ARGBColor;</div>
+<div class="line">        <span class="keywordflow">if</span>(mesh) s_MeshManipulator-&gt;setVertexColors(mesh, SColor(c.getA(), c.getR(), c.getG(), c.getB()));</div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering*) { <span class="keywordflow">return</span> 0; }</div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Обработчик клавиш: P - поставить блок-метку в мир 2 под камерой, M - поднять мир 1 на два блока. </p><div class="fragment"><div class="line"><span class="comment">// Обработчик клавиш: P - поставить блок-метку в мир 2 под камерой, M - поднять мир 1 на два блока (changeWorld3DInfo()).</span></div>
+<div class="line"><span class="keyword">class </span>MyReceiver : <span class="keyword">public</span> IEventReceiver</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> OnEvent(<span class="keyword">const</span> SEvent&amp; event)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(event.EventType == EET_KEY_INPUT_EVENT &amp;&amp; !event.KeyInput.PressedDown)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_KEY_P) s_Mark = <span class="keyword">true</span>;</div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_KEY_M) s_Move = <span class="keyword">true</span>;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">bool</span> s_Mark = <span class="keyword">false</span>;</div>
+<div class="line">    <span class="keywordtype">bool</span> s_Move = <span class="keyword">false</span>;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> И генератор пола - у каждого мира свой генератор со своим цветом: </p><div class="fragment"><div class="line"><span class="comment">// Генератор: в чанке (0,0,0) - пол 16x16 из вокселей одного цвета (у каждого мира - свой генератор и свой цвет).</span></div>
+<div class="line"><span class="keyword">class </span>FloorGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    FloorGenerator(ARGBColor color) : s_Color(color) {}</div>
+<div class="line">    <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> size)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(!(chunk-&gt;getVoxelAddress()-&gt;getVector(0) == Vector3d&lt;int&gt;(0, 0, 0))) <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// Остальные чанки - пустые.</span></div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; size; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; size; z++)</div>
+<div class="line">                chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, 0, z), <span class="keyword">new</span> ARGBColorVoxel(s_Color), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    ARGBColor s_Color;</div>
+<div class="line">};</div>
+</div><!-- fragment --> <h1 class="doxsection"><a class="anchor" id="t12info"></a>
+World3DInfo: родительская нода и сдвиг</h1>
+<p>Положение мира задаёт структура World3DInfo из двух полей:</p><ul>
+<li>s_WorldRootNode - родительская нода мира. Все ноды чанков мира враппер делает её детьми, поэтому всё, что вы делаете с этой нодой (сдвиг, поворот, масштаб, привязка к другой ноде), делается со всем миром сразу. 0 (по умолчанию) - ноды чанков враппер вешает прямо на корень сцены;</li>
+<li>s_AmendmentPositionWorld - сдвиг начала координат мира относительно родительской ноды (в её локальных координатах). Ноды чанков ставятся со сдвигом на этот вектор - удобно, например, чтобы мир вращался вокруг своего центра, а не вокруг угла.</li>
+</ul>
+<p>Важно помнить, где лежат блоки: блок с глобальными координатами k занимает в координатах мира отрезок от k - 0.5 до k + 0.5 (центр блока - в целой точке). Пол 16x16 из блоков 0..15 занимает от -0.5 до 15.5, его центр - 7.5. Поэтому сдвиг (-7.5, 0, -7.5) ставит центр пола ровно под родительскую ноду.</p>
+<p>World3DInfo передаётся в addWorld() - у всех трёх её вариантов это последний параметр. Начнём main() как обычно: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(800, 600));</div>
+<div class="line">    MyReceiver receiver;</div>
+<div class="line">    device-&gt;setEventReceiver(&amp;receiver);</div>
+<div class="line">    ISceneManager* smgr = device-&gt;getSceneManager();</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Логгер: без него движок молча проглатывает и ошибки.</span></div>
+<div class="line">    lgr-&gt;setPrintStandard(<span class="keyword">false</span>); <span class="comment">// Обычные сообщения не нужны - только предупреждения и ошибки.</span></div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device, lgr);</div>
+<div class="line">    lgr-&gt;drop(); <span class="comment">// Движок держит свою ссылку.</span></div>
+<div class="line">    MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">    factory-&gt;setPositionScale(16);</div>
+<div class="line">    factory-&gt;setSScale(16);</div>
+<div class="line">    isve-&gt;setFactoryChunkMeshSceneNode(factory);</div>
+</div><!-- fragment --><p> Мир 1 - родительская нода в начале координат, центр пола - под ней: </p><div class="fragment"><div class="line"><span class="comment">// Мир 1: родительская нода в начале координат, начало координат мира сдвинуто так, что центр пола - под нодой.</span></div>
+<div class="line">ISceneNode* root1 = smgr-&gt;addEmptySceneNode();</div>
+<div class="line">World3DInfo info1;</div>
+<div class="line">info1.s_WorldRootNode = root1;</div>
+<div class="line">info1.s_AmendmentPositionWorld = vector3df(-7.5f, 0, -7.5f);</div>
+<div class="line"><span class="keywordtype">int</span> id1 = isve-&gt;addWorld(info1);</div>
+</div><!-- fragment --><p> Мир 2 - "летающий остров": его нода сдвинута, повёрнута на 30 градусов и уменьшена вдвое (блоки острова - по половине единицы сцены). Этот мир создадим через addWorld() с параметрами мира WorldCreatingParameters (урок 2 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>), а World3DInfo передадим вторым параметром: </p><div class="fragment"><div class="line"><span class="comment">// Мир 2: &quot;летающий остров&quot; - нода сдвинута, повёрнута и уменьшена вдвое; мир создаётся со своими параметрами.</span></div>
+<div class="line">ISceneNode* root2 = smgr-&gt;addEmptySceneNode();</div>
+<div class="line">root2-&gt;setPosition(vector3df(30, 5, 0));</div>
+<div class="line">root2-&gt;setRotation(vector3df(0, 30, 0));</div>
+<div class="line">root2-&gt;setScale(vector3df(0.5f, 0.5f, 0.5f));</div>
+<div class="line">World3DInfo info2;</div>
+<div class="line">info2.s_WorldRootNode = root2;</div>
+<div class="line">info2.s_AmendmentPositionWorld = vector3df(-7.5f, 0, -7.5f); <span class="comment">// Вращаться остров будет вокруг центра пола.</span></div>
+<div class="line">WorldCreatingParameters wcp;</div>
+<div class="line">wcp.s_SizeChunk = 16;</div>
+<div class="line"><span class="keywordtype">int</span> id2 = isve-&gt;addWorld(wcp, info2);</div>
+</div><!-- fragment --><p> Пока нода задана миру, фабрика держит на неё ссылку (grab()), поэтому, если удалить ноду из сцены (remove()), ничего не упадёт - мир просто перестанет быть виден. Сами ноды чанков принадлежат врапперу: их не удаляйте и не перевешивайте на другого родителя - двигайте родительскую ноду.</p>
+<h1 class="doxsection"><a class="anchor" id="t12many"></a>
+Несколько миров</h1>
+<p>У движка одна фабрика, и она рисует все миры. Но почти все настройки фабрики задаются для каждого мира отдельно - у таких функций есть параметр "идентификатор мира": setMaterialType(), setMaterialFlag(), setID(), setHardwareMappingHint(), setSizeBlockChunks(), setMultiplePartition(), updateCameraPosition(), changeWorld3DInfo(). Генератор, контроллер сохранения и правило прозрачности - тоже у каждого мира свои (их задают через World): </p><div class="fragment"><div class="line"><span class="comment">// Настройки фабрики для каждого мира - свои (номер уровня, номер мира, ...).</span></div>
+<div class="line">factory-&gt;setMaterialFlag(0, id1, EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">factory-&gt;setMaterialFlag(0, id2, EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">isve-&gt;getWorld(id1)-&gt;setWorldGenerator(<span class="keyword">new</span> FloorGenerator(ARGBColor(255, 60, 160, 60)));</div>
+<div class="line">isve-&gt;getWorld(id2)-&gt;setWorldGenerator(<span class="keyword">new</span> FloorGenerator(ARGBColor(255, 160, 120, 60)));</div>
+<div class="line">isve-&gt;addChunksForRendering(id1, Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">true</span>);</div>
+<div class="line">isve-&gt;addChunksForRendering(id2, Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">true</span>);</div>
+</div><!-- fragment --><p> Общими для всех миров остаются число уровней мешей (setNumberOfMeshesSceneNodeForChunk()) и масштабы (setPositionScale(), setSScale()). Из-за общих масштабов держите у всех миров одинаковый размер чанка, равный масштабам: ноды чанков враппер ставит с шагом в размер чанка мира, а воксели внутри - по масштабам фабрики, и мир с другим размером чанка рассыплется на перекрывающиеся или разъехавшиеся чанки. Нужен мир с другим размером блоков - масштабируйте его родительскую ноду, как наш остров.</p>
+<p>Камера и запуск: </p><div class="fragment"><div class="line">ICameraSceneNode* camera = smgr-&gt;addCameraSceneNodeFPS();</div>
+<div class="line">camera-&gt;setPosition(vector3df(30, 12, -2));</div>
+<div class="line">camera-&gt;setTarget(vector3df(15, 0, 0));</div>
+<div class="line">isve-&gt;start();</div>
+</div><!-- fragment --> <h1 class="doxsection"><a class="anchor" id="t12move"></a>
+Движение мира</h1>
+<p>Двигать мир - значит двигать его родительскую ноду. Остров вращается каждый кадр: </p><div class="fragment"><div class="line"><span class="keywordflow">while</span>(isve-&gt;runIrrDevice())</div>
+<div class="line">{</div>
+<div class="line">    root2-&gt;setRotation(root2-&gt;getRotation() + vector3df(0, 0.2f, 0)); <span class="comment">// Остров вращается - вместе со всеми нодами его чанков.</span></div>
+</div><!-- fragment --><p> Ноды чанков - дети root2, поэтому вращаются вместе с ней, и враппер при этом ничего не перестраивает: меши чанков заданы в локальных координатах родителя. Так же работают setPosition() и setScale(), а можно и привязать родительскую ноду мира к другой ноде (setParent()) - например, к движущемуся кораблю. Трогать ноды сцены можно только в главном потоке - как и всё в Irrlicht.</p>
+<p>Поиск блока под курсором (getAddressSimpleVoxelObjectByThreePoints() и getAddressSimpleVoxelObjectByPoint(), уроки 7 и 8) принимает точки в координатах сцены и сам учитывает положение, поворот и масштаб родительской ноды (с её родителями) и сдвиг - так что щелчок по повёрнутому острову попадёт в нужный блок без всяких пересчётов с вашей стороны. В TestProject3 мир можно двигать и вращать клавишами U, I, J, K, Y, A, O и проверить, что установка и удаление блоков работают в любом положении мира.</p>
+<h1 class="doxsection"><a class="anchor" id="t12coords"></a>
+Координаты сцены и координаты мира</h1>
+<p>А вот если вам самим нужны координаты мира - на каком блоке стоит игрок, сколько блоков до точки взрыва, - есть getWorldCoordinates(id, точка сцены). Она пересчитывает точку сцены в координаты мира id с учётом родительской ноды (вместе с её родителями) и сдвига, в том числе у мира без родительской ноды. По P узнаем, над каким блоком острова висит камера, и поставим туда красный блок-метку: </p><div class="fragment"><div class="line"><span class="keywordflow">if</span>(receiver.s_Mark)</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">// Какой блок мира 2 под камерой? Пересчитываем позицию камеры в координаты мира 2 (здесь, в главном потоке,</span></div>
+<div class="line">    <span class="comment">// - по текущему положению ноды). Блок с координатами k занимает от k - 0.5 до k + 0.5.</span></div>
+<div class="line">    receiver.s_Mark = <span class="keyword">false</span>;</div>
+<div class="line">    vector3df cam = camera-&gt;getAbsolutePosition();</div>
+<div class="line">    Vector3d&lt;float&gt; w = isve-&gt;getWorldCoordinates(id2, Vector3d&lt;float&gt;(cam.X, cam.Y, cam.Z));</div>
+<div class="line">    Vector3d&lt;int&gt; block((<span class="keywordtype">int</span>)floorf(w.getX() + 0.5f), 1, (<span class="keywordtype">int</span>)floorf(w.getZ() + 0.5f)); <span class="comment">// Над полом (y = 1).</span></div>
+<div class="line">    printf(<span class="stringliteral">&quot;camera in world 2: (%.2f, %.2f, %.2f), mark block (%d, %d, %d)\n&quot;</span>, w.getX(), w.getY(), w.getZ(), block.getX(), block.getY(), block.getZ());</div>
+<div class="line">    <span class="keywordflow">if</span>(block.getX() &gt;= 0 &amp;&amp; block.getX() &lt; 16 &amp;&amp; block.getZ() &gt;= 0 &amp;&amp; block.getZ() &lt; 16) <span class="comment">// Только внутри загруженного чанка.</span></div>
+<div class="line">    {</div>
+<div class="line">        isve-&gt;setSimpleVoxelObjectByGlobalVector(id2, block, <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 255, 0, 0)));</div>
+<div class="line">        isve-&gt;addTaskUpdateChunks();</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Блок k занимает от k - 0.5 до k + 0.5, поэтому номер блока - floorf(координата + 0.5) (не просто (int): приведение к int округляет к нулю, и у отрицательных координат номер был бы неверным). Метку ставим, только если блок внутри загруженного чанка: за его пределами чанка нет, и враппер такую установку не выполнит (предупреждение в логе). Направление пересчитывается как разность двух пересчитанных точек: </p><div class="fragment"><div class="line">Vector3d&lt;float&gt; look = isve-&gt;getWorldCoordinates(<span class="keywordtype">id</span>, campos + lookvect) - isve-&gt;getWorldCoordinates(<span class="keywordtype">id</span>, campos);</div>
+</div><!-- fragment --><p><b>getWorldCoordinates() и потоки.</b> Функция потокобезопасна, но считает по-разному:</p><ul>
+<li>в главном потоке - по текущему положению нод (даже если вы сдвинули ноду в этом же кадре);</li>
+<li>в остальных потоках (пользовательская функция UserControllerForThread, свой поток) - по положению, которое запомнил последний update() (а также addWorld() и changeWorld3DInfo()). Ноды сцены меняет главный поток, и читать их из других потоков нельзя, поэтому враппер раз в кадр запоминает их положение.</li>
+</ul>
+<p>Отсюда правило: если мир движется, пересчитывайте координаты в главном потоке в момент события (щелчка, нажатия), а в другие потоки передавайте уже координаты мира. Иначе поток очереди выполнит задание через несколько кадров, когда остров уже повернётся, и действие попадёт не туда. Для неподвижного мира разницы нет.</p>
+<h1 class="doxsection"><a class="anchor" id="t12change"></a>
+Смена положения после создания</h1>
+<p>По M поднимем мир 1 на два блока. Положение мира после создания меняет changeWorld3DInfo(), текущее можно узнать через getWorld3DInfo(): </p><div class="fragment"><div class="line"><span class="keywordflow">if</span>(receiver.s_Move)</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">// Поднять мир 1 на два блока: меняем сдвиг его начала координат. Ноды чанков пересклеятся в ближайшем update().</span></div>
+<div class="line">    receiver.s_Move = <span class="keyword">false</span>;</div>
+<div class="line">    World3DInfo info = factory-&gt;getWorld3DInfo(id1);</div>
+<div class="line">    info.s_AmendmentPositionWorld.Y += 2;</div>
+<div class="line">    factory-&gt;changeWorld3DInfo(id1, info);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Что важно знать про changeWorld3DInfo():</p><ul>
+<li>вызывать только из главного потока;</li>
+<li>ноды чанков мира пересклеиваются в ближайшем update() - с новой родительской нодой и новым сдвигом. Это новые ноды: onUpdateChunkMeshSceneNode() получит их, так что селекторы столкновений (урок 7) обновятся сами, если вы обрабатываете их так, как в уроке 7;</li>
+<li>getWorldCoordinates() учитывает новые данные сразу, не дожидаясь update();</li>
+<li>s_WorldRootNode = 0 отвязывает мир от родительской ноды (фабрика отпускает свою ссылку на неё);</li>
+<li>функция возвращает false, если мира с таким идентификатором нет.</li>
+</ul>
+<p>getWorld3DInfo() можно вызывать из любого потока, но полученная нода - объект сцены: трогать её можно только в главном потоке. Для простого движения мира changeWorld3DInfo() не нужна - достаточно двигать саму родительскую ноду (это и дешевле: ничего не пересклеивается).</p>
+<p>Остаток цикла - обычный: update() каждый кадр (заодно запоминает положение родительских нод для других потоков) и рисование: </p><div class="fragment"><div class="line">    isve-&gt;update(); <span class="comment">// Заодно запоминает положение родительских нод - для getWorldCoordinates() из других потоков.</span></div>
+<div class="line">    device-&gt;getVideoDriver()-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 100, 100, 140));</div>
+<div class="line">    smgr-&gt;drawAll();</div>
+<div class="line">    device-&gt;getVideoDriver()-&gt;endScene();</div>
+<div class="line">}</div>
+<div class="line">isve-&gt;stop();</div>
+<div class="line"><span class="keyword">delete</span> isve;</div>
+<div class="line">device-&gt;drop();</div>
+<div class="line"><span class="keywordflow">return</span> 0;</div>
+</div><!-- fragment --><p> Ну и напоследок ещё раз полный код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Фабрика - как в уроке 1: куб из видимых граней, цвет вершин - цвет вокселя. Одна фабрика рисует все миры.</span></div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        s_Plane = createFaceMesh();</div>
+<div class="line">        s_MeshManipulator = device-&gt;getSceneManager()-&gt;getMeshManipulator();</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); }</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl)</div>
+<div class="line">    {</div>
+<div class="line">        IMesh* mesh = getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1));</div>
+<div class="line">        ARGBColor c = ((VoxelInfoARGBColor*)vxl-&gt;getVoxelInfo())-&gt;s_ARGBColor;</div>
+<div class="line">        <span class="keywordflow">if</span>(mesh) s_MeshManipulator-&gt;setVertexColors(mesh, SColor(c.getA(), c.getR(), c.getG(), c.getB()));</div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering*) { <span class="keywordflow">return</span> 0; }</div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Обработчик клавиш: P - поставить блок-метку в мир 2 под камерой, M - поднять мир 1 на два блока (changeWorld3DInfo()).</span></div>
+<div class="line"><span class="keyword">class </span>MyReceiver : <span class="keyword">public</span> IEventReceiver</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> OnEvent(<span class="keyword">const</span> SEvent&amp; event)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(event.EventType == EET_KEY_INPUT_EVENT &amp;&amp; !event.KeyInput.PressedDown)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_KEY_P) s_Mark = <span class="keyword">true</span>;</div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_KEY_M) s_Move = <span class="keyword">true</span>;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">bool</span> s_Mark = <span class="keyword">false</span>;</div>
+<div class="line">    <span class="keywordtype">bool</span> s_Move = <span class="keyword">false</span>;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Генератор: в чанке (0,0,0) - пол 16x16 из вокселей одного цвета (у каждого мира - свой генератор и свой цвет).</span></div>
+<div class="line"><span class="keyword">class </span>FloorGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    FloorGenerator(ARGBColor color) : s_Color(color) {}</div>
+<div class="line">    <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> size)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(!(chunk-&gt;getVoxelAddress()-&gt;getVector(0) == Vector3d&lt;int&gt;(0, 0, 0))) <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// Остальные чанки - пустые.</span></div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; size; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; size; z++)</div>
+<div class="line">                chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, 0, z), <span class="keyword">new</span> ARGBColorVoxel(s_Color), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    ARGBColor s_Color;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(800, 600));</div>
+<div class="line">    MyReceiver receiver;</div>
+<div class="line">    device-&gt;setEventReceiver(&amp;receiver);</div>
+<div class="line">    ISceneManager* smgr = device-&gt;getSceneManager();</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Логгер: без него движок молча проглатывает и ошибки.</span></div>
+<div class="line">    lgr-&gt;setPrintStandard(<span class="keyword">false</span>); <span class="comment">// Обычные сообщения не нужны - только предупреждения и ошибки.</span></div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device, lgr);</div>
+<div class="line">    lgr-&gt;drop(); <span class="comment">// Движок держит свою ссылку.</span></div>
+<div class="line">    MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">    factory-&gt;setPositionScale(16);</div>
+<div class="line">    factory-&gt;setSScale(16);</div>
+<div class="line">    isve-&gt;setFactoryChunkMeshSceneNode(factory);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Мир 1: родительская нода в начале координат, начало координат мира сдвинуто так, что центр пола - под нодой.</span></div>
+<div class="line">    ISceneNode* root1 = smgr-&gt;addEmptySceneNode();</div>
+<div class="line">    World3DInfo info1;</div>
+<div class="line">    info1.s_WorldRootNode = root1;</div>
+<div class="line">    info1.s_AmendmentPositionWorld = vector3df(-7.5f, 0, -7.5f);</div>
+<div class="line">    <span class="keywordtype">int</span> id1 = isve-&gt;addWorld(info1);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Мир 2: &quot;летающий остров&quot; - нода сдвинута, повёрнута и уменьшена вдвое; мир создаётся со своими параметрами.</span></div>
+<div class="line">    ISceneNode* root2 = smgr-&gt;addEmptySceneNode();</div>
+<div class="line">    root2-&gt;setPosition(vector3df(30, 5, 0));</div>
+<div class="line">    root2-&gt;setRotation(vector3df(0, 30, 0));</div>
+<div class="line">    root2-&gt;setScale(vector3df(0.5f, 0.5f, 0.5f));</div>
+<div class="line">    World3DInfo info2;</div>
+<div class="line">    info2.s_WorldRootNode = root2;</div>
+<div class="line">    info2.s_AmendmentPositionWorld = vector3df(-7.5f, 0, -7.5f); <span class="comment">// Вращаться остров будет вокруг центра пола.</span></div>
+<div class="line">    WorldCreatingParameters wcp;</div>
+<div class="line">    wcp.s_SizeChunk = 16;</div>
+<div class="line">    <span class="keywordtype">int</span> id2 = isve-&gt;addWorld(wcp, info2);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Настройки фабрики для каждого мира - свои (номер уровня, номер мира, ...).</span></div>
+<div class="line">    factory-&gt;setMaterialFlag(0, id1, EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">    factory-&gt;setMaterialFlag(0, id2, EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">    isve-&gt;getWorld(id1)-&gt;setWorldGenerator(<span class="keyword">new</span> FloorGenerator(ARGBColor(255, 60, 160, 60)));</div>
+<div class="line">    isve-&gt;getWorld(id2)-&gt;setWorldGenerator(<span class="keyword">new</span> FloorGenerator(ARGBColor(255, 160, 120, 60)));</div>
+<div class="line">    isve-&gt;addChunksForRendering(id1, Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">true</span>);</div>
+<div class="line">    isve-&gt;addChunksForRendering(id2, Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">true</span>);</div>
+<div class="line"> </div>
+<div class="line">    ICameraSceneNode* camera = smgr-&gt;addCameraSceneNodeFPS();</div>
+<div class="line">    camera-&gt;setPosition(vector3df(30, 12, -2));</div>
+<div class="line">    camera-&gt;setTarget(vector3df(15, 0, 0));</div>
+<div class="line">    isve-&gt;start();</div>
+<div class="line">    <span class="keywordflow">while</span>(isve-&gt;runIrrDevice())</div>
+<div class="line">    {</div>
+<div class="line">        root2-&gt;setRotation(root2-&gt;getRotation() + vector3df(0, 0.2f, 0)); <span class="comment">// Остров вращается - вместе со всеми нодами его чанков.</span></div>
+<div class="line">        <span class="keywordflow">if</span>(receiver.s_Mark)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="comment">// Какой блок мира 2 под камерой? Пересчитываем позицию камеры в координаты мира 2 (здесь, в главном потоке,</span></div>
+<div class="line">            <span class="comment">// - по текущему положению ноды). Блок с координатами k занимает от k - 0.5 до k + 0.5.</span></div>
+<div class="line">            receiver.s_Mark = <span class="keyword">false</span>;</div>
+<div class="line">            vector3df cam = camera-&gt;getAbsolutePosition();</div>
+<div class="line">            Vector3d&lt;float&gt; w = isve-&gt;getWorldCoordinates(id2, Vector3d&lt;float&gt;(cam.X, cam.Y, cam.Z));</div>
+<div class="line">            Vector3d&lt;int&gt; block((<span class="keywordtype">int</span>)floorf(w.getX() + 0.5f), 1, (<span class="keywordtype">int</span>)floorf(w.getZ() + 0.5f)); <span class="comment">// Над полом (y = 1).</span></div>
+<div class="line">            printf(<span class="stringliteral">&quot;camera in world 2: (%.2f, %.2f, %.2f), mark block (%d, %d, %d)\n&quot;</span>, w.getX(), w.getY(), w.getZ(), block.getX(), block.getY(), block.getZ());</div>
+<div class="line">            <span class="keywordflow">if</span>(block.getX() &gt;= 0 &amp;&amp; block.getX() &lt; 16 &amp;&amp; block.getZ() &gt;= 0 &amp;&amp; block.getZ() &lt; 16) <span class="comment">// Только внутри загруженного чанка.</span></div>
+<div class="line">            {</div>
+<div class="line">                isve-&gt;setSimpleVoxelObjectByGlobalVector(id2, block, <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 255, 0, 0)));</div>
+<div class="line">                isve-&gt;addTaskUpdateChunks();</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span>(receiver.s_Move)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="comment">// Поднять мир 1 на два блока: меняем сдвиг его начала координат. Ноды чанков пересклеятся в ближайшем update().</span></div>
+<div class="line">            receiver.s_Move = <span class="keyword">false</span>;</div>
+<div class="line">            World3DInfo info = factory-&gt;getWorld3DInfo(id1);</div>
+<div class="line">            info.s_AmendmentPositionWorld.Y += 2;</div>
+<div class="line">            factory-&gt;changeWorld3DInfo(id1, info);</div>
+<div class="line">        }</div>
+<div class="line">        isve-&gt;update(); <span class="comment">// Заодно запоминает положение родительских нод - для getWorldCoordinates() из других потоков.</span></div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 100, 100, 140));</div>
+<div class="line">        smgr-&gt;drawAll();</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;endScene();</div>
+<div class="line">    }</div>
+<div class="line">    isve-&gt;stop();</div>
+<div class="line">    <span class="keyword">delete</span> isve;</div>
+<div class="line">    device-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="tutorials.html">Уроки по врапперу IrrSimpleVoxelEngine.</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

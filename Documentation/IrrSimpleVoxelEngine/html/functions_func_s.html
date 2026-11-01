@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>IrrSimpleVoxelEngine: Члены классов - Функции</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,238 +23,155 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">IrrSimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Враппер для воксельного движка на irrlicht</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li><a href="pages.html"><span>Описания</span></a></li>
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
-      <li><a href="hierarchy.html"><span>Иерархия&#160;классов</span></a></li>
-      <li class="current"><a href="functions.html"><span>Члены&#160;классов</span></a></li>
-    </ul>
-  </div>
-  <div id="navrow3" class="tabs2">
-    <ul class="tablist">
-      <li><a href="functions.html"><span>Указатель</span></a></li>
-      <li class="current"><a href="functions_func.html"><span>Функции</span></a></li>
-      <li><a href="functions_vars.html"><span>Переменные</span></a></li>
-      <li><a href="functions_rela.html"><span>Относящиеся&#160;к&#160;классу&#160;функции</span></a></li>
-    </ul>
-  </div>
-  <div id="navrow4" class="tabs3">
-    <ul class="tablist">
-      <li><a href="functions_func.html#index_a"><span>a</span></a></li>
-      <li><a href="functions_func_c.html#index_c"><span>c</span></a></li>
-      <li><a href="functions_func_d.html#index_d"><span>d</span></a></li>
-      <li><a href="functions_func_f.html#index_f"><span>f</span></a></li>
-      <li><a href="functions_func_g.html#index_g"><span>g</span></a></li>
-      <li><a href="functions_func_i.html#index_i"><span>i</span></a></li>
-      <li><a href="functions_func_m.html#index_m"><span>m</span></a></li>
-      <li><a href="functions_func_n.html#index_n"><span>n</span></a></li>
-      <li><a href="functions_func_o.html#index_o"><span>o</span></a></li>
-      <li><a href="functions_func_p.html#index_p"><span>p</span></a></li>
-      <li><a href="functions_func_r.html#index_r"><span>r</span></a></li>
-      <li class="current"><a href="functions_func_s.html#index_s"><span>s</span></a></li>
-      <li><a href="functions_func_t.html#index_t"><span>t</span></a></li>
-      <li><a href="functions_func_u.html#index_u"><span>u</span></a></li>
-      <li><a href="functions_func_~.html#index_~"><span>~</span></a></li>
-    </ul>
-  </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('functions_func_s.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Друзья</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
 <div class="contents">
-&#160;
+<div class="textblock">Список всех задокументированных функций со ссылками на документацию класса каждого члена:</div><br/>
+<div class="qindex"><a class="qindex" href="functions_func.html#index_a">A</a><div class="alphasepar"></div><a class="qindex" href="functions_func_c.html#index_c">C</a><div class="alphasepar"></div><a class="qindex" href="functions_func_d.html#index_d">D</a><div class="alphasepar"></div><a class="qindex" href="functions_func_f.html#index_f">F</a><div class="alphasepar"></div><a class="qindex" href="functions_func_g.html#index_g">G</a><div class="alphasepar"></div><a class="qindex" href="functions_func_h.html#index_h">H</a><div class="alphasepar"></div><a class="qindex" href="functions_func_i.html#index_i">I</a><div class="alphasepar"></div><a class="qindex" href="functions_func_m.html#index_m">M</a><div class="alphasepar"></div><a class="qindex" href="functions_func_o.html#index_o">O</a><div class="alphasepar"></div><a class="qindex" href="functions_func_r.html#index_r">R</a><div class="alphasepar"></div><a class="qindex" href="functions_func_s.html#index_s">S</a><div class="alphasepar"></div><a class="qindex" href="functions_func_t.html#index_t">T</a><div class="alphasepar"></div><a class="qindex" href="functions_func_u.html#index_u">U</a><div class="alphasepar"></div><a class="qindex" href="functions_func_~.html#index_~">~</a></div>
 
-<h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
-<li>setAlwaysBeCleanedOncePerMillisecond()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#ad23eb400365653dbf092cb553d717b96">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a>
-</li>
-<li>setBoundingBox()
-: <a class="el" href="classirr_1_1scene_1_1_c_batching_mesh.html#ac723d897f5a287a94c65fcd27ceba419">irr::scene::CBatchingMesh</a>
-</li>
-<li>setChunkForUpdate()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#acda0d00b58fae7bc387bd6c1402ba2a4">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setDirty()
-: <a class="el" href="classirr_1_1scene_1_1_c_batching_mesh.html#ad6773a576bf9c041c0e190fdd8d6c7d4">irr::scene::CBatchingMesh</a>
-</li>
-<li>setFactoryChunkMeshSceneNode()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a77c9d389d655ac743fc6312645c1905e">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a>
-</li>
-<li>setHardwareMappingHint()
-: <a class="el" href="classirr_1_1scene_1_1_c_batching_mesh.html#a8d6b43900f252cf61453bcd86165c94f">irr::scene::CBatchingMesh</a>
-, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a5f0d645dde7e967b6abf6c6dfe84edbd">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock</a>
-, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#a684a3924574e4b6b0c4c24108e69e26d">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a>
-, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a768bbf1d6e6599220c98e05fa998efd9">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setID()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#a45a58420d74cdc2a27ac339500492f4b">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a>
-, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a71953494b410b0581669891fda1e5002">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setIrrlichtDevice()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a867afc5632aa9557c20778b694051882">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setIrrSimpleVoxelEngine()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#af01547050ddd128ad7ac64f5384d84fc">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setIsFaces()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a8bf2e165d34e4916e4c813332b5e9466">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setMaterialFlag()
-: <a class="el" href="classirr_1_1scene_1_1_c_batching_mesh.html#a1f9ede4f4f54878aa2a45333ec125899">irr::scene::CBatchingMesh</a>
-, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#aace4a3924f8d216a71facf4f84a441e4">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a>
-, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a9de19a98a848a6e573157353d5d6d0ed">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setMaterialType()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#a5f52b1ff416a2c5167c2c50ef3e07ca1">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a>
-, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a9177a4a69c056fd5273f80ff5fc28c71">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setMaximumSizeOfQueueForStartCleaning()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a8862c24e53f16258b35308c251ee6a32">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a>
-</li>
-<li>setMaxNumberOfThreadAddChunks()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a08698151fd7e64ba7de1299c6d0e4157">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a>
-</li>
-<li>setMaxNumberOfThreadUpdateChunks()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#ad06c56ae99a5f86d2a9309e51a1af147">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a>
-</li>
-<li>setMesh()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a46d36f96f21996aa444026f22bbf421d">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock</a>
-, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#a999f9ac64c678efca5d44efd0d94d1e4">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a>
-</li>
-<li>setMultiplePartition()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a39838272d8e9c3183eb50ad447a24b16">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setNumberOfMeshesSceneNodeForChunk()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#a40b2aab1b2e64f7e4e33ae8b62edd5c1">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a>
-, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a6502e3f66ddf9e29f0fb34cd3436294f">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setOcclusionQueries()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#af4fffee34ecf5afae1c7624d6877eb6b">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setPositionScale()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a4ecbc0d9fe64b98eae06cae52c030554">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setReadKey()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_vector.html#a3fc2c2d7a7b50d0d26929118c45348de">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeVector&lt; TYPE_Value &gt;</a>
-</li>
-<li>setRotationScale()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a76b0e22b06a466dbcb725cf88f42dcef">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setScale()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#ac8b74cd264bb1c497fb446eda7ebaca9">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock</a>
-, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#a0e91b445c67babefcfe78c499835dd27">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a>
-</li>
-<li>setSimpleVoxelObject()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a7daf21a1ebff3c5f61f569fc80432da9">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a>
-</li>
-<li>setSimpleVoxelObjectByGlobalVector()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#af634add32d1ec9de98d69030ad9b55d5">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a>
-</li>
-<li>setSize()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a60beba4b38e921c873bc68714c694857">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock</a>
-</li>
-<li>setSizeBlockChunks()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a5d0bb1e5704dae48325e3cfb7d602b5c">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setSizeChunkMeshBlock()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#ac4441a32f1cf99d53e2743d6f4eaceb0">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a>
-</li>
-<li>setSScale()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#ac28982234390cbf99bbd1bea12e508b7">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setTimerTestOcclusionQueriesInMilliseconds()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a913a15c86b99563055ec0c320ceff423">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a>
-</li>
-<li>setUserControllerForThread()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a7e99db73968d7ad567554321e12b3deb">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a>
-</li>
-<li>setValue()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_type.html#a9f40dde2b3560f7c7e3caea5e2256c8c">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeType&lt; TYPE_Value &gt;</a>
-</li>
-<li>setWakeUpGarbageCollectorOncePerMilliseconds()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a7a0cef7632e33d602c32b6e66f63be2c">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a>
-</li>
-<li>setWriteKey()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_vector.html#a96d02e8da746e912ffa764c483a67c86">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeVector&lt; TYPE_Value &gt;</a>
-</li>
-<li>setWriteKeyFromReadKey()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_vector.html#a6365ff1593a3fc95c4da80c20db17421">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeVector&lt; TYPE_Value &gt;</a>
-</li>
-<li>size()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_vector.html#af5d899ec7d44b05d758d8fd8461e3b30">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeVector&lt; TYPE_Value &gt;</a>
-</li>
-<li>start()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a5b5c11ed0f603681ff336765e6beb4eb">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a>
-</li>
-<li>stop()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a442381d59957fee048d13289e3f3d6cb">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a>
-</li>
-<li>subValuePostfix()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#a8f77c3e84a7c79dfb9c8f3580d3551f1">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter&lt; TYPE_CounterValue &gt;</a>
-</li>
-<li>subValuePrefix()
-: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types_1_1_thread_safe_counter.html#ab9e7a14b7cba1d5c0353590389b15c22">SimpleVoxelEngine::IrrEngine::ThreadSafeTypes::ThreadSafeCounter&lt; TYPE_CounterValue &gt;</a>
-</li>
+
+<h3 class="doxsection"><a id="index_s" name="index_s"></a>- s -</h3><ul>
+<li>saveAllChunks()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a70c571fdd50d12d7c826c9796f080183">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a></li>
+<li>setActiveCameraPosition()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#a7bdfe12762c4725fba369565b6530366">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a></li>
+<li>setBoundingBox()&#160;:&#160;<a class="el" href="classirr_1_1scene_1_1_c_batching_mesh.html#ac723d897f5a287a94c65fcd27ceba419">irr::scene::CBatchingMesh</a></li>
+<li>setChunkForUpdate()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#acda0d00b58fae7bc387bd6c1402ba2a4">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setChunkPosition()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html#adba8b4d6fe2c988da05dfec9a5939ffa">SimpleVoxelEngine::IrrEngine::ChunkStreamingController</a></li>
+<li>setDirty()&#160;:&#160;<a class="el" href="classirr_1_1scene_1_1_c_batching_mesh.html#ad6773a576bf9c041c0e190fdd8d6c7d4">irr::scene::CBatchingMesh</a></li>
+<li>setFactoryChunkMeshSceneNode()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a77c9d389d655ac743fc6312645c1905e">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a></li>
+<li>setHardwareMappingHint()&#160;:&#160;<a class="el" href="classirr_1_1scene_1_1_c_batching_mesh.html#a8d6b43900f252cf61453bcd86165c94f">irr::scene::CBatchingMesh</a>, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a5f0d645dde7e967b6abf6c6dfe84edbd">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock</a>, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#a684a3924574e4b6b0c4c24108e69e26d">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a>, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a768bbf1d6e6599220c98e05fa998efd9">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setID()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#a45a58420d74cdc2a27ac339500492f4b">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a>, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a71953494b410b0581669891fda1e5002">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setIrrlichtDevice()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a867afc5632aa9557c20778b694051882">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setIrrSimpleVoxelEngine()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#af01547050ddd128ad7ac64f5384d84fc">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setIsFaces()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a8bf2e165d34e4916e4c813332b5e9466">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setMaterialFlag()&#160;:&#160;<a class="el" href="classirr_1_1scene_1_1_c_batching_mesh.html#a1f9ede4f4f54878aa2a45333ec125899">irr::scene::CBatchingMesh</a>, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#aace4a3924f8d216a71facf4f84a441e4">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a>, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a9de19a98a848a6e573157353d5d6d0ed">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setMaterialType()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#a5f52b1ff416a2c5167c2c50ef3e07ca1">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a>, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a9177a4a69c056fd5273f80ff5fc28c71">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setMaxFramesBetweenOcclusionQueries()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#ad946a5ba7034b33167a6c11f6a423c40">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setMaxLoadsPerStep()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a46d0dd5b0463e8b5bafec1f71ea9e750">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool</a></li>
+<li>setMaxNumberOfThreadAddChunks()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a08698151fd7e64ba7de1299c6d0e4157">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a></li>
+<li>setMaxNumberOfThreadUpdateChunks()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#ad06c56ae99a5f86d2a9309e51a1af147">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a></li>
+<li>setMaxPendingActions()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a38f6e4118982e4526aebc2b857b55aa0">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool</a></li>
+<li>setMaxUnloadsPerStep()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#af35549cddb6f9ebc61f5ad5508fdd861">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool</a></li>
+<li>setMesh()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a46d36f96f21996aa444026f22bbf421d">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock</a>, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#a999f9ac64c678efca5d44efd0d94d1e4">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a></li>
+<li>setMultiplePartition()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a39838272d8e9c3183eb50ad447a24b16">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setNumberOfMeshesSceneNodeForChunk()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#a40b2aab1b2e64f7e4e33ae8b62edd5c1">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a>, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a6502e3f66ddf9e29f0fb34cd3436294f">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setOcclusionQueries()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#a7e078fe50b8755ff1df1de54e6db3432">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a>, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#af4fffee34ecf5afae1c7624d6877eb6b">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setOcclusionQueriesBoundingBox()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a9c6e11e0e161521b28b03c72fd7a49e6">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setOcclusionQuery()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#ae7113efcb40193509a0e74e1872718e1">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock</a></li>
+<li>setPositionScale()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a4ecbc0d9fe64b98eae06cae52c030554">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setRadius()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html#af24c3fd5c63cda8d277f4b6b7079005a">SimpleVoxelEngine::IrrEngine::ChunkStreamingController</a></li>
+<li>setRecheckIntervalMilliseconds()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a689f1306d8b07a386a1b1fa3b215d58b">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool</a></li>
+<li>setRetryDelayMilliseconds()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a8e3659d5f4de5af4cab1d4bf025ea480">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool</a></li>
+<li>setRotationScale()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a76b0e22b06a466dbcb725cf88f42dcef">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setSaveOnUnload()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a5a2adcf075a241210909a79eeafff438">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool</a></li>
+<li>setScale()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a728bc127cccd8810ba6a2bc7673fc8c8">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock</a>, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#a70b3d7b739f4b17506a17936e8d52c07">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a></li>
+<li>setScenePosition()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html#a4fbde844110a988c6b00de6694260f19">SimpleVoxelEngine::IrrEngine::ChunkStreamingController</a></li>
+<li>setShape()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html#a8e5a5d5a7afb03ea75b4cdf30d1ce5a9">SimpleVoxelEngine::IrrEngine::ChunkStreamingController</a></li>
+<li>setSimpleVoxelObject()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a7daf21a1ebff3c5f61f569fc80432da9">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a></li>
+<li>setSimpleVoxelObjectByGlobalVector()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#af634add32d1ec9de98d69030ad9b55d5">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a></li>
+<li>setSize()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a60beba4b38e921c873bc68714c694857">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock</a></li>
+<li>setSizeBlockChunks()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a5d0bb1e5704dae48325e3cfb7d602b5c">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setSizeChunk()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#ac71826359ee4b652eebda5841fd0ce0d">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock</a>, <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#afcbcaba2b6607e7588b81c2ecd1b70f5">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a></li>
+<li>setSizeChunkMeshBlock()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#ac4441a32f1cf99d53e2743d6f4eaceb0">SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController</a></li>
+<li>setSScale()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#ac28982234390cbf99bbd1bea12e508b7">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setTimerTestOcclusionQueriesInMilliseconds()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a913a15c86b99563055ec0c320ceff423">SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode</a></li>
+<li>setUnloadMargin()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html#ab22c2f1da6bb217876d83ba97aff0026">SimpleVoxelEngine::IrrEngine::ChunkStreamingController</a></li>
+<li>setUserControllerForThread()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#afbdb2e46ca63c64d090fed8778d75b4f">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a></li>
+<li>setWorldPosition()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html#a72194a57a7650555ea9ea77642926724">SimpleVoxelEngine::IrrEngine::ChunkStreamingController</a></li>
+<li>sortTransparentTriangles()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a36a0bccd6db829db59549d83f8425057">SimpleVoxelEngine::IrrEngine::ChunksMeshBlock</a></li>
+<li>start()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a5b5c11ed0f603681ff336765e6beb4eb">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a></li>
+<li>step()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a7e58d846729bdbfcbd46963f21a87d63">SimpleVoxelEngine::IrrEngine::ChunkStreamingPool</a></li>
+<li>stop()&#160;:&#160;<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a442381d59957fee048d13289e3f3d6cb">SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по IrrSimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:38. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

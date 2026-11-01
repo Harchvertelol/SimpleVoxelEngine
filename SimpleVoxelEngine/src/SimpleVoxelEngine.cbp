@@ -15,6 +15,7 @@
 				<Option createDefFile="1" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-DSVE_DEBUG_CHECKS" />
 				</Compiler>
 			</Target>
 			<Target title="Release">

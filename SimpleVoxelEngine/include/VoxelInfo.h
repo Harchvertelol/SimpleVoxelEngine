@@ -16,6 +16,11 @@ namespace SimpleVoxelEngine
         struct VoxelInfo
         {
             TYPE_VOXEL_INFO s_TypeVoxelInfo; //!< Тип информации для отрисовки вокселя.
+            //! Виртуальный деструктор.
+            /*! Движок удаляет информацию через указатель на VoxelInfo, а наследники (VoxelInfoARGBColor и
+            пользовательские) без виртуального деструктора удалялись неправильно (их деструкторы не вызывались).
+            */
+            virtual ~VoxelInfo() {}
         };
     }
 }

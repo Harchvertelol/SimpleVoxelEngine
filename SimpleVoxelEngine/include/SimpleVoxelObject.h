@@ -36,7 +36,9 @@ namespace SimpleVoxelEngine
                 void setTypeVoxel(SimpleVoxelEngine::Defines::TYPE_VOXEL tv);
                 //! Получение информации для рендеринга.
                 /*! Данная функция вызывается при получении от SimpleVoxelObject информации, которая будет отдана пользователю для отрисовки.
-                \return Возвращает указатель на VoxelInfo.
+                Переопределите её в своём вокселе: нужно возвращать НОВЫЙ объект (new VoxelInfo или наследника) - его заберёт
+                VoxelForRendering и удалит сам. Базовая реализация возвращает NULL (информации нет).
+                \return Возвращает указатель на новый VoxelInfo (или NULL).
                 */
                 virtual SimpleVoxelEngine::Core::VoxelInfo* getVoxelForRenderingInfo();
             private:

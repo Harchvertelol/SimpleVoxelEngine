@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>IrrSimpleVoxelEngine: Члены классов - Переменные</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,177 +23,145 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">IrrSimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Враппер для воксельного движка на irrlicht</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li><a href="pages.html"><span>Описания</span></a></li>
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
-      <li><a href="hierarchy.html"><span>Иерархия&#160;классов</span></a></li>
-      <li class="current"><a href="functions.html"><span>Члены&#160;классов</span></a></li>
-    </ul>
-  </div>
-  <div id="navrow3" class="tabs2">
-    <ul class="tablist">
-      <li><a href="functions.html"><span>Указатель</span></a></li>
-      <li><a href="functions_func.html"><span>Функции</span></a></li>
-      <li class="current"><a href="functions_vars.html"><span>Переменные</span></a></li>
-      <li><a href="functions_rela.html"><span>Относящиеся&#160;к&#160;классу&#160;функции</span></a></li>
-    </ul>
-  </div>
-  <div id="navrow4" class="tabs3">
-    <ul class="tablist">
-      <li><a href="#index_i"><span>i</span></a></li>
-      <li class="current"><a href="#index_s"><span>s</span></a></li>
-    </ul>
-  </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('functions_vars.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Друзья</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
 <div class="contents">
-&#160;
+<div class="textblock">Список всех задокументированных переменных со ссылками на документацию класса каждого члена:</div><br/>
+<div class="qindex"><a class="qindex" href="#index_i">I</a><div class="alphasepar"></div><a class="qindex" href="#index_s">S</a></div>
 
-<h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
-<li>isCompleted
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task.html#aa140b57f3b3c5c6d64124e182311c704">SimpleVoxelEngine::IrrEngine::Task</a>
-</li>
+
+<h3 class="doxsection"><a id="index_i" name="index_i"></a>- i -</h3><ul>
+<li>isCompleted&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task.html#aa140b57f3b3c5c6d64124e182311c704">SimpleVoxelEngine::IrrEngine::Task</a></li>
 </ul>
 
 
-<h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
-<li>s_All
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_tasks_chunks_for_update.html#ac6b41014c70d9b4c78a42c6d0cdaf118">SimpleVoxelEngine::IrrEngine::TaskAddTasksChunksForUpdate</a>
-</li>
-<li>s_Immediatelyupdated
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_simple_voxel_object.html#a5e05e84ffb8ba88c8f93a6ad216bf451">SimpleVoxelEngine::IrrEngine::TaskDeleteSimpleVoxelObject</a>
-, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_simple_voxel_object.html#a6a90968b29b366cac30de9971fd0c662">SimpleVoxelEngine::IrrEngine::TaskSetSimpleVoxelObject</a>
-</li>
-<li>s_Load
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_chunks.html#aee70ac1dc19a20c07a83f9086e837d42">SimpleVoxelEngine::IrrEngine::TaskAddChunks</a>
-</li>
-<li>s_LoadFrame
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_chunks.html#a089e830233713c74b77e11de2f3b1e12">SimpleVoxelEngine::IrrEngine::TaskAddChunks</a>
-</li>
-<li>s_MaterialFlag
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_material_flag_definition.html#aec8d106559a795e51ea0ca3844cb42be">SimpleVoxelEngine::IrrEngine::MaterialFlagDefinition</a>
-</li>
-<li>s_Parameters
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_run_thread_function_with_parameters.html#a04fb9c3df72b8fa34382f3800f70e7a6">SimpleVoxelEngine::IrrEngine::TaskRunThreadFunctionWithParameters</a>
-</li>
-<li>s_PtrCounterLock
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_lock_data.html#a593e79913f8fec53e9aa30e3ffed2786">SimpleVoxelEngine::IrrEngine::LockData</a>
-</li>
-<li>s_PtrFlagRenderingNow
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_lock_data.html#ad67c681ea516768ddc35f347242b8562">SimpleVoxelEngine::IrrEngine::LockData</a>
-</li>
-<li>s_Rewrite
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_simple_voxel_object.html#adbd143b1f388d6d67304765783046220">SimpleVoxelEngine::IrrEngine::TaskSetSimpleVoxelObject</a>
-</li>
-<li>s_Save
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html#a37b10d2115f973d6414852137c96d129">SimpleVoxelEngine::IrrEngine::TaskDeleteChunks</a>
-</li>
-<li>s_SimpleVoxelObject
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_simple_voxel_object.html#a246255dbc69927e9f0ecfde0cb10c3d1">SimpleVoxelEngine::IrrEngine::TaskSetSimpleVoxelObject</a>
-</li>
-<li>s_SizeFrame
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_chunks.html#a4bb7073d25b4389a7a9297ea155d42c0">SimpleVoxelEngine::IrrEngine::TaskAddChunks</a>
-, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html#abfd1f6d19f2e2d1b67b50940424e2e26">SimpleVoxelEngine::IrrEngine::TaskDeleteChunks</a>
-</li>
-<li>s_SizeOfMasCounterLock
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_lock_data.html#a8e668036a51700c6b910c40e9f73a6fb">SimpleVoxelEngine::IrrEngine::LockData</a>
-</li>
-<li>s_TypeTask
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task.html#a3a43c048411b3ca60b920ecd737fb2b1">SimpleVoxelEngine::IrrEngine::Task</a>
-</li>
-<li>s_Unload
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html#af9e59b75549212b1d6f4a93e84da3ce1">SimpleVoxelEngine::IrrEngine::TaskDeleteChunks</a>
-</li>
-<li>s_UnloadFrame
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html#a9bf6c4dd8cc4db6e2478df153c780d83">SimpleVoxelEngine::IrrEngine::TaskDeleteChunks</a>
-</li>
-<li>s_Value
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_material_flag_definition.html#a16d9f5bad3e6a2e34a422f25b940ab21">SimpleVoxelEngine::IrrEngine::MaterialFlagDefinition</a>
-</li>
-<li>s_VectorChunk
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_update_chunk.html#ab0902aa98fcbc5b83dbacd7778c313c5">SimpleVoxelEngine::IrrEngine::TaskUpdateChunk</a>
-</li>
-<li>s_VectorLeftDown
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_chunks.html#ad36047073b14c4a25bd56210e3f335c4">SimpleVoxelEngine::IrrEngine::TaskAddChunks</a>
-, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html#a29855a0faa0ca8165d7e94f164d678b3">SimpleVoxelEngine::IrrEngine::TaskDeleteChunks</a>
-</li>
-<li>s_VectorRightUp
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_chunks.html#a534a04d905b9d2b2faef83d6660400d7">SimpleVoxelEngine::IrrEngine::TaskAddChunks</a>
-, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html#a18050f7cb9ffd76b0845b07866afd337">SimpleVoxelEngine::IrrEngine::TaskDeleteChunks</a>
-</li>
-<li>s_VoxelAddress
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_simple_voxel_object.html#a676cf693d27d3ffe73331c26048551a9">SimpleVoxelEngine::IrrEngine::TaskDeleteSimpleVoxelObject</a>
-, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_simple_voxel_object.html#a5e2168a64e1a6f7881cdb6afde8db365">SimpleVoxelEngine::IrrEngine::TaskSetSimpleVoxelObject</a>
-</li>
-<li>s_WorldId
-: <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_chunks.html#a2186fccafe31295c6025a6eef4a2d0dd">SimpleVoxelEngine::IrrEngine::TaskAddChunks</a>
-, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html#a13874b8c454e5acbe441d38a53279cba">SimpleVoxelEngine::IrrEngine::TaskDeleteChunks</a>
-, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_simple_voxel_object.html#a3302f88c531be45a90dbcf6ff67705a2">SimpleVoxelEngine::IrrEngine::TaskDeleteSimpleVoxelObject</a>
-, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_simple_voxel_object.html#a9a8ab10b1516b2fe983211352f0db4d8">SimpleVoxelEngine::IrrEngine::TaskSetSimpleVoxelObject</a>
-, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_update_chunk.html#a6ed74989f36fb93d6f8f4e4b195d5ad0">SimpleVoxelEngine::IrrEngine::TaskUpdateChunk</a>
-</li>
+<h3 class="doxsection"><a id="index_s" name="index_s"></a>- s -</h3><ul>
+<li>s_Action&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_stream_chunk_action.html#ae4b48e0d3a50b52cc3e1a8fb2c9de889">SimpleVoxelEngine::IrrEngine::StreamChunkAction</a></li>
+<li>s_Actions&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_stream_chunks.html#ab5a4921d79badd716a6f7e01ff757e3c">SimpleVoxelEngine::IrrEngine::TaskStreamChunks</a></li>
+<li>s_All&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_tasks_chunks_for_update.html#ac6b41014c70d9b4c78a42c6d0cdaf118">SimpleVoxelEngine::IrrEngine::TaskAddTasksChunksForUpdate</a></li>
+<li>s_AmendmentPositionWorld&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_world3_d_info.html#a446cb2e4e8b1c23afe145f771d42ab12">SimpleVoxelEngine::IrrEngine::World3DInfo</a></li>
+<li>s_DeleteByEngine&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_user_controller_for_thread.html#ae4989ca57632968f3d5fdf1df48ca223">SimpleVoxelEngine::IrrEngine::TaskSetUserControllerForThread</a></li>
+<li>s_Failed&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#aa190b2bf5151b84f369e0871ad5ab3bd">SimpleVoxelEngine::IrrEngine::ChunkStreamingState</a></li>
+<li>s_Immediatelyupdated&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_simple_voxel_object.html#a5e05e84ffb8ba88c8f93a6ad216bf451">SimpleVoxelEngine::IrrEngine::TaskDeleteSimpleVoxelObject</a>, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_simple_voxel_object.html#a6a90968b29b366cac30de9971fd0c662">SimpleVoxelEngine::IrrEngine::TaskSetSimpleVoxelObject</a></li>
+<li>s_Load&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_chunks.html#aee70ac1dc19a20c07a83f9086e837d42">SimpleVoxelEngine::IrrEngine::TaskAddChunks</a></li>
+<li>s_Loaded&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ac69572cccedbbf1e131778c5fdc8e223">SimpleVoxelEngine::IrrEngine::ChunkStreamingState</a></li>
+<li>s_LoadFrame&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_chunks.html#a089e830233713c74b77e11de2f3b1e12">SimpleVoxelEngine::IrrEngine::TaskAddChunks</a></li>
+<li>s_MaterialFlag&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_material_flag_definition.html#aec8d106559a795e51ea0ca3844cb42be">SimpleVoxelEngine::IrrEngine::MaterialFlagDefinition</a></li>
+<li>s_MemoryWanted&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#a1f72706d2ea1684cb2fb843bdaad9027">SimpleVoxelEngine::IrrEngine::ChunkStreamingState</a></li>
+<li>s_OutOfBounds&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#a5433a1f807e8a8e5e5f7570e95249d49">SimpleVoxelEngine::IrrEngine::ChunkStreamingState</a></li>
+<li>s_Parameters&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_run_thread_function_with_parameters.html#a04fb9c3df72b8fa34382f3800f70e7a6">SimpleVoxelEngine::IrrEngine::TaskRunThreadFunctionWithParameters</a></li>
+<li>s_PendingActions&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ae334d15a2f03e74db15a6519a8bbac04">SimpleVoxelEngine::IrrEngine::ChunkStreamingState</a></li>
+<li>s_Rendered&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ad9be74f23025a1faca35fe6125cce40e">SimpleVoxelEngine::IrrEngine::ChunkStreamingState</a></li>
+<li>s_RenderWanted&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#ad233bdd55eb87c6fc6a0886f8a87aed7">SimpleVoxelEngine::IrrEngine::ChunkStreamingState</a></li>
+<li>s_RequiredPartition&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_simple_voxel_object.html#ac69fdc9a868a8e66dc141b00f0c83efc">SimpleVoxelEngine::IrrEngine::TaskDeleteSimpleVoxelObject</a>, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_simple_voxel_object.html#a3d0eb2f2ffd0d737afa5fa0ae08b0d1e">SimpleVoxelEngine::IrrEngine::TaskSetSimpleVoxelObject</a></li>
+<li>s_Rewrite&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_simple_voxel_object.html#adbd143b1f388d6d67304765783046220">SimpleVoxelEngine::IrrEngine::TaskSetSimpleVoxelObject</a></li>
+<li>s_Save&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_stream_chunk_action.html#a5c01dea5b6ed3b98546aca6b627734da">SimpleVoxelEngine::IrrEngine::StreamChunkAction</a>, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html#a37b10d2115f973d6414852137c96d129">SimpleVoxelEngine::IrrEngine::TaskDeleteChunks</a></li>
+<li>s_SaveNumber&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_save_chunks.html#affecde9dbc23ca96f6358125f4119d45">SimpleVoxelEngine::IrrEngine::TaskSaveChunks</a></li>
+<li>s_SimpleVoxelObject&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_simple_voxel_object.html#a246255dbc69927e9f0ecfde0cb10c3d1">SimpleVoxelEngine::IrrEngine::TaskSetSimpleVoxelObject</a></li>
+<li>s_SizeFrame&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_chunks.html#a4bb7073d25b4389a7a9297ea155d42c0">SimpleVoxelEngine::IrrEngine::TaskAddChunks</a>, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html#abfd1f6d19f2e2d1b67b50940424e2e26">SimpleVoxelEngine::IrrEngine::TaskDeleteChunks</a></li>
+<li>s_TypeTask&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task.html#a3a43c048411b3ca60b920ecd737fb2b1">SimpleVoxelEngine::IrrEngine::Task</a></li>
+<li>s_Unload&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html#af9e59b75549212b1d6f4a93e84da3ce1">SimpleVoxelEngine::IrrEngine::TaskDeleteChunks</a></li>
+<li>s_UnloadFrame&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html#a9bf6c4dd8cc4db6e2478df153c780d83">SimpleVoxelEngine::IrrEngine::TaskDeleteChunks</a></li>
+<li>s_UserControllerForThread&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_user_controller_for_thread.html#a696a29cb77b2b378e86e919209d7f8e2">SimpleVoxelEngine::IrrEngine::TaskSetUserControllerForThread</a></li>
+<li>s_Value&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_material_flag_definition.html#a16d9f5bad3e6a2e34a422f25b940ab21">SimpleVoxelEngine::IrrEngine::MaterialFlagDefinition</a></li>
+<li>s_Vector&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_stream_chunk_action.html#a87aa425ff7309202e294282799c4f086">SimpleVoxelEngine::IrrEngine::StreamChunkAction</a></li>
+<li>s_VectorChunk&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_update_chunk.html#ab0902aa98fcbc5b83dbacd7778c313c5">SimpleVoxelEngine::IrrEngine::TaskUpdateChunk</a></li>
+<li>s_VectorLeftDown&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_chunks.html#ad36047073b14c4a25bd56210e3f335c4">SimpleVoxelEngine::IrrEngine::TaskAddChunks</a>, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html#a29855a0faa0ca8165d7e94f164d678b3">SimpleVoxelEngine::IrrEngine::TaskDeleteChunks</a></li>
+<li>s_VectorRightUp&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_chunks.html#a534a04d905b9d2b2faef83d6660400d7">SimpleVoxelEngine::IrrEngine::TaskAddChunks</a>, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html#a18050f7cb9ffd76b0845b07866afd337">SimpleVoxelEngine::IrrEngine::TaskDeleteChunks</a></li>
+<li>s_VoxelAddress&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_simple_voxel_object.html#a676cf693d27d3ffe73331c26048551a9">SimpleVoxelEngine::IrrEngine::TaskDeleteSimpleVoxelObject</a>, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_simple_voxel_object.html#a5e2168a64e1a6f7881cdb6afde8db365">SimpleVoxelEngine::IrrEngine::TaskSetSimpleVoxelObject</a></li>
+<li>s_WorldId&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_stream_chunk_action.html#a7255ca7a6ae25f73ac014b22a81c5abd">SimpleVoxelEngine::IrrEngine::StreamChunkAction</a>, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_chunks.html#a2186fccafe31295c6025a6eef4a2d0dd">SimpleVoxelEngine::IrrEngine::TaskAddChunks</a>, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html#a13874b8c454e5acbe441d38a53279cba">SimpleVoxelEngine::IrrEngine::TaskDeleteChunks</a>, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_simple_voxel_object.html#a3302f88c531be45a90dbcf6ff67705a2">SimpleVoxelEngine::IrrEngine::TaskDeleteSimpleVoxelObject</a>, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_save_chunks.html#a0281cc0670fb60b8df6a36e5838afecb">SimpleVoxelEngine::IrrEngine::TaskSaveChunks</a>, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_simple_voxel_object.html#a9a8ab10b1516b2fe983211352f0db4d8">SimpleVoxelEngine::IrrEngine::TaskSetSimpleVoxelObject</a>, <a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_update_chunk.html#a6ed74989f36fb93d6f8f4e4b195d5ad0">SimpleVoxelEngine::IrrEngine::TaskUpdateChunk</a></li>
+<li>s_WorldRootNode&#160;:&#160;<a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_world3_d_info.html#a2aa0a338ac2a8b64633861001ed632f3">SimpleVoxelEngine::IrrEngine::World3DInfo</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по IrrSimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:39. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

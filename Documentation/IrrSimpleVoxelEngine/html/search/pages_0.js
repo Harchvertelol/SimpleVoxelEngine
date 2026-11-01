@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['Об_20авторе_20движка_2e',['Об авторе движка.',['../author.html',1,'']]],
-  ['Изменения',['Изменения',['../changes.html',1,'']]],
-  ['Общие_20идеи_20работы_20враппера_20irrsimplevoxelengine_2e',['Общие идеи работы враппера IrrSimpleVoxelEngine.',['../ideas.html',1,'']]],
-  ['Документация_20по_20irrsimplevoxelengine_2e',['Документация по IrrSimpleVoxelEngine.',['../index.html',1,'']]],
-  ['Настройка_20враппера_20irrsimplevoxelengine_20для_20работы_2e',['Настройка враппера IrrSimpleVoxelEngine для работы.',['../install.html',1,'']]],
-  ['Уроки_20по_20врапперу_20irrsimplevoxelengine_2e',['Уроки по врапперу IrrSimpleVoxelEngine.',['../tutorials.html',1,'']]]
+  ['0_200_201_3a_20ndash_20mdash_20mdash_0',['IrrSimpleVoxelEngine, build 0.0.1: (&amp;ndash; ----&amp;mdash; -&amp;mdash;)',['../changes.html#build001',1,'']]],
+  ['0_200_202_3a_20ndash_20mdash_20mdash_1',['IrrSimpleVoxelEngine, build 0.0.2: (&amp;ndash; ----&amp;mdash; -&amp;mdash;)',['../changes.html#build002',1,'']]],
+  ['0_201_3a_20ndash_20mdash_20mdash_2',['IrrSimpleVoxelEngine, build 0.0.1: (&amp;ndash; ----&amp;mdash; -&amp;mdash;)',['../changes.html#build001',1,'']]],
+  ['0_202_3a_20ndash_20mdash_20mdash_3',['IrrSimpleVoxelEngine, build 0.0.2: (&amp;ndash; ----&amp;mdash; -&amp;mdash;)',['../changes.html#build002',1,'']]]
 ];

@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>SimpleVoxelEngine: Пространство имен SimpleVoxelEngine::Defines</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,286 +23,361 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">SimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Воксельный движок</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li><a href="pages.html"><span>Описания</span></a></li>
-      <li class="current"><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li><a href="namespacemembers.html"><span>Члены&#160;пространств&#160;имен</span></a></li>
-    </ul>
+  <div id="splitbar" class="ui-resizable-handle">
   </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('namespace_simple_voxel_engine_1_1_defines.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html">Defines</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#namespaces">Пространства имен</a> &#124;
-<a href="#enum-members">Перечисления</a> &#124;
-<a href="#var-members">Переменные</a>  </div>
-  <div class="headertitle">
-<div class="title">Пространство имен SimpleVoxelEngine::Defines</div>  </div>
+  <div class="headertitle"><div class="title">Пространство имен SimpleVoxelEngine::Defines</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Предопределённые константы и enum.  
 <a href="#details">Подробнее...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Пространства имен</h2></td></tr>
-<tr class="memitem:namespace_simple_voxel_engine_1_1_defines_1_1_s_t_r_i_n_g___c_o_n_s_t_a_n_t_s"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_defines_1_1_s_t_r_i_n_g___c_o_n_s_t_a_n_t_s.html">STRING_CONSTANTS</a></td></tr>
+<tr class="memitem:STRING_5FCONSTANTS" id="r_STRING_5FCONSTANTS"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespace_simple_voxel_engine_1_1_defines_1_1_s_t_r_i_n_g___c_o_n_s_t_a_n_t_s.html">STRING_CONSTANTS</a></td></tr>
 <tr class="memdesc:namespace_simple_voxel_engine_1_1_defines_1_1_s_t_r_i_n_g___c_o_n_s_t_a_n_t_s"><td class="mdescLeft">&#160;</td><td class="mdescRight">Строковые константы движка. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Перечисления</h2></td></tr>
-<tr class="memitem:aac2bcaf5e9d74b977cab7e9e16828610"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#aac2bcaf5e9d74b977cab7e9e16828610">WORK_CONSTANTS</a> { <a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#aac2bcaf5e9d74b977cab7e9e16828610a36afa45c01b2c9af7b37bb781efa8c0f">FILE_READ_SIZE_STR</a> = 5000
+<tr class="memitem:aac2bcaf5e9d74b977cab7e9e16828610" id="r_aac2bcaf5e9d74b977cab7e9e16828610"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#aac2bcaf5e9d74b977cab7e9e16828610">WORK_CONSTANTS</a> { <a class="el" href="#aac2bcaf5e9d74b977cab7e9e16828610a36afa45c01b2c9af7b37bb781efa8c0f">FILE_READ_SIZE_STR</a> = 5000
  }</td></tr>
-<tr class="memdesc:aac2bcaf5e9d74b977cab7e9e16828610"><td class="mdescLeft">&#160;</td><td class="mdescRight">Рабочие константы для движка.  <a href="namespace_simple_voxel_engine_1_1_defines.html#aac2bcaf5e9d74b977cab7e9e16828610">Подробнее...</a><br /></td></tr>
-<tr class="separator:aac2bcaf5e9d74b977cab7e9e16828610"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a020fb55a33034c81354b5e182fe96920"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920">TYPE_VOXEL</a> { <br />
-&#160;&#160;<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a2f9342234ef44722f6ebea71c14fa7f2">TYPE_NONE</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a825c0b05142a4ddcf26bb571c61558a7">CHUNK_VOXEL_OBJECT</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a54d38305b02c53c7e79516eca37826e6">ARGBCOLOR</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a1680ac33acf89e87878ea187ed1a767e">MULTI_VOXEL</a>, 
+<tr class="memdesc:aac2bcaf5e9d74b977cab7e9e16828610"><td class="mdescLeft">&#160;</td><td class="mdescRight">Рабочие константы для движка.  <a href="#aac2bcaf5e9d74b977cab7e9e16828610">Подробнее...</a><br /></td></tr>
+<tr class="memitem:a020fb55a33034c81354b5e182fe96920" id="r_a020fb55a33034c81354b5e182fe96920"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a020fb55a33034c81354b5e182fe96920">TYPE_VOXEL</a> { <br />
+&#160;&#160;<a class="el" href="#a020fb55a33034c81354b5e182fe96920a2f9342234ef44722f6ebea71c14fa7f2">TYPE_NONE</a>
+, <a class="el" href="#a020fb55a33034c81354b5e182fe96920a825c0b05142a4ddcf26bb571c61558a7">CHUNK_VOXEL_OBJECT</a>
+, <a class="el" href="#a020fb55a33034c81354b5e182fe96920a54d38305b02c53c7e79516eca37826e6">ARGBCOLOR</a>
+, <a class="el" href="#a020fb55a33034c81354b5e182fe96920a1680ac33acf89e87878ea187ed1a767e">MULTI_VOXEL</a>
+, <br />
+&#160;&#160;<a class="el" href="#a020fb55a33034c81354b5e182fe96920a8db757ec8856b5b75cf9aa43528f97d1">FILL</a>
+, <a class="el" href="#a020fb55a33034c81354b5e182fe96920a44f50553de3e67b1031cb44f00869bba">CUSTOM_VOXEL</a>
 <br />
-&#160;&#160;<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a8db757ec8856b5b75cf9aa43528f97d1">FILL</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a44f50553de3e67b1031cb44f00869bba">CUSTOM_VOXEL</a>
+ }</td></tr>
+<tr class="memdesc:a020fb55a33034c81354b5e182fe96920"><td class="mdescLeft">&#160;</td><td class="mdescRight">Типы SimpleVoxelObject.  <a href="#a020fb55a33034c81354b5e182fe96920">Подробнее...</a><br /></td></tr>
+<tr class="memitem:a070ae0d5bf8d1b094bae93cb8c64aaa0" id="r_a070ae0d5bf8d1b094bae93cb8c64aaa0"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a070ae0d5bf8d1b094bae93cb8c64aaa0">LevelSearchSimpleVoxelObject</a> { <a class="el" href="#a070ae0d5bf8d1b094bae93cb8c64aaa0a66458b594beda50ff5181f230b092520">AUTOLEVEL</a>
+, <a class="el" href="#a070ae0d5bf8d1b094bae93cb8c64aaa0a2d7f4ff4b3576f41f5a6847cc51d1858">LASTLEVEL</a>
+, <a class="el" href="#a070ae0d5bf8d1b094bae93cb8c64aaa0a9ad779d8e470591060ab9107c649b59d">NUMBERLEVEL</a>
+ }</td></tr>
+<tr class="memdesc:a070ae0d5bf8d1b094bae93cb8c64aaa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Уровень поиска SimpleVoxelObject (World::getAddressSimpleVoxelObjectByThreePoints(), getAddressSimpleVoxelObjectByPoint()).  <a href="#a070ae0d5bf8d1b094bae93cb8c64aaa0">Подробнее...</a><br /></td></tr>
+<tr class="memitem:a30357d9ac225edac4962f1ccc75bab4d" id="r_a30357d9ac225edac4962f1ccc75bab4d"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a30357d9ac225edac4962f1ccc75bab4d">EventType</a> { <br />
+&#160;&#160;<a class="el" href="#a30357d9ac225edac4962f1ccc75bab4dabcc2138a15ae206d41c3de3f29b4a7fe">EVENT_TYPE_ERROR</a>
+, <a class="el" href="#a30357d9ac225edac4962f1ccc75bab4da5fd72120755720ae4991dc8182456aec">EVENT_TYPE_STANDARD</a>
+, <a class="el" href="#a30357d9ac225edac4962f1ccc75bab4dac1d93d9629f9c95578458716c3c681f9">EVENT_TYPE_LOGIC_VIOLATION</a>
+, <a class="el" href="#a30357d9ac225edac4962f1ccc75bab4da0c69572cead6ad44842184c23d52c75c">EVENT_TYPE_WARNING</a>
+, <br />
+&#160;&#160;<a class="el" href="#a30357d9ac225edac4962f1ccc75bab4dadf497d77f2217c24324956617572d2a9">EVENT_TYPE_INFO</a>
 <br />
  }</td></tr>
-<tr class="memdesc:a020fb55a33034c81354b5e182fe96920"><td class="mdescLeft">&#160;</td><td class="mdescRight">Типы SimpleVoxelObject.  <a href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920">Подробнее...</a><br /></td></tr>
-<tr class="separator:a020fb55a33034c81354b5e182fe96920"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a070ae0d5bf8d1b094bae93cb8c64aaa0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0">LevelSearchSimpleVoxelObject</a> { <a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0a66458b594beda50ff5181f230b092520">AUTOLEVEL</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0a2d7f4ff4b3576f41f5a6847cc51d1858">LASTLEVEL</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0a9ad779d8e470591060ab9107c649b59d">NUMBERLEVEL</a>
+<tr class="memdesc:a30357d9ac225edac4962f1ccc75bab4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Типы событий для регистрации движком.  <a href="#a30357d9ac225edac4962f1ccc75bab4d">Подробнее...</a><br /></td></tr>
+<tr class="memitem:a51d92ebb561dde8d40ee24b5e3c06325" id="r_a51d92ebb561dde8d40ee24b5e3c06325"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a51d92ebb561dde8d40ee24b5e3c06325">WHERE_SEARCH_IN_MEMORY</a> { <a class="el" href="#a51d92ebb561dde8d40ee24b5e3c06325a56098fd11d719b2d0d1ff465e78e942b">ALL_SIMPLE_VOXEL_OBJECTS</a>
+, <a class="el" href="#a51d92ebb561dde8d40ee24b5e3c06325a74bf30752e40ec1cdf32a114e6654477">VISIBLE_CACHE_SIMPLE_VOXEL_OBJECT</a>
+, <a class="el" href="#a51d92ebb561dde8d40ee24b5e3c06325a51749b789c44d728e48a5e49a259e2f9">VISIBLE_CACHE_RENDER_FACES_SIMPLE_VOXEL_OBJECT</a>
  }</td></tr>
-<tr class="memdesc:a070ae0d5bf8d1b094bae93cb8c64aaa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Уровень поиска SimpleVoxelObject. Данная опция в данный момент недоступна.  <a href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0">Подробнее...</a><br /></td></tr>
-<tr class="separator:a070ae0d5bf8d1b094bae93cb8c64aaa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30357d9ac225edac4962f1ccc75bab4d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a30357d9ac225edac4962f1ccc75bab4d">EventType</a> { <a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a30357d9ac225edac4962f1ccc75bab4dabcc2138a15ae206d41c3de3f29b4a7fe">EVENT_TYPE_ERROR</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a30357d9ac225edac4962f1ccc75bab4dab6cdfce2dcf9438a10af9d6570a08c80">EVENT_TYPE_STANDART</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a30357d9ac225edac4962f1ccc75bab4dac1d93d9629f9c95578458716c3c681f9">EVENT_TYPE_LOGIC_VIOLATION</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a30357d9ac225edac4962f1ccc75bab4da0c69572cead6ad44842184c23d52c75c">EVENT_TYPE_WARNING</a>
+<tr class="memdesc:a51d92ebb561dde8d40ee24b5e3c06325"><td class="mdescLeft">&#160;</td><td class="mdescRight">Типы кэшей для поиска SimpleVoxelObject в чанке.  <a href="#a51d92ebb561dde8d40ee24b5e3c06325">Подробнее...</a><br /></td></tr>
+<tr class="memitem:a27af4b8b7ce3b258558859f540e8d5df" id="r_a27af4b8b7ce3b258558859f540e8d5df"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a27af4b8b7ce3b258558859f540e8d5df">WORLD_BOUND_SIDE</a> { <br />
+&#160;&#160;<a class="el" href="#a27af4b8b7ce3b258558859f540e8d5dfa8eb26d5b211dcb6590b47a7ff8c8f5e9">WORLD_BOUND_X_MIN</a>
+, <a class="el" href="#a27af4b8b7ce3b258558859f540e8d5dfaf698d777ff41338c586c26c884ccbec7">WORLD_BOUND_X_MAX</a>
+, <a class="el" href="#a27af4b8b7ce3b258558859f540e8d5dfaef609ee65ae2984de6f3b8303be6e1ff">WORLD_BOUND_Y_MIN</a>
+, <a class="el" href="#a27af4b8b7ce3b258558859f540e8d5dfa323d8d5dd7c9af164bf3b58bfffe8ed6">WORLD_BOUND_Y_MAX</a>
+, <br />
+&#160;&#160;<a class="el" href="#a27af4b8b7ce3b258558859f540e8d5dfa69b39f9ec421126a4d44c0d339e37e6f">WORLD_BOUND_Z_MIN</a>
+, <a class="el" href="#a27af4b8b7ce3b258558859f540e8d5dfaa726aa8b44551d15ca111d124f639987">WORLD_BOUND_Z_MAX</a>
+<br />
  }</td></tr>
-<tr class="memdesc:a30357d9ac225edac4962f1ccc75bab4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Типы событий для регистрации движком.  <a href="namespace_simple_voxel_engine_1_1_defines.html#a30357d9ac225edac4962f1ccc75bab4d">Подробнее...</a><br /></td></tr>
-<tr class="separator:a30357d9ac225edac4962f1ccc75bab4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51d92ebb561dde8d40ee24b5e3c06325"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a51d92ebb561dde8d40ee24b5e3c06325">WHERE_SEARCH_IN_MEMORY</a> { <a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a51d92ebb561dde8d40ee24b5e3c06325a56098fd11d719b2d0d1ff465e78e942b">ALL_SIMPLE_VOXEL_OBJECTS</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a51d92ebb561dde8d40ee24b5e3c06325a74bf30752e40ec1cdf32a114e6654477">VISIBLE_CACHE_SIMPLE_VOXEL_OBJECT</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a51d92ebb561dde8d40ee24b5e3c06325a51749b789c44d728e48a5e49a259e2f9">VISIBLE_CACHE_RENDER_FACES_SIMPLE_VOXEL_OBJECT</a>
+<tr class="memdesc:a27af4b8b7ce3b258558859f540e8d5df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сторона границы мира (см. World::setChunksBound()).  <a href="#a27af4b8b7ce3b258558859f540e8d5df">Подробнее...</a><br /></td></tr>
+<tr class="memitem:a39da496e239c30c435260b9992e3cab8" id="r_a39da496e239c30c435260b9992e3cab8"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a39da496e239c30c435260b9992e3cab8">WORLD_AXIS</a> { <a class="el" href="#a39da496e239c30c435260b9992e3cab8af02c16f4d91d342468680cf925fe2e73">WORLD_AXIS_X</a>
+, <a class="el" href="#a39da496e239c30c435260b9992e3cab8add12e809c05cfe34c17a1e8779e45ed0">WORLD_AXIS_Y</a>
+, <a class="el" href="#a39da496e239c30c435260b9992e3cab8a7a1b61c1973cb0d8114dcab3a7bd5da1">WORLD_AXIS_Z</a>
  }</td></tr>
-<tr class="memdesc:a51d92ebb561dde8d40ee24b5e3c06325"><td class="mdescLeft">&#160;</td><td class="mdescRight">Типы кэшей для поиска SimpleVoxelObject в чанке.  <a href="namespace_simple_voxel_engine_1_1_defines.html#a51d92ebb561dde8d40ee24b5e3c06325">Подробнее...</a><br /></td></tr>
-<tr class="separator:a51d92ebb561dde8d40ee24b5e3c06325"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a39da496e239c30c435260b9992e3cab8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ось мира (см. World::setChunksBounds()).  <a href="#a39da496e239c30c435260b9992e3cab8">Подробнее...</a><br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Переменные</h2></td></tr>
-<tr class="memitem:a0a6ab25531ff2a3f96cabcfb415335ca"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0a6ab25531ff2a3f96cabcfb415335ca"></a>
-const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a0a6ab25531ff2a3f96cabcfb415335ca">EPS</a> = 0.0000001</td></tr>
-<tr class="memdesc:a0a6ab25531ff2a3f96cabcfb415335ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Эпсилон-значение для правильного сравнения double. <br /></td></tr>
-<tr class="separator:a0a6ab25531ff2a3f96cabcfb415335ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a6ab25531ff2a3f96cabcfb415335ca" id="r_a0a6ab25531ff2a3f96cabcfb415335ca"><td class="memItemLeft"><a id="a0a6ab25531ff2a3f96cabcfb415335ca" name="a0a6ab25531ff2a3f96cabcfb415335ca"></a>
+const float&#160;</td><td class="memItemRight"><b>EPS</b> = 0.001</td></tr>
+<tr class="memdesc:a0a6ab25531ff2a3f96cabcfb415335ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Эпсилон-значение для правильного сравнения дробных величин. <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
 <div class="textblock"><p>Предопределённые константы и enum. </p>
-</div><h2 class="groupheader">Перечисления</h2>
-<a class="anchor" id="a30357d9ac225edac4962f1ccc75bab4d"></a>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Перечисления</h2>
+<a id="a30357d9ac225edac4962f1ccc75bab4d" name="a30357d9ac225edac4962f1ccc75bab4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30357d9ac225edac4962f1ccc75bab4d">&#9670;&#160;</a></span>EventType</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a30357d9ac225edac4962f1ccc75bab4d">SimpleVoxelEngine::Defines::EventType</a></td>
+          <td class="memname">enum <a class="el" href="#a30357d9ac225edac4962f1ccc75bab4d">SimpleVoxelEngine::Defines::EventType</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Типы событий для регистрации движком. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a class="anchor" id="a30357d9ac225edac4962f1ccc75bab4dabcc2138a15ae206d41c3de3f29b4a7fe"></a>EVENT_TYPE_ERROR&#160;</td><td class="fielddoc">
-<p>Ошибка. </p>
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="a30357d9ac225edac4962f1ccc75bab4dabcc2138a15ae206d41c3de3f29b4a7fe" name="a30357d9ac225edac4962f1ccc75bab4dabcc2138a15ae206d41c3de3f29b4a7fe"></a>EVENT_TYPE_ERROR&#160;</td><td class="fielddoc"><p>Ошибка. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a30357d9ac225edac4962f1ccc75bab4dab6cdfce2dcf9438a10af9d6570a08c80"></a>EVENT_TYPE_STANDART&#160;</td><td class="fielddoc">
-<p>Стандартное сообщение. </p>
+<tr><td class="fieldname"><a id="a30357d9ac225edac4962f1ccc75bab4da5fd72120755720ae4991dc8182456aec" name="a30357d9ac225edac4962f1ccc75bab4da5fd72120755720ae4991dc8182456aec"></a>EVENT_TYPE_STANDARD&#160;</td><td class="fielddoc"><p>Стандартное сообщение. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a30357d9ac225edac4962f1ccc75bab4dac1d93d9629f9c95578458716c3c681f9"></a>EVENT_TYPE_LOGIC_VIOLATION&#160;</td><td class="fielddoc">
-<p>Логическая ошибка пользователя. </p>
+<tr><td class="fieldname"><a id="a30357d9ac225edac4962f1ccc75bab4dac1d93d9629f9c95578458716c3c681f9" name="a30357d9ac225edac4962f1ccc75bab4dac1d93d9629f9c95578458716c3c681f9"></a>EVENT_TYPE_LOGIC_VIOLATION&#160;</td><td class="fielddoc"><p>Логическая ошибка пользователя. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a30357d9ac225edac4962f1ccc75bab4da0c69572cead6ad44842184c23d52c75c"></a>EVENT_TYPE_WARNING&#160;</td><td class="fielddoc">
-<p>Предупреждение. </p>
+<tr><td class="fieldname"><a id="a30357d9ac225edac4962f1ccc75bab4da0c69572cead6ad44842184c23d52c75c" name="a30357d9ac225edac4962f1ccc75bab4da0c69572cead6ad44842184c23d52c75c"></a>EVENT_TYPE_WARNING&#160;</td><td class="fielddoc"><p>Предупреждение. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a30357d9ac225edac4962f1ccc75bab4dadf497d77f2217c24324956617572d2a9" name="a30357d9ac225edac4962f1ccc75bab4dadf497d77f2217c24324956617572d2a9"></a>EVENT_TYPE_INFO&#160;</td><td class="fielddoc"><p>Информационное сообщение. </p>
 </td></tr>
 </table>
 
-<p>См. определение в файле <a class="el" href="_defines_8h_source.html">Defines.h</a> строка <a class="el" href="_defines_8h_source.html#l00033">33</a></p>
+</div>
+</div>
+<a id="a070ae0d5bf8d1b094bae93cb8c64aaa0" name="a070ae0d5bf8d1b094bae93cb8c64aaa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a070ae0d5bf8d1b094bae93cb8c64aaa0">&#9670;&#160;</a></span>LevelSearchSimpleVoxelObject</h2>
 
-</div>
-</div>
-<a class="anchor" id="a070ae0d5bf8d1b094bae93cb8c64aaa0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a070ae0d5bf8d1b094bae93cb8c64aaa0">SimpleVoxelEngine::Defines::LevelSearchSimpleVoxelObject</a></td>
+          <td class="memname">enum <a class="el" href="#a070ae0d5bf8d1b094bae93cb8c64aaa0">SimpleVoxelEngine::Defines::LevelSearchSimpleVoxelObject</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Уровень поиска SimpleVoxelObject. Данная опция в данный момент недоступна. </p>
+<p>Уровень поиска SimpleVoxelObject (World::getAddressSimpleVoxelObjectByThreePoints(), getAddressSimpleVoxelObjectByPoint()). </p>
 <table class="fieldtable">
-<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a class="anchor" id="a070ae0d5bf8d1b094bae93cb8c64aaa0a66458b594beda50ff5181f230b092520"></a>AUTOLEVEL&#160;</td><td class="fielddoc">
-<p>Автовыбор уровня. </p>
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="a070ae0d5bf8d1b094bae93cb8c64aaa0a66458b594beda50ff5181f230b092520" name="a070ae0d5bf8d1b094bae93cb8c64aaa0a66458b594beda50ff5181f230b092520"></a>AUTOLEVEL&#160;</td><td class="fielddoc"><p>Автовыбор уровня (сейчас - как LASTLEVEL). </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a070ae0d5bf8d1b094bae93cb8c64aaa0a2d7f4ff4b3576f41f5a6847cc51d1858"></a>LASTLEVEL&#160;</td><td class="fielddoc">
-<p>До самого конца. </p>
+<tr><td class="fieldname"><a id="a070ae0d5bf8d1b094bae93cb8c64aaa0a2d7f4ff4b3576f41f5a6847cc51d1858" name="a070ae0d5bf8d1b094bae93cb8c64aaa0a2d7f4ff4b3576f41f5a6847cc51d1858"></a>LASTLEVEL&#160;</td><td class="fielddoc"><p>До самого конца: до вокселя, который не чанк, или до пустой ячейки. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a070ae0d5bf8d1b094bae93cb8c64aaa0a9ad779d8e470591060ab9107c649b59d"></a>NUMBERLEVEL&#160;</td><td class="fielddoc">
-<p>Уровень отдельно указан. </p>
+<tr><td class="fieldname"><a id="a070ae0d5bf8d1b094bae93cb8c64aaa0a9ad779d8e470591060ab9107c649b59d" name="a070ae0d5bf8d1b094bae93cb8c64aaa0a9ad779d8e470591060ab9107c649b59d"></a>NUMBERLEVEL&#160;</td><td class="fielddoc"><p>До уровня, указанного отдельно (уровень = число векторов в адресе: 1 - чанк, 2 - воксель чанка...). </p>
 </td></tr>
 </table>
 
-<p>См. определение в файле <a class="el" href="_defines_8h_source.html">Defines.h</a> строка <a class="el" href="_defines_8h_source.html#l00026">26</a></p>
+</div>
+</div>
+<a id="a020fb55a33034c81354b5e182fe96920" name="a020fb55a33034c81354b5e182fe96920"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a020fb55a33034c81354b5e182fe96920">&#9670;&#160;</a></span>TYPE_VOXEL</h2>
 
-</div>
-</div>
-<a class="anchor" id="a020fb55a33034c81354b5e182fe96920"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920">SimpleVoxelEngine::Defines::TYPE_VOXEL</a></td>
+          <td class="memname">enum <a class="el" href="#a020fb55a33034c81354b5e182fe96920">SimpleVoxelEngine::Defines::TYPE_VOXEL</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Типы SimpleVoxelObject. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a class="anchor" id="a020fb55a33034c81354b5e182fe96920a2f9342234ef44722f6ebea71c14fa7f2"></a>TYPE_NONE&#160;</td><td class="fielddoc">
-<p>Неустановленный тип. </p>
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="a020fb55a33034c81354b5e182fe96920a2f9342234ef44722f6ebea71c14fa7f2" name="a020fb55a33034c81354b5e182fe96920a2f9342234ef44722f6ebea71c14fa7f2"></a>TYPE_NONE&#160;</td><td class="fielddoc"><p>Неустановленный тип. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a020fb55a33034c81354b5e182fe96920a825c0b05142a4ddcf26bb571c61558a7"></a>CHUNK_VOXEL_OBJECT&#160;</td><td class="fielddoc">
-<p>Чанк. </p>
+<tr><td class="fieldname"><a id="a020fb55a33034c81354b5e182fe96920a825c0b05142a4ddcf26bb571c61558a7" name="a020fb55a33034c81354b5e182fe96920a825c0b05142a4ddcf26bb571c61558a7"></a>CHUNK_VOXEL_OBJECT&#160;</td><td class="fielddoc"><p>Чанк. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a020fb55a33034c81354b5e182fe96920a54d38305b02c53c7e79516eca37826e6"></a>ARGBCOLOR&#160;</td><td class="fielddoc">
-<p>ARGB цвет. </p>
+<tr><td class="fieldname"><a id="a020fb55a33034c81354b5e182fe96920a54d38305b02c53c7e79516eca37826e6" name="a020fb55a33034c81354b5e182fe96920a54d38305b02c53c7e79516eca37826e6"></a>ARGBCOLOR&#160;</td><td class="fielddoc"><p>ARGB цвет. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a020fb55a33034c81354b5e182fe96920a1680ac33acf89e87878ea187ed1a767e"></a>MULTI_VOXEL&#160;</td><td class="fielddoc">
-<p>Мультивоксель. Не используется. </p>
+<tr><td class="fieldname"><a id="a020fb55a33034c81354b5e182fe96920a1680ac33acf89e87878ea187ed1a767e" name="a020fb55a33034c81354b5e182fe96920a1680ac33acf89e87878ea187ed1a767e"></a>MULTI_VOXEL&#160;</td><td class="fielddoc"><p>Мультивоксель. Не используется. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a020fb55a33034c81354b5e182fe96920a8db757ec8856b5b75cf9aa43528f97d1"></a>FILL&#160;</td><td class="fielddoc">
-<p>Заливка. Не используется. </p>
+<tr><td class="fieldname"><a id="a020fb55a33034c81354b5e182fe96920a8db757ec8856b5b75cf9aa43528f97d1" name="a020fb55a33034c81354b5e182fe96920a8db757ec8856b5b75cf9aa43528f97d1"></a>FILL&#160;</td><td class="fielddoc"><p>Заливка. Не используется. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a020fb55a33034c81354b5e182fe96920a44f50553de3e67b1031cb44f00869bba"></a>CUSTOM_VOXEL&#160;</td><td class="fielddoc">
-<p>Кастомизированный SimpleVoxelObject, т.е. тип пользователя. </p>
+<tr><td class="fieldname"><a id="a020fb55a33034c81354b5e182fe96920a44f50553de3e67b1031cb44f00869bba" name="a020fb55a33034c81354b5e182fe96920a44f50553de3e67b1031cb44f00869bba"></a>CUSTOM_VOXEL&#160;</td><td class="fielddoc"><p>Кастомизированный SimpleVoxelObject, т.е. тип пользователя. </p>
 </td></tr>
 </table>
 
-<p>См. определение в файле <a class="el" href="_defines_8h_source.html">Defines.h</a> строка <a class="el" href="_defines_8h_source.html#l00016">16</a></p>
+</div>
+</div>
+<a id="a51d92ebb561dde8d40ee24b5e3c06325" name="a51d92ebb561dde8d40ee24b5e3c06325"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51d92ebb561dde8d40ee24b5e3c06325">&#9670;&#160;</a></span>WHERE_SEARCH_IN_MEMORY</h2>
 
-</div>
-</div>
-<a class="anchor" id="a51d92ebb561dde8d40ee24b5e3c06325"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a51d92ebb561dde8d40ee24b5e3c06325">SimpleVoxelEngine::Defines::WHERE_SEARCH_IN_MEMORY</a></td>
+          <td class="memname">enum <a class="el" href="#a51d92ebb561dde8d40ee24b5e3c06325">SimpleVoxelEngine::Defines::WHERE_SEARCH_IN_MEMORY</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Типы кэшей для поиска SimpleVoxelObject в чанке. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a class="anchor" id="a51d92ebb561dde8d40ee24b5e3c06325a56098fd11d719b2d0d1ff465e78e942b"></a>ALL_SIMPLE_VOXEL_OBJECTS&#160;</td><td class="fielddoc">
-<p>Искать среди всех SimpleVoxelObject. </p>
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="a51d92ebb561dde8d40ee24b5e3c06325a56098fd11d719b2d0d1ff465e78e942b" name="a51d92ebb561dde8d40ee24b5e3c06325a56098fd11d719b2d0d1ff465e78e942b"></a>ALL_SIMPLE_VOXEL_OBJECTS&#160;</td><td class="fielddoc"><p>Искать среди всех SimpleVoxelObject. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a51d92ebb561dde8d40ee24b5e3c06325a74bf30752e40ec1cdf32a114e6654477"></a>VISIBLE_CACHE_SIMPLE_VOXEL_OBJECT&#160;</td><td class="fielddoc">
-<p>Искать только среди видимых SimpleVoxelObject. </p>
+<tr><td class="fieldname"><a id="a51d92ebb561dde8d40ee24b5e3c06325a74bf30752e40ec1cdf32a114e6654477" name="a51d92ebb561dde8d40ee24b5e3c06325a74bf30752e40ec1cdf32a114e6654477"></a>VISIBLE_CACHE_SIMPLE_VOXEL_OBJECT&#160;</td><td class="fielddoc"><p>Искать только среди видимых SimpleVoxelObject. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a51d92ebb561dde8d40ee24b5e3c06325a51749b789c44d728e48a5e49a259e2f9"></a>VISIBLE_CACHE_RENDER_FACES_SIMPLE_VOXEL_OBJECT&#160;</td><td class="fielddoc">
-<p>Искать среди видимых с указанным кэшем видимости граней SimpleVoxelObjects. </p>
+<tr><td class="fieldname"><a id="a51d92ebb561dde8d40ee24b5e3c06325a51749b789c44d728e48a5e49a259e2f9" name="a51d92ebb561dde8d40ee24b5e3c06325a51749b789c44d728e48a5e49a259e2f9"></a>VISIBLE_CACHE_RENDER_FACES_SIMPLE_VOXEL_OBJECT&#160;</td><td class="fielddoc"><p>Искать среди видимых с указанным кэшем видимости граней SimpleVoxelObjects. </p>
 </td></tr>
 </table>
 
-<p>См. определение в файле <a class="el" href="_defines_8h_source.html">Defines.h</a> строка <a class="el" href="_defines_8h_source.html#l00041">41</a></p>
+</div>
+</div>
+<a id="aac2bcaf5e9d74b977cab7e9e16828610" name="aac2bcaf5e9d74b977cab7e9e16828610"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac2bcaf5e9d74b977cab7e9e16828610">&#9670;&#160;</a></span>WORK_CONSTANTS</h2>
 
-</div>
-</div>
-<a class="anchor" id="aac2bcaf5e9d74b977cab7e9e16828610"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#aac2bcaf5e9d74b977cab7e9e16828610">SimpleVoxelEngine::Defines::WORK_CONSTANTS</a></td>
+          <td class="memname">enum <a class="el" href="#aac2bcaf5e9d74b977cab7e9e16828610">SimpleVoxelEngine::Defines::WORK_CONSTANTS</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Рабочие константы для движка. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a class="anchor" id="aac2bcaf5e9d74b977cab7e9e16828610a36afa45c01b2c9af7b37bb781efa8c0f"></a>FILE_READ_SIZE_STR&#160;</td><td class="fielddoc">
-<p>Максимальное количество символов в строке при чтении текстового файла. </p>
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="aac2bcaf5e9d74b977cab7e9e16828610a36afa45c01b2c9af7b37bb781efa8c0f" name="aac2bcaf5e9d74b977cab7e9e16828610a36afa45c01b2c9af7b37bb781efa8c0f"></a>FILE_READ_SIZE_STR&#160;</td><td class="fielddoc"><p>Максимальное количество символов в строке при чтении текстового файла. </p>
 </td></tr>
 </table>
 
-<p>См. определение в файле <a class="el" href="_defines_8h_source.html">Defines.h</a> строка <a class="el" href="_defines_8h_source.html#l00011">11</a></p>
+</div>
+</div>
+<a id="a39da496e239c30c435260b9992e3cab8" name="a39da496e239c30c435260b9992e3cab8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39da496e239c30c435260b9992e3cab8">&#9670;&#160;</a></span>WORLD_AXIS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a39da496e239c30c435260b9992e3cab8">SimpleVoxelEngine::Defines::WORLD_AXIS</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ось мира (см. World::setChunksBounds()). </p>
+<table class="fieldtable">
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="a39da496e239c30c435260b9992e3cab8af02c16f4d91d342468680cf925fe2e73" name="a39da496e239c30c435260b9992e3cab8af02c16f4d91d342468680cf925fe2e73"></a>WORLD_AXIS_X&#160;</td><td class="fielddoc"><p>Ось X. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a39da496e239c30c435260b9992e3cab8add12e809c05cfe34c17a1e8779e45ed0" name="a39da496e239c30c435260b9992e3cab8add12e809c05cfe34c17a1e8779e45ed0"></a>WORLD_AXIS_Y&#160;</td><td class="fielddoc"><p>Ось Y (высота). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a39da496e239c30c435260b9992e3cab8a7a1b61c1973cb0d8114dcab3a7bd5da1" name="a39da496e239c30c435260b9992e3cab8a7a1b61c1973cb0d8114dcab3a7bd5da1"></a>WORLD_AXIS_Z&#160;</td><td class="fielddoc"><p>Ось Z. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="a27af4b8b7ce3b258558859f540e8d5df" name="a27af4b8b7ce3b258558859f540e8d5df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27af4b8b7ce3b258558859f540e8d5df">&#9670;&#160;</a></span>WORLD_BOUND_SIDE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a27af4b8b7ce3b258558859f540e8d5df">SimpleVoxelEngine::Defines::WORLD_BOUND_SIDE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Сторона границы мира (см. World::setChunksBound()). </p>
+<table class="fieldtable">
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="a27af4b8b7ce3b258558859f540e8d5dfa8eb26d5b211dcb6590b47a7ff8c8f5e9" name="a27af4b8b7ce3b258558859f540e8d5dfa8eb26d5b211dcb6590b47a7ff8c8f5e9"></a>WORLD_BOUND_X_MIN&#160;</td><td class="fielddoc"><p>Наименьшая координата X чанка. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a27af4b8b7ce3b258558859f540e8d5dfaf698d777ff41338c586c26c884ccbec7" name="a27af4b8b7ce3b258558859f540e8d5dfaf698d777ff41338c586c26c884ccbec7"></a>WORLD_BOUND_X_MAX&#160;</td><td class="fielddoc"><p>Наибольшая координата X чанка. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a27af4b8b7ce3b258558859f540e8d5dfaef609ee65ae2984de6f3b8303be6e1ff" name="a27af4b8b7ce3b258558859f540e8d5dfaef609ee65ae2984de6f3b8303be6e1ff"></a>WORLD_BOUND_Y_MIN&#160;</td><td class="fielddoc"><p>Наименьшая координата Y чанка (низ мира). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a27af4b8b7ce3b258558859f540e8d5dfa323d8d5dd7c9af164bf3b58bfffe8ed6" name="a27af4b8b7ce3b258558859f540e8d5dfa323d8d5dd7c9af164bf3b58bfffe8ed6"></a>WORLD_BOUND_Y_MAX&#160;</td><td class="fielddoc"><p>Наибольшая координата Y чанка (верх мира). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a27af4b8b7ce3b258558859f540e8d5dfa69b39f9ec421126a4d44c0d339e37e6f" name="a27af4b8b7ce3b258558859f540e8d5dfa69b39f9ec421126a4d44c0d339e37e6f"></a>WORLD_BOUND_Z_MIN&#160;</td><td class="fielddoc"><p>Наименьшая координата Z чанка. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a27af4b8b7ce3b258558859f540e8d5dfaa726aa8b44551d15ca111d124f639987" name="a27af4b8b7ce3b258558859f540e8d5dfaa726aa8b44551d15ca111d124f639987"></a>WORLD_BOUND_Z_MAX&#160;</td><td class="fielddoc"><p>Наибольшая координата Z чанка. </p>
+</td></tr>
+</table>
 
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:23. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a href="namespace_simple_voxel_engine_1_1_defines.html">Defines</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

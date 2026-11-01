@@ -41,10 +41,10 @@
 			<Add option="-std=c++11" />
 			<Add directory="../SimpleVoxelEngine/include" />
 			<Add directory="../IrrSimpleVoxelEngine/include" />
-			<Add directory="E:/SDK/irrlicht-1.8.5/include" />
+			<Add directory="E:/SDK/irrlicht-1.8.4/include" />
 		</Compiler>
 		<Linker>
-			<Add library="E:/SDK/irrlicht-1.8.5/lib/Win32-gcc/libIrrlicht.a" />
+			<Add library="E:/SDK/irrlicht-1.8.4/lib/Win32-gcc/libIrrlicht.a" />
 		</Linker>
 		<Unit filename="XEffects/CScreenQuad.h" />
 		<Unit filename="XEffects/CShaderPre.cpp" />
@@ -56,6 +56,9 @@
 		<Unit filename="XEffects/XEffects.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>

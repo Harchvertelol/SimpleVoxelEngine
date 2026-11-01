@@ -1,6 +1,9 @@
-#ifndef Logger_H
-#define Logger_H
+//»зменено: защита от повторного включени€ называлась Logger_H - если в проекте пользовател€ есть свой
+//Logger.h с тем же именем защиты, один из заголовков молча пропускалс€. “еперь с префиксом, как у остальных заголовков.
+#ifndef SimpleVoxelEngine__Logger_H
+#define SimpleVoxelEngine__Logger_H
 
+#include <atomic>
 #include <string>
 #include "Defines.h"
 #include "Additional/ReferenceCounter.h"
@@ -25,6 +28,11 @@ namespace SimpleVoxelEngine
                 \param IsFatal ≈сли имеет значени€ true, то событие €вл€етс€ фатальным. –екомендуетс€ прекратить работу с программой.
                 */
                 void registerEvent(SimpleVoxelEngine::Defines::EventType TypeEvent, std::string TextEvent, bool IsFatal = false);
+                //! ¬ывод€тс€ ли сообщени€ этого типа.
+                /*! \param TypeEvent “ип событи€.
+                \return ¬озвращает true, если сообщени€ этого типа вывод€тс€ (см. setPrintError() и т.д.), иначе false.
+                */
+                bool isPrinted(SimpleVoxelEngine::Defines::EventType TypeEvent) const;
                 //! ”становка вывода сообщений об ошибках (EVENT_TYPE_ERROR).
                 /*! \param value ≈сли имеет значение true, то сообщени€ с типом EVENT_TYPE_ERROR будут выводитьс€, иначе - нет.
                 */
@@ -66,12 +74,23 @@ namespace SimpleVoxelEngine
                 */
                 bool getPrintInfo();
             private:
-                void registerEventStandartConsole(SimpleVoxelEngine::Defines::EventType, std::string, bool);
-                bool s_PrintError;
-                bool s_PrintLogicViolation;
-                bool s_PrintWarning;
-                bool s_PrintStandard;
-                bool s_PrintInfo;
+                //! ¬ывод сообщени€ в консоль (std::cout), если сообщени€ этого типа вывод€тс€.
+                /*! —трока начинаетс€ с типа ("Error: ", "Warning: " и т.д.); фатальное сообщение кончаетс€ словом "Fatal!".
+                \param TypeEvent “ип событи€.
+                \param TextEvent “екст сообщени€.
+                \param IsFatal ‘атальное ли событие.
+                */
+                void registerEventStandardConsole(SimpleVoxelEngine::Defines::EventType, std::string, bool);
+                //‘лаги атомарные. ≈сли логгером пользуютс€ из нескольких потоков, флаги одновременно читают потоки, которые
+                //вывод€т сообщени€, а мен€ет (setPrintError() и т.д.) другой поток. ” обычного bool одновременные чтение и запись
+                //из разных потоков - гонка данных: по правилам C++ поведение не определено (компил€тор вправе, например, один раз
+                //прочитать флаг и дальше пользоватьс€ запомненным значением). std::atomic<bool> - та же переменна€, но еЄ чтение и
+                //запись из разных потоков корректны и видны всем потокам; блокировок нет, по скорости - почти как bool.
+                std::atomic<bool> s_PrintError; //!< ¬ыводить ли ошибки (EVENT_TYPE_ERROR).
+                std::atomic<bool> s_PrintLogicViolation; //!< ¬ыводить ли логические ошибки (EVENT_TYPE_LOGIC_VIOLATION).
+                std::atomic<bool> s_PrintWarning; //!< ¬ыводить ли предупреждени€ (EVENT_TYPE_WARNING).
+                std::atomic<bool> s_PrintStandard; //!< ¬ыводить ли стандартные сообщени€ (EVENT_TYPE_STANDARD).
+                std::atomic<bool> s_PrintInfo; //!< ¬ыводить ли информационные сообщени€ (EVENT_TYPE_INFO).
         };
     }
 }

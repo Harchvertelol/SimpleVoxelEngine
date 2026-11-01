@@ -1,0 +1,501 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Урок 14: Производительность и отладка.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IrrSimpleVoxelEngine
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tutorial14.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Урок 14: Производительность и отладка. </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Мир работает, блоки ставятся, всё рисуется. Теперь пора разобраться, от каких настроек зависит скорость и как ловить ошибки. В этом уроке:</p><ul>
+<li>склейка чанков в ноды (setSizeBlockChunks()) - главная настройка скорости рисования;</li>
+<li>hardware mapping - где хранятся меши нод;</li>
+<li>число потоков построения и setMultiplePartition();</li>
+<li>замер: FPS, число треугольников и нод;</li>
+<li>Occlusion Queries - что это, как включить, сколько стоят и когда окупаются;</li>
+<li>отладочные библиотеки (lib/Debug, SVE_DEBUG_CHECKS);</li>
+<li>заморозка и очистка фабрики, правильное завершение, константы IrrSVEDefines. Пример - два одинаковых холмистых мира по 4x2x4 чанка рядом: у первого каждый чанк - своя нода, у второго все 32 чанка склеены в одну. Подключения и фабрика - как в уроке 1: <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;thread&gt;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core;</div>
+<div class="ttc" id="a_irr_simple_voxel_engine_8h_html"><div class="ttname"><a href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a></div><div class="ttdoc">Главный заголовочный файл. Необходимо присоединять только его к проекту.</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">SimpleVoxelEngine::IrrEngine</a></div><div class="ttdoc">Главное пространство имён IrrSimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:13</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:11</div></div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="comment">// Фабрика - как в уроке 1: куб из видимых граней, цвет вершин - цвет вокселя.</span></div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        s_Plane = createFaceMesh();</div>
+<div class="line">        s_MeshManipulator = device-&gt;getSceneManager()-&gt;getMeshManipulator();</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); }</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl)</div>
+<div class="line">    {</div>
+<div class="line">        IMesh* mesh = getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1));</div>
+<div class="line">        ARGBColor c = ((VoxelInfoARGBColor*)vxl-&gt;getVoxelInfo())-&gt;s_ARGBColor;</div>
+<div class="line">        <span class="keywordflow">if</span>(mesh) s_MeshManipulator-&gt;setVertexColors(mesh, SColor(c.getA(), c.getR(), c.getG(), c.getB()));</div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering*) { <span class="keywordflow">return</span> 0; }</div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">};</div>
+</div><!-- fragment --> Генератор холмов (высота от 4 до 20 блоков, поэтому заняты чанки с y = 0 и y = 1), обработчик клавиши O и маленькая функция подсчёта нод мира - ноды чанков являются детьми родительской ноды мира (урок 12): <div class="fragment"><div class="line"><span class="comment">// Генератор холмов высотой от 4 до 20 блоков: заняты чанки с y = 0 и y = 1. Вызывается в потоке главной очереди.</span></div>
+<div class="line"><span class="keyword">class </span>HillsGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> size)</div>
+<div class="line">    {</div>
+<div class="line">        Vector3d&lt;int&gt; v = chunk-&gt;getVoxelAddress()-&gt;getVector(0); <span class="comment">// Координаты чанка (в чанках).</span></div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; size; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; size; z++)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">const</span> <span class="keywordtype">int</span> gx = v.getX() * size + x, gz = v.getZ() * size + z; <span class="comment">// Глобальные координаты столбца.</span></div>
+<div class="line">                <span class="keyword">const</span> <span class="keywordtype">int</span> h = (int)(12 + 8 * sinf(gx * 0.2f) * cosf(gz * 0.15f));</div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; size; y++)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keyword">const</span> <span class="keywordtype">int</span> gy = v.getY() * size + y;</div>
+<div class="line">                    <span class="keywordflow">if</span>(gy &gt; h) <span class="keywordflow">break</span>;</div>
+<div class="line">                    chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 60 + gy * 8, 150, 60)), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="comment">// Обработчик: O - включить или выключить Occlusion Queries.</span></div>
+<div class="line"><span class="keyword">class </span>MyReceiver : <span class="keyword">public</span> IEventReceiver</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> OnEvent(<span class="keyword">const</span> SEvent&amp; event)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(event.EventType == EET_KEY_INPUT_EVENT &amp;&amp; !event.KeyInput.PressedDown &amp;&amp; event.KeyInput.Key == KEY_KEY_O) s_Toggle = <span class="keyword">true</span>;</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">bool</span> s_Toggle = <span class="keyword">false</span>;</div>
+<div class="line">};</div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="comment">// Сколько нод чанков у мира: ноды чанков - дети его родительской ноды (урок 12).</span></div>
+<div class="line"><span class="keywordtype">int</span> countChunkNodes(ISceneNode* root)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">int</span> nodes = 0;</div>
+<div class="line">    <span class="keywordflow">for</span>(core::list&lt;ISceneNode*&gt;::ConstIterator it = root-&gt;getChildren().begin(); it != root-&gt;getChildren().end(); ++it)</div>
+<div class="line">        <span class="keywordflow">if</span>((*it)-&gt;getType() == ESNT_MESH) nodes++;</div>
+<div class="line">    <span class="keywordflow">return</span> nodes;</div>
+<div class="line">}</div>
+</div><!-- fragment --> </li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="t14threads"></a>
+Потоки построения</h1>
+<p>Меши чанков строят два пула потоков: потоки "создания" строят только что добавленные чанки (загрузка мира), потоки "обновления" в первую очередь перестраивают изменённые чанки (чтобы правки игрока появлялись сразу, даже пока грузится большой мир), а когда таких нет - помогают потокам создания. По умолчанию в каждом пуле по одному потоку (IrrSVEDefines::DEFAULT_NUMBER_OF_THREAD_ADD_CHUNKS и DEFAULT_NUMBER_OF_THREAD_UPDATE_CHUNKS). Число потоков задаётся только до start() (getMaxNumberOfThreadAddChunks() и getMaxNumberOfThreadUpdateChunks() вернут текущие значения): </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(800, 600));</div>
+<div class="line">    MyReceiver receiver;</div>
+<div class="line">    device-&gt;setEventReceiver(&amp;receiver);</div>
+<div class="line">    ISceneManager* smgr = device-&gt;getSceneManager();</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Логгер: без него движок молча проглатывает и ошибки.</span></div>
+<div class="line">    lgr-&gt;setPrintStandard(<span class="keyword">false</span>); <span class="comment">// Обычные сообщения не нужны - только предупреждения и ошибки.</span></div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device, lgr);</div>
+<div class="line">    lgr-&gt;drop(); <span class="comment">// Движок держит свою ссылку.</span></div>
+<div class="line">    <span class="comment">// Потоки построения - до start(). Два ядра оставляем главному потоку и потоку главной очереди.</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cores = std::thread::hardware_concurrency();</div>
+<div class="line">    isve-&gt;setMaxNumberOfThreadAddChunks(cores &gt; 3 ? cores - 2 : 1);</div>
+<div class="line">    isve-&gt;setMaxNumberOfThreadUpdateChunks(1);</div>
+</div><!-- fragment --><p> Два ядра оставляем главному потоку (рисование) и потоку главной очереди (генерация, загрузка, правки). Больше потоков</p><ul>
+<li>быстрее загрузка, но не бесконечно: снимок данных чанка берётся под блокировкой движка, а ваши getMeshVoxel() и getMeshNumber() вызываются строго по одному (под общей блокировкой фабрики, урок 3) - параллельно идёт только остальная работа (склейка мешей вокселей в меш чанка). Чем быстрее ваш getMeshVoxel(), тем больше пользы от потоков: ничего не загружайте и не создавайте в нём лишнего.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="t14glue"></a>
+Склейка чанков в ноды</h1>
+<p>Враппер не создаёт по ноде на каждый чанк: соседние чанки склеиваются в блок, и у блока одна нода Irrlicht на каждый уровень мешей. Размер блока в чанках задаёт setSizeBlockChunks(). Это главный выбор между скоростью рисования и скоростью изменений:</p><ul>
+<li><b>меньше нод - быстрее рисование.</b> Каждая нода - это обход сцены, проверка видимости камерой, смена материала и вызовы отрисовки (по одному на мешбуфер - на каждую текстуру уровня). Тысяча маленьких нод рисуется заметно медленнее, чем сотня больших с тем же числом треугольников;</li>
+<li><b>больше нод - быстрее изменения.</b> При правке одного блока перестраивается только его чанк (в потоке построения), но склеивается весь блок чанков - копированием готовых мешей всех его чанков, в главном потоке, внутри update(). Блок 4x4x4 - это 64 чанка на каждую правку, и игра начинает подтормаживать при каждом щелчке;</li>
+<li>большие ноды хуже отсекаются камерой (нода рисуется целиком, если видна хоть её часть), а у полупрозрачных уровней сортировка между нодами грубее и каждая пересортировка дороже (урок 9). Обычно хорош небольшой столбик или кубик: в TestProject3 - 1x4x1 (четыре чанка по высоте). Лучший размер для вашей игры покажет только замер.</li>
+</ul>
+<p>Задать размер можно двумя способами - выбрать нужно один:</p><ul>
+<li>общий для всех миров: factory-&gt;setSizeBlockChunks(x, y, z) - до setFactoryChunkMeshSceneNode() (потом фабрика заморожена);</li>
+<li>для каждого мира свой: factory-&gt;setSizeBlockChunks(id, x, y, z) - после addWorld(), пока у мира нет ни одного готового меша (проще всего - до start()): первый меш замораживает размер. Если общий размер задан, такой вызов - ошибка в логе. Если не задать ничего, каждый чанк - своя нода (1x1x1).</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="t14hm"></a>
+Hardware mapping</h1>
+<p>По умолчанию Irrlicht каждый кадр передаёт видеокарте вершины и индексы всех мешей из оперативной памяти. Меши нод чанков меняются редко, поэтому выгоднее хранить их в видеопамяти (VBO) - EHM_STATIC: меш передаётся один раз и заново - только когда нода пересклеена. Это setHardwareMappingHint(уровень, режим, буфер): без номера мира - для всех будущих миров (вызывать после setNumberOfMeshesSceneNodeForChunk(), который сбрасывает настройки уровней, и до addWorld()), с номером мира - для одного мира (после addWorld(), применяется и к уже склеенным мешам). У полупрозрачных уровней индексы пересортировываются при движении камеры, там можно попробовать EHM_DYNAMIC для индексов - и замерить.</p>
+<p>Настроим фабрику: масштабы, один уровень, hardware mapping, таймер Occlusion Queries (о нём ниже), и отдадим её движку: </p><div class="fragment"><div class="line">MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">factory-&gt;setPositionScale(16);</div>
+<div class="line">factory-&gt;setSScale(16);</div>
+<div class="line">factory-&gt;setNumberOfMeshesSceneNodeForChunk(1); <span class="comment">// Первым из настроек уровней: сбрасывает материалы и hardware mapping.</span></div>
+<div class="line">factory-&gt;setHardwareMappingHint(0, EHM_STATIC, EBT_VERTEX_AND_INDEX); <span class="comment">// Меши нод - в видеопамяти (для всех будущих миров).</span></div>
+<div class="line">factory-&gt;setTimerTestOcclusionQueriesInMilliseconds(2 * IrrSVEDefines::TIMER_OCCLUSION_QUERIES_IN_MILLISECONDS); <span class="comment">// Раз в 200 мс.</span></div>
+<div class="line">isve-&gt;setFactoryChunkMeshSceneNode(factory); <span class="comment">// Здесь фабрика замораживается: масштабы и общая склейка больше не меняются.</span></div>
+</div><!-- fragment --><p> Два мира рядом, у каждого своя родительская нода (урок 12). setMultiplePartition(id, true) обещает движку, что все чанки верхнего уровня разбиты одинаково (на getSizeChunk()), - тогда видимость граней считается быстрым путём, прямо по массивам чанка и шести соседей (около 0.2 мс на чанк 16x16x16). Результат тот же, что медленным путём, а если у какого-то чанка всё же другое разбиение, для него быстрый путь просто не используется (текущее значение - isMultiplePartition(id)). Рамка (loadframe = true) загружает чанки вокруг области: сама не рисуется, но без неё на краях области рисовались бы лишние грани. </p><div class="fragment"><div class="line"><span class="comment">// Два одинаковых мира 4x2x4 чанка рядом: у первого каждый чанк - своя нода, у второго все 32 чанка склеены в одну.</span></div>
+<div class="line">ISceneNode* roots[2];</div>
+<div class="line"><span class="keywordtype">int</span> ids[2];</div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 2; i++)</div>
+<div class="line">{</div>
+<div class="line">    roots[i] = smgr-&gt;addEmptySceneNode();</div>
+<div class="line">    roots[i]-&gt;setPosition(vector3df(i * 80.0f, 0, 0));</div>
+<div class="line">    World3DInfo info;</div>
+<div class="line">    info.s_WorldRootNode = roots[i];</div>
+<div class="line">    ids[i] = isve-&gt;addWorld(info);</div>
+<div class="line">    isve-&gt;getWorld(ids[i])-&gt;setWorldGenerator(<span class="keyword">new</span> HillsGenerator);</div>
+<div class="line">    factory-&gt;setMultiplePartition(ids[i], <span class="keyword">true</span>); <span class="comment">// Все чанки разбиты одинаково - быстрый расчёт видимости граней.</span></div>
+<div class="line">    factory-&gt;setMaterialFlag(0, ids[i], EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">    isve-&gt;addChunksForRendering(ids[i], Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(3, 1, 3), <span class="keyword">true</span>, <span class="keyword">true</span>); <span class="comment">// С рамкой: края без лишних граней.</span></div>
+<div class="line">}</div>
+<div class="line">factory-&gt;setSizeBlockChunks(ids[0], 1, 1, 1); <span class="comment">// Склейка - для каждого мира (общую до этого не задавали), до первого меша.</span></div>
+<div class="line">factory-&gt;setSizeBlockChunks(ids[1], 4, 2, 4);</div>
+</div><!-- fragment --> <h1 class="doxsection"><a class="anchor" id="t14measure"></a>
+Замер</h1>
+<p>Камера, запуск и главный цикл. Раз в 2 секунды печатаем FPS, число нарисованных треугольников и число нод каждого мира: </p><div class="fragment"><div class="line">ICameraSceneNode* camera = smgr-&gt;addCameraSceneNodeFPS();</div>
+<div class="line">camera-&gt;setPosition(vector3df(70, 40, -40));</div>
+<div class="line">camera-&gt;setTarget(vector3df(70, 0, 32));</div>
+<div class="line">isve-&gt;start();</div>
+<div class="line">u32 lastprint = 0;</div>
+<div class="line"><span class="keywordflow">while</span>(isve-&gt;runIrrDevice())</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">if</span>(receiver.s_Toggle) <span class="comment">// O: Occlusion Queries включаются и выключаются и у уже созданных нод.</span></div>
+<div class="line">    {</div>
+<div class="line">        receiver.s_Toggle = <span class="keyword">false</span>;</div>
+<div class="line">        factory-&gt;setOcclusionQueries(!factory-&gt;getOcclusionQueries());</div>
+<div class="line">    }</div>
+<div class="line">    isve-&gt;update();</div>
+<div class="line">    device-&gt;getVideoDriver()-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 100, 100, 140));</div>
+<div class="line">    smgr-&gt;drawAll();</div>
+<div class="line">    isve-&gt;runOcclusionQueries(); <span class="comment">// Между drawAll() и endScene(); без включённых Occlusion Queries ничего не делает.</span></div>
+<div class="line">    device-&gt;getVideoDriver()-&gt;endScene();</div>
+<div class="line">    <span class="keywordflow">if</span>(isve-&gt;getTimeSafeThread() - lastprint &gt; 2000) <span class="comment">// Раз в 2 секунды - замер.</span></div>
+<div class="line">    {</div>
+<div class="line">        lastprint = isve-&gt;getTimeSafeThread();</div>
+<div class="line">        printf(<span class="stringliteral">&quot;FPS %d, triangles %u, nodes: world 1 (1x1x1) %d, world 2 (4x2x4) %d, occlusion queries %s\n&quot;</span>,</div>
+<div class="line">               device-&gt;getVideoDriver()-&gt;getFPS(), device-&gt;getVideoDriver()-&gt;getPrimitiveCountDrawn(),</div>
+<div class="line">               countChunkNodes(roots[0]), countChunkNodes(roots[1]), factory-&gt;getOcclusionQueries() ? <span class="stringliteral">&quot;on&quot;</span> : <span class="stringliteral">&quot;off&quot;</span>);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> У первого мира получится нода на каждый непустой чанк (у нас 28), у второго - одна. Треугольников у них поровну, а вызовов отрисовки - в 28 раз меньше у второго. Попробуйте поставить у обоих по 50x2x50 чанков и сравнить FPS - а потом поставьте блок в каждом мире и сравните, насколько дольше появляется изменение во втором.</p>
+<h1 class="doxsection"><a class="anchor" id="t14oq"></a>
+Occlusion Queries</h1>
+<p>Occlusion Query - это вопрос к видеокарте: "сколько пикселей этой ноды прошло бы проверку глубины?". Если ноль - нода целиком закрыта другими (например, горой перед камерой), и её можно не рисовать. Включаются они у фабрики: setOcclusionQueries(true) (только в главном потоке; применяется и к уже созданным нодам, при выключении скрытые ноды снова показываются). Сами проверки выполняет isve-&gt;runOcclusionQueries() - её нужно вызывать каждый кадр <b>между drawAll() и endScene()</b>: проверка рисует ноды в уже заполненный кадром Z-буфер. В другом месте (например, до beginScene()) результат неверный: ноды мигают или не скрываются никогда. Раз в getTimerTestOcclusionQueriesInMilliseconds() миллисекунд (по умолчанию IrrSVEDefines::TIMER_OCCLUSION_QUERIES_IN_MILLISECONDS = 100, у нас 200) выполняются все Occlusion Queries драйвера - и ваши собственные тоже, - и закрытые ноды скрываются до следующей проверки. Без включённых Occlusion Queries runOcclusionQueries() ничего не делает, поэтому её можно вызывать всегда.</p>
+<p>Окупаются ли они - зависит от сцены, поэтому сначала разберём, что они стоят и что дают.</p>
+<p><b>Цена на видеокарте</b> небольшая. Проверка рисует каждую ноду ещё раз, но без записи цвета и глубины, и враппер по умолчанию рисует для проверки не полный меш ноды, а её ограничивающий кубоид - 12 треугольников вместо тысяч. В кадр кубоид не попадает. Видимую ноду кубоид не скроет никогда, а закрытую иногда сочтёт видимой (виден угол кубоида над пустым местом) - это безопасно, просто выигрыш чуть меньше. Изнутри у кубоида не видно ни одной лицевой грани, поэтому ноду, внутри кубоида которой стоит камера (блок чанков вокруг игрока), враппер не скрывает никогда. Полный меш точнее, но на проверке нода рисуется второй раз целиком: setOcclusionQueriesBoundingBox(false).</p>
+<p><b>Цена на процессоре.</b> Irrlicht 1.8 хранит запросы в простом массиве и ищет запрос ноды перебором (linear_search) - при запуске проверки, при получении результата, при обновлении; на N нод это порядка N^2 сравнений за проверку. При сотнях нод это незаметно, при многих тысячах - уже да; поэтому с Occlusion Queries лучше крупнее склейка (setSizeBlockChunks() побольше - меньше нод). Кроме того, updateAllOcclusionQueries() ждёт результатов от видеокарты - раз в таймер процессор стоит, пока видеокарта не дорисует проверку; таймер побольше - ждать реже.</p>
+<p><b>Выигрыш</b> - каждая скрытая нода не рисуется целиком, со всеми её тысячами треугольников и текстурами. Чем больше нод закрыто, тем больше выигрыш. Где закрыто много: пещеры и подземелья, помещения, плотный город, горы и холмы перед камерой, вид с земли в холмистом мире. Где почти ничего: открытая равнина и вид сверху - меши чанков и так состоят только из видимых граней, а ноды вне поля зрения камеры Irrlicht и так не рисует.</p>
+<p><b>Почему по умолчанию выключены.</b> Результат применяется с задержкой - до следующей проверки. Быстро повернул камеру - нода, которая только что была закрыта, ещё скрыта, и на её месте на мгновение мелькает дыра (меньше таймер - короче мелькание, но чаще проверки). Решайте сами, включать ли их, - лучше с замером FPS на своей сцене и нужных видеокартах.</p>
+<p>Учтите ещё одно: Irrlicht сам удаляет запрос, который не запускался больше 1000 кадров. Поэтому проверка выполняется не только по таймеру, но и не реже, чем раз в getMaxFramesBetweenOcclusionQueries() кадров (вызовов runOcclusionQueries(); по умолчанию IrrSVEDefines::MAX_FRAMES_BETWEEN_OCCLUSION_QUERIES = 900, можно задать от 1 до 1000 функцией setMaxFramesBetweenOcclusionQueries()) - большой таймер при высоком FPS запросы не потеряет. В нашем примере их включает и выключает клавиша O, а в цикле стоит вызов: </p><div class="fragment"><div class="line">isve-&gt;update();</div>
+<div class="line">device-&gt;getVideoDriver()-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 100, 100, 140));</div>
+<div class="line">smgr-&gt;drawAll();</div>
+<div class="line">isve-&gt;runOcclusionQueries(); <span class="comment">// Между drawAll() и endScene(); без включённых Occlusion Queries ничего не делает.</span></div>
+<div class="line">device-&gt;getVideoDriver()-&gt;endScene();</div>
+</div><!-- fragment --> <h1 class="doxsection"><a class="anchor" id="t14debug"></a>
+Отладочные библиотеки и SVE_DEBUG_CHECKS</h1>
+<p>У ядра и враппера есть две сборки: Release (lib/Release) и Debug (lib/Debug). Отладочная собрана с флагом -DSVE_DEBUG_CHECKS - в ней включены проверки ошибок программиста, которые в релизе ничего не проверяют ради скорости (в релизной сборке этих проверок нет совсем). Чтобы отлаживать свою программу с проверками, просто подключите библиотеки из lib/Debug (как в Debug-цели TestProject3) - свою программу собирать с этим флагом не нужно: заголовки от него не зависят. При ошибке в лог пишется сообщение с "Debug check (SVE_DEBUG_CHECKS)", а функция не выполняется (или возвращает ошибку) вместо порчи памяти и падения где-то далеко от места ошибки. Проверяется:</p><ul>
+<li>в ядре: координаты вектора внутри чанка, svo == NULL, чанк вне мира, отрицательный индекс VoxelAddress::addVector();</li>
+<li>во враппере: update(), addWorld(), setFactoryChunkMeshSceneNode() и настройки фабрики, которые трогают сцену (FactoryChunkMeshSceneNode::update(), setMaterialFlag(), setMaterialType(), setHardwareMappingHint(), setID(), changeWorld3DInfo(), setOcclusionQueries()), а также runOcclusionQueries() и функции пула стриминга вызываются из главного потока - того, где создан движок (узнать поток - isMainThread());</li>
+<li>stop() не вызывается из потока построения (из функций фабрики) - иначе зависание;</li>
+<li>getWorldCoordinates() и поиск адреса по трём точкам и по точке: есть фабрика и мир (без проверки - молча неверный результат или NULL);</li>
+<li>add/deleteChunksForRendering(): углы области не перепутаны (иначе область пустая);</li>
+<li>set/deleteSimpleVoxelObject(): адрес создан этим же движком (предупреждение);</li>
+<li>addMainTask(): задание STOP (его ставит только stop()) отклоняется. Например, вызов setOcclusionQueries() из другого потока в отладочной сборке не выполнится, а в логе будет: <div class="fragment"><div class="line">Logic violation: IrrSVE: Debug check (SVE_DEBUG_CHECKS): FactoryChunkMeshSceneNode::setOcclusionQueries must be called from the main thread (the thread where the engine was created).</div>
+</div><!-- fragment --> Два важных замечания. Первое: сообщения видны, только если у движка есть логгер, - без логгера движок молча проглатывает и ошибки, и предупреждения. Поэтому в примере движок создан с логгером (отключены только стандартные сообщения): <div class="fragment"><div class="line">Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Логгер: без него движок молча проглатывает и ошибки.</span></div>
+<div class="line">lgr-&gt;setPrintStandard(<span class="keyword">false</span>); <span class="comment">// Обычные сообщения не нужны - только предупреждения и ошибки.</span></div>
+<div class="line">IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device, lgr);</div>
+<div class="line">lgr-&gt;drop(); <span class="comment">// Движок держит свою ссылку.</span></div>
+</div><!-- fragment --> Второе: отладочные проверки ловят только ошибки программиста. Данные извне - файлы сохранений, сеть, ввод игрока - проверяйте в своём коде, и в релизе тоже. Хорошая привычка - запускать игру с отладочными библиотеками после каждой заметной правки и смотреть, не появилось ли в логе "Debug check".</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="t14exit"></a>
+Заморозка, очистка и завершение</h1>
+<p>setFactoryChunkMeshSceneNode() замораживает фабрику (freeze(), проверить - isFreeze()): после этого не меняются масштабы (setPositionScale(), setRotationScale(), setSScale()), setIsFaces(), общий setSizeBlockChunks(), число уровней (setNumberOfMeshesSceneNodeForChunk()) и привязка к движку и устройству. Так враппер гарантирует, что потоки построения и уже созданные блоки чанков не увидят смены настроек на ходу. Сами вы freeze() вызывать не должны - замороженную фабрику движок не примет.</p>
+<p>clear() полностью очищает фабрику: убирает все чанки из отрисовки, удаляет неприменённые меши, миры фабрики (с их настройками и World3DInfo) и уровни мешей. Её вызывает деструктор фабрики, а фабрику удаляет движок, так что вызывать clear() самому обычно не нужно: замороженную фабрику после clear() дальше использовать нельзя. Если нужно убрать из отрисовки часть чанков, не трогая данные мира, есть deleteChunk(id, вектор чанка), deleteAllChunks(id) и deleteAllChunks() (потокобезопасны; нода исчезает не позже ближайшего update()), а проверить, отрисовывается ли чанк, - isRenderChunk(id, вектор чанка). Обычно же удобнее deleteChunk(s)ForRendering() движка (урок 6) - они умеют ещё и выгрузить данные. Правильное завершение - как в уроке 11: </p><div class="fragment"><div class="line">isve-&gt;stop(); <span class="comment">// Остановить потоки, потом удалить движок: он удалит ноды чанков, фабрику (её деструктор вызовет clear()) и миры.</span></div>
+<div class="line"><span class="keyword">delete</span> isve;</div>
+<div class="line">device-&gt;drop();</div>
+<div class="line"><span class="keywordflow">return</span> 0;</div>
+</div><!-- fragment --><p> delete isve сначала убирает ноды чанков (onUpdateChunkMeshSceneNode(0, ...) по каждой ноде, пока ваша фабрика ещё цела), потом удаляет фабрику и миры. Устройство Irrlicht удаляется последним - движку оно нужно до конца.</p>
+<h1 class="doxsection"><a class="anchor" id="t14defines"></a>
+Константы IrrSVEDefines</h1>
+<p>В пространстве имён IrrSVEDefines (<a class="el" href="_irr_s_v_e_defines_8h_source.html">IrrSVEDefines.h</a>) - значения по умолчанию и пороги враппера:</p><ul>
+<li>DEFAULT_NUMBER_OF_THREAD_ADD_CHUNKS = 1 и DEFAULT_NUMBER_OF_THREAD_UPDATE_CHUNKS = 1 - число потоков построения по умолчанию;</li>
+<li>TIMER_OCCLUSION_QUERIES_IN_MILLISECONDS = 100 - период проверок Occlusion Queries по умолчанию;</li>
+<li>MAX_FRAMES_BETWEEN_OCCLUSION_QUERIES = 900 - проверки Occlusion Queries не реже, чем раз в столько кадров, и MAX_FRAMES_BETWEEN_OCCLUSION_QUERIES_LIMIT = 1000 - наибольшее значение для setMaxFramesBetweenOcclusionQueries();</li>
+<li>MAX_DELAY_GLUE_BLOCK_CHUNKS_IN_MILLISECONDS = 1000 - сколько максимум склейка блока чанков ждёт, пока построятся его новые чанки. При загрузке чанки одного блока приходят в разных кадрах, и без ожидания блок склеивался бы заново на каждый пришедший чанк. Правки уже построенных чанков не ждут;</li>
+<li>TRANSPARENT_SORT_CAMERA_THRESHOLD = 0.25 - на сколько единиц сцены должна сместиться камера, чтобы полупрозрачные треугольники блока были пересортированы (сортировать каждый кадр дорого, а при маленьком сдвиге порядок почти не меняется).</li>
+</ul>
+<p>Ну и напоследок ещё раз полный код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;thread&gt;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Фабрика - как в уроке 1: куб из видимых граней, цвет вершин - цвет вокселя.</span></div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        s_Plane = createFaceMesh();</div>
+<div class="line">        s_MeshManipulator = device-&gt;getSceneManager()-&gt;getMeshManipulator();</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); }</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl)</div>
+<div class="line">    {</div>
+<div class="line">        IMesh* mesh = getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1));</div>
+<div class="line">        ARGBColor c = ((VoxelInfoARGBColor*)vxl-&gt;getVoxelInfo())-&gt;s_ARGBColor;</div>
+<div class="line">        <span class="keywordflow">if</span>(mesh) s_MeshManipulator-&gt;setVertexColors(mesh, SColor(c.getA(), c.getR(), c.getG(), c.getB()));</div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering*) { <span class="keywordflow">return</span> 0; }</div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Генератор холмов высотой от 4 до 20 блоков: заняты чанки с y = 0 и y = 1. Вызывается в потоке главной очереди.</span></div>
+<div class="line"><span class="keyword">class </span>HillsGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> size)</div>
+<div class="line">    {</div>
+<div class="line">        Vector3d&lt;int&gt; v = chunk-&gt;getVoxelAddress()-&gt;getVector(0); <span class="comment">// Координаты чанка (в чанках).</span></div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; size; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; size; z++)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">const</span> <span class="keywordtype">int</span> gx = v.getX() * size + x, gz = v.getZ() * size + z; <span class="comment">// Глобальные координаты столбца.</span></div>
+<div class="line">                <span class="keyword">const</span> <span class="keywordtype">int</span> h = (int)(12 + 8 * sinf(gx * 0.2f) * cosf(gz * 0.15f));</div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; size; y++)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keyword">const</span> <span class="keywordtype">int</span> gy = v.getY() * size + y;</div>
+<div class="line">                    <span class="keywordflow">if</span>(gy &gt; h) <span class="keywordflow">break</span>;</div>
+<div class="line">                    chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 60 + gy * 8, 150, 60)), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Обработчик: O - включить или выключить Occlusion Queries.</span></div>
+<div class="line"><span class="keyword">class </span>MyReceiver : <span class="keyword">public</span> IEventReceiver</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> OnEvent(<span class="keyword">const</span> SEvent&amp; event)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(event.EventType == EET_KEY_INPUT_EVENT &amp;&amp; !event.KeyInput.PressedDown &amp;&amp; event.KeyInput.Key == KEY_KEY_O) s_Toggle = <span class="keyword">true</span>;</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">bool</span> s_Toggle = <span class="keyword">false</span>;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Сколько нод чанков у мира: ноды чанков - дети его родительской ноды (урок 12).</span></div>
+<div class="line"><span class="keywordtype">int</span> countChunkNodes(ISceneNode* root)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">int</span> nodes = 0;</div>
+<div class="line">    <span class="keywordflow">for</span>(core::list&lt;ISceneNode*&gt;::ConstIterator it = root-&gt;getChildren().begin(); it != root-&gt;getChildren().end(); ++it)</div>
+<div class="line">        <span class="keywordflow">if</span>((*it)-&gt;getType() == ESNT_MESH) nodes++;</div>
+<div class="line">    <span class="keywordflow">return</span> nodes;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(800, 600));</div>
+<div class="line">    MyReceiver receiver;</div>
+<div class="line">    device-&gt;setEventReceiver(&amp;receiver);</div>
+<div class="line">    ISceneManager* smgr = device-&gt;getSceneManager();</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Логгер: без него движок молча проглатывает и ошибки.</span></div>
+<div class="line">    lgr-&gt;setPrintStandard(<span class="keyword">false</span>); <span class="comment">// Обычные сообщения не нужны - только предупреждения и ошибки.</span></div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device, lgr);</div>
+<div class="line">    lgr-&gt;drop(); <span class="comment">// Движок держит свою ссылку.</span></div>
+<div class="line">    <span class="comment">// Потоки построения - до start(). Два ядра оставляем главному потоку и потоку главной очереди.</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cores = std::thread::hardware_concurrency();</div>
+<div class="line">    isve-&gt;setMaxNumberOfThreadAddChunks(cores &gt; 3 ? cores - 2 : 1);</div>
+<div class="line">    isve-&gt;setMaxNumberOfThreadUpdateChunks(1);</div>
+<div class="line">    MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">    factory-&gt;setPositionScale(16);</div>
+<div class="line">    factory-&gt;setSScale(16);</div>
+<div class="line">    factory-&gt;setNumberOfMeshesSceneNodeForChunk(1); <span class="comment">// Первым из настроек уровней: сбрасывает материалы и hardware mapping.</span></div>
+<div class="line">    factory-&gt;setHardwareMappingHint(0, EHM_STATIC, EBT_VERTEX_AND_INDEX); <span class="comment">// Меши нод - в видеопамяти (для всех будущих миров).</span></div>
+<div class="line">    factory-&gt;setTimerTestOcclusionQueriesInMilliseconds(2 * IrrSVEDefines::TIMER_OCCLUSION_QUERIES_IN_MILLISECONDS); <span class="comment">// Раз в 200 мс.</span></div>
+<div class="line">    isve-&gt;setFactoryChunkMeshSceneNode(factory); <span class="comment">// Здесь фабрика замораживается: масштабы и общая склейка больше не меняются.</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Два одинаковых мира 4x2x4 чанка рядом: у первого каждый чанк - своя нода, у второго все 32 чанка склеены в одну.</span></div>
+<div class="line">    ISceneNode* roots[2];</div>
+<div class="line">    <span class="keywordtype">int</span> ids[2];</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 2; i++)</div>
+<div class="line">    {</div>
+<div class="line">        roots[i] = smgr-&gt;addEmptySceneNode();</div>
+<div class="line">        roots[i]-&gt;setPosition(vector3df(i * 80.0f, 0, 0));</div>
+<div class="line">        World3DInfo info;</div>
+<div class="line">        info.s_WorldRootNode = roots[i];</div>
+<div class="line">        ids[i] = isve-&gt;addWorld(info);</div>
+<div class="line">        isve-&gt;getWorld(ids[i])-&gt;setWorldGenerator(<span class="keyword">new</span> HillsGenerator);</div>
+<div class="line">        factory-&gt;setMultiplePartition(ids[i], <span class="keyword">true</span>); <span class="comment">// Все чанки разбиты одинаково - быстрый расчёт видимости граней.</span></div>
+<div class="line">        factory-&gt;setMaterialFlag(0, ids[i], EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">        isve-&gt;addChunksForRendering(ids[i], Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(3, 1, 3), <span class="keyword">true</span>, <span class="keyword">true</span>); <span class="comment">// С рамкой: края без лишних граней.</span></div>
+<div class="line">    }</div>
+<div class="line">    factory-&gt;setSizeBlockChunks(ids[0], 1, 1, 1); <span class="comment">// Склейка - для каждого мира (общую до этого не задавали), до первого меша.</span></div>
+<div class="line">    factory-&gt;setSizeBlockChunks(ids[1], 4, 2, 4);</div>
+<div class="line"> </div>
+<div class="line">    ICameraSceneNode* camera = smgr-&gt;addCameraSceneNodeFPS();</div>
+<div class="line">    camera-&gt;setPosition(vector3df(70, 40, -40));</div>
+<div class="line">    camera-&gt;setTarget(vector3df(70, 0, 32));</div>
+<div class="line">    isve-&gt;start();</div>
+<div class="line">    u32 lastprint = 0;</div>
+<div class="line">    <span class="keywordflow">while</span>(isve-&gt;runIrrDevice())</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(receiver.s_Toggle) <span class="comment">// O: Occlusion Queries включаются и выключаются и у уже созданных нод.</span></div>
+<div class="line">        {</div>
+<div class="line">            receiver.s_Toggle = <span class="keyword">false</span>;</div>
+<div class="line">            factory-&gt;setOcclusionQueries(!factory-&gt;getOcclusionQueries());</div>
+<div class="line">        }</div>
+<div class="line">        isve-&gt;update();</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 100, 100, 140));</div>
+<div class="line">        smgr-&gt;drawAll();</div>
+<div class="line">        isve-&gt;runOcclusionQueries(); <span class="comment">// Между drawAll() и endScene(); без включённых Occlusion Queries ничего не делает.</span></div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;endScene();</div>
+<div class="line">        <span class="keywordflow">if</span>(isve-&gt;getTimeSafeThread() - lastprint &gt; 2000) <span class="comment">// Раз в 2 секунды - замер.</span></div>
+<div class="line">        {</div>
+<div class="line">            lastprint = isve-&gt;getTimeSafeThread();</div>
+<div class="line">            printf(<span class="stringliteral">&quot;FPS %d, triangles %u, nodes: world 1 (1x1x1) %d, world 2 (4x2x4) %d, occlusion queries %s\n&quot;</span>,</div>
+<div class="line">                   device-&gt;getVideoDriver()-&gt;getFPS(), device-&gt;getVideoDriver()-&gt;getPrimitiveCountDrawn(),</div>
+<div class="line">                   countChunkNodes(roots[0]), countChunkNodes(roots[1]), factory-&gt;getOcclusionQueries() ? <span class="stringliteral">&quot;on&quot;</span> : <span class="stringliteral">&quot;off&quot;</span>);</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line">    isve-&gt;stop(); <span class="comment">// Остановить потоки, потом удалить движок: он удалит ноды чанков, фабрику (её деструктор вызовет clear()) и миры.</span></div>
+<div class="line">    <span class="keyword">delete</span> isve;</div>
+<div class="line">    device-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="tutorials.html">Уроки по врапперу IrrSimpleVoxelEngine.</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

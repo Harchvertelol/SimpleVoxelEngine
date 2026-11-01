@@ -22,6 +22,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-DSVE_DEBUG_CHECKS" />
 					<Add directory="../../SimpleVoxelEngine/include" />
 				</Compiler>
 				<Linker>
@@ -56,17 +57,18 @@
 		</Linker>
 		<Unit filename="../include/CBatchingMesh/CBatchingMesh.h" />
 		<Unit filename="../include/ChunksMeshBlock.h" />
+		<Unit filename="../include/ChunkStreamingController.h" />
+		<Unit filename="../include/ChunkStreamingPool.h" />
 		<Unit filename="../include/ChunksMeshBlocksController.h" />
 		<Unit filename="../include/FactoryChunkMeshSceneNode.h" />
 		<Unit filename="../include/IrrSVEDefines.h" />
 		<Unit filename="../include/IrrSimpleVoxelEngine.h" />
 		<Unit filename="../include/Task.h" />
-		<Unit filename="../include/ThreadSafeCounter.h" />
-		<Unit filename="../include/ThreadSafeType.h" />
-		<Unit filename="../include/ThreadSafeVector.h" />
 		<Unit filename="../include/UserControllerForThread.h" />
 		<Unit filename="CBatchingMesh/CBatchingMesh.cpp" />
 		<Unit filename="ChunksMeshBlock.cpp" />
+		<Unit filename="ChunkStreamingController.cpp" />
+		<Unit filename="ChunkStreamingPool.cpp" />
 		<Unit filename="ChunksMeshBlocksController.cpp" />
 		<Unit filename="FactoryChunkMeshSceneNode.cpp" />
 		<Unit filename="IrrSimpleVoxelEngine.cpp" />

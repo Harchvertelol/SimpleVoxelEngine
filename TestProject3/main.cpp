@@ -1,11 +1,46 @@
+/*
+    TestProject3 - демонстрация воксельного движка SimpleVoxelEngine и его обёртки
+    для Irrlicht (IrrSimpleVoxelEngine).
+
+    Что делает программа:
+    - создаёт мир из чанков 16x16x16 блоков (11 x 16 x 11 чанков);
+    - генерирует его (или загружает с диска из WORLD_FOLDER, если он уже сохранён);
+    - строит меши чанков в фоновых потоках и показывает их в Irrlicht;
+    - позволяет летать FPS-камерой, ставить и удалять блоки мышью, делать сферы,
+      взрывы и "освещение" (это считается в потоке движка, а не в потоке графики);
+    - показывает прозрачность двух видов: стекло (альфа-тест) и вода (смешивание).
+
+    Порядок частей файла:
+    1. Константы и перечисления.
+    2. Шейдерный callback (освещение "солнцем").
+    3. Свой тип блока (MyBlock) и информация о нём для рендеринга (MyVoxelInfo).
+    4. Правило прозрачности граней (MySimpleVoxelObjectTransparentTester).
+    5. Генератор мира (MyWorldGenerator).
+    6. Задачи для потока движка (сфера, взрыв, свет) и их обработчик (MyController).
+    7. Фабрика мешей (MyFactoryChunkMeshSceneNode): по вокселю говорит, какой меш рисовать.
+    8. Сохранение и загрузка чанков (MyChunksSaveLoadController).
+    9. Обработчик клавиатуры и мыши (MyReceiver).
+    10. main(): создание устройства, движка, мира, камеры и главный цикл.
+
+    Про потоки (важно для понимания, где что можно делать):
+    - Главный поток: окно, рисование, обработчик событий, isve->update().
+      Только здесь можно трогать сцену Irrlicht (ноды, селекторы, аниматоры).
+    - Поток главной очереди движка: выполняет задания по порядку - генерацию
+      и загрузку чанков, установку блоков, пользовательские функции MyController.
+      Пока выполняется одно задание, мир меняет только оно.
+    - Потоки построения: собирают меши чанков, вызывая функции фабрики
+      getMeshVoxel()/getMeshNumber(). Поэтому фабрика не должна ничего загружать
+      в этих функциях - всё загружается заранее в её конструкторе.
+*/
+
 #include <irrlicht.h> //Подключим иррлихт
 #include <iostream>
-
+#include <thread> //Только ради std::thread::hardware_concurrency() - числа ядер процессора
 #include <ctime>
+#include <cmath>
+#include <cstring> //strncmp/strstr для фильтра сообщений лога Irrlicht
 
-#include <IrrSimpleVoxelEngine.h> //Подключим наш движок
-
-#include <CBatchingMesh/CBatchingMesh.h>
+#include <IrrSimpleVoxelEngine.h> //Подключим наш движок (он сам подключает ядро SimpleVoxelEngine)
 
 using namespace SimpleVoxelEngine; //Подключим пространства имён нашего движка
 using namespace Core;
@@ -25,7 +60,51 @@ using namespace video;
 using namespace io;
 using namespace gui;
 
-class MyShaderCallBack : public video::IShaderConstantSetCallBack
+// ---------------------------------------------------------------------------------------------
+// 1. Константы и перечисления
+// ---------------------------------------------------------------------------------------------
+
+const std::string WORLD_FOLDER = "data/testproject3"; //Папка, куда сохраняется мир. Удалите её, чтобы мир сгенерировался заново.
+const int SIZE_CHUNK = 16; //Размер ребра чанка в блоках.
+const unsigned int ID_GLASS = 11; //Стекло: "вырезанная" прозрачность (альфа-тест), рисуется как непрозрачный материал.
+const unsigned int ID_WATER = 12; //Вода: полупрозрачность со смешиванием, движок сортирует её треугольники.
+//Режим маленьких блоков (вложенные чанки). Изменено: раньше был временным тестом под #if NESTED_CHUNK_TEST,
+//теперь это постоянная часть программы - макрос и все #if/#endif убраны. Клавиша C включает режим, в котором левый щелчок по
+//обычному блоку не ломает его, а разбивает на NESTED_TEST_PARTITIONS^3 таких же маленьких блоков (вложенный чанк),
+//а правый щелчок ставит маленький блок и в пустое место (там создаётся вложенный чанк с одним маленьким блоком).
+//Маленькие блоки ломаются как обычные. Разбитые блоки не сохраняются: контроллер сохранения
+//пишет вместо вложенного чанка пустое место. Освещение (L) освещает и маленькие блоки разбитого блока, каждый - по
+//своему центру (изменено: раньше разбитый блок портился - MyController считал любой воксель блоком MyBlock).
+//Взрыв (B) при включённом режиме разбивает блоки на краю шара на маленькие: маленькие блоки внутри шара исчезают,
+//остальные остаются - край воронки получается неровным, "выгрызенным".
+const int NESTED_TEST_PARTITIONS = 4; //ТЕСТ: на сколько частей по каждой оси разбивается блок.
+
+//Уровни мешей чанка: у каждого уровня свой материал.
+//Для каждого блока чанков движок создаёт отдельную ноду на каждый уровень, поэтому
+//прозрачные блоки рисуются своими нодами со своим материалом, отдельно от непрозрачных.
+enum MESH_LEVELS
+{
+    LEVEL_SOLID = 0, //Обычные непрозрачные блоки.
+    LEVEL_CUTOUT = 1, //Стекло (EMT_TRANSPARENT_ALPHA_CHANNEL_REF).
+    LEVEL_BLEND = 2, //Вода (EMT_TRANSPARENT_ALPHA_CHANNEL).
+    NUMBER_OF_LEVELS = 3
+};
+
+//ID нод сцены для выбора лучом: луч "видит" только ноды с флагом IDFlag_IsPickable.
+enum IDS_NODES
+{
+    IDFlag_IsPickable = 1, //Сюда можно навести курсор (обычные блоки и стекло)
+    ID_IsNotPickable //Луч проходит насквозь (вода, огонёк-биллборд)
+};
+
+// ---------------------------------------------------------------------------------------------
+// 2. Шейдер освещения
+// ---------------------------------------------------------------------------------------------
+
+//Irrlicht вызывает OnSetConstants каждый раз перед отрисовкой мешбуфера с нашим шейдерным
+//материалом. Здесь мы передаём в шейдеры (shaders/light.vert, shaders/light.frag) параметры
+//"солнца". Освещение самого блока шейдер берёт из цвета вершин (его ставит фабрика мешей).
+class MyShaderCallBack : public video::IShaderConstantSetCallBack //Передаёт в шейдер освещения параметры "солнца"
 {
 public:
     MyShaderCallBack():
@@ -34,45 +113,46 @@ public:
     {
         s_StarLightColor = SColorf(1.f, 1.f, 1.f, 0.f);
     }
-	virtual void OnSetConstants(video::IMaterialRendererServices* services,
-			s32 userData)
-	{
-        services->setPixelShaderConstant("s_TextureLayerID", &s_TextureLayerID, 1);
-        services->setPixelShaderConstant("s_StarLightColor", reinterpret_cast<f32*>(&s_StarLightColor), 4);
-        services->setVertexShaderConstant("s_StarLightIntensity", reinterpret_cast<f32*>(&s_StarLightIntensity), 1);
-	}
-	f32 s_StarLightIntensity;
-	SColorf s_StarLightColor;
-	s32 s_TextureLayerID;
+    virtual void OnSetConstants(video::IMaterialRendererServices* services, s32 userData)
+    {
+        services->setPixelShaderConstant("s_TextureLayerID", &s_TextureLayerID, 1); //Номер текстурного слоя (сэмплер)
+        services->setPixelShaderConstant("s_StarLightColor", reinterpret_cast<f32*>(&s_StarLightColor), 4); //Цвет солнца
+        services->setVertexShaderConstant("s_StarLightIntensity", reinterpret_cast<f32*>(&s_StarLightIntensity), 1); //Сила солнца (0..1), меняется клавишами P и ;
+    }
+    f32 s_StarLightIntensity;
+    SColorf s_StarLightColor;
+    s32 s_TextureLayerID;
 };
 
+// ---------------------------------------------------------------------------------------------
+// 3. Свой тип блока
+// ---------------------------------------------------------------------------------------------
+
+//Информация, которую блок отдаёт для построения меша. Движок копирует её из блока
+//под блокировкой, а сам меш потом строится в другом потоке уже по этой копии,
+//не трогая мир. Поэтому сюда кладём всё, что понадобится фабрике мешей.
 struct MyVoxelInfo : VoxelInfo //Структура, в которой будем передавать информацию для рендеринга
 {
-    unsigned int s_Id;
-    SColor s_LightColor;
+    unsigned int s_Id; //Тип блока (номер текстуры)
+    SColor s_LightColor; //Освещение: alpha - сила солнечного света, RGB - цвет "лампы" (клавиша L)
 };
 
+//Наш блок. Хранит только тип и освещение. Всё остальное (положение, видимость граней)
+//хранит сам движок.
 class MyBlock : public SimpleVoxelObject //Опишем наш блок, не будем пользоваться встроенным типами вокселей
 {
     public:
-        MyBlock(unsigned int id):
-            SimpleVoxelObject(),
-            s_Id(id)
-        {
-            setTypeVoxel(CUSTOM_VOXEL); //Для всех своих типов блоков делаем тип вокселя CUSTOM_VOXEL
-            s_LightColor = SColor(255, 0, 0, 0);
-        }
-        MyBlock(unsigned int id, SColor lightcolor):
+        MyBlock(unsigned int id, SColor lightcolor = SColor(255, 0, 0, 0)):
             SimpleVoxelObject(),
             s_Id(id),
             s_LightColor(lightcolor)
         {
             setTypeVoxel(CUSTOM_VOXEL); //Для всех своих типов блоков делаем тип вокселя CUSTOM_VOXEL
         }
-        VoxelInfo* getVoxelForRenderingInfo() //Получение информации о вокселе
+        VoxelInfo* getVoxelForRenderingInfo() //Получение информации о вокселе. Должна вернуть НОВЫЙ объект - его удалит движок.
         {
             MyVoxelInfo* vxlnf = new MyVoxelInfo;
-            vxlnf->s_TypeVoxelInfo = CUSTOM_VOXEL_INFO;
+            vxlnf->s_TypeVoxelInfo = CUSTOM_VOXEL_INFO; //Говорим движку, что это наша собственная структура
             vxlnf->s_Id = s_Id;
             vxlnf->s_LightColor = s_LightColor;
             return vxlnf;
@@ -81,121 +161,89 @@ class MyBlock : public SimpleVoxelObject //Опишем наш блок, не будем пользоватьс
         {
             return s_Id;
         }
-        char getStarLight()
+        unsigned char getStarLight() //Сила солнечного света хранится в альфа-канале цвета освещения
         {
             return s_LightColor.getAlpha();
-        }
-        char getLightR()
-        {
-            return s_LightColor.getRed();
-        }
-        char getLightG()
-        {
-            return s_LightColor.getGreen();
-        }
-        char getLightB()
-        {
-            return s_LightColor.getBlue();
         }
     private:
         unsigned int s_Id;
         SColor s_LightColor;
 };
 
-class MySimpleVoxelObjectTransparentTester : public SimpleVoxelObjectTransparentTester
+// ---------------------------------------------------------------------------------------------
+// 4. Прозрачность граней
+// ---------------------------------------------------------------------------------------------
+
+//Движок рисует только те грани блока, которые чем-то не закрыты. Чтобы понять, закрыта ли
+//грань, он спрашивает у этого объекта: "прозрачен ли сосед svo для блока parent?".
+//Если сосед непрозрачен - грань между ними не рисуется. Без этого класса сквозь стекло и
+//воду не было бы видно граней блоков, стоящих за ними.
+class MySimpleVoxelObjectTransparentTester : public SimpleVoxelObjectTransparentTester //Определяет, видна ли грань соседа
 {
     public:
-        MySimpleVoxelObjectTransparentTester():
-            SimpleVoxelObjectTransparentTester()
-        {
-            //...
-        }
-        ~MySimpleVoxelObjectTransparentTester()
-        {
-            //...
-        }
         bool isTransparent(SimpleVoxelObject* svo, SimpleVoxelObject* parent)
         {
-            if(((MyBlock*)svo)->getId() == 11 && parent && ((MyBlock*)parent)->getId() != 11) return true;
-            else if(((MyBlock*)svo)->getId() == 11 && !parent) return true;
-            if(((MyBlock*)svo)->getId() == 12 && parent && ((MyBlock*)parent)->getId() != 12) return true;
-            else if(((MyBlock*)svo)->getId() == 12 && !parent) return true;
-            return false;
+            //Стекло и вода прозрачны для всех, кроме таких же блоков: грани между двумя
+            //одинаковыми прозрачными блоками не рисуются (иначе внутри толщи воды видна "сетка").
+            unsigned int id = ((MyBlock*)svo)->getId();
+            if(id != ID_GLASS && id != ID_WATER) return false;
+            return !parent || ((MyBlock*)parent)->getId() != id;
         }
 };
 
+// ---------------------------------------------------------------------------------------------
+// 5. Генератор мира
+// ---------------------------------------------------------------------------------------------
+
+//Вызывается движком (в потоке главной очереди) для каждого чанка, которого нет ни в памяти,
+//ни на диске. Заполняет чанк блоками. Возвращает true, если генерация прошла успешно.
 class MyWorldGenerator : public WorldGenerator //Создадим наш генератор мира
 {
     public:
-        MyWorldGenerator():
-            WorldGenerator()
-        {
-            //...
-        }
         bool generateChunk(ChunkVoxelObject* chunk, int sizechunk) //А вот и функция генерации
         {
-            Vector3d<int> vect = chunk->getVoxelAddress()->getVector(0);
-            SColor ttt = SColor(255, 0, 0, 0);
-            /*if(vect.getY() < 4) //Создаём мир, в котором первые 4 чанка в высоту заполнены, остальные пусты. Это отсылка к майнкрафту.
-            {
-                MyBlock* newsvo = 0;
-                for(int x = 0; x < sizechunk; x++)
-                    for(int y = 0; y < sizechunk; y++)
-                        for(int z = 0; z < sizechunk; z++)
-                        {
-                            if(vect.getY() == 3) ttt = SColor(y*16 + 15, 0, 0, 0);
-                            else ttt = SColor(15, 0, 0, 0);
-                            int idd;
-                            if( ( x % 2 == 0 && y % 2 == 0 && z % 2 == 0) || (x % 2 != 0 && y % 2 != 0 && z % 2 != 0) ) idd = 3;
-                            else idd = 5;
-                            //idd = rand() % 10 + 1;
-                            //if(rand()%100 != 0)
-                            {
-                                newsvo = new MyBlock(idd, ttt);
-                                if(newsvo) chunk->setSimpleVoxelObject(Vector3d<int>(x,y,z), newsvo, true, false);
-                            }
-                        }
-            }
-            return true;*/
-
-
+            Vector3d<int> vect = chunk->getVoxelAddress()->getVector(0); //Координаты чанка в мире (в чанках, не в блоках)
             if(vect.getY() < 4) //Создаём мир, в котором первые 4 чанка в высоту заполнены, остальные пусты. Это отсылка к майнкрафту.
             {
-                MyBlock* newsvo = 0;
                 for(int x = 0; x < sizechunk; x++)
                     for(int y = 0; y < sizechunk; y++)
                         for(int z = 0; z < sizechunk; z++)
                         {
-                            int id = 12;
-                            if(vect.getX() % 2 == 0 && vect.getY() % 2 == 0 && vect.getZ() % 2 == 0) id = 11;
-                            newsvo = 0;
-                            if(vect.getY() == 3) ttt = SColor(y*16 + 15, 0, 0, 0);
-                            else ttt = SColor(15, 0, 0, 0);
-                            //ttt = SColor(255, 255, 255, 255);
-                            if(abs(vect.getX()) <= 3 && abs(vect.getZ()) <= 3 && vect.getY() > 0)
-                            {
-                                if( vect.getY() == 3 && y < 10 ) newsvo = new MyBlock(id, ttt);
-                                else if( vect.getY() < 3 ) newsvo = new MyBlock(id, ttt);
-                            }
-                            else
-                            {
-                                int idd;
-                                if( ( x % 2 == 0 && y % 2 == 0 && z % 2 == 0) || (x % 2 != 0 && y % 2 != 0 && z % 2 != 0) ) idd = 3;
-                                else idd = 5;
-                                newsvo = new MyBlock(idd, ttt);
-                            }
-                            //if(vect.getY() == 3) ttt = SColor(y*16 + 15, 0, 0, 0);
-                            //else ttt = SColor(15, 0, 0, 0);
-                            //newsvo = new MyBlock(3, ttt);
-                            if(newsvo) chunk->setSimpleVoxelObject(Vector3d<int>(x,y,z), newsvo, true, false);
+                            SColor light = (vect.getY() == 3) ? SColor(y*16 + 15, 0, 0, 0) : SColor(15, 0, 0, 0); //Ближе ко дну темнее
+                            int id = ( ( x % 2 == 0 && y % 2 == 0 && z % 2 == 0) || (x % 2 != 0 && y % 2 != 0 && z % 2 != 0) ) ? 3 : 5; //Узор из двух текстур
+                            //rewrite = true - заменить, если там что-то было;
+                            //последний false - не помечать соседей для пересчёта видимости (чанк ещё
+                            //только создаётся, движок сам всё посчитает при построении)
+                            chunk->setSimpleVoxelObject(Vector3d<int>(x,y,z), new MyBlock(id, light), true, false);
                         }
             }
-            chunk->getWorld()->getEngine()->registerEvent(EVENT_TYPE_STANDARD, "Chunk generated.");
-            return true;
+            else if(vect.getY() == 4 && vect.getX() >= 0 && vect.getX() <= 1 && vect.getZ() == 0)
+            {
+                //Демонстрация прозрачности прямо на поверхности: два соседних (в разных чанках) бассейна воды,
+                //внутри каждого - столб стекла и столб камня. Сквозь воду должны быть видны и вода дальнего
+                //бассейна, и стекло, и камень, без "дыр" и мерцания.
+                for(int x = 2; x < sizechunk - 2; x++)
+                    for(int y = 0; y < 6; y++)
+                        for(int z = 2; z < sizechunk - 2; z++)
+                        {
+                            unsigned int id = ID_WATER;
+                            if(x >= 5 && x <= 6 && z >= 5 && z <= 6) id = ID_GLASS; //Столб стекла 2x2
+                            else if(x >= 9 && x <= 10 && z >= 9 && z <= 10) id = 1; //Столб камня 2x2
+                            chunk->setSimpleVoxelObject(Vector3d<int>(x,y,z), new MyBlock(id), true, false);
+                        }
+            }
+            return true; //Остальные чанки остаются пустыми (воздух)
         }
-    private:
-        //...
 };
+
+// ---------------------------------------------------------------------------------------------
+// 6. Задачи для потока движка
+// ---------------------------------------------------------------------------------------------
+
+//Большие изменения мира (сфера радиусом 70 - это сотни тысяч блоков) нельзя делать в главном
+//потоке: картинка встанет. Поэтому обработчик клавиш только упаковывает параметры в структуру
+//и отдаёт её движку (addTaskRunUserControllerForThread), а сама работа выполняется в
+//MyController::userThreadFunction в потоке движка. Структуру параметров движок удалит сам.
 
 enum TYPE_MY_TASK //Наши задачи для выполнения в другом потоке
 {
@@ -206,24 +254,46 @@ enum TYPE_MY_TASK //Наши задачи для выполнения в другом потоке
 
 struct MyParams : ParametersForThreadFunction //Наш родительский тип для передачи параметров в поток
 {
-    TYPE_MY_TASK s_Type;
+    TYPE_MY_TASK s_Type; //По этому полю обработчик понимает, к какому типу приводить параметры
 };
 
 struct CreateSphereParams : MyParams //Параметры для создания сферы в потоке
 {
     int s_IdWorld;
     int s_Radius;
-    int s_TypeVoxelSet;
+    int s_TypeVoxelSet; //Из какого блока делать сферу
 };
 
-struct BoomParams : MyParams //Параметры для взрыва в потоке
+struct BoomParams : MyParams //Параметры для взрыва и освещения в потоке
 {
-    World* s_World;
+    int s_IdWorld;
     int s_Radius;
-    triangle3df s_HitTriangle;
-    Vector3d<float> s_Vct;
-    Vector3d<float> s_Campos;
+    triangle3df s_HitTriangle; //Треугольник, на который смотрела камера в момент нажатия
+    Vector3d<float> s_Vct; //Направление взгляда камеры
+    Vector3d<float> s_Campos; //Позиция камеры
+    bool s_SmallBlocks = false; //Добавлено: включён ли режим маленьких блоков (C) - взрыв разбивает блоки на краю
 };
+
+static bool isInLoadedArea(int x, int y, int z) //Дабы не вылазить за границы не загруженной области
+{
+    //Загружены чанки от (-5,0,-5) до (5,15,5), то есть блоки от -5*16 до 6*16-1 по X и Z и от 0 до 16*16-1 по Y.
+    //Исправлено: по Y было y <= 16*SIZE_CHUNK - слой y = 256 лежит уже в незагруженном чанке (движок писал предупреждение).
+    return y >= 0 && y <= 16*SIZE_CHUNK - 1 && x <= 6*SIZE_CHUNK - 1 && x >= -5*SIZE_CHUNK && z <= 6*SIZE_CHUNK - 1 && z >= -5*SIZE_CHUNK;
+}
+
+//Добавлено: адрес блока первого уровня по его глобальным координатам: [0] - чанк, [1] - блок внутри чанка
+//(как в getHitVoxel(), только в обратную сторону). Деление - с округлением вниз: блок -1 лежит в чанке -1 на месте 15
+//(обычное деление в C++ округляет к нулю и дало бы чанк 0). Кому адрес отдан (setSimpleVoxelObject()), тот его и удалит.
+static VoxelAddress* createAddressOfBlock(IrrSimpleVoxelEngine* isve, Vector3d<int> block)
+{
+    const int g[3] = { block.getX(), block.getY(), block.getZ() };
+    int c[3];
+    for(int k = 0; k < 3; k++) c[k] = g[k] >= 0 ? g[k] / SIZE_CHUNK : -((-g[k] + SIZE_CHUNK - 1) / SIZE_CHUNK);
+    VoxelAddress* addr = new VoxelAddress(isve);
+    addr->addNextVector(Vector3d<int>(c[0], c[1], c[2]));
+    addr->addNextVector(Vector3d<int>(g[0] - c[0] * SIZE_CHUNK, g[1] - c[1] * SIZE_CHUNK, g[2] - c[2] * SIZE_CHUNK));
+    return addr;
+}
 
 class MyController : public UserControllerForThread //Контроллер для работы в другом потоке
 {
@@ -233,1220 +303,953 @@ class MyController : public UserControllerForThread //Контроллер для работы в др
         {
             //...
         }
-        ~MyController()
-        {
-            //...
-        }
-        void userThreadFunction(ParametersForThreadFunction* params) //Функция, которая и будет работать в другом поткое
+        void userThreadFunction(ParametersForThreadFunction* params) //Функция работает в потоке главной очереди движка.
+                                                                     //Пока она работает, мир меняет только она.
         {
             IrrSimpleVoxelEngine* isve = getIrrSimpleVoxelEngine();
-            //isve->getAccessToTheSimpleVoxelEngine();
             MyParams* myparameters = (MyParams*)params;
             if(myparameters->s_Type == CREATE_SPHERE)
             {
+                //Полая сфера с центром в (0, 2*rad, 0): ставим блок, если точка лежит в тонком слое
+                //у поверхности сферы, а всё внутри и снаружи в пределах куба очищаем.
                 CreateSphereParams* cspar = (CreateSphereParams*)myparameters;
                 int rad = cspar->s_Radius;
                 for(int x = -rad; x <= rad; x++)
-                    for(int y = -rad + rad*2; y <= rad + rad*2; y++)
+                    for(int y = rad; y <= rad*3; y++)
                         for(int z = -rad; z <= rad; z++)
                         {
-                            if(y >=0 && y <= 16*16 && x <= 6*16 - 1 && x >= -5*16 && z <= 6*16 - 1 && z >= -5*16 ) //Дабы не вылазить за границы не загруженной области
+                            if(!isInLoadedArea(x, y, z)) continue;
+                            int d = rad*rad - (x*x + (y - rad*2)*(y - rad*2) + z*z);
+                            if(d >= 0 && d <= rad*2) isve->setSimpleVoxelObjectByGlobalVector(cspar->s_IdWorld, Vector3d<int>(x, y, z), new MyBlock(cspar->s_TypeVoxelSet));
+                            else isve->setSimpleVoxelObjectByGlobalVector(cspar->s_IdWorld, Vector3d<int>(x, y, z), 0); //0 - удалить блок
+                        }
+                //Установка блоков только помечает чанки как изменённые. Перестраиваем их один раз,
+                //после всех изменений, а не после каждого блока.
+                isve->addTaskUpdateChunks();
+            }
+            else if(myparameters->s_Type == BOOM || myparameters->s_Type == CREATE_LIGHT)
+            {
+                BoomParams* bp = (BoomParams*)myparameters;
+                Vector3d<int> center;
+                if(!getHitVoxel(bp, center)) return; //Не нашли блок под курсором - ничего не делаем
+                int rad = bp->s_Radius;
+                //Добавлено: взрыв в режиме маленьких блоков (C) - край шара режется по маленьким блокам.
+                //При радиусе 0 - как обычно (удаляется один блок).
+                if(myparameters->s_Type == BOOM && bp->s_SmallBlocks && rad > 0)
+                {
+                    boomWithSmallBlocks(bp, center, rad);
+                    isve->addTaskUpdateChunks();
+                    return;
+                }
+                for(int x = center.getX() - rad; x <= center.getX() + rad; x++)
+                    for(int y = center.getY() - rad; y <= center.getY() + rad; y++)
+                        for(int z = center.getZ() - rad; z <= center.getZ() + rad; z++)
+                        {
+                            if(!isInLoadedArea(x, y, z)) continue;
+                            int dist2 = (x - center.getX())*(x - center.getX()) + (y - center.getY())*(y - center.getY()) + (z - center.getZ())*(z - center.getZ());
+                            if(dist2 > rad*rad) continue; //Берём только шар, а не весь куб
+                            if(myparameters->s_Type == BOOM)
                             {
-                                if(rad*rad - (x*x + (y - rad*2)*(y - rad*2) + z*z) >= 0 && rad*rad - (x*x + (y - rad*2)*(y - rad*2) + z*z) <= rad*2 )
-                                {
-                                    MyBlock* svo = new MyBlock(cspar->s_TypeVoxelSet);
-                                    isve->setSimpleVoxelObjectByGlobalVector(cspar->s_IdWorld, Vector3d<int>(x, y, z), svo);
-                                }
-                                else
-                                {
-                                    isve->setSimpleVoxelObjectByGlobalVector(cspar->s_IdWorld, Vector3d<int>(x, y, z), 0);
-                                }
+                                isve->setSimpleVoxelObjectByGlobalVector(bp->s_IdWorld, Vector3d<int>(x, y, z), 0); //Взрыв просто удаляет блоки
+                                continue;
                             }
+                            //Фиолетовый свет, чем дальше от центра, тем слабее.
+                            //Указатель на блок действителен, пока мы внутри userThreadFunction.
+                            SimpleVoxelObject* obj = isve->getSimpleVoxelObjectByGlobalVector(bp->s_IdWorld, Vector3d<int>(x, y, z), false);
+                            if(!obj) continue; //Пустое место освещать не нужно
+                            //Исправлено: в ячейке может быть не блок, а вложенный чанк - разбитый блок (режим
+                            //маленьких блоков, клавиша C). Раньше он приводился к MyBlock, getId() и getStarLight() читали
+                            //мусор, и маленькие блоки заменялись одним блоком случайного типа.
+                            //Изменено: маленькие блоки разбитого блока тоже освещаются, каждый - по своему центру.
+                            if(obj->getTypeVoxel() == CHUNK_VOXEL_OBJECT)
+                            {
+                                lightSmallBlocks(bp, Vector3d<int>(x, y, z), (ChunkVoxelObject*)obj, center, rad);
+                                continue;
+                            }
+                            if(obj->getTypeVoxel() != CUSTOM_VOXEL) continue; //Не наш блок - не трогаем
+                            MyBlock* svo = (MyBlock*)obj;
+                            //Изменено: цвет считает getLightColor() - одна формула для блоков и маленьких блоков.
+                            SColor lightcolor = getLightColor(svo->getStarLight(), sqrtf((float)dist2), rad); //Солнечный свет сохраняем
+                            //Блоки неизменяемые: чтобы поменять освещение, ставим на это место новый блок того же типа.
+                            isve->setSimpleVoxelObjectByGlobalVector(bp->s_IdWorld, Vector3d<int>(x, y, z), new MyBlock(svo->getId(), lightcolor));
                         }
                 isve->addTaskUpdateChunks();
             }
-            else if(myparameters->s_Type == BOOM)
-            {
-                BoomParams* bp = (BoomParams*)myparameters;
-                triangle3df hitTriangle = bp->s_HitTriangle;
-                World* s_World = bp->s_World;
-                Vector3d<float> vct = bp->s_Vct;
-                int radboom = bp->s_Radius;
-                Vector3d<float> a1(hitTriangle.pointA.X, hitTriangle.pointA.Y, hitTriangle.pointA.Z);
-                Vector3d<float> a2(hitTriangle.pointB.X, hitTriangle.pointB.Y, hitTriangle.pointB.Z);
-                Vector3d<float> a3(hitTriangle.pointC.X, hitTriangle.pointC.Y, hitTriangle.pointC.Z);
-                int mn = 1;
-                VoxelAddress* vxladdr = isve->getAddressSimpleVoxelObjectByThreePoints(s_World->getId(), a1, a2, a3, vct*mn, bp->s_Campos); //Получаем блок по трём точкам и вектору камеры
-                Vector3d<int> vectboom = vxladdr->getLastVector();
-                vxladdr->deleteLastVector();
-                vectboom = vectboom + vxladdr->getLastVector() * 16;
-                delete vxladdr;
-                for(int x = -radboom + vectboom.getX(); x <= radboom + vectboom.getX(); x++)
-                    for(int y = -radboom + vectboom.getY(); y <= radboom + vectboom.getY(); y++)
-                        for(int z = -radboom + vectboom.getZ(); z <= radboom + vectboom.getZ(); z++)
-                        {
-                            if(y >=0 && y <= 16*16 && x <= 6*16 - 1 && x >= -5*16 && z <= 6*16 - 1 && z >= -5*16 ) //Дабы не вылазить за границы не загруженной области
-                                if(radboom*radboom - ((x - vectboom.getX())*(x - vectboom.getX()) + (y - vectboom.getY())*(y - vectboom.getY()) + (z - vectboom.getZ())*(z - vectboom.getZ())) >= 0 )
-                                {
-                                    isve->setSimpleVoxelObjectByGlobalVector(s_World->getId(), Vector3d<int>(x, y, z), 0);
-                                }
-                        }
-                isve->addTaskUpdateChunks();
-            }
-            else if(myparameters->s_Type == CREATE_LIGHT)
-            {
-                BoomParams* bp = (BoomParams*)myparameters;
-                triangle3df hitTriangle = bp->s_HitTriangle;
-                World* s_World = bp->s_World;
-                Vector3d<float> vct = bp->s_Vct;
-                int radboom = bp->s_Radius;
-                Vector3d<float> a1(hitTriangle.pointA.X, hitTriangle.pointA.Y, hitTriangle.pointA.Z);
-                Vector3d<float> a2(hitTriangle.pointB.X, hitTriangle.pointB.Y, hitTriangle.pointB.Z);
-                Vector3d<float> a3(hitTriangle.pointC.X, hitTriangle.pointC.Y, hitTriangle.pointC.Z);
-                int mn = 1;
-                VoxelAddress* vxladdr = isve->getAddressSimpleVoxelObjectByThreePoints(s_World->getId(), a1, a2, a3, vct*mn, bp->s_Campos); //Получаем блок по трём точкам и вектору камеры
-                Vector3d<int> vectboom = vxladdr->getLastVector();
-                vxladdr->deleteLastVector();
-                vectboom = vectboom + vxladdr->getLastVector() * 16;
-                delete vxladdr;
-                int id;
-                int lightcolorR = 222;
-                int lightcolorG = 9;
-                int lightcolorB = 255;
-                for(int x = -radboom + vectboom.getX(); x <= radboom + vectboom.getX(); x++)
-                    for(int y = -radboom + vectboom.getY(); y <= radboom + vectboom.getY(); y++)
-                        for(int z = -radboom + vectboom.getZ(); z <= radboom + vectboom.getZ(); z++)
-                        {
-                            if(y >=0 && y <= 16*16 && x <= 6*16 - 1 && x >= -5*16 && z <= 6*16 - 1 && z >= -5*16 ) //Дабы не вылазить за границы не загруженной области
-                                if(radboom*radboom - ((x - vectboom.getX())*(x - vectboom.getX()) + (y - vectboom.getY())*(y - vectboom.getY()) + (z - vectboom.getZ())*(z - vectboom.getZ())) >= 0 )
-                                {
-                                    int starlight = 0;
-                                    MyBlock* svo = (MyBlock*)isve->getSimpleVoxelObjectByGlobalVector(s_World->getId(), Vector3d<int>(x, y, z), false);
-                                    char r = 0, g = 0, b = 0;
-                                    if(svo)
-                                    {
-                                        id = svo->getId();
-                                        starlight = svo->getStarLight();
-                                        //r = svo->getLightR();
-                                        //g = svo->getLightG();
-                                        //b = svo->getLightB();
-                                    }
-                                    else id = -1;
-                                    int aa = ((x - vectboom.getX())*(x - vectboom.getX()) + (y - vectboom.getY())*(y - vectboom.getY()) + (z - vectboom.getZ())*(z - vectboom.getZ()));
-                                    SColor lightcolor(starlight, r + (255 - sqrt(aa) * 255 / radboom) * lightcolorR / 255, g + (255 - sqrt(aa) * 255 / radboom) * lightcolorG / 255, b + (255 - sqrt(aa) * 255 / radboom) * lightcolorB / 255);
-                                    if(id != -1) isve->setSimpleVoxelObjectByGlobalVector(s_World->getId(), Vector3d<int>(x, y, z), new MyBlock(id, lightcolor));
-                                }
-                        }
-                isve->addTaskUpdateChunks();
-            }
-            //isve->freeAccessToTheSimpleVoxelEngine();
         }
     private:
-        //...
+        bool getHitVoxel(BoomParams* bp, Vector3d<int>& result) //Получаем глобальные координаты блока по треугольнику, в который смотрит камера
+        {
+            Vector3d<float> a1(bp->s_HitTriangle.pointA.X, bp->s_HitTriangle.pointA.Y, bp->s_HitTriangle.pointA.Z);
+            Vector3d<float> a2(bp->s_HitTriangle.pointB.X, bp->s_HitTriangle.pointB.Y, bp->s_HitTriangle.pointB.Z);
+            Vector3d<float> a3(bp->s_HitTriangle.pointC.X, bp->s_HitTriangle.pointC.Y, bp->s_HitTriangle.pointC.Z);
+            //Движок сам учитывает положение и поворот мира (rootnode) и находит блок, которому принадлежит треугольник.
+            VoxelAddress* vxladdr = getIrrSimpleVoxelEngine()->getAddressSimpleVoxelObjectByThreePoints(bp->s_IdWorld, a1, a2, a3, bp->s_Vct, bp->s_Campos);
+            if(!vxladdr) return false;
+            bool good = vxladdr->getLastVectInd() >= 2; //Адрес мог вернуться без вокселя (только чанк)
+            //Адрес: [0] - координаты чанка, [1] - координаты блока внутри чанка. Переводим в глобальные координаты блока.
+            if(good) result = vxladdr->getVector(1) + vxladdr->getVector(0) * SIZE_CHUNK;
+            delete vxladdr; //Адрес мы никуда не отдали, поэтому удаляем сами
+            return good;
+        }
+        //Добавлено: копия нашего блока (тот же тип и весь цвет освещения). Цвет отдаёт
+        //getVoxelForRenderingInfo() - это новый объект, удаляем его сами.
+        static MyBlock* copyMyBlock(SimpleVoxelObject* svo)
+        {
+            MyVoxelInfo* info = (MyVoxelInfo*)svo->getVoxelForRenderingInfo();
+            MyBlock* copy = new MyBlock(info->s_Id, info->s_LightColor);
+            delete info;
+            return copy;
+        }
+        //Добавлено: взрыв в режиме маленьких блоков. Каждая ячейка рядом с шаром рассматривается как
+        //n^3 маленьких блоков (обычный блок - как будто его разбили на NESTED_TEST_PARTITIONS^3, разбитый - по своим
+        //маленьким блокам): маленькие блоки, центр которых внутри шара, удаляются. Если удалены все - ячейка
+        //пустеет, если ни одного - не меняется, иначе на её место ставится вложенный чанк из оставшихся маленьких блоков.
+        //Берём на одну ячейку больше радиуса: у соседней с шаром ячейки маленькие блоки тоже могут оказаться внутри.
+        void boomWithSmallBlocks(BoomParams* bp, Vector3d<int> center, int rad)
+        {
+            IrrSimpleVoxelEngine* isve = getIrrSimpleVoxelEngine();
+            const int ext = rad + 1;
+            const float r2 = (float)(rad * rad);
+            for(int x = center.getX() - ext; x <= center.getX() + ext; x++)
+                for(int y = center.getY() - ext; y <= center.getY() + ext; y++)
+                    for(int z = center.getZ() - ext; z <= center.getZ() + ext; z++)
+                    {
+                        if(!isInLoadedArea(x, y, z)) continue;
+                        const int cx = x - center.getX(), cy = y - center.getY(), cz = z - center.getZ();
+                        if(cx*cx + cy*cy + cz*cz > ext*ext) continue; //Ячейка заведомо вне шара (её половина диагонали < 1)
+                        const Vector3d<int> cell(x, y, z);
+                        SimpleVoxelObject* obj = isve->getSimpleVoxelObjectByGlobalVector(bp->s_IdWorld, cell, false);
+                        if(!obj) continue;
+                        ChunkVoxelObject* old = 0;
+                        int n = NESTED_TEST_PARTITIONS;
+                        if(obj->getTypeVoxel() == CHUNK_VOXEL_OBJECT)
+                        {
+                            old = (ChunkVoxelObject*)obj;
+                            n = (int)old->getNumberOfPartitions();
+                        }
+                        else if(obj->getTypeVoxel() != CUSTOM_VOXEL) //Не наш блок - как при обычном взрыве
+                        {
+                            if(cx*cx + cy*cy + cz*cz <= rad*rad) isve->setSimpleVoxelObjectByGlobalVector(bp->s_IdWorld, cell, 0);
+                            continue;
+                        }
+                        //Первый проход: сколько маленьких блоков остаётся и сколько уничтожает взрыв.
+                        int kept = 0, removed = 0;
+                        for(int pass = 0; pass < 2; pass++)
+                        {
+                            ChunkVoxelObject* nested = 0;
+                            if(pass == 1)
+                            {
+                                if(removed == 0) break; //Взрыв ячейку не задел
+                                if(kept == 0) //Уничтожено всё - ячейка пустеет
+                                {
+                                    isve->setSimpleVoxelObjectByGlobalVector(bp->s_IdWorld, cell, 0);
+                                    break;
+                                }
+                                nested = new ChunkVoxelObject();
+                                nested->setNumberOfPartitions(n);
+                            }
+                            for(int i = 0; i < n; i++)
+                                for(int j = 0; j < n; j++)
+                                    for(int k = 0; k < n; k++)
+                                    {
+                                        SimpleVoxelObject* src = old ? old->getSimpleVoxelObject(Vector3d<int>(i, j, k)) : obj;
+                                        if(!src || src->getTypeVoxel() != CUSTOM_VOXEL) continue; //Пустая маленькая ячейка
+                                        //Центр маленького блока (блок первого уровня занимает [-0.5, 0.5) вокруг целых координат).
+                                        const float dx = cx - 0.5f + (i + 0.5f) / n;
+                                        const float dy = cy - 0.5f + (j + 0.5f) / n;
+                                        const float dz = cz - 0.5f + (k + 0.5f) / n;
+                                        const bool inside = dx*dx + dy*dy + dz*dz <= r2;
+                                        if(pass == 0) { if(inside) removed++; else kept++; }
+                                        else if(!inside) nested->setSimpleVoxelObject(Vector3d<int>(i, j, k), copyMyBlock(src), true, false);
+                                    }
+                            //Старый блок (или старый вложенный чанк) движок удалит сам при замене.
+                            if(nested) isve->setSimpleVoxelObjectByGlobalVector(bp->s_IdWorld, cell, nested);
+                        }
+                    }
+        }
+        //Добавлено: цвет освещения блока на расстоянии dist от центра света радиуса rad - фиолетовый,
+        //чем дальше, тем слабее; солнечный свет (альфа) - как был. При радиусе 0 центр светится в полную силу
+        //(раньше деление на 0 давало NaN, а перевод NaN в целое не определён).
+        static SColor getLightColor(unsigned char starlight, float dist, int rad)
+        {
+            float power = rad > 0 ? 1.f - dist / rad : 1.f;
+            if(power < 0.f) power = 0.f; //Сюда приходят только блоки внутри шара света - это на всякий случай
+            return SColor(starlight, (u32)(power * 222), (u32)(power * 9), (u32)(power * 255));
+        }
+        //Добавлено: освещение маленьких блоков разбитого блока (вложенного чанка nested) в ячейке cell
+        //(глобальные координаты блока первого уровня). Сила света - по центру каждого маленького блока, маленькие блоки
+        //за границей шара света не меняются. Как и у обычных блоков, на место каждого ставится новый блок с новым светом
+        //(старый движок удалит сам). Адрес - из трёх векторов: чанк, блок в чанке, маленький блок во вложенном чанке.
+        void lightSmallBlocks(BoomParams* bp, Vector3d<int> cell, ChunkVoxelObject* nested, Vector3d<int> center, int rad)
+        {
+            IrrSimpleVoxelEngine* isve = getIrrSimpleVoxelEngine();
+            const int n = (int)nested->getNumberOfPartitions();
+            for(int i = 0; i < n; i++)
+                for(int j = 0; j < n; j++)
+                    for(int k = 0; k < n; k++)
+                    {
+                        SimpleVoxelObject* obj = nested->getSimpleVoxelObject(Vector3d<int>(i, j, k));
+                        if(!obj || obj->getTypeVoxel() != CUSTOM_VOXEL) continue; //Пустая маленькая ячейка
+                        //Блок первого уровня занимает [-0.5, 0.5) вокруг своих целых координат, маленький блок i - его i-я часть из n.
+                        const float dx = cell.getX() - 0.5f + (i + 0.5f) / n - center.getX();
+                        const float dy = cell.getY() - 0.5f + (j + 0.5f) / n - center.getY();
+                        const float dz = cell.getZ() - 0.5f + (k + 0.5f) / n - center.getZ();
+                        const float dist = sqrtf(dx*dx + dy*dy + dz*dz);
+                        if(rad > 0 && dist > rad) continue; //Этот маленький блок - за границей шара света
+                        MyBlock* svo = (MyBlock*)obj;
+                        VoxelAddress* addr = createAddressOfBlock(isve, cell);
+                        addr->addNextVector(Vector3d<int>(i, j, k));
+                        //Адрес и новый блок забирает движок; true - заменить старый маленький блок.
+                        isve->setSimpleVoxelObject(bp->s_IdWorld, addr, new MyBlock(svo->getId(), getLightColor(svo->getStarLight(), dist, rad)), true);
+                    }
+        }
 };
 
+// ---------------------------------------------------------------------------------------------
+// 7. Фабрика мешей
+// ---------------------------------------------------------------------------------------------
+
+//Движок не знает, как выглядят наши блоки. Для каждого видимого блока он вызывает
+//getMeshVoxel() (какой меш нарисовать) и getMeshNumber() (на какой уровень/материал его
+//положить), а потом склеивает меши всех блоков чанка в один большой меш.
+//Ещё фабрика получает onUpdateChunkMeshSceneNode() - уведомление о том, что нода блока
+//чанков создана или удалена. Мы используем его, чтобы держать селекторы столкновений
+//в актуальном состоянии.
 class MyFactoryChunkMeshSceneNode : public FactoryChunkMeshSceneNode //Описываем фабрику для того, чтобы самому по вокселю "говорить" движку, что рисовать
 {
     public:
-        MyFactoryChunkMeshSceneNode(): //Важно! Функция получения вокселя работает в другом потоке, поэтому загрузку
-                                        //всех данных производим в конструкторе.
-            FactoryChunkMeshSceneNode()
+        MyFactoryChunkMeshSceneNode(IrrlichtDevice* device, IrrSimpleVoxelEngine* eng): //Важно! Функция получения вокселя работает в другом потоке,
+                                                                                       //поэтому загрузку всех данных производим в конструкторе.
+            FactoryChunkMeshSceneNode(device, eng),
+            s_MTS(0)
         {
-            s_TempMesh = getIrrlichtDevice()->getSceneManager()->getMesh("models/plane3.obj")->getMesh(0);
-            TCoordsPlane = new vector2d<f32>[s_TempMesh->getMeshBuffer(0)->getVertexCount()];
-            S3DVertex* ver = (S3DVertex*)s_TempMesh->getMeshBuffer(0)->getVertices();
-            for(unsigned int i = 0; i < s_TempMesh->getMeshBuffer(0)->getVertexCount(); i++) TCoordsPlane[i] = ver[i].TCoords;
+            ISceneManager* smgr = getIrrlichtDevice()->getSceneManager();
             s_Driver = getIrrlichtDevice()->getVideoDriver();
-            s_MeshManipulator = getIrrlichtDevice()->getSceneManager()->getMeshManipulator();
-            s_Textures = new ITexture*[13];
-            s_Textures[0] = s_Driver->getTexture("media/1.jpg");
-            s_Textures[1] = s_Driver->getTexture("media/2.jpg");
-            s_Textures[2] = s_Driver->getTexture("media/3.jpg");
-            s_Textures[3] = s_Driver->getTexture("media/4.jpg");
-            s_Textures[4] = s_Driver->getTexture("media/5.jpg");
-            s_Textures[5] = s_Driver->getTexture("media/6.jpg");
-            s_Textures[6] = s_Driver->getTexture("media/7.jpg");
-            s_Textures[7] = s_Driver->getTexture("media/8.jpg");
-            s_Textures[8] = s_Driver->getTexture("media/9.jpg");
-            s_Textures[9] = s_Driver->getTexture("media/10.jpg");
-            s_Textures[10] = s_Driver->getTexture("media/11.bmp");
-            s_Textures[11] = s_Driver->getTexture("media/12.png");
-            s_Textures[12] = s_Driver->getTexture("media/13.png");
-            /*s_NormalMap = new ITexture*[13];
-            s_NormalMap[0] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[1] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[2] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[3] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[4] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[5] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[6] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[7] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[8] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[9] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[10] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[11] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[12] = s_Driver->getTexture("media/7_height.bmp");
-            for(int i = 0; i < 13; i++) if (s_NormalMap[i]) s_Driver->makeNormalMapTexture(s_NormalMap[i], 9.0f);*/
+            s_MeshManipulator = smgr->getMeshManipulator();
+            //Квадрат-грань, из которого getMeshCubeFaces() собирает куб (только видимые грани).
+            //Изменено: грань создаёт враппер (createFaceMesh() - такой же квадрат, как был models/plane3.obj),
+            //файлы models/plane*.obj больше не нужны. Меши теперь наши - удаляем их в деструкторе.
+            s_PlaneMesh = createFaceMesh();
+            //Шесть отдельных граней - для блока 0, у которого на каждой грани своя текстура.
+            for(int i = 0; i < 6; i++) s_PlaneMeshes[i] = createFaceMesh();
+            //Текстуры блоков: номер блока = номер текстуры (по модулю 13).
+            //11.bmp - стекло (ID_GLASS), 12.png - вода (ID_WATER), у них есть альфа-канал.
+            const char* textures[13] = { "media/1.jpg", "media/2.jpg", "media/3.jpg", "media/4.jpg", "media/5.jpg", "media/6.jpg", "media/7.jpg",
+                                         "media/8.jpg", "media/9.jpg", "media/10.jpg", "media/11.bmp", "media/12.png", "media/13.png" };
+            for(int i = 0; i < 13; i++) s_Textures[i] = s_Driver->getTexture(textures[i]);
         }
-        MyFactoryChunkMeshSceneNode(IrrlichtDevice* device, IrrSimpleVoxelEngine* eng):
-            FactoryChunkMeshSceneNode(device, eng)
+        ~MyFactoryChunkMeshSceneNode() //Добавлено: грани создали мы (createFaceMesh()) - мы их и удаляем
         {
-            s_TempMesh = getIrrlichtDevice()->getSceneManager()->getMesh("models/plane3.obj")->getMesh(0);
-            TCoordsPlane = new vector2d<f32>[s_TempMesh->getMeshBuffer(0)->getVertexCount()];
-            S3DVertex* ver = (S3DVertex*)s_TempMesh->getMeshBuffer(0)->getVertices();
-            for(unsigned int i = 0; i < s_TempMesh->getMeshBuffer(0)->getVertexCount(); i++) TCoordsPlane[i] = ver[i].TCoords;
-            s_TempMeshs = new IMesh*[6];
-            for(int i = 0; i < 6; i++) s_TempMeshs[i] = getIrrlichtDevice()->getSceneManager()->getMesh(("models/plane" + WorkFunctions::ConvertFunctions::itos(i) + ".obj").c_str())->getMesh(0);
-            s_Driver = getIrrlichtDevice()->getVideoDriver();
-            s_MeshManipulator = getIrrlichtDevice()->getSceneManager()->getMeshManipulator();
-            s_Textures = new ITexture*[13];
-            s_Textures[0] = s_Driver->getTexture("media/1.jpg");
-            s_Textures[1] = s_Driver->getTexture("media/2.jpg");
-            s_Textures[2] = s_Driver->getTexture("media/3.jpg");
-            s_Textures[3] = s_Driver->getTexture("media/4.jpg");
-            s_Textures[4] = s_Driver->getTexture("media/5.jpg");
-            s_Textures[5] = s_Driver->getTexture("media/6.jpg");
-            s_Textures[6] = s_Driver->getTexture("media/7.jpg");
-            s_Textures[7] = s_Driver->getTexture("media/8.jpg");
-            s_Textures[8] = s_Driver->getTexture("media/9.jpg");
-            s_Textures[9] = s_Driver->getTexture("media/10.jpg");
-            s_Textures[10] = s_Driver->getTexture("media/11.bmp");
-            s_Textures[11] = s_Driver->getTexture("media/12.png");
-            s_Textures[12] = s_Driver->getTexture("media/13.png");
-            /*s_NormalMap = new ITexture*[13];
-            s_NormalMap[0] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[1] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[2] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[3] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[4] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[5] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[6] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[7] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[8] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[9] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[10] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[11] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[12] = s_Driver->getTexture("media/7_height.bmp");
-            for(int i = 0; i < 13; i++) if (s_NormalMap[i]) s_Driver->makeNormalMapTexture(s_NormalMap[i], 9.0f);*/
+            s_PlaneMesh->drop();
+            for(int i = 0; i < 6; i++) s_PlaneMeshes[i]->drop();
+            //Добавлено: мета-селектор создали мы (createMetaTriangleSelector()) - мы его и отпускаем. Фабрику удаляет
+            //delete isve уже после того, как убрал ноды чанков (onUpdateChunkMeshSceneNode(0, ...) сняли их селекторы),
+            //а аниматор столкновений камеры держит на мета-селектор свою ссылку.
+            if(s_MTS) s_MTS->drop();
         }
-        MyFactoryChunkMeshSceneNode(IrrlichtDevice* device):
-            FactoryChunkMeshSceneNode(device)
-        {
-            s_TempMesh = getIrrlichtDevice()->getSceneManager()->getMesh("models/plane3.obj")->getMesh(0);
-            TCoordsPlane = new vector2d<f32>[s_TempMesh->getMeshBuffer(0)->getVertexCount()];
-            S3DVertex* ver = (S3DVertex*)s_TempMesh->getMeshBuffer(0)->getVertices();
-            for(unsigned int i = 0; i < s_TempMesh->getMeshBuffer(0)->getVertexCount(); i++) TCoordsPlane[i] = ver[i].TCoords;
-            s_Driver = getIrrlichtDevice()->getVideoDriver();
-            s_MeshManipulator = getIrrlichtDevice()->getSceneManager()->getMeshManipulator();
-            s_Textures = new ITexture*[13];
-            s_Textures[0] = s_Driver->getTexture("media/1.jpg");
-            s_Textures[1] = s_Driver->getTexture("media/2.jpg");
-            s_Textures[2] = s_Driver->getTexture("media/3.jpg");
-            s_Textures[3] = s_Driver->getTexture("media/4.jpg");
-            s_Textures[4] = s_Driver->getTexture("media/5.jpg");
-            s_Textures[5] = s_Driver->getTexture("media/6.jpg");
-            s_Textures[6] = s_Driver->getTexture("media/7.jpg");
-            s_Textures[7] = s_Driver->getTexture("media/8.jpg");
-            s_Textures[8] = s_Driver->getTexture("media/9.jpg");
-            s_Textures[9] = s_Driver->getTexture("media/10.jpg");
-            s_Textures[10] = s_Driver->getTexture("media/11.bmp");
-            s_Textures[11] = s_Driver->getTexture("media/12.png");
-            s_Textures[12] = s_Driver->getTexture("media/13.png");
-            /*s_NormalMap = new ITexture*[13];
-            s_NormalMap[0] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[1] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[2] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[3] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[4] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[5] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[6] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[7] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[8] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[9] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[10] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[11] = s_Driver->getTexture("media/7_height.bmp");
-            s_NormalMap[12] = s_Driver->getTexture("media/7_height.bmp");
-            for(int i = 0; i < 13; i++) if (s_NormalMap[i]) s_Driver->makeNormalMapTexture(s_NormalMap[i], 9.0f);*/
-        }
-        ~MyFactoryChunkMeshSceneNode()
-        {
-            if(s_TempMeshs) delete[] s_TempMeshs;
-            if(s_Textures) delete[] s_Textures;
-        }
-        ICameraSceneNode* camFPS;
-        IMetaTriangleSelector* s_MTS;
+        IMetaTriangleSelector* s_MTS; //Все селекторы чанков для столкновений камеры и выбора блоков
     private:
-        IMesh* getMeshVoxel(VoxelForRendering* vxl) //А вот и наша функция реакции на воксель
+        IMesh* getMeshVoxel(VoxelForRendering* vxl) //А вот и наша функция реакции на воксель. Работает в потоке построения!
         {
-            int txt = 1;
-            VoxelInfo* t = vxl->getVoxelInfo(); //Получаем информацию для рендеринга
-            if(t->s_TypeVoxelInfo == CUSTOM_VOXEL_INFO)
+            MyVoxelInfo* info = (MyVoxelInfo*)vxl->getVoxelInfo(); //Получаем информацию для рендеринга
+            IMesh* mesh = 0;
+            if(info->s_Id == 0) //Блок с разными текстурами на каждой грани
             {
-                txt = ((MyVoxelInfo*)t)->s_Id + 1; //Узнаём ID
+                for(int i = 0; i < 6; i++) s_PlaneMeshes[i]->getMeshBuffer(0)->getMaterial().setTexture(0, s_Textures[i]);
+                mesh = getMeshCubeFaces(vxl, s_PlaneMeshes, vector3df(1,1,1)); //Получаем меш куба по видимым граням
             }
-            /*S3DVertex* ver = (S3DVertex*)s_TempMesh->getMeshBuffer(0)->getVertices();
-            if(txt == 13)
+            else
             {
-                if(txt == 1)
+                s_PlaneMesh->getMeshBuffer(0)->getMaterial().setTexture(0, s_Textures[info->s_Id % 13]); //Текстурного атласа нет, поэтому каждая текстура
+                                                                                                        //даёт свой мешбуффер, а значит больше лагов.
+                mesh = getMeshCubeFaces(vxl, s_PlaneMesh, vector3df(1,1,1)); //Меш - это копия, поэтому смену текстуры выше он "запомнил"
+            }
+            if(mesh) s_MeshManipulator->setVertexColors(mesh, info->s_LightColor); //Цвет вершины - освещение для шейдера
+            if(mesh && vxl->getScale().getX() < 0.999f) fitTexCoordsToWholeBlock(mesh, vxl); //ТЕСТ: маленький блок из разбитого
+            return mesh; //Отдаём наш меш генератору нод (он сам сделает ему drop())
+        }
+        //ТЕСТ: текстурные координаты маленького блока - с того же места грани целого блока.
+        //Разбитый блок выглядит так же, как целый, а выломанная ямка - как будто вгрызаемся в сам блок.
+        //Ориентация текстуры на каждой грани задана моделью плоскости, поэтому для каждого треугольника
+        //находится, как его текстурные координаты зависят от положения на грани (линейно), и та же
+        //зависимость применяется в масштабе целого блока (размер 1, центр - ближайший целый узел: центры блоков
+        //первого уровня в чанке лежат в целых координатах). Работает в потоке построения мешей.
+        //mesh - меш маленького блока из getMeshCubeFaces() (меняются его текстурные координаты),
+        //vxl - воксель для рендеринга (позиция и размер маленького блока).
+        void fitTexCoordsToWholeBlock(IMesh* mesh, VoxelForRendering* vxl)
+        {
+            const float size = vxl->getScale().getX(); //Размер маленького блока (целый - 1)
+            const float center[3] = { vxl->getPosition().getX(), vxl->getPosition().getY(), vxl->getPosition().getZ() };
+            float offset[3]; //Центр маленького блока относительно центра целого
+            for(int k = 0; k < 3; k++) offset[k] = center[k] - floorf(center[k] + 0.5f);
+            for(u32 b = 0; b < mesh->getMeshBufferCount(); b++)
+            {
+                IMeshBuffer* mb = mesh->getMeshBuffer(b);
+                if(mb->getIndexType() != EIT_16BIT) continue;
+                const u16* indices = mb->getIndices();
+                const u32 vcount = mb->getVertexCount();
+                std::vector<vector2df> oldtc(vcount);
+                std::vector<bool> done(vcount, false);
+                for(u32 i = 0; i < vcount; i++) oldtc[i] = mb->getTCoords(i);
+                for(u32 t = 0; t + 2 < mb->getIndexCount(); t += 3)
                 {
-                    for(unsigned int i = 0; i < s_TempMesh->getMeshBuffer(0)->getVertexCount(); i++)
+                    const u16 id[3] = { indices[t], indices[t + 1], indices[t + 2] };
+                    float p[3][3]; //Позиции вершин относительно центра маленького блока
+                    for(int j = 0; j < 3; j++) { const vector3df& v = mb->getPosition(id[j]); p[j][0] = v.X; p[j][1] = v.Y; p[j][2] = v.Z; }
+                    int axis = -1; //Ось нормали грани: по ней у всех вершин одна координата
+                    for(int k = 0; k < 3 && axis < 0; k++) if(fabsf(p[1][k] - p[0][k]) < 1e-5f && fabsf(p[2][k] - p[0][k]) < 1e-5f) axis = k;
+                    if(axis < 0) continue;
+                    const int t1 = (axis + 1) % 3, t2 = (axis + 2) % 3;
+                    //tc = A * (позиция на грани) + c; A находим по двум сторонам треугольника.
+                    const float d1x = p[1][t1] - p[0][t1], d1y = p[1][t2] - p[0][t2];
+                    const float d2x = p[2][t1] - p[0][t1], d2y = p[2][t2] - p[0][t2];
+                    const float det = d1x * d2y - d1y * d2x;
+                    if(fabsf(det) < 1e-12f) continue;
+                    const vector2df e1 = oldtc[id[1]] - oldtc[id[0]], e2 = oldtc[id[2]] - oldtc[id[0]];
+                    const vector2df a1 = (e1 * d2y - e2 * d1y) / det; //Столбец A при оси t1
+                    const vector2df a2 = (e2 * d1x - e1 * d2x) / det; //Столбец A при оси t2
+                    const vector2df c = oldtc[id[0]] - a1 * p[0][t1] - a2 * p[0][t2];
+                    for(int j = 0; j < 3; j++)
                     {
-                        if(ver[i].TCoords.Y != 0) ver[i].TCoords.Y = TCoordsPlane[i].Y * 0.3125f;
+                        if(done[id[j]]) continue;
+                        //Тот же шаблон грани, растянутый до целого блока: A уменьшается в size раз.
+                        mb->getTCoords(id[j]) = a1 * (size * (p[j][t1] + offset[t1])) + a2 * (size * (p[j][t2] + offset[t2])) + c;
+                        done[id[j]] = true;
                     }
                 }
+                mb->setDirty(EBT_VERTEX);
             }
-            else for(unsigned int i = 0; i < s_TempMesh->getMeshBuffer(0)->getVertexCount(); i++) ver[i].TCoords = TCoordsPlane[i];*/
-            s_TempMesh->getMeshBuffer(0)->getMaterial().setTexture(0, s_Textures[txt - 1]); //Мне было лень делать текстурный атлас, поэтому пока так,
-                                                                                            //но данная вещь даёт на каждую текстуру свой мешбуффер,
-                                                                                            //а значит больше лагов.
-            if(((MyVoxelInfo*)t)->s_Id == 0) for(int i = 0; i < 6; i++) s_TempMeshs[i]->getMeshBuffer(0)->getMaterial().setTexture(0, s_Textures[i]);
-            if(((MyVoxelInfo*)t)->s_Id == 0) s_TempMeshRes = getMeshCubeFaces(vxl, s_TempMeshs, vector3df(1,1,1)); //Получаем меш куба по видимым граням
-            else s_TempMeshRes = getMeshCubeFaces(vxl, s_TempMesh, vector3df(1,1,1));
-            s_MeshManipulator->setVertexColors(s_TempMeshRes, ((MyVoxelInfo*)t)->s_LightColor);
-            s_TempMeshRes->getMeshBuffer(0)->getMaterial().MaterialTypeParam = pack_textureBlendFunc(EBF_SRC_ALPHA, EBF_DST_ALPHA, EMFN_MODULATE_4X);
-            //if(((MyVoxelInfo*)t)->s_Id == 12) s_TempMeshRes->getMeshBuffer(0)->getMaterial().ColorMask = ECP_RGB;
-            return s_TempMeshRes; //Отдаём наш меш генератору нод
         }
-        int getMeshNumber(SimpleVoxelEngine::Core::VoxelForRendering* vxl)
+        int getMeshNumber(VoxelForRendering* vxl) //В какой уровень (материал) попадёт воксель
         {
-            int txt = 1;
-            VoxelInfo* t = vxl->getVoxelInfo();
-            if(t->s_TypeVoxelInfo == CUSTOM_VOXEL_INFO)
-            {
-                txt = ((MyVoxelInfo*)t)->s_Id + 1;
-            }
-            if(txt == 12) return 1;
-            if(txt == 13) return 2;
-            return 0;
+            unsigned int id = ((MyVoxelInfo*)vxl->getVoxelInfo())->s_Id;
+            if(id == ID_GLASS) return LEVEL_CUTOUT;
+            if(id == ID_WATER) return LEVEL_BLEND;
+            return LEVEL_SOLID;
         }
+        //Вызывается в главном потоке (внутри isve->update()), когда нода блока чанков создана
+        //заново (meshscenenode != 0) или исчезла (meshscenenode == 0). Старая нода к этому
+        //моменту уже удалена, поэтому её селектор нужно убрать из общего мета-селектора,
+        //а для новой ноды создать новый. Вызывается и при delete isve - по каждой
+        //ноде, с meshscenenode == 0: так селекторы убираются из мета-селектора и при выходе.
         void onUpdateChunkMeshSceneNode(IMeshSceneNode* meshscenenode, int numbermesh, Vector3d<int> vect)
         {
-            if(numbermesh == 2) return;
-            if(s_TA[numbermesh][vect])
+            if(numbermesh == LEVEL_BLEND) return; //Сквозь воду можно ходить
+            std::map<Vector3d<int>, ITriangleSelector*>::iterator iter = s_Selectors[numbermesh].find(vect);
+            if(iter != s_Selectors[numbermesh].end()) //Старая нода уже удалена - убираем её селектор
             {
-                s_MTS->removeTriangleSelector(s_TA[numbermesh][vect]);
-                s_TA[numbermesh][vect]->drop();
-                s_TA[numbermesh].erase(vect);
+                s_MTS->removeTriangleSelector(iter->second);
+                iter->second->drop(); //Наша ссылка из createOctreeTriangleSelector
+                s_Selectors[numbermesh].erase(iter);
             }
-            /*if(s_Anims[numbermesh][vect])
-            {
-                camFPS->removeAnimator(s_Anims[numbermesh][vect]);
-                s_Anims[numbermesh].erase(vect);
-            }*/
-            if(!meshscenenode) return;
-            //ITriangleSelector* selector = getIrrlichtDevice()->getSceneManager()->createTriangleSelector(meshscenenode->getMesh(), meshscenenode);
-            ITriangleSelector* selector = getIrrlichtDevice()->getSceneManager()->createOctTreeTriangleSelector(meshscenenode->getMesh(), meshscenenode);
+            if(!meshscenenode) return; //Ноды больше нет - новый селектор не нужен
+            //Октодерево быстрее простого селектора при проверке луча и столкновениях с большим мешем.
+            ITriangleSelector* selector = getIrrlichtDevice()->getSceneManager()->createOctreeTriangleSelector(meshscenenode->getMesh(), meshscenenode);
             if(!selector) return;
-            meshscenenode->setTriangleSelector(selector);
-            s_MTS->addTriangleSelector(selector);
-            s_TA[numbermesh][vect] = selector;
-            /*ISceneNodeAnimator* anim = getIrrlichtDevice()->getSceneManager()->createCollisionResponseAnimator(
-                selector, camFPS, core::vector3df(0.4,0.9,0.4),
-                core::vector3df(0,-0.01,0), core::vector3df(0,0.5,0));
-            camFPS->addAnimator(anim);
-            s_Anims[numbermesh][vect] = anim;
-            selector->drop();*/
+            meshscenenode->setTriangleSelector(selector); //Нужно для выбора блока лучом (getSceneNodeAndCollisionPointFromRay)
+            s_MTS->addTriangleSelector(selector); //Нужно для столкновений камеры с миром
+            s_Selectors[numbermesh][vect] = selector; //Запоминаем, чтобы потом удалить
         }
         IVideoDriver* s_Driver;
-        IMesh** s_TempMeshs;
-        IMesh* s_TempMesh;
-        IMesh* s_TempMeshRes;
-        ITexture** s_Textures;
-        ITexture** s_NormalMap;
         IMeshManipulator* s_MeshManipulator;
-        vector2d<f32>* TCoordsPlane;
-        std::map<Vector3d<int>, ISceneNodeAnimator*> s_Anims[3];
-        std::map<Vector3d<int>, ITriangleSelector*> s_TA[3];
+        IMesh* s_PlaneMesh;
+        IMesh* s_PlaneMeshes[6];
+        ITexture* s_Textures[13];
+        std::map<Vector3d<int>, ITriangleSelector*> s_Selectors[NUMBER_OF_LEVELS]; //Селектор каждой ноды: [уровень][координаты блока чанков]
 };
 
-class MyReceiver : public IEventReceiver //Наш обработчик событий
-{
-public:
-        virtual bool OnEvent(const SEvent& event)
-        {
-                if (event.EventType == irr::EET_KEY_INPUT_EVENT)
-                        KeyIsDown[event.KeyInput.Key] = event.KeyInput.PressedDown;
-                if (event.EventType == irr::EET_KEY_INPUT_EVENT)
-                {
-                    if(!(*s_Ghost) && event.KeyInput.Key == KEY_KEY_M && !event.KeyInput.PressedDown) //Включаем и выключаем гравитацию
-                    {
-                        if(*s_Gravity == false) *s_Gravity = true;
-                        else *s_Gravity = false;
-                        isUpdate = true;
-                    }
-                    if(event.KeyInput.Key == KEY_KEY_N && !event.KeyInput.PressedDown) //Включаем и выключаем прохождение сквозь стены
-                    {
-                        if(*s_Ghost == false)
-                        {
-                            *s_Ghost = true;
-                            //*s_Gravity = false;
-                        }
-                        else *s_Ghost = false;
-                        isUpdate = true;
-                    }
-                    if(event.KeyInput.Key == KEY_KEY_W && !event.KeyInput.PressedDown) //Просто изменение блока вокселей в чанке (0,5,0)
-                    {
-                        VoxelAddress vxladdrtemp(isve);
-                        vxladdrtemp.addNextVector(Vector3d<int>(0,5,0));
-                        for(int i = 0; i < 8; i++)
-                            for(int j = 0; j < 8; j++)
-                                for(int k = 0; k < 8; k++)
-                                {
-                                    VoxelAddress* nva = new VoxelAddress(vxladdrtemp);
-                                    nva->addNextVector(Vector3d<int>(i,j,k));
-                                    int r = rand()%16 - 5;
-                                    if(r < 0) isve->deleteSimpleVoxelObject(s_World->getId(), nva);
-                                    else
-                                    {
-                                        MyBlock* newsvo = new MyBlock(r);
-                                        if(!newsvo) cout<<"Error creating SVO!"<<endl;
-                                        isve->setSimpleVoxelObject(s_World->getId(), nva, newsvo, true);
-                                    }
-                                }
-                        isve->addTaskUpdateChunks();
-                        isUpdate = true;
-                    }
-                    if(event.KeyInput.Key == KEY_KEY_E && !event.KeyInput.PressedDown) //Создаём плоскость для творчества из чанка (0,5,0)
-                    {
-                        VoxelAddress vxladdrtemp(isve);
-                        vxladdrtemp.addNextVector(Vector3d<int>(0,5,0));
-                        for(int i = 0; i < 16; i++)
-                            for(int j = 5; j < 16; j++)
-                                for(int k = 0; k < 16; k++)
-                                {
-                                    VoxelAddress* nva = new VoxelAddress(vxladdrtemp);
-                                    nva->addNextVector(Vector3d<int>(i,j,k));
-                                    isve->deleteSimpleVoxelObject(s_World->getId(), nva);
-                                }
-                        isve->addTaskUpdateChunks();
-                        isUpdate = true;
-                    }
-                    if(event.KeyInput.Key == KEY_KEY_T && !event.KeyInput.PressedDown) //Создаём максимально лагучий чанк (0,5,0)
-                    {
-                        VoxelAddress vxladdrtemp(isve);
-                        vxladdrtemp.addNextVector(Vector3d<int>(0,5,0));
-                        for(int i = 0; i < 16; i++)
-                            for(int j = 0; j < 16; j++)
-                                for(int k = 0; k < 16; k++)
-                                {
-                                    VoxelAddress* nva = new VoxelAddress(vxladdrtemp);
-                                    nva->addNextVector(Vector3d<int>(i,j,k));
-                                    if( (i % 2 == 0 && j % 2 != 0 && k % 2 == 0) ||
-                                       (i % 2 == 0 && j % 2 == 0 && k % 2 != 0) ||
-                                       (i % 2 != 0 && j % 2 != 0 && k % 2 != 0) ||
-                                       (i % 2 != 0 && j % 2 == 0 && k % 2 == 0) ) isve->deleteSimpleVoxelObject(s_World->getId(), nva);
-                                    else
-                                    {
-                                        MyBlock* newsvo = new MyBlock(rand()%11);
-                                        if(!newsvo) cout<<"Error creating SVO!"<<endl;
-                                        isve->setSimpleVoxelObject(s_World->getId(), nva, newsvo, true);
-                                    }
-                                }
-                        isve->addTaskUpdateChunks();
-                        isUpdate = true;
-                    }
-                    if(event.KeyInput.Key == KEY_KEY_R && !event.KeyInput.PressedDown) //Регенерация чанка (0,5,0) (очень плохо сделана, костыль)
-                    {
-                        isve->deleteChunkForRendering(s_World->getId(), Vector3d<int>(0,5,0), true);
-                        isve->addChunkForRendering(s_World->getId(), Vector3d<int>(0,5,0), true);
-                        isve->getFactoryChunkMeshSceneNode()->setChunkForUpdate(s_World->getId(), Vector3d<int>(2,0,0));
-                        isve->getFactoryChunkMeshSceneNode()->setChunkForUpdate(s_World->getId(), Vector3d<int>(0,0,0)) ;
-                        isve->getFactoryChunkMeshSceneNode()->setChunkForUpdate(s_World->getId(), Vector3d<int>(1,1,0));
-                        isve->getFactoryChunkMeshSceneNode()->setChunkForUpdate(s_World->getId(), Vector3d<int>(1,-1,0));
-                        isve->getFactoryChunkMeshSceneNode()->setChunkForUpdate(s_World->getId(), Vector3d<int>(1,0,1));
-                        isve->getFactoryChunkMeshSceneNode()->setChunkForUpdate(s_World->getId(), Vector3d<int>(1,0,-1));
-                        isve->addTaskUpdateChunks();
-                        isUpdate = true;
-                    }
-                    if(event.KeyInput.Key == KEY_KEY_S && !event.KeyInput.PressedDown) //Создание огромной полой сферы рвдиуса rad из
-                                                                                        //заданного блока (с помощью цифровых клавиш),
-                                                                                        //причём отдаёт это задание в другой поток
-                    {
-                        CreateSphereParams* csp = new CreateSphereParams;
-                        csp->s_Type = CREATE_SPHERE;
-                        csp->s_IdWorld = s_World->getId();
-                        csp->s_Radius = rad;
-                        csp->s_TypeVoxelSet = s_TypeVoxelSet;
-                        isve->addTaskRunUserControllerForThread(csp);
-                    }
-                    if(event.KeyInput.Key == KEY_KEY_L && !event.KeyInput.PressedDown)
-                    {
-                        BoomParams* bp = new BoomParams;
-                        bp->s_Type = CREATE_LIGHT;
-                        bp->s_HitTriangle = hitTriangle;
-                        bp->s_Radius = radboom;
-                        bp->s_Vct = vct;
-                        bp->s_World = s_World;
-                        bp->s_Campos = campos;
-                        isve->addTaskRunUserControllerForThread(bp);
-                    }
-                    if(event.KeyInput.Key == KEY_KEY_B && !event.KeyInput.PressedDown) //Взрываем! И опять в другом потоке, дабы графический поток не подвисал
-                    {
-                        BoomParams* bp = new BoomParams;
-                        bp->s_Type = BOOM;
-                        bp->s_HitTriangle = hitTriangle;
-                        bp->s_Radius = radboom;
-                        bp->s_Vct = vct;
-                        bp->s_World = s_World;
-                        bp->s_Campos = campos;
-                        isve->addTaskRunUserControllerForThread(bp);
-                    }
-                    if(event.KeyInput.Key == KEY_KEY_Z && !event.KeyInput.PressedDown)
-                    {
-                        isve->deleteChunksForRendering(s_World->getId(), Vector3d<int>(-5,0,-5), Vector3d<int>(5, 15, 5), true, false);
-                    }
-                }
-                if (event.EventType == irr::EET_MOUSE_INPUT_EVENT) //Реакция на щелчок мыши
-                {
-                    bool left = false, right = false;
-                    if(event.MouseInput.Event == EMIE_LMOUSE_PRESSED_DOWN) left = true; //Удаление блока
-                    if(event.MouseInput.Event == EMIE_RMOUSE_PRESSED_DOWN) right = true; //Установка блока
-                    float mn = 1;
-                    if(left || right)
-                    {
-                        if(right) mn = (-1);
-                        Vector3d<float> a1(hitTriangle.pointA.X, hitTriangle.pointA.Y, hitTriangle.pointA.Z);
-                        Vector3d<float> a2(hitTriangle.pointB.X, hitTriangle.pointB.Y, hitTriangle.pointB.Z);
-                        Vector3d<float> a3(hitTriangle.pointC.X, hitTriangle.pointC.Y, hitTriangle.pointC.Z);
-                        isve->getAccessToTheSimpleVoxelEngine();
-                        VoxelAddress* vxladdr = isve->getAddressSimpleVoxelObjectByThreePoints(s_World->getId(), a1, a2, a3, vct*mn, campos); //Получаем блок по трём точкам и вектору камеры
-                        isve->freeAccessToTheSimpleVoxelEngine();
-                        if(left) isve->deleteSimpleVoxelObject(s_World->getId(), vxladdr);
-                        else
-                        {
-                            MyBlock* newsvo = new MyBlock(s_TypeVoxelSet);
-                            isve->setSimpleVoxelObject(s_World->getId(), vxladdr, newsvo, true);
-                        }
-                        isve->addTaskUpdateChunks();
-                        isUpdate = true;
-                    }
-                }
-                return false;
-        }
+// ---------------------------------------------------------------------------------------------
+// 8. Сохранение и загрузка чанков
+// ---------------------------------------------------------------------------------------------
 
-        virtual bool IsKeyDown(EKEY_CODE keyCode) const
-        {
-                return KeyIsDown[keyCode];
-        }
-
-        MyReceiver(World* wrld, IrrSimpleVoxelEngine* i, bool* gr, bool* gh):
-            isUpdate(false),
-            s_TypeVoxelSet(0),
-            s_World(wrld),
-            isve(i),
-            s_Gravity(gr),
-            s_Ghost(gh)
-        {
-                for (u32 i=0; i<KEY_KEY_CODES_COUNT; ++i)
-                        KeyIsDown[i] = false;
-        }
-        Vector3d<float> campos;
-        triangle3df hitTriangle; //Треугольник щелчка по блоку
-        Vector3d<float> vct; //Вектор камеры
-        bool isUpdate; //Надо ли обновлять чанк
-        int s_TypeVoxelSet; //Какие блоки ставим
-        int rad; // Радиус сферы
-        int radboom; // Радиус взрыва
-
-private:
-        World* s_World;
-        IrrSimpleVoxelEngine* isve;
-        bool* s_Gravity; //Указатель на контроллер гравитации
-        bool* s_Ghost; //Указатель на контроллер прохождения сквозь стены
-        bool KeyIsDown[KEY_KEY_CODES_COUNT];
-};
-//...
-class MyChunksSaveLoadController : public ChunksSaveLoadController
-{
-   public:
-       MyChunksSaveLoadController(IrrSimpleVoxelEngine* eng): // Конструктор, для работы с логгером передадим в него указатель на движок.
-           ChunksSaveLoadController(),
-           s_Engine(eng) // Переменная движка в нашем классе.
-           {
-               //...
-           }
-           bool saveChunk(ChunkVoxelObject* cvo, Vector3d<int> vect)
-           {
-               unsigned int nonnsvo = cvo->getNumberOfNotNullSimpleVoxelObjects();
-                std::string folder = s_Folders[cvo->getWorld()->getId()] + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + "chunks"; // Получили папку мира. В её подпапке "chunks" и будем хранить файлы чанков
-                std::string filename = folder + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + "chunk_" + vect.toString(STRING_CONSTANTS::DEFAULT_VECTOR_COORDINATES_SPLITTER); // А вот и название файла, где будем хранить чанк. Пусть это будет chunk_%v, где %v есть вектор чанка.
-                ofstream filechunk(filename.c_str()); // Открыли файл для записи.
-                if(!filechunk) // Если не смогли, то...
-                {
-                    WorkFunctions::FileFunctions::createFolders(folder, STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER); // Создадим все папки.
-                    filechunk.open(filename.c_str(), ios::out|ios::app|ios::binary); // Откроем ещё раз.
-                    if(!filechunk) // Если неудача, то выходим из функции сохранения.
-                    {
-                        s_Engine->registerEvent(EVENT_TYPE_ERROR, "Chunk voxel not saved. Error open file for write. File: " + filename);
-                        return false;
-                    }
-                }
-                filechunk << nonnsvo << " ";
-                if(nonnsvo != 0)
-                {
-                    SimpleVoxelObject** svos = cvo->getSimpleVoxelObjects(); // Получили массив указателей на SimpleVoxelObjects.
-                    bool* svocachevisible = cvo->getCacheVisibleSimpleVoxelObjects();
-                    bool** svocachevisiblefaces = cvo->getCacheVisibleSimpleVoxelObjectsRenderFaces();
-                    int numbofpart = cvo->getNumberOfPartitions(); // Получили размер ребра чанка.
-                    for(int i = 0; i < numbofpart * numbofpart * numbofpart; i++) // А вот и наш цикл.
-                    {
-                        if(svos[i] && svos[i]->getTypeVoxel() == CUSTOM_VOXEL)
-                        {
-                            filechunk << ((MyBlock*)svos[i])->getId() << " " << svocachevisible[i] << " ";
-                            if(svocachevisible[i])
-                                for(int j = 0; j < 6; j++) filechunk << svocachevisiblefaces[i][j] << " ";
-                        }
-                        else filechunk << -1 << " "; // Если нет, то запишем -1, но, по идее, все объекты должны быть "наши", т.е. иметь тип CUSTOM_VOXEL.
-                    }
-                }
-                s_Engine->registerEvent(EVENT_TYPE_STANDARD, "Chunk voxel saved. File: " + filename); // Отправим стандартное сообщение о сохранении чанка.
-                filechunk.close();
-                return true;
-            }
-            bool loadChunk(SimpleVoxelEngine::Voxels::ChunkVoxelObject* cvo, SimpleVoxelEngine::Additional::Vector3d<int> vect)
-            {
-                unsigned int nonnsvo = 0;
-               std::string folder = s_Folders[cvo->getWorld()->getId()] + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + "chunks"; // Получили папку мира. В её подпапке "chunks" и будем хранить файлы чанков
-               std::string filename = folder + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + "chunk_" + vect.toString(STRING_CONSTANTS::DEFAULT_VECTOR_COORDINATES_SPLITTER); // А вот и название файла, где будем хранить чанк. Пусть это будет chunk_%v, где %v есть вектор чанка.
-               ifstream filechunk(filename.c_str()); // Открыли файл для чтения.
-               if(!filechunk) // Проверили, открылся ли файл.
-               {
-                   s_Engine->registerEvent(EVENT_TYPE_ERROR, "Chunk voxel not loaded. Error open file for read. File: " + filename);
-                   return false;
-               }
-               int numbofpart = cvo->getNumberOfPartitions(); // Получили размер ребра чанка.
-               int id = 0; // Сюда будем читать ID.
-               MyBlock* block; // Переменная для хранения указателя на наш воксель.
-               int t = 0;
-               filechunk >> nonnsvo;
-               if(nonnsvo != 0)
-               {
-                   SimpleVoxelObject** svos = cvo->getSimpleVoxelObjects(); // Получили массив указателей на SimpleVoxelObjects.
-                   bool* svocachevisible = cvo->getReCalculateVisibleCacheSimpleVoxelObjects(); // Получим ещё и кэш видимости, чтобы потом устроить полный пересчёт.
-                   bool* svocachevisiblenow = cvo->getCacheVisibleSimpleVoxelObjects();
-                   bool** svocachevisiblefaces = cvo->getCacheVisibleSimpleVoxelObjectsRenderFaces();
-                   cvo->setNumberOfNotNullSimpleVoxelObjects(nonnsvo);
-                   for(int i = 0; i < numbofpart * numbofpart * numbofpart; i++) // А вот и наш цикл.
-                   {
-                       filechunk >> id;
-                       if(id != -1)
-                       {
-                           filechunk >> t;
-                           block = new MyBlock(id);
-                           if(!block)
-                           {
-                               s_Engine->registerEvent(EVENT_TYPE_ERROR, "Chunk voxel not loaded. Error creating Block. Folder: " + folder);
-                               return false;
-                           }
-                           svos[i] = block;
-                           svocachevisible[i] = false; // А вот и указываем, что надо пересчитать видимость.
-                           if(t == 0)
-                           {
-                               svocachevisiblenow[i] = false;
-                           }
-                           else
-                           {
-                               svocachevisiblenow[i] = true;
-                               if(!svocachevisiblefaces[i]) svocachevisiblefaces[i] = new bool[6];
-                               for(int j = 0; j < 6; j++) filechunk >> svocachevisiblefaces[i][j];
-                           }
-                       }
-                   }
-               }
-               s_Engine->registerEvent(EVENT_TYPE_STANDARD, "Chunk voxel loaded. File: " + filename); // Отправим стандартное сообщение о загрузке чанка.
-               filechunk.close();
-               return true;
-            }
-            bool canLoad(World* wrld, Vector3d<int> vect)
-            {
-               std::string folder = s_Folders[wrld->getId()] + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + "chunks"; // Получили папку мира. В её подпапке "chunks" хранятся файлы чанков
-               std::string filename = folder + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + "chunk_" + vect.toString(STRING_CONSTANTS::DEFAULT_VECTOR_COORDINATES_SPLITTER); // А вот и название файла, где хранится чанк. Это будет chunk_%v, где %v есть вектор чанка.
-               //while(!WorkFunctions::FileFunctions::fileExists(filename));
-               if(WorkFunctions::FileFunctions::fileExists(filename)) return true; // Если файл существует, то можем загрузить.
-               return false; // Иначе не можем.
-            }
-            void setFolder(int id, std::string folder)
-            {
-                s_Folders[id] = folder;
-            }
-    private:
-       IrrSimpleVoxelEngine* s_Engine;
-       std::map< int, std::string > s_Folders;
-};
-/*class MyChunksSaveLoadController : public ChunksSaveLoadController
-{
-   public:
-       MyChunksSaveLoadController(IrrSimpleVoxelEngine* eng): // Конструктор, для работы с логгером передадим в него указатель на движок.
-           ChunksSaveLoadController(),
-           s_Engine(eng) // Переменная движка в нашем классе.
-           {
-               //...
-           }
-           bool saveChunk(ChunkVoxelObject* cvo, Vector3d<int> vect)
-           {
-               return true;
-                SimpleVoxelObject** svos = cvo->getSimpleVoxelObjects(); // Получили массив указателей на SimpleVoxelObjects.
-                std::string folder = cvo->getWorld()->getNameFolder() + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + "chunks"; // Получили папку мира. В её подпапке "chunks" и будем хранить файлы чанков
-                std::string filename = folder + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + "chunk_" + vect.toString(STRING_CONSTANTS::DEFAULT_VECTOR_COORDINATES_SPLITTER); // А вот и название файла, где будем хранить чанк. Пусть это будет chunk_%v, где %v есть вектор чанка.
-                ofstream filechunk(filename.c_str()); // Открыли файл для записи.
-                if(!filechunk) // Если не смогли, то...
-                {
-                    WorkFunctions::FileFunctions::createFolders(folder, STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER); // Создадим все папки.
-                    filechunk.open(filename.c_str(), ios::out|ios::app|ios::binary); // Откроем ещё раз.
-                    if(!filechunk) // Если неудача, то выходим из функции сохранения.
-                    {
-                        s_Engine->registerEvent(EVENT_TYPE_ERROR, "Chunk voxel not saved. Error open file for write. File: " + filename);
-                        return false;
-                    }
-                }
-                int numbofpart = cvo->getNumberOfPartitions(); // Получили размер ребра чанка.
-                for(int i = 0; i < numbofpart * numbofpart * numbofpart; i++) // А вот и наш цикл.
-                {
-                    if(svos[i] && svos[i]->getTypeVoxel() == CUSTOM_VOXEL) filechunk << ((MyBlock*)svos[i])->getId() << " "; // Если объект есть и наш, то запишем его ID.
-                    else filechunk << -1 << " "; // Если нет, то запишем -1, но, по идее, все объекты должны быть "наши", т.е. иметь тип CUSTOM_VOXEL.
-                }
-                s_Engine->registerEvent(EVENT_TYPE_STANDARD, "Chunk voxel saved. File: " + filename); // Отправим стандартное сообщение о сохранении чанка.
-                filechunk.close();
-                return true;
-            }
-            bool loadChunk(SimpleVoxelEngine::Voxels::ChunkVoxelObject* cvo, SimpleVoxelEngine::Additional::Vector3d<int> vect)
-            {
-                return true;
-               SimpleVoxelObject** svos = cvo->getSimpleVoxelObjects(); // Получили массив указателей на SimpleVoxelObjects.
-               bool* svocachevisible = cvo->getReCalculateVisibleCacheSimpleVoxelObjects(); // Получим ещё и кэш видимости, чтобы потом устроить полный пересчёт.
-               std::string folder = cvo->getWorld()->getNameFolder() + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + "chunks"; // Получили папку мира. В её подпапке "chunks" и будем хранить файлы чанков
-               std::string filename = folder + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + "chunk_" + vect.toString(STRING_CONSTANTS::DEFAULT_VECTOR_COORDINATES_SPLITTER); // А вот и название файла, где будем хранить чанк. Пусть это будет chunk_%v, где %v есть вектор чанка.
-               ifstream filechunk(filename.c_str()); // Открыли файл для чтения.
-               if(!filechunk) // Проверили, открылся ли файл.
-               {
-                   s_Engine->registerEvent(EVENT_TYPE_ERROR, "Chunk voxel not loaded. Error open file for read. File: " + filename);
-                   return false;
-               }
-               int numbofpart = cvo->getNumberOfPartitions(); // Получили размер ребра чанка.
-               int id = 0; // Сюда будем читать ID.
-               MyBlock* block; // Переменная для хранения указателя на наш воксель.
-               for(int i = 0; i < numbofpart * numbofpart * numbofpart; i++) // А вот и наш цикл.
-               {
-                   filechunk >> id;
-                   if(id != -1)
-                   {
-                       block = new MyBlock(id);
-                       if(!block)
-                       {
-                           s_Engine->registerEvent(EVENT_TYPE_ERROR, "Chunk voxel not loaded. Error creating Block. Folder: " + folder);
-                           return false;
-                       }
-                       svos[i] = block;
-                       svocachevisible[i] = true; // А вот и указываем, что надо пересчитать видимость.
-                   }
-               }
-               s_Engine->registerEvent(EVENT_TYPE_STANDARD, "Chunk voxel loaded. File: " + filename); // Отправим стандартное сообщение о загрузке чанка.
-               filechunk.close();
-               return true;
-            }
-            bool canLoad(World* wrld, Vector3d<int> vect)
-            {
-               std::string folder = wrld->getNameFolder() + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + "chunks"; // Получили папку мира. В её подпапке "chunks" хранятся файлы чанков
-               std::string filename = folder + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + "chunk_" + vect.toString(STRING_CONSTANTS::DEFAULT_VECTOR_COORDINATES_SPLITTER); // А вот и название файла, где хранится чанк. Это будет chunk_%v, где %v есть вектор чанка.
-               //while(!WorkFunctions::FileFunctions::fileExists(filename));
-               if(WorkFunctions::FileFunctions::fileExists(filename)) return true; // Если файл существует, то можем загрузить.
-               return false; // Иначе не можем.
-            }
-    private:
-       IrrSimpleVoxelEngine* s_Engine;
-};*/
-//...
-/*class MyChunksSaveLoadController : public ChunksSaveLoadController
+//Движок сам решает, когда чанк надо сохранить (при выгрузке, saveAllChunks()) или загрузить
+//(при добавлении чанка, если canLoad() вернула true). Формат файла - простой текст:
+//число непустых блоков, затем для каждой ячейки чанка либо -1 (пусто), либо
+//"id видимость [6 флагов видимости граней]". Освещение не сохраняется.
+class MyChunksSaveLoadController : public ChunksSaveLoadController //Сохранение и загрузка чанков в текстовые файлы
 {
     public:
-        MyChunksSaveLoadController(IrrSimpleVoxelEngine* eng):
+        MyChunksSaveLoadController(IrrSimpleVoxelEngine* eng): // Конструктор, для работы с логгером передадим в него указатель на движок.
             ChunksSaveLoadController(),
             s_Engine(eng)
         {
             //...
         }
-        ~MyChunksSaveLoadController()
-        {
-            //...
-        }
         bool saveChunk(ChunkVoxelObject* cvo, Vector3d<int> vect)
         {
-            return true;
-            SimpleVoxelObject** svos = cvo->getSimpleVoxelObjects();
-            std::string folder = getFolderChunk(vect);
-            std::string filename = folder + "/SVO.chunk";
-            fstream filechunk(filename.c_str(), ios::out|ios::app|ios::binary);
-            if(!filechunk)
+            unsigned int nonnsvo = cvo->getNumberOfNotNullSimpleVoxelObjects();
+            std::string folder = s_Folders[cvo->getWorld()->getId()] + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + "chunks"; // В подпапке "chunks" папки мира храним файлы чанков
+            std::string filename = getFileName(cvo->getWorld()->getId(), vect);
+            ofstream filechunk(filename.c_str()); // Открыли файл для записи.
+            if(!filechunk) // Если не смогли, то создадим все папки и откроем ещё раз.
             {
                 WorkFunctions::FileFunctions::createFolders(folder, STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER);
-                filechunk.open(filename.c_str(), ios::out|ios::app|ios::binary);
+                filechunk.open(filename.c_str(), ios::out|ios::trunc);
                 if(!filechunk)
                 {
-                    s_Engine->registerEvent(EVENT_TYPE_ERROR, "Chunk voxel not saved. Error open file for write. Folder: " + folder);
+                    s_Engine->registerEvent(EVENT_TYPE_ERROR, "Chunk voxel not saved. Error open file for write. File: " + filename);
                     return false;
                 }
             }
-            int numbofpart = cvo->getNumberOfPartitions();
-            for(int i = 0; i < numbofpart * numbofpart * numbofpart; i++)
+            filechunk << nonnsvo << " ";
+            if(nonnsvo != 0) // Пустой чанк - только ноль, без ячеек
             {
-                if(svos[i]) filechunk << ((MyBlock*)svos[i])->getId();
+                SimpleVoxelObject** svos = cvo->getSimpleVoxelObjects(); // Получили массив указателей на SimpleVoxelObjects.
+                bool* svocachevisible = cvo->getCacheVisibleSimpleVoxelObjects(); // Виден ли блок вообще
+                bool** svocachevisiblefaces = cvo->getCacheVisibleSimpleVoxelObjectsRenderFaces(); // Какие грани видны (6 флагов или NULL)
+                int numbofpart = cvo->getNumberOfPartitions(); // Получили размер ребра чанка.
+                for(int i = 0; i < numbofpart * numbofpart * numbofpart; i++)
+                {
+                    if(svos[i] && svos[i]->getTypeVoxel() == CUSTOM_VOXEL)
+                    {
+                        bool visible = svocachevisible[i] && svocachevisiblefaces[i];
+                        filechunk << ((MyBlock*)svos[i])->getId() << " " << visible << " ";
+                        if(visible) for(int j = 0; j < 6; j++) filechunk << svocachevisiblefaces[i][j] << " ";
+                    }
+                    else filechunk << -1 << " "; // Пустое место
+                }
             }
-            filechunk.close();
-            s_Engine->registerEvent(EVENT_TYPE_STANDARD, "Chunk voxel saved. Folder: " + folder);
+            s_Engine->registerEvent(EVENT_TYPE_STANDARD, "Chunk voxel saved. File: " + filename);
             return true;
         }
         bool loadChunk(ChunkVoxelObject* cvo, Vector3d<int> vect)
         {
-            return false;
+            std::string filename = getFileName(cvo->getWorld()->getId(), vect);
+            ifstream filechunk(filename.c_str()); // Открыли файл для чтения.
+            if(!filechunk)
+            {
+                s_Engine->registerEvent(EVENT_TYPE_ERROR, "Chunk voxel not loaded. Error open file for read. File: " + filename);
+                return false;
+            }
+            unsigned int nonnsvo = 0;
+            filechunk >> nonnsvo;
+            if(nonnsvo != 0)
+            {
+                int numbofpart = cvo->getNumberOfPartitions(); // Получили размер ребра чанка.
+                SimpleVoxelObject** svos = cvo->getSimpleVoxelObjects(); // Получили массив указателей на SimpleVoxelObjects.
+                bool* svorecalculate = cvo->getReCalculateVisibleCacheSimpleVoxelObjects(); // Флаги "пересчитать видимость блока"
+                bool* svocachevisible = cvo->getCacheVisibleSimpleVoxelObjects();
+                bool** svocachevisiblefaces = cvo->getCacheVisibleSimpleVoxelObjectsRenderFaces();
+                cvo->setNumberOfNotNullSimpleVoxelObjects(nonnsvo); // Мы пишем в массив напрямую, поэтому счётчик ставим сами
+                int id = 0, visible = 0;
+                for(int i = 0; i < numbofpart * numbofpart * numbofpart; i++)
+                {
+                    filechunk >> id;
+                    if(id == -1) continue;
+                    filechunk >> visible;
+                    svos[i] = new MyBlock(id); // Чанк при загрузке пустой, поэтому просто кладём блок (освещение по умолчанию)
+                    //Видимость всё равно пересчитываем: если чанк был сохранён до того, как его меш хоть раз
+                    //построили (например, программу закрыли сразу после запуска), в файле записан пустой кэш,
+                    //и без пересчёта такой чанк навсегда остался бы невидимым.
+                    svorecalculate[i] = true;
+                    svocachevisible[i] = (visible != 0);
+                    if(visible)
+                    {
+                        if(!svocachevisiblefaces[i]) svocachevisiblefaces[i] = new bool[6];
+                        for(int j = 0; j < 6; j++) filechunk >> svocachevisiblefaces[i][j];
+                    }
+                }
+            }
+            s_Engine->registerEvent(EVENT_TYPE_STANDARD, "Chunk voxel loaded. File: " + filename);
+            return true;
+        }
+        bool canLoad(World* wrld, Vector3d<int> vect)
+        {
+            return WorkFunctions::FileFunctions::fileExists(getFileName(wrld->getId(), vect)); // Если файл существует, то можем загрузить.
+                                                                                                // Иначе движок вызовет генератор мира.
+        }
+        void setFolder(int id, std::string folder) // Папка для мира с идентификатором id
+        {
+            s_Folders[id] = folder;
         }
     private:
-        Engine* s_Engine;
-};*/
-
-enum IDS_NODES
-{
-    IDFlag_IsPickable = 1,
-    ID_IsNotPickable
+        std::string getFileName(int worldid, Vector3d<int> vect) // Файл чанка: <папка мира>/chunks/chunk_<вектор>
+        {
+            return s_Folders[worldid] + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + "chunks" + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + "chunk_" + vect.toString(STRING_CONSTANTS::DEFAULT_VECTOR_COORDINATES_SPLITTER);
+        }
+        IrrSimpleVoxelEngine* s_Engine;
+        std::map< int, std::string > s_Folders;
 };
+
+// ---------------------------------------------------------------------------------------------
+// 9. Обработчик событий
+// ---------------------------------------------------------------------------------------------
+
+//Получает от Irrlicht нажатия клавиш, щелчки мыши и сообщения лога. Работает в главном потоке.
+//Мелкие действия (один блок) отдаёт движку напрямую - функции движка потокобезопасны и сами
+//ставят задание в очередь. Крупные (сфера, взрыв, свет) - через MyController.
+//Флаги, которые нужно обработать в главном цикле (например, пересоздать аниматор камеры),
+//просто выставляются здесь, а выполняются в main().
+class MyReceiver : public IEventReceiver //Наш обработчик событий
+{
+    public:
+        MyReceiver(int worldid, IrrSimpleVoxelEngine* i):
+            isUpdate(false),
+            s_TypeVoxelSet(0),
+            rad(20),
+            radboom(5),
+            gravity(false),
+            ghost(false),
+            hasTarget(false),
+            s_WorldId(worldid),
+            isve(i)
+        {
+            for (u32 i=0; i<KEY_KEY_CODES_COUNT; ++i) KeyIsDown[i] = false;
+        }
+        virtual bool OnEvent(const SEvent& event)
+        {
+            //Irrlicht сначала отдаёт каждое сообщение своего лога обработчику событий и печатает
+            //его в консоль, только если обработчик вернул false. На каждую новую ноду чанка
+            //Irrlicht пишет "Needed Xms to create OctreeTriangleSelector.(...)" - тысячи строк,
+            //вывод в консоль Windows медленный и тормозит загрузку. Глушим только эти строки,
+            //остальные сообщения (ошибки загрузки текстур и т.п.) печатаются как обычно.
+            if (event.EventType == irr::EET_LOG_TEXT_EVENT)
+            {
+                const char* text = event.LogEvent.Text;
+                return text && strncmp(text, "Needed ", 7) == 0 && strstr(text, "OctreeTriangleSelector") != 0;
+            }
+            if (event.EventType == irr::EET_KEY_INPUT_EVENT)
+            {
+                KeyIsDown[event.KeyInput.Key] = event.KeyInput.PressedDown; //Удерживаемые клавиши проверяются в главном цикле
+                if(!event.KeyInput.PressedDown) onKeyUp(event.KeyInput.Key); //Разовые действия - по отпусканию клавиши
+            }
+            if (event.EventType == irr::EET_MOUSE_INPUT_EVENT && hasTarget) //Реакция на щелчок мыши
+            {
+                bool left = event.MouseInput.Event == EMIE_LMOUSE_PRESSED_DOWN; //Удаление блока
+                bool right = event.MouseInput.Event == EMIE_RMOUSE_PRESSED_DOWN; //Установка блока
+                if(left || right)
+                {
+                    Vector3d<float> a1(hitTriangle.pointA.X, hitTriangle.pointA.Y, hitTriangle.pointA.Z);
+                    Vector3d<float> a2(hitTriangle.pointB.X, hitTriangle.pointB.Y, hitTriangle.pointB.Z);
+                    Vector3d<float> a3(hitTriangle.pointC.X, hitTriangle.pointC.Y, hitTriangle.pointC.Z);
+                    //При установке смотрим "из" блока, чтобы получить соседний с ним адрес.
+                    VoxelAddress* vxladdr = isve->getAddressSimpleVoxelObjectByThreePoints(s_WorldId, a1, a2, a3, right ? vct * (-1) : vct, campos);
+                    if(vxladdr && vxladdr->getLastVectInd() >= 2) //Адрес есть и указывает на блок, а не только на чанк
+                    {
+                        if(left && nestedTestMode && splitBlock(vxladdr)) //ТЕСТ: разбить блок первого уровня
+                        {
+                            isve->addTaskUpdateChunks();
+                            return false;
+                        }
+                        if(right && nestedTestMode && placeSmallBlock()) //ТЕСТ: маленький блок под курсором
+                        {
+                            delete vxladdr; //Не пригодился: маленький блок ставится по точке под курсором
+                            isve->addTaskUpdateChunks();
+                            return false;
+                        }
+                        //Адрес и блок движок забирает себе и удалит сам.
+                        if(left) isve->deleteSimpleVoxelObject(s_WorldId, vxladdr);
+                        else isve->setSimpleVoxelObject(s_WorldId, vxladdr, new MyBlock(s_TypeVoxelSet), true);
+                        isve->addTaskUpdateChunks(); //Перестроить изменённый чанк (и соседей, если блок на границе)
+                    }
+                    else if(vxladdr) delete vxladdr; //Адрес не пригодился - удаляем сами
+                }
+            }
+            return false; //false - Irrlicht продолжит обработку (например, FPS-камера получит клавиши)
+        }
+        bool IsKeyDown(EKEY_CODE keyCode) const
+        {
+            return KeyIsDown[keyCode];
+        }
+        //Эти поля заполняет главный цикл каждый кадр, а читает обработчик при щелчке/нажатии.
+        Vector3d<float> campos; //Позиция камеры
+        triangle3df hitTriangle; //Треугольник, на который смотрит камера
+        Vector3d<float> vct; //Вектор камеры
+        bool isUpdate; //Надо ли пересоздать аниматор столкновений
+        int s_TypeVoxelSet; //Какие блоки ставим
+        int rad; //Радиус сферы
+        int radboom; //Радиус взрыва и освещения
+        bool gravity; //Включена ли гравитация
+        bool ghost; //Проходим ли сквозь стены
+        bool hasTarget; //Смотрит ли камера на блок
+        bool nestedTestMode = false; //ТЕСТ: включён ли режим маленьких блоков (клавиша C)
+        vector3df hitPoint; //ТЕСТ: точка под курсором (в координатах сцены), заполняет главный цикл
+    private:
+        //ТЕСТ: заменить блок первого уровня вложенным чанком из таких же маленьких блоков.
+        //vxladdr - адрес блока (при успехе его забирает движок). Возвращает false, если по адресу не обычный блок
+        //первого уровня (тогда щелчок работает как обычно).
+        bool splitBlock(VoxelAddress* vxladdr)
+        {
+            if(vxladdr->getLastVectInd() != 2) return false; //Маленькие блоки внутри вложенного чанка просто ломаются
+            unsigned int id = 0;
+            SColor lightcolor(255, 0, 0, 0);
+            bool found = false;
+            isve->getAccessToTheSimpleVoxelEngine(); //Читаем мир напрямую - нужен доступ (меши строятся в других потоках)
+            World* wrld = isve->getWorld(s_WorldId);
+            SimpleVoxelObject* svo = wrld ? wrld->getSimpleVoxelObject(vxladdr, false) : 0;
+            if(svo && svo->getTypeVoxel() == CUSTOM_VOXEL)
+            {
+                id = ((MyBlock*)svo)->getId();
+                //Изменено: маленькие блоки получают весь свет блока - и солнечный, и фиолетовый от L
+                //(раньше только солнечный: освещённый блок после разбиения темнел). Цвет отдаёт getVoxelForRenderingInfo() -
+                //это новый объект, удаляем его сами.
+                MyVoxelInfo* info = (MyVoxelInfo*)svo->getVoxelForRenderingInfo();
+                lightcolor = info->s_LightColor;
+                delete info;
+                found = true;
+            }
+            isve->freeAccessToTheSimpleVoxelEngine();
+            if(!found) return false;
+            //Вложенный чанк можно заполнить до вставки в мир: адрес и мир движок выдаст ему при вставке.
+            ChunkVoxelObject* nested = new ChunkVoxelObject();
+            nested->setNumberOfPartitions(NESTED_TEST_PARTITIONS);
+            for(int x = 0; x < NESTED_TEST_PARTITIONS; x++)
+                for(int y = 0; y < NESTED_TEST_PARTITIONS; y++)
+                    for(int z = 0; z < NESTED_TEST_PARTITIONS; z++)
+                        nested->setSimpleVoxelObject(Vector3d<int>(x, y, z), new MyBlock(id, lightcolor), true, false);
+            isve->setSimpleVoxelObject(s_WorldId, vxladdr, nested, true); //true - заменить блок
+            return true;
+        }
+        //ТЕСТ: поставить маленький блок ровно под курсором.
+        //Ячейка ищется по точке под курсором (getAddressSimpleVoxelObjectByPoint(), со стороны камеры), а не по
+        //треугольнику: getAddressSimpleVoxelObjectByThreePoints() берёт место у центра треугольника, и рядом с большой
+        //гранью маленький блок вставал со сдвигом. Пустая маленькая ячейка вложенного чанка - ставится блок;
+        //пустая ячейка первого уровня - она заменяется вложенным чанком с одним маленьким блоком под курсором.
+        //Возвращает false, если ставить некуда (тогда щелчок работает как обычно).
+        bool placeSmallBlock()
+        {
+            const Vector3d<float> point(hitPoint.X, hitPoint.Y, hitPoint.Z);
+            VoxelAddress* target = isve->getAddressSimpleVoxelObjectByPoint(s_WorldId, point, vct * (-1), campos); //К камере
+            if(!target) return false;
+            bool empty = false;
+            if(target->getLastVectInd() >= 2)
+            {
+                isve->getAccessToTheSimpleVoxelEngine();
+                World* wrld = isve->getWorld(s_WorldId);
+                empty = wrld && !wrld->getSimpleVoxelObject(target, false);
+                isve->freeAccessToTheSimpleVoxelEngine();
+            }
+            if(!empty) { delete target; return false; }
+            if(target->getLastVectInd() >= 3) //Пустая маленькая ячейка внутри вложенного чанка
+            {
+                isve->setSimpleVoxelObject(s_WorldId, target, new MyBlock(s_TypeVoxelSet), false);
+                return true;
+            }
+            //Пустая ячейка первого уровня: какой маленький блок под курсором - по той же точке в координатах мира.
+            Vector3d<float> look = isve->getWorldCoordinates(s_WorldId, campos) - isve->getWorldCoordinates(s_WorldId, campos + vct);
+            Vector3d<float> wp = isve->getWorldCoordinates(s_WorldId, point) + look.getNormalizeVector() * 0.001f;
+            //Блок k занимает [k - 0.5, k + 0.5): центры блоков - в целых координатах.
+            const float q[3] = { wp.getX() + 0.5f, wp.getY() + 0.5f, wp.getZ() + 0.5f };
+            int cell[3], sub[3];
+            for(int k = 0; k < 3; k++)
+            {
+                cell[k] = (int)floorf(q[k]);
+                sub[k] = (int)floorf((q[k] - cell[k]) * NESTED_TEST_PARTITIONS);
+                if(sub[k] < 0) sub[k] = 0;
+                if(sub[k] >= NESTED_TEST_PARTITIONS) sub[k] = NESTED_TEST_PARTITIONS - 1;
+            }
+            const Vector3d<int> found = target->getVector(1) + target->getVector(0) * SIZE_CHUNK;
+            if(!(found == Vector3d<int>(cell[0], cell[1], cell[2]))) { delete target; return false; } //Не должно случаться
+            ChunkVoxelObject* nested = new ChunkVoxelObject();
+            nested->setNumberOfPartitions(NESTED_TEST_PARTITIONS);
+            nested->setSimpleVoxelObject(Vector3d<int>(sub[0], sub[1], sub[2]), new MyBlock(s_TypeVoxelSet), true, false);
+            isve->setSimpleVoxelObject(s_WorldId, target, nested, false);
+            return true;
+        }
+        void onKeyUp(EKEY_CODE key)
+        {
+            const Vector3d<int> testchunk(0, 5, 0); //Чанк над поверхностью для тестов W, E, T, R
+            if(key == KEY_KEY_M && !ghost) { gravity = !gravity; isUpdate = true; } //Включаем и выключаем гравитацию
+            else if(key == KEY_KEY_N) { ghost = !ghost; isUpdate = true; } //Включаем и выключаем прохождение сквозь стены
+            else if(key == KEY_KEY_C) nestedTestMode = !nestedTestMode; //ТЕСТ: режим маленьких блоков
+            else if(key == KEY_KEY_W || key == KEY_KEY_E || key == KEY_KEY_T) //Тестовые изменения блоков в чанке (0,5,0)
+            {
+                for(int i = 0; i < SIZE_CHUNK; i++)
+                    for(int j = 0; j < SIZE_CHUNK; j++)
+                        for(int k = 0; k < SIZE_CHUNK; k++)
+                        {
+                            //Адрес блока: сначала координаты чанка, затем координаты блока внутри чанка.
+                            VoxelAddress* nva = new VoxelAddress(isve);
+                            nva->addNextVector(testchunk);
+                            nva->addNextVector(Vector3d<int>(i,j,k));
+                            int id = -1; //-1 - удалить блок
+                            if(key == KEY_KEY_W) //Случайная группа блоков 8x8x8
+                            {
+                                if(i >= 8 || j >= 8 || k >= 8) { delete nva; continue; }
+                                id = rand()%16 - 5; //Примерно треть блоков удаляется (id < 0), остальные - случайные
+                            }
+                            else if(key == KEY_KEY_E) //Срезать чанк выше 5-го слоя
+                            {
+                                if(j < 5) { delete nva; continue; }
+                            }
+                            else if(!((i + j + k) % 2 == 1)) id = rand()%11; //Максимально "лагучий" чанк (шахматный порядок)
+                            if(id < 0) isve->deleteSimpleVoxelObject(s_WorldId, nva);
+                            else isve->setSimpleVoxelObject(s_WorldId, nva, new MyBlock(id), true);
+                        }
+                isve->addTaskUpdateChunks(); //Одно перестроение на все 4096 изменений
+            }
+            else if(key == KEY_KEY_R) //Перезагрузка чанка (0,5,0): он будет сохранён на диск и загружен заново
+            {
+                isve->deleteChunkForRendering(s_WorldId, testchunk, true); //true - выгрузить из памяти (с сохранением)
+                isve->addChunkForRendering(s_WorldId, testchunk, true); //true - загрузить с диска
+            }
+            else if(key == KEY_KEY_S) //Огромная полая сфера радиуса rad из выбранного блока, считается в другом потоке
+            {
+                CreateSphereParams* csp = new CreateSphereParams; //Удалит движок после выполнения
+                csp->s_Type = CREATE_SPHERE;
+                csp->s_IdWorld = s_WorldId;
+                csp->s_Radius = rad;
+                csp->s_TypeVoxelSet = s_TypeVoxelSet;
+                isve->addTaskRunUserControllerForThread(csp);
+            }
+            else if((key == KEY_KEY_B || key == KEY_KEY_L) && hasTarget) //Взрыв или освещение в точке курсора, тоже в другом потоке
+            {
+                BoomParams* bp = new BoomParams; //Удалит движок после выполнения
+                bp->s_Type = (key == KEY_KEY_B) ? BOOM : CREATE_LIGHT;
+                bp->s_IdWorld = s_WorldId;
+                bp->s_HitTriangle = hitTriangle; //Копируем: к моменту выполнения камера уже может смотреть в другое место
+                bp->s_Radius = radboom;
+                bp->s_Vct = vct;
+                bp->s_Campos = campos;
+                bp->s_SmallBlocks = nestedTestMode; //Добавлено: взрыв в режиме маленьких блоков
+                isve->addTaskRunUserControllerForThread(bp);
+            }
+            else if(key == KEY_KEY_Z) //Удаление чанков из рендеринга и памяти без сохранения на диск
+            {
+                //unload = true - выгрузить из памяти, save = false - не сохранять.
+                isve->deleteChunksForRendering(s_WorldId, Vector3d<int>(-5,0,-5), Vector3d<int>(5, 15, 5), true, false);
+            }
+        }
+        int s_WorldId;
+        IrrSimpleVoxelEngine* isve;
+        bool KeyIsDown[KEY_KEY_CODES_COUNT];
+};
+
+// ---------------------------------------------------------------------------------------------
+// 10. main
+// ---------------------------------------------------------------------------------------------
 
 int main()
 {
-    /*Engine* a = new Engine;
-    cout << "Engine added." << endl;
-    getch();
-    int id1 = a->addWorld("123", 16);
-    cout << "World added." << endl;
-    getch();
-    MyChunksSaveLoadController* aaa = new MyChunksSaveLoadController(0);
-    World* w = a->getWorld(id1);
-    w->setChunksSaveLoadController(aaa);
-    w->loadChunks(Vector3d<int>(0,0,0), 3);
-    cout << "Chunks added." << endl;
-    getch();
-    delete w;
-    cout << "Engine deleted." << endl;
-    getch();
-    return 0;*/
     srand((unsigned)time(NULL));
-    //IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d< u32 >(1280, 720), 32, false, false, false);
-    //...
-    SIrrlichtCreationParameters* s_IrrlichtCreationParameters = new SIrrlichtCreationParameters;
-    s_IrrlichtCreationParameters->DeviceType = EIDT_BEST;
-    s_IrrlichtCreationParameters->DriverType = EDT_OPENGL;
-    s_IrrlichtCreationParameters->WindowSize = dimension2d<u32>(1280, 720);
-    s_IrrlichtCreationParameters->Bits = 32;
-    s_IrrlichtCreationParameters->ZBufferBits = 16;
-    s_IrrlichtCreationParameters->Fullscreen = false;
-    s_IrrlichtCreationParameters->Stencilbuffer = false;
-    s_IrrlichtCreationParameters->Vsync = false;
-    s_IrrlichtCreationParameters->AntiAlias = 8;
-    s_IrrlichtCreationParameters->WithAlphaChannel = false;
-    s_IrrlichtCreationParameters->Doublebuffer = true;
-    s_IrrlichtCreationParameters->IgnoreInput = false;
-    s_IrrlichtCreationParameters->Stereobuffer = false;
-    s_IrrlichtCreationParameters->HighPrecisionFPU = false;
 
-    IrrlichtDevice* device = createDeviceEx(*s_IrrlichtCreationParameters);
-    delete s_IrrlichtCreationParameters;
-    //...
-    if (device == 0) return 1;
-    ILogger* logger = device->getLogger();
-    logger->setLogLevel(ELL_ERROR);
+    //--- Устройство Irrlicht ---
+    SIrrlichtCreationParameters params;
+    params.DriverType = EDT_OPENGL; //Шейдеры написаны на GLSL
+    params.WindowSize = dimension2d<u32>(1280, 720);
+    params.Bits = 32;
+    params.ZBufferBits = 24; //Точнее Z-буфер - меньше мерцания на дальних гранях
+    params.AntiAlias = 8;
+    IrrlichtDevice* device = createDeviceEx(params);
+    if (device == 0) return 1; //Не удалось создать окно (нет OpenGL и т.п.)
     IVideoDriver* driver = device->getVideoDriver();
-    driver->setTextureCreationFlag(video::ETCF_ALWAYS_32_BIT, true);
+    driver->setTextureCreationFlag(video::ETCF_ALWAYS_32_BIT, true); //Чтобы не терялся альфа-канал прозрачных текстур
     ISceneManager* smgr = device->getSceneManager();
     IGUIEnvironment* guienv = device->getGUIEnvironment();
     device->setWindowCaption(L"Test IrrSimpleVoxelEngine program");
 
-    smgr->getParameters()->setAttribute(scene::ALLOW_ZWRITE_ON_TRANSPARENT, true);
-
-    // Создадим шейдеры освещения
+    //--- Материалы ---
+    //Шейдер освещения. Один и тот же шейдер на трёх базовых материалах:
+    //непрозрачный, альфа-тест (стекло) и полупрозрачный со смешиванием (вода).
+    //Базовый материал (последний параметр) задаёт, как Irrlicht смешивает результат шейдера
+    //с картинкой и в какой проход (непрозрачный или прозрачный) попадёт нода.
     MyShaderCallBack* mc = new MyShaderCallBack();
-    s32 chunkLightMaterialType = driver->getGPUProgrammingServices()->addHighLevelShaderMaterialFromFiles(
-                                "Shaders/light.vert", "vertexMain", video::EVST_VS_1_1,
-                                "Shaders/light.frag", "pixelMain", video::EPST_PS_1_1,
-                                mc, video::EMT_SOLID, 0, EGSL_DEFAULT);
-    s32 chunkLightTransparentMaterialTypeBlend = driver->getGPUProgrammingServices()->addHighLevelShaderMaterialFromFiles(
-                                "Shaders/light.vert", "vertexMain", video::EVST_VS_1_1,
-                                "Shaders/light.frag", "pixelMain", video::EPST_PS_1_1,
-                                //mc, video::EMT_TRANSPARENT_ALPHA_CHANNEL, 0, EGSL_DEFAULT);
-                                mc, video::EMT_ONETEXTURE_BLEND, 0, EGSL_DEFAULT);
-                                //mc, video::EMT_TRANSPARENT_ALPHA_CHANNEL, 0, EGSL_DEFAULT);
-    s32 chunkLightTransparentMaterialTypeRef = driver->getGPUProgrammingServices()->addHighLevelShaderMaterialFromFiles(
-                                "Shaders/light.vert", "vertexMain", video::EVST_VS_1_1,
-                                "Shaders/light.frag", "pixelMain", video::EPST_PS_1_1,
-                                mc, video::EMT_TRANSPARENT_ALPHA_CHANNEL_REF, 0, EGSL_DEFAULT);
-    mc->drop();
+    IGPUProgrammingServices* gpu = driver->getGPUProgrammingServices();
+    s32 materialSolid = gpu->addHighLevelShaderMaterialFromFiles("shaders/light.vert", "vertexMain", EVST_VS_1_1,
+                                "shaders/light.frag", "pixelMain", EPST_PS_1_1, mc, EMT_SOLID);
+    s32 materialCutout = gpu->addHighLevelShaderMaterialFromFiles("shaders/light.vert", "vertexMain", EVST_VS_1_1,
+                                "shaders/light.frag", "pixelMain", EPST_PS_1_1, mc, EMT_TRANSPARENT_ALPHA_CHANNEL_REF);
+    s32 materialBlend = gpu->addHighLevelShaderMaterialFromFiles("shaders/light.vert", "vertexMain", EVST_VS_1_1,
+                                "shaders/light.frag", "pixelMain", EPST_PS_1_1, mc, EMT_TRANSPARENT_ALPHA_CHANNEL);
+    mc->drop(); //Шейдеры держат свою ссылку на mc, пользоваться им дальше можно (он живёт, пока жив драйвер)
 
+    //--- Движок ---
     //Начинаем подключать наш движок
     Logger* lgr = new Logger; //Создали логгер для получения сообщений
-    lgr->setPrintStandard(false); //Не хотим читать стандартные сообщения
+    lgr->setPrintStandard(false); //Не хотим читать стандартные сообщения (только предупреждения и ошибки)
     IrrSimpleVoxelEngine* isve = new IrrSimpleVoxelEngine(device, lgr); //Создали движок
-    lgr->drop();
-    MyController* mcntrlr = new MyController(isve); //Создали контроллер для работы в другом потоке
-    isve->setUserControllerForThread(mcntrlr); //Установили контроллер движку
+    lgr->drop(); //Движок держит свою ссылку на логгер
+    //Сколько потоков строят меши. Два ядра оставляем главному потоку и потоку очереди движка.
+    unsigned int cores = std::thread::hardware_concurrency();
+    isve->setMaxNumberOfThreadAddChunks(cores > 3 ? cores - 2 : 1); //Потоки построения новых чанков
+    isve->setMaxNumberOfThreadUpdateChunks(1); //Поток перестройки изменённых чанков
+    isve->setUserControllerForThread(new MyController(isve)); //Контроллер для работы в другом потоке (удалит движок)
+
+    //--- Фабрика мешей и её настройки ---
+    //Фабрику нужно отдать движку ДО создания мира. Удалит её тоже движок.
     MyFactoryChunkMeshSceneNode* mfcmsn = new MyFactoryChunkMeshSceneNode(device, isve); //Создали нашу фабрику нод
-    mfcmsn->setPositionScale(16); //Установили масштабы позиции и растяжения
-    mfcmsn->setSScale(16);
-    mfcmsn->setSizeBlockChunks(1, 8, 1); //Установили блок склейки чанков в меш
-    mfcmsn->setNumberOfMeshesSceneNodeForChunk(3);
-    mfcmsn->setHardwareMappingHint(0, EHM_STATIC, EBT_VERTEX_AND_INDEX); //Включили hardware mapping hint
-    mfcmsn->setMaterialType(0, (E_MATERIAL_TYPE)chunkLightMaterialType);
-    mfcmsn->setHardwareMappingHint(1, EHM_STATIC, EBT_VERTEX_AND_INDEX);
-    mfcmsn->setMaterialType(1, (E_MATERIAL_TYPE)chunkLightTransparentMaterialTypeRef);
-    mfcmsn->setHardwareMappingHint(2, EHM_STATIC, EBT_VERTEX_AND_INDEX);
-    mfcmsn->setMaterialType(2, (E_MATERIAL_TYPE)chunkLightTransparentMaterialTypeBlend);
+    mfcmsn->setPositionScale(SIZE_CHUNK); //Масштаб позиции: один блок = одна единица сцены
+    mfcmsn->setSScale(SIZE_CHUNK); //Масштаб размера блока (тоже 1 единица)
+    //Сколько чанков склеивать в одну ноду. Меньше нод - быстрее рисование, но дольше перестройка
+    //при изменении одного блока и грубее сортировка прозрачности между нодами.
+    mfcmsn->setSizeBlockChunks(1, 4, 1);
+    mfcmsn->setNumberOfMeshesSceneNodeForChunk(NUMBER_OF_LEVELS); //Вызывать первым из настроек уровней: сбрасывает материалы уровней
+    mfcmsn->setMaterialType(LEVEL_SOLID, (E_MATERIAL_TYPE)materialSolid);
+    mfcmsn->setMaterialType(LEVEL_CUTOUT, (E_MATERIAL_TYPE)materialCutout);
+    mfcmsn->setMaterialType(LEVEL_BLEND, (E_MATERIAL_TYPE)materialBlend); //Движок сам отключит запись в Z-буфер и будет сортировать треугольники
+    //Меши чанков меняются редко - храним их в видеопамяти (VBO), а не передаём каждый кадр.
+    for(int i = 0; i < NUMBER_OF_LEVELS; i++) mfcmsn->setHardwareMappingHint(i, EHM_STATIC, EBT_VERTEX_AND_INDEX);
     isve->setFactoryChunkMeshSceneNode(mfcmsn); //Установили фабрику движку
-    MyChunksSaveLoadController* mcslc = new MyChunksSaveLoadController(isve);
-    //World* wrld = new World(isve, "data/testworld");
-    //int id = isve->addWorld(wrld); //Создали тестовый мир, чанк 16 на 16 на 16 блоков
-    ISceneNode* rn = smgr->addEmptySceneNode();
+
+    //--- Мир ---
+    ISceneNode* rootnode = smgr->addEmptySceneNode(); //Родительская нода мира, её можно двигать и вращать
     World3DInfo w3dinfo;
-    w3dinfo.s_WorldRootNode = rn;
-    vector3df a1(15.5, 88.5, -3.5);
-    vector3df a2(16.5, 88.5, -3.5);
-    vector3df a3(16.5, 87.5, -3.5);
-    //w3dinfo.s_AmendmentPositionWorld = -(a1 + a2 + a3) / 2;
-    w3dinfo.s_AmendmentPositionWorld = vector3df(-16.5f, -88.5f, 1.5f);
-    //w3dinfo.s_AmendmentPositionWorld = vector3df(0,-1,0);
-    int id = isve->addWorld(w3dinfo); //Создали тестовый мир, чанк 16 на 16 на 16 блоков
-    //mcslc->setFolder(id, "data/test");
-    mcslc->setFolder(id, "data/onlyfortest");
-    MySimpleVoxelObjectTransparentTester* mysvott = new MySimpleVoxelObjectTransparentTester;
-    isve->getWorld(id)->setSimpleVoxelObjectTransparentTester(mysvott);
-    isve->getWorld(id)->setChunksSaveLoadController(mcslc);
-    isve->getFactoryChunkMeshSceneNode()->setMultiplePartition(id, true); //Указали, что все чанки одинаково разбиты на всех уровнях
-    isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(0, id, EMF_LIGHTING, false); //Убрали освещение
-    //isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(0, id, EMF_BILINEAR_FILTER, false);
-    //isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(0, id, EMF_WIREFRAME, true);
-    //isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(0, id, EMF_WIREFRAME, true);
-    isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(1, id, EMF_LIGHTING, false);
-    isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(1, id, EMF_BLEND_OPERATION, true);
-    //isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(1, id, EMF_ZWRITE_ENABLE, false);
-    isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(1, id, EMF_BACK_FACE_CULLING, false);
-    isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(1, id, EMF_USE_MIP_MAPS, false);
-    isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(1, id, EMF_BILINEAR_FILTER, false);
-    //isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(1, id, EMF_COLOR_MATERIAL, false);
-    //isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(1, id, EMF_WIREFRAME, true);
-    isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(2, id, EMF_LIGHTING, false);
-    isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(2, id, EMF_BLEND_OPERATION, true);
-    isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(2, id, EMF_ZWRITE_ENABLE, false);
-    isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(2, id, EMF_BACK_FACE_CULLING, false);
-    isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(2, id, EMF_COLOR_MATERIAL, false);
-    isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(2, id, EMF_BILINEAR_FILTER, false);
+    w3dinfo.s_WorldRootNode = rootnode; //Все ноды чанков будут дочерними для rootnode
+    w3dinfo.s_AmendmentPositionWorld = vector3df(-16.5f, -88.5f, 1.5f); //Сдвиг начала координат мира относительно rootnode
+    WorldCreatingParameters wcp;
+    wcp.s_SizeChunk = SIZE_CHUNK;
+    int id = isve->addWorld(wcp, w3dinfo); //Создали мир, чанк 16 на 16 на 16 блоков
+    MyChunksSaveLoadController* mcslc = new MyChunksSaveLoadController(isve);
+    mcslc->setFolder(id, WORLD_FOLDER);
+    isve->getWorld(id)->setChunksSaveLoadController(mcslc); //Мир сам удалит контроллер
+    isve->getWorld(id)->setSimpleVoxelObjectTransparentTester(new MySimpleVoxelObjectTransparentTester); //И это тоже
+    isve->getWorld(id)->setWorldGenerator(new MyWorldGenerator); //Отдали генератор миру
+    mfcmsn->setMultiplePartition(id, true); //Указали, что все чанки одинаково разбиты на всех уровнях
+    for(int i = 0; i < NUMBER_OF_LEVELS; i++) mfcmsn->setMaterialFlag(i, id, EMF_LIGHTING, false); //Освещение считает наш шейдер
+    //Грани воды рисуются с обеих сторон: если нырнуть, изнутри видно поверхность и стенки воды (границу с воздухом).
+    //Без этого Irrlicht отбрасывает задние стороны граней, и из-под воды граница воды не видна совсем.
+    //Порядок от дальних к ближним движок соблюдает и для таких граней (сортировка по центру треугольника).
+    mfcmsn->setMaterialFlag(LEVEL_BLEND, id, EMF_BACK_FACE_CULLING, false);
+    mfcmsn->setID(LEVEL_SOLID, id, IDFlag_IsPickable);
+    mfcmsn->setID(LEVEL_CUTOUT, id, IDFlag_IsPickable);
+    mfcmsn->setID(LEVEL_BLEND, id, ID_IsNotPickable); //Курсор на воду не реагирует
+    //Ставим в очередь загрузку (или генерацию) и построение чанков от (-5,0,-5) до (5,15,5).
+    //Само построение начнётся после isve->start() и пойдёт в фоне: мир появляется по частям.
+    isve->addChunksForRendering(id, Vector3d<int>(-5,0,-5), Vector3d<int>(5, 15, 5), true); //Сгенерировали параллелепипед чанков.
 
-    isve->getFactoryChunkMeshSceneNode()->setID(0, id, IDFlag_IsPickable);
-    isve->getFactoryChunkMeshSceneNode()->setID(1, id, IDFlag_IsPickable);
-    isve->getFactoryChunkMeshSceneNode()->setID(2, id, ID_IsNotPickable);
-
-    //isve->getFactoryChunkMeshSceneNode()->setMaterialFlag(2, id, EMF_WIREFRAME, true);
-    //isve->getFactoryChunkMeshSceneNode()->setOcclusionQueries(true);
-    MyWorldGenerator* mywrldgen = new MyWorldGenerator; //Создали наш генератор
-    isve->getWorld(id)->setWorldGenerator(mywrldgen); //Отдали генератор миру
-    //isve->addChunksForRendering(id, Vector3d<int>(0,0,0), Vector3d<int>(0, 0, 0), true); //Сгенерировали параллелепипед чанков.
-    isve->addChunksForRendering(id, Vector3d<int>(-10,0,-10), Vector3d<int>(10, 15, 10), true); //Сгенерировали параллелепипед чанков.
-    //isve->addChunksForRendering(id, Vector3d<int>(0,0,0), Vector3d<int>(0,0,0), true);
-
-
-    SKeyMap keyMap[5];
-    keyMap[0].Action = EKA_MOVE_FORWARD;
-    keyMap[0].KeyCode = KEY_UP;
-
-    keyMap[1].Action = EKA_JUMP_UP;
-    keyMap[1].KeyCode = KEY_SPACE;
-
-    keyMap[2].Action = EKA_MOVE_BACKWARD;
-    keyMap[2].KeyCode = KEY_DOWN;
-
-    keyMap[3].Action = EKA_STRAFE_LEFT;
-    keyMap[3].KeyCode = KEY_LEFT;
-
-    keyMap[4].Action = EKA_STRAFE_RIGHT;
-    keyMap[4].KeyCode = KEY_RIGHT;
-
-    ICameraSceneNode* camFPS = smgr->addCameraSceneNodeFPS(0, 70, 0.008, -1, keyMap, 5); //Создали нашу камеру
-    //ICameraSceneNode* camFPS = smgr->addCameraSceneNode();
+    //--- Камера ---
+    SKeyMap keyMap[5]; //Управление стрелками (буквы заняты под команды)
+    keyMap[0].Action = EKA_MOVE_FORWARD;  keyMap[0].KeyCode = KEY_UP;
+    keyMap[1].Action = EKA_JUMP_UP;       keyMap[1].KeyCode = KEY_SPACE;
+    keyMap[2].Action = EKA_MOVE_BACKWARD; keyMap[2].KeyCode = KEY_DOWN;
+    keyMap[3].Action = EKA_STRAFE_LEFT;   keyMap[3].KeyCode = KEY_LEFT;
+    keyMap[4].Action = EKA_STRAFE_RIGHT;  keyMap[4].KeyCode = KEY_RIGHT;
+    ICameraSceneNode* camFPS = smgr->addCameraSceneNodeFPS(0, 70, 0.008, -1, keyMap, 5); //Создали нашу камеру (скорость поворота 70, движения 0.008)
     camFPS->setPosition(vector3df(24.4111f, 80.3288f, 25.5249f));
-    //camFPS->setPosition(vector3df(-5*16, 5.3288f, -5*16));
-    //camFPS->setPosition(vector3df(24.4111f, 800.3288f, 25.5249f));
-    camFPS->setTarget(vector3df(23.2238, 7.1799, -10.7250));
-    camFPS->setNearValue(0.2);
+    camFPS->setTarget(vector3df(23.2238f, 7.1799f, -10.7250f));
+    camFPS->setNearValue(0.2); //Ближняя плоскость отсечения: чтобы вплотную к блоку он не "пропадал"
 
-    mfcmsn->camFPS = camFPS;
+    //--- Столкновения и обработчик событий ---
+    //Мета-селектор объединяет селекторы всех нод чанков (их добавляет и удаляет фабрика).
+    //Аниматор столкновений не даёт камере проходить сквозь блоки.
     mfcmsn->s_MTS = smgr->createMetaTriangleSelector();
-
-    ISceneNodeAnimator* anim = smgr->createCollisionResponseAnimator(
-                mfcmsn->s_MTS, camFPS, core::vector3df(0.4,0.9,0.4),
-                core::vector3df(0,0,0), core::vector3df(0,0.5,0));
-    camFPS->addAnimator(anim);
-
-    bool gravity = false, ghost = false;
-
-    MyReceiver myRec(isve->getWorld(id), isve, &gravity, &ghost);
+    ISceneNodeAnimator* anim = 0; //Аниматор столкновений камеры с миром
+    MyReceiver myRec(id, isve);
+    myRec.isUpdate = true; //Создать аниматор на первом кадре
+    //Обработчик получает и события ввода, и сообщения лога Irrlicht (там отфильтрован спам селекторов).
     device->setEventReceiver(&myRec);
 
-    /*if(selector)
-    {
-		anim = smgr->createCollisionResponseAnimator(
-			selector, camFPS, core::vector3df(0.4,0.9,0.4),
-			core::vector3df(0,0,0), core::vector3df(0,0.5,0));
-		selector->drop();
-		camFPS->addAnimator(anim);
-    }*/
-
-    scene::IBillboardSceneNode * bill = smgr->addBillboardSceneNode(); //Создаём биллбоард по аналогии из туториала про коллиизии
-	bill->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
-	bill->setMaterialTexture(0, driver->getTexture("media/particle.bmp"));
-	bill->setMaterialFlag(video::EMF_LIGHTING, false);
-	bill->setMaterialFlag(video::EMF_ZBUFFER, false);
-	bill->setSize(core::dimension2d<f32>(1.0f, 1.0f));
-	bill->setID(ID_IsNotPickable);
-	ISceneNode* skydome = smgr->addSkyDomeSceneNode(driver->getTexture("skydome/skydome.jpg"), 256, 128, 0.9, 2, 1000);
-    IGUIFont *font1=guienv->getFont("fonts/arial.xml");
-
+    //--- Прочие объекты сцены ---
+    IBillboardSceneNode* bill = smgr->addBillboardSceneNode(); //Огонёк в точке, куда смотрит камера
+    bill->setMaterialType(EMT_TRANSPARENT_ADD_COLOR);
+    bill->setMaterialTexture(0, driver->getTexture("media/particle.bmp"));
+    bill->setMaterialFlag(EMF_LIGHTING, false);
+    bill->setMaterialFlag(EMF_ZBUFFER, false); //Огонёк видно всегда, даже если он "внутри" грани
+    bill->setSize(dimension2d<f32>(1.0f, 1.0f));
+    bill->setID(ID_IsNotPickable); //Луч не должен попадать в сам огонёк
+    smgr->addSkyDomeSceneNode(driver->getTexture("skydome/skydome.jpg"), 256, 128, 0.9, 2, 1000); //Небо
+    IGUIFont* font = guienv->getFont("fonts/arial.xml"); //Шрифт для подсказки в углу экрана
     device->getCursorControl()->setVisible(false); //Выключаем курсор
+    ISceneCollisionManager* collMan = smgr->getSceneCollisionManager(); //Для луча "куда смотрит камера"
+    SMaterial wireMaterial; //Материал для подсветки треугольника под курсором
+    wireMaterial.Wireframe = true;
+    wireMaterial.Lighting = false;
 
-    scene::ISceneCollisionManager* collMan = smgr->getSceneCollisionManager();
+    //Клавиши выбора типа блока: i-я клавиша выбирает блок с номером i.
+    const EKEY_CODE blockKeys[13] = { KEY_KEY_1, KEY_KEY_2, KEY_KEY_3, KEY_KEY_4, KEY_KEY_5, KEY_KEY_6, KEY_KEY_7,
+                                      KEY_KEY_8, KEY_KEY_9, KEY_KEY_0, KEY_MINUS, KEY_BACK, KEY_HOME };
 
-    video::SMaterial material;
-    material.Wireframe=true;
-    material.setTexture(0, 0);
-	material.Lighting = false;
+    isve->start(); //Стартуем движок: запускаются потоки, начинается загрузка/генерация мира
 
-	/*smgr->addSkyBoxSceneNode( //Создаём скайбокс
-    driver->getTexture("skybox/irrlicht2_up.jpg"),
-    driver->getTexture("skybox/irrlicht2_dn.jpg"),
-    driver->getTexture("skybox/irrlicht2_lf.jpg"),
-    driver->getTexture("skybox/irrlicht2_rt.jpg"),
-    driver->getTexture("skybox/irrlicht2_ft.jpg"),
-    driver->getTexture("skybox/irrlicht2_bk.jpg"));*/
-
-    stringw blockstr, fpsstr, gravitystr, genstr, strhlp;
-
-    isve->start(); //Стартуем движок
-
-    myRec.rad = 20;
-    myRec.radboom = 5;
-
-    f32 changefloat = 0.01;
-
-    /*int t = isve->getTimeSafeThread();
-    int t2;
-    bool test = false, del = true;*/
-
-    while(isve->runIrrDevice())
-        if(device->isWindowActive())
+    //--- Главный цикл ---
+    while(isve->runIrrDevice()) //То же, что device->run(), но безопасно для потоков движка
+    {
+        if(!device->isWindowActive()) //Окно свёрнуто или не в фокусе - не рисуем, отдаём процессор
         {
-            //...
-            /*t2 = isve->getTimeSafeThread();
-            if(true && ( t2 - t > 3000 || (test && t2 - t > 50) ) )
-            {
-                test = true;
-                //cout << "!" << endl;
-                {
-                    if(del)
-                    {
-                        VoxelAddress* vxladdr = new VoxelAddress(isve);
-                        vxladdr->addNextVector(Vector3d<int>(0,0,0));
-                        vxladdr->addNextVector(Vector3d<int>(15,15,15));
-                        isve->deleteSimpleVoxelObject(id, vxladdr);
-                        del = false;
-                    }
-                    else
-                    {
-                        MyBlock* svo = new MyBlock(1);
-                        VoxelAddress* vxladdr = new VoxelAddress(isve);
-                        vxladdr->addNextVector(Vector3d<int>(0,0,0));
-                        vxladdr->addNextVector(Vector3d<int>(15,15,15));
-                        isve->setSimpleVoxelObject(id, vxladdr, svo);
-                        del = true;
-                    }
-                }
-                isve->addTaskUpdateChunks();
-                //isve->getFactoryChunkMeshSceneNode()->setChunkForUpdate(id, Vector3d<int>(0,0,0));
-                //isve->getFactoryChunkMeshSceneNode()->updateChunk(id, Vector3d<int>(0,0,0));
-                //isve->getFactoryChunkMeshSceneNode()->updateChunks();
-                //isve->addTaskUpdateChunks();
-                t = isve->getTimeSafeThread();
-            }*/
-            //...
-            isve->update(); //Тик движка
-            /*if(myRec.isUpdate)
-            {
-                if(selector)
-                {
-                    camFPS->removeAnimator(anim);
-                    anim->drop();
-                    if(gravity == false) anim = smgr->createCollisionResponseAnimator( //Учитываем гравитацию
-                        selector, camFPS, core::vector3df(0.4,0.9,0.4),
-                        core::vector3df(0,0,0), core::vector3df(0,0.5,0));
-                    else if(gravity == true) anim = smgr->createCollisionResponseAnimator(
-                        selector, camFPS, core::vector3df(0.4,0.9,0.4),
-                        core::vector3df(0,-0.01,0), core::vector3df(0,0.5,0));
-                    selector->drop();
-                    camFPS->addAnimator(anim);
-                }
-                myRec.isUpdate = false;
-            }*/
-            int fps = driver->getFPS(); //Создаём строки для вывода информации
-            blockstr = L"Type voxel set: ";
-            blockstr += myRec.s_TypeVoxelSet + 1;
-            blockstr += " (keys 1,2,3, ... , 9, 0, -)";
-            fpsstr = L"FPS: ";
-            fpsstr += fps;
-            gravitystr = L"Gravity: ";
-            if(gravity) gravitystr += "On";
-            else gravitystr += "Off";
-            gravitystr += " ('M' key for change)";
-            genstr = L"Type moving: ";
-            if(!ghost) genstr += L"stone";
-            else genstr += L"ghost";
-            genstr += L" ('N' key for change)";
-            strhlp = L"F1 for help (not working).";
-            //driver->beginScene(true,true, SColor(255,100,101,140));
-            driver->beginScene(true,true, SColor(0,0,0,0));
-            smgr->drawAll();
-            font1->draw(blockstr,rect<s32>(10,10,
-            driver->getScreenSize().Height,100),SColor(255,255,255,255));
-            font1->draw(fpsstr,rect<s32>(10,30,
-            driver->getScreenSize().Height,100),SColor(255,255,255,255));
-            font1->draw(gravitystr,rect<s32>(10,50,
-            driver->getScreenSize().Height,100),SColor(255,255,255,255));
-            font1->draw(genstr,rect<s32>(10,70,
-            driver->getScreenSize().Height,100),SColor(255,255,255,255));
-            font1->draw(strhlp,rect<s32>(10,90,
-            driver->getScreenSize().Height,100),SColor(255,255,255,255));
-            core::line3d<f32> ray; //А вот и наш луч. Получаем треугольник.
-            ray.start = camFPS->getPosition();
-            ray.end = ray.start + (camFPS->getTarget() - ray.start).normalize() * 30.0f;
-            core::vector3df intersection;
-            core::triangle3df hitTriangle;
-            scene::ISceneNode * selectedSceneNode =
-                collMan->getSceneNodeAndCollisionPointFromRay(
-                        ray,
-                        intersection,
-                        hitTriangle,
-                        IDFlag_IsPickable,
-                        0 );
-            if(selectedSceneNode)
-            {
-                bill->setPosition(intersection);
-                driver->setTransform(video::ETS_WORLD, core::matrix4());
-                driver->setMaterial(material);
-                driver->draw3DTriangle(hitTriangle, video::SColor(0,255,0,0));
-                myRec.hitTriangle = hitTriangle; //Отдаём обработчику треугольник
-                vector3df aa = (camFPS->getTarget() - camFPS->getPosition()).normalize();
-                myRec.vct = Vector3d<float>( aa.X, aa.Y, aa.Z ); //Отдаём обработчику вектор камеры
-                myRec.campos = Vector3d<float>(camFPS->getPosition().X, camFPS->getPosition().Y, camFPS->getPosition().Z);
-            }
-            //...
-            guienv->drawAll();
-            driver->endScene();
-            if(myRec.IsKeyDown(KEY_KEY_1)) myRec.s_TypeVoxelSet = 0; //Для установки типа блока
-            if(myRec.IsKeyDown(KEY_KEY_2)) myRec.s_TypeVoxelSet = 1;
-            if(myRec.IsKeyDown(KEY_KEY_3)) myRec.s_TypeVoxelSet = 2;
-            if(myRec.IsKeyDown(KEY_KEY_4)) myRec.s_TypeVoxelSet = 3;
-            if(myRec.IsKeyDown(KEY_KEY_5)) myRec.s_TypeVoxelSet = 4;
-            if(myRec.IsKeyDown(KEY_KEY_6)) myRec.s_TypeVoxelSet = 5;
-            if(myRec.IsKeyDown(KEY_KEY_7)) myRec.s_TypeVoxelSet = 6;
-            if(myRec.IsKeyDown(KEY_KEY_8)) myRec.s_TypeVoxelSet = 7;
-            if(myRec.IsKeyDown(KEY_KEY_9)) myRec.s_TypeVoxelSet = 8;
-            if(myRec.IsKeyDown(KEY_KEY_0)) myRec.s_TypeVoxelSet = 9;
-            if(myRec.IsKeyDown(KEY_MINUS)) myRec.s_TypeVoxelSet = 10;
-            if(myRec.IsKeyDown(KEY_BACK)) myRec.s_TypeVoxelSet = 11;
-            if(myRec.IsKeyDown(KEY_HOME)) myRec.s_TypeVoxelSet = 12;
-            if(myRec.IsKeyDown(KEY_KEY_X)) //Установим радиус сферы
-            {
-                cout << "Type sphere radius (<= 70!): ";
-                cin >> myRec.rad;
-                if(myRec.rad > 70) myRec.rad = 70;
-            }
-            if(myRec.IsKeyDown(KEY_KEY_G)) //Установим радиус сферы
-            {
-                cout << "Type boom radius (<= 70!): ";
-                cin >> myRec.radboom;
-                if(myRec.radboom > 70) myRec.radboom = 70;
-            }
-            if(myRec.IsKeyDown(KEY_KEY_P))
-            {
-                mc->s_StarLightIntensity += changefloat;
-                if(mc->s_StarLightIntensity > 1) mc->s_StarLightIntensity = 1;
-            }
-            if(myRec.IsKeyDown(KEY_OEM_1))
-            {
-                mc->s_StarLightIntensity -= changefloat;
-                if(mc->s_StarLightIntensity < 0) mc->s_StarLightIntensity = 0;
-            }
-            if(myRec.IsKeyDown(KEY_KEY_U))
-            {
-                rn->setPosition(rn->getPosition() + vector3df(0,0.01,0));
-            }
-            if(myRec.IsKeyDown(KEY_KEY_I))
-            {
-                rn->setPosition(rn->getPosition() + vector3df(0,-0.01,0));
-            }
-            if(myRec.IsKeyDown(KEY_KEY_J))
-            {
-                rn->setRotation(rn->getRotation() + vector3df(0,0.05,0));
-            }
-            if(myRec.IsKeyDown(KEY_KEY_K))
-            {
-                rn->setRotation(rn->getRotation() + vector3df(0,-0.05,0));
-            }
-            if(myRec.IsKeyDown(KEY_KEY_N))
-            {
-                rn->setRotation(vector3df(0,90,0));
-            }
-            if(myRec.IsKeyDown(KEY_KEY_A))
-            {
-                rn->setRotation(vector3df(0,0,0));
-            }
-            if(myRec.IsKeyDown(KEY_KEY_O))
-            {
-                rn->setRotation(vector3df(rand()%360,rand()%360,rand()%360));
-            }
-            if(myRec.isUpdate)
-            {
-                if(gravity)
-                {
-                    if(anim)
-                    {
-                        camFPS->removeAnimator(anim);
-                        anim->drop();
-                    }
-                    anim = smgr->createCollisionResponseAnimator(
-                        mfcmsn->s_MTS, camFPS, core::vector3df(0.4,0.9,0.4),
-                        core::vector3df(0,-0.05,0), core::vector3df(0,0.5,0));
-                    camFPS->addAnimator(anim);
-                    anim->drop();
-                    //gravity = true;
-                }
-                else
-                {
-                    if(anim)
-                    {
-                        camFPS->removeAnimator(anim);
-                        anim->drop();
-                    }
-                    anim = smgr->createCollisionResponseAnimator(
-                        mfcmsn->s_MTS, camFPS, core::vector3df(0.4,0.9,0.4),
-                        core::vector3df(0,0,0), core::vector3df(0,0.5,0));
-                    camFPS->addAnimator(anim);
-                    anim->drop();
-                    //gravity = false;
-                }
-                if(ghost)
-                {
-                    camFPS->removeAnimator(anim);
-                    anim->drop();
-                    anim = 0;
-                }
-                myRec.isUpdate = false;
-            }
+            device->yield();
+            continue;
         }
-    isve->getWorld(id)->saveAllChunks();
-    isve->stop(); //Останавливаем движок
-    delete isve;
-    device->drop();
+        isve->update(); //Тик движка: готовые чанки становятся нодами, прозрачные треугольники сортируются
+        driver->beginScene(true, true, SColor(0,0,0,0));
+        smgr->drawAll();
+
+        //Ищем блок, на который смотрит камера (не дальше 30 блоков)
+        line3d<f32> ray;
+        ray.start = camFPS->getPosition();
+        ray.end = ray.start + (camFPS->getTarget() - ray.start).normalize() * 30.0f;
+        vector3df intersection;
+        triangle3df hitTriangle;
+        ISceneNode* selectedSceneNode = collMan->getSceneNodeAndCollisionPointFromRay(ray, intersection, hitTriangle, IDFlag_IsPickable, 0);
+        myRec.hasTarget = (selectedSceneNode != 0);
+        if(selectedSceneNode)
+        {
+            bill->setPosition(intersection);
+            //Рисуем красный каркас треугольника, в который попал луч (в мировых координатах)
+            driver->setTransform(ETS_WORLD, matrix4());
+            driver->setMaterial(wireMaterial);
+            driver->draw3DTriangle(hitTriangle, SColor(0,255,0,0));
+            myRec.hitTriangle = hitTriangle; //Отдаём обработчику треугольник
+            myRec.hitPoint = intersection; //ТЕСТ: точка под курсором - для установки маленьких блоков
+            vector3df look = (camFPS->getTarget() - camFPS->getPosition()).normalize();
+            myRec.vct = Vector3d<float>(look.X, look.Y, look.Z); //Отдаём обработчику вектор камеры
+            myRec.campos = Vector3d<float>(camFPS->getPosition().X, camFPS->getPosition().Y, camFPS->getPosition().Z);
+        }
+
+        //Подсказка в левом верхнем углу
+        stringw text = L"Type voxel set: ";
+        text += myRec.s_TypeVoxelSet + 1;
+        text += L" (keys 1-9, 0, -, Backspace = glass, Home = water)\nFPS: ";
+        text += driver->getFPS();
+        text += L"\nGravity: ";
+        text += myRec.gravity ? L"On" : L"Off";
+        text += L" ('M' key)\nType moving: ";
+        text += myRec.ghost ? L"ghost" : L"stone";
+        text += L" ('N' key)\nAll keys: see the controls .txt file next to the bin folders";
+        text += myRec.nestedTestMode ? L"\nTEST: small blocks - left click splits, right click places ('C' key)" : L"\nTEST: small blocks off ('C' key)";
+        if(font) font->draw(text, rect<s32>(10, 10, 800, 200), SColor(255,255,255,255));
+        guienv->drawAll();
+        driver->endScene();
+
+        //Удерживаемые клавиши (действуют, пока клавиша нажата)
+        for(int i = 0; i < 13; i++) if(myRec.IsKeyDown(blockKeys[i])) myRec.s_TypeVoxelSet = i; //Выбор типа блока
+        if(myRec.IsKeyDown(KEY_KEY_X)) //Радиус сферы (графика стоит, пока не введено число!)
+        {
+            cout << "Type sphere radius (<= 70!): ";
+            cin >> myRec.rad;
+            if(myRec.rad > 70) myRec.rad = 70;
+        }
+        if(myRec.IsKeyDown(KEY_KEY_G)) //Радиус взрыва и освещения (графика стоит, пока не введено число!)
+        {
+            cout << "Type boom radius (<= 70!): ";
+            cin >> myRec.radboom;
+            if(myRec.radboom > 70) myRec.radboom = 70;
+        }
+        if(myRec.IsKeyDown(KEY_KEY_P)) mc->s_StarLightIntensity = core::min_(mc->s_StarLightIntensity + 0.01f, 1.f); //Сила "солнца"
+        if(myRec.IsKeyDown(KEY_OEM_1)) mc->s_StarLightIntensity = core::max_(mc->s_StarLightIntensity - 0.01f, 0.f); //KEY_OEM_1 - клавиша ";"
+        //Сдвиги и вращения мира - проверка того, что установка/удаление блоков работают в любом положении мира
+        if(myRec.IsKeyDown(KEY_KEY_U)) rootnode->setPosition(rootnode->getPosition() + vector3df(0,0.01,0));
+        if(myRec.IsKeyDown(KEY_KEY_I)) rootnode->setPosition(rootnode->getPosition() + vector3df(0,-0.01,0));
+        if(myRec.IsKeyDown(KEY_KEY_J)) rootnode->setRotation(rootnode->getRotation() + vector3df(0,0.05,0));
+        if(myRec.IsKeyDown(KEY_KEY_K)) rootnode->setRotation(rootnode->getRotation() + vector3df(0,-0.05,0));
+        if(myRec.IsKeyDown(KEY_KEY_Y)) rootnode->setRotation(vector3df(0,90,0));
+        if(myRec.IsKeyDown(KEY_KEY_A)) rootnode->setRotation(vector3df(0,0,0));
+        if(myRec.IsKeyDown(KEY_KEY_O)) rootnode->setRotation(vector3df(rand()%360,rand()%360,rand()%360));
+
+        if(myRec.isUpdate) //Пересоздаём аниматор столкновений под новый режим движения
+        {
+            if(anim)
+            {
+                camFPS->removeAnimator(anim); //removeAnimator сам освобождает свою ссылку
+                anim = 0;
+            }
+            if(!myRec.ghost) //В режиме "призрака" аниматора нет - летаем сквозь стены
+            {
+                //Эллипсоид камеры 0.4 x 0.9 x 0.4, гравитация вниз или её нет, смещение глаз на 0.5 вверх.
+                anim = smgr->createCollisionResponseAnimator(mfcmsn->s_MTS, camFPS, vector3df(0.4,0.9,0.4),
+                    myRec.gravity ? vector3df(0,-0.05,0) : vector3df(0,0,0), vector3df(0,0.5,0));
+                camFPS->addAnimator(anim);
+                anim->drop(); //Теперь аниматором владеет камера
+            }
+            myRec.isUpdate = false;
+        }
+    }
+
+    //--- Завершение ---
+    isve->stop(); //Сначала останавливаем потоки движка (все поставленные задания будут выполнены)...
+    isve->getWorld(id)->saveAllChunks(); //...и только потом сохраняем мир, когда его уже никто не меняет
+    delete isve; //Удаляет миры, фабрику, контроллеры, генератор и логгер (свою ссылку). Перед этим убирает ноды чанков:
+                 //фабрика получает onUpdateChunkMeshSceneNode(0, ...) по каждой ноде (устройство ещё живо).
+    mfcmsn = 0; //Фабрику удалил движок
+    device->drop(); //Последним - устройство Irrlicht (движку оно нужно до конца)
     return 0;
 }

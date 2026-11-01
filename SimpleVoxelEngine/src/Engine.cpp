@@ -38,6 +38,12 @@ void SimpleVoxelEngine::Core::Engine::registerEvent(SimpleVoxelEngine::Defines::
     if(s_Logger) s_Logger->registerEvent(TypeEvent, TextEvent, IsFatal);
 }
 
+//Добавлено: наследник, переопределивший registerEvent(), может сначала узнать, выведется ли сообщение (и не делать лишней работы).
+bool SimpleVoxelEngine::Core::Engine::isEventPrinted(SimpleVoxelEngine::Defines::EventType TypeEvent) const
+{
+    return s_Logger && s_Logger->isPrinted(TypeEvent);
+}
+
 int SimpleVoxelEngine::Core::Engine::addWorld()
 {
     WorldCreatingParameters wcp;
@@ -66,17 +72,15 @@ int SimpleVoxelEngine::Core::Engine::addWorld(World* wrld)
         registerEvent(EVENT_TYPE_ERROR, "Error adding world. World pointer is null", true);
         return -1;
     }
-    if(!wrld)
-    {
-        registerEvent(EVENT_TYPE_LOGIC_VIOLATION, "Error setting world to engine. World pointer is NULL.");
-        return -1;
-    }
     if(wrld->getEngine() != this)
     {
         registerEvent(EVENT_TYPE_LOGIC_VIOLATION, "Error setting world to engine. World already setted in other engine.");
         return -1;
     }
-    if(wrld->getId() != 0)
+    //Исправлено: было getId() != 0. Новый мир имеет id -1 (так его создают оба конструктора World), поэтому
+    //любой новый мир отклонялся, а уже зарегистрированный мир с id 0 можно было добавить второй раз
+    //(потом деструктор движка удалял его дважды).
+    if(wrld->getId() != -1)
     {
         registerEvent(EVENT_TYPE_LOGIC_VIOLATION, "Error setting world to engine. World id already setted.");
         return -1;
@@ -95,7 +99,10 @@ int SimpleVoxelEngine::Core::Engine::addWorld(World* wrld)
 
 World* SimpleVoxelEngine::Core::Engine::getWorld(int id)
 {
-    World* wrld = s_Worlds[id];
+    //find вместо operator[]: operator[] вставлял бы пустую запись, т.е. менял карту при простом чтении
+    //(а getWorld() может вызываться из нескольких потоков одновременно).
+    map< int, World* >::iterator iter = s_Worlds.find(id);
+    World* wrld = (iter == s_Worlds.end()) ? 0 : iter->second;
     if(!wrld) registerEvent(EVENT_TYPE_LOGIC_VIOLATION, "Error getting world with ID = " + WorkFunctions::ConvertFunctions::itos(id) + ". The world does not exist", true);
     return wrld;
 }

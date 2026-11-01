@@ -40,10 +40,12 @@ namespace SimpleVoxelEngine
                 /*! \param vect Добавляемый вектор.
                 */
                 void addNextVector(SimpleVoxelEngine::Additional::Vector3d<int> vect);
-                //! Добавление вектора в адрес по индексу.
-                /*! \param ind Индекс, куда идёт добавление.
-                \param vect Добавляемый вектор.
-                \return Возвращает true в случае успеха, иначе false. Нельзя добавить вектор на несуществующий индекс (только addNextVector()).
+                //! Замена вектора по индексу (или добавление в конец).
+                /*! Если ind < getLastVectInd() - вектор с этим индексом заменяется на vect; если ind == getLastVectInd() - vect
+                добавляется в конец (как addNextVector()).
+                \param ind Индекс вектора (0 - чанк, 1 - воксель в чанке и т.д.).
+                \param vect Новый вектор.
+                \return Возвращает true в случае успеха, иначе false (ind > getLastVectInd()).
                 */
                 bool addVector(int ind, SimpleVoxelEngine::Additional::Vector3d<int> vect);
                 //! Получение последнего индекса.

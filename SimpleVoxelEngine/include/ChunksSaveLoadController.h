@@ -45,6 +45,9 @@ namespace SimpleVoxelEngine
                 */
                 virtual bool canLoad(SimpleVoxelEngine::Core::World* wrld, SimpleVoxelEngine::Additional::Vector3d<int> vect) = 0;
             private:
+                //! Установка мира, которому принадлежит контроллер (вызывает мир при World::setChunksSaveLoadController()).
+                /*! \param wrld Мир.
+                */
                 void setWorld(SimpleVoxelEngine::Core::World*);
                 SimpleVoxelEngine::Core::World* s_World;
         };

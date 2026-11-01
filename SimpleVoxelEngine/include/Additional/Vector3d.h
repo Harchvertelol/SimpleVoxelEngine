@@ -2,6 +2,8 @@
 #define SimpleVoxelEngine__Vector3d_H
 
 #include <cmath>
+#include <sstream>
+#include <string>
 
 #include "WorkFunctions.h"
 #include "Defines.h"
@@ -17,7 +19,9 @@ namespace SimpleVoxelEngine
         {
             public:
                 //! Конструктор по умолчанию.
-                /*! \param x Координата X вектора.
+                /*! Внимание: конструктор неявный, поэтому число само превращается в вектор (число, 0, 0) -
+                например, v + 1 означает v + (1, 0, 0). Для сдвига на число по всем осям пишите v + Vector3d(1, 1, 1).
+                \param x Координата X вектора.
                 \param y Координата Y вектора.
                 \param z Координата Z вектора.
                 */
@@ -59,13 +63,18 @@ namespace SimpleVoxelEngine
                     return s_ZCoord;
                 }
                 //! Преобразование вектора в string.
-                /*! Преобразует вектор в строковый вид, используя тип float для функции преобразования.
+                /*! Координаты выводятся в своём типе (для float - 6 значащих цифр).
                 \param split_str Разделитель координат.
                 \return Строковый вид вектора.
                 */
                 inline std::string toString(std::string split_str = ", ") const
                 {
-                    return WorkFunctions::ConvertFunctions::ftos( getX() ) + split_str + WorkFunctions::ConvertFunctions::ftos( getY() ) + split_str + WorkFunctions::ConvertFunctions::ftos( getZ() );
+                    //Исправлено: координаты переводились через float с 6 значащими цифрами - у целых векторов начиная
+                    //с 1000000 получалось "1e+06", и разные чанки давали одну строку (например, одно имя файла чанка).
+                    //Теперь каждый тип выводится как есть; для int меньше миллиона и для float строка прежняя.
+                    std::ostringstream str;
+                    str << getX() << split_str << getY() << split_str << getZ();
+                    return str.str();
                 }
                 //! Получение квадрата стандартной нормы вектора.
                 /*! \return Возвращает квадрат стандартной нормы вектора.
@@ -90,7 +99,9 @@ namespace SimpleVoxelEngine
                     return newvect;
                 }
                 //! Получение нормализованного вектора.
-                /*! \return Возвращает нормализованный вектор.
+                /*! Нулевой вектор не нормализуется: для float получится NaN, для int - деление на ноль. Для int результат
+                к тому же округляется к нулю (почти всегда нулевой вектор) - используйте для float.
+                \return Возвращает нормализованный вектор.
                 */
                 inline Vector3d<TYPE_TypeCoord> getNormalizeVector() const
                 {
@@ -143,11 +154,14 @@ namespace SimpleVoxelEngine
                     return false;
                 }
                 //! Оператор сравнения "меньше или равно".
+                /*! Внимание: "меньше" сравнивает точно, а "равно" - с допуском EPS (см. operator==), поэтому для float
+                a < b и a == b могут быть верны одновременно. Для int всё согласовано. */
                 bool operator<=(const Vector3d<TYPE_TypeCoord>& vect) const
                 {
                     return (*this) < vect || (*this) == vect;
                 }
                 //! Оператор сравнения "больше или равно".
+                /*! Для float - то же замечание, что и у operator<=. */
                 bool operator>=(const Vector3d<TYPE_TypeCoord>& vect) const
                 {
                     return (*this) > vect || (*this) == vect;
@@ -242,6 +256,9 @@ namespace SimpleVoxelEngine
             return false;
         }
         //! Оператор сравнения "равно" для возможности использования класса как индексатора std::map.
+        /*! Сравнивает с допуском EPS по каждой координате (для int - то же, что точное равенство). Для float это не
+        отношение эквивалентности (a == b и b == c не значит a == c) и не согласовано с точным operator<. std::map
+        пользуется только operator<, поэтому ключи карты сравниваются точно. */
         template<class TYPE_TypeCoord> bool operator==(const Vector3d<TYPE_TypeCoord>& vect1, const Vector3d<TYPE_TypeCoord>& vect2)
         {
             return std::abs(vect1.getX() - vect2.getX()) <= SimpleVoxelEngine::Defines::EPS && std::abs(vect1.getY() - vect2.getY()) <= SimpleVoxelEngine::Defines::EPS && std::abs(vect1.getZ() - vect2.getZ()) <= SimpleVoxelEngine::Defines::EPS;

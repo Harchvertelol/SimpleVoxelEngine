@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>IrrSimpleVoxelEngine: Пространство имен SimpleVoxelEngine::IrrEngine::IrrSVEDefines</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,140 +23,187 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">IrrSimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Враппер для воксельного движка на irrlicht</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li><a href="pages.html"><span>Описания</span></a></li>
-      <li class="current"><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li><a href="namespacemembers.html"><span>Члены&#160;пространств&#160;имен</span></a></li>
-    </ul>
+  <div id="splitbar" class="ui-resizable-handle">
   </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Друзья</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html">IrrSVEDefines</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#enum-members">Перечисления</a>  </div>
-  <div class="headertitle">
-<div class="title">Пространство имен SimpleVoxelEngine::IrrEngine::IrrSVEDefines</div>  </div>
+  <div class="headertitle"><div class="title">Пространство имен SimpleVoxelEngine::IrrEngine::IrrSVEDefines</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Пространство имён с предопределённым константами для работы движка.  
 <a href="#details">Подробнее...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Перечисления</h2></td></tr>
-<tr class="memitem:afdf9968e4547e68deda475ee4517f5c3"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3">NUMBER_DEFINES</a> { <br />
-&#160;&#160;<a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a6c64b86a8a4f242e2d586b47feb0f98d">DEFAULT_NUMBER_OF_THREAD_ADD_CHUNKS</a> = 1, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3af86c70f04793b400cea82f8e8443c5f8">DEFAULT_NUMBER_OF_THREAD_UPDATE_CHUNKS</a> = 1, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a98d3a516d5baa2fa31717bfd0476edef">WAKE_UP_GARBAGE_COLLECTOR_ONCE_PER_MILLISECONDS</a> = 1000, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3ad5758c01d3943eea2b77a46376b29534">MAXIMUM_SIZE_OF_QUEUE_FOR_START_CLEANING</a> = 100000, 
-<br />
-&#160;&#160;<a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3a630523280ff52003ff8352dce2362f64">ALWAYS_BE_CLEANED_ONCE_PER_MILLISECOND</a> = 60000, 
-<b>TIMER_OCCLUSION_QUERIES_IN_MILLISECONDS</b> = 100
+<tr class="memitem:afdf9968e4547e68deda475ee4517f5c3" id="r_afdf9968e4547e68deda475ee4517f5c3"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#afdf9968e4547e68deda475ee4517f5c3">NUMBER_DEFINES</a> { <br />
+&#160;&#160;<a class="el" href="#afdf9968e4547e68deda475ee4517f5c3a6c64b86a8a4f242e2d586b47feb0f98d">DEFAULT_NUMBER_OF_THREAD_ADD_CHUNKS</a> = 1
+, <a class="el" href="#afdf9968e4547e68deda475ee4517f5c3af86c70f04793b400cea82f8e8443c5f8">DEFAULT_NUMBER_OF_THREAD_UPDATE_CHUNKS</a> = 1
+, <a class="el" href="#afdf9968e4547e68deda475ee4517f5c3a0223ac0bc4276306565966eb248dd222">TIMER_OCCLUSION_QUERIES_IN_MILLISECONDS</a> = 100
+, <a class="el" href="#afdf9968e4547e68deda475ee4517f5c3a27c850b9052b2b2bb5eaac291e8c273a">MAX_FRAMES_BETWEEN_OCCLUSION_QUERIES</a> = 900
+, <br />
+&#160;&#160;<a class="el" href="#afdf9968e4547e68deda475ee4517f5c3af248635d836505278742b53135b09d5a">MAX_FRAMES_BETWEEN_OCCLUSION_QUERIES_LIMIT</a> = 1000
+, <a class="el" href="#afdf9968e4547e68deda475ee4517f5c3ae315955bc7633ccaca947d22531f1d4e">MAX_DELAY_GLUE_BLOCK_CHUNKS_IN_MILLISECONDS</a> = 1000
+, <a class="el" href="#afdf9968e4547e68deda475ee4517f5c3a9b883ff691084fb66d034b07ac26eda6">THREAD_WAIT_INTERVAL_IN_MILLISECONDS</a> = 2
 <br />
  }</td></tr>
-<tr class="memdesc:afdf9968e4547e68deda475ee4517f5c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Числовые константы.  <a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3">Подробнее...</a><br /></td></tr>
-<tr class="separator:afdf9968e4547e68deda475ee4517f5c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:afdf9968e4547e68deda475ee4517f5c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Числовые константы.  <a href="#afdf9968e4547e68deda475ee4517f5c3">Подробнее...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Переменные</h2></td></tr>
+<tr class="memitem:a8563b1c9d15b937af7ecf19a4af057d6" id="r_a8563b1c9d15b937af7ecf19a4af057d6"><td class="memItemLeft">const float&#160;</td><td class="memItemRight"><a class="el" href="#a8563b1c9d15b937af7ecf19a4af057d6">TRANSPARENT_SORT_CAMERA_THRESHOLD</a> = 0.25f</td></tr>
+<tr class="memdesc:a8563b1c9d15b937af7ecf19a4af057d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Насколько (в единицах сцены, в локальных координатах ноды) должна сместиться камера, чтобы полупрозрачные треугольники блока были пересортированы.  <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
 <div class="textblock"><p>Пространство имён с предопределённым константами для работы движка. </p>
-</div><h2 class="groupheader">Перечисления</h2>
-<a class="anchor" id="afdf9968e4547e68deda475ee4517f5c3"></a>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Перечисления</h2>
+<a id="afdf9968e4547e68deda475ee4517f5c3" name="afdf9968e4547e68deda475ee4517f5c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdf9968e4547e68deda475ee4517f5c3">&#9670;&#160;</a></span>NUMBER_DEFINES</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html#afdf9968e4547e68deda475ee4517f5c3">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::NUMBER_DEFINES</a></td>
+          <td class="memname">enum <a class="el" href="#afdf9968e4547e68deda475ee4517f5c3">SimpleVoxelEngine::IrrEngine::IrrSVEDefines::NUMBER_DEFINES</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Числовые константы. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a class="anchor" id="afdf9968e4547e68deda475ee4517f5c3a6c64b86a8a4f242e2d586b47feb0f98d"></a>DEFAULT_NUMBER_OF_THREAD_ADD_CHUNKS&#160;</td><td class="fielddoc">
-<p>Стандартное количество потоков для создания чанков. В данный момент ни на что не влияет. </p>
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="afdf9968e4547e68deda475ee4517f5c3a6c64b86a8a4f242e2d586b47feb0f98d" name="afdf9968e4547e68deda475ee4517f5c3a6c64b86a8a4f242e2d586b47feb0f98d"></a>DEFAULT_NUMBER_OF_THREAD_ADD_CHUNKS&#160;</td><td class="fielddoc"><p>Стандартное количество потоков для создания чанков (теперь это реальное число потоков пула, см. setMaxNumberOfThreadAddChunks). </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="afdf9968e4547e68deda475ee4517f5c3af86c70f04793b400cea82f8e8443c5f8"></a>DEFAULT_NUMBER_OF_THREAD_UPDATE_CHUNKS&#160;</td><td class="fielddoc">
-<p>Стандартное количество потоков для обновления чанков. В данный момент ни на что не влияет. </p>
+<tr><td class="fieldname"><a id="afdf9968e4547e68deda475ee4517f5c3af86c70f04793b400cea82f8e8443c5f8" name="afdf9968e4547e68deda475ee4517f5c3af86c70f04793b400cea82f8e8443c5f8"></a>DEFAULT_NUMBER_OF_THREAD_UPDATE_CHUNKS&#160;</td><td class="fielddoc"><p>Стандартное количество потоков для обновления чанков (реальное число потоков пула, см. setMaxNumberOfThreadUpdateChunks). </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="afdf9968e4547e68deda475ee4517f5c3a98d3a516d5baa2fa31717bfd0476edef"></a>WAKE_UP_GARBAGE_COLLECTOR_ONCE_PER_MILLISECONDS&#160;</td><td class="fielddoc">
-<p>Раз за сколько миллисекунд просыпается сборщик мусора. </p>
+<tr><td class="fieldname"><a id="afdf9968e4547e68deda475ee4517f5c3a0223ac0bc4276306565966eb248dd222" name="afdf9968e4547e68deda475ee4517f5c3a0223ac0bc4276306565966eb248dd222"></a>TIMER_OCCLUSION_QUERIES_IN_MILLISECONDS&#160;</td><td class="fielddoc"><p>Раз в это количество миллисекунд происходит пересчёт Occlusion Queries. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="afdf9968e4547e68deda475ee4517f5c3ad5758c01d3943eea2b77a46376b29534"></a>MAXIMUM_SIZE_OF_QUEUE_FOR_START_CLEANING&#160;</td><td class="fielddoc">
-<p>Если длина хотя бы одной очереди задач превысит данное значение, заработает сборщик мусора. </p>
+<tr><td class="fieldname"><a id="afdf9968e4547e68deda475ee4517f5c3a27c850b9052b2b2bb5eaac291e8c273a" name="afdf9968e4547e68deda475ee4517f5c3a27c850b9052b2b2bb5eaac291e8c273a"></a>MAX_FRAMES_BETWEEN_OCCLUSION_QUERIES&#160;</td><td class="fielddoc"><p>Occlusion Queries выполняются не реже, чем раз в это количество кадров (вызовов runOcclusionQueries()). </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="afdf9968e4547e68deda475ee4517f5c3a630523280ff52003ff8352dce2362f64"></a>ALWAYS_BE_CLEANED_ONCE_PER_MILLISECOND&#160;</td><td class="fielddoc">
-<p>Независимо ни от чего раз в это количество миллисекунд сборщик мусора просыпается и чистит очереди. </p>
+<tr><td class="fieldname"><a id="afdf9968e4547e68deda475ee4517f5c3af248635d836505278742b53135b09d5a" name="afdf9968e4547e68deda475ee4517f5c3af248635d836505278742b53135b09d5a"></a>MAX_FRAMES_BETWEEN_OCCLUSION_QUERIES_LIMIT&#160;</td><td class="fielddoc"><p>Наибольшее допустимое значение setMaxFramesBetweenOcclusionQueries(): Irrlicht удаляет Occlusion Query, которую не запускали больше 1000 кадров. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="afdf9968e4547e68deda475ee4517f5c3ae315955bc7633ccaca947d22531f1d4e" name="afdf9968e4547e68deda475ee4517f5c3ae315955bc7633ccaca947d22531f1d4e"></a>MAX_DELAY_GLUE_BLOCK_CHUNKS_IN_MILLISECONDS&#160;</td><td class="fielddoc"><p>Сколько максимум склейка блока чанков может ждать, пока будут построены его новые чанки. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="afdf9968e4547e68deda475ee4517f5c3a9b883ff691084fb66d034b07ac26eda6" name="afdf9968e4547e68deda475ee4517f5c3a9b883ff691084fb66d034b07ac26eda6"></a>THREAD_WAIT_INTERVAL_IN_MILLISECONDS&#160;</td><td class="fielddoc"><p>Как часто поток очереди и потоки построения, когда им нечего делать, проверяют, не появилась ли работа (на Windows фактически - до ~15 мс). </p>
 </td></tr>
 </table>
 
-<p>См. определение в файле <a class="el" href="_irr_s_v_e_defines_8h_source.html">IrrSVEDefines.h</a> строка <a class="el" href="_irr_s_v_e_defines_8h_source.html#l00011">11</a></p>
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Переменные</h2>
+<a id="a8563b1c9d15b937af7ecf19a4af057d6" name="a8563b1c9d15b937af7ecf19a4af057d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8563b1c9d15b937af7ecf19a4af057d6">&#9670;&#160;</a></span>TRANSPARENT_SORT_CAMERA_THRESHOLD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const float SimpleVoxelEngine::IrrEngine::IrrSVEDefines::TRANSPARENT_SORT_CAMERA_THRESHOLD = 0.25f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Насколько (в единицах сцены, в локальных координатах ноды) должна сместиться камера, чтобы полупрозрачные треугольники блока были пересортированы. </p>
+<p>Сортировать каждый кадр дорого, а при маленьком смещении камеры порядок треугольников почти не меняется. </p>
 
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по IrrSimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:37. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a></li><li class="navelem"><a href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html">IrrSVEDefines</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

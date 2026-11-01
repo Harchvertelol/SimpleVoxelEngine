@@ -29,8 +29,8 @@ namespace SimpleVoxelEngine
             public:
                 //! Стандартный конструктор.
                 ARGBColorVoxel();
-                //! Конструктор копирования.
-                ARGBColorVoxel(SimpleVoxelEngine::Additional::ARGBColor& argbcolor);
+                //Удалён конструктор ARGBColorVoxel(ARGBColor&) (был ошибочно назван конструктором копирования): вместе с
+                //конструктором ниже он давал неоднозначность - ARGBColor c; new ARGBColorVoxel(c); не компилировался.
                 //! Конструктор с заданием цвета.
                 /*! \param argbcolor Задаваемый цвет.
                 */
@@ -40,11 +40,15 @@ namespace SimpleVoxelEngine
                 //! Установка вокселю цвета.
                 /*! \param argbcolor Устанавливаемый цвет.
                 */
-                void setARGBColor(SimpleVoxelEngine::Additional::ARGBColor argbcolor); //!< \param argbcolor Цвет, который устанавливают вокселю.
+                void setARGBColor(SimpleVoxelEngine::Additional::ARGBColor argbcolor); //Изменено: убрано повторное описание параметра.
                 //! Получить цвет вокселя.
-                SimpleVoxelEngine::Additional::ARGBColor getARGBColor(); //!< \return Возвращает цвет вокселя.
+                /*! \return Возвращает цвет вокселя.
+                */
+                SimpleVoxelEngine::Additional::ARGBColor getARGBColor();
                 //! Функция для получения информации для рендеринга вокселя.
-                SimpleVoxelEngine::Core::VoxelInfo* getVoxelForRenderingInfo(); //!< \return Возвращает указатель на VoxelInfoARGBColor.
+                /*! \return Возвращает новый VoxelInfoARGBColor (его удалит VoxelForRendering).
+                */
+                SimpleVoxelEngine::Core::VoxelInfo* getVoxelForRenderingInfo();
             private:
                 SimpleVoxelEngine::Additional::ARGBColor s_ARGBColor;
         };

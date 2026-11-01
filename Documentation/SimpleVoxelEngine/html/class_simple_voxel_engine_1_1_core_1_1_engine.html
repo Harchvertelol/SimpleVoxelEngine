@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>SimpleVoxelEngine: Класс SimpleVoxelEngine::Core::Engine</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,135 +23,145 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">SimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Воксельный движок</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li><a href="pages.html"><span>Описания</span></a></li>
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
-      <li><a href="hierarchy.html"><span>Иерархия&#160;классов</span></a></li>
-      <li><a href="functions.html"><span>Члены&#160;классов</span></a></li>
-    </ul>
+  <div id="splitbar" class="ui-resizable-handle">
   </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_simple_voxel_engine_1_1_core_1_1_engine.html','','class_simple_voxel_engine_1_1_core_1_1_engine-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_core.html">Core</a></li><li class="navelem"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#pub-methods">Открытые члены</a> &#124;
-<a href="class_simple_voxel_engine_1_1_core_1_1_engine-members.html">Полный список членов класса</a>  </div>
-  <div class="headertitle">
-<div class="title">Класс SimpleVoxelEngine::Core::Engine</div>  </div>
+  <div class="headertitle"><div class="title">Класс SimpleVoxelEngine::Core::Engine</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Воксельный движок.  
- <a href="class_simple_voxel_engine_1_1_core_1_1_engine.html#details">Подробнее...</a></p>
+ <a href="#details">Подробнее...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_engine_8h_source.html">Engine.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Открытые члены</h2></td></tr>
-<tr class="memitem:a7cb6fc73da8236990f0e5743a71c7a51"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7cb6fc73da8236990f0e5743a71c7a51"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html#a7cb6fc73da8236990f0e5743a71c7a51">Engine</a> ()</td></tr>
+<tr class="memitem:a7cb6fc73da8236990f0e5743a71c7a51" id="r_a7cb6fc73da8236990f0e5743a71c7a51"><td class="memItemLeft"><a id="a7cb6fc73da8236990f0e5743a71c7a51" name="a7cb6fc73da8236990f0e5743a71c7a51"></a>
+&#160;</td><td class="memItemRight"><b>Engine</b> ()</td></tr>
 <tr class="memdesc:a7cb6fc73da8236990f0e5743a71c7a51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный конструктор. <br /></td></tr>
-<tr class="separator:a7cb6fc73da8236990f0e5743a71c7a51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18a08eb13c99ee10355fa131e440f0d6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html#a18a08eb13c99ee10355fa131e440f0d6">Engine</a> (<a class="el" href="class_simple_voxel_engine_1_1_debug_1_1_logger.html">SimpleVoxelEngine::Debug::Logger</a> *lgr)</td></tr>
-<tr class="memdesc:a18a08eb13c99ee10355fa131e440f0d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор с логгером.  <a href="#a18a08eb13c99ee10355fa131e440f0d6">Подробнее...</a><br /></td></tr>
-<tr class="separator:a18a08eb13c99ee10355fa131e440f0d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b34f7bd85c22f88463ba27ae86b7643"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b34f7bd85c22f88463ba27ae86b7643"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html#a2b34f7bd85c22f88463ba27ae86b7643">~Engine</a> ()</td></tr>
-<tr class="memdesc:a2b34f7bd85c22f88463ba27ae86b7643"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный деструктор. <br /></td></tr>
-<tr class="separator:a2b34f7bd85c22f88463ba27ae86b7643"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8be40525434878d6632f3aab051323c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html#ac8be40525434878d6632f3aab051323c">registerEvent</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a30357d9ac225edac4962f1ccc75bab4d">SimpleVoxelEngine::Defines::EventType</a> TypeEvent, std::string TextEvent, bool IsFatal=false)</td></tr>
-<tr class="memdesc:ac8be40525434878d6632f3aab051323c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Регистрация событий.  <a href="#ac8be40525434878d6632f3aab051323c">Подробнее...</a><br /></td></tr>
-<tr class="separator:ac8be40525434878d6632f3aab051323c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d79da7893ad9fe3380b7d3eaff0fe5e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html#a2d79da7893ad9fe3380b7d3eaff0fe5e">addWorld</a> ()</td></tr>
-<tr class="memdesc:a2d79da7893ad9fe3380b7d3eaff0fe5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создание мира по умолчанию.  <a href="#a2d79da7893ad9fe3380b7d3eaff0fe5e">Подробнее...</a><br /></td></tr>
-<tr class="separator:a2d79da7893ad9fe3380b7d3eaff0fe5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7828bcfbb3a8311e85686faf52e52538"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html#a7828bcfbb3a8311e85686faf52e52538">addWorld</a> (<a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html">WorldCreatingParameters</a> &amp;wcp)</td></tr>
-<tr class="memdesc:a7828bcfbb3a8311e85686faf52e52538"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создание мира.  <a href="#a7828bcfbb3a8311e85686faf52e52538">Подробнее...</a><br /></td></tr>
-<tr class="separator:a7828bcfbb3a8311e85686faf52e52538"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac085b3f93d352b00c7d54d8240640f28"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html#ac085b3f93d352b00c7d54d8240640f28">addWorld</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html">World</a> *wrld)</td></tr>
-<tr class="memdesc:ac085b3f93d352b00c7d54d8240640f28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавление мира к движку.  <a href="#ac085b3f93d352b00c7d54d8240640f28">Подробнее...</a><br /></td></tr>
-<tr class="separator:ac085b3f93d352b00c7d54d8240640f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed41ee9400cbfe38e3b77c65958cd56d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html">World</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html#aed41ee9400cbfe38e3b77c65958cd56d">getWorld</a> (int id)</td></tr>
-<tr class="memdesc:aed41ee9400cbfe38e3b77c65958cd56d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение мира по ID.  <a href="#aed41ee9400cbfe38e3b77c65958cd56d">Подробнее...</a><br /></td></tr>
-<tr class="separator:aed41ee9400cbfe38e3b77c65958cd56d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7889d09741148b849ae6b582ce721090"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_debug_1_1_logger.html">SimpleVoxelEngine::Debug::Logger</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html#a7889d09741148b849ae6b582ce721090">getLogger</a> ()</td></tr>
-<tr class="memdesc:a7889d09741148b849ae6b582ce721090"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение логгера.  <a href="#a7889d09741148b849ae6b582ce721090">Подробнее...</a><br /></td></tr>
-<tr class="separator:a7889d09741148b849ae6b582ce721090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18a08eb13c99ee10355fa131e440f0d6" id="r_a18a08eb13c99ee10355fa131e440f0d6"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a18a08eb13c99ee10355fa131e440f0d6">Engine</a> (<a class="el" href="class_simple_voxel_engine_1_1_debug_1_1_logger.html">SimpleVoxelEngine::Debug::Logger</a> *lgr)</td></tr>
+<tr class="memdesc:a18a08eb13c99ee10355fa131e440f0d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор с логгером.  <br /></td></tr>
+<tr class="memitem:a1a4e9bf698cade4b12b1f91b36e5f88d" id="r_a1a4e9bf698cade4b12b1f91b36e5f88d"><td class="memItemLeft"><a id="a1a4e9bf698cade4b12b1f91b36e5f88d" name="a1a4e9bf698cade4b12b1f91b36e5f88d"></a>
+virtual&#160;</td><td class="memItemRight"><b>~Engine</b> ()</td></tr>
+<tr class="memdesc:a1a4e9bf698cade4b12b1f91b36e5f88d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный деструктор. <br /></td></tr>
+<tr class="memitem:ae7543c95c3ac5441308f44be9b87f57f" id="r_ae7543c95c3ac5441308f44be9b87f57f"><td class="memItemLeft"><a id="ae7543c95c3ac5441308f44be9b87f57f" name="ae7543c95c3ac5441308f44be9b87f57f"></a>
+&#160;</td><td class="memItemRight"><b>Engine</b> (const Engine &amp;)=delete</td></tr>
+<tr class="memdesc:ae7543c95c3ac5441308f44be9b87f57f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Копирование запрещено: движок владеет мирами и держит ссылку на логгер. <br /></td></tr>
+<tr class="memitem:a20a1fa38289a84e35e2f1d60a3b22be2" id="r_a20a1fa38289a84e35e2f1d60a3b22be2"><td class="memItemLeft"><a id="a20a1fa38289a84e35e2f1d60a3b22be2" name="a20a1fa38289a84e35e2f1d60a3b22be2"></a>
+<a class="el" href="#a7cb6fc73da8236990f0e5743a71c7a51">Engine</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (const <a class="el" href="#a7cb6fc73da8236990f0e5743a71c7a51">Engine</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a20a1fa38289a84e35e2f1d60a3b22be2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Присваивание запрещено по той же причине. <br /></td></tr>
+<tr class="memitem:a3550ac39ecee5ef4a789dc70430c5344" id="r_a3550ac39ecee5ef4a789dc70430c5344"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a3550ac39ecee5ef4a789dc70430c5344">registerEvent</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a30357d9ac225edac4962f1ccc75bab4d">SimpleVoxelEngine::Defines::EventType</a> TypeEvent, std::string TextEvent, bool IsFatal=false)</td></tr>
+<tr class="memdesc:a3550ac39ecee5ef4a789dc70430c5344"><td class="mdescLeft">&#160;</td><td class="mdescRight">Регистрация событий.  <br /></td></tr>
+<tr class="memitem:ae69231b777dc379dec338e1da35f6784" id="r_ae69231b777dc379dec338e1da35f6784"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae69231b777dc379dec338e1da35f6784">isEventPrinted</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a30357d9ac225edac4962f1ccc75bab4d">SimpleVoxelEngine::Defines::EventType</a> TypeEvent) const</td></tr>
+<tr class="memdesc:ae69231b777dc379dec338e1da35f6784"><td class="mdescLeft">&#160;</td><td class="mdescRight">Будет ли выведено сообщение этого типа.  <br /></td></tr>
+<tr class="memitem:a2d79da7893ad9fe3380b7d3eaff0fe5e" id="r_a2d79da7893ad9fe3380b7d3eaff0fe5e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a2d79da7893ad9fe3380b7d3eaff0fe5e">addWorld</a> ()</td></tr>
+<tr class="memdesc:a2d79da7893ad9fe3380b7d3eaff0fe5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создание мира по умолчанию.  <br /></td></tr>
+<tr class="memitem:a7828bcfbb3a8311e85686faf52e52538" id="r_a7828bcfbb3a8311e85686faf52e52538"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7828bcfbb3a8311e85686faf52e52538">addWorld</a> (<a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html">WorldCreatingParameters</a> &amp;wcp)</td></tr>
+<tr class="memdesc:a7828bcfbb3a8311e85686faf52e52538"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создание мира.  <br /></td></tr>
+<tr class="memitem:ac085b3f93d352b00c7d54d8240640f28" id="r_ac085b3f93d352b00c7d54d8240640f28"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac085b3f93d352b00c7d54d8240640f28">addWorld</a> (<a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html">World</a> *wrld)</td></tr>
+<tr class="memdesc:ac085b3f93d352b00c7d54d8240640f28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавление мира к движку.  <br /></td></tr>
+<tr class="memitem:a9238e878c48241472896723749badee2" id="r_a9238e878c48241472896723749badee2"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html">World</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a9238e878c48241472896723749badee2">getWorld</a> (int id)</td></tr>
+<tr class="memdesc:a9238e878c48241472896723749badee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение мира по ID.  <br /></td></tr>
+<tr class="memitem:a44a443de2cf4d2f97a507931c74c4f0b" id="r_a44a443de2cf4d2f97a507931c74c4f0b"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_debug_1_1_logger.html">SimpleVoxelEngine::Debug::Logger</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a44a443de2cf4d2f97a507931c74c4f0b">getLogger</a> ()</td></tr>
+<tr class="memdesc:a44a443de2cf4d2f97a507931c74c4f0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение логгера.  <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
 <div class="textblock"><p>Воксельный движок. </p>
 <p>Данный класс является главным обработчиком и контроллером всего происходящего. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
+<a id="a18a08eb13c99ee10355fa131e440f0d6" name="a18a08eb13c99ee10355fa131e440f0d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18a08eb13c99ee10355fa131e440f0d6">&#9670;&#160;</a></span>Engine()</h2>
 
-<p>См. определение в файле <a class="el" href="_engine_8h_source.html">Engine.h</a> строка <a class="el" href="_engine_8h_source.html#l00017">17</a></p>
-</div><h2 class="groupheader">Конструктор(ы)</h2>
-<a class="anchor" id="a18a08eb13c99ee10355fa131e440f0d6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">SimpleVoxelEngine::Core::Engine::Engine </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_debug_1_1_logger.html">SimpleVoxelEngine::Debug::Logger</a> *&#160;</td>
-          <td class="paramname"><em>lgr</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_debug_1_1_logger.html">SimpleVoxelEngine::Debug::Logger</a> *</td>          <td class="paramname"><span class="paramname"><em>lgr</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -164,15 +177,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<h2 class="groupheader">Методы</h2>
-<a class="anchor" id="a2d79da7893ad9fe3380b7d3eaff0fe5e"></a>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
+<a id="a2d79da7893ad9fe3380b7d3eaff0fe5e" name="a2d79da7893ad9fe3380b7d3eaff0fe5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d79da7893ad9fe3380b7d3eaff0fe5e">&#9670;&#160;</a></span>addWorld() <span class="overload">[1/3]</span></h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">int SimpleVoxelEngine::Core::Engine::addWorld </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -183,15 +198,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a7828bcfbb3a8311e85686faf52e52538"></a>
+<a id="ac085b3f93d352b00c7d54d8240640f28" name="ac085b3f93d352b00c7d54d8240640f28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac085b3f93d352b00c7d54d8240640f28">&#9670;&#160;</a></span>addWorld() <span class="overload">[2/3]</span></h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">int SimpleVoxelEngine::Core::Engine::addWorld </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html">WorldCreatingParameters</a> &amp;&#160;</td>
-          <td class="paramname"><em>wcp</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html">World</a> *</td>          <td class="paramname"><span class="paramname"><em>wrld</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавление мира к движку. </p>
+<p>Движок забирает мир и удалит его в своём деструкторе. Мир должен быть создан с этим движком (World(this, ...)) и ещё нигде не зарегистрирован. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">wrld</td><td>Добавляемый мир. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает идентификатор добавленного мира (wrld) или -1 в случае неудачи - тогда движок мир не забирает, удаляет вызывающий. </dd></dl>
+
+</div>
+</div>
+<a id="a7828bcfbb3a8311e85686faf52e52538" name="a7828bcfbb3a8311e85686faf52e52538"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7828bcfbb3a8311e85686faf52e52538">&#9670;&#160;</a></span>addWorld() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SimpleVoxelEngine::Core::Engine::addWorld </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html">WorldCreatingParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>wcp</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -208,58 +250,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="ac085b3f93d352b00c7d54d8240640f28"></a>
+<a id="a44a443de2cf4d2f97a507931c74c4f0b" name="a44a443de2cf4d2f97a507931c74c4f0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44a443de2cf4d2f97a507931c74c4f0b">&#9670;&#160;</a></span>getLogger()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int SimpleVoxelEngine::Core::Engine::addWorld </td>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_debug_1_1_logger.html">SimpleVoxelEngine::Debug::Logger</a> * SimpleVoxelEngine::Core::Engine::getLogger </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html">World</a> *&#160;</td>
-          <td class="paramname"><em>wrld</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Добавление мира к движку. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">wrld</td><td>Добавляемый мир. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Возвращает</dt><dd>Возвращает идентификатор добавленного мира (wrld) или -1 в случае неудачи. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a7889d09741148b849ae6b582ce721090"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_debug_1_1_logger.html">SimpleVoxelEngine::Debug::Logger</a>* SimpleVoxelEngine::Core::Engine::getLogger </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Получение логгера. </p>
-<p>После окончания работы с логгером, когда он больше не нужен, необходимо вызвать у него функцию grab(), чтобы уменьшить число ссылок на него. </p><dl class="section return"><dt>Возвращает</dt><dd>Возвращает указатель на логгер, установленный движку или 0 в случае, если его нет. </dd></dl>
+<p>После окончания работы с логгером, когда он больше не нужен, необходимо вызвать у него функцию drop(), чтобы уменьшить число ссылок на него. </p><dl class="section return"><dt>Возвращает</dt><dd>Возвращает указатель на логгер, установленный движку или 0 в случае, если его нет. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="aed41ee9400cbfe38e3b77c65958cd56d"></a>
+<a id="a9238e878c48241472896723749badee2" name="a9238e878c48241472896723749badee2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9238e878c48241472896723749badee2">&#9670;&#160;</a></span>getWorld()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html">World</a>* SimpleVoxelEngine::Core::Engine::getWorld </td>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html">World</a> * SimpleVoxelEngine::Core::Engine::getWorld </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -276,38 +296,66 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="ac8be40525434878d6632f3aab051323c"></a>
+<a id="ae69231b777dc379dec338e1da35f6784" name="ae69231b777dc379dec338e1da35f6784"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae69231b777dc379dec338e1da35f6784">&#9670;&#160;</a></span>isEventPrinted()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void SimpleVoxelEngine::Core::Engine::registerEvent </td>
+          <td class="memname">bool SimpleVoxelEngine::Core::Engine::isEventPrinted </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a30357d9ac225edac4962f1ccc75bab4d">SimpleVoxelEngine::Defines::EventType</a>&#160;</td>
-          <td class="paramname"><em>TypeEvent</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>TextEvent</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>IsFatal</em> = <code>false</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a30357d9ac225edac4962f1ccc75bab4d">SimpleVoxelEngine::Defines::EventType</a></td>          <td class="paramname"><span class="paramname"><em>TypeEvent</em></span></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Регистрация событий. </p>
+<p>Будет ли выведено сообщение этого типа. </p>
 <dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TypeEvent</td><td>Тип события. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если логгер установлен и выводит сообщения этого типа, иначе false. </dd></dl>
+
+</div>
+</div>
+<a id="a3550ac39ecee5ef4a789dc70430c5344" name="a3550ac39ecee5ef4a789dc70430c5344"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3550ac39ecee5ef4a789dc70430c5344">&#9670;&#160;</a></span>registerEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void SimpleVoxelEngine::Core::Engine::registerEvent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_simple_voxel_engine_1_1_defines.html#a30357d9ac225edac4962f1ccc75bab4d">SimpleVoxelEngine::Defines::EventType</a></td>          <td class="paramname"><span class="paramname"><em>TypeEvent</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>TextEvent</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>IsFatal</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Регистрация событий. </p>
+<p>Все сообщения движка (миров, чанков, адресов) идут через эту функцию; она передаёт их логгеру (<a class="el" href="#a44a443de2cf4d2f97a507931c74c4f0b" title="Получение логгера.">getLogger()</a>), если он установлен, а логгер выводит те типы сообщений, которые у него включены. Функцию можно переопределить в наследнике движка - например, чтобы дополнительно записывать сообщения в файл или фильтровать их по-своему. Переопределённая функция может вызвать эту (<a class="el" href="#a3550ac39ecee5ef4a789dc70430c5344" title="Регистрация событий.">Engine::registerEvent()</a>), чтобы сообщение всё равно попало в логгер. Если не переопределять, работает вывод логгера, как есть. </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">TypeEvent</td><td>Тип регистрируемого события. </td></tr>
     <tr><td class="paramname">TextEvent</td><td>Текст сообщения для логгера. </td></tr>
@@ -319,14 +367,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 </div>
 </div>
 <hr/>Объявления и описания членов класса находятся в файле:<ul>
-<li><a class="el" href="_engine_8h_source.html">Engine.h</a></li>
+<li>E:/NeuroCoding/Claude/MyVoxelWork/SimpleVoxelEngine/include/<a class="el" href="_engine_8h_source.html">Engine.h</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:22. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a href="namespace_simple_voxel_engine_1_1_core.html">Core</a></li><li class="navelem"><a href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

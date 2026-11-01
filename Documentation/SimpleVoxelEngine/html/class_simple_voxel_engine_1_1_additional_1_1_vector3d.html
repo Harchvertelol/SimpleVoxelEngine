@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>SimpleVoxelEngine: Шаблон класса SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,197 +23,178 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">SimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Воксельный движок</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li><a href="pages.html"><span>Описания</span></a></li>
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
-      <li><a href="hierarchy.html"><span>Иерархия&#160;классов</span></a></li>
-      <li><a href="functions.html"><span>Члены&#160;классов</span></a></li>
-    </ul>
+  <div id="splitbar" class="ui-resizable-handle">
   </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_simple_voxel_engine_1_1_additional_1_1_vector3d.html','','class_simple_voxel_engine_1_1_additional_1_1_vector3d-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_additional.html">Additional</a></li><li class="navelem"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#pub-methods">Открытые члены</a> &#124;
-<a href="class_simple_voxel_engine_1_1_additional_1_1_vector3d-members.html">Полный список членов класса</a>  </div>
-  <div class="headertitle">
-<div class="title">Шаблон класса SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</div>  </div>
+  <div class="headertitle"><div class="title">Шаблон класса SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Шаблонный класс 3d вектора.  
- <a href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#details">Подробнее...</a></p>
+ <a href="#details">Подробнее...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_vector3d_8h_source.html">Vector3d.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Открытые члены</h2></td></tr>
-<tr class="memitem:a32d1ec89c5de5c0cd3b68f78936cc7fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a> (TYPE_TypeCoord x=0, TYPE_TypeCoord y=0, TYPE_TypeCoord z=0)</td></tr>
-<tr class="memdesc:a32d1ec89c5de5c0cd3b68f78936cc7fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию.  <a href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Подробнее...</a><br /></td></tr>
-<tr class="separator:a32d1ec89c5de5c0cd3b68f78936cc7fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35def5e375013dd59182d4bc008947e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35def5e375013dd59182d4bc008947e3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a35def5e375013dd59182d4bc008947e3">Vector3d</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect)</td></tr>
+<tr class="memitem:a32d1ec89c5de5c0cd3b68f78936cc7fc" id="r_a32d1ec89c5de5c0cd3b68f78936cc7fc"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a> (TYPE_TypeCoord x=0, TYPE_TypeCoord y=0, TYPE_TypeCoord z=0)</td></tr>
+<tr class="memdesc:a32d1ec89c5de5c0cd3b68f78936cc7fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор по умолчанию.  <br /></td></tr>
+<tr class="memitem:a35def5e375013dd59182d4bc008947e3" id="r_a35def5e375013dd59182d4bc008947e3"><td class="memItemLeft"><a id="a35def5e375013dd59182d4bc008947e3" name="a35def5e375013dd59182d4bc008947e3"></a>
+&#160;</td><td class="memItemRight"><b>Vector3d</b> (const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect)</td></tr>
 <tr class="memdesc:a35def5e375013dd59182d4bc008947e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор копирования. <br /></td></tr>
-<tr class="separator:a35def5e375013dd59182d4bc008947e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64e12abac22605aa8df8dff8b84fc36f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a64e12abac22605aa8df8dff8b84fc36f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a64e12abac22605aa8df8dff8b84fc36f">~Vector3d</a> ()</td></tr>
+<tr class="memitem:a64e12abac22605aa8df8dff8b84fc36f" id="r_a64e12abac22605aa8df8dff8b84fc36f"><td class="memItemLeft"><a id="a64e12abac22605aa8df8dff8b84fc36f" name="a64e12abac22605aa8df8dff8b84fc36f"></a>
+&#160;</td><td class="memItemRight"><b>~Vector3d</b> ()</td></tr>
 <tr class="memdesc:a64e12abac22605aa8df8dff8b84fc36f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный деструктор. <br /></td></tr>
-<tr class="separator:a64e12abac22605aa8df8dff8b84fc36f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ea4997033de7c64318074bdf579066d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a5ea4997033de7c64318074bdf579066d">setVector</a> (TYPE_TypeCoord x, TYPE_TypeCoord y, TYPE_TypeCoord z)</td></tr>
-<tr class="memdesc:a5ea4997033de7c64318074bdf579066d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка вектора какому-либо значению.  <a href="#a5ea4997033de7c64318074bdf579066d">Подробнее...</a><br /></td></tr>
-<tr class="separator:a5ea4997033de7c64318074bdf579066d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac87f455cf2b888dcd1769483547a5758"><td class="memItemLeft" align="right" valign="top">TYPE_TypeCoord&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#ac87f455cf2b888dcd1769483547a5758">getX</a> () const </td></tr>
-<tr class="memdesc:ac87f455cf2b888dcd1769483547a5758"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение X координаты.  <a href="#ac87f455cf2b888dcd1769483547a5758">Подробнее...</a><br /></td></tr>
-<tr class="separator:ac87f455cf2b888dcd1769483547a5758"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac726d719e37aa2a44edd19fb464867b"><td class="memItemLeft" align="right" valign="top">TYPE_TypeCoord&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#aac726d719e37aa2a44edd19fb464867b">getY</a> () const </td></tr>
-<tr class="memdesc:aac726d719e37aa2a44edd19fb464867b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение Y координаты.  <a href="#aac726d719e37aa2a44edd19fb464867b">Подробнее...</a><br /></td></tr>
-<tr class="separator:aac726d719e37aa2a44edd19fb464867b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d8189dd942354e96c47cb26e6f8ea1f"><td class="memItemLeft" align="right" valign="top">TYPE_TypeCoord&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a3d8189dd942354e96c47cb26e6f8ea1f">getZ</a> () const </td></tr>
-<tr class="memdesc:a3d8189dd942354e96c47cb26e6f8ea1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение Z координаты.  <a href="#a3d8189dd942354e96c47cb26e6f8ea1f">Подробнее...</a><br /></td></tr>
-<tr class="separator:a3d8189dd942354e96c47cb26e6f8ea1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95af6b9c76613dda90289c3498da3b0e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a95af6b9c76613dda90289c3498da3b0e">toString</a> (std::string split_str) const </td></tr>
-<tr class="memdesc:a95af6b9c76613dda90289c3498da3b0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Преобразование вектора в string.  <a href="#a95af6b9c76613dda90289c3498da3b0e">Подробнее...</a><br /></td></tr>
-<tr class="separator:a95af6b9c76613dda90289c3498da3b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfbeae55511cf2b7b0d2b6424813d32e"><td class="memItemLeft" align="right" valign="top">TYPE_TypeCoord&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#acfbeae55511cf2b7b0d2b6424813d32e">getSquareNorm</a> () const </td></tr>
-<tr class="memdesc:acfbeae55511cf2b7b0d2b6424813d32e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение квадрата стандартной нормы вектора.  <a href="#acfbeae55511cf2b7b0d2b6424813d32e">Подробнее...</a><br /></td></tr>
-<tr class="separator:acfbeae55511cf2b7b0d2b6424813d32e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff8d59f000db5d8bca9102d62ef21d66"><td class="memItemLeft" align="right" valign="top">TYPE_TypeCoord&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#aff8d59f000db5d8bca9102d62ef21d66">getNorm</a> () const </td></tr>
-<tr class="memdesc:aff8d59f000db5d8bca9102d62ef21d66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение стандартной нормы вектора.  <a href="#aff8d59f000db5d8bca9102d62ef21d66">Подробнее...</a><br /></td></tr>
-<tr class="separator:aff8d59f000db5d8bca9102d62ef21d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a990d6c6452ff34f9bb5ac77886c75d71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a990d6c6452ff34f9bb5ac77886c75d71">getAbs</a> () const </td></tr>
-<tr class="memdesc:a990d6c6452ff34f9bb5ac77886c75d71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение вектора-модуля.  <a href="#a990d6c6452ff34f9bb5ac77886c75d71">Подробнее...</a><br /></td></tr>
-<tr class="separator:a990d6c6452ff34f9bb5ac77886c75d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeaa7c88b5d26e82273bdb3e320a3a954"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#aeaa7c88b5d26e82273bdb3e320a3a954">getNormalizeVector</a> () const </td></tr>
-<tr class="memdesc:aeaa7c88b5d26e82273bdb3e320a3a954"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение нормализованного вектора.  <a href="#aeaa7c88b5d26e82273bdb3e320a3a954">Подробнее...</a><br /></td></tr>
-<tr class="separator:aeaa7c88b5d26e82273bdb3e320a3a954"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad68f52bb094de594116d15ceba615d82"><td class="memItemLeft" align="right" valign="top">TYPE_TypeCoord&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#ad68f52bb094de594116d15ceba615d82">scalarProduct</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; vect) const </td></tr>
-<tr class="memdesc:ad68f52bb094de594116d15ceba615d82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Вычисление скалярного произведения.  <a href="#ad68f52bb094de594116d15ceba615d82">Подробнее...</a><br /></td></tr>
-<tr class="separator:ad68f52bb094de594116d15ceba615d82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa35c95dd46d36fc0057846e303cce4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#aaa35c95dd46d36fc0057846e303cce4d">crossProduct</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; vect) const </td></tr>
-<tr class="memdesc:aaa35c95dd46d36fc0057846e303cce4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Вычисление векторного произведения.  <a href="#aaa35c95dd46d36fc0057846e303cce4d">Подробнее...</a><br /></td></tr>
-<tr class="separator:aaa35c95dd46d36fc0057846e303cce4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0dcee89d5b1754518f39ead39891f37"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab0dcee89d5b1754518f39ead39891f37"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#ab0dcee89d5b1754518f39ead39891f37">operator&lt;</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect) const </td></tr>
-<tr class="memdesc:ab0dcee89d5b1754518f39ead39891f37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "меньше". <br /></td></tr>
-<tr class="separator:ab0dcee89d5b1754518f39ead39891f37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23674feefff663c296ebf9e034a0be11"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a23674feefff663c296ebf9e034a0be11"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a23674feefff663c296ebf9e034a0be11">operator&gt;</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect) const </td></tr>
-<tr class="memdesc:a23674feefff663c296ebf9e034a0be11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "больше". <br /></td></tr>
-<tr class="separator:a23674feefff663c296ebf9e034a0be11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87357ab293f34a28378bbd8fa63c9f4f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a87357ab293f34a28378bbd8fa63c9f4f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a87357ab293f34a28378bbd8fa63c9f4f">operator&lt;=</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect) const </td></tr>
-<tr class="memdesc:a87357ab293f34a28378bbd8fa63c9f4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "меньше или равно". <br /></td></tr>
-<tr class="separator:a87357ab293f34a28378bbd8fa63c9f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a1a251f1bdebab1483132a9b25f43c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5a1a251f1bdebab1483132a9b25f43c1"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a5a1a251f1bdebab1483132a9b25f43c1">operator&gt;=</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect) const </td></tr>
-<tr class="memdesc:a5a1a251f1bdebab1483132a9b25f43c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "больше или равно". <br /></td></tr>
-<tr class="separator:a5a1a251f1bdebab1483132a9b25f43c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acba65805e26bc28b7653779388bc43b4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acba65805e26bc28b7653779388bc43b4"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#acba65805e26bc28b7653779388bc43b4">operator=</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect)</td></tr>
-<tr class="memdesc:acba65805e26bc28b7653779388bc43b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор присваивания. <br /></td></tr>
-<tr class="separator:acba65805e26bc28b7653779388bc43b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a622af4b16103e201e1f90243e4f97a2b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a622af4b16103e201e1f90243e4f97a2b"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a622af4b16103e201e1f90243e4f97a2b">operator+=</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect)</td></tr>
-<tr class="memdesc:a622af4b16103e201e1f90243e4f97a2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор добавления вектора к исходному. <br /></td></tr>
-<tr class="separator:a622af4b16103e201e1f90243e4f97a2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1656f53072f98d467c795aa0ad14522"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1656f53072f98d467c795aa0ad14522"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#ab1656f53072f98d467c795aa0ad14522">operator-=</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect)</td></tr>
-<tr class="memdesc:ab1656f53072f98d467c795aa0ad14522"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор вычитания вектора из исходного. <br /></td></tr>
-<tr class="separator:ab1656f53072f98d467c795aa0ad14522"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62f44d80815590f2ac09201f18d4487a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a62f44d80815590f2ac09201f18d4487a"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a62f44d80815590f2ac09201f18d4487a">operator+</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect1) const </td></tr>
-<tr class="memdesc:a62f44d80815590f2ac09201f18d4487a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сложения. <br /></td></tr>
-<tr class="separator:a62f44d80815590f2ac09201f18d4487a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a037b2c9f16c76036c3e354791d5f9a05"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a037b2c9f16c76036c3e354791d5f9a05"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a037b2c9f16c76036c3e354791d5f9a05">operator*</a> (TYPE_TypeCoord what) const </td></tr>
-<tr class="memdesc:a037b2c9f16c76036c3e354791d5f9a05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор умножения на число. <br /></td></tr>
-<tr class="separator:a037b2c9f16c76036c3e354791d5f9a05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a282e839290bf7d5ec50e99bf133b1dbc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a282e839290bf7d5ec50e99bf133b1dbc"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a282e839290bf7d5ec50e99bf133b1dbc">operator*=</a> (TYPE_TypeCoord what)</td></tr>
-<tr class="memdesc:a282e839290bf7d5ec50e99bf133b1dbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор умножения исходного на число. <br /></td></tr>
-<tr class="separator:a282e839290bf7d5ec50e99bf133b1dbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b0a2539cec5d7e48e97c95a006383be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b0a2539cec5d7e48e97c95a006383be"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a5b0a2539cec5d7e48e97c95a006383be">operator/=</a> (TYPE_TypeCoord what)</td></tr>
-<tr class="memdesc:a5b0a2539cec5d7e48e97c95a006383be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор деления исходного на число. <br /></td></tr>
-<tr class="separator:a5b0a2539cec5d7e48e97c95a006383be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f7588d9c10e9fb0f7051a52c68ff513"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f7588d9c10e9fb0f7051a52c68ff513"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a6f7588d9c10e9fb0f7051a52c68ff513">operator/</a> (TYPE_TypeCoord what) const </td></tr>
-<tr class="memdesc:a6f7588d9c10e9fb0f7051a52c68ff513"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор деления. <br /></td></tr>
-<tr class="separator:a6f7588d9c10e9fb0f7051a52c68ff513"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fdd765639371c564788463f587b0043"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8fdd765639371c564788463f587b0043"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a8fdd765639371c564788463f587b0043">operator-</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect1) const </td></tr>
-<tr class="memdesc:a8fdd765639371c564788463f587b0043"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор вычитания. <br /></td></tr>
-<tr class="separator:a8fdd765639371c564788463f587b0043"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ea4997033de7c64318074bdf579066d" id="r_a5ea4997033de7c64318074bdf579066d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5ea4997033de7c64318074bdf579066d">setVector</a> (TYPE_TypeCoord x, TYPE_TypeCoord y, TYPE_TypeCoord z)</td></tr>
+<tr class="memdesc:a5ea4997033de7c64318074bdf579066d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Установка вектора какому-либо значению.  <br /></td></tr>
+<tr class="memitem:a9411b98520097643668fd3b169dbf0cf" id="r_a9411b98520097643668fd3b169dbf0cf"><td class="memItemLeft">TYPE_TypeCoord&#160;</td><td class="memItemRight"><a class="el" href="#a9411b98520097643668fd3b169dbf0cf">getX</a> () const</td></tr>
+<tr class="memdesc:a9411b98520097643668fd3b169dbf0cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение X координаты.  <br /></td></tr>
+<tr class="memitem:af5cbad9bf14f48c3ae8d5531984124d3" id="r_af5cbad9bf14f48c3ae8d5531984124d3"><td class="memItemLeft">TYPE_TypeCoord&#160;</td><td class="memItemRight"><a class="el" href="#af5cbad9bf14f48c3ae8d5531984124d3">getY</a> () const</td></tr>
+<tr class="memdesc:af5cbad9bf14f48c3ae8d5531984124d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение Y координаты.  <br /></td></tr>
+<tr class="memitem:abe6fd0789a987a9b2e33c3cfd371f262" id="r_abe6fd0789a987a9b2e33c3cfd371f262"><td class="memItemLeft">TYPE_TypeCoord&#160;</td><td class="memItemRight"><a class="el" href="#abe6fd0789a987a9b2e33c3cfd371f262">getZ</a> () const</td></tr>
+<tr class="memdesc:abe6fd0789a987a9b2e33c3cfd371f262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение Z координаты.  <br /></td></tr>
+<tr class="memitem:a21d4317933213c995a2b6179091b570f" id="r_a21d4317933213c995a2b6179091b570f"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#a21d4317933213c995a2b6179091b570f">toString</a> (std::string split_str=&quot;, &quot;) const</td></tr>
+<tr class="memdesc:a21d4317933213c995a2b6179091b570f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Преобразование вектора в string.  <br /></td></tr>
+<tr class="memitem:a67f2c174e11c09ba018e2c36a0a256de" id="r_a67f2c174e11c09ba018e2c36a0a256de"><td class="memItemLeft">TYPE_TypeCoord&#160;</td><td class="memItemRight"><a class="el" href="#a67f2c174e11c09ba018e2c36a0a256de">getSquareNorm</a> () const</td></tr>
+<tr class="memdesc:a67f2c174e11c09ba018e2c36a0a256de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение квадрата стандартной нормы вектора.  <br /></td></tr>
+<tr class="memitem:a6aa20a900a83a1efe280ecd143b5aa8c" id="r_a6aa20a900a83a1efe280ecd143b5aa8c"><td class="memItemLeft">TYPE_TypeCoord&#160;</td><td class="memItemRight"><a class="el" href="#a6aa20a900a83a1efe280ecd143b5aa8c">getNorm</a> () const</td></tr>
+<tr class="memdesc:a6aa20a900a83a1efe280ecd143b5aa8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение стандартной нормы вектора.  <br /></td></tr>
+<tr class="memitem:a329afd8039e826718ad2e0a15d39b3f0" id="r_a329afd8039e826718ad2e0a15d39b3f0"><td class="memItemLeft"><a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a329afd8039e826718ad2e0a15d39b3f0">getAbs</a> () const</td></tr>
+<tr class="memdesc:a329afd8039e826718ad2e0a15d39b3f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение вектора-модуля.  <br /></td></tr>
+<tr class="memitem:a02f74039e1ad7c67c68969a943e5ba62" id="r_a02f74039e1ad7c67c68969a943e5ba62"><td class="memItemLeft"><a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a02f74039e1ad7c67c68969a943e5ba62">getNormalizeVector</a> () const</td></tr>
+<tr class="memdesc:a02f74039e1ad7c67c68969a943e5ba62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение нормализованного вектора.  <br /></td></tr>
+<tr class="memitem:a59c4cfe383b632c80f0950e9dfeb1ac0" id="r_a59c4cfe383b632c80f0950e9dfeb1ac0"><td class="memItemLeft">TYPE_TypeCoord&#160;</td><td class="memItemRight"><a class="el" href="#a59c4cfe383b632c80f0950e9dfeb1ac0">scalarProduct</a> (const <a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; vect) const</td></tr>
+<tr class="memdesc:a59c4cfe383b632c80f0950e9dfeb1ac0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Вычисление скалярного произведения.  <br /></td></tr>
+<tr class="memitem:a15f2b8c17bcf180f44f1a23820f87848" id="r_a15f2b8c17bcf180f44f1a23820f87848"><td class="memItemLeft"><a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a15f2b8c17bcf180f44f1a23820f87848">crossProduct</a> (const <a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; vect) const</td></tr>
+<tr class="memdesc:a15f2b8c17bcf180f44f1a23820f87848"><td class="mdescLeft">&#160;</td><td class="mdescRight">Вычисление векторного произведения.  <br /></td></tr>
+<tr class="memitem:aae3addcaecb1666dd6ff25072200bc31" id="r_aae3addcaecb1666dd6ff25072200bc31"><td class="memItemLeft"><a id="aae3addcaecb1666dd6ff25072200bc31" name="aae3addcaecb1666dd6ff25072200bc31"></a>
+bool&#160;</td><td class="memItemRight"><b>operator&lt;</b> (const <a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect) const</td></tr>
+<tr class="memdesc:aae3addcaecb1666dd6ff25072200bc31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "меньше". <br /></td></tr>
+<tr class="memitem:a1dcb5dac5d3f64dd8b8b07d420c16caa" id="r_a1dcb5dac5d3f64dd8b8b07d420c16caa"><td class="memItemLeft"><a id="a1dcb5dac5d3f64dd8b8b07d420c16caa" name="a1dcb5dac5d3f64dd8b8b07d420c16caa"></a>
+bool&#160;</td><td class="memItemRight"><b>operator&gt;</b> (const <a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect) const</td></tr>
+<tr class="memdesc:a1dcb5dac5d3f64dd8b8b07d420c16caa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "больше". <br /></td></tr>
+<tr class="memitem:a700e5cf38fed3beaa21151b3c7ce15a7" id="r_a700e5cf38fed3beaa21151b3c7ce15a7"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a700e5cf38fed3beaa21151b3c7ce15a7">operator&lt;=</a> (const <a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect) const</td></tr>
+<tr class="memdesc:a700e5cf38fed3beaa21151b3c7ce15a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "меньше или равно".  <br /></td></tr>
+<tr class="memitem:a1f3872730a9ec6c2fa96aff36c723966" id="r_a1f3872730a9ec6c2fa96aff36c723966"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a1f3872730a9ec6c2fa96aff36c723966">operator&gt;=</a> (const <a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect) const</td></tr>
+<tr class="memdesc:a1f3872730a9ec6c2fa96aff36c723966"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "больше или равно".  <br /></td></tr>
+<tr class="memitem:aa0aa36819329b1c315991d49e06f59ad" id="r_aa0aa36819329b1c315991d49e06f59ad"><td class="memItemLeft"><a id="aa0aa36819329b1c315991d49e06f59ad" name="aa0aa36819329b1c315991d49e06f59ad"></a>
+<a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (const <a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect)</td></tr>
+<tr class="memdesc:aa0aa36819329b1c315991d49e06f59ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор присваивания. <br /></td></tr>
+<tr class="memitem:a25d1fd563425a281b21651f62dc5bbad" id="r_a25d1fd563425a281b21651f62dc5bbad"><td class="memItemLeft"><a id="a25d1fd563425a281b21651f62dc5bbad" name="a25d1fd563425a281b21651f62dc5bbad"></a>
+<a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;&#160;</td><td class="memItemRight"><b>operator+=</b> (const <a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect)</td></tr>
+<tr class="memdesc:a25d1fd563425a281b21651f62dc5bbad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор добавления вектора к исходному. <br /></td></tr>
+<tr class="memitem:a085c2d653700da5efaa1e9c0a725892a" id="r_a085c2d653700da5efaa1e9c0a725892a"><td class="memItemLeft"><a id="a085c2d653700da5efaa1e9c0a725892a" name="a085c2d653700da5efaa1e9c0a725892a"></a>
+<a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;&#160;</td><td class="memItemRight"><b>operator-=</b> (const <a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect)</td></tr>
+<tr class="memdesc:a085c2d653700da5efaa1e9c0a725892a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор вычитания вектора из исходного. <br /></td></tr>
+<tr class="memitem:a602cdd75e637dac4c8eee64835a0aa99" id="r_a602cdd75e637dac4c8eee64835a0aa99"><td class="memItemLeft"><a id="a602cdd75e637dac4c8eee64835a0aa99" name="a602cdd75e637dac4c8eee64835a0aa99"></a>
+<a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memItemRight"><b>operator+</b> (const <a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect1) const</td></tr>
+<tr class="memdesc:a602cdd75e637dac4c8eee64835a0aa99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сложения. <br /></td></tr>
+<tr class="memitem:ab442fbe6127ff4ef184604854f914eae" id="r_ab442fbe6127ff4ef184604854f914eae"><td class="memItemLeft"><a id="ab442fbe6127ff4ef184604854f914eae" name="ab442fbe6127ff4ef184604854f914eae"></a>
+<a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memItemRight"><b>operator*</b> (TYPE_TypeCoord what) const</td></tr>
+<tr class="memdesc:ab442fbe6127ff4ef184604854f914eae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор умножения на число. <br /></td></tr>
+<tr class="memitem:a904e0708d27c2facb0d1100a943d1d67" id="r_a904e0708d27c2facb0d1100a943d1d67"><td class="memItemLeft"><a id="a904e0708d27c2facb0d1100a943d1d67" name="a904e0708d27c2facb0d1100a943d1d67"></a>
+<a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;&#160;</td><td class="memItemRight"><b>operator*=</b> (TYPE_TypeCoord what)</td></tr>
+<tr class="memdesc:a904e0708d27c2facb0d1100a943d1d67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор умножения исходного на число. <br /></td></tr>
+<tr class="memitem:ab137723faaa59de02d138d2b02dc969d" id="r_ab137723faaa59de02d138d2b02dc969d"><td class="memItemLeft"><a id="ab137723faaa59de02d138d2b02dc969d" name="ab137723faaa59de02d138d2b02dc969d"></a>
+<a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;&#160;</td><td class="memItemRight"><b>operator/=</b> (TYPE_TypeCoord what)</td></tr>
+<tr class="memdesc:ab137723faaa59de02d138d2b02dc969d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор деления исходного на число. <br /></td></tr>
+<tr class="memitem:a8fb8a44726d434bad84d7c1376a0cf30" id="r_a8fb8a44726d434bad84d7c1376a0cf30"><td class="memItemLeft"><a id="a8fb8a44726d434bad84d7c1376a0cf30" name="a8fb8a44726d434bad84d7c1376a0cf30"></a>
+<a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memItemRight"><b>operator/</b> (TYPE_TypeCoord what) const</td></tr>
+<tr class="memdesc:a8fb8a44726d434bad84d7c1376a0cf30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор деления. <br /></td></tr>
+<tr class="memitem:ae969d4ae8676ae855a8617dcf695747f" id="r_ae969d4ae8676ae855a8617dcf695747f"><td class="memItemLeft"><a id="ae969d4ae8676ae855a8617dcf695747f" name="ae969d4ae8676ae855a8617dcf695747f"></a>
+<a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memItemRight"><b>operator-</b> (const <a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect1) const</td></tr>
+<tr class="memdesc:ae969d4ae8676ae855a8617dcf695747f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор вычитания. <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
-<div class="textblock"><h3>template&lt;typename TYPE_TypeCoord&gt;<br />
-class SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</h3>
-
-<p>Шаблонный класс 3d вектора. </p>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename TYPE_TypeCoord&gt;<br />
+class SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</div><p>Шаблонный класс 3d вектора. </p>
 <p>Данный класс содержит основные методы, необходимые для работы с векторами в 3d пространстве.. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
+<a id="a32d1ec89c5de5c0cd3b68f78936cc7fc" name="a32d1ec89c5de5c0cd3b68f78936cc7fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">&#9670;&#160;</a></span>Vector3d()</h2>
 
-<p>См. определение в файле <a class="el" href="_vector3d_8h_source.html">Vector3d.h</a> строка <a class="el" href="_vector3d_8h_source.html#l00016">16</a></p>
-</div><h2 class="groupheader">Конструктор(ы)</h2>
-<a class="anchor" id="a32d1ec89c5de5c0cd3b68f78936cc7fc"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -220,38 +204,30 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a> </td>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::Vector3d </td>
           <td>(</td>
-          <td class="paramtype">TYPE_TypeCoord&#160;</td>
-          <td class="paramname"><em>x</em> = <code>0</code>, </td>
+          <td class="paramtype">TYPE_TypeCoord</td>          <td class="paramname"><span class="paramname"><em>x</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TYPE_TypeCoord&#160;</td>
-          <td class="paramname"><em>y</em> = <code>0</code>, </td>
+          <td class="paramtype">TYPE_TypeCoord</td>          <td class="paramname"><span class="paramname"><em>y</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TYPE_TypeCoord&#160;</td>
-          <td class="paramname"><em>z</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">TYPE_TypeCoord</td>          <td class="paramname"><span class="paramname"><em>z</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Конструктор по умолчанию. </p>
-<dl class="params"><dt>Аргументы</dt><dd>
+<p>Внимание: конструктор неявный, поэтому число само превращается в вектор (число, 0, 0) - например, v + 1 означает v + (1, 0, 0). Для сдвига на число по всем осям пишите v + Vector3d(1, 1, 1). </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">x</td><td>Координата X вектора. </td></tr>
     <tr><td class="paramname">y</td><td>Координата Y вектора. </td></tr>
@@ -260,12 +236,12 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
   </dd>
 </dl>
 
-<p>См. определение в файле <a class="el" href="_vector3d_8h_source.html">Vector3d.h</a> строка <a class="el" href="_vector3d_8h_source.html#l00024">24</a></p>
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
+<a id="a15f2b8c17bcf180f44f1a23820f87848" name="a15f2b8c17bcf180f44f1a23820f87848"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15f2b8c17bcf180f44f1a23820f87848">&#9670;&#160;</a></span>crossProduct()</h2>
 
-</div>
-</div>
-<h2 class="groupheader">Методы</h2>
-<a class="anchor" id="aaa35c95dd46d36fc0057846e303cce4d"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -275,16 +251,15 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt;TYPE_TypeCoord&gt; <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::crossProduct </td>
+          <td class="memname"><a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::crossProduct </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td>
-          <td class="paramname"><em>vect</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -298,11 +273,11 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
 </dl>
 <dl class="section return"><dt>Возвращает</dt><dd>Возвращает результат векторного произведения исходного вектора на vect. </dd></dl>
 
-<p>См. определение в файле <a class="el" href="_vector3d_8h_source.html">Vector3d.h</a> строка <a class="el" href="_vector3d_8h_source.html#l00112">112</a></p>
+</div>
+</div>
+<a id="a329afd8039e826718ad2e0a15d39b3f0" name="a329afd8039e826718ad2e0a15d39b3f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a329afd8039e826718ad2e0a15d39b3f0">&#9670;&#160;</a></span>getAbs()</h2>
 
-</div>
-</div>
-<a class="anchor" id="a990d6c6452ff34f9bb5ac77886c75d71"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -312,15 +287,15 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt;TYPE_TypeCoord&gt; <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::getAbs </td>
+          <td class="memname"><a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::getAbs </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -328,11 +303,11 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
 <p>Получение вектора-модуля. </p>
 <dl class="section return"><dt>Возвращает</dt><dd>Возвращает вектор, координаты которого есть модули координат исходного вектора. </dd></dl>
 
-<p>См. определение в файле <a class="el" href="_vector3d_8h_source.html">Vector3d.h</a> строка <a class="el" href="_vector3d_8h_source.html#l00087">87</a></p>
+</div>
+</div>
+<a id="a6aa20a900a83a1efe280ecd143b5aa8c" name="a6aa20a900a83a1efe280ecd143b5aa8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aa20a900a83a1efe280ecd143b5aa8c">&#9670;&#160;</a></span>getNorm()</h2>
 
-</div>
-</div>
-<a class="anchor" id="aff8d59f000db5d8bca9102d62ef21d66"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -344,13 +319,13 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
         <tr>
           <td class="memname">TYPE_TypeCoord <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::getNorm </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -358,13 +333,11 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
 <p>Получение стандартной нормы вектора. </p>
 <dl class="section return"><dt>Возвращает</dt><dd>Возвращает стандартную норму вектора. </dd></dl>
 
-<p>См. определение в файле <a class="el" href="_vector3d_8h_source.html">Vector3d.h</a> строка <a class="el" href="_vector3d_8h_source.html#l00080">80</a></p>
-
-<p>Используется в <a class="el" href="_vector3d_8h_source.html#l00095">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::getNormalizeVector()</a>.</p>
-
 </div>
 </div>
-<a class="anchor" id="aeaa7c88b5d26e82273bdb3e320a3a954"></a>
+<a id="a02f74039e1ad7c67c68969a943e5ba62" name="a02f74039e1ad7c67c68969a943e5ba62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02f74039e1ad7c67c68969a943e5ba62">&#9670;&#160;</a></span>getNormalizeVector()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -374,27 +347,27 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt;TYPE_TypeCoord&gt; <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::getNormalizeVector </td>
+          <td class="memname"><a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::getNormalizeVector </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Получение нормализованного вектора. </p>
-<dl class="section return"><dt>Возвращает</dt><dd>Возвращает нормализованный вектор. </dd></dl>
-
-<p>См. определение в файле <a class="el" href="_vector3d_8h_source.html">Vector3d.h</a> строка <a class="el" href="_vector3d_8h_source.html#l00095">95</a></p>
+<p>Нулевой вектор не нормализуется: для float получится NaN, для int - деление на ноль. Для int результат к тому же округляется к нулю (почти всегда нулевой вектор) - используйте для float. </p><dl class="section return"><dt>Возвращает</dt><dd>Возвращает нормализованный вектор. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="acfbeae55511cf2b7b0d2b6424813d32e"></a>
+<a id="a67f2c174e11c09ba018e2c36a0a256de" name="a67f2c174e11c09ba018e2c36a0a256de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67f2c174e11c09ba018e2c36a0a256de">&#9670;&#160;</a></span>getSquareNorm()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -406,13 +379,13 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
         <tr>
           <td class="memname">TYPE_TypeCoord <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::getSquareNorm </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -420,13 +393,11 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
 <p>Получение квадрата стандартной нормы вектора. </p>
 <dl class="section return"><dt>Возвращает</dt><dd>Возвращает квадрат стандартной нормы вектора. </dd></dl>
 
-<p>См. определение в файле <a class="el" href="_vector3d_8h_source.html">Vector3d.h</a> строка <a class="el" href="_vector3d_8h_source.html#l00073">73</a></p>
-
-<p>Используется в <a class="el" href="_vector3d_8h_source.html#l00080">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::getNorm()</a>.</p>
-
 </div>
 </div>
-<a class="anchor" id="ac87f455cf2b888dcd1769483547a5758"></a>
+<a id="a9411b98520097643668fd3b169dbf0cf" name="a9411b98520097643668fd3b169dbf0cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9411b98520097643668fd3b169dbf0cf">&#9670;&#160;</a></span>getX()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -438,13 +409,13 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
         <tr>
           <td class="memname">TYPE_TypeCoord <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::getX </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -452,13 +423,11 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
 <p>Получение X координаты. </p>
 <dl class="section return"><dt>Возвращает</dt><dd>Возвращает X координату вектора. </dd></dl>
 
-<p>См. определение в файле <a class="el" href="_vector3d_8h_source.html">Vector3d.h</a> строка <a class="el" href="_vector3d_8h_source.html#l00043">43</a></p>
-
-<p>Используется в <a class="el" href="_vector3d_8h_source.html#l00112">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::crossProduct()</a>, <a class="el" href="_vector3d_8h_source.html#l00087">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::getAbs()</a>, <a class="el" href="_vector3d_8h_source.html#l00167">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::operator+=()</a>, <a class="el" href="_vector3d_8h_source.html#l00118">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::operator&lt;()</a>, <a class="el" href="_vector3d_8h_source.html#l00156">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::operator=()</a>, <a class="el" href="_vector3d_8h_source.html#l00245">SimpleVoxelEngine::Additional::operator==()</a>, <a class="el" href="_vector3d_8h_source.html#l00132">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::operator&gt;()</a>, <a class="el" href="_vector3d_8h_source.html#l00104">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::scalarProduct()</a> и <a class="el" href="_vector3d_8h_source.html#l00066">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::toString()</a>.</p>
-
 </div>
 </div>
-<a class="anchor" id="aac726d719e37aa2a44edd19fb464867b"></a>
+<a id="af5cbad9bf14f48c3ae8d5531984124d3" name="af5cbad9bf14f48c3ae8d5531984124d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5cbad9bf14f48c3ae8d5531984124d3">&#9670;&#160;</a></span>getY()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -470,13 +439,13 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
         <tr>
           <td class="memname">TYPE_TypeCoord <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::getY </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -484,13 +453,11 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
 <p>Получение Y координаты. </p>
 <dl class="section return"><dt>Возвращает</dt><dd>Возвращает Y координату вектора. </dd></dl>
 
-<p>См. определение в файле <a class="el" href="_vector3d_8h_source.html">Vector3d.h</a> строка <a class="el" href="_vector3d_8h_source.html#l00050">50</a></p>
-
-<p>Используется в <a class="el" href="_vector3d_8h_source.html#l00112">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::crossProduct()</a>, <a class="el" href="_vector3d_8h_source.html#l00087">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::getAbs()</a>, <a class="el" href="_vector3d_8h_source.html#l00167">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::operator+=()</a>, <a class="el" href="_vector3d_8h_source.html#l00118">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::operator&lt;()</a>, <a class="el" href="_vector3d_8h_source.html#l00156">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::operator=()</a>, <a class="el" href="_vector3d_8h_source.html#l00245">SimpleVoxelEngine::Additional::operator==()</a>, <a class="el" href="_vector3d_8h_source.html#l00132">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::operator&gt;()</a>, <a class="el" href="_vector3d_8h_source.html#l00104">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::scalarProduct()</a> и <a class="el" href="_vector3d_8h_source.html#l00066">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::toString()</a>.</p>
-
 </div>
 </div>
-<a class="anchor" id="a3d8189dd942354e96c47cb26e6f8ea1f"></a>
+<a id="abe6fd0789a987a9b2e33c3cfd371f262" name="abe6fd0789a987a9b2e33c3cfd371f262"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe6fd0789a987a9b2e33c3cfd371f262">&#9670;&#160;</a></span>getZ()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -502,13 +469,13 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
         <tr>
           <td class="memname">TYPE_TypeCoord <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::getZ </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -516,13 +483,71 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
 <p>Получение Z координаты. </p>
 <dl class="section return"><dt>Возвращает</dt><dd>Возвращает Z координату вектора. </dd></dl>
 
-<p>См. определение в файле <a class="el" href="_vector3d_8h_source.html">Vector3d.h</a> строка <a class="el" href="_vector3d_8h_source.html#l00057">57</a></p>
+</div>
+</div>
+<a id="a700e5cf38fed3beaa21151b3c7ce15a7" name="a700e5cf38fed3beaa21151b3c7ce15a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a700e5cf38fed3beaa21151b3c7ce15a7">&#9670;&#160;</a></span>operator&lt;=()</h2>
 
-<p>Используется в <a class="el" href="_vector3d_8h_source.html#l00112">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::crossProduct()</a>, <a class="el" href="_vector3d_8h_source.html#l00087">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::getAbs()</a>, <a class="el" href="_vector3d_8h_source.html#l00167">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::operator+=()</a>, <a class="el" href="_vector3d_8h_source.html#l00118">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::operator&lt;()</a>, <a class="el" href="_vector3d_8h_source.html#l00156">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::operator=()</a>, <a class="el" href="_vector3d_8h_source.html#l00245">SimpleVoxelEngine::Additional::operator==()</a>, <a class="el" href="_vector3d_8h_source.html#l00132">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::operator&gt;()</a>, <a class="el" href="_vector3d_8h_source.html#l00104">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::scalarProduct()</a> и <a class="el" href="_vector3d_8h_source.html#l00066">SimpleVoxelEngine::Additional::Vector3d&lt; float &gt;::toString()</a>.</p>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TYPE_TypeCoord&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::operator&lt;= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Оператор сравнения "меньше или равно". </p>
+<p>Внимание: "меньше" сравнивает точно, а "равно" - с допуском EPS (см. operator==), поэтому для float a &lt; b и a == b могут быть верны одновременно. Для int всё согласовано. </p>
 
 </div>
 </div>
-<a class="anchor" id="ad68f52bb094de594116d15ceba615d82"></a>
+<a id="a1f3872730a9ec6c2fa96aff36c723966" name="a1f3872730a9ec6c2fa96aff36c723966"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f3872730a9ec6c2fa96aff36c723966">&#9670;&#160;</a></span>operator&gt;=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TYPE_TypeCoord&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::operator&gt;= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Оператор сравнения "больше или равно". </p>
+<p>Для float - то же замечание, что и у operator&lt;=. </p>
+
+</div>
+</div>
+<a id="a59c4cfe383b632c80f0950e9dfeb1ac0" name="a59c4cfe383b632c80f0950e9dfeb1ac0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59c4cfe383b632c80f0950e9dfeb1ac0">&#9670;&#160;</a></span>scalarProduct()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -534,14 +559,13 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
         <tr>
           <td class="memname">TYPE_TypeCoord <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::scalarProduct </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td>
-          <td class="paramname"><em>vect</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>&lt; TYPE_TypeCoord &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -555,11 +579,11 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
 </dl>
 <dl class="section return"><dt>Возвращает</dt><dd>Возвращает результат скалярного произведения исходного вектора на vect. </dd></dl>
 
-<p>См. определение в файле <a class="el" href="_vector3d_8h_source.html">Vector3d.h</a> строка <a class="el" href="_vector3d_8h_source.html#l00104">104</a></p>
+</div>
+</div>
+<a id="a5ea4997033de7c64318074bdf579066d" name="a5ea4997033de7c64318074bdf579066d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ea4997033de7c64318074bdf579066d">&#9670;&#160;</a></span>setVector()</h2>
 
-</div>
-</div>
-<a class="anchor" id="a5ea4997033de7c64318074bdf579066d"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -571,30 +595,22 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::setVector </td>
           <td>(</td>
-          <td class="paramtype">TYPE_TypeCoord&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
+          <td class="paramtype">TYPE_TypeCoord</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TYPE_TypeCoord&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
+          <td class="paramtype">TYPE_TypeCoord</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TYPE_TypeCoord&#160;</td>
-          <td class="paramname"><em>z</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">TYPE_TypeCoord</td>          <td class="paramname"><span class="paramname"><em>z</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -609,11 +625,11 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
   </dd>
 </dl>
 
-<p>См. определение в файле <a class="el" href="_vector3d_8h_source.html">Vector3d.h</a> строка <a class="el" href="_vector3d_8h_source.html#l00034">34</a></p>
+</div>
+</div>
+<a id="a21d4317933213c995a2b6179091b570f" name="a21d4317933213c995a2b6179091b570f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21d4317933213c995a2b6179091b570f">&#9670;&#160;</a></span>toString()</h2>
 
-</div>
-</div>
-<a class="anchor" id="a95af6b9c76613dda90289c3498da3b0e"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -625,20 +641,19 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
         <tr>
           <td class="memname">std::string <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d</a>&lt; TYPE_TypeCoord &gt;::toString </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>split_str</em></td><td>)</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>split_str</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;,&#160;&quot;</span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Преобразование вектора в string. </p>
-<p>Преобразует вектор в строковый вид, используя тип float для функции преобразования. </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>Координаты выводятся в своём типе (для float - 6 значащих цифр). </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">split_str</td><td>Разделитель координат. </td></tr>
   </table>
@@ -646,19 +661,27 @@ template&lt;typename TYPE_TypeCoord&gt; </div>
 </dl>
 <dl class="section return"><dt>Возвращает</dt><dd>Строковый вид вектора. </dd></dl>
 
-<p>См. определение в файле <a class="el" href="_vector3d_8h_source.html">Vector3d.h</a> строка <a class="el" href="_vector3d_8h_source.html#l00066">66</a></p>
-
 </div>
 </div>
 <hr/>Объявления и описания членов класса находятся в файле:<ul>
-<li><a class="el" href="_vector3d_8h_source.html">Vector3d.h</a></li>
+<li>E:/NeuroCoding/Claude/MyVoxelWork/SimpleVoxelEngine/include/Additional/<a class="el" href="_vector3d_8h_source.html">Vector3d.h</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:22. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a href="namespace_simple_voxel_engine_1_1_additional.html">Additional</a></li><li class="navelem"><a href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

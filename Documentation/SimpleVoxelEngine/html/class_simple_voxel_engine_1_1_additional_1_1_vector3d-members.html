@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
-<title>SimpleVoxelEngine: Cписок членов класса</title>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SimpleVoxelEngine: Список членов класса</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,115 +23,132 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">SimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Воксельный движок</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li><a href="pages.html"><span>Описания</span></a></li>
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
-      <li><a href="hierarchy.html"><span>Иерархия&#160;классов</span></a></li>
-      <li><a href="functions.html"><span>Члены&#160;классов</span></a></li>
-    </ul>
+  <div id="splitbar" class="ui-resizable-handle">
   </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_simple_voxel_engine_1_1_additional_1_1_vector3d.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_additional.html">Additional</a></li><li class="navelem"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
-  <div class="headertitle">
-<div class="title">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt; Cписок членов класса</div>  </div>
+  <div class="headertitle"><div class="title">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt; Список членов класса</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Полный список членов класса <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a>, включая наследуемые из базового класса</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#aaa35c95dd46d36fc0057846e303cce4d">crossProduct</a>(const Vector3d&lt; TYPE_TypeCoord &gt; vect) const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a990d6c6452ff34f9bb5ac77886c75d71">getAbs</a>() const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#aff8d59f000db5d8bca9102d62ef21d66">getNorm</a>() const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#aeaa7c88b5d26e82273bdb3e320a3a954">getNormalizeVector</a>() const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#acfbeae55511cf2b7b0d2b6424813d32e">getSquareNorm</a>() const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#ac87f455cf2b888dcd1769483547a5758">getX</a>() const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#aac726d719e37aa2a44edd19fb464867b">getY</a>() const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a3d8189dd942354e96c47cb26e6f8ea1f">getZ</a>() const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a037b2c9f16c76036c3e354791d5f9a05">operator*</a>(TYPE_TypeCoord what) const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a282e839290bf7d5ec50e99bf133b1dbc">operator*=</a>(TYPE_TypeCoord what)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a62f44d80815590f2ac09201f18d4487a">operator+</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect1) const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a622af4b16103e201e1f90243e4f97a2b">operator+=</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a8fdd765639371c564788463f587b0043">operator-</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect1) const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#ab1656f53072f98d467c795aa0ad14522">operator-=</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a6f7588d9c10e9fb0f7051a52c68ff513">operator/</a>(TYPE_TypeCoord what) const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a5b0a2539cec5d7e48e97c95a006383be">operator/=</a>(TYPE_TypeCoord what)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#ab0dcee89d5b1754518f39ead39891f37">operator&lt;</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect) const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a87357ab293f34a28378bbd8fa63c9f4f">operator&lt;=</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect) const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#acba65805e26bc28b7653779388bc43b4">operator=</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a23674feefff663c296ebf9e034a0be11">operator&gt;</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect) const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a5a1a251f1bdebab1483132a9b25f43c1">operator&gt;=</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect) const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#ad68f52bb094de594116d15ceba615d82">scalarProduct</a>(const Vector3d&lt; TYPE_TypeCoord &gt; vect) const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a15f2b8c17bcf180f44f1a23820f87848">crossProduct</a>(const Vector3d&lt; TYPE_TypeCoord &gt; vect) const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a329afd8039e826718ad2e0a15d39b3f0">getAbs</a>() const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a6aa20a900a83a1efe280ecd143b5aa8c">getNorm</a>() const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a02f74039e1ad7c67c68969a943e5ba62">getNormalizeVector</a>() const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a67f2c174e11c09ba018e2c36a0a256de">getSquareNorm</a>() const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a9411b98520097643668fd3b169dbf0cf">getX</a>() const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#af5cbad9bf14f48c3ae8d5531984124d3">getY</a>() const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#abe6fd0789a987a9b2e33c3cfd371f262">getZ</a>() const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#ab442fbe6127ff4ef184604854f914eae">operator*</a>(TYPE_TypeCoord what) const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a904e0708d27c2facb0d1100a943d1d67">operator*=</a>(TYPE_TypeCoord what)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a602cdd75e637dac4c8eee64835a0aa99">operator+</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect1) const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a25d1fd563425a281b21651f62dc5bbad">operator+=</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#ae969d4ae8676ae855a8617dcf695747f">operator-</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect1) const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a085c2d653700da5efaa1e9c0a725892a">operator-=</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a8fb8a44726d434bad84d7c1376a0cf30">operator/</a>(TYPE_TypeCoord what) const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#ab137723faaa59de02d138d2b02dc969d">operator/=</a>(TYPE_TypeCoord what)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#aae3addcaecb1666dd6ff25072200bc31">operator&lt;</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect) const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a700e5cf38fed3beaa21151b3c7ce15a7">operator&lt;=</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect) const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#aa0aa36819329b1c315991d49e06f59ad">operator=</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a1dcb5dac5d3f64dd8b8b07d420c16caa">operator&gt;</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect) const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a1f3872730a9ec6c2fa96aff36c723966">operator&gt;=</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect) const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a59c4cfe383b632c80f0950e9dfeb1ac0">scalarProduct</a>(const Vector3d&lt; TYPE_TypeCoord &gt; vect) const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a5ea4997033de7c64318074bdf579066d">setVector</a>(TYPE_TypeCoord x, TYPE_TypeCoord y, TYPE_TypeCoord z)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a95af6b9c76613dda90289c3498da3b0e">toString</a>(std::string split_str) const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a21d4317933213c995a2b6179091b570f">toString</a>(std::string split_str=&quot;, &quot;) const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a32d1ec89c5de5c0cd3b68f78936cc7fc">Vector3d</a>(TYPE_TypeCoord x=0, TYPE_TypeCoord y=0, TYPE_TypeCoord z=0)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a35def5e375013dd59182d4bc008947e3">Vector3d</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a35def5e375013dd59182d4bc008947e3">Vector3d</a>(const Vector3d&lt; TYPE_TypeCoord &gt; &amp;vect)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#a64e12abac22605aa8df8dff8b84fc36f">~Vector3d</a>()</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">SimpleVoxelEngine::Additional::Vector3d&lt; TYPE_TypeCoord &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:22. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -56,6 +56,7 @@ Engine* SimpleVoxelEngine::Core::VoxelAddress::getEngine() const
 void SimpleVoxelEngine::Core::VoxelAddress::setLevelShift(int shift, bool up)
 {
     s_LevelShift = shift;
+    s_Up = up; //»справлено: параметр up не сохран€лс€ (isUp() всегда возвращала true).
 }
 
 void SimpleVoxelEngine::Core::VoxelAddress::addNextVector(Vector3d<int> vect)
@@ -66,9 +67,17 @@ void SimpleVoxelEngine::Core::VoxelAddress::addNextVector(Vector3d<int> vect)
 
 bool SimpleVoxelEngine::Core::VoxelAddress::addVector(int ind, Vector3d<int> vect)
 {
+#ifdef SVE_DEBUG_CHECKS
+    //ќтладочна€ проверка (добавлено): отрицательный индекс создавал в карте запись, которую адрес не видит.
+    if(ind < 0)
+    {
+        if(s_Engine) s_Engine->registerEvent(EVENT_TYPE_LOGIC_VIOLATION, "Debug check (SVE_DEBUG_CHECKS): addVector: index is negative");
+        return false;
+    }
+#endif
     if(ind > s_LastVectInd)
     {
-        s_Engine->registerEvent(EVENT_TYPE_LOGIC_VIOLATION, "Vector to address not added. Index adding vector is more than last index.");
+        if(s_Engine) s_Engine->registerEvent(EVENT_TYPE_LOGIC_VIOLATION, "Vector to address not added. Index adding vector is more than last index.");
         return false;
     }
     if(ind == s_LastVectInd)
@@ -82,7 +91,11 @@ bool SimpleVoxelEngine::Core::VoxelAddress::addVector(int ind, Vector3d<int> vec
 
 SimpleVoxelEngine::Additional::Vector3d<int> SimpleVoxelEngine::Core::VoxelAddress::getVector(int ind)
 {
-    return s_Address[ind];
+    //»справлено: operator[] дл€ несуществующего индекса добавл€л в карту запись (0,0,0) - адрес "рос" от чтени€,
+    //а его копи€ потом копировала и эту лишнюю запись. “еперь поиск без вставки, результат прежний - нулевой вектор.
+    map< int, SimpleVoxelEngine::Additional::Vector3d<int> >::const_iterator I = s_Address.find(ind);
+    if(I == s_Address.end()) return Vector3d<int>(0,0,0);
+    return I->second;
 }
 
 std::map< int, SimpleVoxelEngine::Additional::Vector3d<int> > SimpleVoxelEngine::Core::VoxelAddress::getAddress() const
@@ -117,7 +130,7 @@ bool SimpleVoxelEngine::Core::VoxelAddress::deleteLastVector()
     map< int, SimpleVoxelEngine::Additional::Vector3d<int> >::iterator I = s_Address.find(s_LastVectInd - 1);
     if ( I == s_Address.end() )
     {
-        s_Engine->registerEvent(EVENT_TYPE_ERROR, "Removal is not an existing vector from address.");
+        if(s_Engine) s_Engine->registerEvent(EVENT_TYPE_ERROR, "Removal is not an existing vector from address."); //ƒобавлена проверка движка (ветка ошибки, при нормальной работе не выполн€етс€).
         return false;
     }
     s_LastVectInd--;

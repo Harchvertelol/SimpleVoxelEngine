@@ -1,0 +1,110 @@
+# depslib dependency file v1.0
+1448149668 source:e:\neurocoding\claude\myvoxelwork\emptyproject\main.cpp
+	<SimpleVoxelEngine.h>
+	<cstring>
+	<map>
+	<fstream>
+
+1440007350 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\simplevoxelengine.h
+	"Engine.h"
+	"IniParser/ParserInfoFile.h"
+	"ARGBColorVoxel.h"
+	"Additional/ReferenceCounter.h"
+	"WorkFunctions.h"
+
+1793448046 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\engine.h
+	<map>
+	"Defines.h"
+	"Logger.h"
+	"World.h"
+
+1793399461 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\defines.h
+	<string>
+
+1793437442 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\logger.h
+	<atomic>
+	<string>
+	"Defines.h"
+	"Additional/ReferenceCounter.h"
+
+1793236323 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\additional\referencecounter.h
+
+1793405569 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\world.h
+	<string>
+	<vector>
+	"Additional/Vector3d.h"
+	"ChunkVoxelObject.h"
+	"IniParser/PostParsingStruct.h"
+	"Defines.h"
+	"VoxelAddress.h"
+	"WorldGenerator.h"
+	"SimpleVoxelObjectTransparentTester.h"
+	"ChunksSaveLoadController.h"
+
+1793400527 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\additional\vector3d.h
+	<cmath>
+	<sstream>
+	<string>
+	"WorkFunctions.h"
+	"Defines.h"
+
+1440007308 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\workfunctions.h
+	<sstream>
+	<map>
+	"Defines.h"
+
+1793403829 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\chunkvoxelobject.h
+	<map>
+	"SimpleVoxelObject.h"
+	"Additional/Vector3d.h"
+	"Defines.h"
+	"Logger.h"
+	"VoxelsForRendering.h"
+	"VoxelAddress.h"
+
+1793317319 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\simplevoxelobject.h
+	<fstream>
+	"Defines.h"
+	"VoxelAddress.h"
+	"VoxelInfo.h"
+
+1793399152 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\voxeladdress.h
+	<map>
+	"Additional/Vector3d.h"
+
+1793399351 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\voxelinfo.h
+
+1793236323 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\voxelsforrendering.h
+	<map>
+	"VoxelForRendering.h"
+
+1793399152 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\voxelforrendering.h
+	<map>
+	"Additional/Vector3d.h"
+	"VoxelInfo.h"
+
+1419363636 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\iniparser\postparsingstruct.h
+	<map>
+	<string>
+
+1434361059 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\worldgenerator.h
+	"ChunkVoxelObject.h"
+	"Additional/Vector3d.h"
+
+1793317319 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\simplevoxelobjecttransparenttester.h
+	"SimpleVoxelObject.h"
+
+1793403829 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\chunkssaveloadcontroller.h
+	"ChunkVoxelObject.h"
+
+1419363618 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\iniparser\parserinfofile.h
+	<string>
+	"PostParsingStruct.h"
+
+1793400470 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\argbcolorvoxel.h
+	"SimpleVoxelObject.h"
+	"Additional/ARGBColor.h"
+
+1793297849 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\additional\argbcolor.h
+	<map>
+

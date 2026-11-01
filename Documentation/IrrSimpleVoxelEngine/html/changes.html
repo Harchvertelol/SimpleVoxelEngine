@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>IrrSimpleVoxelEngine: Изменения</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,86 +23,148 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">IrrSimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Враппер для воксельного движка на irrlicht</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li class="current"><a href="pages.html"><span>Описания</span></a></li>
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('changes.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Друзья</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
-</div><!-- top -->
-<div class="header">
-  <div class="headertitle">
-<div class="title">Изменения </div>  </div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Изменения </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="build001"></a>
-IrrSimpleVoxelEngine, build 0.0.1: (-- ------- ----)</h1>
-<p>1) Добавлен hardware mapping hint. Сильный прирост FPS. При использовании данного хинта идёт довольно сильный расход памяти, так как hardware buffers в самом Irrlicht удаляются раз в 20 000 кадров. Для себя я перекомпилировал Irrlicht, где сделал это удаление раз в 60 кадров.<br />
- 2) Добавлена упрощённая функция получения вокселя по трём точкам.<br />
- 3) Изменена функция получения доступа к движку (и освобождение доступа).<br />
- 4) Добавлена возможность мультитекстурирования и склейки вокселя из частей.<br />
- 5) Исправлен небольшой баг невозможности установки логирования/не логирования некоторых действий.<br />
- 6) Добавлена возможность разбивать чанк на произвольное количество мешей по желанию.<br />
- 7) Сделан механизм работы с прозрачными объектами.<br />
- 8) Исправлен Occlusion Query.<br />
- 9) Добавлена возможность установки ID нодам чанков.<br />
- 10) Добавлена возможность полного управления блоками чанков на уровне возможностей движка.<br />
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="build002"></a>
+IrrSimpleVoxelEngine, build 0.0.2: (&ndash; ----&mdash; -&mdash;)</h1>
+<p>1) Переписана поточная часть: одна главная очередь заданий, пулы потоков построения мешей, все обращения к миру под одной блокировкой. Исправлены падения при многопоточной генерации и обновлении чанков. setMaxNumberOfThreadAddChunks() и setMaxNumberOfThreadUpdateChunks() теперь работают.<br  />
+ 2) Версии построений чанков: устаревший меш не перезаписывает более новый.<br  />
+ 3) Пользовательские функции UserControllerForThread выполняются в потоке главной очереди.<br  />
+ 4) Исправлены артефакты прозрачности: сортировка полупрозрачных треугольников, отключение записи в Z-буфер для полупрозрачных шейдерных материалов, ноды стоят в центре блока чанков.<br  />
+ 5) Отложенная склейка блока чанков: при загрузке блок склеивается один раз, когда построены все его чанки.<br  />
+ 6) Быстрый пересчёт видимости граней в <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>: чанки появляются примерно в 15 раз быстрее.<br  />
+ 7) После добавления и выгрузки чанков автоматически перестраиваются соседи.<br  />
+ 8) Удалены сборщик мусора, режим STANDBY, ThreadSafe-классы и функции, которые стали не нужны.<br  />
+ 9) Исправлены утечки памяти и обращения к удалённым объектам (подробно - в changesIrrSVE.txt и changesSVE.txt в корне проекта).<br  />
+ 10) Видеопамять склеенных мешей освобождается сразу при пересклейке блока - работает с официальной сборкой Irrlicht.<br  />
+ 11) Контроллер пользовательских функций можно заменить во время работы движка, в том числе контроллерами из своего пула (их движок не удаляет).<br  />
+ 12) Адрес вокселя по трём точкам находится и для граней вложенных вокселей (калибровка больше не сдвигает их вершины на сетку блоков).<br  />
+ 13) Добавлены поиск адреса вокселя под точкой (getAddressSimpleVoxelObjectByPoint) и пересчёт точки сцены в координаты мира (getWorldCoordinates).<br  />
+ 14) Поиск адреса вокселя по трём точкам и по точке работает и далеко от начала координат (учитывается точность float). Грани на стыке с загруженным или выгруженным чанком пересчитываются.<br  />
+ 15) Отладочные версии библиотек (lib/Debug, флаг SVE_DEBUG_CHECKS) проверяют ошибки программиста: вызовы не из главного потока, stop() из потока построения, несуществующий мир и др. Новая функция isMainThread().<br  />
+ 16) Сохранение мира во время игры: saveAllChunks(id, wait) - отдельное задание главной очереди, безопасно из любого потока; isSaveCompleted() - узнать, закончено ли и успешно ли.<br  />
+ 17) Проверка враппера: stop() из нескольких потоков и повторный stop(true) дожидаются потоков; saveAllChunks() во время остановки сохраняет всё, что поставлено до него; getWorldCoordinates() верно учитывает масштаб и родителей ноды мира и сдвиг без ноды; Occlusion Queries выполняет новая функция runOcclusionQueries() (между drawAll() и endScene()), включение и выключение применяется к уже созданным нодам; правка построенного чанка не ждёт отложенной склейки; настройки материалов, ID и hardware mapping мира, а также changeWorld3DInfo() применяются к уже созданным нодам; ноды чанков и родительские ноды миров защищены ссылками (grab); склейка меша чанка из многих вокселей больше не квадратичная; *ByGlobalVector не портят ячейки чанков с другим разбиением.<br  />
+ 18) Задание STOP ставит только stop(): отладочная версия (SVE_DEBUG_CHECKS) отклоняет его в addMainTask(), в релизе этой проверки нет.<br  />
+ 19) Новая функция FactoryChunkMeshSceneNode::createFaceMesh(): готовая грань для getMeshCubeFaces(), модель грани из файла больше не нужна.<br  />
+ 20) Стриминг чанков: пул контроллеров (ChunkStreamingPool, ChunkStreamingController) загружает и выгружает чанки вокруг игроков или камер - форма области (кубоид, цилиндр, шар), радиусы, запас выгрузки, несколько владельцев у чанка, ближние чанки первыми, ограниченная очередь. addChunksForRendering() пропускает чанки за границами мира.<br  />
+ </p>
+<h1 class="doxsection"><a class="anchor" id="build001"></a>
+IrrSimpleVoxelEngine, build 0.0.1: (&ndash; ----&mdash; -&mdash;)</h1>
+<p>1) Добавлен hardware mapping hint. Сильный прирост FPS.<br  />
+ 2) Добавлена упрощённая функция получения вокселя по трём точкам.<br  />
+ 3) Изменена функция получения доступа к движку (и освобождение доступа).<br  />
+ 4) Добавлена возможность мультитекстурирования и склейки вокселя из частей.<br  />
+ 5) Исправлен небольшой баг невозможности установки логирования/не логирования некоторых действий.<br  />
+ 6) Добавлена возможность разбивать чанк на произвольное количество мешей по желанию.<br  />
+ 7) Сделан механизм работы с прозрачными объектами.<br  />
+ 8) Исправлен Occlusion Query.<br  />
+ 9) Добавлена возможность установки ID нодам чанков.<br  />
+ 10) Добавлена возможность полного управления блоками чанков на уровне возможностей движка.<br  />
+ 11) Добавлена возможность ставить каждому миру родительскую ноду, а также смещать начало координат в мире.<br  />
+ 12) Исправлена функция определения адреса вокселя по трём точкам (а именно проблемы с округлением float).<br  />
  </p>
 </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по IrrSimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:37. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

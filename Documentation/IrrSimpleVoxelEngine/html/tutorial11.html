@@ -1,0 +1,608 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Урок 11: Сохранение мира во время игры.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IrrSimpleVoxelEngine
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tutorial11.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Урок 11: Сохранение мира во время игры. </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Как сохранять и загружать чанки, мы уже знаем: в уроке 3 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a> мы написали свой контроллер сохранения (наследник ChunksSaveLoadController) и вызывали World::saveAllChunks(). Во враппере контроллер точно такой же, и пишется он так же. Отличается другое - когда и откуда сохранять. В ядре всё происходит в одном потоке, и мир меняется только тогда, когда мы сами его меняем. Во враппере же мир живёт в нескольких потоках: поток главной очереди загружает и генерирует чанки, ставит и удаляет блоки, потоки построения в это время читают мир, чтобы построить меши. Если посреди игры просто вызвать World::saveAllChunks() из главного потока, мир может поменяться прямо во время сохранения - половина чанка сохранится до установки блока, половина после, а то и что похуже. Поэтому в этом уроке мы разберём только то, чем сохранение во враппере отличается от ядра:</p><ul>
+<li>сохранение во время игры - IrrSimpleVoxelEngine::saveAllChunks() и проверка его окончания isSaveCompleted();</li>
+<li>в каком потоке работает контроллер сохранения и что из этого следует;</li>
+<li>сохранение при выгрузке чанков;</li>
+<li>правильный порядок действий при выходе из программы.</li>
+</ul>
+<p>Начнём с привычного: подключим враппер и пространства имён. </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core;</div>
+<div class="ttc" id="a_irr_simple_voxel_engine_8h_html"><div class="ttname"><a href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a></div><div class="ttdoc">Главный заголовочный файл. Необходимо присоединять только его к проекту.</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">SimpleVoxelEngine::IrrEngine</a></div><div class="ttdoc">Главное пространство имён IrrSimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:13</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:11</div></div>
+</div><!-- fragment --><p> Фабрику возьмём из урока 1 без изменений: куб из видимых граней, цвет вершин - цвет вокселя ARGBColorVoxel. </p><div class="fragment"><div class="line"><span class="comment">// Фабрика - как в уроке 1: куб из видимых граней, цвет вершин - цвет вокселя.</span></div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        s_Plane = createFaceMesh();</div>
+<div class="line">        s_MeshManipulator = device-&gt;getSceneManager()-&gt;getMeshManipulator();</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); }</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl)</div>
+<div class="line">    {</div>
+<div class="line">        IMesh* mesh = getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1));</div>
+<div class="line">        ARGBColor c = ((VoxelInfoARGBColor*)vxl-&gt;getVoxelInfo())-&gt;s_ARGBColor;</div>
+<div class="line">        <span class="keywordflow">if</span>(mesh) s_MeshManipulator-&gt;setVertexColors(mesh, SColor(c.getA(), c.getR(), c.getG(), c.getB()));</div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering*) { <span class="keywordflow">return</span> 0; }</div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">};</div>
+</div><!-- fragment --> <h1 class="doxsection"><a class="anchor" id="t11controller"></a>
+Контроллер сохранения</h1>
+<p>Теперь контроллер. Он такой же, как в уроке 3 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>, и пишет чанки на диск: каждый чанк - в своём текстовом файле data/lesson11/chunk_x.y.z (x, y, z - координаты чанка). В файле сначала число непустых вокселей, потом цвета всех ячеек чанка одним числом (0 - пустая ячейка). Формат простейший, без сжатия, зато его можно открыть и посмотреть глазами. Папки ещё может не быть - тогда создаём её (WorkFunctions::FileFunctions::createFolders()) и открываем файл снова. Ошибки (файл не открылся, не записался) пишем в лог и возвращаем false - тогда сохранение считается неудачным: </p><div class="fragment"><div class="line"><span class="comment">// Контроллер сохранения и загрузки (урок 3 SimpleVoxelEngine): каждый чанк - в своём текстовом файле</span></div>
+<div class="line"><span class="comment">// &lt;папка&gt;/chunk_&lt;x&gt;.&lt;y&gt;.&lt;z&gt;: сначала число непустых вокселей, потом цвета всех ячеек чанка (0 - пустая ячейка).</span></div>
+<div class="line"><span class="comment">// Формат - простейший, как в уроке 3 SimpleVoxelEngine. Враппер вызывает контроллер в потоке главной очереди под блокировкой движка.</span></div>
+<div class="line"><span class="keyword">class </span>FileSaveLoadController : <span class="keyword">public</span> ChunksSaveLoadController</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    FileSaveLoadController(IrrSimpleVoxelEngine* isve, std::string folder) : s_ISVE(isve), s_Folder(folder) {}</div>
+<div class="line">    std::string getFileName(Vector3d&lt;int&gt; vect) <span class="comment">// Файл чанка: &lt;папка&gt;/chunk_x.y.z</span></div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">return</span> s_Folder + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + <span class="stringliteral">&quot;chunk_&quot;</span> + vect.toString(STRING_CONSTANTS::DEFAULT_VECTOR_COORDINATES_SPLITTER);</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">bool</span> saveChunk(ChunkVoxelObject* cvo, Vector3d&lt;int&gt; vect)</div>
+<div class="line">    {</div>
+<div class="line">        std::string filename = getFileName(vect);</div>
+<div class="line">        std::ofstream file(filename.c_str()); <span class="comment">// Файл перезаписывается с начала.</span></div>
+<div class="line">        <span class="keywordflow">if</span>(!file) <span class="comment">// Папки ещё нет - создадим её и откроем файл снова.</span></div>
+<div class="line">        {</div>
+<div class="line">            WorkFunctions::FileFunctions::createFolders(s_Folder, STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER);</div>
+<div class="line">            file.open(filename.c_str(), std::ios::out | std::ios::trunc);</div>
+<div class="line">            <span class="keywordflow">if</span>(!file)</div>
+<div class="line">            {</div>
+<div class="line">                s_ISVE-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;Chunk not saved: error opening file &quot;</span> + filename);</div>
+<div class="line">                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> notnull = cvo-&gt;getNumberOfNotNullSimpleVoxelObjects();</div>
+<div class="line">        file &lt;&lt; notnull;</div>
+<div class="line">        <span class="keywordflow">if</span>(notnull != 0) <span class="comment">// В пустом чанке массивов вокселей может не быть - не трогаем их.</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordtype">int</span> n = cvo-&gt;getNumberOfPartitions();</div>
+<div class="line">            SimpleVoxelObject** svos = cvo-&gt;getSimpleVoxelObjects();</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; n * n * n; i++)</div>
+<div class="line">            {</div>
+<div class="line">                u32 color = 0; <span class="comment">// Пустая ячейка; вложенные чанки и чужие воксели тоже не сохраняем.</span></div>
+<div class="line">                <span class="keywordflow">if</span>(svos[i] &amp;&amp; svos[i]-&gt;getTypeVoxel() == ARGBCOLOR)</div>
+<div class="line">                {</div>
+<div class="line">                    ARGBColor c = ((ARGBColorVoxel*)svos[i])-&gt;getARGBColor();</div>
+<div class="line">                    color = SColor(c.getA(), c.getR(), c.getG(), c.getB()).color; <span class="comment">// Цвет одним числом.</span></div>
+<div class="line">                }</div>
+<div class="line">                file &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; color;</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span>(!file) <span class="comment">// Ошибка записи (например, кончилось место на диске).</span></div>
+<div class="line">        {</div>
+<div class="line">            s_ISVE-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;Chunk not saved: error writing file &quot;</span> + filename);</div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">        }</div>
+<div class="line">        s_SavedChunks++;</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+</div><!-- fragment --><p> Обратите внимание: в пустом чанке массивов вокселей может и не быть (ядро экономит память), поэтому сначала смотрим getNumberOfNotNullSimpleVoxelObjects(), а уже потом берём getSimpleVoxelObjects(). Вложенные чанки (маленькие блоки, урок 13) и чужие воксели наш простой формат не сохраняет - на их месте после загрузки будет пусто. Загрузка - как в уроке 3 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>: читаем файл, создаём воксели прямо в массиве чанка, просим движок пересчитать видимость граней (мы её не сохраняли) и сами ставим число непустых вокселей. Если файл обрезан или испорчен, возвращаем false - мир сам удалит недозагруженный чанк. canLoad() говорит движку, есть ли сохранение чанка: есть файл - загружаем, нет - движок вызовет генератор: </p><div class="fragment"><div class="line">    <span class="keywordtype">bool</span> loadChunk(ChunkVoxelObject* cvo, Vector3d&lt;int&gt; vect)</div>
+<div class="line">    {</div>
+<div class="line">        std::string filename = getFileName(vect);</div>
+<div class="line">        std::ifstream file(filename.c_str());</div>
+<div class="line">        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> notnull = 0;</div>
+<div class="line">        <span class="keywordflow">if</span>(!file || !(file &gt;&gt; notnull))</div>
+<div class="line">        {</div>
+<div class="line">            s_ISVE-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;Chunk not loaded: error reading file &quot;</span> + filename);</div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span>(notnull == 0) <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// Чанк был пустым - так и оставляем.</span></div>
+<div class="line">        <span class="keywordtype">int</span> n = cvo-&gt;getNumberOfPartitions();</div>
+<div class="line">        SimpleVoxelObject** svos = cvo-&gt;getSimpleVoxelObjects(); <span class="comment">// Создаёт массивы чанка.</span></div>
+<div class="line">        <span class="keywordtype">bool</span>* recalculate = cvo-&gt;getReCalculateVisibleCacheSimpleVoxelObjects();</div>
+<div class="line">        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> created = 0;</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; n * n * n; i++)</div>
+<div class="line">        {</div>
+<div class="line">            u32 color = 0;</div>
+<div class="line">            <span class="keywordflow">if</span>(!(file &gt;&gt; color)) <span class="comment">// Файл обрезан или испорчен - мир удалит недозагруженный чанк сам.</span></div>
+<div class="line">            {</div>
+<div class="line">                s_ISVE-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;Chunk not loaded: damaged file &quot;</span> + filename);</div>
+<div class="line">                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">            }</div>
+<div class="line">            <span class="keywordflow">if</span>(!color) <span class="keywordflow">continue</span>;</div>
+<div class="line">            SColor c(color);</div>
+<div class="line">            svos[i] = <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(c.getAlpha(), c.getRed(), c.getGreen(), c.getBlue()));</div>
+<div class="line">            recalculate[i] = <span class="keyword">true</span>; <span class="comment">// Видимость граней мы не сохраняли - пусть движок пересчитает.</span></div>
+<div class="line">            created++;</div>
+<div class="line">        }</div>
+<div class="line">        cvo-&gt;setNumberOfNotNullSimpleVoxelObjects(created);</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">bool</span> canLoad(World*, Vector3d&lt;int&gt; vect) { <span class="keywordflow">return</span> WorkFunctions::FileFunctions::fileExists(getFileName(vect)); } <span class="comment">// Есть файл - загружаем.</span></div>
+<div class="line">    <span class="keywordtype">int</span> s_SavedChunks = 0; <span class="comment">// Сколько раз сохранялся чанк (для вывода).</span></div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    IrrSimpleVoxelEngine* s_ISVE; <span class="comment">// Для сообщений в лог.</span></div>
+<div class="line">    std::string s_Folder; <span class="comment">// Папка мира.</span></div>
+<div class="line">};</div>
+</div><!-- fragment --><p> А теперь самое важное отличие от ядра. <b>Враппер вызывает контроллер сохранения (и загрузки, и генератор) в потоке главной очереди, под блокировкой движка.</b> Что из этого следует:</p><ul>
+<li>пока работает saveChunk(), мир никто не меняет: другие задания очереди ждут, а потоки построения не могут взять блокировку - снимок мира получится целым;</li>
+<li>в контроллере нельзя трогать сцену Irrlicht (ноды, текстуры, драйвер) - это можно только в главном потоке;</li>
+<li>если главный поток (или любой другой) читает данные контроллера (у нас - s_SavedChunks), он должен взять ту же блокировку (пример - сразу после списка);</li>
+<li>долгое сохранение задерживает задания очереди (установку блоков, загрузку чанков), но не рисование: update() каждый кадр продолжает работать, просто новые меши в это время не строятся. Поэтому сам контроллер должен работать быстро: большой мир лучше писать в файлы чанков (а не в один огромный файл) и без лишних преобразований.</li>
+</ul>
+<p>Так главный поток может, например, узнать, сколько раз сохранялся чанк: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> saved = 0;</div>
+<div class="line">{</div>
+<div class="line">    std::lock_guard&lt;std::recursive_mutex&gt; lock(isve-&gt;getLockAccessToTheSimpleVoxelEngine()); <span class="comment">// Та же блокировка, что у потока очереди.</span></div>
+<div class="line">    saved = saver-&gt;s_SavedChunks;</div>
+<div class="line">} <span class="comment">// Здесь блокировка отпускается.</span></div>
+</div><!-- fragment --><p>Генератор нужен, когда чанка ещё нет в сохранении (canLoad() вернула false): тогда движок вызывает генератор, а если генератора нет - создаёт пустой чанк (с предупреждением в логе). Наш генератор делает пол в один блок: </p><div class="fragment"><div class="line"><span class="comment">// Генератор: в чанках с y = 0 - пол толщиной в один блок (по 256 вокселей на чанк). Вызывается, только если контроллер</span></div>
+<div class="line"><span class="comment">// сохранения не может загрузить чанк (canLoad() вернула false).</span></div>
+<div class="line"><span class="keyword">class </span>FloorGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> size)</div>
+<div class="line">    {</div>
+<div class="line">        Vector3d&lt;int&gt; v = chunk-&gt;getVoxelAddress()-&gt;getVector(0); <span class="comment">// Координаты чанка (в чанках).</span></div>
+<div class="line">        <span class="keywordflow">if</span>(v.getY() != 0) <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// Остальные чанки - пустые.</span></div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; size; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; size; z++)</div>
+<div class="line">                chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, 0, z), <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, (v.getX() * size + x) * 8, 128, z * 16)), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> И обработчик клавиш: F5 - сохранить мир, F9 - выгрузить чанк (1,0,0) с сохранением и загрузить его снова. Обработчик событий Irrlicht вызывается в главном потоке, поэтому здесь мы только запоминаем нажатие, а всё делаем в главном цикле. </p><div class="fragment"><div class="line"><span class="comment">// Обработчик клавиш: F5 - сохранить мир, F9 - выгрузить чанк (1,0,0) с сохранением и загрузить его снова.</span></div>
+<div class="line"><span class="keyword">class </span>MyReceiver : <span class="keyword">public</span> IEventReceiver</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> OnEvent(<span class="keyword">const</span> SEvent&amp; event)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(event.EventType == EET_KEY_INPUT_EVENT &amp;&amp; !event.KeyInput.PressedDown)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_F5) s_Save = <span class="keyword">true</span>;</div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_F9) s_Reload = <span class="keyword">true</span>;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">bool</span> s_Save = <span class="keyword">false</span>;</div>
+<div class="line">    <span class="keywordtype">bool</span> s_Reload = <span class="keyword">false</span>;</div>
+<div class="line">};</div>
+</div><!-- fragment --> <h1 class="doxsection"><a class="anchor" id="t11setup"></a>
+Подключение контроллера</h1>
+<p>В main() всё как обычно. Логгер нужен, чтобы видеть ошибки (без логгера движок их молча проглатывает), стандартные сообщения отключим. </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(800, 600));</div>
+<div class="line">    MyReceiver receiver;</div>
+<div class="line">    device-&gt;setEventReceiver(&amp;receiver);</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Логгер: без него движок молча проглатывает и ошибки.</span></div>
+<div class="line">    lgr-&gt;setPrintStandard(<span class="keyword">false</span>); <span class="comment">// Обычные сообщения не нужны - только предупреждения и ошибки.</span></div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device, lgr);</div>
+<div class="line">    lgr-&gt;drop(); <span class="comment">// Движок держит свою ссылку.</span></div>
+<div class="line">    MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">    factory-&gt;setPositionScale(16);</div>
+<div class="line">    factory-&gt;setSScale(16);</div>
+<div class="line">    isve-&gt;setFactoryChunkMeshSceneNode(factory);</div>
+<div class="line">    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld();</div>
+</div><!-- fragment --><p> Контроллер и генератор отдаём миру. До start() потоки враппера ещё не запущены, поэтому блокировка не нужна. Если же менять контроллер во время работы - только под блокировкой движка (getLockAccessToTheSimpleVoxelEngine()): его в этот момент может вызывать поток очереди. Мир сам удалит и контроллер, и генератор. </p><div class="fragment"><div class="line">factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">FileSaveLoadController* saver = <span class="keyword">new</span> FileSaveLoadController(isve, <span class="stringliteral">&quot;data/lesson11&quot;</span>); <span class="comment">// Мир хранится в папке data/lesson11.</span></div>
+<div class="line">isve-&gt;getWorld(<span class="keywordtype">id</span>)-&gt;setChunksSaveLoadController(saver); <span class="comment">// До start() блокировка не нужна. Мир сам удалит контроллер.</span></div>
+<div class="line">isve-&gt;getWorld(<span class="keywordtype">id</span>)-&gt;setWorldGenerator(<span class="keyword">new</span> FloorGenerator); <span class="comment">// Чанка нет в сохранении - его создаст генератор.</span></div>
+<div class="line">isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(1, 0, 0), <span class="keyword">true</span>); <span class="comment">// Два чанка: (0,0,0) и (1,0,0).</span></div>
+<div class="line">ICameraSceneNode* camera = device-&gt;getSceneManager()-&gt;addCameraSceneNodeFPS();</div>
+<div class="line">camera-&gt;setPosition(vector3df(16, 12, -12));</div>
+<div class="line">camera-&gt;setTarget(vector3df(16, 0, 8));</div>
+<div class="line">isve-&gt;start();</div>
+</div><!-- fragment --><p> При первом запуске контроллер пуст, canLoad() возвращает false, и оба чанка создаёт генератор.</p>
+<h1 class="doxsection"><a class="anchor" id="t11save"></a>
+Сохранение во время игры</h1>
+<p>Главный цикл. По F5 вызываем isve-&gt;saveAllChunks(id): </p><div class="fragment"><div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> savenumber = 0; <span class="comment">// Номер идущего сохранения (0 - сохранения нет).</span></div>
+<div class="line"><span class="keywordflow">while</span>(isve-&gt;runIrrDevice())</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">if</span>(receiver.s_Save &amp;&amp; savenumber == 0) <span class="comment">// F5: сохранение ставится в очередь, игра не ждёт.</span></div>
+<div class="line">    {</div>
+<div class="line">        receiver.s_Save = <span class="keyword">false</span>;</div>
+<div class="line">        savenumber = isve-&gt;saveAllChunks(<span class="keywordtype">id</span>);</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">bool</span> ok = <span class="keyword">false</span>;</div>
+<div class="line">    <span class="keywordflow">if</span>(savenumber != 0 &amp;&amp; isve-&gt;isSaveCompleted(savenumber, &amp;ok)) <span class="comment">// Каждый кадр проверяем, закончилось ли.</span></div>
+<div class="line">    {</div>
+<div class="line">        printf(ok ? <span class="stringliteral">&quot;World saved\n&quot;</span> : <span class="stringliteral">&quot;World NOT saved\n&quot;</span>);</div>
+<div class="line">        savenumber = 0;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p> saveAllChunks() ничего не сохраняет сама: она ставит в главную очередь отдельное задание (SAVE_CHUNKS) и сразу возвращает номер сохранения. Игра при этом не ждёт. Задания очереди выполняются строго по порядку, поэтому:</p><ul>
+<li>в сохранение попадёт всё, что поставлено в очередь до вызова, - блоки, поставленные по щелчку мыши за мгновение до F5, загрузка и выгрузка чанков, изменения из UserControllerForThread;</li>
+<li>всё, что поставлено после вызова, в это сохранение не попадёт, даже если выполнится раньше, чем вы увидите результат;</li>
+<li>пока сохранение идёт, мир никто не меняет (оно выполняется под блокировкой движка).</li>
+</ul>
+<p>Закончилось ли сохранение, узнаём по номеру: isSaveCompleted(номер, &amp;ok) возвращает true, когда задание выполнено, и записывает в ok результат. Проверять можно хоть каждый кадр - это быстро. Результат false будет, если мира нет, миру не установлен контроллер сохранения, какой-то чанк не сохранился (saveChunk() вернула false) или движок удалили раньше, чем очередь дошла до задания. Враппер помнит результаты последних 1000 законченных сохранений - этого хватает с запасом, если не ждать результата часами.</p>
+<p>saveAllChunks() потокобезопасна: её можно вызывать из любого потока - например, из своего потока автосохранения раз в пять минут. Есть и второй параметр - wait: </p><div class="fragment"><div class="line">isve-&gt;saveAllChunks(<span class="keywordtype">id</span>, <span class="keyword">true</span>); <span class="comment">// Дождаться окончания сохранения.</span></div>
+</div><!-- fragment --><p> С wait = true функция возвращается, только когда сохранение закончено. В главном потоке во время игры так делать не стоит - картинка встанет, пока очередь не дойдёт до сохранения и не выполнит его. И никогда не ждите сохранения, держа блокировку движка (getAccessToTheSimpleVoxelEngine() или lock_guard на getLockAccessToTheSimpleVoxelEngine()): заданию сохранения нужна та же блокировка, и программа зависнет навсегда.</p>
+<p>Ещё три случая, когда saveAllChunks() сохраняет сразу, прямо в вызывающем потоке (результат готов уже при возврате):</p><ul>
+<li>вызов из пользовательской функции UserControllerForThread (урок 10): она сама работает в потоке главной очереди, и задание ждало бы само себя. Сохранение попадает ровно в это место: всё, что функция успела изменить, сохранится;</li>
+<li>движок ещё не запущен (до start()). Осторожно: задания, поставленные до start() (например, наш addChunksForRendering()), ещё не выполнены, и в такое сохранение не попадут;</li>
+<li>поток очереди уже завершился после stop() - все задания к этому моменту выполнены. Если же stop() уже вызван (например, stop(false) из другого потока), а очередь ещё работает, задание сохранения встаёт перед заданием остановки - в сохранение попадает всё, что поставлено до вызова.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="t11unload"></a>
+Сохранение при выгрузке чанков</h1>
+<p>Чанки сохраняются не только по saveAllChunks(), но и при выгрузке из памяти. По F9 мы выгружаем чанк (1,0,0) и тут же загружаем его снова: </p><div class="fragment"><div class="line"><span class="keywordflow">if</span>(receiver.s_Reload) <span class="comment">// F9: выгрузить чанк с сохранением и загрузить снова (пользуется тем же контроллером).</span></div>
+<div class="line">{</div>
+<div class="line">    receiver.s_Reload = <span class="keyword">false</span>;</div>
+<div class="line">    isve-&gt;deleteChunkForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(1, 0, 0), <span class="keyword">true</span>, <span class="keyword">true</span>); <span class="comment">// unload = true, save = true.</span></div>
+<div class="line">    isve-&gt;addChunkForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(1, 0, 0), <span class="keyword">true</span>); <span class="comment">// load = true: контроллер загрузит сохранённое.</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Параметры deleteChunkForRendering(): unload = true - не только убрать чанк из отрисовки, но и выгрузить из памяти, save = true - перед выгрузкой сохранить. Выгрузка выполняется в потоке главной очереди, и контроллер вызывается там же и так же, как при saveAllChunks(). Следующее задание - addChunkForRendering(..., load = true): теперь canLoad() возвращает true, и чанк загружает наш loadChunk(), а не генератор. Обратите внимание: у deleteChunk(s)ForRendering() save по умолчанию true, так что выгрузка без сохранения - это явный save = false (в TestProject3 так сделана клавиша Z). Без установленного контроллера сохранять некуда, и чанк просто выгружается.</p>
+<p>Стриминг (урок 6) выгружает чанки так же: ChunkStreamingPool::setSaveOnUnload(true) - и чанки, от которых ушли игроки, сохраняются тем же контроллером, в том же потоке. Только помните, что стриминг сохраняет лишь выгружаемые чанки: те, что ещё загружены, сохранит saveAllChunks() или сохранение при выходе.</p>
+<h1 class="doxsection"><a class="anchor" id="t11exit"></a>
+Правильный выход</h1>
+<p>Осталось выйти из программы, ничего не потеряв. Ядро при удалении мира само ничего не сохраняет, поэтому сохранить нужно явно, и порядок здесь важен: </p><div class="fragment"><div class="line">isve-&gt;stop(); <span class="comment">// Сначала - остановка: все поставленные задания выполнены, мир больше никто не меняет.</span></div>
+<div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> last = isve-&gt;saveAllChunks(<span class="keywordtype">id</span>); <span class="comment">// Очередь уже остановлена - сохранение выполняется сразу, здесь.</span></div>
+<div class="line"><span class="keywordtype">bool</span> lastok = <span class="keyword">false</span>;</div>
+<div class="line">isve-&gt;isSaveCompleted(last, &amp;lastok);</div>
+<div class="line">printf(lastok ? <span class="stringliteral">&quot;World saved on exit\n&quot;</span> : <span class="stringliteral">&quot;World NOT saved on exit\n&quot;</span>);</div>
+<div class="line"><span class="keyword">delete</span> isve; <span class="comment">// Удалит мир, а с ним и контроллер сохранения.</span></div>
+<div class="line">device-&gt;drop();</div>
+</div><!-- fragment --><ul>
+<li>сначала stop(): он выполняет все задания, поставленные до вызова (последние щелчки игрока тоже), и останавливает потоки. После этого мир никто не меняет и не читает;</li>
+<li>потом сохранение. Очередь уже остановлена, поэтому saveAllChunks(id) выполняется сразу, здесь же, и isSaveCompleted() тут же даёт результат. Можно вместо неё вызвать и isve-&gt;getWorld(id)-&gt;saveAllChunks(), как в TestProject3: после stop() это уже безопасно;</li>
+<li>и только потом delete isve: он удалит миры, а с ними контроллеры сохранения и генераторы.</li>
+</ul>
+<p>Подойдёт и обратный порядок - saveAllChunks(id), потом stop(): stop() сначала выполнит все задания очереди, в том числе и сохранение. А вот так делать нельзя:</p><ul>
+<li>delete isve без сохранения - всё, что не выгружалось, пропадёт;</li>
+<li>World::saveAllChunks() до stop() (без блокировки движка) - мир может меняться прямо во время сохранения;</li>
+<li>saveAllChunks(id, true) под блокировкой движка - зависание (см. выше).</li>
+</ul>
+<p>Ну и напоследок ещё раз полный код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Фабрика - как в уроке 1: куб из видимых граней, цвет вершин - цвет вокселя.</span></div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        s_Plane = createFaceMesh();</div>
+<div class="line">        s_MeshManipulator = device-&gt;getSceneManager()-&gt;getMeshManipulator();</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); }</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl)</div>
+<div class="line">    {</div>
+<div class="line">        IMesh* mesh = getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1));</div>
+<div class="line">        ARGBColor c = ((VoxelInfoARGBColor*)vxl-&gt;getVoxelInfo())-&gt;s_ARGBColor;</div>
+<div class="line">        <span class="keywordflow">if</span>(mesh) s_MeshManipulator-&gt;setVertexColors(mesh, SColor(c.getA(), c.getR(), c.getG(), c.getB()));</div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering*) { <span class="keywordflow">return</span> 0; }</div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Контроллер сохранения и загрузки (урок 3 SimpleVoxelEngine): каждый чанк - в своём текстовом файле</span></div>
+<div class="line"><span class="comment">// &lt;папка&gt;/chunk_&lt;x&gt;.&lt;y&gt;.&lt;z&gt;: сначала число непустых вокселей, потом цвета всех ячеек чанка (0 - пустая ячейка).</span></div>
+<div class="line"><span class="comment">// Формат - простейший, как в уроке 3 SimpleVoxelEngine. Враппер вызывает контроллер в потоке главной очереди под блокировкой движка.</span></div>
+<div class="line"><span class="keyword">class </span>FileSaveLoadController : <span class="keyword">public</span> ChunksSaveLoadController</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    FileSaveLoadController(IrrSimpleVoxelEngine* isve, std::string folder) : s_ISVE(isve), s_Folder(folder) {}</div>
+<div class="line">    std::string getFileName(Vector3d&lt;int&gt; vect) <span class="comment">// Файл чанка: &lt;папка&gt;/chunk_x.y.z</span></div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">return</span> s_Folder + STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER + <span class="stringliteral">&quot;chunk_&quot;</span> + vect.toString(STRING_CONSTANTS::DEFAULT_VECTOR_COORDINATES_SPLITTER);</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">bool</span> saveChunk(ChunkVoxelObject* cvo, Vector3d&lt;int&gt; vect)</div>
+<div class="line">    {</div>
+<div class="line">        std::string filename = getFileName(vect);</div>
+<div class="line">        std::ofstream file(filename.c_str()); <span class="comment">// Файл перезаписывается с начала.</span></div>
+<div class="line">        <span class="keywordflow">if</span>(!file) <span class="comment">// Папки ещё нет - создадим её и откроем файл снова.</span></div>
+<div class="line">        {</div>
+<div class="line">            WorkFunctions::FileFunctions::createFolders(s_Folder, STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER);</div>
+<div class="line">            file.open(filename.c_str(), std::ios::out | std::ios::trunc);</div>
+<div class="line">            <span class="keywordflow">if</span>(!file)</div>
+<div class="line">            {</div>
+<div class="line">                s_ISVE-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;Chunk not saved: error opening file &quot;</span> + filename);</div>
+<div class="line">                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> notnull = cvo-&gt;getNumberOfNotNullSimpleVoxelObjects();</div>
+<div class="line">        file &lt;&lt; notnull;</div>
+<div class="line">        <span class="keywordflow">if</span>(notnull != 0) <span class="comment">// В пустом чанке массивов вокселей может не быть - не трогаем их.</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordtype">int</span> n = cvo-&gt;getNumberOfPartitions();</div>
+<div class="line">            SimpleVoxelObject** svos = cvo-&gt;getSimpleVoxelObjects();</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; n * n * n; i++)</div>
+<div class="line">            {</div>
+<div class="line">                u32 color = 0; <span class="comment">// Пустая ячейка; вложенные чанки и чужие воксели тоже не сохраняем.</span></div>
+<div class="line">                <span class="keywordflow">if</span>(svos[i] &amp;&amp; svos[i]-&gt;getTypeVoxel() == ARGBCOLOR)</div>
+<div class="line">                {</div>
+<div class="line">                    ARGBColor c = ((ARGBColorVoxel*)svos[i])-&gt;getARGBColor();</div>
+<div class="line">                    color = SColor(c.getA(), c.getR(), c.getG(), c.getB()).color; <span class="comment">// Цвет одним числом.</span></div>
+<div class="line">                }</div>
+<div class="line">                file &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; color;</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span>(!file) <span class="comment">// Ошибка записи (например, кончилось место на диске).</span></div>
+<div class="line">        {</div>
+<div class="line">            s_ISVE-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;Chunk not saved: error writing file &quot;</span> + filename);</div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">        }</div>
+<div class="line">        s_SavedChunks++;</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">bool</span> loadChunk(ChunkVoxelObject* cvo, Vector3d&lt;int&gt; vect)</div>
+<div class="line">    {</div>
+<div class="line">        std::string filename = getFileName(vect);</div>
+<div class="line">        std::ifstream file(filename.c_str());</div>
+<div class="line">        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> notnull = 0;</div>
+<div class="line">        <span class="keywordflow">if</span>(!file || !(file &gt;&gt; notnull))</div>
+<div class="line">        {</div>
+<div class="line">            s_ISVE-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;Chunk not loaded: error reading file &quot;</span> + filename);</div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span>(notnull == 0) <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// Чанк был пустым - так и оставляем.</span></div>
+<div class="line">        <span class="keywordtype">int</span> n = cvo-&gt;getNumberOfPartitions();</div>
+<div class="line">        SimpleVoxelObject** svos = cvo-&gt;getSimpleVoxelObjects(); <span class="comment">// Создаёт массивы чанка.</span></div>
+<div class="line">        <span class="keywordtype">bool</span>* recalculate = cvo-&gt;getReCalculateVisibleCacheSimpleVoxelObjects();</div>
+<div class="line">        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> created = 0;</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; n * n * n; i++)</div>
+<div class="line">        {</div>
+<div class="line">            u32 color = 0;</div>
+<div class="line">            <span class="keywordflow">if</span>(!(file &gt;&gt; color)) <span class="comment">// Файл обрезан или испорчен - мир удалит недозагруженный чанк сам.</span></div>
+<div class="line">            {</div>
+<div class="line">                s_ISVE-&gt;registerEvent(EVENT_TYPE_ERROR, <span class="stringliteral">&quot;Chunk not loaded: damaged file &quot;</span> + filename);</div>
+<div class="line">                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">            }</div>
+<div class="line">            <span class="keywordflow">if</span>(!color) <span class="keywordflow">continue</span>;</div>
+<div class="line">            SColor c(color);</div>
+<div class="line">            svos[i] = <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(c.getAlpha(), c.getRed(), c.getGreen(), c.getBlue()));</div>
+<div class="line">            recalculate[i] = <span class="keyword">true</span>; <span class="comment">// Видимость граней мы не сохраняли - пусть движок пересчитает.</span></div>
+<div class="line">            created++;</div>
+<div class="line">        }</div>
+<div class="line">        cvo-&gt;setNumberOfNotNullSimpleVoxelObjects(created);</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">bool</span> canLoad(World*, Vector3d&lt;int&gt; vect) { <span class="keywordflow">return</span> WorkFunctions::FileFunctions::fileExists(getFileName(vect)); } <span class="comment">// Есть файл - загружаем.</span></div>
+<div class="line">    <span class="keywordtype">int</span> s_SavedChunks = 0; <span class="comment">// Сколько раз сохранялся чанк (для вывода).</span></div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    IrrSimpleVoxelEngine* s_ISVE; <span class="comment">// Для сообщений в лог.</span></div>
+<div class="line">    std::string s_Folder; <span class="comment">// Папка мира.</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Генератор: в чанках с y = 0 - пол толщиной в один блок (по 256 вокселей на чанк). Вызывается, только если контроллер</span></div>
+<div class="line"><span class="comment">// сохранения не может загрузить чанк (canLoad() вернула false).</span></div>
+<div class="line"><span class="keyword">class </span>FloorGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> size)</div>
+<div class="line">    {</div>
+<div class="line">        Vector3d&lt;int&gt; v = chunk-&gt;getVoxelAddress()-&gt;getVector(0); <span class="comment">// Координаты чанка (в чанках).</span></div>
+<div class="line">        <span class="keywordflow">if</span>(v.getY() != 0) <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// Остальные чанки - пустые.</span></div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; size; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; size; z++)</div>
+<div class="line">                chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, 0, z), <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, (v.getX() * size + x) * 8, 128, z * 16)), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Обработчик клавиш: F5 - сохранить мир, F9 - выгрузить чанк (1,0,0) с сохранением и загрузить его снова.</span></div>
+<div class="line"><span class="keyword">class </span>MyReceiver : <span class="keyword">public</span> IEventReceiver</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> OnEvent(<span class="keyword">const</span> SEvent&amp; event)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(event.EventType == EET_KEY_INPUT_EVENT &amp;&amp; !event.KeyInput.PressedDown)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_F5) s_Save = <span class="keyword">true</span>;</div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_F9) s_Reload = <span class="keyword">true</span>;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">bool</span> s_Save = <span class="keyword">false</span>;</div>
+<div class="line">    <span class="keywordtype">bool</span> s_Reload = <span class="keyword">false</span>;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(800, 600));</div>
+<div class="line">    MyReceiver receiver;</div>
+<div class="line">    device-&gt;setEventReceiver(&amp;receiver);</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Логгер: без него движок молча проглатывает и ошибки.</span></div>
+<div class="line">    lgr-&gt;setPrintStandard(<span class="keyword">false</span>); <span class="comment">// Обычные сообщения не нужны - только предупреждения и ошибки.</span></div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device, lgr);</div>
+<div class="line">    lgr-&gt;drop(); <span class="comment">// Движок держит свою ссылку.</span></div>
+<div class="line">    MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">    factory-&gt;setPositionScale(16);</div>
+<div class="line">    factory-&gt;setSScale(16);</div>
+<div class="line">    isve-&gt;setFactoryChunkMeshSceneNode(factory);</div>
+<div class="line">    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld();</div>
+<div class="line">    factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">    FileSaveLoadController* saver = <span class="keyword">new</span> FileSaveLoadController(isve, <span class="stringliteral">&quot;data/lesson11&quot;</span>); <span class="comment">// Мир хранится в папке data/lesson11.</span></div>
+<div class="line">    isve-&gt;getWorld(<span class="keywordtype">id</span>)-&gt;setChunksSaveLoadController(saver); <span class="comment">// До start() блокировка не нужна. Мир сам удалит контроллер.</span></div>
+<div class="line">    isve-&gt;getWorld(<span class="keywordtype">id</span>)-&gt;setWorldGenerator(<span class="keyword">new</span> FloorGenerator); <span class="comment">// Чанка нет в сохранении - его создаст генератор.</span></div>
+<div class="line">    isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(1, 0, 0), <span class="keyword">true</span>); <span class="comment">// Два чанка: (0,0,0) и (1,0,0).</span></div>
+<div class="line">    ICameraSceneNode* camera = device-&gt;getSceneManager()-&gt;addCameraSceneNodeFPS();</div>
+<div class="line">    camera-&gt;setPosition(vector3df(16, 12, -12));</div>
+<div class="line">    camera-&gt;setTarget(vector3df(16, 0, 8));</div>
+<div class="line">    isve-&gt;start();</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> savenumber = 0; <span class="comment">// Номер идущего сохранения (0 - сохранения нет).</span></div>
+<div class="line">    <span class="keywordflow">while</span>(isve-&gt;runIrrDevice())</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(receiver.s_Save &amp;&amp; savenumber == 0) <span class="comment">// F5: сохранение ставится в очередь, игра не ждёт.</span></div>
+<div class="line">        {</div>
+<div class="line">            receiver.s_Save = <span class="keyword">false</span>;</div>
+<div class="line">            savenumber = isve-&gt;saveAllChunks(<span class="keywordtype">id</span>);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordtype">bool</span> ok = <span class="keyword">false</span>;</div>
+<div class="line">        <span class="keywordflow">if</span>(savenumber != 0 &amp;&amp; isve-&gt;isSaveCompleted(savenumber, &amp;ok)) <span class="comment">// Каждый кадр проверяем, закончилось ли.</span></div>
+<div class="line">        {</div>
+<div class="line">            printf(ok ? <span class="stringliteral">&quot;World saved\n&quot;</span> : <span class="stringliteral">&quot;World NOT saved\n&quot;</span>);</div>
+<div class="line">            savenumber = 0;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span>(receiver.s_Reload) <span class="comment">// F9: выгрузить чанк с сохранением и загрузить снова (пользуется тем же контроллером).</span></div>
+<div class="line">        {</div>
+<div class="line">            receiver.s_Reload = <span class="keyword">false</span>;</div>
+<div class="line">            isve-&gt;deleteChunkForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(1, 0, 0), <span class="keyword">true</span>, <span class="keyword">true</span>); <span class="comment">// unload = true, save = true.</span></div>
+<div class="line">            isve-&gt;addChunkForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(1, 0, 0), <span class="keyword">true</span>); <span class="comment">// load = true: контроллер загрузит сохранённое.</span></div>
+<div class="line">        }</div>
+<div class="line">        isve-&gt;update();</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 100, 100, 140));</div>
+<div class="line">        device-&gt;getSceneManager()-&gt;drawAll();</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;endScene();</div>
+<div class="line">    }</div>
+<div class="line">    isve-&gt;stop(); <span class="comment">// Сначала - остановка: все поставленные задания выполнены, мир больше никто не меняет.</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> last = isve-&gt;saveAllChunks(<span class="keywordtype">id</span>); <span class="comment">// Очередь уже остановлена - сохранение выполняется сразу, здесь.</span></div>
+<div class="line">    <span class="keywordtype">bool</span> lastok = <span class="keyword">false</span>;</div>
+<div class="line">    isve-&gt;isSaveCompleted(last, &amp;lastok);</div>
+<div class="line">    printf(lastok ? <span class="stringliteral">&quot;World saved on exit\n&quot;</span> : <span class="stringliteral">&quot;World NOT saved on exit\n&quot;</span>);</div>
+<div class="line">    <span class="keyword">delete</span> isve; <span class="comment">// Удалит мир, а с ним и контроллер сохранения.</span></div>
+<div class="line">    device-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="tutorials.html">Уроки по врапперу IrrSimpleVoxelEngine.</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

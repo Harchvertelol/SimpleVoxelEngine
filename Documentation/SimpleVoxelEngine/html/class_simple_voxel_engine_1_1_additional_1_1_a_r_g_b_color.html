@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>SimpleVoxelEngine: Класс SimpleVoxelEngine::Additional::ARGBColor</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,183 +23,171 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">SimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Воксельный движок</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li><a href="pages.html"><span>Описания</span></a></li>
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
-      <li><a href="hierarchy.html"><span>Иерархия&#160;классов</span></a></li>
-      <li><a href="functions.html"><span>Члены&#160;классов</span></a></li>
-    </ul>
+  <div id="splitbar" class="ui-resizable-handle">
   </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html','','class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_additional.html">Additional</a></li><li class="navelem"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#pub-methods">Открытые члены</a> &#124;
-<a href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color-members.html">Полный список членов класса</a>  </div>
-  <div class="headertitle">
-<div class="title">Класс SimpleVoxelEngine::Additional::ARGBColor</div>  </div>
+  <div class="headertitle"><div class="title">Класс SimpleVoxelEngine::Additional::ARGBColor</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Цвет ARGB.  
- <a href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#details">Подробнее...</a></p>
+ <a href="#details">Подробнее...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_a_r_g_b_color_8h_source.html">ARGBColor.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Открытые члены</h2></td></tr>
-<tr class="memitem:a75fd36a9b70efbba190825d4b675015b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a75fd36a9b70efbba190825d4b675015b">ARGBColor</a> (unsigned char a=0, unsigned char r=0, unsigned char g=0, unsigned char b=0)</td></tr>
-<tr class="memdesc:a75fd36a9b70efbba190825d4b675015b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор с заданием цвета.  <a href="#a75fd36a9b70efbba190825d4b675015b">Подробнее...</a><br /></td></tr>
-<tr class="separator:a75fd36a9b70efbba190825d4b675015b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36da3fa9731f1827c75d6186fad8fde2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a36da3fa9731f1827c75d6186fad8fde2"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a36da3fa9731f1827c75d6186fad8fde2">ARGBColor</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> &amp;argbcolor)</td></tr>
+<tr class="memitem:a75fd36a9b70efbba190825d4b675015b" id="r_a75fd36a9b70efbba190825d4b675015b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a75fd36a9b70efbba190825d4b675015b">ARGBColor</a> (unsigned char a=0, unsigned char r=0, unsigned char g=0, unsigned char b=0)</td></tr>
+<tr class="memdesc:a75fd36a9b70efbba190825d4b675015b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор с заданием цвета.  <br /></td></tr>
+<tr class="memitem:a36da3fa9731f1827c75d6186fad8fde2" id="r_a36da3fa9731f1827c75d6186fad8fde2"><td class="memItemLeft"><a id="a36da3fa9731f1827c75d6186fad8fde2" name="a36da3fa9731f1827c75d6186fad8fde2"></a>
+&#160;</td><td class="memItemRight"><b>ARGBColor</b> (const ARGBColor &amp;argbcolor)</td></tr>
 <tr class="memdesc:a36da3fa9731f1827c75d6186fad8fde2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор копирования. <br /></td></tr>
-<tr class="separator:a36da3fa9731f1827c75d6186fad8fde2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca2c69b823f5d833711797d31e256a10"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca2c69b823f5d833711797d31e256a10"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#aca2c69b823f5d833711797d31e256a10">~ARGBColor</a> ()</td></tr>
+<tr class="memitem:aca2c69b823f5d833711797d31e256a10" id="r_aca2c69b823f5d833711797d31e256a10"><td class="memItemLeft"><a id="aca2c69b823f5d833711797d31e256a10" name="aca2c69b823f5d833711797d31e256a10"></a>
+&#160;</td><td class="memItemRight"><b>~ARGBColor</b> ()</td></tr>
 <tr class="memdesc:aca2c69b823f5d833711797d31e256a10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Стандартный деструктор. <br /></td></tr>
-<tr class="separator:aca2c69b823f5d833711797d31e256a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f9aa4ea301563a519f88c857e505c26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a8f9aa4ea301563a519f88c857e505c26">setARGB</a> (unsigned char a, unsigned char r, unsigned char g, unsigned char b)</td></tr>
-<tr class="memdesc:a8f9aa4ea301563a519f88c857e505c26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция установки цвета.  <a href="#a8f9aa4ea301563a519f88c857e505c26">Подробнее...</a><br /></td></tr>
-<tr class="separator:a8f9aa4ea301563a519f88c857e505c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9b68070160cd4e154eadf475c9b944d"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#ab9b68070160cd4e154eadf475c9b944d">getA</a> () const </td></tr>
-<tr class="memdesc:ab9b68070160cd4e154eadf475c9b944d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение альфа компоненты.  <a href="#ab9b68070160cd4e154eadf475c9b944d">Подробнее...</a><br /></td></tr>
-<tr class="separator:ab9b68070160cd4e154eadf475c9b944d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a804bc684e1cf430c869c129280984bfb"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a804bc684e1cf430c869c129280984bfb">getR</a> () const </td></tr>
-<tr class="memdesc:a804bc684e1cf430c869c129280984bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение красной компоненты.  <a href="#a804bc684e1cf430c869c129280984bfb">Подробнее...</a><br /></td></tr>
-<tr class="separator:a804bc684e1cf430c869c129280984bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cb5191432f1ef076c9669debe1eaa0d"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a3cb5191432f1ef076c9669debe1eaa0d">getG</a> () const </td></tr>
-<tr class="memdesc:a3cb5191432f1ef076c9669debe1eaa0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение зелёной компоненты.  <a href="#a3cb5191432f1ef076c9669debe1eaa0d">Подробнее...</a><br /></td></tr>
-<tr class="separator:a3cb5191432f1ef076c9669debe1eaa0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af76d6c6820c37b9ed445973d74f135ad"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#af76d6c6820c37b9ed445973d74f135ad">getB</a> () const </td></tr>
-<tr class="memdesc:af76d6c6820c37b9ed445973d74f135ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение голубой компоненты.  <a href="#af76d6c6820c37b9ed445973d74f135ad">Подробнее...</a><br /></td></tr>
-<tr class="separator:af76d6c6820c37b9ed445973d74f135ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8a7eed993c824521775f1cb342225f3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af8a7eed993c824521775f1cb342225f3"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#af8a7eed993c824521775f1cb342225f3">operator=</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> &amp;)</td></tr>
-<tr class="memdesc:af8a7eed993c824521775f1cb342225f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор присваивания. <br /></td></tr>
-<tr class="separator:af8a7eed993c824521775f1cb342225f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c366a0f5ec1db8a8a648bf2dd0cf6e2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5c366a0f5ec1db8a8a648bf2dd0cf6e2"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a5c366a0f5ec1db8a8a648bf2dd0cf6e2">operator+=</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> &amp;)</td></tr>
-<tr class="memdesc:a5c366a0f5ec1db8a8a648bf2dd0cf6e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор добавления значения к исходному. <br /></td></tr>
-<tr class="separator:a5c366a0f5ec1db8a8a648bf2dd0cf6e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0fa48eb4c5caf2c55f38276d7f0a50fd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0fa48eb4c5caf2c55f38276d7f0a50fd"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a0fa48eb4c5caf2c55f38276d7f0a50fd">operator+</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> &amp;)</td></tr>
-<tr class="memdesc:a0fa48eb4c5caf2c55f38276d7f0a50fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сложения. <br /></td></tr>
-<tr class="separator:a0fa48eb4c5caf2c55f38276d7f0a50fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac063fe56a215c01c1a96c6f8ba3fb2c2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac063fe56a215c01c1a96c6f8ba3fb2c2"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#ac063fe56a215c01c1a96c6f8ba3fb2c2">operator*</a> (unsigned char)</td></tr>
-<tr class="memdesc:ac063fe56a215c01c1a96c6f8ba3fb2c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор умножения. <br /></td></tr>
-<tr class="separator:ac063fe56a215c01c1a96c6f8ba3fb2c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8bb554f813d5bb3b3a86da3621cd670"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8bb554f813d5bb3b3a86da3621cd670"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#ac8bb554f813d5bb3b3a86da3621cd670">operator*=</a> (unsigned char)</td></tr>
-<tr class="memdesc:ac8bb554f813d5bb3b3a86da3621cd670"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор умножения исходного на значение. <br /></td></tr>
-<tr class="separator:ac8bb554f813d5bb3b3a86da3621cd670"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d3d8e26a021cdbdf2e3a554314a99cc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8d3d8e26a021cdbdf2e3a554314a99cc"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a8d3d8e26a021cdbdf2e3a554314a99cc">operator-=</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> &amp;)</td></tr>
-<tr class="memdesc:a8d3d8e26a021cdbdf2e3a554314a99cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор вычитания значения из исходного. <br /></td></tr>
-<tr class="separator:a8d3d8e26a021cdbdf2e3a554314a99cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66c17b04a028080f1067327c7c32f326"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a66c17b04a028080f1067327c7c32f326"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a66c17b04a028080f1067327c7c32f326">operator-</a> (<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> &amp;)</td></tr>
-<tr class="memdesc:a66c17b04a028080f1067327c7c32f326"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор вычитания. <br /></td></tr>
-<tr class="separator:a66c17b04a028080f1067327c7c32f326"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f9aa4ea301563a519f88c857e505c26" id="r_a8f9aa4ea301563a519f88c857e505c26"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8f9aa4ea301563a519f88c857e505c26">setARGB</a> (unsigned char a, unsigned char r, unsigned char g, unsigned char b)</td></tr>
+<tr class="memdesc:a8f9aa4ea301563a519f88c857e505c26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция установки цвета.  <br /></td></tr>
+<tr class="memitem:a99a506825b2211a92719b13ee0717ce2" id="r_a99a506825b2211a92719b13ee0717ce2"><td class="memItemLeft">unsigned char&#160;</td><td class="memItemRight"><a class="el" href="#a99a506825b2211a92719b13ee0717ce2">getA</a> () const</td></tr>
+<tr class="memdesc:a99a506825b2211a92719b13ee0717ce2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение альфа компоненты.  <br /></td></tr>
+<tr class="memitem:aa7d68d8339e7cd6000623da82c15e804" id="r_aa7d68d8339e7cd6000623da82c15e804"><td class="memItemLeft">unsigned char&#160;</td><td class="memItemRight"><a class="el" href="#aa7d68d8339e7cd6000623da82c15e804">getR</a> () const</td></tr>
+<tr class="memdesc:aa7d68d8339e7cd6000623da82c15e804"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение красной компоненты.  <br /></td></tr>
+<tr class="memitem:af2a5a89c70ee5447743a7916a42f75f8" id="r_af2a5a89c70ee5447743a7916a42f75f8"><td class="memItemLeft">unsigned char&#160;</td><td class="memItemRight"><a class="el" href="#af2a5a89c70ee5447743a7916a42f75f8">getG</a> () const</td></tr>
+<tr class="memdesc:af2a5a89c70ee5447743a7916a42f75f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение зелёной компоненты.  <br /></td></tr>
+<tr class="memitem:a85b7a3be8b00697b2b3b14026476ad5f" id="r_a85b7a3be8b00697b2b3b14026476ad5f"><td class="memItemLeft">unsigned char&#160;</td><td class="memItemRight"><a class="el" href="#a85b7a3be8b00697b2b3b14026476ad5f">getB</a> () const</td></tr>
+<tr class="memdesc:a85b7a3be8b00697b2b3b14026476ad5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение голубой компоненты.  <br /></td></tr>
+<tr class="memitem:a28ca5fc0db47b80d34b65388f5fab607" id="r_a28ca5fc0db47b80d34b65388f5fab607"><td class="memItemLeft"><a id="a28ca5fc0db47b80d34b65388f5fab607" name="a28ca5fc0db47b80d34b65388f5fab607"></a>
+<a class="el" href="#a75fd36a9b70efbba190825d4b675015b">ARGBColor</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (const <a class="el" href="#a75fd36a9b70efbba190825d4b675015b">ARGBColor</a> &amp;)</td></tr>
+<tr class="memdesc:a28ca5fc0db47b80d34b65388f5fab607"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор присваивания. <br /></td></tr>
+<tr class="memitem:a2db9241a1e5fc4bc24495103527c04a5" id="r_a2db9241a1e5fc4bc24495103527c04a5"><td class="memItemLeft"><a id="a2db9241a1e5fc4bc24495103527c04a5" name="a2db9241a1e5fc4bc24495103527c04a5"></a>
+<a class="el" href="#a75fd36a9b70efbba190825d4b675015b">ARGBColor</a> &amp;&#160;</td><td class="memItemRight"><b>operator+=</b> (const <a class="el" href="#a75fd36a9b70efbba190825d4b675015b">ARGBColor</a> &amp;)</td></tr>
+<tr class="memdesc:a2db9241a1e5fc4bc24495103527c04a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор добавления значения к исходному. <br /></td></tr>
+<tr class="memitem:a1c4bd47107957e5b243df7fab9d13b3e" id="r_a1c4bd47107957e5b243df7fab9d13b3e"><td class="memItemLeft"><a id="a1c4bd47107957e5b243df7fab9d13b3e" name="a1c4bd47107957e5b243df7fab9d13b3e"></a>
+<a class="el" href="#a75fd36a9b70efbba190825d4b675015b">ARGBColor</a>&#160;</td><td class="memItemRight"><b>operator+</b> (const <a class="el" href="#a75fd36a9b70efbba190825d4b675015b">ARGBColor</a> &amp;) const</td></tr>
+<tr class="memdesc:a1c4bd47107957e5b243df7fab9d13b3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сложения. <br /></td></tr>
+<tr class="memitem:a6caed3a7038a96806cfd8dbca8c76ce2" id="r_a6caed3a7038a96806cfd8dbca8c76ce2"><td class="memItemLeft"><a id="a6caed3a7038a96806cfd8dbca8c76ce2" name="a6caed3a7038a96806cfd8dbca8c76ce2"></a>
+<a class="el" href="#a75fd36a9b70efbba190825d4b675015b">ARGBColor</a>&#160;</td><td class="memItemRight"><b>operator*</b> (unsigned char) const</td></tr>
+<tr class="memdesc:a6caed3a7038a96806cfd8dbca8c76ce2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор умножения. <br /></td></tr>
+<tr class="memitem:ac059a6fb85ae41e8103e084502d9431a" id="r_ac059a6fb85ae41e8103e084502d9431a"><td class="memItemLeft"><a id="ac059a6fb85ae41e8103e084502d9431a" name="ac059a6fb85ae41e8103e084502d9431a"></a>
+<a class="el" href="#a75fd36a9b70efbba190825d4b675015b">ARGBColor</a> &amp;&#160;</td><td class="memItemRight"><b>operator*=</b> (unsigned char)</td></tr>
+<tr class="memdesc:ac059a6fb85ae41e8103e084502d9431a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор умножения исходного на значение. <br /></td></tr>
+<tr class="memitem:a4bf524d1aad5efde7992de3cdb1ed04c" id="r_a4bf524d1aad5efde7992de3cdb1ed04c"><td class="memItemLeft"><a id="a4bf524d1aad5efde7992de3cdb1ed04c" name="a4bf524d1aad5efde7992de3cdb1ed04c"></a>
+<a class="el" href="#a75fd36a9b70efbba190825d4b675015b">ARGBColor</a> &amp;&#160;</td><td class="memItemRight"><b>operator-=</b> (const <a class="el" href="#a75fd36a9b70efbba190825d4b675015b">ARGBColor</a> &amp;)</td></tr>
+<tr class="memdesc:a4bf524d1aad5efde7992de3cdb1ed04c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор вычитания значения из исходного. <br /></td></tr>
+<tr class="memitem:aecdb46a12b8f1ddc11223286f5ef720d" id="r_aecdb46a12b8f1ddc11223286f5ef720d"><td class="memItemLeft"><a id="aecdb46a12b8f1ddc11223286f5ef720d" name="aecdb46a12b8f1ddc11223286f5ef720d"></a>
+<a class="el" href="#a75fd36a9b70efbba190825d4b675015b">ARGBColor</a>&#160;</td><td class="memItemRight"><b>operator-</b> (const <a class="el" href="#a75fd36a9b70efbba190825d4b675015b">ARGBColor</a> &amp;) const</td></tr>
+<tr class="memdesc:aecdb46a12b8f1ddc11223286f5ef720d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор вычитания. <br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
 <div class="textblock"><p>Цвет ARGB. </p>
-<p>Данный класс содержит в себе ARGB цвет. Можно использовать для цвета вокселей. </p>
+<p>Данный класс содержит в себе ARGB цвет. Можно использовать для цвета вокселей. Компоненты - unsigned char, арифметика (+, -, *) идёт по модулю 256 (переполнение "по кругу", без насыщения): например, 200 + 100 = 44, 0 - 1 = 255. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
+<a id="a75fd36a9b70efbba190825d4b675015b" name="a75fd36a9b70efbba190825d4b675015b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75fd36a9b70efbba190825d4b675015b">&#9670;&#160;</a></span>ARGBColor()</h2>
 
-<p>См. определение в файле <a class="el" href="_a_r_g_b_color_8h_source.html">ARGBColor.h</a> строка <a class="el" href="_a_r_g_b_color_8h_source.html#l00013">13</a></p>
-</div><h2 class="groupheader">Конструктор(ы)</h2>
-<a class="anchor" id="a75fd36a9b70efbba190825d4b675015b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">SimpleVoxelEngine::Additional::ARGBColor::ARGBColor </td>
           <td>(</td>
-          <td class="paramtype">unsigned char&#160;</td>
-          <td class="paramname"><em>a</em> = <code>0</code>, </td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>a</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned char&#160;</td>
-          <td class="paramname"><em>r</em> = <code>0</code>, </td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>r</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned char&#160;</td>
-          <td class="paramname"><em>g</em> = <code>0</code>, </td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>g</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned char&#160;</td>
-          <td class="paramname"><em>b</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>b</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -214,15 +205,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<h2 class="groupheader">Методы</h2>
-<a class="anchor" id="ab9b68070160cd4e154eadf475c9b944d"></a>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
+<a id="a99a506825b2211a92719b13ee0717ce2" name="a99a506825b2211a92719b13ee0717ce2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99a506825b2211a92719b13ee0717ce2">&#9670;&#160;</a></span>getA()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">unsigned char SimpleVoxelEngine::Additional::ARGBColor::getA </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -233,14 +226,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="af76d6c6820c37b9ed445973d74f135ad"></a>
+<a id="a85b7a3be8b00697b2b3b14026476ad5f" name="a85b7a3be8b00697b2b3b14026476ad5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85b7a3be8b00697b2b3b14026476ad5f">&#9670;&#160;</a></span>getB()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">unsigned char SimpleVoxelEngine::Additional::ARGBColor::getB </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -251,14 +246,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a3cb5191432f1ef076c9669debe1eaa0d"></a>
+<a id="af2a5a89c70ee5447743a7916a42f75f8" name="af2a5a89c70ee5447743a7916a42f75f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2a5a89c70ee5447743a7916a42f75f8">&#9670;&#160;</a></span>getG()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">unsigned char SimpleVoxelEngine::Additional::ARGBColor::getG </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -269,14 +266,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a804bc684e1cf430c869c129280984bfb"></a>
+<a id="aa7d68d8339e7cd6000623da82c15e804" name="aa7d68d8339e7cd6000623da82c15e804"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7d68d8339e7cd6000623da82c15e804">&#9670;&#160;</a></span>getR()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">unsigned char SimpleVoxelEngine::Additional::ARGBColor::getR </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -287,38 +286,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 </div>
 </div>
-<a class="anchor" id="a8f9aa4ea301563a519f88c857e505c26"></a>
+<a id="a8f9aa4ea301563a519f88c857e505c26" name="a8f9aa4ea301563a519f88c857e505c26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f9aa4ea301563a519f88c857e505c26">&#9670;&#160;</a></span>setARGB()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void SimpleVoxelEngine::Additional::ARGBColor::setARGB </td>
           <td>(</td>
-          <td class="paramtype">unsigned char&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned char&#160;</td>
-          <td class="paramname"><em>r</em>, </td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>r</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned char&#160;</td>
-          <td class="paramname"><em>g</em>, </td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>g</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned char&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">unsigned char</td>          <td class="paramname"><span class="paramname"><em>b</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -337,14 +329,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 </div>
 </div>
 <hr/>Объявления и описания членов класса находятся в файле:<ul>
-<li><a class="el" href="_a_r_g_b_color_8h_source.html">ARGBColor.h</a></li>
+<li>E:/NeuroCoding/Claude/MyVoxelWork/SimpleVoxelEngine/include/Additional/<a class="el" href="_a_r_g_b_color_8h_source.html">ARGBColor.h</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:22. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a href="namespace_simple_voxel_engine_1_1_additional.html">Additional</a></li><li class="navelem"><a href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

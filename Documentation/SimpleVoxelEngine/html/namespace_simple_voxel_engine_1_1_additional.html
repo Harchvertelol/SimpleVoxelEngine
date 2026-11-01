@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>SimpleVoxelEngine: Пространство имен SimpleVoxelEngine::Additional</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,131 +23,173 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">SimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Воксельный движок</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li><a href="pages.html"><span>Описания</span></a></li>
-      <li class="current"><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li><a href="namespacemembers.html"><span>Члены&#160;пространств&#160;имен</span></a></li>
-    </ul>
+  <div id="splitbar" class="ui-resizable-handle">
   </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('namespace_simple_voxel_engine_1_1_additional.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_additional.html">Additional</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Классы</a> &#124;
-<a href="#func-members">Функции</a>  </div>
-  <div class="headertitle">
-<div class="title">Пространство имен SimpleVoxelEngine::Additional</div>  </div>
+  <div class="headertitle"><div class="title">Пространство имен SimpleVoxelEngine::Additional</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Дополнительные классы для использования в движке.  
 <a href="#details">Подробнее...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Классы</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a></td></tr>
+<tr class="memitem:ARGBColor" id="r_ARGBColor"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Цвет ARGB.  <a href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_reference_counter.html">ReferenceCounter</a></td></tr>
+<tr class="memitem:ReferenceCounter" id="r_ReferenceCounter"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_reference_counter.html">ReferenceCounter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Класс, отвечающий за счётчик ссылок на объект.  <a href="class_simple_voxel_engine_1_1_additional_1_1_reference_counter.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a></td></tr>
+<tr class="memitem:Vector3d" id="r_Vector3d"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Шаблонный класс 3d вектора.  <a href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Функции</h2></td></tr>
-<tr class="memitem:ac23dddbb575d2b3191b3fce6069da2f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac23dddbb575d2b3191b3fce6069da2f9"></a>
-<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_additional.html#ac23dddbb575d2b3191b3fce6069da2f9">operator*</a> (unsigned char, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a>)</td></tr>
-<tr class="memdesc:ac23dddbb575d2b3191b3fce6069da2f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор умножения на число слева. <br /></td></tr>
-<tr class="separator:ac23dddbb575d2b3191b3fce6069da2f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0099716b40765c9177ee0fc7820f399c"><td class="memTemplParams" colspan="2"><a class="anchor" id="a0099716b40765c9177ee0fc7820f399c"></a>
-template&lt;class TYPE_TypeCoord &gt; </td></tr>
-<tr class="memitem:a0099716b40765c9177ee0fc7820f399c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_additional.html#a0099716b40765c9177ee0fc7820f399c">operator*</a> (TYPE_TypeCoord what, const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; vect)</td></tr>
-<tr class="memdesc:a0099716b40765c9177ee0fc7820f399c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор умножения на число слева. <br /></td></tr>
-<tr class="separator:a0099716b40765c9177ee0fc7820f399c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61b5650ff1033ce53e56f3efe749c7f5"><td class="memTemplParams" colspan="2"><a class="anchor" id="a61b5650ff1033ce53e56f3efe749c7f5"></a>
-template&lt;class TYPE_TypeCoord &gt; </td></tr>
-<tr class="memitem:a61b5650ff1033ce53e56f3efe749c7f5"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_additional.html#a61b5650ff1033ce53e56f3efe749c7f5">operator&lt;</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect1, const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect2)</td></tr>
+<tr class="memitem:a6b78809073a4c4c4162244e4d0327d59" id="r_a6b78809073a4c4c4162244e4d0327d59"><td class="memItemLeft"><a id="a6b78809073a4c4c4162244e4d0327d59" name="a6b78809073a4c4c4162244e4d0327d59"></a>
+<a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a>&#160;</td><td class="memItemRight"><b>operator*</b> (unsigned char, <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a>)</td></tr>
+<tr class="memdesc:a6b78809073a4c4c4162244e4d0327d59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор умножения на число слева. <br /></td></tr>
+<tr class="memitem:a92a168178fd7662ee8cb0b70886a2b6d" id="r_a92a168178fd7662ee8cb0b70886a2b6d"><td class="memTemplParams" colspan="2"><a id="a92a168178fd7662ee8cb0b70886a2b6d" name="a92a168178fd7662ee8cb0b70886a2b6d"></a>
+template&lt;class TYPE_TypeCoord&gt; </td></tr>
+<tr class="memitem:a92a168178fd7662ee8cb0b70886a2b6d template"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt;&#160;</td><td class="memItemRight"><b>operator*</b> (TYPE_TypeCoord what, const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; vect)</td></tr>
+<tr class="memdesc:a92a168178fd7662ee8cb0b70886a2b6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор умножения на число слева. <br /></td></tr>
+<tr class="memitem:a61b5650ff1033ce53e56f3efe749c7f5" id="r_a61b5650ff1033ce53e56f3efe749c7f5"><td class="memTemplParams" colspan="2"><a id="a61b5650ff1033ce53e56f3efe749c7f5" name="a61b5650ff1033ce53e56f3efe749c7f5"></a>
+template&lt;class TYPE_TypeCoord&gt; </td></tr>
+<tr class="memitem:a61b5650ff1033ce53e56f3efe749c7f5 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&lt;</b> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect1, const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect2)</td></tr>
 <tr class="memdesc:a61b5650ff1033ce53e56f3efe749c7f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "меньше" для возможности использования класса как индексатора std::map. <br /></td></tr>
-<tr class="separator:a61b5650ff1033ce53e56f3efe749c7f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0b6395e2aaf15769880e1bf0bb7904b"><td class="memTemplParams" colspan="2"><a class="anchor" id="ab0b6395e2aaf15769880e1bf0bb7904b"></a>
-template&lt;class TYPE_TypeCoord &gt; </td></tr>
-<tr class="memitem:ab0b6395e2aaf15769880e1bf0bb7904b"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_additional.html#ab0b6395e2aaf15769880e1bf0bb7904b">operator==</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect1, const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect2)</td></tr>
-<tr class="memdesc:ab0b6395e2aaf15769880e1bf0bb7904b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "равно" для возможности использования класса как индексатора std::map. <br /></td></tr>
-<tr class="separator:ab0b6395e2aaf15769880e1bf0bb7904b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ab59e3f1bb3319cbf74551e988a6c7a"><td class="memTemplParams" colspan="2"><a class="anchor" id="a9ab59e3f1bb3319cbf74551e988a6c7a"></a>
-template&lt;class TYPE_TypeCoord &gt; </td></tr>
-<tr class="memitem:a9ab59e3f1bb3319cbf74551e988a6c7a"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_additional.html#a9ab59e3f1bb3319cbf74551e988a6c7a">operator!=</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect1, const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect2)</td></tr>
+<tr class="memitem:ab0b6395e2aaf15769880e1bf0bb7904b" id="r_ab0b6395e2aaf15769880e1bf0bb7904b"><td class="memTemplParams" colspan="2">template&lt;class TYPE_TypeCoord&gt; </td></tr>
+<tr class="memitem:ab0b6395e2aaf15769880e1bf0bb7904b template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ab0b6395e2aaf15769880e1bf0bb7904b">operator==</a> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect1, const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect2)</td></tr>
+<tr class="memdesc:ab0b6395e2aaf15769880e1bf0bb7904b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "равно" для возможности использования класса как индексатора std::map.  <br /></td></tr>
+<tr class="memitem:a9ab59e3f1bb3319cbf74551e988a6c7a" id="r_a9ab59e3f1bb3319cbf74551e988a6c7a"><td class="memTemplParams" colspan="2"><a id="a9ab59e3f1bb3319cbf74551e988a6c7a" name="a9ab59e3f1bb3319cbf74551e988a6c7a"></a>
+template&lt;class TYPE_TypeCoord&gt; </td></tr>
+<tr class="memitem:a9ab59e3f1bb3319cbf74551e988a6c7a template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator!=</b> (const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect1, const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;vect2)</td></tr>
 <tr class="memdesc:a9ab59e3f1bb3319cbf74551e988a6c7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Оператор сравнения "не равно" для возможности использования класса как индексатора std::map. <br /></td></tr>
-<tr class="separator:a9ab59e3f1bb3319cbf74551e988a6c7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
 <div class="textblock"><p>Дополнительные классы для использования в движке. </p>
-</div></div><!-- contents -->
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Функции</h2>
+<a id="ab0b6395e2aaf15769880e1bf0bb7904b" name="ab0b6395e2aaf15769880e1bf0bb7904b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0b6395e2aaf15769880e1bf0bb7904b">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class TYPE_TypeCoord&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::Additional::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>vect1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a>&lt; TYPE_TypeCoord &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>vect2</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Оператор сравнения "равно" для возможности использования класса как индексатора std::map. </p>
+<p>Сравнивает с допуском EPS по каждой координате (для int - то же, что точное равенство). Для float это не отношение эквивалентности (a == b и b == c не значит a == c) и не согласовано с точным operator&lt;. std::map пользуется только operator&lt;, поэтому ключи карты сравниваются точно. </p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:22. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a href="namespace_simple_voxel_engine_1_1_additional.html">Additional</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

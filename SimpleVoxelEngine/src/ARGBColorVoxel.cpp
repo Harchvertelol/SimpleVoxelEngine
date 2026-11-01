@@ -17,13 +17,8 @@ SimpleVoxelEngine::Voxels::ARGBColorVoxel::ARGBColorVoxel():
     setTypeVoxel(ARGBCOLOR);
 }
 
-SimpleVoxelEngine::Voxels::ARGBColorVoxel::ARGBColorVoxel(ARGBColor& argbcolor):
-    SimpleVoxelObject(),
-    s_ARGBColor(argbcolor)
-{
-    setTypeVoxel(ARGBCOLOR);
-}
-
+//Удалён конструктор ARGBColorVoxel(ARGBColor&): он делал то же, что конструктор ниже, но вместе с ним давал
+//неоднозначность при вызове с обычной переменной ARGBColor.
 SimpleVoxelEngine::Voxels::ARGBColorVoxel::ARGBColorVoxel(ARGBColor argbcolor):
     SimpleVoxelObject(),
     s_ARGBColor(argbcolor)

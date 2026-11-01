@@ -1,9 +1,26 @@
 var searchData=
 [
-  ['Об_20авторе_20движка_2e',['Об авторе движка.',['../author.html',1,'']]],
-  ['Изменения',['Изменения',['../changes.html',1,'']]],
-  ['Общие_20идеи_20работы_20враппера_20irrsimplevoxelengine_2e',['Общие идеи работы враппера IrrSimpleVoxelEngine.',['../ideas.html',1,'']]],
-  ['Документация_20по_20irrsimplevoxelengine_2e',['Документация по IrrSimpleVoxelEngine.',['../index.html',1,'']]],
-  ['Настройка_20враппера_20irrsimplevoxelengine_20для_20работы_2e',['Настройка враппера IrrSimpleVoxelEngine для работы.',['../install.html',1,'']]],
-  ['Уроки_20по_20врапперу_20irrsimplevoxelengine_2e',['Уроки по врапперу IrrSimpleVoxelEngine.',['../tutorials.html',1,'']]]
+  ['id_20нод_0',['ID нод',['../tutorial7.html#tut7_ids',1,'']]],
+  ['irrlicht_1',['Irrlicht',['../ideas.html#meshes',1,'Как воксели превращаются в ноды Irrlicht'],['../tutorial7.html#tut7_idea',1,'Как это устроено в Irrlicht']]],
+  ['irrsimplevoxelengine_2',['IrrSimpleVoxelEngine',['../index.html',1,'Документация по IrrSimpleVoxelEngine.'],['../ideas.html',1,'Общие идеи работы враппера IrrSimpleVoxelEngine.'],['../tutorials.html',1,'Уроки по врапперу IrrSimpleVoxelEngine.'],['../class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html',1,'SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine'],['../class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#af36cdeb3e6ea2381bc858e388c2f6aa6',1,'SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::IrrSimpleVoxelEngine(irr::IrrlichtDevice *device)'],['../class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#add12ca89f78c17c885264d5378b91cc8',1,'SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine::IrrSimpleVoxelEngine(irr::IrrlichtDevice *device, SimpleVoxelEngine::Debug::Logger *lgr)']]],
+  ['irrsimplevoxelengine_20для_20работы_3',['Настройка враппера IrrSimpleVoxelEngine для работы.',['../install.html',1,'']]],
+  ['irrsimplevoxelengine_20build_200_200_201_3a_20ndash_20mdash_20mdash_4',['IrrSimpleVoxelEngine, build 0.0.1: (&amp;ndash; ----&amp;mdash; -&amp;mdash;)',['../changes.html#build001',1,'']]],
+  ['irrsimplevoxelengine_20build_200_200_202_3a_20ndash_20mdash_20mdash_5',['IrrSimpleVoxelEngine, build 0.0.2: (&amp;ndash; ----&amp;mdash; -&amp;mdash;)',['../changes.html#build002',1,'']]],
+  ['irrsimplevoxelengine_2eh_6',['IrrSimpleVoxelEngine.h',['../_irr_simple_voxel_engine_8h.html',1,'']]],
+  ['irrsvedefines_7',['Константы IrrSVEDefines',['../tutorial14.html#t14defines',1,'']]],
+  ['isareaready_8',['isAreaReady',['../class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#accc620d712f34c5cadb16ec02c4aa927',1,'SimpleVoxelEngine::IrrEngine::ChunkStreamingPool']]],
+  ['iscompleted_9',['isCompleted',['../struct_simple_voxel_engine_1_1_irr_engine_1_1_task.html#aa140b57f3b3c5c6d64124e182311c704',1,'SimpleVoxelEngine::IrrEngine::Task']]],
+  ['isdirty_10',['isDirty',['../classirr_1_1scene_1_1_c_batching_mesh.html#ab07f538e2cde8fecc2de1d47bb684dee',1,'irr::scene::CBatchingMesh']]],
+  ['isempty_11',['isEmpty',['../class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#af873b9cbb2d107f8469df8f612b084b0',1,'SimpleVoxelEngine::IrrEngine::ChunksMeshBlock']]],
+  ['isfaces_12',['isFaces',['../class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#abdeaa66b13e2753b3129ffa0da6affe9',1,'SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode']]],
+  ['isforupdatechunk_13',['isForUpdateChunk',['../class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#af25d330bae3295152c0e25b9f32f8885',1,'SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode']]],
+  ['isfreeze_14',['isFreeze',['../class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#af832043cd98323dde20f48f31ef4d03a',1,'SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController::isFreeze()'],['../class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a1cf68b66c7425b4d56322089f5f1fe17',1,'SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode::isFreeze()']]],
+  ['isinarea_15',['isInArea',['../class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html#a647b2a7c7904aedfa68ca3d00032f213',1,'SimpleVoxelEngine::IrrEngine::ChunkStreamingController']]],
+  ['ismainthread_16',['isMainThread',['../class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#aa6adc23cec952fc0a0d55cbf178ca1c6',1,'SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine']]],
+  ['ismultiplepartition_17',['isMultiplePartition',['../class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#a6c37ea4edd78bb64a691cc00b9a09402',1,'SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode']]],
+  ['isrenderchunk_18',['isRenderChunk',['../class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#aab57602a52d0546775910b54f1115a58',1,'SimpleVoxelEngine::IrrEngine::ChunksMeshBlock::isRenderChunk()'],['../class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#abdcf75ad2468cfaa1d959843222b571d',1,'SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController::isRenderChunk()'],['../class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#ac9a5f7189898833b1184a43854a0a5ab',1,'SimpleVoxelEngine::IrrEngine::FactoryChunkMeshSceneNode::isRenderChunk()']]],
+  ['isrun_19',['isRun',['../class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#aec74fa74e1ae1d2ecb17b5d3570d1a13',1,'SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine']]],
+  ['issavecompleted_20',['isSaveCompleted',['../class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a5e53fac40fcf2de5a2e95f9004e80c5f',1,'SimpleVoxelEngine::IrrEngine::IrrSimpleVoxelEngine']]],
+  ['istransparentlevel_21',['isTransparentLevel',['../class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#a5e5d7914736205995dc6d92c4dc4b7a3',1,'SimpleVoxelEngine::IrrEngine::ChunksMeshBlocksController']]],
+  ['iswaitupdate_22',['isWaitUpdate',['../class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#a0253edcd19467bed94e641b14d9a5a7a',1,'SimpleVoxelEngine::IrrEngine::ChunksMeshBlock']]]
 ];

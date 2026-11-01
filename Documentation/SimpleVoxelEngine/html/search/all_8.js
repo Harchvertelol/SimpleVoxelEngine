@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['multi_5fvoxel',['MULTI_VOXEL',['../namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a1680ac33acf89e87878ea187ed1a767e',1,'SimpleVoxelEngine::Defines']]]
+  ['build_200_200_201_3a_20ndash_20mdash_20mdash_0',['SimpleVoxelEngine, build 0.0.1: (&amp;ndash; ----&amp;mdash; -&amp;mdash;)',['../changes.html#build001',1,'']]],
+  ['build_200_200_202_1',['SimpleVoxelEngine, build 0.0.2',['../changes.html#build002',1,'']]]
 ];

@@ -1,0 +1,465 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Урок 8: Изменение мира.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IrrSimpleVoxelEngine
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tutorial8.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Урок 8: Изменение мира. </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>В этом уроке мы научимся менять мир прямо во время игры: ставить и удалять воксели по адресу и по глобальным координатам, находить блок под курсором и правильно перестраивать изменённые чанки. В конце у нас будет пол из цветных блоков, на котором левой кнопкой мыши блоки выламываются, правой - ставятся, а клавишами строится и прорубается стена.</p>
+<p>Прежде чем писать код, давайте разберёмся, как враппер вообще меняет мир. Все изменения мира выполняет один поток - поток главной очереди заданий (подробно о потоках - в уроке 10). Поэтому функции setSimpleVoxelObject(), deleteSimpleVoxelObject() и setSimpleVoxelObjectByGlobalVector() работают так:</p><ul>
+<li>если их вызвать из главного потока (или любого другого, кроме потока очереди), они ничего не меняют сразу, а ставят задание в конец главной очереди. Задания выполняются строго по порядку, чуть позже (обычно в пределах кадра);</li>
+<li>если их вызвать из пользовательской функции UserControllerForThread (она работает в потоке главной очереди), изменение выполняется сразу.</li>
+</ul>
+<p>Отсюда первое правило: в главном потоке сразу после setSimpleVoxelObject() воксель ещё не стоит в мире, и getSimpleVoxelObjectByGlobalVector() вернёт старое содержимое ячейки. Второе правило: адрес и воксель, переданные в эти функции, забирает враппер - не удаляйте их и не пользуйтесь ими после вызова (при ошибке враппер удалит их сам). Третье: если к моменту выполнения задания чанк уже выгружен, ничего не меняется (предупреждение в логе, воксель удаляется).</p>
+<p>Начнём, как обычно, с подключения враппера. Пространство имён Defines нужно для типов вокселей, Debug - для логгера: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;mutex&gt;</span> <span class="comment">// std::lock_guard - для блокировки движка.</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines; <span class="comment">// Типы вокселей (ARGBCOLOR).</span></div>
+<div class="line"><span class="keyword">using namespace </span>Debug; <span class="comment">// Logger.</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core;</div>
+<div class="ttc" id="a_irr_simple_voxel_engine_8h_html"><div class="ttname"><a href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a></div><div class="ttdoc">Главный заголовочный файл. Необходимо присоединять только его к проекту.</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">SimpleVoxelEngine::IrrEngine</a></div><div class="ttdoc">Главное пространство имён IrrSimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:13</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:11</div></div>
+</div><!-- fragment --><p> Фабрика почти такая же, как на главной странице, но с одним дополнением: чтобы луч из камеры мог найти грань, у каждой ноды чанков должен быть селектор треугольников. Враппер сообщает о каждой новой ноде через onUpdateChunkMeshSceneNode() (в главном потоке, внутри isve-&gt;update()) - там селектор и создадим. Подробно о селекторах, мета-селекторе и столкновениях камеры с миром рассказано в уроке 7, здесь нам хватит самого простого варианта: селектор, который хранится в самой ноде и удаляется вместе с ней. </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> onUpdateChunkMeshSceneNode(IMeshSceneNode* node, <span class="keywordtype">int</span>, Vector3d&lt;int&gt;)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">if</span>(!node) <span class="keywordflow">return</span>; <span class="comment">// Нода удалена - её селектор удалится вместе с ней.</span></div>
+<div class="line">    ITriangleSelector* selector = s_SceneManager-&gt;createTriangleSelector(node-&gt;getMesh(), node);</div>
+<div class="line">    node-&gt;setTriangleSelector(selector); <span class="comment">// Подробно о селекторах и столкновениях - в уроке 7.</span></div>
+<div class="line">    selector-&gt;drop();</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Обработчик событий только запоминает, что сделать: OnEvent() вызывается в главном потоке (внутри runIrrDevice()), а сами действия мы выполним в главном цикле: </p><div class="fragment"><div class="line"><span class="keyword">class </span>MyReceiver : <span class="keyword">public</span> IEventReceiver</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyReceiver() : s_Action(0) {}</div>
+<div class="line">    <span class="keywordtype">bool</span> OnEvent(<span class="keyword">const</span> SEvent&amp; event)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(event.EventType == EET_MOUSE_INPUT_EVENT)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span>(event.MouseInput.Event == EMIE_LMOUSE_PRESSED_DOWN) s_Action = 1; <span class="comment">// Удалить блок под курсором.</span></div>
+<div class="line">            <span class="keywordflow">if</span>(event.MouseInput.Event == EMIE_RMOUSE_PRESSED_DOWN) s_Action = 2; <span class="comment">// Поставить блок на грань под курсором.</span></div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span>(event.EventType == EET_KEY_INPUT_EVENT &amp;&amp; event.KeyInput.PressedDown)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_KEY_W) s_Action = 3; <span class="comment">// Построить стену.</span></div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_KEY_Q) s_Action = 4; <span class="comment">// Прорубить в стене проход.</span></div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_KEY_U) s_Action = 5; <span class="comment">// Перестроить все чанки.</span></div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> s_Action; <span class="comment">// 0 - ничего не делать.</span></div>
+<div class="line">};</div>
+</div><!-- fragment --><p><b>Адрес вокселя.</b> Воксель в мире задаётся адресом VoxelAddress (подробно - в уроке 4 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>). Это цепочка векторов: [0] - координаты чанка в мире, [1] - координаты вокселя внутри чанка (от 0 до размера чанка - 1), [2] - координаты внутри вложенного чанка и так далее (вложенные чанки - в уроке 13). У нас вложенных чанков нет, поэтому адрес всегда из двух векторов. Адрес создаётся для движка - а враппер и есть движок (IrrSimpleVoxelEngine унаследован от Engine), поэтому пишем new VoxelAddress(isve).</p>
+<p>Глобальные координаты блока (те, в которых мы думаем о мире: "блок на x = -3") переводятся в адрес так: чанк - это координата, делённая на размер чанка с округлением ВНИЗ, место в чанке - остаток. Для отрицательных координат обычное деление в C++ округляет к нулю и даёт не тот чанк: блок -3 лежит в чанке -1 на месте 13 (-3 = -1 * 16 + 13), а не в чанке 0. Обратный перевод - чанк * 16 + место: </p><div class="fragment"><div class="line">Vector3d&lt;int&gt; getGlobalVector(VoxelAddress* addr)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">return</span> addr-&gt;getVector(0) * 16 + addr-&gt;getVector(1);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Поставим по адресу красную колонну из четырёх блоков на глобальных координатах (-3, 1..4, -3): </p><div class="fragment"><div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 1; y &lt;= 4; y++)</div>
+<div class="line">{</div>
+<div class="line">    VoxelAddress* addr = <span class="keyword">new</span> VoxelAddress(isve); <span class="comment">// Адрес создаётся для этого движка.</span></div>
+<div class="line">    addr-&gt;addNextVector(Vector3d&lt;int&gt;(-1, 0, -1)); <span class="comment">// [0] - координаты чанка.</span></div>
+<div class="line">    addr-&gt;addNextVector(Vector3d&lt;int&gt;(13, y, 13)); <span class="comment">// [1] - координаты вокселя внутри чанка (от 0 до 15).</span></div>
+<div class="line">    isve-&gt;setSimpleVoxelObject(<span class="keywordtype">id</span>, addr, <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 220, 40, 40))); <span class="comment">// Адрес и воксель забрал враппер.</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><p> У setSimpleVoxelObject(id, addr, svo, rewrite, immediatelyupdated) два необязательных параметра:</p><ul>
+<li>rewrite (по умолчанию false) - что делать, если ячейка занята. false - новый воксель не ставится (в логе логическая ошибка "This partition already exist", новый воксель враппер удаляет); true - старый воксель удаляется, на его место встаёт новый;</li>
+<li>immediatelyupdated (по умолчанию false) - когда перестраивать чанк. false - чанк (и соседний чанк, если воксель лежит на его границе: у соседа могла открыться или закрыться грань) только помечается для обновления, а перестроит его addTaskUpdateChunks(); true - чанк сразу, как только задание выполнено, ставится на построение.</li>
+</ul>
+<p>deleteSimpleVoxelObject(id, addr, immediatelyupdated) удаляет воксель и так же помечает (или сразу перестраивает) чанки. Если ячейка пуста, ничего не происходит (стандартное сообщение в логе). Адрес тоже забирает враппер.</p>
+<p>Ошибки в адресе враппер проверяет всегда, даже в релизной сборке: вектор за пределами разбиения чанка (например, (16, 0, 0) при чанке 16) - логическая ошибка в логе, мир не меняется.</p>
+<p><b>Глобальные координаты.</b> Адрес удобен, когда он уже есть (например, его вернул поиск блока под курсором). Если же мы строим что-то по координатам, проще отдать врапперу сами координаты - он сам найдёт чанк и место в нём (с правильным округлением отрицательных координат). Пол 32x32 из четырёх чанков: </p><div class="fragment"><div class="line">isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(-1, 0, -1), Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">true</span>);</div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = -16; x &lt; 16; x++)</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = -16; z &lt; 16; z++)</div>
+<div class="line">        isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(x, 0, z), <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 100 + (x &amp; 1) * 60, 140, 100 + (z &amp; 1) * 60)));</div>
+</div><!-- fragment --><p> Кстати, генератора мира у нас нет, поэтому при загрузке чанков в логе будут предупреждения "world generator is not
+set. Chunk is empty" - чанки просто создаются пустыми. Это нормально; свой генератор - в уроке 2.</p>
+<p>setSimpleVoxelObjectByGlobalVector() всегда перезаписывает ячейку (как rewrite = true) и никогда не перестраивает чанк сразу (как immediatelyupdated = false) - после пачки таких правок нужен addTaskUpdateChunks(). Если вместо вокселя передать NULL, воксель в этой ячейке удаляется - отдельной функции удаления по глобальным координатам нет. Параметр level пока работает только со значением 1 (блоки первого уровня). Глобальные координаты считаются по размеру чанка мира (World::getSizeChunk()): если какой-то чанк разбит иначе (это мог сделать генератор или контроллер загрузки), ставить в него по глобальным координатам нельзя - ошибка в логе, воксель удаляется.</p>
+<p>Прочитать воксель по глобальным координатам можно функцией getSimpleVoxelObjectByGlobalVector(id, vect, isexists). isexists = true - если ячейка пуста или чанк не загружен, в логе будет сообщение; false - просто вернётся NULL. Важно: она возвращает указатель на воксель, который живёт в мире, а мир в это время может менять поток главной очереди. Указатель гарантированно действителен только внутри пользовательской функции UserControllerForThread или пока захвачена блокировка движка (getLockAccessToTheSimpleVoxelEngine(), подробно - в уроке 10). Ниже мы читаем цвет блока из главного потока - поэтому под блокировкой.</p>
+<p><b>Одна перестройка после пачки правок.</b> Каждый setSimpleVoxelObject() без immediatelyupdated только помечает чанк. Перестраивает помеченные чанки задание addTaskUpdateChunks() - оно тоже встаёт в главную очередь, после всех правок, поставленных раньше, поэтому увидит их все: </p><div class="fragment"><div class="line">isve-&gt;addTaskUpdateChunks(); <span class="comment">// Одна перестройка изменённых чанков после всех правок.</span></div>
+</div><!-- fragment --><p> Так 1000 правок одного чанка дают одну перестройку, а не 1000. Самая частая ошибка - забыть addTaskUpdateChunks(): изменения есть в мире, но не видны, пока этот чанк не перестроится по какой-то другой причине (например, при следующей правке с addTaskUpdateChunks()). immediatelyupdated = true удобен для одиночной правки (клик мышью) - не нужно ничего вызывать после. Для тысяч правок он плох: каждая правка снова ставит чанк на построение, и чанк, который строится прямо сейчас, будет построен ещё раз - лишняя работа.</p>
+<p><b>Блок под курсором.</b> Луч из камеры через центр экрана находит точку на грани (через селекторы нод, которые мы создали в фабрике). А дальше нужен адрес блока, которому эта грань принадлежит, - его даёт getAddressSimpleVoxelObjectByPoint(id, point, lookvect, changeposition). Точка лежит ровно на грани, поэтому враппер сдвигает её на тысячную долю блока вдоль lookvect и смотрит, в какую ячейку она попала. Если lookvect направлен от камеры (внутрь блока) - это сам блок, который надо удалить. Если к камере - пустая ячейка перед гранью, куда надо поставить новый блок. changeposition - откуда смотрим (позиция камеры). Все точки - в координатах сцены: враппер сам пересчитывает их в координаты мира, учитывая родительскую ноду мира и сдвиг (урок 12). Тот же пересчёт доступен и отдельно - getWorldCoordinates(id, точка): при стандартных масштабах блок с глобальными координатами k занимает в координатах мира отрезок [k - 0.5, k + 0.5), то есть центры блоков - в целых точках. </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> editBlockUnderCursor(IrrSimpleVoxelEngine* isve, <span class="keywordtype">int</span> <span class="keywordtype">id</span>, ICameraSceneNode* camera, <span class="keywordtype">bool</span> remove)</div>
+<div class="line">{</div>
+<div class="line">    ISceneCollisionManager* collision = isve-&gt;getIrrlichtDevice()-&gt;getSceneManager()-&gt;getSceneCollisionManager();</div>
+<div class="line">    vector3df start = camera-&gt;getAbsolutePosition();</div>
+<div class="line">    vector3df dir = (camera-&gt;getTarget() - start).normalize();</div>
+<div class="line">    vector3df point; <span class="comment">// Точка попадания луча в грань.</span></div>
+<div class="line">    triangle3df triangle; <span class="comment">// Треугольник грани.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(!collision-&gt;getSceneNodeAndCollisionPointFromRay(line3df(start, start + dir * 100.f), point, triangle)) <span class="keywordflow">return</span>;</div>
+<div class="line">    Vector3d&lt;float&gt; hit(point.X, point.Y, point.Z), look(dir.X, dir.Y, dir.Z), campos(start.X, start.Y, start.Z);</div>
+<div class="line">    <span class="comment">// Блок, на грань которого смотрим: ищем от точки по направлению взгляда (внутрь блока).</span></div>
+<div class="line">    VoxelAddress* target = isve-&gt;getAddressSimpleVoxelObjectByPoint(<span class="keywordtype">id</span>, hit, look, campos);</div>
+<div class="line">    <span class="keywordflow">if</span>(!target) <span class="keywordflow">return</span>;</div>
+<div class="line">    <span class="keywordflow">if</span>(target-&gt;getLastVectInd() &lt; 2) { <span class="keyword">delete</span> target; <span class="keywordflow">return</span>; } <span class="comment">// Чанк не загружен - адрес без вокселя.</span></div>
+</div><!-- fragment --><p> Обратите внимание на проверки: функция может вернуть NULL (ошибка) или адрес без векторов вокселя (чанк в этом месте не загружен) - такой адрес в setSimpleVoxelObject() отдавать нельзя, его надо просто удалить. Возвращённый адрес - новый объект: либо отдайте его врапперу (set/deleteSimpleVoxelObject), либо удалите сами.</p>
+<p>Есть и вторая функция поиска - getAddressSimpleVoxelObjectByThreePoints(id, v1, v2, v3, lookvect, changeposition): ей передают три вершины треугольника, в который попал луч (наш triangle), и она находит ячейку у центра этого треугольника (так делает TestProject3). Для обычных кубов результат тот же, но если рядом с большой гранью стоят маленькие блоки (вложенные чанки), точное место под курсором находит только getAddressSimpleVoxelObjectByPoint(). Подробно обе функции и луч - в уроке 7.</p>
+<p>Удаление - одна строка, с immediatelyupdated = true (это одиночная правка): </p><div class="fragment"><div class="line"><span class="keywordflow">if</span>(remove)</div>
+<div class="line">{</div>
+<div class="line">    isve-&gt;deleteSimpleVoxelObject(<span class="keywordtype">id</span>, target, <span class="keyword">true</span>); <span class="comment">// true - перестроить чанк сразу. Адрес забрал враппер.</span></div>
+<div class="line">    <span class="keywordflow">return</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Для установки сделаем новый блок того же цвета, что и блок, на который смотрим. Цвет читаем из мира - под блокировкой движка, потому что движок запущен и поток главной очереди может удалить этот воксель прямо сейчас (например, если пользователь кликнул дважды). Захват блокировки через std::lock_guard освобождает её на выходе из блока сам: </p><div class="fragment"><div class="line">    ARGBColor color(255, 255, 255, 255);</div>
+<div class="line">    {</div>
+<div class="line">        std::lock_guard&lt;std::recursive_mutex&gt; lock(isve-&gt;getLockAccessToTheSimpleVoxelEngine());</div>
+<div class="line">        SimpleVoxelObject* svo = isve-&gt;getSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, getGlobalVector(target), <span class="keyword">false</span>);</div>
+<div class="line">        <span class="keywordflow">if</span>(svo &amp;&amp; svo-&gt;getTypeVoxel() == ARGBCOLOR) color = ((ARGBColorVoxel*)svo)-&gt;getARGBColor();</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keyword">delete</span> target; <span class="comment">// Этот адрес мы никому не отдали - удаляем сами.</span></div>
+<div class="line">    <span class="comment">// Пустая ячейка перед гранью: ищем от точки в обратную сторону, к камере.</span></div>
+<div class="line">    VoxelAddress* place = isve-&gt;getAddressSimpleVoxelObjectByPoint(<span class="keywordtype">id</span>, hit, Vector3d&lt;float&gt;(-dir.X, -dir.Y, -dir.Z), campos);</div>
+<div class="line">    <span class="keywordflow">if</span>(!place) <span class="keywordflow">return</span>;</div>
+<div class="line">    <span class="keywordflow">if</span>(place-&gt;getLastVectInd() &lt; 2) { <span class="keyword">delete</span> place; <span class="keywordflow">return</span>; }</div>
+<div class="line">    isve-&gt;setSimpleVoxelObject(<span class="keywordtype">id</span>, place, <span class="keyword">new</span> ARGBColorVoxel(color), <span class="keyword">false</span>, <span class="keyword">true</span>); <span class="comment">// Не перезаписывать, перестроить сразу.</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><p> rewrite = false здесь - защита: если ячейка вдруг занята (например, перед гранью стекла стоит другой блок), ничего не перезапишется.</p>
+<p><b>Главный цикл.</b> Действия выполняем в главном цикле перед isve-&gt;update(). Стена 16x8 блоков - пачка правок по глобальным координатам и одна перестройка после неё. Проход в стене - та же функция с NULL вместо вокселя: </p><div class="fragment"><div class="line"><span class="keywordflow">if</span>(receiver.s_Action == 1 || receiver.s_Action == 2) editBlockUnderCursor(isve, <span class="keywordtype">id</span>, camera, receiver.s_Action == 1);</div>
+<div class="line"><span class="keywordflow">if</span>(receiver.s_Action == 3) <span class="comment">// Стена 16x8 блоков у края мира.</span></div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = -8; x &lt; 8; x++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 1; y &lt;= 8; y++)</div>
+<div class="line">            isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(x, y, -10), <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 200, 200, 90)));</div>
+<div class="line">    isve-&gt;addTaskUpdateChunks(); <span class="comment">// Без этого стена появится только при следующей перестройке этих чанков.</span></div>
+<div class="line">}</div>
+<div class="line"><span class="keywordflow">if</span>(receiver.s_Action == 4) <span class="comment">// Проход 2x3 в стене: NULL вместо вокселя - удалить.</span></div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = -1; x &lt;= 0; x++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 1; y &lt;= 3; y++)</div>
+<div class="line">            isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(x, y, -10), 0);</div>
+<div class="line">    isve-&gt;addTaskUpdateChunks();</div>
+<div class="line">}</div>
+<div class="line"><span class="keywordflow">if</span>(receiver.s_Action == 5) isve-&gt;addTaskUpdateChunks(<span class="keyword">true</span>); <span class="comment">// true - перестроить все отрисовываемые чанки.</span></div>
+<div class="line">receiver.s_Action = 0;</div>
+</div><!-- fragment --><p> Стена из 128 блоков - это 128 заданий в очереди, они выполнятся быстро. Но если правок десятки тысяч (сфера, взрыв, заливка), ставить их по одной из главного потока не стоит: лучше одним заданием addTaskRunUserControllerForThread() выполнить их все в пользовательской функции, где правки идут сразу, без заданий (урок 10). И никогда не ставьте правки в цикле без ограничения (например, каждый кадр тысячу новых блоков, не дожидаясь выполнения): очередь заданий ничем не ограничена и будет расти, пока не займёт всю память.</p>
+<p><b>Принудительная перестройка.</b> addTaskUpdateChunks(true) перестраивает все отрисовываемые чанки, а не только помеченные. Кроме того, у фабрики есть функции, которые ставят чанки на построение напрямую:</p><ul>
+<li>updateChunk(id, vect) - перестроить один чанк (false и логическая ошибка в логе, если чанк не отрисовывается);</li>
+<li>updateChunks(id) и updateChunks() - перестроить помеченные чанки мира id или всех миров (пометки снимаются);</li>
+<li>updateAllChunks(id) и updateAllChunks() - перестроить все отрисовываемые чанки мира или всех миров;</li>
+<li>setChunkForUpdate(id, vect) - пометить чанк для обновления (false, если чанк не отрисовывается или уже помечен);</li>
+<li>isForUpdateChunk(id, vect) - помечен ли чанк.</li>
+</ul>
+<p>Важное отличие: эти функции фабрики выполняются сразу, в вызывающем потоке, а не через главную очередь. Поэтому сразу после setSimpleVoxelObject() из главного потока factory-&gt;updateChunks() бесполезен: правка ещё стоит в очереди, чанк ещё не помечен, и перестраивать нечего. Из главного потока после правок вызывайте isve-&gt;addTaskUpdateChunks() - оно встанет в очередь после них. Функции фабрики нужны в других случаях:</p><ul>
+<li>внутри пользовательской функции UserControllerForThread, где правки уже выполнены;</li>
+<li>когда мир не менялся, а изменилось то, как фабрика рисует воксели (например, getMeshVoxel() стал брать другие текстуры) - тогда updateAllChunks();</li>
+<li>когда вы изменили мир напрямую через ядро, в обход враппера. Враппер о такой правке не знает, поэтому чанк нужно пометить самим (и соседний, если воксель на границе чанка) и перестроить: <div class="fragment"><div class="line">{</div>
+<div class="line">    std::lock_guard&lt;std::recursive_mutex&gt; lock(isve-&gt;getLockAccessToTheSimpleVoxelEngine());</div>
+<div class="line">    World* world = isve-&gt;getWorld(<span class="keywordtype">id</span>);</div>
+<div class="line">    VoxelAddress addr(isve);</div>
+<div class="line">    addr.addNextVector(Vector3d&lt;int&gt;(0, 0, 0));</div>
+<div class="line">    addr.addNextVector(Vector3d&lt;int&gt;(5, 1, 5));</div>
+<div class="line">    ARGBColorVoxel* vxl = <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 0, 0, 255));</div>
+<div class="line">    <span class="keywordflow">if</span>(!world-&gt;setSimpleVoxelObject(&amp;addr, vxl, <span class="keyword">true</span>)) <span class="keyword">delete</span> vxl; <span class="comment">// При неудаче воксель остаётся нашим.</span></div>
+<div class="line">    factory-&gt;setChunkForUpdate(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(0, 0, 0)); <span class="comment">// Под той же блокировкой; воксель не на границе - соседей не помечаем.</span></div>
+<div class="line">}</div>
+<div class="line">factory-&gt;updateChunks(<span class="keywordtype">id</span>);</div>
+</div><!-- fragment --> Прямая работа с World во время работы движка - только под блокировкой движка (потоки построения в это время читают мир). Пометку setChunkForUpdate() делайте под той же блокировкой: иначе между изменением и пометкой поток главной очереди может убрать чанк из отрисовки (например, стриминг), и пометка закончится нарушением логики (подробнее - в уроке 10). Обычно проще и безопаснее пользоваться функциями враппера.</li>
+</ul>
+<p>Камера в этом уроке - FPS-камера с небольшой скоростью (10 блоков в секунду), курсор скрыт, а "курсор" - центр экрана, куда смотрит камера. Мышь крутит камеру, стрелки двигают, левая кнопка выламывает блок, правая ставит, W строит стену, Q прорубает в ней проход, U перестраивает все чанки.</p>
+<p><b>Типичные ошибки:</b></p><ul>
+<li>забыли addTaskUpdateChunks() после пачки правок - изменения не видны;</li>
+<li>сразу после setSimpleVoxelObject() в главном потоке прочитали воксель и удивились, что его нет - правка ещё в очереди;</li>
+<li>удалили адрес или воксель после передачи врапперу (двойное удаление) или, наоборот, не удалили адрес, который вернул поиск и который никуда не отдали (утечка);</li>
+<li>отдали в setSimpleVoxelObject() адрес без вектора вокселя (поиск в незагруженном чанке);</li>
+<li>сохранили указатель от getSimpleVoxelObjectByGlobalVector() и пользовались им позже без блокировки движка;</li>
+<li>ставили правки каждый кадр без ограничения - очередь растёт без предела.</li>
+</ul>
+<p>Ну и напоследок ещё раз полный код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;mutex&gt;</span> <span class="comment">// std::lock_guard - для блокировки движка.</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines; <span class="comment">// Типы вокселей (ARGBCOLOR).</span></div>
+<div class="line"><span class="keyword">using namespace </span>Debug; <span class="comment">// Logger.</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Фабрика - как на главной странице, плюс селектор треугольников у каждой ноды (чтобы луч из камеры находил грани).</span></div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        s_Plane = createFaceMesh();</div>
+<div class="line">        s_SceneManager = device-&gt;getSceneManager();</div>
+<div class="line">        s_MeshManipulator = s_SceneManager-&gt;getMeshManipulator();</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); }</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl) <span class="comment">// Потоки построения.</span></div>
+<div class="line">    {</div>
+<div class="line">        IMesh* mesh = getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1));</div>
+<div class="line">        ARGBColor c = ((VoxelInfoARGBColor*)vxl-&gt;getVoxelInfo())-&gt;s_ARGBColor;</div>
+<div class="line">        <span class="keywordflow">if</span>(mesh) s_MeshManipulator-&gt;setVertexColors(mesh, SColor(c.getA(), c.getR(), c.getG(), c.getB()));</div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering*) { <span class="keywordflow">return</span> 0; }</div>
+<div class="line">    <span class="comment">// Главный поток (внутри isve-&gt;update()): нода блока чанков создана (node != 0) или удалена (node == 0).</span></div>
+<div class="line">    <span class="keywordtype">void</span> onUpdateChunkMeshSceneNode(IMeshSceneNode* node, <span class="keywordtype">int</span>, Vector3d&lt;int&gt;)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(!node) <span class="keywordflow">return</span>; <span class="comment">// Нода удалена - её селектор удалится вместе с ней.</span></div>
+<div class="line">        ITriangleSelector* selector = s_SceneManager-&gt;createTriangleSelector(node-&gt;getMesh(), node);</div>
+<div class="line">        node-&gt;setTriangleSelector(selector); <span class="comment">// Подробно о селекторах и столкновениях - в уроке 7.</span></div>
+<div class="line">        selector-&gt;drop();</div>
+<div class="line">    }</div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    ISceneManager* s_SceneManager;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Обработчик событий: только запоминает, что сделать. Вызывается в главном потоке (внутри runIrrDevice()).</span></div>
+<div class="line"><span class="keyword">class </span>MyReceiver : <span class="keyword">public</span> IEventReceiver</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyReceiver() : s_Action(0) {}</div>
+<div class="line">    <span class="keywordtype">bool</span> OnEvent(<span class="keyword">const</span> SEvent&amp; event)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(event.EventType == EET_MOUSE_INPUT_EVENT)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span>(event.MouseInput.Event == EMIE_LMOUSE_PRESSED_DOWN) s_Action = 1; <span class="comment">// Удалить блок под курсором.</span></div>
+<div class="line">            <span class="keywordflow">if</span>(event.MouseInput.Event == EMIE_RMOUSE_PRESSED_DOWN) s_Action = 2; <span class="comment">// Поставить блок на грань под курсором.</span></div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span>(event.EventType == EET_KEY_INPUT_EVENT &amp;&amp; event.KeyInput.PressedDown)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_KEY_W) s_Action = 3; <span class="comment">// Построить стену.</span></div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_KEY_Q) s_Action = 4; <span class="comment">// Прорубить в стене проход.</span></div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_KEY_U) s_Action = 5; <span class="comment">// Перестроить все чанки.</span></div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> s_Action; <span class="comment">// 0 - ничего не делать.</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Глобальные координаты блока по его адресу первого уровня: чанк * 16 + место в чанке.</span></div>
+<div class="line">Vector3d&lt;int&gt; getGlobalVector(VoxelAddress* addr)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">return</span> addr-&gt;getVector(0) * 16 + addr-&gt;getVector(1);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Удалить блок под центром экрана (remove == true) или поставить новый блок на грань, в которую смотрим.</span></div>
+<div class="line"><span class="keywordtype">void</span> editBlockUnderCursor(IrrSimpleVoxelEngine* isve, <span class="keywordtype">int</span> <span class="keywordtype">id</span>, ICameraSceneNode* camera, <span class="keywordtype">bool</span> remove)</div>
+<div class="line">{</div>
+<div class="line">    ISceneCollisionManager* collision = isve-&gt;getIrrlichtDevice()-&gt;getSceneManager()-&gt;getSceneCollisionManager();</div>
+<div class="line">    vector3df start = camera-&gt;getAbsolutePosition();</div>
+<div class="line">    vector3df dir = (camera-&gt;getTarget() - start).normalize();</div>
+<div class="line">    vector3df point; <span class="comment">// Точка попадания луча в грань.</span></div>
+<div class="line">    triangle3df triangle; <span class="comment">// Треугольник грани.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(!collision-&gt;getSceneNodeAndCollisionPointFromRay(line3df(start, start + dir * 100.f), point, triangle)) <span class="keywordflow">return</span>;</div>
+<div class="line">    Vector3d&lt;float&gt; hit(point.X, point.Y, point.Z), look(dir.X, dir.Y, dir.Z), campos(start.X, start.Y, start.Z);</div>
+<div class="line">    <span class="comment">// Блок, на грань которого смотрим: ищем от точки по направлению взгляда (внутрь блока).</span></div>
+<div class="line">    VoxelAddress* target = isve-&gt;getAddressSimpleVoxelObjectByPoint(<span class="keywordtype">id</span>, hit, look, campos);</div>
+<div class="line">    <span class="keywordflow">if</span>(!target) <span class="keywordflow">return</span>;</div>
+<div class="line">    <span class="keywordflow">if</span>(target-&gt;getLastVectInd() &lt; 2) { <span class="keyword">delete</span> target; <span class="keywordflow">return</span>; } <span class="comment">// Чанк не загружен - адрес без вокселя.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(remove)</div>
+<div class="line">    {</div>
+<div class="line">        isve-&gt;deleteSimpleVoxelObject(<span class="keywordtype">id</span>, target, <span class="keyword">true</span>); <span class="comment">// true - перестроить чанк сразу. Адрес забрал враппер.</span></div>
+<div class="line">        <span class="keywordflow">return</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// Цвет нового блока - как у того, на который смотрим. Движок запущен, поэтому указатель на воксель</span></div>
+<div class="line">    <span class="comment">// читаем под блокировкой движка: иначе поток главной очереди может удалить этот воксель прямо сейчас.</span></div>
+<div class="line">    ARGBColor color(255, 255, 255, 255);</div>
+<div class="line">    {</div>
+<div class="line">        std::lock_guard&lt;std::recursive_mutex&gt; lock(isve-&gt;getLockAccessToTheSimpleVoxelEngine());</div>
+<div class="line">        SimpleVoxelObject* svo = isve-&gt;getSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, getGlobalVector(target), <span class="keyword">false</span>);</div>
+<div class="line">        <span class="keywordflow">if</span>(svo &amp;&amp; svo-&gt;getTypeVoxel() == ARGBCOLOR) color = ((ARGBColorVoxel*)svo)-&gt;getARGBColor();</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keyword">delete</span> target; <span class="comment">// Этот адрес мы никому не отдали - удаляем сами.</span></div>
+<div class="line">    <span class="comment">// Пустая ячейка перед гранью: ищем от точки в обратную сторону, к камере.</span></div>
+<div class="line">    VoxelAddress* place = isve-&gt;getAddressSimpleVoxelObjectByPoint(<span class="keywordtype">id</span>, hit, Vector3d&lt;float&gt;(-dir.X, -dir.Y, -dir.Z), campos);</div>
+<div class="line">    <span class="keywordflow">if</span>(!place) <span class="keywordflow">return</span>;</div>
+<div class="line">    <span class="keywordflow">if</span>(place-&gt;getLastVectInd() &lt; 2) { <span class="keyword">delete</span> place; <span class="keywordflow">return</span>; }</div>
+<div class="line">    isve-&gt;setSimpleVoxelObject(<span class="keywordtype">id</span>, place, <span class="keyword">new</span> ARGBColorVoxel(color), <span class="keyword">false</span>, <span class="keyword">true</span>); <span class="comment">// Не перезаписывать, перестроить сразу.</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    MyReceiver receiver;</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(800, 600), 32, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, &amp;receiver);</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Логгер: ошибки и предупреждения враппера видны в консоли.</span></div>
+<div class="line">    lgr-&gt;setPrintStandard(<span class="keyword">false</span>); <span class="comment">// Стандартные сообщения (их много) не выводим.</span></div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device, lgr);</div>
+<div class="line">    lgr-&gt;drop();</div>
+<div class="line">    MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">    factory-&gt;setPositionScale(16);</div>
+<div class="line">    factory-&gt;setSScale(16);</div>
+<div class="line">    isve-&gt;setFactoryChunkMeshSceneNode(factory);</div>
+<div class="line">    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld(); <span class="comment">// Чанк 16x16x16.</span></div>
+<div class="line">    factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">    <span class="comment">// Четыре чанка: от (-1,0,-1) до (0,0,0). Блоки в них - с глобальными координатами от -16 до 15 по X и Z.</span></div>
+<div class="line">    isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(-1, 0, -1), Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">true</span>);</div>
+<div class="line">    <span class="comment">// Пол 32x32 - по глобальным координатам: враппер сам найдёт чанк и место в нём.</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = -16; x &lt; 16; x++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = -16; z &lt; 16; z++)</div>
+<div class="line">            isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(x, 0, z), <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 100 + (x &amp; 1) * 60, 140, 100 + (z &amp; 1) * 60)));</div>
+<div class="line">    <span class="comment">// Красная колонна - по адресу. Блок (-3, y, -3) лежит в чанке (-1, 0, -1) на месте (13, y, 13): -3 = -1 * 16 + 13.</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 1; y &lt;= 4; y++)</div>
+<div class="line">    {</div>
+<div class="line">        VoxelAddress* addr = <span class="keyword">new</span> VoxelAddress(isve); <span class="comment">// Адрес создаётся для этого движка.</span></div>
+<div class="line">        addr-&gt;addNextVector(Vector3d&lt;int&gt;(-1, 0, -1)); <span class="comment">// [0] - координаты чанка.</span></div>
+<div class="line">        addr-&gt;addNextVector(Vector3d&lt;int&gt;(13, y, 13)); <span class="comment">// [1] - координаты вокселя внутри чанка (от 0 до 15).</span></div>
+<div class="line">        isve-&gt;setSimpleVoxelObject(<span class="keywordtype">id</span>, addr, <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 220, 40, 40))); <span class="comment">// Адрес и воксель забрал враппер.</span></div>
+<div class="line">    }</div>
+<div class="line">    isve-&gt;addTaskUpdateChunks(); <span class="comment">// Одна перестройка изменённых чанков после всех правок.</span></div>
+<div class="line">    ICameraSceneNode* camera = device-&gt;getSceneManager()-&gt;addCameraSceneNodeFPS(0, 100.f, 0.01f); <span class="comment">// Скорость - 10 блоков в секунду.</span></div>
+<div class="line">    camera-&gt;setPosition(vector3df(2, 6, -12));</div>
+<div class="line">    camera-&gt;setTarget(vector3df(2, 0, 0));</div>
+<div class="line">    device-&gt;getCursorControl()-&gt;setVisible(<span class="keyword">false</span>);</div>
+<div class="line">    isve-&gt;start();</div>
+<div class="line">    <span class="keywordflow">while</span>(isve-&gt;runIrrDevice())</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(receiver.s_Action == 1 || receiver.s_Action == 2) editBlockUnderCursor(isve, <span class="keywordtype">id</span>, camera, receiver.s_Action == 1);</div>
+<div class="line">        <span class="keywordflow">if</span>(receiver.s_Action == 3) <span class="comment">// Стена 16x8 блоков у края мира.</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = -8; x &lt; 8; x++)</div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 1; y &lt;= 8; y++)</div>
+<div class="line">                    isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(x, y, -10), <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 200, 200, 90)));</div>
+<div class="line">            isve-&gt;addTaskUpdateChunks(); <span class="comment">// Без этого стена появится только при следующей перестройке этих чанков.</span></div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span>(receiver.s_Action == 4) <span class="comment">// Проход 2x3 в стене: NULL вместо вокселя - удалить.</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = -1; x &lt;= 0; x++)</div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 1; y &lt;= 3; y++)</div>
+<div class="line">                    isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(x, y, -10), 0);</div>
+<div class="line">            isve-&gt;addTaskUpdateChunks();</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span>(receiver.s_Action == 5) isve-&gt;addTaskUpdateChunks(<span class="keyword">true</span>); <span class="comment">// true - перестроить все отрисовываемые чанки.</span></div>
+<div class="line">        receiver.s_Action = 0;</div>
+<div class="line">        isve-&gt;update();</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 100, 100, 140));</div>
+<div class="line">        device-&gt;getSceneManager()-&gt;drawAll();</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;endScene();</div>
+<div class="line">    }</div>
+<div class="line">    isve-&gt;stop();</div>
+<div class="line">    <span class="keyword">delete</span> isve;</div>
+<div class="line">    device-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="tutorials.html">Уроки по врапперу IrrSimpleVoxelEngine.</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

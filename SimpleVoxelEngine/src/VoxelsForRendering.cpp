@@ -28,5 +28,7 @@ int SimpleVoxelEngine::Core::VoxelsForRendering::getNumberOfVoxelsForRendering()
 
 VoxelForRendering* SimpleVoxelEngine::Core::VoxelsForRendering::getVoxelForRendering(int ind)
 {
-    return s_VFR[ind];
+    //»справлено: operator[] при неверном номере вставл€л в карту пустую запись. “еперь просто NULL.
+    std::map<int, VoxelForRendering*>::iterator iter = s_VFR.find(ind);
+    return iter == s_VFR.end() ? 0 : iter->second;
 }

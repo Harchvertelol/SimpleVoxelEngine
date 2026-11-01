@@ -19,6 +19,10 @@ namespace SimpleVoxelEngine
                 VoxelsForRendering();
                 //! Стандартный деструктор.
                 ~VoxelsForRendering();
+                //! Копирование запрещено: объект владеет своими VoxelForRendering (копия удалила бы их второй раз).
+                VoxelsForRendering(const VoxelsForRendering&) = delete;
+                //! Присваивание запрещено по той же причине.
+                VoxelsForRendering& operator=(const VoxelsForRendering&) = delete;
                 //! Добавление VoxelForRendering в список.
                 /*! \param vfr Добавляемый воксель для отрисовки.
                 */

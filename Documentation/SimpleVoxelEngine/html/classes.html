@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>SimpleVoxelEngine: Алфавитный указатель классов</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,104 +23,132 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">SimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Воксельный движок</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li><a href="pages.html"><span>Описания</span></a></li>
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li class="current"><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
-      <li><a href="hierarchy.html"><span>Иерархия&#160;классов</span></a></li>
-      <li><a href="functions.html"><span>Члены&#160;классов</span></a></li>
-    </ul>
-  </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('classes.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
 <div class="header">
-  <div class="headertitle">
-<div class="title">Алфавитный указатель классов</div>  </div>
+  <div class="headertitle"><div class="title">Алфавитный указатель классов</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="qindex"><a class="qindex" href="#letter_A">A</a>&#160;|&#160;<a class="qindex" href="#letter_C">C</a>&#160;|&#160;<a class="qindex" href="#letter_E">E</a>&#160;|&#160;<a class="qindex" href="#letter_L">L</a>&#160;|&#160;<a class="qindex" href="#letter_P">P</a>&#160;|&#160;<a class="qindex" href="#letter_R">R</a>&#160;|&#160;<a class="qindex" href="#letter_S">S</a>&#160;|&#160;<a class="qindex" href="#letter_V">V</a>&#160;|&#160;<a class="qindex" href="#letter_W">W</a></div>
-<table style="margin: 10px; white-space: nowrap;" align="center" width="95%" border="0" cellspacing="0" cellpadding="0">
-<tr><td rowspan="2" valign="bottom"><a name="letter_A"></a><table border="0" cellspacing="0" cellpadding="0"><tr><td><div class="ah">&#160;&#160;A&#160;&#160;</div></td></tr></table>
-</td><td rowspan="2" valign="bottom"><a name="letter_E"></a><table border="0" cellspacing="0" cellpadding="0"><tr><td><div class="ah">&#160;&#160;E&#160;&#160;</div></td></tr></table>
-</td><td valign="top"><a class="el" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a> (<a class="el" href="namespace_ini_parser.html">IniParser</a>)&#160;&#160;&#160;</td><td rowspan="2" valign="bottom"><a name="letter_V"></a><table border="0" cellspacing="0" cellpadding="0"><tr><td><div class="ah">&#160;&#160;V&#160;&#160;</div></td></tr></table>
-</td><td rowspan="2" valign="bottom"><a name="letter_W"></a><table border="0" cellspacing="0" cellpadding="0"><tr><td><div class="ah">&#160;&#160;W&#160;&#160;</div></td></tr></table>
-</td></tr>
-<tr><td rowspan="2" valign="bottom"><a name="letter_R"></a><table border="0" cellspacing="0" cellpadding="0"><tr><td><div class="ah">&#160;&#160;R&#160;&#160;</div></td></tr></table>
-</td></tr>
-<tr><td valign="top"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_additional.html">SimpleVoxelEngine::Additional</a>)&#160;&#160;&#160;</td><td valign="top"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)&#160;&#160;&#160;</td><td valign="top"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_additional.html">SimpleVoxelEngine::Additional</a>)&#160;&#160;&#160;</td><td valign="top"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html">World</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)&#160;&#160;&#160;</td></tr>
-<tr><td valign="top"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_a_r_g_b_color_voxel.html">ARGBColorVoxel</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_voxels.html">SimpleVoxelEngine::Voxels</a>)&#160;&#160;&#160;</td><td rowspan="2" valign="bottom"><a name="letter_L"></a><table border="0" cellspacing="0" cellpadding="0"><tr><td><div class="ah">&#160;&#160;L&#160;&#160;</div></td></tr></table>
-</td><td valign="top"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_reference_counter.html">ReferenceCounter</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_additional.html">SimpleVoxelEngine::Additional</a>)&#160;&#160;&#160;</td><td valign="top"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)&#160;&#160;&#160;</td><td valign="top"><a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html">WorldCreatingParameters</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)&#160;&#160;&#160;</td></tr>
-<tr><td rowspan="2" valign="bottom"><a name="letter_C"></a><table border="0" cellspacing="0" cellpadding="0"><tr><td><div class="ah">&#160;&#160;C&#160;&#160;</div></td></tr></table>
-</td><td rowspan="2" valign="bottom"><a name="letter_S"></a><table border="0" cellspacing="0" cellpadding="0"><tr><td><div class="ah">&#160;&#160;S&#160;&#160;</div></td></tr></table>
-</td><td valign="top"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html">VoxelForRendering</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)&#160;&#160;&#160;</td><td valign="top"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world_generator.html">WorldGenerator</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)&#160;&#160;&#160;</td></tr>
-<tr><td valign="top"><a class="el" href="class_simple_voxel_engine_1_1_debug_1_1_logger.html">Logger</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_debug.html">SimpleVoxelEngine::Debug</a>)&#160;&#160;&#160;</td><td valign="top"><a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_voxel_info.html">VoxelInfo</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)&#160;&#160;&#160;</td><td></td></tr>
-<tr><td valign="top"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_chunks_save_load_controller.html">ChunksSaveLoadController</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)&#160;&#160;&#160;</td><td rowspan="2" valign="bottom"><a name="letter_P"></a><table border="0" cellspacing="0" cellpadding="0"><tr><td><div class="ah">&#160;&#160;P&#160;&#160;</div></td></tr></table>
-</td><td valign="top"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelObject</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_voxels.html">SimpleVoxelEngine::Voxels</a>)&#160;&#160;&#160;</td><td valign="top"><a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_voxel_info_a_r_g_b_color.html">VoxelInfoARGBColor</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)&#160;&#160;&#160;</td><td></td></tr>
-<tr><td valign="top"><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html">ChunkVoxelObject</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_voxels.html">SimpleVoxelEngine::Voxels</a>)&#160;&#160;&#160;</td><td valign="top"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_simple_voxel_object_transparent_tester.html">SimpleVoxelObjectTransparentTester</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)&#160;&#160;&#160;</td><td valign="top"><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxels_for_rendering.html">VoxelsForRendering</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)&#160;&#160;&#160;</td><td></td></tr>
-<tr><td></td><td valign="top"><a class="el" href="class_ini_parser_1_1_parser_info_file.html">ParserInfoFile</a> (<a class="el" href="namespace_ini_parser.html">IniParser</a>)&#160;&#160;&#160;</td><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td><td></td><td></td></tr>
-</table>
-<div class="qindex"><a class="qindex" href="#letter_A">A</a>&#160;|&#160;<a class="qindex" href="#letter_C">C</a>&#160;|&#160;<a class="qindex" href="#letter_E">E</a>&#160;|&#160;<a class="qindex" href="#letter_L">L</a>&#160;|&#160;<a class="qindex" href="#letter_P">P</a>&#160;|&#160;<a class="qindex" href="#letter_R">R</a>&#160;|&#160;<a class="qindex" href="#letter_S">S</a>&#160;|&#160;<a class="qindex" href="#letter_V">V</a>&#160;|&#160;<a class="qindex" href="#letter_W">W</a></div>
+<div class="qindex"><a class="qindex" href="#letter_A">A</a><div class="alphasepar"></div><a class="qindex" href="#letter_C">C</a><div class="alphasepar"></div><a class="qindex" href="#letter_E">E</a><div class="alphasepar"></div><a class="qindex" href="#letter_L">L</a><div class="alphasepar"></div><a class="qindex" href="#letter_P">P</a><div class="alphasepar"></div><a class="qindex" href="#letter_R">R</a><div class="alphasepar"></div><a class="qindex" href="#letter_S">S</a><div class="alphasepar"></div><a class="qindex" href="#letter_V">V</a><div class="alphasepar"></div><a class="qindex" href="#letter_W">W</a></div>
+<div class="classindex">
+<dl class="classindex even">
+<dt class="alphachar"><a id="letter_A" name="letter_A">A</a></dt>
+<dd><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_additional.html">SimpleVoxelEngine::Additional</a>)</dd><dd><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_a_r_g_b_color_voxel.html">ARGBColorVoxel</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_voxels.html">SimpleVoxelEngine::Voxels</a>)</dd></dl>
+<dl class="classindex odd">
+<dt class="alphachar"><a id="letter_C" name="letter_C">C</a></dt>
+<dd><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_chunks_save_load_controller.html">ChunksSaveLoadController</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)</dd><dd><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_chunk_voxel_object.html">ChunkVoxelObject</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_voxels.html">SimpleVoxelEngine::Voxels</a>)</dd></dl>
+<dl class="classindex even">
+<dt class="alphachar"><a id="letter_E" name="letter_E">E</a></dt>
+<dd><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_engine.html">Engine</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)</dd></dl>
+<dl class="classindex odd">
+<dt class="alphachar"><a id="letter_L" name="letter_L">L</a></dt>
+<dd><a class="el" href="class_simple_voxel_engine_1_1_debug_1_1_logger.html">Logger</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_debug.html">SimpleVoxelEngine::Debug</a>)</dd></dl>
+<dl class="classindex even">
+<dt class="alphachar"><a id="letter_P" name="letter_P">P</a></dt>
+<dd><a class="el" href="class_ini_parser_1_1_parser_info_file.html">ParserInfoFile</a> (<a class="el" href="namespace_ini_parser.html">IniParser</a>)</dd><dd><a class="el" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a> (<a class="el" href="namespace_ini_parser.html">IniParser</a>)</dd></dl>
+<dl class="classindex odd">
+<dt class="alphachar"><a id="letter_R" name="letter_R">R</a></dt>
+<dd><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_reference_counter.html">ReferenceCounter</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_additional.html">SimpleVoxelEngine::Additional</a>)</dd></dl>
+<dl class="classindex even">
+<dt class="alphachar"><a id="letter_S" name="letter_S">S</a></dt>
+<dd><a class="el" href="class_simple_voxel_engine_1_1_voxels_1_1_simple_voxel_object.html">SimpleVoxelObject</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_voxels.html">SimpleVoxelEngine::Voxels</a>)</dd><dd><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_simple_voxel_object_transparent_tester.html">SimpleVoxelObjectTransparentTester</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)</dd></dl>
+<dl class="classindex odd">
+<dt class="alphachar"><a id="letter_V" name="letter_V">V</a></dt>
+<dd><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_vector3d.html">Vector3d</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_additional.html">SimpleVoxelEngine::Additional</a>)</dd><dd><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_address.html">VoxelAddress</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)</dd><dd><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxel_for_rendering.html">VoxelForRendering</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)</dd><dd><a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_voxel_info.html">VoxelInfo</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)</dd><dd><a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_voxel_info_a_r_g_b_color.html">VoxelInfoARGBColor</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)</dd><dd><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_voxels_for_rendering.html">VoxelsForRendering</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)</dd></dl>
+<dl class="classindex even">
+<dt class="alphachar"><a id="letter_W" name="letter_W">W</a></dt>
+<dd><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world.html">World</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)</dd><dd><a class="el" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html">WorldCreatingParameters</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)</dd><dd><a class="el" href="class_simple_voxel_engine_1_1_core_1_1_world_generator.html">WorldGenerator</a> (<a class="el" href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a>)</dd></dl>
+</div>
 </div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:23. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,0 +1,25 @@
+var class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool =
+[
+    [ "addController", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a364db84fb7807ef6746997d994b5adcf", null ],
+    [ "getChunkOwners", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a980653439fc219dbf9ab9967d75ddd0a", null ],
+    [ "getController", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#ab7cba0b56c2ef9bc7e2b9bbd68cc899a", null ],
+    [ "getControllerNames", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a3fcec1065736d3bfe60bee5703e574ce", null ],
+    [ "getMaxLoadsPerStep", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a06d9e2b42ba216e211dc15e8e84abf60", null ],
+    [ "getMaxPendingActions", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a773cd8191cfcc7af2bab41a2d116249d", null ],
+    [ "getMaxUnloadsPerStep", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a2491cf07f1812424899e7515f9763911", null ],
+    [ "getPendingActions", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#ac29a12a2cadf984f987f07e57f17fa23", null ],
+    [ "getRecheckIntervalMilliseconds", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a47c9b0981edd9ffacb31b2f96203c288", null ],
+    [ "getRetryDelayMilliseconds", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#aa1649ac9fb6d506c3c8eb340fe069e0c", null ],
+    [ "getSaveOnUnload", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a15ff107462ae1a196718c42453d2bed5", null ],
+    [ "getState", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a7f1f1192f4ad4bd3fc9696830817fc7f", null ],
+    [ "isAreaReady", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#accc620d712f34c5cadb16ec02c4aa927", null ],
+    [ "removeAllControllers", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a1c8fc9abc8bb4cc220f8b496ff17ad91", null ],
+    [ "removeController", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#aa20fbebb747edba51d061f6562a7acee", null ],
+    [ "setMaxLoadsPerStep", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a46d0dd5b0463e8b5bafec1f71ea9e750", null ],
+    [ "setMaxPendingActions", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a38f6e4118982e4526aebc2b857b55aa0", null ],
+    [ "setMaxUnloadsPerStep", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#af35549cddb6f9ebc61f5ad5508fdd861", null ],
+    [ "setRecheckIntervalMilliseconds", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a689f1306d8b07a386a1b1fa3b215d58b", null ],
+    [ "setRetryDelayMilliseconds", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a8e3659d5f4de5af4cab1d4bf025ea480", null ],
+    [ "setSaveOnUnload", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a5a2adcf075a241210909a79eeafff438", null ],
+    [ "step", "class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a7e58d846729bdbfcbd46963f21a87d63", null ]
+];

@@ -1,0 +1,985 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Урок 13: Вложенные чанки.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IrrSimpleVoxelEngine
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tutorial13.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Урок 13: Вложенные чанки. </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Вспомним одну из главных идей <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a> (раздел "Общие идеи работы движка" его документации): чанк - это тоже воксель. Значит, в ячейку чанка можно положить не блок, а ещё один чанк со своим разбиением - и получить внутри блока маленькие блоки. Целый блок храним одним объектом, а разбитый, повреждённый, "выгрызенный" взрывом - вложенным чанком. Ядро поддерживает вложенные чанки любой глубины и с любым разбиением во всех своих функциях (соседи, видимость граней, адреса, поиск по точке), а враппер их рисует. В этом уроке мы:</p><ul>
+<li>разобьём блок на 4x4x4 маленьких блока и поставим и удалим маленький блок по адресу из трёх векторов;</li>
+<li>посмотрим, как маленькие блоки приходят в фабрику и как подогнать им текстуру;</li>
+<li>научимся ломать и ставить маленькие блоки под курсором (getAddressSimpleVoxelObjectByPoint());</li>
+<li>сделаем взрыв, край воронки которого режется по маленьким блокам, и свет, который освещает каждый маленький блок по отдельности. Всё это есть и в TestProject3 (клавиша C включает режим маленьких блоков: левый щелчок разбивает блок, правый ставит маленький блок, B и L - взрыв и свет по маленьким блокам), здесь - то же самое в коротком примере. Адреса вокселей VoxelAddress разобраны в уроке 4 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>.</li>
+</ul>
+<p>Начнём с подключений и двух констант: размер чанка и на сколько частей по каждой оси разбивается блок. </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> SIZE_CHUNK = 16; <span class="comment">// Ребро чанка в блоках.</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> PARTS = 4; <span class="comment">// На сколько частей по каждой оси разбивается блок: 4x4x4 = 64 маленьких блока.</span></div>
+<div class="ttc" id="a_irr_simple_voxel_engine_8h_html"><div class="ttname"><a href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a></div><div class="ttdoc">Главный заголовочный файл. Необходимо присоединять только его к проекту.</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">SimpleVoxelEngine::IrrEngine</a></div><div class="ttdoc">Главное пространство имён IrrSimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:13</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:11</div></div>
+</div><!-- fragment --><p> Нам часто понадобится адрес блока первого уровня по его глобальным координатам: вектор [0] - чанк, вектор [1] - блок в чанке. Делить нужно с округлением вниз: блок с координатой -1 лежит в чанке -1 на месте 15, а обычное деление в C++ округляет к нулю и дало бы чанк 0. </p><div class="fragment"><div class="line"><span class="comment">// Адрес блока первого уровня по его глобальным координатам: [0] - чанк, [1] - блок в чанке. Деление - с округлением</span></div>
+<div class="line"><span class="comment">// вниз (блок -1 лежит в чанке -1 на месте 15). Адрес забирает тот, кому его отдали (setSimpleVoxelObject() и др.).</span></div>
+<div class="line">VoxelAddress* createAddressOfBlock(IrrSimpleVoxelEngine* isve, Vector3d&lt;int&gt; block)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">int</span> g[3] = { block.getX(), block.getY(), block.getZ() };</div>
+<div class="line">    <span class="keywordtype">int</span> c[3];</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k = 0; k &lt; 3; k++) c[k] = g[k] &gt;= 0 ? g[k] / SIZE_CHUNK : -((-g[k] + SIZE_CHUNK - 1) / SIZE_CHUNK);</div>
+<div class="line">    VoxelAddress* addr = <span class="keyword">new</span> VoxelAddress(isve);</div>
+<div class="line">    addr-&gt;addNextVector(Vector3d&lt;int&gt;(c[0], c[1], c[2]));</div>
+<div class="line">    addr-&gt;addNextVector(Vector3d&lt;int&gt;(g[0] - c[0] * SIZE_CHUNK, g[1] - c[1] * SIZE_CHUNK, g[2] - c[2] * SIZE_CHUNK));</div>
+<div class="line">    <span class="keywordflow">return</span> addr;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Генератор делает землю из четырёх слоёв (y = 0..3) в чанке (0,0,0): </p><div class="fragment"><div class="line"><span class="comment">// Генератор: в чанке (0,0,0) - земля из слоёв y = 0..3, остальные чанки пустые.</span></div>
+<div class="line"><span class="keyword">class </span>GroundGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> size)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(!(chunk-&gt;getVoxelAddress()-&gt;getVector(0) == Vector3d&lt;int&gt;(0, 0, 0))) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; size; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; 4; y++)</div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; size; z++)</div>
+<div class="line">                    chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 90, 170 - y * 20, 70)), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+</div><!-- fragment --> <h1 class="doxsection"><a class="anchor" id="t13factory"></a>
+Маленькие блоки в фабрике</h1>
+<p>Для фабрики маленький блок ничем не отличается от обычного: getMeshVoxel() вызывается для каждого видимого вокселя на любой глубине вложенности, а VoxelForRendering уже содержит его позицию и размер. Размер - vxl-&gt;getScale(): при масштабах фабрики, равных размеру чанка, целый блок - 1, маленький из разбиения на 4 - 0.25 (из разбиения 4 внутри разбиения 4 - 1/16 и так далее). getMeshCubeFaces() сама строит куб в размер вокселя, так что маленькие блоки нарисуются правильно без единой строчки кода.</p>
+<p>С текстурой сложнее. Грань createFaceMesh() растягивает текстуру целиком (от 0 до 1) на любую грань, и маленький блок получит всю текстуру блока, уменьшенную в 4 раза: разбитый блок будет выглядеть как мозаика из 64 маленьких копий. Чтобы разбитый блок выглядел так же, как целый, маленькому блоку нужно взять текстурные координаты с того места грани целого блока, где он лежит. Чтобы это было хорошо видно, сделаем текстуру прямо в коде - светлую с тёмной рамкой (текстура без рамки на маленьком блоке - это четверть рамки на целом блоке): </p><div class="fragment"><div class="line"><span class="comment">// Фабрика: куб из видимых граней с текстурой-рамкой; цвет вершин - цвет вокселя. Маленьким блокам текстурные</span></div>
+<div class="line"><span class="comment">// координаты берутся с того места грани целого блока, где маленький блок лежит.</span></div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        IVideoDriver* driver = device-&gt;getVideoDriver();</div>
+<div class="line">        IImage* image = driver-&gt;createImage(ECF_A8R8G8B8, dimension2d&lt;u32&gt;(16, 16)); <span class="comment">// Текстура 16x16: светлая с тёмной рамкой.</span></div>
+<div class="line">        <span class="keywordflow">for</span>(u32 x = 0; x &lt; 16; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(u32 y = 0; y &lt; 16; y++)</div>
+<div class="line">                image-&gt;setPixel(x, y, (x == 0 || y == 0 || x == 15 || y == 15) ? SColor(255, 60, 60, 60) : SColor(255, 230, 230, 230));</div>
+<div class="line">        ITexture* texture = driver-&gt;addTexture(<span class="stringliteral">&quot;block_frame&quot;</span>, image);</div>
+<div class="line">        image-&gt;drop();</div>
+<div class="line">        s_Plane = createFaceMesh();</div>
+<div class="line">        s_Plane-&gt;getMeshBuffer(0)-&gt;getMaterial().setTexture(0, texture);</div>
+<div class="line">        s_MeshManipulator = device-&gt;getSceneManager()-&gt;getMeshManipulator();</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); }</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl) <span class="comment">// Потоки построения. Маленький блок приходит сюда так же, как обычный.</span></div>
+<div class="line">    {</div>
+<div class="line">        IMesh* mesh = getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1)); <span class="comment">// Размер куба - getScale() вокселя (маленький - 1/4).</span></div>
+<div class="line">        <span class="keywordflow">if</span>(!mesh) <span class="keywordflow">return</span> 0;</div>
+<div class="line">        ARGBColor c = ((VoxelInfoARGBColor*)vxl-&gt;getVoxelInfo())-&gt;s_ARGBColor;</div>
+<div class="line">        s_MeshManipulator-&gt;setVertexColors(mesh, SColor(c.getA(), c.getR(), c.getG(), c.getB()));</div>
+<div class="line">        <span class="keywordflow">if</span>(vxl-&gt;getScale().getX() &lt; 0.999f) fitTexCoordsToWholeBlock(mesh, vxl); <span class="comment">// Маленький блок.</span></div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering*) { <span class="keywordflow">return</span> 0; }</div>
+</div><!-- fragment --><p> Маленький блок узнаём по размеру меньше 1 и подгоняем ему текстурные координаты функцией из TestProject3. Она не знает, как повёрнута текстура на каждой грани (это задаёт модель грани), и поэтому для каждого треугольника находит линейную зависимость текстурных координат от положения на грани, а потом применяет ту же зависимость в масштабе целого блока. Центр целого блока - ближайший целый узел, потому что центры блоков первого уровня лежат в целых координатах. Функция работает в потоке построения (как и весь getMeshVoxel()) и меняет только меш, который мы сами только что получили, - это безопасно. </p><div class="fragment"><div class="line"><span class="comment">// Текстурные координаты маленького блока - с того же места грани целого блока (как в TestProject3): тогда разбитый</span></div>
+<div class="line"><span class="comment">// блок выглядит так же, как целый. Для каждого треугольника находится линейная зависимость текстурных координат от</span></div>
+<div class="line"><span class="comment">// положения на грани, и та же зависимость применяется в масштабе целого блока (размер 1, центр - ближайший целый узел).</span></div>
+<div class="line"><span class="keywordtype">void</span> fitTexCoordsToWholeBlock(IMesh* mesh, VoxelForRendering* vxl)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">float</span> size = vxl-&gt;getScale().getX(); <span class="comment">// Размер маленького блока (целый - 1).</span></div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">float</span> center[3] = { vxl-&gt;getPosition().getX(), vxl-&gt;getPosition().getY(), vxl-&gt;getPosition().getZ() };</div>
+<div class="line">    <span class="keywordtype">float</span> offset[3]; <span class="comment">// Центр маленького блока относительно центра целого.</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k = 0; k &lt; 3; k++) offset[k] = center[k] - floorf(center[k] + 0.5f);</div>
+<div class="line">    <span class="keywordflow">for</span>(u32 b = 0; b &lt; mesh-&gt;getMeshBufferCount(); b++)</div>
+<div class="line">    {</div>
+<div class="line">        IMeshBuffer* mb = mesh-&gt;getMeshBuffer(b);</div>
+<div class="line">        <span class="keywordflow">if</span>(mb-&gt;getIndexType() != EIT_16BIT) <span class="keywordflow">continue</span>;</div>
+<div class="line">        <span class="keyword">const</span> u16* indices = mb-&gt;getIndices();</div>
+<div class="line">        <span class="keyword">const</span> u32 vcount = mb-&gt;getVertexCount();</div>
+<div class="line">        std::vector&lt;vector2df&gt; oldtc(vcount);</div>
+<div class="line">        std::vector&lt;bool&gt; done(vcount, <span class="keyword">false</span>);</div>
+<div class="line">        <span class="keywordflow">for</span>(u32 i = 0; i &lt; vcount; i++) oldtc[i] = mb-&gt;getTCoords(i);</div>
+<div class="line">        <span class="keywordflow">for</span>(u32 t = 0; t + 2 &lt; mb-&gt;getIndexCount(); t += 3)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">const</span> u16 <span class="keywordtype">id</span>[3] = { indices[t], indices[t + 1], indices[t + 2] };</div>
+<div class="line">            <span class="keywordtype">float</span> p[3][3]; <span class="comment">// Позиции вершин относительно центра маленького блока.</span></div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; 3; j++) { <span class="keyword">const</span> vector3df&amp; v = mb-&gt;getPosition(<span class="keywordtype">id</span>[j]); p[j][0] = v.X; p[j][1] = v.Y; p[j][2] = v.Z; }</div>
+<div class="line">            <span class="keywordtype">int</span> axis = -1; <span class="comment">// Ось нормали грани: по ней у всех вершин одна координата.</span></div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k = 0; k &lt; 3 &amp;&amp; axis &lt; 0; k++) <span class="keywordflow">if</span>(fabsf(p[1][k] - p[0][k]) &lt; 1e-5f &amp;&amp; fabsf(p[2][k] - p[0][k]) &lt; 1e-5f) axis = k;</div>
+<div class="line">            <span class="keywordflow">if</span>(axis &lt; 0) <span class="keywordflow">continue</span>;</div>
+<div class="line">            <span class="keyword">const</span> <span class="keywordtype">int</span> t1 = (axis + 1) % 3, t2 = (axis + 2) % 3;</div>
+<div class="line">            <span class="comment">// tc = A * (положение на грани) + c; A находим по двум сторонам треугольника.</span></div>
+<div class="line">            <span class="keyword">const</span> <span class="keywordtype">float</span> d1x = p[1][t1] - p[0][t1], d1y = p[1][t2] - p[0][t2];</div>
+<div class="line">            <span class="keyword">const</span> <span class="keywordtype">float</span> d2x = p[2][t1] - p[0][t1], d2y = p[2][t2] - p[0][t2];</div>
+<div class="line">            <span class="keyword">const</span> <span class="keywordtype">float</span> det = d1x * d2y - d1y * d2x;</div>
+<div class="line">            <span class="keywordflow">if</span>(fabsf(det) &lt; 1e-12f) <span class="keywordflow">continue</span>;</div>
+<div class="line">            <span class="keyword">const</span> vector2df e1 = oldtc[<span class="keywordtype">id</span>[1]] - oldtc[<span class="keywordtype">id</span>[0]], e2 = oldtc[<span class="keywordtype">id</span>[2]] - oldtc[<span class="keywordtype">id</span>[0]];</div>
+<div class="line">            <span class="keyword">const</span> vector2df a1 = (e1 * d2y - e2 * d1y) / det; <span class="comment">// Столбец A при оси t1.</span></div>
+<div class="line">            <span class="keyword">const</span> vector2df a2 = (e2 * d1x - e1 * d2x) / det; <span class="comment">// Столбец A при оси t2.</span></div>
+<div class="line">            <span class="keyword">const</span> vector2df c = oldtc[<span class="keywordtype">id</span>[0]] - a1 * p[0][t1] - a2 * p[0][t2];</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; 3; j++)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">if</span>(done[<span class="keywordtype">id</span>[j]]) <span class="keywordflow">continue</span>;</div>
+<div class="line">                <span class="comment">// Тот же шаблон грани, растянутый до целого блока: A уменьшается в size раз.</span></div>
+<div class="line">                mb-&gt;getTCoords(<span class="keywordtype">id</span>[j]) = a1 * (size * (p[j][t1] + offset[t1])) + a2 * (size * (p[j][t2] + offset[t2])) + c;</div>
+<div class="line">                done[<span class="keywordtype">id</span>[j]] = <span class="keyword">true</span>;</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">        mb-&gt;setDirty(EBT_VERTEX);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Ну и последнее в фабрике - селектор треугольников каждой ноде чанков, чтобы луч из камеры находил точку под курсором (подробно про селекторы - в уроке 7). Здесь самый простой вариант: селектор принадлежит ноде и удаляется вместе с ней. </p><div class="fragment"><div class="line">    <span class="comment">// Ноде чанков - селектор треугольников, чтобы луч из камеры находил точку под курсором (урок 7). Селектор</span></div>
+<div class="line">    <span class="comment">// принадлежит ноде и удаляется вместе с ней.</span></div>
+<div class="line">    <span class="keywordtype">void</span> onUpdateChunkMeshSceneNode(IMeshSceneNode* node, <span class="keywordtype">int</span>, Vector3d&lt;int&gt;)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(!node) <span class="keywordflow">return</span>;</div>
+<div class="line">        ITriangleSelector* selector = getIrrlichtDevice()-&gt;getSceneManager()-&gt;createTriangleSelector(node-&gt;getMesh(), node);</div>
+<div class="line">        node-&gt;setTriangleSelector(selector);</div>
+<div class="line">        selector-&gt;drop();</div>
+<div class="line">    }</div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">};</div>
+</div><!-- fragment --> <h1 class="doxsection"><a class="anchor" id="t13split"></a>
+Разбиение блока и адрес из трёх векторов</h1>
+<p>Теперь main(). Создаём движок, фабрику и мир как обычно (контроллер UserControllerForThread понадобится для взрыва и света, он описан ниже): </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(800, 600));</div>
+<div class="line">    ISceneManager* smgr = device-&gt;getSceneManager();</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Логгер: без него движок молча проглатывает и ошибки.</span></div>
+<div class="line">    lgr-&gt;setPrintStandard(<span class="keyword">false</span>); <span class="comment">// Обычные сообщения не нужны - только предупреждения и ошибки.</span></div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device, lgr);</div>
+<div class="line">    lgr-&gt;drop(); <span class="comment">// Движок держит свою ссылку.</span></div>
+<div class="line">    isve-&gt;setUserControllerForThread(<span class="keyword">new</span> MyController(isve));</div>
+<div class="line">    MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">    factory-&gt;setPositionScale(SIZE_CHUNK);</div>
+<div class="line">    factory-&gt;setSScale(SIZE_CHUNK);</div>
+<div class="line">    isve-&gt;setFactoryChunkMeshSceneNode(factory);</div>
+<div class="line">    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld();</div>
+<div class="line">    factory-&gt;setMultiplePartition(<span class="keywordtype">id</span>, <span class="keyword">true</span>); <span class="comment">// Чанки верхнего уровня разбиты одинаково - вложенным чанкам это не мешает.</span></div>
+<div class="line">    factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">    isve-&gt;getWorld(<span class="keywordtype">id</span>)-&gt;setWorldGenerator(<span class="keyword">new</span> GroundGenerator);</div>
+<div class="line">    isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">true</span>);</div>
+</div><!-- fragment --><p> setMultiplePartition(id, true) обещает движку, что все чанки <b>верхнего уровня</b> разбиты одинаково (на getSizeChunk()), - вложенным чанкам это не мешает: видимость граней у разбитых блоков и их соседей движок считает точно, просто медленнее (подробнее - в уроке 14).</p>
+<p>Разобьём блок (8,3,8). Создаём вложенный чанк ChunkVoxelObject, задаём ему разбиение setNumberOfPartitions() и заполняем маленькими блоками - прямо так, до вставки в мир: адрес и мир движок выдаст ему сам при вставке. Потом ставим его в мир на место блока, как обычный воксель: </p><div class="fragment"><div class="line"><span class="comment">// 1) Разбить блок (8,3,8): на его место - вложенный чанк из 4x4x4 маленьких блоков того же цвета.</span></div>
+<div class="line">ChunkVoxelObject* split = <span class="keyword">new</span> ChunkVoxelObject();</div>
+<div class="line">split-&gt;setNumberOfPartitions(PARTS);</div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; PARTS; i++)</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; PARTS; j++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k = 0; k &lt; PARTS; k++)</div>
+<div class="line">            split-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(i, j, k), <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 90, 110, 70)), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(8, 3, 8), split); <span class="comment">// Старый блок удалит движок.</span></div>
+</div><!-- fragment --><p> Несколько важных деталей:</p><ul>
+<li>разбиение задаётся только пустому чанку (пока в нём нет вокселей), иначе setNumberOfPartitions() вернёт false. Оно может быть любым от 1 до 255 и у разных вложенных чанков - разным;</li>
+<li>последний параметр ChunkVoxelObject::setSimpleVoxelObject() - false: чанк ещё не в мире, соседей помечать на пересчёт видимости незачем, при вставке движок всё посчитает сам;</li>
+<li>старый блок (8,3,8) движок удалит сам, а вложенный чанк вместе с маленькими блоками теперь принадлежит миру;</li>
+<li>внутрь вложенного чанка можно положить ещё один вложенный чанк - глубина не ограничена.</li>
+</ul>
+<p>Адрес маленького блока - из трёх векторов: чанк, блок в чанке, маленький блок во вложенном чанке. Таким адресом можно и поставить (заменить) маленький блок, и удалить его - функциями враппера setSimpleVoxelObject() и deleteSimpleVoxelObject() (адрес они забирают): </p><div class="fragment"><div class="line"><span class="comment">// 2) Маленький блок по адресу из трёх векторов: чанк (0,0,0), блок (8,3,8) в чанке, маленький блок (3,3,3) в нём.</span></div>
+<div class="line">VoxelAddress* addr = <span class="keyword">new</span> VoxelAddress(isve);</div>
+<div class="line">addr-&gt;addNextVector(Vector3d&lt;int&gt;(0, 0, 0));</div>
+<div class="line">addr-&gt;addNextVector(Vector3d&lt;int&gt;(8, 3, 8));</div>
+<div class="line">addr-&gt;addNextVector(Vector3d&lt;int&gt;(3, 3, 3));</div>
+<div class="line">isve-&gt;setSimpleVoxelObject(<span class="keywordtype">id</span>, addr, <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 220, 40, 40)), <span class="keyword">true</span>); <span class="comment">// true - заменить старый.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 3) Удалить маленький блок (0,3,0) того же разбитого блока - в углу верхнего слоя будет ямка.</span></div>
+<div class="line">VoxelAddress* hole = createAddressOfBlock(isve, Vector3d&lt;int&gt;(8, 3, 8));</div>
+<div class="line">hole-&gt;addNextVector(Vector3d&lt;int&gt;(0, 3, 0));</div>
+<div class="line">isve-&gt;deleteSimpleVoxelObject(<span class="keywordtype">id</span>, hole);</div>
+<div class="line">isve-&gt;addTaskUpdateChunks();</div>
+</div><!-- fragment --><p> Третий вектор работает, только если в ячейке уже лежит вложенный чанк. Поставить маленький блок в пустую ячейку или в целый блок напрямую нельзя - сначала в ячейку кладётся вложенный чанк (как мы сделали выше, а ниже - в placeSmallBlock()).</p>
+<p><b>Осторожно с чтением мира.</b> После разбиения getSimpleVoxelObjectByGlobalVector(id, (8,3,8)) вернёт уже не ваш блок, а вложенный чанк - объект с типом CHUNK_VOXEL_OBJECT. Любой код, который читает блоки и приводит их к своему типу, должен сначала проверять getTypeVoxel() - иначе он прочитает мусор (поэтому и наш свет, и взрыв ниже, и свет в TestProject3 разбирают разбитые блоки отдельно). И помните про сохранение: контроллер из урока 11 и TestProject3 вложенные чанки не сохраняют. Если маленькие блоки должны переживать перезапуск, ваш формат сохранения должен уметь записывать вложенный чанк (его разбиение и воксели, рекурсивно).</p>
+<h1 class="doxsection"><a class="anchor" id="t13cursor"></a>
+Маленькие блоки под курсором</h1>
+<p>Чтобы ломать и ставить маленькие блоки мышью, нужен адрес ячейки ровно под курсором. getAddressSimpleVoxelObjectByThreePoints() (урок 8) по треугольнику, в который попал луч, находит ячейку у центра этого треугольника - для целых блоков этого достаточно, а для маленьких нет: большая грань целого блока закрывает сразу 16 маленьких ячеек перед собой, и блок встал бы не там, куда смотрит игрок. Для этого есть getAddressSimpleVoxelObjectByPoint(): она берёт саму точку под курсором, сдвигает её вдоль lookvect на 0.001 блока и возвращает ячейку, в которой точка оказалась, - на любой глубине вложенных чанков. Направление от камеры даёт сам блок под курсором, к камере (lookvect * -1) - пустую ячейку перед гранью, куда можно ставить.</p>
+<p>Точку под курсором каждый кадр находит главный цикл - лучом из камеры по селекторам нод: </p><div class="fragment"><div class="line"><span class="comment">// Точка под курсором (центр экрана): луч из камеры по селекторам нод чанков.</span></div>
+<div class="line">vector3df campos = camera-&gt;getAbsolutePosition();</div>
+<div class="line">vector3df look = (camera-&gt;getTarget() - campos).normalize();</div>
+<div class="line">line3df ray(campos, campos + look * 50.0f);</div>
+<div class="line">vector3df hit;</div>
+<div class="line">triangle3df triangle;</div>
+<div class="line">receiver.s_HasTarget = collision-&gt;getSceneNodeAndCollisionPointFromRay(ray, hit, triangle) != 0;</div>
+<div class="line">receiver.s_Point = Vector3d&lt;float&gt;(hit.X, hit.Y, hit.Z);</div>
+<div class="line">receiver.s_Look = Vector3d&lt;float&gt;(look.X, look.Y, look.Z);</div>
+<div class="line">receiver.s_CamPos = Vector3d&lt;float&gt;(campos.X, campos.Y, campos.Z);</div>
+</div><!-- fragment --><p> А обработчик событий по щелчкам ломает и ставит блоки. Ломать просто: адрес из двух векторов - целый блок, из трёх - маленький, deleteSimpleVoxelObject() удалит и то, и другое. </p><div class="fragment"><div class="line"><span class="comment">// Обработчик: левая кнопка - сломать блок (или маленький блок) под курсором, правая - поставить маленький блок,</span></div>
+<div class="line"><span class="comment">// B - взрыв, L - свет в блоке под курсором. Точку под курсором каждый кадр заполняет главный цикл.</span></div>
+<div class="line"><span class="keyword">class </span>MyReceiver : <span class="keyword">public</span> IEventReceiver</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyReceiver(IrrSimpleVoxelEngine* isve, <span class="keywordtype">int</span> <span class="keywordtype">id</span>) : s_ISVE(isve), s_WorldId(id) {}</div>
+<div class="line">    <span class="keywordtype">bool</span> OnEvent(<span class="keyword">const</span> SEvent&amp; event)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(!s_HasTarget) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">        <span class="keywordflow">if</span>(event.EventType == EET_MOUSE_INPUT_EVENT)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span>(event.MouseInput.Event == EMIE_LMOUSE_PRESSED_DOWN) breakUnderCursor();</div>
+<div class="line">            <span class="keywordflow">if</span>(event.MouseInput.Event == EMIE_RMOUSE_PRESSED_DOWN) placeSmallBlock();</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span>(event.EventType == EET_KEY_INPUT_EVENT &amp;&amp; !event.KeyInput.PressedDown)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_KEY_B) addTask(BOOM, 2);</div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_KEY_L) addTask(LIGHT, 3);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// Сломать то, что под курсором: точку чуть сдвигаем от камеры - внутрь блока. На любой глубине вложенных чанков:</span></div>
+<div class="line">    <span class="comment">// адрес из двух векторов - целый блок, из трёх - маленький блок.</span></div>
+<div class="line">    <span class="keywordtype">bool</span> breakUnderCursor()</div>
+<div class="line">    {</div>
+<div class="line">        VoxelAddress* addr = s_ISVE-&gt;getAddressSimpleVoxelObjectByPoint(s_WorldId, s_Point, s_Look, s_CamPos);</div>
+<div class="line">        <span class="keywordflow">if</span>(!addr) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">        <span class="keywordflow">if</span>(addr-&gt;getLastVectInd() &lt; 2) { <span class="keyword">delete</span> addr; <span class="keywordflow">return</span> <span class="keyword">false</span>; } <span class="comment">// Чанк не загружен.</span></div>
+<div class="line">        s_ISVE-&gt;deleteSimpleVoxelObject(s_WorldId, addr); <span class="comment">// Адрес забирает движок.</span></div>
+<div class="line">        s_ISVE-&gt;addTaskUpdateChunks();</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p> Ставить сложнее. Если ячейка к камере - пустая маленькая ячейка разбитого блока (адрес из трёх векторов), ставим туда маленький блок. Если же это пустая ячейка первого уровня (адрес из двух векторов), кладём в неё вложенный чанк с одним маленьким блоком - тем, что под курсором. Какой это из 4x4x4, считаем по той же точке в координатах мира (getWorldCoordinates(), урок 12): дробная часть координаты (с учётом того, что блок k занимает от k - 0.5 до k + 0.5), умноженная на PARTS. Мир здесь читаем напрямую (World::getSimpleVoxelObject()) - значит, под блокировкой движка: потоки построения в это время могут читать мир, а поток очереди - менять. </p><div class="fragment"><div class="line"><span class="comment">// Поставить маленький блок ровно под курсором: точку сдвигаем к камере - в пустую ячейку перед гранью.</span></div>
+<div class="line"><span class="keywordtype">bool</span> placeSmallBlock()</div>
+<div class="line">{</div>
+<div class="line">    VoxelAddress* target = s_ISVE-&gt;getAddressSimpleVoxelObjectByPoint(s_WorldId, s_Point, s_Look * (-1), s_CamPos);</div>
+<div class="line">    <span class="keywordflow">if</span>(!target) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    <span class="keywordtype">bool</span> empty = <span class="keyword">false</span>;</div>
+<div class="line">    <span class="keywordflow">if</span>(target-&gt;getLastVectInd() &gt;= 2)</div>
+<div class="line">    {</div>
+<div class="line">        std::lock_guard&lt;std::recursive_mutex&gt; lock(s_ISVE-&gt;getLockAccessToTheSimpleVoxelEngine()); <span class="comment">// Читаем мир напрямую.</span></div>
+<div class="line">        World* wrld = s_ISVE-&gt;getWorld(s_WorldId);</div>
+<div class="line">        empty = wrld &amp;&amp; !wrld-&gt;getSimpleVoxelObject(target, <span class="keyword">false</span>);</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">if</span>(!empty) { <span class="keyword">delete</span> target; <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
+<div class="line">    <span class="keywordflow">if</span>(target-&gt;getLastVectInd() &gt;= 3) <span class="comment">// Пустая маленькая ячейка уже разбитого блока - ставим маленький блок.</span></div>
+<div class="line">    {</div>
+<div class="line">        s_ISVE-&gt;setSimpleVoxelObject(s_WorldId, target, <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 80, 80, 255)));</div>
+<div class="line">        s_ISVE-&gt;addTaskUpdateChunks();</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// Пустая ячейка первого уровня: ставим вложенный чанк с одним маленьким блоком. Какой из PARTS^3 - по той же</span></div>
+<div class="line">    <span class="comment">// точке в координатах мира (блок k занимает [k - 0.5, k + 0.5)).</span></div>
+<div class="line">    Vector3d&lt;float&gt; look = s_ISVE-&gt;getWorldCoordinates(s_WorldId, s_CamPos) - s_ISVE-&gt;getWorldCoordinates(s_WorldId, s_CamPos + s_Look);</div>
+<div class="line">    Vector3d&lt;float&gt; w = s_ISVE-&gt;getWorldCoordinates(s_WorldId, s_Point) + look.getNormalizeVector() * 0.001f;</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">float</span> q[3] = { w.getX() + 0.5f, w.getY() + 0.5f, w.getZ() + 0.5f };</div>
+<div class="line">    <span class="keywordtype">int</span> sub[3];</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k = 0; k &lt; 3; k++)</div>
+<div class="line">    {</div>
+<div class="line">        sub[k] = (int)floorf((q[k] - floorf(q[k])) * PARTS);</div>
+<div class="line">        <span class="keywordflow">if</span>(sub[k] &lt; 0) sub[k] = 0;</div>
+<div class="line">        <span class="keywordflow">if</span>(sub[k] &gt;= PARTS) sub[k] = PARTS - 1;</div>
+<div class="line">    }</div>
+<div class="line">    ChunkVoxelObject* nested = <span class="keyword">new</span> ChunkVoxelObject(); <span class="comment">// Вложенный чанк заполняется до вставки в мир.</span></div>
+<div class="line">    nested-&gt;setNumberOfPartitions(PARTS);</div>
+<div class="line">    nested-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(sub[0], sub[1], sub[2]), <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 80, 80, 255)), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">    s_ISVE-&gt;setSimpleVoxelObject(s_WorldId, target, nested); <span class="comment">// Адрес и вложенный чанк забирает движок.</span></div>
+<div class="line">    s_ISVE-&gt;addTaskUpdateChunks();</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --> <h1 class="doxsection"><a class="anchor" id="t13boom"></a>
+Взрыв и свет по маленьким блокам</h1>
+<p>Взрыв и свет меняют много блоков сразу, поэтому, как и в уроке 10, их делает пользовательская функция UserControllerForThread в потоке главной очереди: пока она работает, мир меняет только она, и указатели на воксели, полученные внутри неё, действительны до её конца. Обработчик только упаковывает параметры - блок первого уровня под курсором и радиус: </p><div class="fragment"><div class="line"><span class="comment">// Взрыв или свет - в потоке главной очереди (UserControllerForThread). Центр - блок первого уровня под курсором.</span></div>
+<div class="line"><span class="keywordtype">bool</span> addTask(MY_TASK type, <span class="keywordtype">int</span> radius)</div>
+<div class="line">{</div>
+<div class="line">    VoxelAddress* addr = s_ISVE-&gt;getAddressSimpleVoxelObjectByPoint(s_WorldId, s_Point, s_Look, s_CamPos);</div>
+<div class="line">    <span class="keywordflow">if</span>(!addr) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    <span class="keywordtype">bool</span> good = addr-&gt;getLastVectInd() &gt;= 2;</div>
+<div class="line">    <span class="keywordflow">if</span>(good)</div>
+<div class="line">    {</div>
+<div class="line">        MyParams* p = <span class="keyword">new</span> MyParams; <span class="comment">// Удалит движок после выполнения.</span></div>
+<div class="line">        p-&gt;s_Type = type;</div>
+<div class="line">        p-&gt;s_WorldId = s_WorldId;</div>
+<div class="line">        p-&gt;s_Center = addr-&gt;getVector(1) + addr-&gt;getVector(0) * SIZE_CHUNK; <span class="comment">// Чанк и блок в чанке - в глобальные координаты.</span></div>
+<div class="line">        p-&gt;s_Radius = radius;</div>
+<div class="line">        s_ISVE-&gt;addTaskRunUserControllerForThread(p);</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keyword">delete</span> addr;</div>
+<div class="line">    <span class="keywordflow">return</span> good;</div>
+<div class="line">}</div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="comment">// Параметры взрыва и света для потока главной очереди.</span></div>
+<div class="line"><span class="keyword">enum</span> MY_TASK { BOOM, LIGHT };</div>
+<div class="line"><span class="keyword">struct </span>MyParams : ParametersForThreadFunction</div>
+<div class="line">{</div>
+<div class="line">    MY_TASK s_Type;</div>
+<div class="line">    <span class="keywordtype">int</span> s_WorldId;</div>
+<div class="line">    Vector3d&lt;int&gt; s_Center; <span class="comment">// Блок первого уровня в центре (глобальные координаты).</span></div>
+<div class="line">    <span class="keywordtype">int</span> s_Radius;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Взрыв. Обычный взрыв просто удаляет блоки внутри шара, и край воронки получается ступенчатым. Сделаем его "выгрызенным": каждую ячейку рядом с шаром рассматриваем как n^3 маленьких блоков (целый блок - как будто уже разбитый на PARTS^3, разбитый - по своим маленьким блокам) и удаляем маленькие блоки, центр которых внутри шара. Если удалены все - ячейка пустеет, если ни одного - не меняется, иначе на её место ставится новый вложенный чанк из оставшихся маленьких блоков. Проходов два: первый только считает, второй строит вложенный чанк - так целые блоки, которые взрыв не задел, не превращаются зря во вложенные чанки (они дороже и в памяти, и при построении мешей). </p><div class="fragment"><div class="line"><span class="comment">// Взрыв и свет по маленьким блокам - в потоке главной очереди: пока функция работает, мир меняет только она.</span></div>
+<div class="line"><span class="keyword">class </span>MyController : <span class="keyword">public</span> UserControllerForThread</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyController(IrrSimpleVoxelEngine* isve) : UserControllerForThread(isve) {}</div>
+<div class="line">    <span class="keywordtype">void</span> userThreadFunction(ParametersForThreadFunction* params)</div>
+<div class="line">    {</div>
+<div class="line">        MyParams* p = (MyParams*)params;</div>
+<div class="line">        <span class="keywordflow">if</span>(p-&gt;s_Type == BOOM) boom(p);</div>
+<div class="line">        <span class="keywordflow">else</span> light(p);</div>
+<div class="line">        getIrrSimpleVoxelEngine()-&gt;addTaskUpdateChunks(); <span class="comment">// Перестроить изменённые чанки - один раз после всех правок.</span></div>
+<div class="line">    }</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="comment">// Каждая ячейка около шара - n^3 маленьких блоков (целый блок - как будто разбитый на PARTS^3): маленькие блоки,</span></div>
+<div class="line">    <span class="comment">// центр которых внутри шара, удаляются. Удалены все - ячейка пустеет, ни одного - не меняется, иначе на её место</span></div>
+<div class="line">    <span class="comment">// ставится вложенный чанк из оставшихся маленьких блоков. Край воронки получается &quot;выгрызенным&quot;.</span></div>
+<div class="line">    <span class="keywordtype">void</span> boom(MyParams* p)</div>
+<div class="line">    {</div>
+<div class="line">        IrrSimpleVoxelEngine* isve = getIrrSimpleVoxelEngine();</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">int</span> ext = p-&gt;s_Radius + 1; <span class="comment">// Ячейка рядом с шаром тоже может задеть его своими маленькими блоками.</span></div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">float</span> r2 = (float)(p-&gt;s_Radius * p-&gt;s_Radius);</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = -ext; x &lt;= ext; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = -ext; y &lt;= ext; y++)</div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = -ext; z &lt;= ext; z++)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keyword">const</span> Vector3d&lt;int&gt; cell = p-&gt;s_Center + Vector3d&lt;int&gt;(x, y, z);</div>
+<div class="line">                    <span class="keywordflow">if</span>(cell.getX() &lt; 0 || cell.getX() &gt;= SIZE_CHUNK || cell.getY() &lt; 0 || cell.getY() &gt;= SIZE_CHUNK ||</div>
+<div class="line">                       cell.getZ() &lt; 0 || cell.getZ() &gt;= SIZE_CHUNK) <span class="keywordflow">continue</span>; <span class="comment">// Только в загруженном чанке (0,0,0).</span></div>
+<div class="line">                    SimpleVoxelObject* obj = isve-&gt;getSimpleVoxelObjectByGlobalVector(p-&gt;s_WorldId, cell, <span class="keyword">false</span>);</div>
+<div class="line">                    <span class="keywordflow">if</span>(!obj) <span class="keywordflow">continue</span>;</div>
+<div class="line">                    ChunkVoxelObject* old = 0; <span class="comment">// Уже разбитый блок.</span></div>
+<div class="line">                    <span class="keywordtype">int</span> n = PARTS;</div>
+<div class="line">                    <span class="keywordflow">if</span>(obj-&gt;getTypeVoxel() == CHUNK_VOXEL_OBJECT)</div>
+<div class="line">                    {</div>
+<div class="line">                        old = (ChunkVoxelObject*)obj;</div>
+<div class="line">                        n = old-&gt;getNumberOfPartitions();</div>
+<div class="line">                    }</div>
+<div class="line">                    <span class="keywordtype">int</span> kept = 0, removed = 0;</div>
+<div class="line">                    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> pass = 0; pass &lt; 2; pass++) <span class="comment">// Проход 0 - считаем, проход 1 - строим вложенный чанк.</span></div>
+<div class="line">                    {</div>
+<div class="line">                        ChunkVoxelObject* nested = 0;</div>
+<div class="line">                        <span class="keywordflow">if</span>(pass == 1)</div>
+<div class="line">                        {</div>
+<div class="line">                            <span class="keywordflow">if</span>(removed == 0) <span class="keywordflow">break</span>; <span class="comment">// Взрыв ячейку не задел.</span></div>
+<div class="line">                            <span class="keywordflow">if</span>(kept == 0) { isve-&gt;setSimpleVoxelObjectByGlobalVector(p-&gt;s_WorldId, cell, 0); <span class="keywordflow">break</span>; } <span class="comment">// Уничтожено всё.</span></div>
+<div class="line">                            nested = <span class="keyword">new</span> ChunkVoxelObject();</div>
+<div class="line">                            nested-&gt;setNumberOfPartitions(n);</div>
+<div class="line">                        }</div>
+<div class="line">                        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
+<div class="line">                            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; n; j++)</div>
+<div class="line">                                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k = 0; k &lt; n; k++)</div>
+<div class="line">                                {</div>
+<div class="line">                                    SimpleVoxelObject* src = old ? old-&gt;getSimpleVoxelObject(Vector3d&lt;int&gt;(i, j, k)) : obj;</div>
+<div class="line">                                    <span class="keywordflow">if</span>(!src || src-&gt;getTypeVoxel() != ARGBCOLOR) <span class="keywordflow">continue</span>; <span class="comment">// Пустая маленькая ячейка.</span></div>
+<div class="line">                                    <span class="comment">// Центр маленького блока относительно центра шара (блок занимает [-0.5, 0.5) вокруг своих координат).</span></div>
+<div class="line">                                    <span class="keyword">const</span> <span class="keywordtype">float</span> dx = x - 0.5f + (i + 0.5f) / n, dy = y - 0.5f + (j + 0.5f) / n, dz = z - 0.5f + (k + 0.5f) / n;</div>
+<div class="line">                                    <span class="keyword">const</span> <span class="keywordtype">bool</span> inside = dx * dx + dy * dy + dz * dz &lt;= r2;</div>
+<div class="line">                                    <span class="keywordflow">if</span>(pass == 0) { <span class="keywordflow">if</span>(inside) removed++; <span class="keywordflow">else</span> kept++; }</div>
+<div class="line">                                    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(!inside) nested-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(i, j, k), <span class="keyword">new</span> ARGBColorVoxel(((ARGBColorVoxel*)src)-&gt;getARGBColor()), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">                                }</div>
+<div class="line">                        <span class="keywordflow">if</span>(nested) isve-&gt;setSimpleVoxelObjectByGlobalVector(p-&gt;s_WorldId, cell, nested); <span class="comment">// Старое удалит движок.</span></div>
+<div class="line">                    }</div>
+<div class="line">                }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p> Обратите внимание: старый вложенный чанк (old) мы не меняем на месте, а читаем из него и строим новый - старый движок удалит сам при замене. Копии маленьких блоков создаём через new: один и тот же воксель не может лежать в двух местах.</p>
+<p>Свет. Блоки в <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a> неизменяемые: если поменять цвет вокселя на месте (ARGBColorVoxel::setARGBColor()), движок не узнает, что чанк нужно перестроить. Поэтому на место каждого освещённого вокселя ставится новый, с новым цветом. Целый блок меняем по глобальным координатам, а маленькие блоки разбитого - каждый по своему центру и по адресу из трёх векторов: </p><div class="fragment"><div class="line">    <span class="comment">// Свет: блоки внутри шара желтеют тем сильнее, чем ближе к центру. Маленькие блоки разбитого блока - каждый по своему</span></div>
+<div class="line">    <span class="comment">// центру, по адресу из трёх векторов. Воксели неизменяемые: на место каждого ставится новый с новым цветом.</span></div>
+<div class="line">    <span class="keywordtype">void</span> light(MyParams* p)</div>
+<div class="line">    {</div>
+<div class="line">        IrrSimpleVoxelEngine* isve = getIrrSimpleVoxelEngine();</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">int</span> r = p-&gt;s_Radius;</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = -r; x &lt;= r; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = -r; y &lt;= r; y++)</div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = -r; z &lt;= r; z++)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keyword">const</span> Vector3d&lt;int&gt; cell = p-&gt;s_Center + Vector3d&lt;int&gt;(x, y, z);</div>
+<div class="line">                    <span class="keywordflow">if</span>(cell.getX() &lt; 0 || cell.getX() &gt;= SIZE_CHUNK || cell.getY() &lt; 0 || cell.getY() &gt;= SIZE_CHUNK ||</div>
+<div class="line">                       cell.getZ() &lt; 0 || cell.getZ() &gt;= SIZE_CHUNK) <span class="keywordflow">continue</span>;</div>
+<div class="line">                    SimpleVoxelObject* obj = isve-&gt;getSimpleVoxelObjectByGlobalVector(p-&gt;s_WorldId, cell, <span class="keyword">false</span>);</div>
+<div class="line">                    <span class="keywordflow">if</span>(!obj) <span class="keywordflow">continue</span>;</div>
+<div class="line">                    <span class="keywordflow">if</span>(obj-&gt;getTypeVoxel() == ARGBCOLOR) <span class="comment">// Целый блок.</span></div>
+<div class="line">                    {</div>
+<div class="line">                        <span class="keywordtype">float</span> d = sqrtf((<span class="keywordtype">float</span>)(x * x + y * y + z * z));</div>
+<div class="line">                        <span class="keywordflow">if</span>(d &lt;= r) isve-&gt;setSimpleVoxelObjectByGlobalVector(p-&gt;s_WorldId, cell, <span class="keyword">new</span> ARGBColorVoxel(lit(((ARGBColorVoxel*)obj)-&gt;getARGBColor(), d, r)));</div>
+<div class="line">                        <span class="keywordflow">continue</span>;</div>
+<div class="line">                    }</div>
+<div class="line">                    <span class="keywordflow">if</span>(obj-&gt;getTypeVoxel() != CHUNK_VOXEL_OBJECT) <span class="keywordflow">continue</span>;</div>
+<div class="line">                    ChunkVoxelObject* nested = (ChunkVoxelObject*)obj; <span class="comment">// Разбитый блок: каждый маленький блок отдельно.</span></div>
+<div class="line">                    <span class="keyword">const</span> <span class="keywordtype">int</span> n = nested-&gt;getNumberOfPartitions();</div>
+<div class="line">                    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
+<div class="line">                        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; n; j++)</div>
+<div class="line">                            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k = 0; k &lt; n; k++)</div>
+<div class="line">                            {</div>
+<div class="line">                                SimpleVoxelObject* piece = nested-&gt;getSimpleVoxelObject(Vector3d&lt;int&gt;(i, j, k));</div>
+<div class="line">                                <span class="keywordflow">if</span>(!piece || piece-&gt;getTypeVoxel() != ARGBCOLOR) <span class="keywordflow">continue</span>;</div>
+<div class="line">                                <span class="keyword">const</span> <span class="keywordtype">float</span> dx = x - 0.5f + (i + 0.5f) / n, dy = y - 0.5f + (j + 0.5f) / n, dz = z - 0.5f + (k + 0.5f) / n;</div>
+<div class="line">                                <span class="keyword">const</span> <span class="keywordtype">float</span> d = sqrtf(dx * dx + dy * dy + dz * dz);</div>
+<div class="line">                                <span class="keywordflow">if</span>(d &gt; r) <span class="keywordflow">continue</span>;</div>
+<div class="line">                                VoxelAddress* addr = createAddressOfBlock(isve, cell); <span class="comment">// Чанк и блок в чанке...</span></div>
+<div class="line">                                addr-&gt;addNextVector(Vector3d&lt;int&gt;(i, j, k)); <span class="comment">// ...и маленький блок во вложенном чанке.</span></div>
+<div class="line">                                isve-&gt;setSimpleVoxelObject(p-&gt;s_WorldId, addr, <span class="keyword">new</span> ARGBColorVoxel(lit(((ARGBColorVoxel*)piece)-&gt;getARGBColor(), d, r)), <span class="keyword">true</span>);</div>
+<div class="line">                            }</div>
+<div class="line">                }</div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// Цвет c, подсвеченный жёлтым: в центре света - сильнее, на расстоянии r - никак.</span></div>
+<div class="line">    <span class="keyword">static</span> ARGBColor lit(ARGBColor c, <span class="keywordtype">float</span> d, <span class="keywordtype">int</span> r)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">float</span> power = r &gt; 0 ? 1 - d / r : 1;</div>
+<div class="line">        <span class="keywordflow">return</span> ARGBColor(c.getA(), (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)(c.getR() + (255 - c.getR()) * power), (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)(c.getG() + (255 - c.getG()) * power), c.getB());</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> В конце userThreadFunction() один раз вызывается addTaskUpdateChunks() - все изменённые чанки перестроятся один раз после всех правок (а не после каждой из сотен).</p>
+<p>Осталось запустить движок и главный цикл (точку под курсором он находит после drawAll(), как показано выше): </p><div class="fragment"><div class="line">ICameraSceneNode* camera = smgr-&gt;addCameraSceneNodeFPS();</div>
+<div class="line">camera-&gt;setPosition(vector3df(8, 7, 3));</div>
+<div class="line">camera-&gt;setTarget(vector3df(8, 3.5f, 8));</div>
+<div class="line">MyReceiver receiver(isve, <span class="keywordtype">id</span>);</div>
+<div class="line">device-&gt;setEventReceiver(&amp;receiver);</div>
+<div class="line">ISceneCollisionManager* collision = smgr-&gt;getSceneCollisionManager();</div>
+<div class="line">isve-&gt;start();</div>
+</div><!-- fragment --> <h1 class="doxsection"><a class="anchor" id="t13cost"></a>
+Цена маленьких блоков</h1>
+<p>Вложенные чанки - не бесплатные:</p><ul>
+<li>разбитый блок 4x4x4 - это 64 воксели и массивы вложенного чанка вместо одного блока;</li>
+<li>у каждого маленького блока - свои видимые грани: на месте одной грани целого блока может оказаться 16;</li>
+<li>видимость граней у вложенных чанков и их соседей считается медленным путём, а не быстрым (как у чанков с одинаковым разбиением). Поэтому разбивайте блоки, только когда это действительно нужно (повреждение, мелкие детали), а не "на всякий
+случай". Хорошая идея - собирать вложенный чанк обратно в целый блок, если все маленькие блоки снова одинаковые. Для небольших фигурных блоков, у которых форма заранее известна (полублоки, лестницы), чаще выгоднее склейка вокселя из частей - getMeshVoxelByGlue() (урок 4).</li>
+</ul>
+<p>Ну и напоследок ещё раз полный код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> SIZE_CHUNK = 16; <span class="comment">// Ребро чанка в блоках.</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> PARTS = 4; <span class="comment">// На сколько частей по каждой оси разбивается блок: 4x4x4 = 64 маленьких блока.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Адрес блока первого уровня по его глобальным координатам: [0] - чанк, [1] - блок в чанке. Деление - с округлением</span></div>
+<div class="line"><span class="comment">// вниз (блок -1 лежит в чанке -1 на месте 15). Адрес забирает тот, кому его отдали (setSimpleVoxelObject() и др.).</span></div>
+<div class="line">VoxelAddress* createAddressOfBlock(IrrSimpleVoxelEngine* isve, Vector3d&lt;int&gt; block)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">int</span> g[3] = { block.getX(), block.getY(), block.getZ() };</div>
+<div class="line">    <span class="keywordtype">int</span> c[3];</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k = 0; k &lt; 3; k++) c[k] = g[k] &gt;= 0 ? g[k] / SIZE_CHUNK : -((-g[k] + SIZE_CHUNK - 1) / SIZE_CHUNK);</div>
+<div class="line">    VoxelAddress* addr = <span class="keyword">new</span> VoxelAddress(isve);</div>
+<div class="line">    addr-&gt;addNextVector(Vector3d&lt;int&gt;(c[0], c[1], c[2]));</div>
+<div class="line">    addr-&gt;addNextVector(Vector3d&lt;int&gt;(g[0] - c[0] * SIZE_CHUNK, g[1] - c[1] * SIZE_CHUNK, g[2] - c[2] * SIZE_CHUNK));</div>
+<div class="line">    <span class="keywordflow">return</span> addr;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Генератор: в чанке (0,0,0) - земля из слоёв y = 0..3, остальные чанки пустые.</span></div>
+<div class="line"><span class="keyword">class </span>GroundGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> size)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(!(chunk-&gt;getVoxelAddress()-&gt;getVector(0) == Vector3d&lt;int&gt;(0, 0, 0))) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; size; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; 4; y++)</div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; size; z++)</div>
+<div class="line">                    chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 90, 170 - y * 20, 70)), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Фабрика: куб из видимых граней с текстурой-рамкой; цвет вершин - цвет вокселя. Маленьким блокам текстурные</span></div>
+<div class="line"><span class="comment">// координаты берутся с того места грани целого блока, где маленький блок лежит.</span></div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        IVideoDriver* driver = device-&gt;getVideoDriver();</div>
+<div class="line">        IImage* image = driver-&gt;createImage(ECF_A8R8G8B8, dimension2d&lt;u32&gt;(16, 16)); <span class="comment">// Текстура 16x16: светлая с тёмной рамкой.</span></div>
+<div class="line">        <span class="keywordflow">for</span>(u32 x = 0; x &lt; 16; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(u32 y = 0; y &lt; 16; y++)</div>
+<div class="line">                image-&gt;setPixel(x, y, (x == 0 || y == 0 || x == 15 || y == 15) ? SColor(255, 60, 60, 60) : SColor(255, 230, 230, 230));</div>
+<div class="line">        ITexture* texture = driver-&gt;addTexture(<span class="stringliteral">&quot;block_frame&quot;</span>, image);</div>
+<div class="line">        image-&gt;drop();</div>
+<div class="line">        s_Plane = createFaceMesh();</div>
+<div class="line">        s_Plane-&gt;getMeshBuffer(0)-&gt;getMaterial().setTexture(0, texture);</div>
+<div class="line">        s_MeshManipulator = device-&gt;getSceneManager()-&gt;getMeshManipulator();</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); }</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl) <span class="comment">// Потоки построения. Маленький блок приходит сюда так же, как обычный.</span></div>
+<div class="line">    {</div>
+<div class="line">        IMesh* mesh = getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1)); <span class="comment">// Размер куба - getScale() вокселя (маленький - 1/4).</span></div>
+<div class="line">        <span class="keywordflow">if</span>(!mesh) <span class="keywordflow">return</span> 0;</div>
+<div class="line">        ARGBColor c = ((VoxelInfoARGBColor*)vxl-&gt;getVoxelInfo())-&gt;s_ARGBColor;</div>
+<div class="line">        s_MeshManipulator-&gt;setVertexColors(mesh, SColor(c.getA(), c.getR(), c.getG(), c.getB()));</div>
+<div class="line">        <span class="keywordflow">if</span>(vxl-&gt;getScale().getX() &lt; 0.999f) fitTexCoordsToWholeBlock(mesh, vxl); <span class="comment">// Маленький блок.</span></div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering*) { <span class="keywordflow">return</span> 0; }</div>
+<div class="line">    <span class="comment">// Текстурные координаты маленького блока - с того же места грани целого блока (как в TestProject3): тогда разбитый</span></div>
+<div class="line">    <span class="comment">// блок выглядит так же, как целый. Для каждого треугольника находится линейная зависимость текстурных координат от</span></div>
+<div class="line">    <span class="comment">// положения на грани, и та же зависимость применяется в масштабе целого блока (размер 1, центр - ближайший целый узел).</span></div>
+<div class="line">    <span class="keywordtype">void</span> fitTexCoordsToWholeBlock(IMesh* mesh, VoxelForRendering* vxl)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">float</span> size = vxl-&gt;getScale().getX(); <span class="comment">// Размер маленького блока (целый - 1).</span></div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">float</span> center[3] = { vxl-&gt;getPosition().getX(), vxl-&gt;getPosition().getY(), vxl-&gt;getPosition().getZ() };</div>
+<div class="line">        <span class="keywordtype">float</span> offset[3]; <span class="comment">// Центр маленького блока относительно центра целого.</span></div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k = 0; k &lt; 3; k++) offset[k] = center[k] - floorf(center[k] + 0.5f);</div>
+<div class="line">        <span class="keywordflow">for</span>(u32 b = 0; b &lt; mesh-&gt;getMeshBufferCount(); b++)</div>
+<div class="line">        {</div>
+<div class="line">            IMeshBuffer* mb = mesh-&gt;getMeshBuffer(b);</div>
+<div class="line">            <span class="keywordflow">if</span>(mb-&gt;getIndexType() != EIT_16BIT) <span class="keywordflow">continue</span>;</div>
+<div class="line">            <span class="keyword">const</span> u16* indices = mb-&gt;getIndices();</div>
+<div class="line">            <span class="keyword">const</span> u32 vcount = mb-&gt;getVertexCount();</div>
+<div class="line">            std::vector&lt;vector2df&gt; oldtc(vcount);</div>
+<div class="line">            std::vector&lt;bool&gt; done(vcount, <span class="keyword">false</span>);</div>
+<div class="line">            <span class="keywordflow">for</span>(u32 i = 0; i &lt; vcount; i++) oldtc[i] = mb-&gt;getTCoords(i);</div>
+<div class="line">            <span class="keywordflow">for</span>(u32 t = 0; t + 2 &lt; mb-&gt;getIndexCount(); t += 3)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">const</span> u16 <span class="keywordtype">id</span>[3] = { indices[t], indices[t + 1], indices[t + 2] };</div>
+<div class="line">                <span class="keywordtype">float</span> p[3][3]; <span class="comment">// Позиции вершин относительно центра маленького блока.</span></div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; 3; j++) { <span class="keyword">const</span> vector3df&amp; v = mb-&gt;getPosition(<span class="keywordtype">id</span>[j]); p[j][0] = v.X; p[j][1] = v.Y; p[j][2] = v.Z; }</div>
+<div class="line">                <span class="keywordtype">int</span> axis = -1; <span class="comment">// Ось нормали грани: по ней у всех вершин одна координата.</span></div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k = 0; k &lt; 3 &amp;&amp; axis &lt; 0; k++) <span class="keywordflow">if</span>(fabsf(p[1][k] - p[0][k]) &lt; 1e-5f &amp;&amp; fabsf(p[2][k] - p[0][k]) &lt; 1e-5f) axis = k;</div>
+<div class="line">                <span class="keywordflow">if</span>(axis &lt; 0) <span class="keywordflow">continue</span>;</div>
+<div class="line">                <span class="keyword">const</span> <span class="keywordtype">int</span> t1 = (axis + 1) % 3, t2 = (axis + 2) % 3;</div>
+<div class="line">                <span class="comment">// tc = A * (положение на грани) + c; A находим по двум сторонам треугольника.</span></div>
+<div class="line">                <span class="keyword">const</span> <span class="keywordtype">float</span> d1x = p[1][t1] - p[0][t1], d1y = p[1][t2] - p[0][t2];</div>
+<div class="line">                <span class="keyword">const</span> <span class="keywordtype">float</span> d2x = p[2][t1] - p[0][t1], d2y = p[2][t2] - p[0][t2];</div>
+<div class="line">                <span class="keyword">const</span> <span class="keywordtype">float</span> det = d1x * d2y - d1y * d2x;</div>
+<div class="line">                <span class="keywordflow">if</span>(fabsf(det) &lt; 1e-12f) <span class="keywordflow">continue</span>;</div>
+<div class="line">                <span class="keyword">const</span> vector2df e1 = oldtc[<span class="keywordtype">id</span>[1]] - oldtc[<span class="keywordtype">id</span>[0]], e2 = oldtc[<span class="keywordtype">id</span>[2]] - oldtc[<span class="keywordtype">id</span>[0]];</div>
+<div class="line">                <span class="keyword">const</span> vector2df a1 = (e1 * d2y - e2 * d1y) / det; <span class="comment">// Столбец A при оси t1.</span></div>
+<div class="line">                <span class="keyword">const</span> vector2df a2 = (e2 * d1x - e1 * d2x) / det; <span class="comment">// Столбец A при оси t2.</span></div>
+<div class="line">                <span class="keyword">const</span> vector2df c = oldtc[<span class="keywordtype">id</span>[0]] - a1 * p[0][t1] - a2 * p[0][t2];</div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; 3; j++)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keywordflow">if</span>(done[<span class="keywordtype">id</span>[j]]) <span class="keywordflow">continue</span>;</div>
+<div class="line">                    <span class="comment">// Тот же шаблон грани, растянутый до целого блока: A уменьшается в size раз.</span></div>
+<div class="line">                    mb-&gt;getTCoords(<span class="keywordtype">id</span>[j]) = a1 * (size * (p[j][t1] + offset[t1])) + a2 * (size * (p[j][t2] + offset[t2])) + c;</div>
+<div class="line">                    done[<span class="keywordtype">id</span>[j]] = <span class="keyword">true</span>;</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">            mb-&gt;setDirty(EBT_VERTEX);</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// Ноде чанков - селектор треугольников, чтобы луч из камеры находил точку под курсором (урок 7). Селектор</span></div>
+<div class="line">    <span class="comment">// принадлежит ноде и удаляется вместе с ней.</span></div>
+<div class="line">    <span class="keywordtype">void</span> onUpdateChunkMeshSceneNode(IMeshSceneNode* node, <span class="keywordtype">int</span>, Vector3d&lt;int&gt;)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(!node) <span class="keywordflow">return</span>;</div>
+<div class="line">        ITriangleSelector* selector = getIrrlichtDevice()-&gt;getSceneManager()-&gt;createTriangleSelector(node-&gt;getMesh(), node);</div>
+<div class="line">        node-&gt;setTriangleSelector(selector);</div>
+<div class="line">        selector-&gt;drop();</div>
+<div class="line">    }</div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Параметры взрыва и света для потока главной очереди.</span></div>
+<div class="line"><span class="keyword">enum</span> MY_TASK { BOOM, LIGHT };</div>
+<div class="line"><span class="keyword">struct </span>MyParams : ParametersForThreadFunction</div>
+<div class="line">{</div>
+<div class="line">    MY_TASK s_Type;</div>
+<div class="line">    <span class="keywordtype">int</span> s_WorldId;</div>
+<div class="line">    Vector3d&lt;int&gt; s_Center; <span class="comment">// Блок первого уровня в центре (глобальные координаты).</span></div>
+<div class="line">    <span class="keywordtype">int</span> s_Radius;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Взрыв и свет по маленьким блокам - в потоке главной очереди: пока функция работает, мир меняет только она.</span></div>
+<div class="line"><span class="keyword">class </span>MyController : <span class="keyword">public</span> UserControllerForThread</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyController(IrrSimpleVoxelEngine* isve) : UserControllerForThread(isve) {}</div>
+<div class="line">    <span class="keywordtype">void</span> userThreadFunction(ParametersForThreadFunction* params)</div>
+<div class="line">    {</div>
+<div class="line">        MyParams* p = (MyParams*)params;</div>
+<div class="line">        <span class="keywordflow">if</span>(p-&gt;s_Type == BOOM) boom(p);</div>
+<div class="line">        <span class="keywordflow">else</span> light(p);</div>
+<div class="line">        getIrrSimpleVoxelEngine()-&gt;addTaskUpdateChunks(); <span class="comment">// Перестроить изменённые чанки - один раз после всех правок.</span></div>
+<div class="line">    }</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="comment">// Каждая ячейка около шара - n^3 маленьких блоков (целый блок - как будто разбитый на PARTS^3): маленькие блоки,</span></div>
+<div class="line">    <span class="comment">// центр которых внутри шара, удаляются. Удалены все - ячейка пустеет, ни одного - не меняется, иначе на её место</span></div>
+<div class="line">    <span class="comment">// ставится вложенный чанк из оставшихся маленьких блоков. Край воронки получается &quot;выгрызенным&quot;.</span></div>
+<div class="line">    <span class="keywordtype">void</span> boom(MyParams* p)</div>
+<div class="line">    {</div>
+<div class="line">        IrrSimpleVoxelEngine* isve = getIrrSimpleVoxelEngine();</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">int</span> ext = p-&gt;s_Radius + 1; <span class="comment">// Ячейка рядом с шаром тоже может задеть его своими маленькими блоками.</span></div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">float</span> r2 = (float)(p-&gt;s_Radius * p-&gt;s_Radius);</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = -ext; x &lt;= ext; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = -ext; y &lt;= ext; y++)</div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = -ext; z &lt;= ext; z++)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keyword">const</span> Vector3d&lt;int&gt; cell = p-&gt;s_Center + Vector3d&lt;int&gt;(x, y, z);</div>
+<div class="line">                    <span class="keywordflow">if</span>(cell.getX() &lt; 0 || cell.getX() &gt;= SIZE_CHUNK || cell.getY() &lt; 0 || cell.getY() &gt;= SIZE_CHUNK ||</div>
+<div class="line">                       cell.getZ() &lt; 0 || cell.getZ() &gt;= SIZE_CHUNK) <span class="keywordflow">continue</span>; <span class="comment">// Только в загруженном чанке (0,0,0).</span></div>
+<div class="line">                    SimpleVoxelObject* obj = isve-&gt;getSimpleVoxelObjectByGlobalVector(p-&gt;s_WorldId, cell, <span class="keyword">false</span>);</div>
+<div class="line">                    <span class="keywordflow">if</span>(!obj) <span class="keywordflow">continue</span>;</div>
+<div class="line">                    ChunkVoxelObject* old = 0; <span class="comment">// Уже разбитый блок.</span></div>
+<div class="line">                    <span class="keywordtype">int</span> n = PARTS;</div>
+<div class="line">                    <span class="keywordflow">if</span>(obj-&gt;getTypeVoxel() == CHUNK_VOXEL_OBJECT)</div>
+<div class="line">                    {</div>
+<div class="line">                        old = (ChunkVoxelObject*)obj;</div>
+<div class="line">                        n = old-&gt;getNumberOfPartitions();</div>
+<div class="line">                    }</div>
+<div class="line">                    <span class="keywordtype">int</span> kept = 0, removed = 0;</div>
+<div class="line">                    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> pass = 0; pass &lt; 2; pass++) <span class="comment">// Проход 0 - считаем, проход 1 - строим вложенный чанк.</span></div>
+<div class="line">                    {</div>
+<div class="line">                        ChunkVoxelObject* nested = 0;</div>
+<div class="line">                        <span class="keywordflow">if</span>(pass == 1)</div>
+<div class="line">                        {</div>
+<div class="line">                            <span class="keywordflow">if</span>(removed == 0) <span class="keywordflow">break</span>; <span class="comment">// Взрыв ячейку не задел.</span></div>
+<div class="line">                            <span class="keywordflow">if</span>(kept == 0) { isve-&gt;setSimpleVoxelObjectByGlobalVector(p-&gt;s_WorldId, cell, 0); <span class="keywordflow">break</span>; } <span class="comment">// Уничтожено всё.</span></div>
+<div class="line">                            nested = <span class="keyword">new</span> ChunkVoxelObject();</div>
+<div class="line">                            nested-&gt;setNumberOfPartitions(n);</div>
+<div class="line">                        }</div>
+<div class="line">                        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
+<div class="line">                            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; n; j++)</div>
+<div class="line">                                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k = 0; k &lt; n; k++)</div>
+<div class="line">                                {</div>
+<div class="line">                                    SimpleVoxelObject* src = old ? old-&gt;getSimpleVoxelObject(Vector3d&lt;int&gt;(i, j, k)) : obj;</div>
+<div class="line">                                    <span class="keywordflow">if</span>(!src || src-&gt;getTypeVoxel() != ARGBCOLOR) <span class="keywordflow">continue</span>; <span class="comment">// Пустая маленькая ячейка.</span></div>
+<div class="line">                                    <span class="comment">// Центр маленького блока относительно центра шара (блок занимает [-0.5, 0.5) вокруг своих координат).</span></div>
+<div class="line">                                    <span class="keyword">const</span> <span class="keywordtype">float</span> dx = x - 0.5f + (i + 0.5f) / n, dy = y - 0.5f + (j + 0.5f) / n, dz = z - 0.5f + (k + 0.5f) / n;</div>
+<div class="line">                                    <span class="keyword">const</span> <span class="keywordtype">bool</span> inside = dx * dx + dy * dy + dz * dz &lt;= r2;</div>
+<div class="line">                                    <span class="keywordflow">if</span>(pass == 0) { <span class="keywordflow">if</span>(inside) removed++; <span class="keywordflow">else</span> kept++; }</div>
+<div class="line">                                    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(!inside) nested-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(i, j, k), <span class="keyword">new</span> ARGBColorVoxel(((ARGBColorVoxel*)src)-&gt;getARGBColor()), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">                                }</div>
+<div class="line">                        <span class="keywordflow">if</span>(nested) isve-&gt;setSimpleVoxelObjectByGlobalVector(p-&gt;s_WorldId, cell, nested); <span class="comment">// Старое удалит движок.</span></div>
+<div class="line">                    }</div>
+<div class="line">                }</div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// Свет: блоки внутри шара желтеют тем сильнее, чем ближе к центру. Маленькие блоки разбитого блока - каждый по своему</span></div>
+<div class="line">    <span class="comment">// центру, по адресу из трёх векторов. Воксели неизменяемые: на место каждого ставится новый с новым цветом.</span></div>
+<div class="line">    <span class="keywordtype">void</span> light(MyParams* p)</div>
+<div class="line">    {</div>
+<div class="line">        IrrSimpleVoxelEngine* isve = getIrrSimpleVoxelEngine();</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">int</span> r = p-&gt;s_Radius;</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = -r; x &lt;= r; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = -r; y &lt;= r; y++)</div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = -r; z &lt;= r; z++)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keyword">const</span> Vector3d&lt;int&gt; cell = p-&gt;s_Center + Vector3d&lt;int&gt;(x, y, z);</div>
+<div class="line">                    <span class="keywordflow">if</span>(cell.getX() &lt; 0 || cell.getX() &gt;= SIZE_CHUNK || cell.getY() &lt; 0 || cell.getY() &gt;= SIZE_CHUNK ||</div>
+<div class="line">                       cell.getZ() &lt; 0 || cell.getZ() &gt;= SIZE_CHUNK) <span class="keywordflow">continue</span>;</div>
+<div class="line">                    SimpleVoxelObject* obj = isve-&gt;getSimpleVoxelObjectByGlobalVector(p-&gt;s_WorldId, cell, <span class="keyword">false</span>);</div>
+<div class="line">                    <span class="keywordflow">if</span>(!obj) <span class="keywordflow">continue</span>;</div>
+<div class="line">                    <span class="keywordflow">if</span>(obj-&gt;getTypeVoxel() == ARGBCOLOR) <span class="comment">// Целый блок.</span></div>
+<div class="line">                    {</div>
+<div class="line">                        <span class="keywordtype">float</span> d = sqrtf((<span class="keywordtype">float</span>)(x * x + y * y + z * z));</div>
+<div class="line">                        <span class="keywordflow">if</span>(d &lt;= r) isve-&gt;setSimpleVoxelObjectByGlobalVector(p-&gt;s_WorldId, cell, <span class="keyword">new</span> ARGBColorVoxel(lit(((ARGBColorVoxel*)obj)-&gt;getARGBColor(), d, r)));</div>
+<div class="line">                        <span class="keywordflow">continue</span>;</div>
+<div class="line">                    }</div>
+<div class="line">                    <span class="keywordflow">if</span>(obj-&gt;getTypeVoxel() != CHUNK_VOXEL_OBJECT) <span class="keywordflow">continue</span>;</div>
+<div class="line">                    ChunkVoxelObject* nested = (ChunkVoxelObject*)obj; <span class="comment">// Разбитый блок: каждый маленький блок отдельно.</span></div>
+<div class="line">                    <span class="keyword">const</span> <span class="keywordtype">int</span> n = nested-&gt;getNumberOfPartitions();</div>
+<div class="line">                    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
+<div class="line">                        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; n; j++)</div>
+<div class="line">                            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k = 0; k &lt; n; k++)</div>
+<div class="line">                            {</div>
+<div class="line">                                SimpleVoxelObject* piece = nested-&gt;getSimpleVoxelObject(Vector3d&lt;int&gt;(i, j, k));</div>
+<div class="line">                                <span class="keywordflow">if</span>(!piece || piece-&gt;getTypeVoxel() != ARGBCOLOR) <span class="keywordflow">continue</span>;</div>
+<div class="line">                                <span class="keyword">const</span> <span class="keywordtype">float</span> dx = x - 0.5f + (i + 0.5f) / n, dy = y - 0.5f + (j + 0.5f) / n, dz = z - 0.5f + (k + 0.5f) / n;</div>
+<div class="line">                                <span class="keyword">const</span> <span class="keywordtype">float</span> d = sqrtf(dx * dx + dy * dy + dz * dz);</div>
+<div class="line">                                <span class="keywordflow">if</span>(d &gt; r) <span class="keywordflow">continue</span>;</div>
+<div class="line">                                VoxelAddress* addr = createAddressOfBlock(isve, cell); <span class="comment">// Чанк и блок в чанке...</span></div>
+<div class="line">                                addr-&gt;addNextVector(Vector3d&lt;int&gt;(i, j, k)); <span class="comment">// ...и маленький блок во вложенном чанке.</span></div>
+<div class="line">                                isve-&gt;setSimpleVoxelObject(p-&gt;s_WorldId, addr, <span class="keyword">new</span> ARGBColorVoxel(lit(((ARGBColorVoxel*)piece)-&gt;getARGBColor(), d, r)), <span class="keyword">true</span>);</div>
+<div class="line">                            }</div>
+<div class="line">                }</div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// Цвет c, подсвеченный жёлтым: в центре света - сильнее, на расстоянии r - никак.</span></div>
+<div class="line">    <span class="keyword">static</span> ARGBColor lit(ARGBColor c, <span class="keywordtype">float</span> d, <span class="keywordtype">int</span> r)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">float</span> power = r &gt; 0 ? 1 - d / r : 1;</div>
+<div class="line">        <span class="keywordflow">return</span> ARGBColor(c.getA(), (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)(c.getR() + (255 - c.getR()) * power), (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)(c.getG() + (255 - c.getG()) * power), c.getB());</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Обработчик: левая кнопка - сломать блок (или маленький блок) под курсором, правая - поставить маленький блок,</span></div>
+<div class="line"><span class="comment">// B - взрыв, L - свет в блоке под курсором. Точку под курсором каждый кадр заполняет главный цикл.</span></div>
+<div class="line"><span class="keyword">class </span>MyReceiver : <span class="keyword">public</span> IEventReceiver</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyReceiver(IrrSimpleVoxelEngine* isve, <span class="keywordtype">int</span> <span class="keywordtype">id</span>) : s_ISVE(isve), s_WorldId(id) {}</div>
+<div class="line">    <span class="keywordtype">bool</span> OnEvent(<span class="keyword">const</span> SEvent&amp; event)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(!s_HasTarget) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">        <span class="keywordflow">if</span>(event.EventType == EET_MOUSE_INPUT_EVENT)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span>(event.MouseInput.Event == EMIE_LMOUSE_PRESSED_DOWN) breakUnderCursor();</div>
+<div class="line">            <span class="keywordflow">if</span>(event.MouseInput.Event == EMIE_RMOUSE_PRESSED_DOWN) placeSmallBlock();</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span>(event.EventType == EET_KEY_INPUT_EVENT &amp;&amp; !event.KeyInput.PressedDown)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_KEY_B) addTask(BOOM, 2);</div>
+<div class="line">            <span class="keywordflow">if</span>(event.KeyInput.Key == KEY_KEY_L) addTask(LIGHT, 3);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// Сломать то, что под курсором: точку чуть сдвигаем от камеры - внутрь блока. На любой глубине вложенных чанков:</span></div>
+<div class="line">    <span class="comment">// адрес из двух векторов - целый блок, из трёх - маленький блок.</span></div>
+<div class="line">    <span class="keywordtype">bool</span> breakUnderCursor()</div>
+<div class="line">    {</div>
+<div class="line">        VoxelAddress* addr = s_ISVE-&gt;getAddressSimpleVoxelObjectByPoint(s_WorldId, s_Point, s_Look, s_CamPos);</div>
+<div class="line">        <span class="keywordflow">if</span>(!addr) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">        <span class="keywordflow">if</span>(addr-&gt;getLastVectInd() &lt; 2) { <span class="keyword">delete</span> addr; <span class="keywordflow">return</span> <span class="keyword">false</span>; } <span class="comment">// Чанк не загружен.</span></div>
+<div class="line">        s_ISVE-&gt;deleteSimpleVoxelObject(s_WorldId, addr); <span class="comment">// Адрес забирает движок.</span></div>
+<div class="line">        s_ISVE-&gt;addTaskUpdateChunks();</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// Поставить маленький блок ровно под курсором: точку сдвигаем к камере - в пустую ячейку перед гранью.</span></div>
+<div class="line">    <span class="keywordtype">bool</span> placeSmallBlock()</div>
+<div class="line">    {</div>
+<div class="line">        VoxelAddress* target = s_ISVE-&gt;getAddressSimpleVoxelObjectByPoint(s_WorldId, s_Point, s_Look * (-1), s_CamPos);</div>
+<div class="line">        <span class="keywordflow">if</span>(!target) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">        <span class="keywordtype">bool</span> empty = <span class="keyword">false</span>;</div>
+<div class="line">        <span class="keywordflow">if</span>(target-&gt;getLastVectInd() &gt;= 2)</div>
+<div class="line">        {</div>
+<div class="line">            std::lock_guard&lt;std::recursive_mutex&gt; lock(s_ISVE-&gt;getLockAccessToTheSimpleVoxelEngine()); <span class="comment">// Читаем мир напрямую.</span></div>
+<div class="line">            World* wrld = s_ISVE-&gt;getWorld(s_WorldId);</div>
+<div class="line">            empty = wrld &amp;&amp; !wrld-&gt;getSimpleVoxelObject(target, <span class="keyword">false</span>);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span>(!empty) { <span class="keyword">delete</span> target; <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
+<div class="line">        <span class="keywordflow">if</span>(target-&gt;getLastVectInd() &gt;= 3) <span class="comment">// Пустая маленькая ячейка уже разбитого блока - ставим маленький блок.</span></div>
+<div class="line">        {</div>
+<div class="line">            s_ISVE-&gt;setSimpleVoxelObject(s_WorldId, target, <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 80, 80, 255)));</div>
+<div class="line">            s_ISVE-&gt;addTaskUpdateChunks();</div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="comment">// Пустая ячейка первого уровня: ставим вложенный чанк с одним маленьким блоком. Какой из PARTS^3 - по той же</span></div>
+<div class="line">        <span class="comment">// точке в координатах мира (блок k занимает [k - 0.5, k + 0.5)).</span></div>
+<div class="line">        Vector3d&lt;float&gt; look = s_ISVE-&gt;getWorldCoordinates(s_WorldId, s_CamPos) - s_ISVE-&gt;getWorldCoordinates(s_WorldId, s_CamPos + s_Look);</div>
+<div class="line">        Vector3d&lt;float&gt; w = s_ISVE-&gt;getWorldCoordinates(s_WorldId, s_Point) + look.getNormalizeVector() * 0.001f;</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">float</span> q[3] = { w.getX() + 0.5f, w.getY() + 0.5f, w.getZ() + 0.5f };</div>
+<div class="line">        <span class="keywordtype">int</span> sub[3];</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k = 0; k &lt; 3; k++)</div>
+<div class="line">        {</div>
+<div class="line">            sub[k] = (int)floorf((q[k] - floorf(q[k])) * PARTS);</div>
+<div class="line">            <span class="keywordflow">if</span>(sub[k] &lt; 0) sub[k] = 0;</div>
+<div class="line">            <span class="keywordflow">if</span>(sub[k] &gt;= PARTS) sub[k] = PARTS - 1;</div>
+<div class="line">        }</div>
+<div class="line">        ChunkVoxelObject* nested = <span class="keyword">new</span> ChunkVoxelObject(); <span class="comment">// Вложенный чанк заполняется до вставки в мир.</span></div>
+<div class="line">        nested-&gt;setNumberOfPartitions(PARTS);</div>
+<div class="line">        nested-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(sub[0], sub[1], sub[2]), <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 80, 80, 255)), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">        s_ISVE-&gt;setSimpleVoxelObject(s_WorldId, target, nested); <span class="comment">// Адрес и вложенный чанк забирает движок.</span></div>
+<div class="line">        s_ISVE-&gt;addTaskUpdateChunks();</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// Взрыв или свет - в потоке главной очереди (UserControllerForThread). Центр - блок первого уровня под курсором.</span></div>
+<div class="line">    <span class="keywordtype">bool</span> addTask(MY_TASK type, <span class="keywordtype">int</span> radius)</div>
+<div class="line">    {</div>
+<div class="line">        VoxelAddress* addr = s_ISVE-&gt;getAddressSimpleVoxelObjectByPoint(s_WorldId, s_Point, s_Look, s_CamPos);</div>
+<div class="line">        <span class="keywordflow">if</span>(!addr) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">        <span class="keywordtype">bool</span> good = addr-&gt;getLastVectInd() &gt;= 2;</div>
+<div class="line">        <span class="keywordflow">if</span>(good)</div>
+<div class="line">        {</div>
+<div class="line">            MyParams* p = <span class="keyword">new</span> MyParams; <span class="comment">// Удалит движок после выполнения.</span></div>
+<div class="line">            p-&gt;s_Type = type;</div>
+<div class="line">            p-&gt;s_WorldId = s_WorldId;</div>
+<div class="line">            p-&gt;s_Center = addr-&gt;getVector(1) + addr-&gt;getVector(0) * SIZE_CHUNK; <span class="comment">// Чанк и блок в чанке - в глобальные координаты.</span></div>
+<div class="line">            p-&gt;s_Radius = radius;</div>
+<div class="line">            s_ISVE-&gt;addTaskRunUserControllerForThread(p);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">delete</span> addr;</div>
+<div class="line">        <span class="keywordflow">return</span> good;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">bool</span> s_HasTarget = <span class="keyword">false</span>; <span class="comment">// Смотрит ли камера на блок.</span></div>
+<div class="line">    Vector3d&lt;float&gt; s_Point; <span class="comment">// Точка под курсором (координаты сцены).</span></div>
+<div class="line">    Vector3d&lt;float&gt; s_Look; <span class="comment">// Направление взгляда.</span></div>
+<div class="line">    Vector3d&lt;float&gt; s_CamPos; <span class="comment">// Позиция камеры.</span></div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    IrrSimpleVoxelEngine* s_ISVE;</div>
+<div class="line">    <span class="keywordtype">int</span> s_WorldId;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(800, 600));</div>
+<div class="line">    ISceneManager* smgr = device-&gt;getSceneManager();</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Логгер: без него движок молча проглатывает и ошибки.</span></div>
+<div class="line">    lgr-&gt;setPrintStandard(<span class="keyword">false</span>); <span class="comment">// Обычные сообщения не нужны - только предупреждения и ошибки.</span></div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device, lgr);</div>
+<div class="line">    lgr-&gt;drop(); <span class="comment">// Движок держит свою ссылку.</span></div>
+<div class="line">    isve-&gt;setUserControllerForThread(<span class="keyword">new</span> MyController(isve));</div>
+<div class="line">    MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">    factory-&gt;setPositionScale(SIZE_CHUNK);</div>
+<div class="line">    factory-&gt;setSScale(SIZE_CHUNK);</div>
+<div class="line">    isve-&gt;setFactoryChunkMeshSceneNode(factory);</div>
+<div class="line">    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld();</div>
+<div class="line">    factory-&gt;setMultiplePartition(<span class="keywordtype">id</span>, <span class="keyword">true</span>); <span class="comment">// Чанки верхнего уровня разбиты одинаково - вложенным чанкам это не мешает.</span></div>
+<div class="line">    factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">    isve-&gt;getWorld(<span class="keywordtype">id</span>)-&gt;setWorldGenerator(<span class="keyword">new</span> GroundGenerator);</div>
+<div class="line">    isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">true</span>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// 1) Разбить блок (8,3,8): на его место - вложенный чанк из 4x4x4 маленьких блоков того же цвета.</span></div>
+<div class="line">    ChunkVoxelObject* split = <span class="keyword">new</span> ChunkVoxelObject();</div>
+<div class="line">    split-&gt;setNumberOfPartitions(PARTS);</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; PARTS; i++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; PARTS; j++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k = 0; k &lt; PARTS; k++)</div>
+<div class="line">                split-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(i, j, k), <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 90, 110, 70)), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">    isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(8, 3, 8), split); <span class="comment">// Старый блок удалит движок.</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// 2) Маленький блок по адресу из трёх векторов: чанк (0,0,0), блок (8,3,8) в чанке, маленький блок (3,3,3) в нём.</span></div>
+<div class="line">    VoxelAddress* addr = <span class="keyword">new</span> VoxelAddress(isve);</div>
+<div class="line">    addr-&gt;addNextVector(Vector3d&lt;int&gt;(0, 0, 0));</div>
+<div class="line">    addr-&gt;addNextVector(Vector3d&lt;int&gt;(8, 3, 8));</div>
+<div class="line">    addr-&gt;addNextVector(Vector3d&lt;int&gt;(3, 3, 3));</div>
+<div class="line">    isve-&gt;setSimpleVoxelObject(<span class="keywordtype">id</span>, addr, <span class="keyword">new</span> ARGBColorVoxel(ARGBColor(255, 220, 40, 40)), <span class="keyword">true</span>); <span class="comment">// true - заменить старый.</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// 3) Удалить маленький блок (0,3,0) того же разбитого блока - в углу верхнего слоя будет ямка.</span></div>
+<div class="line">    VoxelAddress* hole = createAddressOfBlock(isve, Vector3d&lt;int&gt;(8, 3, 8));</div>
+<div class="line">    hole-&gt;addNextVector(Vector3d&lt;int&gt;(0, 3, 0));</div>
+<div class="line">    isve-&gt;deleteSimpleVoxelObject(<span class="keywordtype">id</span>, hole);</div>
+<div class="line">    isve-&gt;addTaskUpdateChunks();</div>
+<div class="line"> </div>
+<div class="line">    ICameraSceneNode* camera = smgr-&gt;addCameraSceneNodeFPS();</div>
+<div class="line">    camera-&gt;setPosition(vector3df(8, 7, 3));</div>
+<div class="line">    camera-&gt;setTarget(vector3df(8, 3.5f, 8));</div>
+<div class="line">    MyReceiver receiver(isve, <span class="keywordtype">id</span>);</div>
+<div class="line">    device-&gt;setEventReceiver(&amp;receiver);</div>
+<div class="line">    ISceneCollisionManager* collision = smgr-&gt;getSceneCollisionManager();</div>
+<div class="line">    isve-&gt;start();</div>
+<div class="line">    <span class="keywordflow">while</span>(isve-&gt;runIrrDevice())</div>
+<div class="line">    {</div>
+<div class="line">        isve-&gt;update();</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 100, 100, 140));</div>
+<div class="line">        smgr-&gt;drawAll();</div>
+<div class="line">        <span class="comment">// Точка под курсором (центр экрана): луч из камеры по селекторам нод чанков.</span></div>
+<div class="line">        vector3df campos = camera-&gt;getAbsolutePosition();</div>
+<div class="line">        vector3df look = (camera-&gt;getTarget() - campos).normalize();</div>
+<div class="line">        line3df ray(campos, campos + look * 50.0f);</div>
+<div class="line">        vector3df hit;</div>
+<div class="line">        triangle3df triangle;</div>
+<div class="line">        receiver.s_HasTarget = collision-&gt;getSceneNodeAndCollisionPointFromRay(ray, hit, triangle) != 0;</div>
+<div class="line">        receiver.s_Point = Vector3d&lt;float&gt;(hit.X, hit.Y, hit.Z);</div>
+<div class="line">        receiver.s_Look = Vector3d&lt;float&gt;(look.X, look.Y, look.Z);</div>
+<div class="line">        receiver.s_CamPos = Vector3d&lt;float&gt;(campos.X, campos.Y, campos.Z);</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;endScene();</div>
+<div class="line">    }</div>
+<div class="line">    isve-&gt;stop();</div>
+<div class="line">    <span class="keyword">delete</span> isve;</div>
+<div class="line">    device-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="tutorials.html">Уроки по врапперу IrrSimpleVoxelEngine.</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

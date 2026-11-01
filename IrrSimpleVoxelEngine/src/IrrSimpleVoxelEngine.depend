@@ -3389,10 +3389,214 @@
 	"matrix4.h"
 	"IVideoDriver.h"
 
-1405264842 source:e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\irrsimplevoxelengine\src\cbatchingmesh\cbatchingmesh.cpp
+1793400471 source:e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\src\cbatchingmesh\cbatchingmesh.cpp
 	"CBatchingMesh/CBatchingMesh.h"
 
-1565209162 e:\jane\Информатика\c++\Графика(движки)\irrlicht\Воксели\myvoxelwork_new\irrsimplevoxelengine\include\cbatchingmesh\cbatchingmesh.h
+1793403829 e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\include\cbatchingmesh\cbatchingmesh.h
 	<IMesh.h>
 	<SMeshBuffer.h>
+
+1793446292 source:e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\src\chunksmeshblock.cpp
+	"ChunksMeshBlock.h"
+	<algorithm>
+	<vector>
+	<IrrSimpleVoxelEngine.h>
+
+1793446292 e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\include\chunksmeshblock.h
+	<irrlicht.h>
+	<Additional/Vector3d.h>
+	"CBatchingMesh/CBatchingMesh.h"
+
+1793400527 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\additional\vector3d.h
+	<cmath>
+	<sstream>
+	<string>
+	"WorkFunctions.h"
+	"Defines.h"
+
+1440007308 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\workfunctions.h
+	<sstream>
+	<map>
+	"Defines.h"
+
+1793399461 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\defines.h
+	<string>
+
+1793449697 e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\include\irrsimplevoxelengine.h
+	<SimpleVoxelEngine.h>
+	<irrlicht.h>
+	<atomic>
+	<map>
+	<deque>
+	<set>
+	<vector>
+	<thread>
+	<mutex>
+	<condition_variable>
+	"FactoryChunkMeshSceneNode.h"
+	"ChunkStreamingPool.h"
+	"IrrSVEDefines.h"
+	"UserControllerForThread.h"
+	"Task.h"
+
+1440007350 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\simplevoxelengine.h
+	"Engine.h"
+	"IniParser/ParserInfoFile.h"
+	"ARGBColorVoxel.h"
+	"Additional/ReferenceCounter.h"
+	"WorkFunctions.h"
+
+1793448046 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\engine.h
+	<map>
+	"Defines.h"
+	"Logger.h"
+	"World.h"
+
+1793437442 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\logger.h
+	<atomic>
+	<string>
+	"Defines.h"
+	"Additional/ReferenceCounter.h"
+
+1793236323 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\additional\referencecounter.h
+
+1793405569 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\world.h
+	<string>
+	<vector>
+	"Additional/Vector3d.h"
+	"ChunkVoxelObject.h"
+	"IniParser/PostParsingStruct.h"
+	"Defines.h"
+	"VoxelAddress.h"
+	"WorldGenerator.h"
+	"SimpleVoxelObjectTransparentTester.h"
+	"ChunksSaveLoadController.h"
+
+1793403829 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\chunkvoxelobject.h
+	<map>
+	"SimpleVoxelObject.h"
+	"Additional/Vector3d.h"
+	"Defines.h"
+	"Logger.h"
+	"VoxelsForRendering.h"
+	"VoxelAddress.h"
+
+1793317319 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\simplevoxelobject.h
+	<fstream>
+	"Defines.h"
+	"VoxelAddress.h"
+	"VoxelInfo.h"
+
+1793399152 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\voxeladdress.h
+	<map>
+	"Additional/Vector3d.h"
+
+1793399351 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\voxelinfo.h
+
+1793236323 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\voxelsforrendering.h
+	<map>
+	"VoxelForRendering.h"
+
+1793399152 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\voxelforrendering.h
+	<map>
+	"Additional/Vector3d.h"
+	"VoxelInfo.h"
+
+1419363636 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\iniparser\postparsingstruct.h
+	<map>
+	<string>
+
+1434361059 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\worldgenerator.h
+	"ChunkVoxelObject.h"
+	"Additional/Vector3d.h"
+
+1793317319 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\simplevoxelobjecttransparenttester.h
+	"SimpleVoxelObject.h"
+
+1793403829 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\chunkssaveloadcontroller.h
+	"ChunkVoxelObject.h"
+
+1419363618 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\iniparser\parserinfofile.h
+	<string>
+	"PostParsingStruct.h"
+
+1793400470 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\argbcolorvoxel.h
+	"SimpleVoxelObject.h"
+	"Additional/ARGBColor.h"
+
+1793297849 e:\neurocoding\claude\myvoxelwork\simplevoxelengine\include\additional\argbcolor.h
+	<map>
+
+1793448236 e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\include\factorychunkmeshscenenode.h
+	<map>
+	<mutex>
+	<set>
+	<vector>
+	<SimpleVoxelEngine.h>
+	<irrlicht.h>
+	<ChunksMeshBlocksController.h>
+	"CBatchingMesh/CBatchingMesh.h"
+
+1793403829 e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\include\chunksmeshblockscontroller.h
+	<map>
+	<set>
+	<vector>
+	<irrlicht.h>
+	<ChunksMeshBlock.h>
+
+1793449697 e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\include\irrsvedefines.h
+
+1793399024 e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\include\usercontrollerforthread.h
+	"Task.h"
+
+1793403484 e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\include\task.h
+	"SimpleVoxelEngine.h"
+	<vector>
+
+1793403829 source:e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\src\chunksmeshblockscontroller.cpp
+	"ChunksMeshBlocksController.h"
+	<IrrSimpleVoxelEngine.h>
+
+1793452682 source:e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\src\factorychunkmeshscenenode.cpp
+	"FactoryChunkMeshSceneNode.h"
+	"IrrSimpleVoxelEngine.h"
+	"IrrSVEDefines.h"
+
+1418912178 source:e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\src\usercontrollerforthread.cpp
+	"UserControllerForThread.h"
+	"IrrSimpleVoxelEngine.h"
+
+1793449697 source:e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\src\irrsimplevoxelengine.cpp
+	"IrrSimpleVoxelEngine.h"
+	"IrrSVEDefines.h"
+	<cfloat>
+	<algorithm>
+	<chrono>
+
+1793399462 e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\include\chunkstreamingpool.h
+	<map>
+	<mutex>
+	<set>
+	<string>
+	<vector>
+	<irrlicht.h>
+	<SimpleVoxelEngine.h>
+	"ChunkStreamingController.h"
+	"Task.h"
+
+1793399462 e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\include\chunkstreamingcontroller.h
+	<set>
+	<string>
+	<irrlicht.h>
+	<SimpleVoxelEngine.h>
+
+1793400471 source:e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\src\chunkstreamingcontroller.cpp
+	"ChunkStreamingController.h"
+
+1793400471 source:e:\neurocoding\claude\myvoxelwork\irrsimplevoxelengine\src\chunkstreamingpool.cpp
+	"ChunkStreamingPool.h"
+	<algorithm>
+	<chrono>
+	<cmath>
+	<IrrSimpleVoxelEngine.h>
 

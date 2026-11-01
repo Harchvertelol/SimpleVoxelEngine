@@ -1,0 +1,559 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Урок 9: Уровни мешей и прозрачность.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IrrSimpleVoxelEngine
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tutorial9.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Урок 9: Уровни мешей и прозрачность. </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>До сих пор все наши воксели рисовались одним материалом. Но в настоящем мире есть стекло, через которое видно, что внутри, и вода, сквозь которую видно дно. Для этого во враппере есть уровни мешей: каждый уровень - это свой меш чанка со своим материалом, флагами и ID. В этом уроке мы сделаем три уровня (камень, стекло и вода), научим враппер рисовать грани за прозрачными блоками, создадим текстуры прямо в коде и подключим простой шейдер. Никаких файлов урок не требует.</p>
+<p><b>Как устроены уровни.</b> Число уровней задаёт setNumberOfMeshesSceneNodeForChunk(). Для каждого вокселя фабрика в потоке построения вызывает сначала getMeshVoxel() (какой меш нарисовать), а сразу после - getMeshNumber() (на какой уровень этот меш положить: от 0 до числа уровней - 1; другой номер - ошибка, меш чанка не строится). Меши вокселей одного уровня склеиваются вместе, и для каждого блока чанков (setSizeBlockChunks(), урок 2) на каждый непустой уровень враппер создаёт отдельную ноду Irrlicht со своим материалом. Пустой уровень ноды не имеет.</p>
+<p>Зачем разные ноды? Irrlicht рисует сначала все непрозрачные ноды, а потом прозрачные - от дальних к ближним, и решает это по материалу ноды. Если стекло и камень окажутся в одной ноде, то либо камень будет "прозрачным", либо стекло нарисуется не в свою очередь. Поэтому правило простое: один вид материала - один уровень.</p>
+<p>Начнём с перечислений - уровни, типы блоков и ID нод: </p><div class="fragment"><div class="line"><span class="keyword">enum</span> MESH_LEVELS</div>
+<div class="line">{</div>
+<div class="line">    LEVEL_SOLID = 0, <span class="comment">// Камень - непрозрачный.</span></div>
+<div class="line">    LEVEL_GLASS = 1, <span class="comment">// Стекло - &quot;вырезанная&quot; прозрачность (альфа-тест).</span></div>
+<div class="line">    LEVEL_WATER = 2, <span class="comment">// Вода - полупрозрачная со смешиванием.</span></div>
+<div class="line">    NUMBER_OF_LEVELS = 3</div>
+<div class="line">};</div>
+<div class="line"><span class="keyword">enum</span> BLOCK_TYPES</div>
+<div class="line">{</div>
+<div class="line">    BLOCK_STONE = 0,</div>
+<div class="line">    BLOCK_GLASS = 1,</div>
+<div class="line">    BLOCK_WATER = 2</div>
+<div class="line">};</div>
+<div class="line"><span class="keyword">enum</span> NODE_IDS</div>
+<div class="line">{</div>
+<div class="line">    ID_PICKABLE = 1,</div>
+<div class="line">    ID_NOT_PICKABLE = 2</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Блок - как в уроке 2: он хранит только свой тип и отдаёт его в информации для отрисовки: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>MyVoxelInfo : VoxelInfo</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_Type;</div>
+<div class="line">};</div>
+<div class="line"><span class="keyword">class </span>MyBlock : <span class="keyword">public</span> SimpleVoxelObject</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyBlock(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> type) : SimpleVoxelObject(), s_Type(type) { setTypeVoxel(CUSTOM_VOXEL); }</div>
+<div class="line">    VoxelInfo* getVoxelForRenderingInfo() <span class="comment">// Новый объект - его удалит движок.</span></div>
+<div class="line">    {</div>
+<div class="line">        MyVoxelInfo* info = <span class="keyword">new</span> MyVoxelInfo;</div>
+<div class="line">        info-&gt;s_TypeVoxelInfo = CUSTOM_VOXEL_INFO;</div>
+<div class="line">        info-&gt;s_Type = s_Type;</div>
+<div class="line">        <span class="keywordflow">return</span> info;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getType() { <span class="keywordflow">return</span> s_Type; }</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_Type;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p><b>Грани за стеклом и водой.</b> Ядро рисует только те грани, которые ничем не закрыты: грань между двумя блоками считается невидимой. Для камня это правильно, а вот сквозь стекло мы должны видеть грани блоков за ним, а сквозь воду - дно. Как сказать ядру, какие блоки "прозрачны"? Через SimpleVoxelObjectTransparentTester (подробно - в уроке 4 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>). Ядро спрашивает его: "видна ли грань блока parent, если за ней стоит сосед svo?". Сделаем стекло и воду прозрачными для всех, кроме таких же блоков: </p><div class="fragment"><div class="line"><span class="keyword">class </span>MyTransparentTester : <span class="keyword">public</span> SimpleVoxelObjectTransparentTester</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> isTransparent(SimpleVoxelObject* svo, SimpleVoxelObject* parent)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(svo-&gt;getTypeVoxel() != CUSTOM_VOXEL) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> type = ((MyBlock*)svo)-&gt;getType();</div>
+<div class="line">        <span class="keywordflow">if</span>(type != BLOCK_GLASS &amp;&amp; type != BLOCK_WATER) <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Камень непрозрачен.</span></div>
+<div class="line">        <span class="keywordflow">if</span>(!parent || parent-&gt;getTypeVoxel() != CUSTOM_VOXEL) <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// parent может быть NULL - проверяем.</span></div>
+<div class="line">        <span class="keywordflow">return</span> ((MyBlock*)parent)-&gt;getType() != type;</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Что получается: грань камня под водой рисуется (сосед - вода, она прозрачна для камня), грань воды у камня - нет (камень непрозрачен), грань воды за стеклом рисуется, а грани между двумя блоками воды - нет. Последнее очень важно: если такие грани рисовать, внутри толщи воды будет видна "сетка" из полупрозрачных граней, и каждая лишняя грань добавит слой смешивания. Тестер ставится миру сразу после addWorld(), до загрузки чанков (мир удалит его сам): </p><div class="fragment"><div class="line">isve-&gt;getWorld(<span class="keywordtype">id</span>)-&gt;setSimpleVoxelObjectTransparentTester(<span class="keyword">new</span> MyTransparentTester); <span class="comment">// Мир удалит его сам.</span></div>
+</div><!-- fragment --><p><b>Фабрика.</b> Текстура грани и уровень зависят от типа блока. Вызовы getMeshVoxel() и getMeshNumber() во всех потоках построения идут строго по одному (урок 3), поэтому общую грань s_Plane можно перед getMeshCubeFaces() перекрашивать в нужную текстуру: getMeshCubeFaces() делает новый меш-копию, и смена текстуры в нём запоминается. </p><div class="fragment"><div class="line">IMesh* getMeshVoxel(VoxelForRendering* vxl) <span class="comment">// Потоки построения.</span></div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> type = ((MyVoxelInfo*)vxl-&gt;getVoxelInfo())-&gt;s_Type;</div>
+<div class="line">    s_Plane-&gt;getMeshBuffer(0)-&gt;getMaterial().setTexture(0, s_Textures[type]); <span class="comment">// Вызовы идут по одному - общую грань менять можно.</span></div>
+<div class="line">    <span class="keywordflow">return</span> getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1)); <span class="comment">// Новый меш - копия грани вместе с текстурой.</span></div>
+<div class="line">}</div>
+<div class="line"><span class="keywordtype">int</span> getMeshNumber(VoxelForRendering* vxl) <span class="comment">// На какой уровень попадёт воксель (вызывается сразу после getMeshVoxel()).</span></div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> type = ((MyVoxelInfo*)vxl-&gt;getVoxelInfo())-&gt;s_Type;</div>
+<div class="line">    <span class="keywordflow">if</span>(type == BLOCK_GLASS) <span class="keywordflow">return</span> LEVEL_GLASS;</div>
+<div class="line">    <span class="keywordflow">if</span>(type == BLOCK_WATER) <span class="keywordflow">return</span> LEVEL_WATER;</div>
+<div class="line">    <span class="keywordflow">return</span> LEVEL_SOLID;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Тип материала, записанный в мешбуфере вокселя, роли не играет: материал ноды задаёт уровень (setMaterialType()). А вот текстура и цвет вершин берутся из меша.</p>
+<p><b>Текстуры в коде.</b> Текстуры загружаются только в главном потоке (в потоках построения драйвер трогать нельзя), поэтому создадим их до фабрики и передадим ей готовые указатели. Картинку рисуем по пикселям: у камня - серый узор, у стекла - непрозрачная рамка и блик, а в середине "дыра" с альфой 0, у воды - синий цвет с альфой 140 из 255: </p><div class="fragment"><div class="line">ITexture* makeTexture(IVideoDriver* driver, <span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> type)</div>
+<div class="line">{</div>
+<div class="line">    IImage* image = driver-&gt;createImage(ECF_A8R8G8B8, dimension2d&lt;u32&gt;(16, 16));</div>
+<div class="line">    <span class="keywordflow">for</span>(u32 x = 0; x &lt; 16; x++)</div>
+<div class="line">        <span class="keywordflow">for</span>(u32 y = 0; y &lt; 16; y++)</div>
+<div class="line">        {</div>
+<div class="line">            SColor color(140, 40, 90, 200); <span class="comment">// Вода.</span></div>
+<div class="line">            <span class="keywordflow">if</span>(type == BLOCK_STONE) color = SColor(255, 100 + (x * 7 + y * 13) % 40, 100 + (x * 7 + y * 13) % 40, 110);</div>
+<div class="line">            <span class="keywordflow">if</span>(type == BLOCK_GLASS)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordtype">bool</span> frame = (x == 0 || y == 0 || x == 15 || y == 15 || (x == y &amp;&amp; x &gt; 3 &amp;&amp; x &lt; 12));</div>
+<div class="line">                color = frame ? SColor(255, 200, 230, 255) : SColor(0, 255, 255, 255);</div>
+<div class="line">            }</div>
+<div class="line">            image-&gt;setPixel(x, y, color);</div>
+<div class="line">        }</div>
+<div class="line">    ITexture* texture = driver-&gt;addTexture(name, image); <span class="comment">// Текстура - копия картинки.</span></div>
+<div class="line">    image-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> texture;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><b>Два вида прозрачности.</b> Это главное, что нужно понять в уроке (кратко это же есть в IrrSVEReadme.txt, раздел 7):</p><ul>
+<li>"вырезанная" прозрачность (стекло-решётка, листва, забор): пиксель либо виден полностью, либо его нет совсем. Материал EMT_TRANSPARENT_ALPHA_CHANNEL_REF: пиксели с альфой меньше половины отбрасываются (альфа-тест), остальные рисуются как непрозрачные и пишут глубину в Z-буфер. Порядок отрисовки не важен, сортировка не нужна. Наше стекло именно такое: рамка видна, середина - дыра;</li>
+<li>полупрозрачность со смешиванием (вода, цветное стекло): EMT_TRANSPARENT_ALPHA_CHANNEL, цвет пикселя смешивается с тем, что уже нарисовано за ним. Здесь порядок важен: дальние грани нужно рисовать раньше ближних, а писать глубину в Z-буфер нельзя - иначе ближняя грань, нарисованная первой, закроет дальние.</li>
+</ul>
+<p>Для полупрозрачного уровня враппер всё это делает сам: отключает запись в Z-буфер (EMF_ZWRITE_ENABLE = false), сортирует треугольники каждого блока от дальних к ближним и ставит ноду блока в его центр, чтобы Irrlicht правильно упорядочил сами ноды между собой. Полупрозрачным враппер считает уровень, у рендерера материала которого IMaterialRenderer::isTransparent() == true, - поэтому это работает и для шейдеров на основе EMT_TRANSPARENT_ALPHA_CHANNEL (Irrlicht сам запись в Z-буфер для шейдерных материалов не отключает - это делает враппер). Сортировка выполняется в isve-&gt;update(), только если камера сдвинулась больше чем на IrrSVEDefines::TRANSPARENT_SORT_CAMERA_THRESHOLD (0.25 единицы) или блок перестроен, так что каждый кадр это почти ничего не стоит.</p>
+<p>Ограничения сортировки: она точная внутри одного мешбуфера (одна текстура - один мешбуфер), а между разными текстурами одного блока и между разными блоками порядок приблизительный (по центрам). Поэтому для полупрозрачных блоков лучше одна текстура или атлас (урок 5), а чем меньше блок чанков (setSizeBlockChunks()), тем точнее порядок между блоками.</p>
+<p>Сортирует враппер относительно активной камеры сцены. Если мир рисуется другой камерой (например, в текстуру или во втором окне) или сортировать нужно относительно другой точки, задайте её сами - в главном потоке, каждый кадр перед isve-&gt;update(), в координатах сцены: </p><div class="fragment"><div class="line">factory-&gt;updateCameraPosition(<span class="keywordtype">id</span>, camera2-&gt;getAbsolutePosition()); <span class="comment">// Своя камера для сортировки мира id.</span></div>
+</div><!-- fragment --><p> Стоит один раз вызвать updateCameraPosition() для мира - и активная камера для него больше не используется, поэтому обновляйте позицию каждый кадр, пока камера движется.</p>
+<p><b>Шейдеры.</b> Шейдер - это тот же уровень со своим материалом, только материал создан через addHighLevelShaderMaterial(). Последний параметр - базовый материал: он решает, как результат шейдера смешивается с картинкой и считает ли враппер уровень полупрозрачным. Сделаем один шейдер (GLSL) на три базовых материала. Он умножает цвет текстуры на цвет вершины и на яркость, а альфу берёт из текстуры - её дальше обработает базовый материал (альфа-тест у стекла, смешивание у воды): </p><div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* VERTEX_SHADER =</div>
+<div class="line">    <span class="stringliteral">&quot;uniform float s_Brightness;\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;varying vec3 s_Color;\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;void main(void)\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;{\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;    gl_Position = ftransform();\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;    gl_TexCoord[0] = gl_MultiTexCoord0;\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;    s_Color = gl_Color.rgb * s_Brightness;\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;}\n&quot;</span>;</div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* PIXEL_SHADER =</div>
+<div class="line">    <span class="stringliteral">&quot;uniform sampler2D s_Texture;\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;varying vec3 s_Color;\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;void main(void)\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;{\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;    vec4 color = texture2D(s_Texture, gl_TexCoord[0].xy);\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;    gl_FragColor = vec4(color.rgb * s_Color, color.a);\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;}\n&quot;</span>;</div>
+</div><!-- fragment --><p> Константы шейдера передаёт обратный вызов: Irrlicht вызывает OnSetConstants() в главном потоке перед отрисовкой каждого мешбуфера с этим материалом. Яркость будем менять клавишей N ("день и ночь" - так же устроено солнце в TestProject3): </p><div class="fragment"><div class="line"><span class="keyword">class </span>MyShaderCallBack : <span class="keyword">public</span> IShaderConstantSetCallBack</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyShaderCallBack() : s_Brightness(1.f) {}</div>
+<div class="line">    <span class="keywordtype">void</span> OnSetConstants(IMaterialRendererServices* services, s32)</div>
+<div class="line">    {</div>
+<div class="line">        s32 layer = 0; <span class="comment">// Текстура - из слоя 0.</span></div>
+<div class="line">        services-&gt;setPixelShaderConstant(<span class="stringliteral">&quot;s_Texture&quot;</span>, &amp;layer, 1);</div>
+<div class="line">        services-&gt;setVertexShaderConstant(<span class="stringliteral">&quot;s_Brightness&quot;</span>, &amp;s_Brightness, 1);</div>
+<div class="line">    }</div>
+<div class="line">    f32 s_Brightness; <span class="comment">// Клавиша N - день и ночь.</span></div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Создаём материалы. Если драйвер не умеет GLSL (или шейдер не собрался), остаются встроенные материалы - и всё по-прежнему работает, только без яркости: </p><div class="fragment"><div class="line">E_MATERIAL_TYPE materials[NUMBER_OF_LEVELS] = { EMT_SOLID, EMT_TRANSPARENT_ALPHA_CHANNEL_REF, EMT_TRANSPARENT_ALPHA_CHANNEL };</div>
+<div class="line">MyShaderCallBack* callback = <span class="keyword">new</span> MyShaderCallBack;</div>
+<div class="line">IGPUProgrammingServices* gpu = driver-&gt;getGPUProgrammingServices();</div>
+<div class="line"><span class="keywordflow">if</span>(gpu &amp;&amp; driver-&gt;queryFeature(EVDF_ARB_GLSL))</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; NUMBER_OF_LEVELS; i++)</div>
+<div class="line">    {</div>
+<div class="line">        s32 shader = gpu-&gt;addHighLevelShaderMaterial(VERTEX_SHADER, <span class="stringliteral">&quot;main&quot;</span>, EVST_VS_1_1, PIXEL_SHADER, <span class="stringliteral">&quot;main&quot;</span>, EPST_PS_1_1, callback, materials[i]);</div>
+<div class="line">        <span class="keywordflow">if</span>(shader &gt;= 0) materials[i] = (E_MATERIAL_TYPE)shader; <span class="comment">// Шейдер не собрался - остаётся встроенный материал.</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p> Шейдерные материалы держат свою ссылку на callback, поэтому свою ссылку мы отпустим (drop()) в самом конце, после удаления враппера. Шейдеры посложнее (освещение от солнца и ламп) - в TestProject3/main.cpp и в уроке 15.</p>
+<p><b>Настройка уровней.</b> Здесь важен порядок, и ошибки в нём - самые частые: </p><div class="fragment"><div class="line">factory-&gt;setNumberOfMeshesSceneNodeForChunk(NUMBER_OF_LEVELS); <span class="comment">// Первым из настроек уровней: сбрасывает их материалы.</span></div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; NUMBER_OF_LEVELS; i++)</div>
+<div class="line">{</div>
+<div class="line">    factory-&gt;setMaterialType(i, materials[i]); <span class="comment">// По умолчанию для всех миров - до addWorld().</span></div>
+<div class="line">    factory-&gt;setHardwareMappingHint(i, EHM_STATIC, EBT_VERTEX_AND_INDEX); <span class="comment">// Меши чанков - в видеопамяти.</span></div>
+<div class="line">}</div>
+<div class="line">isve-&gt;setFactoryChunkMeshSceneNode(factory); <span class="comment">// После этого число уровней менять нельзя.</span></div>
+<div class="line"><span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld();</div>
+</div><!-- fragment --><ul>
+<li>setNumberOfMeshesSceneNodeForChunk() - первым: он сбрасывает материалы и hardware mapping всех уровней. И до setFactoryChunkMeshSceneNode(): отданной движку (замороженной) фабрике число уровней не меняется - ошибка в логе;</li>
+<li>setMaterialType(уровень, материал) и setHardwareMappingHint(уровень, ...) без номера мира - значения по умолчанию, их берут миры, созданные ПОСЛЕ вызова. Вызванные после addWorld(), они на этот мир уже не подействуют;</li>
+<li>для уже созданного мира есть версии с номером мира: setMaterialType(уровень, id, материал) (ноды уровня пересклеиваются в ближайшем update()) и setHardwareMappingHint(уровень, id, ...). Так у разных миров могут быть разные материалы одного уровня;</li>
+<li>setMaterialFlag(уровень, id, флаг, значение) и setID(уровень, id, ID) есть только для мира - после addWorld(). Они применяются и к уже созданным нодам. EHM_STATIC хранит меши чанков в видеопамяти: они меняются редко, а рисуются каждый кадр. Индексы полупрозрачного уровня при сортировке меняются - враппер сам помечает их для обновления в видеопамяти (подробно о hardware mapping - в уроке 14). Все эти функции - только из главного потока.</li>
+</ul>
+<p>Флаги и ID для мира: </p><div class="fragment"><div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; NUMBER_OF_LEVELS; i++) factory-&gt;setMaterialFlag(i, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>); <span class="comment">// Флаги - для мира, после addWorld().</span></div>
+<div class="line">factory-&gt;setMaterialFlag(LEVEL_WATER, <span class="keywordtype">id</span>, EMF_BACK_FACE_CULLING, <span class="keyword">false</span>); <span class="comment">// Воду видно и изнутри (из-под воды).</span></div>
+<div class="line">factory-&gt;setID(LEVEL_SOLID, <span class="keywordtype">id</span>, ID_PICKABLE);</div>
+<div class="line">factory-&gt;setID(LEVEL_GLASS, <span class="keywordtype">id</span>, ID_PICKABLE);</div>
+<div class="line">factory-&gt;setID(LEVEL_WATER, <span class="keywordtype">id</span>, ID_NOT_PICKABLE);</div>
+</div><!-- fragment --><p> EMF_LIGHTING выключаем: источников света в сцене нет, и без этого встроенные материалы были бы чёрными. ID нод нужен лучу выбора блоков (урок 7): ноды воды получают ID, которого луч не ловит, - курсор проходит сквозь воду и выбирает дно.</p>
+<p>Про EMF_BACK_FACE_CULLING. Обычно Irrlicht не рисует задние стороны граней - и это правильно для всех непрозрачных блоков. Но если нырнуть под воду, поверхность воды и её стенки мы видим изнутри, то есть с задней стороны, и без этого флага граница воды из-под воды не видна совсем. Поэтому у воды (как в TestProject3) задние стороны включены. Цена - сверху видны и задние стороны дальних стенок воды (например, стенки за стеклом изнутри бассейна); сортировка их тоже учитывает, но это лишние слои смешивания. У стекла (альфа-тест) и у непрозрачных уровней флаг не трогайте; если вода в вашей игре не бывает "изнутри", тоже оставьте его включённым.</p>
+<p>Что ещё нельзя делать с полупрозрачными уровнями: включать у сцены ALLOW_ZWRITE_ON_TRANSPARENT и задавать MaterialTypeParam с pack_textureBlendFunc(EBF_SRC_ALPHA, EBF_DST_ALPHA) - DST_ALPHA при буфере кадра без альфа-канала даёт почти сложение цветов.</p>
+<p><b>Сцена.</b> Один чанк: каменный пол, стеклянный домик (только стенки) с каменной колонной внутри и бассейн с каменным бортиком, передняя стенка которого - из стекла. Через неё видна вода, а через воду - дно: </p><div class="fragment"><div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 9; x &lt;= 14; x++)</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 1; y &lt;= 2; y++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 9; z &lt;= 14; z++)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordtype">bool</span> rim = (x == 9 || x == 14 || z == 9 || z == 14);</div>
+<div class="line">            setBlock(isve, <span class="keywordtype">id</span>, x, y, z, rim ? (z == 9 ? BLOCK_GLASS : BLOCK_STONE) : BLOCK_WATER);</div>
+<div class="line">        }</div>
+</div><!-- fragment --><p> В главном цикле ничего особенного нет: сортировку враппер делает внутри isve-&gt;update(). Клавиша N переключает яркость в шейдере (обработчик событий меняет s_Brightness у callback, OnEvent() и OnSetConstants() вызываются в главном потоке, так что синхронизация не нужна).</p>
+<p><b>Типичные ошибки:</b></p><ul>
+<li>setNumberOfMeshesSceneNodeForChunk() после setMaterialType() - материалы сбросились в EMT_SOLID;</li>
+<li>setMaterialType() без номера мира после addWorld() - мир его не увидел (используйте версию с id);</li>
+<li>getMeshNumber() вернул номер уровня больше числа уровней - меш чанка не строится, ошибка в логе;</li>
+<li>нет тестера прозрачности - за стеклом и под водой пустота (грани соседей отсечены);</li>
+<li>тестер делает прозрачными одинаковые блоки друг для друга - сетка внутри воды;</li>
+<li>вода в материале EMT_TRANSPARENT_ALPHA_CHANNEL_REF - край "рваный", полупрозрачности нет; стекло-решётка в EMT_TRANSPARENT_ALPHA_CHANNEL - лишняя сортировка и неверная глубина;</li>
+<li>стекло и вода на одном уровне - один из них нарисуется неправильно.</li>
+</ul>
+<p>Ну и напоследок ещё раз полный код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines; <span class="comment">// CUSTOM_VOXEL.</span></div>
+<div class="line"><span class="keyword">using namespace </span>Debug; <span class="comment">// Logger.</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Уровни мешей: у каждого уровня - свой материал (и свои ноды).</span></div>
+<div class="line"><span class="keyword">enum</span> MESH_LEVELS</div>
+<div class="line">{</div>
+<div class="line">    LEVEL_SOLID = 0, <span class="comment">// Камень - непрозрачный.</span></div>
+<div class="line">    LEVEL_GLASS = 1, <span class="comment">// Стекло - &quot;вырезанная&quot; прозрачность (альфа-тест).</span></div>
+<div class="line">    LEVEL_WATER = 2, <span class="comment">// Вода - полупрозрачная со смешиванием.</span></div>
+<div class="line">    NUMBER_OF_LEVELS = 3</div>
+<div class="line">};</div>
+<div class="line"><span class="comment">// Типы блоков (номер типа - номер текстуры).</span></div>
+<div class="line"><span class="keyword">enum</span> BLOCK_TYPES</div>
+<div class="line">{</div>
+<div class="line">    BLOCK_STONE = 0,</div>
+<div class="line">    BLOCK_GLASS = 1,</div>
+<div class="line">    BLOCK_WATER = 2</div>
+<div class="line">};</div>
+<div class="line"><span class="comment">// ID нод: луч выбора блоков (урок 7) ловит только ноды с ID_PICKABLE - вода курсор не ловит.</span></div>
+<div class="line"><span class="keyword">enum</span> NODE_IDS</div>
+<div class="line">{</div>
+<div class="line">    ID_PICKABLE = 1,</div>
+<div class="line">    ID_NOT_PICKABLE = 2</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Информация для отрисовки и сам блок - как в уроке 2: блок хранит только свой тип.</span></div>
+<div class="line"><span class="keyword">struct </span>MyVoxelInfo : VoxelInfo</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_Type;</div>
+<div class="line">};</div>
+<div class="line"><span class="keyword">class </span>MyBlock : <span class="keyword">public</span> SimpleVoxelObject</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyBlock(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> type) : SimpleVoxelObject(), s_Type(type) { setTypeVoxel(CUSTOM_VOXEL); }</div>
+<div class="line">    VoxelInfo* getVoxelForRenderingInfo() <span class="comment">// Новый объект - его удалит движок.</span></div>
+<div class="line">    {</div>
+<div class="line">        MyVoxelInfo* info = <span class="keyword">new</span> MyVoxelInfo;</div>
+<div class="line">        info-&gt;s_TypeVoxelInfo = CUSTOM_VOXEL_INFO;</div>
+<div class="line">        info-&gt;s_Type = s_Type;</div>
+<div class="line">        <span class="keywordflow">return</span> info;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getType() { <span class="keywordflow">return</span> s_Type; }</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_Type;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Видна ли грань блока parent, за которой стоит сосед svo. Стекло и вода прозрачны для всех, кроме таких же блоков:</span></div>
+<div class="line"><span class="comment">// грани между двумя блоками воды (или стекла) не рисуются, а грань камня под водой и грань воды за стеклом - рисуются.</span></div>
+<div class="line"><span class="keyword">class </span>MyTransparentTester : <span class="keyword">public</span> SimpleVoxelObjectTransparentTester</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> isTransparent(SimpleVoxelObject* svo, SimpleVoxelObject* parent)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(svo-&gt;getTypeVoxel() != CUSTOM_VOXEL) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> type = ((MyBlock*)svo)-&gt;getType();</div>
+<div class="line">        <span class="keywordflow">if</span>(type != BLOCK_GLASS &amp;&amp; type != BLOCK_WATER) <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Камень непрозрачен.</span></div>
+<div class="line">        <span class="keywordflow">if</span>(!parent || parent-&gt;getTypeVoxel() != CUSTOM_VOXEL) <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">// parent может быть NULL - проверяем.</span></div>
+<div class="line">        <span class="keywordflow">return</span> ((MyBlock*)parent)-&gt;getType() != type;</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Фабрика: текстура грани - по типу блока, уровень мешей - тоже по типу блока.</span></div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve, ITexture** textures) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        s_Plane = createFaceMesh();</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 3; i++) s_Textures[i] = textures[i];</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); }</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl) <span class="comment">// Потоки построения.</span></div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> type = ((MyVoxelInfo*)vxl-&gt;getVoxelInfo())-&gt;s_Type;</div>
+<div class="line">        s_Plane-&gt;getMeshBuffer(0)-&gt;getMaterial().setTexture(0, s_Textures[type]); <span class="comment">// Вызовы идут по одному - общую грань менять можно.</span></div>
+<div class="line">        <span class="keywordflow">return</span> getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1)); <span class="comment">// Новый меш - копия грани вместе с текстурой.</span></div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering* vxl) <span class="comment">// На какой уровень попадёт воксель (вызывается сразу после getMeshVoxel()).</span></div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> type = ((MyVoxelInfo*)vxl-&gt;getVoxelInfo())-&gt;s_Type;</div>
+<div class="line">        <span class="keywordflow">if</span>(type == BLOCK_GLASS) <span class="keywordflow">return</span> LEVEL_GLASS;</div>
+<div class="line">        <span class="keywordflow">if</span>(type == BLOCK_WATER) <span class="keywordflow">return</span> LEVEL_WATER;</div>
+<div class="line">        <span class="keywordflow">return</span> LEVEL_SOLID;</div>
+<div class="line">    }</div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    ITexture* s_Textures[3];</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Текстура 16x16 прямо в коде: камень - серый с узором, стекло - непрозрачная рамка и блик, в середине дыра</span></div>
+<div class="line"><span class="comment">// (альфа 0), вода - полупрозрачная синяя (альфа 140).</span></div>
+<div class="line">ITexture* makeTexture(IVideoDriver* driver, <span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> type)</div>
+<div class="line">{</div>
+<div class="line">    IImage* image = driver-&gt;createImage(ECF_A8R8G8B8, dimension2d&lt;u32&gt;(16, 16));</div>
+<div class="line">    <span class="keywordflow">for</span>(u32 x = 0; x &lt; 16; x++)</div>
+<div class="line">        <span class="keywordflow">for</span>(u32 y = 0; y &lt; 16; y++)</div>
+<div class="line">        {</div>
+<div class="line">            SColor color(140, 40, 90, 200); <span class="comment">// Вода.</span></div>
+<div class="line">            <span class="keywordflow">if</span>(type == BLOCK_STONE) color = SColor(255, 100 + (x * 7 + y * 13) % 40, 100 + (x * 7 + y * 13) % 40, 110);</div>
+<div class="line">            <span class="keywordflow">if</span>(type == BLOCK_GLASS)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordtype">bool</span> frame = (x == 0 || y == 0 || x == 15 || y == 15 || (x == y &amp;&amp; x &gt; 3 &amp;&amp; x &lt; 12));</div>
+<div class="line">                color = frame ? SColor(255, 200, 230, 255) : SColor(0, 255, 255, 255);</div>
+<div class="line">            }</div>
+<div class="line">            image-&gt;setPixel(x, y, color);</div>
+<div class="line">        }</div>
+<div class="line">    ITexture* texture = driver-&gt;addTexture(name, image); <span class="comment">// Текстура - копия картинки.</span></div>
+<div class="line">    image-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> texture;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Шейдер (GLSL): цвет текстуры, умноженный на цвет вершины и яркость. Альфа - из текстуры: её дальше обрабатывает</span></div>
+<div class="line"><span class="comment">// базовый материал (альфа-тест у стекла, смешивание у воды).</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* VERTEX_SHADER =</div>
+<div class="line">    <span class="stringliteral">&quot;uniform float s_Brightness;\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;varying vec3 s_Color;\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;void main(void)\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;{\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;    gl_Position = ftransform();\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;    gl_TexCoord[0] = gl_MultiTexCoord0;\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;    s_Color = gl_Color.rgb * s_Brightness;\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;}\n&quot;</span>;</div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* PIXEL_SHADER =</div>
+<div class="line">    <span class="stringliteral">&quot;uniform sampler2D s_Texture;\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;varying vec3 s_Color;\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;void main(void)\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;{\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;    vec4 color = texture2D(s_Texture, gl_TexCoord[0].xy);\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;    gl_FragColor = vec4(color.rgb * s_Color, color.a);\n&quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;}\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Константы шейдера: Irrlicht вызывает OnSetConstants() перед отрисовкой каждого мешбуфера с этим материалом.</span></div>
+<div class="line"><span class="keyword">class </span>MyShaderCallBack : <span class="keyword">public</span> IShaderConstantSetCallBack</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyShaderCallBack() : s_Brightness(1.f) {}</div>
+<div class="line">    <span class="keywordtype">void</span> OnSetConstants(IMaterialRendererServices* services, s32)</div>
+<div class="line">    {</div>
+<div class="line">        s32 layer = 0; <span class="comment">// Текстура - из слоя 0.</span></div>
+<div class="line">        services-&gt;setPixelShaderConstant(<span class="stringliteral">&quot;s_Texture&quot;</span>, &amp;layer, 1);</div>
+<div class="line">        services-&gt;setVertexShaderConstant(<span class="stringliteral">&quot;s_Brightness&quot;</span>, &amp;s_Brightness, 1);</div>
+<div class="line">    }</div>
+<div class="line">    f32 s_Brightness; <span class="comment">// Клавиша N - день и ночь.</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Клавиша N переключает яркость. OnEvent() вызывается в главном потоке.</span></div>
+<div class="line"><span class="keyword">class </span>MyReceiver : <span class="keyword">public</span> IEventReceiver</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyReceiver() : s_CallBack(0) {}</div>
+<div class="line">    <span class="keywordtype">bool</span> OnEvent(<span class="keyword">const</span> SEvent&amp; event)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(event.EventType == EET_KEY_INPUT_EVENT &amp;&amp; event.KeyInput.PressedDown &amp;&amp; event.KeyInput.Key == KEY_KEY_N &amp;&amp; s_CallBack)</div>
+<div class="line">            s_CallBack-&gt;s_Brightness = (s_CallBack-&gt;s_Brightness &gt; 0.7f) ? 0.4f : 1.f;</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    }</div>
+<div class="line">    MyShaderCallBack* s_CallBack;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Блок по глобальным координатам (до start() - задание в очереди, выполнится после запуска).</span></div>
+<div class="line"><span class="keywordtype">void</span> setBlock(IrrSimpleVoxelEngine* isve, <span class="keywordtype">int</span> <span class="keywordtype">id</span>, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> z, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> type)</div>
+<div class="line">{</div>
+<div class="line">    isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(x, y, z), <span class="keyword">new</span> MyBlock(type));</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    MyReceiver receiver;</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(800, 600), 32, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, &amp;receiver);</div>
+<div class="line">    IVideoDriver* driver = device-&gt;getVideoDriver();</div>
+<div class="line">    <span class="comment">// Материалы уровней: встроенные, а если есть GLSL - шейдеры на их основе (последний параметр - базовый материал).</span></div>
+<div class="line">    E_MATERIAL_TYPE materials[NUMBER_OF_LEVELS] = { EMT_SOLID, EMT_TRANSPARENT_ALPHA_CHANNEL_REF, EMT_TRANSPARENT_ALPHA_CHANNEL };</div>
+<div class="line">    MyShaderCallBack* callback = <span class="keyword">new</span> MyShaderCallBack;</div>
+<div class="line">    IGPUProgrammingServices* gpu = driver-&gt;getGPUProgrammingServices();</div>
+<div class="line">    <span class="keywordflow">if</span>(gpu &amp;&amp; driver-&gt;queryFeature(EVDF_ARB_GLSL))</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; NUMBER_OF_LEVELS; i++)</div>
+<div class="line">        {</div>
+<div class="line">            s32 shader = gpu-&gt;addHighLevelShaderMaterial(VERTEX_SHADER, <span class="stringliteral">&quot;main&quot;</span>, EVST_VS_1_1, PIXEL_SHADER, <span class="stringliteral">&quot;main&quot;</span>, EPST_PS_1_1, callback, materials[i]);</div>
+<div class="line">            <span class="keywordflow">if</span>(shader &gt;= 0) materials[i] = (E_MATERIAL_TYPE)shader; <span class="comment">// Шейдер не собрался - остаётся встроенный материал.</span></div>
+<div class="line">        }</div>
+<div class="line">    receiver.s_CallBack = callback;</div>
+<div class="line">    ITexture* textures[3] = { makeTexture(driver, <span class="stringliteral">&quot;stone&quot;</span>, BLOCK_STONE), makeTexture(driver, <span class="stringliteral">&quot;glass&quot;</span>, BLOCK_GLASS), makeTexture(driver, <span class="stringliteral">&quot;water&quot;</span>, BLOCK_WATER) };</div>
+<div class="line"> </div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger;</div>
+<div class="line">    lgr-&gt;setPrintStandard(<span class="keyword">false</span>);</div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device, lgr);</div>
+<div class="line">    lgr-&gt;drop();</div>
+<div class="line">    MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve, textures);</div>
+<div class="line">    factory-&gt;setPositionScale(16);</div>
+<div class="line">    factory-&gt;setSScale(16);</div>
+<div class="line">    factory-&gt;setNumberOfMeshesSceneNodeForChunk(NUMBER_OF_LEVELS); <span class="comment">// Первым из настроек уровней: сбрасывает их материалы.</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; NUMBER_OF_LEVELS; i++)</div>
+<div class="line">    {</div>
+<div class="line">        factory-&gt;setMaterialType(i, materials[i]); <span class="comment">// По умолчанию для всех миров - до addWorld().</span></div>
+<div class="line">        factory-&gt;setHardwareMappingHint(i, EHM_STATIC, EBT_VERTEX_AND_INDEX); <span class="comment">// Меши чанков - в видеопамяти.</span></div>
+<div class="line">    }</div>
+<div class="line">    isve-&gt;setFactoryChunkMeshSceneNode(factory); <span class="comment">// После этого число уровней менять нельзя.</span></div>
+<div class="line">    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld();</div>
+<div class="line">    isve-&gt;getWorld(<span class="keywordtype">id</span>)-&gt;setSimpleVoxelObjectTransparentTester(<span class="keyword">new</span> MyTransparentTester); <span class="comment">// Мир удалит его сам.</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; NUMBER_OF_LEVELS; i++) factory-&gt;setMaterialFlag(i, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>); <span class="comment">// Флаги - для мира, после addWorld().</span></div>
+<div class="line">    factory-&gt;setMaterialFlag(LEVEL_WATER, <span class="keywordtype">id</span>, EMF_BACK_FACE_CULLING, <span class="keyword">false</span>); <span class="comment">// Воду видно и изнутри (из-под воды).</span></div>
+<div class="line">    factory-&gt;setID(LEVEL_SOLID, <span class="keywordtype">id</span>, ID_PICKABLE);</div>
+<div class="line">    factory-&gt;setID(LEVEL_GLASS, <span class="keywordtype">id</span>, ID_PICKABLE);</div>
+<div class="line">    factory-&gt;setID(LEVEL_WATER, <span class="keywordtype">id</span>, ID_NOT_PICKABLE);</div>
+<div class="line"> </div>
+<div class="line">    isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">true</span>);</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; 16; x++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; 16; z++) setBlock(isve, <span class="keywordtype">id</span>, x, 0, z, BLOCK_STONE); <span class="comment">// Пол.</span></div>
+<div class="line">    <span class="comment">// Стеклянный домик 5x5x5 (только стенки) с каменной колонной внутри.</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 2; x &lt;= 6; x++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 1; y &lt;= 5; y++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 2; z &lt;= 6; z++)</div>
+<div class="line">                <span class="keywordflow">if</span>(x == 2 || x == 6 || y == 5 || z == 2 || z == 6) setBlock(isve, <span class="keywordtype">id</span>, x, y, z, BLOCK_GLASS);</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 1; y &lt;= 3; y++) setBlock(isve, <span class="keywordtype">id</span>, 4, y, 4, BLOCK_STONE);</div>
+<div class="line">    <span class="comment">// Бассейн: бортик из камня, передняя стенка (к камере) - из стекла, внутри вода 4x2x4.</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 9; x &lt;= 14; x++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 1; y &lt;= 2; y++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 9; z &lt;= 14; z++)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordtype">bool</span> rim = (x == 9 || x == 14 || z == 9 || z == 14);</div>
+<div class="line">                setBlock(isve, <span class="keywordtype">id</span>, x, y, z, rim ? (z == 9 ? BLOCK_GLASS : BLOCK_STONE) : BLOCK_WATER);</div>
+<div class="line">            }</div>
+<div class="line">    isve-&gt;addTaskUpdateChunks();</div>
+<div class="line"> </div>
+<div class="line">    ICameraSceneNode* camera = device-&gt;getSceneManager()-&gt;addCameraSceneNodeFPS(0, 100.f, 0.01f);</div>
+<div class="line">    camera-&gt;setPosition(vector3df(8, 7, -8));</div>
+<div class="line">    camera-&gt;setTarget(vector3df(8, 1, 8));</div>
+<div class="line">    device-&gt;getCursorControl()-&gt;setVisible(<span class="keyword">false</span>);</div>
+<div class="line">    isve-&gt;start();</div>
+<div class="line">    <span class="keywordflow">while</span>(isve-&gt;runIrrDevice())</div>
+<div class="line">    {</div>
+<div class="line">        isve-&gt;update(); <span class="comment">// Здесь же враппер сортирует треугольники полупрозрачных уровней.</span></div>
+<div class="line">        driver-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 150, 190, 230));</div>
+<div class="line">        device-&gt;getSceneManager()-&gt;drawAll();</div>
+<div class="line">        driver-&gt;endScene();</div>
+<div class="line">    }</div>
+<div class="line">    isve-&gt;stop();</div>
+<div class="line">    <span class="keyword">delete</span> isve;</div>
+<div class="line">    callback-&gt;drop(); <span class="comment">// Шейдеры держат свою ссылку на callback.</span></div>
+<div class="line">    device-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="a_irr_simple_voxel_engine_8h_html"><div class="ttname"><a href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a></div><div class="ttdoc">Главный заголовочный файл. Необходимо присоединять только его к проекту.</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">SimpleVoxelEngine::IrrEngine</a></div><div class="ttdoc">Главное пространство имён IrrSimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:13</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:11</div></div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="tutorials.html">Уроки по врапперу IrrSimpleVoxelEngine.</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

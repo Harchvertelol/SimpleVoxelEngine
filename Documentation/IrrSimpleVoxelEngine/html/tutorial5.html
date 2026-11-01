@@ -1,0 +1,362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Урок 5: Текстурный атлас.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IrrSimpleVoxelEngine
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tutorial5.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Урок 5: Текстурный атлас. </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>В уроке 3 у каждого вида блоков была своя текстура. Это просто, но не быстро. Давайте разберёмся, почему, и сделаем по-другому: одна текстура (атлас) на все блоки, а каждая грань берёт из неё свою клетку.</p>
+<h1 class="doxsection"><a class="anchor" id="tut5_why"></a>
+Почему атлас быстрее</h1>
+<p>Враппер склеивает меши всех вокселей чанка, а потом и всех чанков блока чанков (setSizeBlockChunks()) в один меш ноды. Склейка (CBatchingMesh) кладёт в один мешбуфер только грани с одинаковым материалом, а текстура - часть материала (SMaterial). Поэтому, если в блоке чанков видно 13 разных текстур, у его ноды 13 мешбуферов на уровень, и каждый мешбуфер - это отдельный вызов отрисовки со сменой текстуры. Именно об этом комментарий у getMeshVoxel() в TestProject3/main.cpp: "текстурного атласа нет, поэтому каждая текстура даёт свой мешбуфер, а значит больше лагов". Вызовы отрисовки дороги сами по себе (работа драйвера на процессоре), и при сотнях нод на экране их число быстро растёт.</p>
+<p>С атласом у всех граней уровня один материал - и у ноды ровно один мешбуфер на уровень, сколько бы видов блоков в ней ни было. Число вызовов отрисовки равно числу нод. Кстати, цвет вершин в материал не входит: освещение через цвет вершин (как в TestProject3) мешбуферы не размножает.</p>
+<p>Одна оговорка: индексы в мешбуфере 16-битные, поэтому в одном мешбуфере не больше 65535 вершин (у грани их 4). Если блок чанков очень большой и в нём много видимых граней, склейка начнёт второй мешбуфер с тем же материалом. Это нормально: мешбуферов всё равно будет в разы меньше, чем с отдельными текстурами.</p>
+<h1 class="doxsection"><a class="anchor" id="tut5_code"></a>
+Пишем пример</h1>
+<p>Начало - как в уроке 3: подключаем враппер и пространства имён. Атлас - 4x4 клетки по 16x16 пикселей. Простые блоки берут клетки с 0 по 11, а "трава" - три клетки: 12 сверху, 13 по бокам и 14 снизу. </p><div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> ATLAS_TILES = 4; <span class="comment">// Атлас - 4x4 клетки.</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> TILE_SIZE = 16; <span class="comment">// Клетка - 16x16 пикселей, весь атлас - 64x64.</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> BLOCK_GRASS = 100; <span class="comment">// Блок &quot;трава&quot;: сверху, сбоку и снизу - разные клетки атласа.</span></div>
+</div><!-- fragment --><p> Блок и его информация для отрисовки - самые простые: только номер (свой воксель с VoxelInfo разобран в уроке 2): </p><div class="fragment"><div class="line"><span class="keyword">struct </span>BlockInfo : VoxelInfo</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Файлы уроку не нужны, поэтому атлас нарисуем прямо в коде: картинка 64x64, в каждой клетке свой цвет и тёмная рамка в один пиксель (чтобы было видно, где кончается блок). В настоящей игре атлас обычно загружают из файла (driver-&gt;getTexture("atlas.png")) - всё остальное в уроке от этого не меняется. </p><div class="fragment"><div class="line">ITexture* createAtlas(IVideoDriver* driver)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">int</span> size = ATLAS_TILES * TILE_SIZE;</div>
+<div class="line">    IImage* image = driver-&gt;createImage(ECF_A8R8G8B8, dimension2d&lt;u32&gt;(size, size));</div>
+<div class="line">    ...</div>
+</div><!-- fragment --><p> Самое интересное - конец функции. По умолчанию Irrlicht создаёт для каждой текстуры mip-уровни (уменьшенные копии). Для атласа они вредны (подробнее - ниже, в разделе о фильтрации), поэтому на время создания атласа выключаем флаг ETCF_CREATE_MIP_MAPS, а потом возвращаем, как было, чтобы не задеть остальные текстуры программы: </p><div class="fragment"><div class="line">    <span class="keyword">const</span> <span class="keywordtype">bool</span> mipmaps = driver-&gt;getTextureCreationFlag(ETCF_CREATE_MIP_MAPS);</div>
+<div class="line">    driver-&gt;setTextureCreationFlag(ETCF_CREATE_MIP_MAPS, <span class="keyword">false</span>); <span class="comment">// Атласу mip-уровни не нужны (см. текст урока).</span></div>
+<div class="line">    ITexture* atlas = driver-&gt;addTexture(<span class="stringliteral">&quot;atlas&quot;</span>, image);</div>
+<div class="line">    driver-&gt;setTextureCreationFlag(ETCF_CREATE_MIP_MAPS, mipmaps); <span class="comment">// Вернули флаг для остальных текстур.</span></div>
+<div class="line">    image-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> atlas;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="tut5_uv"></a>
+Текстурные координаты граней</h1>
+<p>Теперь главное: как дать грани нужную клетку атласа. Грань из createFaceMesh() - квадрат с текстурными координатами от 0 до 1 (то есть вся текстура). Нам нужна только клетка: для клетки в столбце col и строке row координата u должна идти от col / 4 до (col + 1) / 4, а v - от row / 4 до (row + 1) / 4.</p>
+<p>Поменять координаты можно в двух местах:</p><ul>
+<li><b>до</b> getMeshCubeFaces() - в самой грани, которую мы ему отдаём (getMeshCubeFaces() копирует грани, и копии "запоминают" координаты);</li>
+<li><b>после</b> - в меше, который вернул getMeshCubeFaces(). Но в нём от 1 до 6 граней, уже повёрнутых и склеенных в один мешбуфер, и сколько их и в каком порядке - зависит от того, какие грани видимы. Разбираться в этом в каждом вызове getMeshVoxel() - лишняя работа и источник ошибок.</li>
+</ul>
+<p>Выбираем первый способ, причём в самом надёжном виде: заранее, в конструкторе фабрики, готовим по отдельной грани на каждую клетку атласа. Тогда getMeshVoxel() ничего не меняет, а только выбирает готовые грани. Можно было бы и менять одну общую грань перед каждым вызовом getMeshCubeFaces() (так TestProject3 меняет текстуру грани): вызовы getMeshVoxel() идут строго по одному, под общей блокировкой фабрики, так что это тоже работает. Но готовые грани проще, и их не нужно пересчитывать для каждого вокселя. </p><div class="fragment"><div class="line">MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">{</div>
+<div class="line">    ITexture* atlas = createAtlas(device-&gt;getVideoDriver()); <span class="comment">// Текстуры - только в главном потоке.</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> tile = 0; tile &lt; ATLAS_TILES * ATLAS_TILES; tile++)</div>
+<div class="line">    {</div>
+<div class="line">        s_Faces[tile] = createFaceMesh(0); <span class="comment">// Отступ 0: координаты ровно от 0 до 1, отступ сделаем сами.</span></div>
+<div class="line">        IMeshBuffer* mb = s_Faces[tile]-&gt;getMeshBuffer(0);</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">float</span> col = tile % ATLAS_TILES, row = tile / ATLAS_TILES; <span class="comment">// Где клетка в атласе.</span></div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">float</span> inset = 0.5f / TILE_SIZE; <span class="comment">// Отступ в полпикселя клетки - от проступания соседних клеток.</span></div>
+<div class="line">        <span class="keywordflow">for</span>(u32 i = 0; i &lt; mb-&gt;getVertexCount(); i++)</div>
+<div class="line">        {</div>
+<div class="line">            vector2df&amp; tc = mb-&gt;getTCoords(i); <span class="comment">// 0 или 1 - угол грани.</span></div>
+<div class="line">            tc.X = (col + inset + tc.X * (1 - 2 * inset)) / ATLAS_TILES;</div>
+<div class="line">            tc.Y = (row + inset + tc.Y * (1 - 2 * inset)) / ATLAS_TILES;</div>
+<div class="line">        }</div>
+<div class="line">        mb-&gt;getMaterial().setTexture(0, atlas); <span class="comment">// У всех граней один и тот же материал - одна текстура.</span></div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line">~MyFactory() { <span class="keywordflow">for</span>(<span class="keywordtype">int</span> tile = 0; tile &lt; ATLAS_TILES * ATLAS_TILES; tile++) s_Faces[tile]-&gt;drop(); }</div>
+</div><!-- fragment --><p> Обратите внимание: атлас создаётся в конструкторе фабрики. Конструктор работает в главном потоке, а getMeshVoxel() - в потоках построения, где трогать драйвер (создавать или загружать текстуры) нельзя.</p>
+<p>Что за отступ inset? У createFaceMesh() есть свой параметр texinset (по умолчанию 0.002): координаты идут от texinset до 1 - texinset, чтобы при фильтрации на краю грани не проступал противоположный край текстуры. Но этот отступ считается от всей текстуры, а в атласе соседи у клетки - другие клетки. Поэтому берём грань с отступом 0 и делаем отступ сами, в долях клетки: полпикселя (0.5 / TILE_SIZE). Тогда крайние точки грани попадают в центры крайних пикселей клетки, и ни при выборке ближайшего пикселя (ошибки округления), ни при билинейной фильтрации (она смешивает соседние пиксели) цвет соседней клетки на грань не попадёт. Без отступа на стыках блоков видны тонкие линии чужого цвета.</p>
+<p>Функция меша вокселя теперь совсем короткая. Порядок граней в массиве - как в массиве видимости: x+, z+, x-, z-, y+, y-: </p><div class="fragment"><div class="line">IMesh* getMeshVoxel(VoxelForRendering* vxl)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span> = ((BlockInfo*)vxl-&gt;getVoxelInfo())-&gt;s_Id;</div>
+<div class="line">    <span class="keywordflow">if</span>(<span class="keywordtype">id</span> == BLOCK_GRASS) <span class="comment">// Порядок граней: x+, z+, x-, z-, y+, y-.</span></div>
+<div class="line">    {</div>
+<div class="line">        IMesh* faces[6] = { s_Faces[13], s_Faces[13], s_Faces[13], s_Faces[13], s_Faces[12], s_Faces[14] }; <span class="comment">// Бока, верх, низ.</span></div>
+<div class="line">        <span class="keywordflow">return</span> getMeshCubeFaces(vxl, faces, vector3df(1, 1, 1));</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">return</span> getMeshCubeFaces(vxl, s_Faces[<span class="keywordtype">id</span> % 12], vector3df(1, 1, 1)); <span class="comment">// Простые блоки - клетки 0..11.</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><p> У "травы" три разные клетки, но материал у всех граней один и тот же - значит, и мешбуфер один.</p>
+<h1 class="doxsection"><a class="anchor" id="tut5_filter"></a>
+Фильтрация и mip-уровни</h1>
+<p>Откуда у ноды чанка материал? Текстура приходит из материала граней (мы задали её в конструкторе фабрики), тип материала задаёт setMaterialType() уровня, а флаги - setMaterialFlag(). Фабрика запоминает флаги уровня и ставит их каждой новой ноде (ноды пересоздаются при каждой перестройке блока чанков), а также сразу применяет к уже созданным. Вызывается setMaterialFlag() в главном потоке, после addWorld() - флаги задаются для мира. </p><div class="fragment"><div class="line">factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_BILINEAR_FILTER, <span class="keyword">false</span>); <span class="comment">// Чёткие пиксели и никакого смешивания с соседними клетками.</span></div>
+<div class="line">factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_TRILINEAR_FILTER, <span class="keyword">false</span>);</div>
+<div class="line">factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_ANISOTROPIC_FILTER, <span class="keyword">false</span>);</div>
+<div class="line">factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_USE_MIP_MAPS, <span class="keyword">false</span>); <span class="comment">// Даже если у текстуры есть mip-уровни - не использовать.</span></div>
+</div><!-- fragment --><p> Зачем всё это?</p><ul>
+<li>Билинейная фильтрация (EMF_BILINEAR_FILTER, в Irrlicht включена по умолчанию) смешивает четыре соседних пикселя. С отступом в полпикселя на краях клетки это безопасно, но картинка размыта. Для "пиксельных" текстур (как в Minecraft) её выключают - берётся ближайший пиксель. Трилинейная и анизотропная фильтрации тоже смешивают пиксели, их выключаем заодно.</li>
+<li>Mip-уровни - главная беда атласа. На уровне k пиксель в 2^k раз больше: клетка 16x16 на четвёртом уровне - один пиксель, а дальше клетки смешиваются друг с другом. Вдали грани получают цвет соседних клеток, на стыках появляются цветные полосы, и никакой отступ в полпикселя от этого не спасает. Поэтому атласу mip-уровни не создаём (ETCF_CREATE_MIP_MAPS при создании текстуры) и не используем (EMF_USE_MIP_MAPS для уровня мешей). Цена - вдали мелкий узор текстуры "мерцает".</li>
+</ul>
+<p>Если мерцание мешает, есть компромиссы: делать клетки с запасом (поле в несколько пикселей вокруг клетки, повторяющее её край, - тогда несколько первых mip-уровней не смешивают соседей) или вместо атласа использовать массивы текстур (texture arrays) в своём шейдере - но это уже за рамками Irrlicht 1.8.</p>
+<p>Ещё одно ограничение атласа: текстуру нельзя "повторить" по большой грани (TextureWrap), ведь за краем клетки - другая клетка. Для кубиков-вокселей, где каждая грань - одна клетка, это не мешает.</p>
+<h1 class="doxsection"><a class="anchor" id="tut5_errors"></a>
+Типичные ошибки</h1>
+<ul>
+<li>Разные флаги или тип материала у разных граней одного уровня (например, у одной грани выключили освещение в её материале) - материалы снова разные, и мешбуферы снова размножаются. Всё, кроме текстуры, лучше задавать через setMaterialType()/setMaterialFlag() уровня, а не в гранях.</li>
+<li>Загрузка текстуры в getMeshVoxel() (driver-&gt;getTexture()) - это поток построения, драйвер там трогать нельзя.</li>
+<li>Атлас с mip-уровнями или без отступа - цветные линии на стыках блоков, особенно вдали.</li>
+<li>createFaceMesh() с отступом по умолчанию и пересчёт координат поверх него - отступ получится не тот, что нужен (в долях всего атласа, а не клетки). Берите createFaceMesh(0) и делайте отступ сами.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="tut5_check"></a>
+Как проверить</h1>
+<p>Проверка урока (AI/AITests/tutorials/diag_tut5.cpp) после построения чанка смотрит ноду: getMesh()-&gt;getMeshBufferCount() должен быть равен 1, текстура материала - атлас, а координаты каждой грани - внутри одной клетки и не ближе полупикселя к её краю. Так же можно проверить и свою программу: посчитайте мешбуферы у нод чанков.</p>
+<p>Ну и напоследок ещё раз полный код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines; <span class="comment">// CUSTOM_VOXEL и другие константы ядра.</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> ATLAS_TILES = 4; <span class="comment">// Атлас - 4x4 клетки.</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> TILE_SIZE = 16; <span class="comment">// Клетка - 16x16 пикселей, весь атлас - 64x64.</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> BLOCK_GRASS = 100; <span class="comment">// Блок &quot;трава&quot;: сверху, сбоку и снизу - разные клетки атласа.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Информация для отрисовки: номер блока (для простых блоков - номер клетки атласа).</span></div>
+<div class="line"><span class="keyword">struct </span>BlockInfo : VoxelInfo</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Наш блок - только номер.</span></div>
+<div class="line"><span class="keyword">class </span>Block : <span class="keyword">public</span> SimpleVoxelObject</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    Block(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>) : s_Id(id) { setTypeVoxel(CUSTOM_VOXEL); }</div>
+<div class="line">    VoxelInfo* getVoxelForRenderingInfo() <span class="comment">// Новый объект - его удалит движок.</span></div>
+<div class="line">    {</div>
+<div class="line">        BlockInfo* info = <span class="keyword">new</span> BlockInfo;</div>
+<div class="line">        info-&gt;s_TypeVoxelInfo = CUSTOM_VOXEL_INFO;</div>
+<div class="line">        info-&gt;s_Id = s_Id;</div>
+<div class="line">        <span class="keywordflow">return</span> info;</div>
+<div class="line">    }</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Создание атласа в коде: 16 клеток разных цветов, у каждой - тёмная рамка в 1 пиксель.</span></div>
+<div class="line">ITexture* createAtlas(IVideoDriver* driver)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">int</span> size = ATLAS_TILES * TILE_SIZE;</div>
+<div class="line">    IImage* image = driver-&gt;createImage(ECF_A8R8G8B8, dimension2d&lt;u32&gt;(size, size));</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> tile = 0; tile &lt; ATLAS_TILES * ATLAS_TILES; tile++)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">const</span> SColor color(255, 60 + (tile % 4) * 60, 60 + (tile / 4) * 60, 220 - tile * 12); <span class="comment">// Свой цвет у каждой клетки.</span></div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">int</span> x0 = (tile % ATLAS_TILES) * TILE_SIZE, y0 = (tile / ATLAS_TILES) * TILE_SIZE; <span class="comment">// Левый верхний угол клетки.</span></div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; TILE_SIZE; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; TILE_SIZE; y++)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">const</span> <span class="keywordtype">bool</span> border = (x == 0 || y == 0 || x == TILE_SIZE - 1 || y == TILE_SIZE - 1);</div>
+<div class="line">                image-&gt;setPixel(x0 + x, y0 + y, border ? SColor(255, color.getRed() / 2, color.getGreen() / 2, color.getBlue() / 2) : color);</div>
+<div class="line">            }</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">bool</span> mipmaps = driver-&gt;getTextureCreationFlag(ETCF_CREATE_MIP_MAPS);</div>
+<div class="line">    driver-&gt;setTextureCreationFlag(ETCF_CREATE_MIP_MAPS, <span class="keyword">false</span>); <span class="comment">// Атласу mip-уровни не нужны (см. текст урока).</span></div>
+<div class="line">    ITexture* atlas = driver-&gt;addTexture(<span class="stringliteral">&quot;atlas&quot;</span>, image);</div>
+<div class="line">    driver-&gt;setTextureCreationFlag(ETCF_CREATE_MIP_MAPS, mipmaps); <span class="comment">// Вернули флаг для остальных текстур.</span></div>
+<div class="line">    image-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> atlas;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Фабрика: грань на каждую клетку атласа готовится один раз, в конструкторе.</span></div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        ITexture* atlas = createAtlas(device-&gt;getVideoDriver()); <span class="comment">// Текстуры - только в главном потоке.</span></div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> tile = 0; tile &lt; ATLAS_TILES * ATLAS_TILES; tile++)</div>
+<div class="line">        {</div>
+<div class="line">            s_Faces[tile] = createFaceMesh(0); <span class="comment">// Отступ 0: координаты ровно от 0 до 1, отступ сделаем сами.</span></div>
+<div class="line">            IMeshBuffer* mb = s_Faces[tile]-&gt;getMeshBuffer(0);</div>
+<div class="line">            <span class="keyword">const</span> <span class="keywordtype">float</span> col = tile % ATLAS_TILES, row = tile / ATLAS_TILES; <span class="comment">// Где клетка в атласе.</span></div>
+<div class="line">            <span class="keyword">const</span> <span class="keywordtype">float</span> inset = 0.5f / TILE_SIZE; <span class="comment">// Отступ в полпикселя клетки - от проступания соседних клеток.</span></div>
+<div class="line">            <span class="keywordflow">for</span>(u32 i = 0; i &lt; mb-&gt;getVertexCount(); i++)</div>
+<div class="line">            {</div>
+<div class="line">                vector2df&amp; tc = mb-&gt;getTCoords(i); <span class="comment">// 0 или 1 - угол грани.</span></div>
+<div class="line">                tc.X = (col + inset + tc.X * (1 - 2 * inset)) / ATLAS_TILES;</div>
+<div class="line">                tc.Y = (row + inset + tc.Y * (1 - 2 * inset)) / ATLAS_TILES;</div>
+<div class="line">            }</div>
+<div class="line">            mb-&gt;getMaterial().setTexture(0, atlas); <span class="comment">// У всех граней один и тот же материал - одна текстура.</span></div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { <span class="keywordflow">for</span>(<span class="keywordtype">int</span> tile = 0; tile &lt; ATLAS_TILES * ATLAS_TILES; tile++) s_Faces[tile]-&gt;drop(); }</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    <span class="comment">// Поток построения: грани только читаются, общие меши не меняются.</span></div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span> = ((BlockInfo*)vxl-&gt;getVoxelInfo())-&gt;s_Id;</div>
+<div class="line">        <span class="keywordflow">if</span>(<span class="keywordtype">id</span> == BLOCK_GRASS) <span class="comment">// Порядок граней: x+, z+, x-, z-, y+, y-.</span></div>
+<div class="line">        {</div>
+<div class="line">            IMesh* faces[6] = { s_Faces[13], s_Faces[13], s_Faces[13], s_Faces[13], s_Faces[12], s_Faces[14] }; <span class="comment">// Бока, верх, низ.</span></div>
+<div class="line">            <span class="keywordflow">return</span> getMeshCubeFaces(vxl, faces, vector3df(1, 1, 1));</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">return</span> getMeshCubeFaces(vxl, s_Faces[<span class="keywordtype">id</span> % 12], vector3df(1, 1, 1)); <span class="comment">// Простые блоки - клетки 0..11.</span></div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering*) { <span class="keywordflow">return</span> 0; }</div>
+<div class="line">    IMesh* s_Faces[ATLAS_TILES * ATLAS_TILES];</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(800, 600));</div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device);</div>
+<div class="line">    MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">    factory-&gt;setPositionScale(16);</div>
+<div class="line">    factory-&gt;setSScale(16);</div>
+<div class="line">    isve-&gt;setFactoryChunkMeshSceneNode(factory);</div>
+<div class="line">    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld();</div>
+<div class="line">    factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">    factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_BILINEAR_FILTER, <span class="keyword">false</span>); <span class="comment">// Чёткие пиксели и никакого смешивания с соседними клетками.</span></div>
+<div class="line">    factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_TRILINEAR_FILTER, <span class="keyword">false</span>);</div>
+<div class="line">    factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_ANISOTROPIC_FILTER, <span class="keyword">false</span>);</div>
+<div class="line">    factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_USE_MIP_MAPS, <span class="keyword">false</span>); <span class="comment">// Даже если у текстуры есть mip-уровни - не использовать.</span></div>
+<div class="line">    isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">true</span>);</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; 16; x++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; 16; z++) <span class="comment">// Пол из 12 видов блоков, квадратами 4x4.</span></div>
+<div class="line">            isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(x, 0, z), <span class="keyword">new</span> Block(x / 4 + (z / 4) * 4));</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 6; x &lt; 10; x++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 6; z &lt; 10; z++) <span class="comment">// Холм из травы посередине.</span></div>
+<div class="line">            isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(x, 1, z), <span class="keyword">new</span> Block(BLOCK_GRASS));</div>
+<div class="line">    isve-&gt;addTaskUpdateChunks();</div>
+<div class="line">    ICameraSceneNode* camera = device-&gt;getSceneManager()-&gt;addCameraSceneNodeFPS();</div>
+<div class="line">    camera-&gt;setPosition(vector3df(8, 10, -10));</div>
+<div class="line">    camera-&gt;setTarget(vector3df(8, 0, 8));</div>
+<div class="line">    isve-&gt;start();</div>
+<div class="line">    <span class="keywordflow">while</span>(isve-&gt;runIrrDevice())</div>
+<div class="line">    {</div>
+<div class="line">        isve-&gt;update();</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 100, 100, 140));</div>
+<div class="line">        device-&gt;getSceneManager()-&gt;drawAll();</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;endScene();</div>
+<div class="line">    }</div>
+<div class="line">    isve-&gt;stop();</div>
+<div class="line">    <span class="keyword">delete</span> isve;</div>
+<div class="line">    device-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="a_irr_simple_voxel_engine_8h_html"><div class="ttname"><a href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a></div><div class="ttdoc">Главный заголовочный файл. Необходимо присоединять только его к проекту.</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">SimpleVoxelEngine::IrrEngine</a></div><div class="ttdoc">Главное пространство имён IrrSimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:13</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:11</div></div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="tutorials.html">Уроки по врапперу IrrSimpleVoxelEngine.</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

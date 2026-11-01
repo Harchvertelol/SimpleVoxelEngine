@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
-<title>SimpleVoxelEngine: Cписок членов класса</title>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SimpleVoxelEngine: Список членов класса</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,103 +23,120 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">SimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Воксельный движок</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li><a href="pages.html"><span>Описания</span></a></li>
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
-      <li><a href="hierarchy.html"><span>Иерархия&#160;классов</span></a></li>
-      <li><a href="functions.html"><span>Члены&#160;классов</span></a></li>
-    </ul>
+  <div id="splitbar" class="ui-resizable-handle">
   </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_additional.html">Additional</a></li><li class="navelem"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">ARGBColor</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
-  <div class="headertitle">
-<div class="title">SimpleVoxelEngine::Additional::ARGBColor Cписок членов класса</div>  </div>
+  <div class="headertitle"><div class="title">SimpleVoxelEngine::Additional::ARGBColor Список членов класса</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Полный список членов класса <a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a>, включая наследуемые из базового класса</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a75fd36a9b70efbba190825d4b675015b">ARGBColor</a>(unsigned char a=0, unsigned char r=0, unsigned char g=0, unsigned char b=0)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a36da3fa9731f1827c75d6186fad8fde2">ARGBColor</a>(const ARGBColor &amp;argbcolor)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#ab9b68070160cd4e154eadf475c9b944d">getA</a>() const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#af76d6c6820c37b9ed445973d74f135ad">getB</a>() const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a3cb5191432f1ef076c9669debe1eaa0d">getG</a>() const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a804bc684e1cf430c869c129280984bfb">getR</a>() const </td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#ac063fe56a215c01c1a96c6f8ba3fb2c2">operator*</a>(unsigned char)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#ac8bb554f813d5bb3b3a86da3621cd670">operator*=</a>(unsigned char)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a0fa48eb4c5caf2c55f38276d7f0a50fd">operator+</a>(ARGBColor &amp;)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a5c366a0f5ec1db8a8a648bf2dd0cf6e2">operator+=</a>(ARGBColor &amp;)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a66c17b04a028080f1067327c7c32f326">operator-</a>(ARGBColor &amp;)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a8d3d8e26a021cdbdf2e3a554314a99cc">operator-=</a>(ARGBColor &amp;)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#af8a7eed993c824521775f1cb342225f3">operator=</a>(const ARGBColor &amp;)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a8f9aa4ea301563a519f88c857e505c26">setARGB</a>(unsigned char a, unsigned char r, unsigned char g, unsigned char b)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a36da3fa9731f1827c75d6186fad8fde2">ARGBColor</a>(const ARGBColor &amp;argbcolor)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a99a506825b2211a92719b13ee0717ce2">getA</a>() const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a85b7a3be8b00697b2b3b14026476ad5f">getB</a>() const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#af2a5a89c70ee5447743a7916a42f75f8">getG</a>() const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#aa7d68d8339e7cd6000623da82c15e804">getR</a>() const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a6caed3a7038a96806cfd8dbca8c76ce2">operator*</a>(unsigned char) const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#ac059a6fb85ae41e8103e084502d9431a">operator*=</a>(unsigned char)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a1c4bd47107957e5b243df7fab9d13b3e">operator+</a>(const ARGBColor &amp;) const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a2db9241a1e5fc4bc24495103527c04a5">operator+=</a>(const ARGBColor &amp;)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#aecdb46a12b8f1ddc11223286f5ef720d">operator-</a>(const ARGBColor &amp;) const</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a4bf524d1aad5efde7992de3cdb1ed04c">operator-=</a>(const ARGBColor &amp;)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a28ca5fc0db47b80d34b65388f5fab607">operator=</a>(const ARGBColor &amp;)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#a8f9aa4ea301563a519f88c857e505c26">setARGB</a>(unsigned char a, unsigned char r, unsigned char g, unsigned char b)</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html#aca2c69b823f5d833711797d31e256a10">~ARGBColor</a>()</td><td class="entry"><a class="el" href="class_simple_voxel_engine_1_1_additional_1_1_a_r_g_b_color.html">SimpleVoxelEngine::Additional::ARGBColor</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:22. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

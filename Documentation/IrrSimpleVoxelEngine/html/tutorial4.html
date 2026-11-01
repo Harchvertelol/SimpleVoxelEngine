@@ -1,0 +1,618 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Урок 4: Нестандартные блоки: полублоки, лестницы, растения.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IrrSimpleVoxelEngine
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tutorial4.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Урок 4: Нестандартные блоки: полублоки, лестницы, растения. </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Мир из одних кубов быстро надоедает. Хочется полублоков, лестниц, травы и цветов. В этом уроке мы сделаем их двумя способами. Первый - склейка вокселя из своих мешей функцией getMeshVoxelByGlue(): воксель остаётся одним блоком, но рисуется любой формой. Второй - вложенные чанки: блок делится на маленькие кубики (например, 2x2x2), и полублок - это просто нижний слой маленьких кубиков. В конце сравним, когда какой способ лучше.</p>
+<p>Но сначала нужно понять, как враппер решает, какие грани рисовать, - для нестандартных блоков это главное.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut4_faces"></a>
+Как считается видимость граней</h1>
+<p>Видимость граней считает ядро, и считает её для ячейки целиком. Для каждого вокселя есть шесть флагов - по одному на грань, в порядке x+, z+, x-, z-, y+, y-. Грань видна, если хотя бы одна ячейка, которая касается её с другой стороны, пустая или прозрачная. Прозрачными считаются:</p><ul>
+<li>пустая ячейка и незагруженный соседний чанк;</li>
+<li>вложенный чанк - но ядро не останавливается на нём, а проверяет все его маленькие ячейки, которые касаются грани (если все они заняты непрозрачными блоками, грань закрыта);</li>
+<li>блок, про который так сказал тестер прозрачности мира (SimpleVoxelObjectTransparentTester, подробно - в уроке 4 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>). Тестер получает соседа (svo) и блок, грань которого проверяется (parent). Без тестера любой блок непрозрачен.</li>
+</ul>
+<p>Воксель, у которого не видна ни одна грань, фабрике вообще не передаётся. Флаги видимости фабрика получает в VoxelForRendering (isRenderFace()), и getMeshCubeFaces() рисует по ним только видимые грани. (Если у фабрики выключена информация о гранях - setIsFaces(false), урок 3, - все шесть флагов равны true, и рисуются все грани.)</p>
+<p>Ядро не знает, что ваш блок - полублок. Для него это просто занятая ячейка. Отсюда две задачи:</p><ul>
+<li>собственные грани нестандартного блока нужно рисовать так, чтобы флаги видимости им подходили;</li>
+<li>соседям нужно объяснить, что нестандартный блок не закрывает их грани (иначе будут дыры).</li>
+</ul>
+<p>С первой задачей помогает getMeshVoxelByGlue(), со второй - тестер прозрачности.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut4_glue"></a>
+Как работает getMeshVoxelByGlue()</h1>
+<p>getMeshVoxelByGlue(vxl, glues) принимает массив из семи мешей и склеивает из них новый меш:</p><ul>
+<li>glues[0] приклеивается всегда (может быть NULL - тогда ничего);</li>
+<li>glues[1]...glues[6] - меши граней в порядке видимости x+, z+, x-, z-, y+, y-: glues[i] приклеивается, только если видна грань i - 1 (vxl-&gt;isRenderFace(i - 1)). Если грань видна, а меш NULL, - это ошибка: функция вернёт NULL, меш чанка не построится.</li>
+</ul>
+<p>Меши приклеиваются "как есть", ничего не сдвигается и не масштабируется. Поэтому каждый меш - это уже готовая часть вокселя в его координатах: центр вокселя - начало координат, размер - размер вокселя. При наших масштабах (равных размеру чанка) воксель первого уровня имеет размер 1, то есть его меши лежат в кубе от -0.5 до 0.5. На место вокселя весь склеенный меш поставит сама фабрика (как и любой меш из getMeshVoxel()). А вот масштаб вокселя склейка не применяет: во вложенном чанке воксель меньше 1, и меш нужно уменьшить самим (мы так и сделаем). Мешбуферы копируются вместе с материалами, так что у каждой части может быть своя текстура. Возвращается новый меш - его можно сразу отдавать врапперу.</p>
+<p>Отсюда правило раскладки: в glues[i] (i от 1 до 6) кладём только то, что лежит на границе вокселя с этой стороны и полностью закрыто, если с этой стороны стоит целый непрозрачный блок. Всё остальное - части внутри вокселя или те, что сосед закрывает не целиком, - в glues[0]. Если с какой-то стороны на границе ничего нет, кладём туда пустой меш (без мешбуферов), а не NULL.</p>
+<p>Посмотрим на полублок (нижняя половина ячейки, по высоте от -0.5 до 0):</p><ul>
+<li>верх полублока лежит на высоте 0, внутри ячейки. Его никакой сосед не закрывает - он всегда виден: glues[0];</li>
+<li>четыре боковые стенки высотой в полблока лежат на границе ячейки. Если сбоку стоит целый блок, стенка закрыта: glues[1]...glues[4];</li>
+<li>сверху (y+) на границе ячейки у полублока ничего нет: glues[5] - пустой меш;</li>
+<li>низ лежит на границе и закрыт блоком снизу: glues[6].</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="irrtut4_tester"></a>
+Тестер прозрачности</h1>
+<div class="fragment"><div class="line"><span class="comment">// Прозрачность для видимости граней: полублок, лестница и растение не закрывают грани соседей целиком.</span></div>
+<div class="line"><span class="keyword">class </span>MyTransparentTester : <span class="keyword">public</span> SimpleVoxelObjectTransparentTester</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="comment">// svo - сосед (всегда блок: не чанк и не NULL), parent - блок, грань которого проверяется (может быть NULL).</span></div>
+<div class="line">    <span class="keywordtype">bool</span> isTransparent(SimpleVoxelObject* svo, SimpleVoxelObject*)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">return</span> ((MyBlock*)svo)-&gt;getId() != ID_STONE; <span class="comment">// Непрозрачен только целый камень.</span></div>
+<div class="line">    }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Представьте целый камень, рядом с которым стоит полублок. Ядро спрашивает: видна ли грань камня, обращённая к полублоку? Без тестера полублок считается непрозрачным, грань камня не рисуется - и над полублоком в камне зияет дыра, сквозь которую видно пустоту. Поэтому все неполные блоки мы объявляем прозрачными.</p>
+<p>У такого решения есть цена. Тестер не знает, какая именно грань проверяется, - только кто сосед и чья грань. Поэтому он не может сказать "полублок закрывает грань снизу, но не сбоку". В итоге рисуются и лишние грани: верх камня под полублоком, стенки между двумя полублоками, стоящими рядом. Их не видно, они только добавляют немного треугольников. Лишняя грань лучше дыры. А вот собственные грани полублока считаются правильно: его низ на камне закрыт, потому что камень (сосед) непрозрачен.</p>
+<p>parent может быть NULL (когда проверяется грань самого вложенного чанка - вместо чанка передаётся NULL), поэтому если он вам нужен (как для стекла в уроке 4 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>), проверяйте его перед использованием. Вложенные чанки тестеру не передаются никогда - их ядро проверяет само.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut4_mesh"></a>
+Строим меши частей</h1>
+<p>Нам понадобятся несколько помощников. Первый добавляет в мешбуфер квадрат: </p><div class="fragment"><div class="line"><span class="comment">// Добавляет в мешбуфер квадрат p0-p1-p2-p3 (углы по кругу) лицом в сторону normal.</span></div>
+<div class="line"><span class="keywordtype">void</span> addQuad(SMeshBuffer* mb, vector3df p0, vector3df p1, vector3df p2, vector3df p3, vector3df normal)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">if</span>((p1 - p0).crossProduct(p2 - p0).dotProduct(normal) &lt; 0) { vector3df t = p1; p1 = p3; p3 = t; } <span class="comment">// Обход - лицом к normal.</span></div>
+<div class="line">    vector3df p[4] = { p0, p1, p2, p3 };</div>
+<div class="line">    u16 first = (u16)mb-&gt;Vertices.size();</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="comment">// Текстурные координаты - по положению на грани: кусок грани берёт свой кусок текстуры (верх картинки - сверху).</span></div>
+<div class="line">        f32 u = p[i].X + 0.5f, v = p[i].Z + 0.5f;</div>
+<div class="line">        <span class="keywordflow">if</span>(fabsf(normal.X) &gt; 0.5f) { u = p[i].Z + 0.5f; v = 0.5f - p[i].Y; }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(fabsf(normal.Z) &gt; 0.5f) { v = 0.5f - p[i].Y; }</div>
+<div class="line">        mb-&gt;Vertices.push_back(S3DVertex(p[i], normal, SColor(255, 255, 255, 255), vector2df(u, v)));</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keyword">const</span> u16 indices[6] = { 0, 1, 2, 0, 2, 3 };</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 6; i++) mb-&gt;Indices.push_back(first + indices[i]);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Irrlicht не рисует обратную сторону треугольника (если не выключить EMF_BACK_FACE_CULLING), поэтому важно, куда он смотрит. Лицевая сторона треугольника (a, b, c) смотрит туда же, куда векторное произведение (b - a) x (c - a), - так устроена и грань createFaceMesh(). Помощник проверяет это и, если нужно, меняет обход углов, так что углы можно перечислять в любую сторону. Текстурные координаты берутся по положению вершины на грани: половинка стенки получит половинку текстуры, и полублок выглядит как обрезанный камень, а не как сжатый.</p>
+<p>Второй помощник добавляет одну грань коробки - в том же порядке, что и видимость граней: </p><div class="fragment"><div class="line"><span class="comment">// Добавляет в мешбуфер грань face (порядок видимости: x+, z+, x-, z-, y+, y-) коробки от a до b.</span></div>
+<div class="line"><span class="keywordtype">void</span> addBoxFace(SMeshBuffer* mb, vector3df a, vector3df b, <span class="keywordtype">int</span> face)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">switch</span>(face)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">case</span> 0: addQuad(mb, vector3df(b.X, a.Y, a.Z), vector3df(b.X, a.Y, b.Z), vector3df(b.X, b.Y, b.Z), vector3df(b.X, b.Y, a.Z), vector3df(1, 0, 0)); <span class="keywordflow">break</span>;</div>
+<div class="line">        <span class="keywordflow">case</span> 1: addQuad(mb, vector3df(a.X, a.Y, b.Z), vector3df(b.X, a.Y, b.Z), vector3df(b.X, b.Y, b.Z), vector3df(a.X, b.Y, b.Z), vector3df(0, 0, 1)); <span class="keywordflow">break</span>;</div>
+<div class="line">        <span class="keywordflow">case</span> 2: addQuad(mb, vector3df(a.X, a.Y, a.Z), vector3df(a.X, a.Y, b.Z), vector3df(a.X, b.Y, b.Z), vector3df(a.X, b.Y, a.Z), vector3df(-1, 0, 0)); <span class="keywordflow">break</span>;</div>
+<div class="line">        <span class="keywordflow">case</span> 3: addQuad(mb, vector3df(a.X, a.Y, a.Z), vector3df(b.X, a.Y, a.Z), vector3df(b.X, b.Y, a.Z), vector3df(a.X, b.Y, a.Z), vector3df(0, 0, -1)); <span class="keywordflow">break</span>;</div>
+<div class="line">        <span class="keywordflow">case</span> 4: addQuad(mb, vector3df(a.X, b.Y, a.Z), vector3df(b.X, b.Y, a.Z), vector3df(b.X, b.Y, b.Z), vector3df(a.X, b.Y, b.Z), vector3df(0, 1, 0)); <span class="keywordflow">break</span>;</div>
+<div class="line">        <span class="keywordflow">case</span> 5: addQuad(mb, vector3df(a.X, a.Y, a.Z), vector3df(b.X, a.Y, a.Z), vector3df(b.X, a.Y, b.Z), vector3df(a.X, a.Y, b.Z), vector3df(0, -1, 0)); <span class="keywordflow">break</span>;</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> И ещё два коротких: новый мешбуфер с текстурой и меш из мешбуфера (пустой мешбуфер даёт пустой меш - как раз то, что нужно для "ничего нет на этой стороне"): </p><div class="fragment"><div class="line"><span class="comment">// Новый пустой мешбуфер с текстурой.</span></div>
+<div class="line">SMeshBuffer* newBuffer(ITexture* texture)</div>
+<div class="line">{</div>
+<div class="line">    SMeshBuffer* mb = <span class="keyword">new</span> SMeshBuffer;</div>
+<div class="line">    mb-&gt;Material.setTexture(0, texture);</div>
+<div class="line">    <span class="keywordflow">return</span> mb;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Меш из мешбуфера (пустой мешбуфер - пустой меш без мешбуферов). Мешбуфер забирает меш.</span></div>
+<div class="line">IMesh* newMesh(SMeshBuffer* mb)</div>
+<div class="line">{</div>
+<div class="line">    SMesh* mesh = <span class="keyword">new</span> SMesh;</div>
+<div class="line">    <span class="keywordflow">if</span>(mb-&gt;getVertexCount() &gt; 0)</div>
+<div class="line">    {</div>
+<div class="line">        mb-&gt;recalculateBoundingBox();</div>
+<div class="line">        mesh-&gt;addMeshBuffer(mb);</div>
+<div class="line">    }</div>
+<div class="line">    mb-&gt;drop();</div>
+<div class="line">    mesh-&gt;recalculateBoundingBox();</div>
+<div class="line">    <span class="keywordflow">return</span> mesh;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Текстуры, как и в уроке 3, рисуем в коде: камень - серая шахматка, растение - зелёные стебли на прозрачном фоне (у прозрачных пикселей альфа равна 0). Функцию makeTexture() смотрите в полном коде.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut4_factory"></a>
+Фабрика: полублок, лестница, растение</h1>
+<p>Все части строим один раз, в конструкторе фабрики (главный поток). Начнём с полублока: </p><div class="fragment"><div class="line"><span class="keyword">const</span> vector3df low(-0.5f, -0.5f, -0.5f), high(0.5f, 0.5f, 0.5f);</div>
+<div class="line"><span class="comment">// Полублок: коробка от низа до середины вокселя.</span></div>
+<div class="line"><span class="keyword">const</span> vector3df slabhigh(0.5f, 0, 0.5f);</div>
+<div class="line">SMeshBuffer* mb = newBuffer(stone);</div>
+<div class="line">addBoxFace(mb, low, slabhigh, 4); <span class="comment">// Верх полублока лежит внутри вокселя - виден всегда: glues[0].</span></div>
+<div class="line">s_Slab[0] = newMesh(mb);</div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> face = 0; face &lt; 6; face++)</div>
+<div class="line">{</div>
+<div class="line">    mb = newBuffer(stone);</div>
+<div class="line">    <span class="keywordflow">if</span>(face != 4) addBoxFace(mb, low, slabhigh, face); <span class="comment">// На границе вокселя сверху у полублока ничего нет - пустой меш.</span></div>
+<div class="line">    s_Slab[face + 1] = newMesh(mb);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Ровно по разобранной выше раскладке: верх коробки - в s_Slab[0], остальные грани - каждая в свою ячейку, а для y+ (face == 4) - пустой меш.</p>
+<p>Лестница - нижняя половина целиком и верхняя четверть со стороны x+ (ступенька поднимается в сторону +X): </p><div class="fragment"><div class="line"><span class="comment">// Лестница: нижняя половина целиком и верхняя четверть со стороны x+.</span></div>
+<div class="line"><span class="keyword">const</span> vector3df steplow(0, 0, -0.5f);</div>
+<div class="line">mb = newBuffer(stone);</div>
+<div class="line">addBoxFace(mb, low, vector3df(0, 0, 0.5f), 4); <span class="comment">// Верх нижней ступеньки (внутри вокселя).</span></div>
+<div class="line">addBoxFace(mb, steplow, high, 2); <span class="comment">// Подступёнок - вертикальная стенка внутри вокселя.</span></div>
+<div class="line">s_Stairs[0] = newMesh(mb);</div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> face = 0; face &lt; 6; face++)</div>
+<div class="line">{</div>
+<div class="line">    mb = newBuffer(stone);</div>
+<div class="line">    <span class="keywordflow">if</span>(face != 4) addBoxFace(mb, low, slabhigh, face); <span class="comment">// Нижняя половина - все грани, кроме верха.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(face != 2 &amp;&amp; face != 5) addBoxFace(mb, steplow, high, face); <span class="comment">// Верхняя четверть - грани на границе вокселя.</span></div>
+<div class="line">    s_Stairs[face + 1] = newMesh(mb);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Внутри ячейки у лестницы две части: верх нижней ступеньки (на высоте 0, от x = -0.5 до 0) и подступёнок - вертикальная стенка на x = 0, смотрящая в -X. Они всегда видны - в s_Stairs[0]. На границе ячейки: справа (x+) - вся стенка целиком (низ коробки плюс верх ступеньки), спереди и сзади (z+ и z-) - "буква Г" из двух кусков, слева (x-) - только нижняя половина, сверху (y+) - верх ступеньки (он на высоте 0.5, на границе, и закрыт блоком сверху), снизу - дно. Получается, что в одной ячейке массива может лежать несколько кусков - это нормально, они просто склеиваются.</p>
+<p>Если лестницам нужны четыре направления, постройте четыре таких набора (повернув части вокруг оси Y) и храните направление в блоке, передавая его в VoxelInfo. При повороте меняется и то, в какой ячейке массива лежит какая стенка: стенка, которая была на x+, после поворота окажется на другой стороне и должна лечь в ячейку той стороны.</p>
+<p>Растение "крестом" - два пересекающихся по диагонали квадрата: </p><div class="fragment"><div class="line"><span class="comment">// Растение &quot;крестом&quot;: два пересекающихся квадрата - glues[0], граней на границе вокселя нет.</span></div>
+<div class="line">mb = newBuffer(plant);</div>
+<div class="line">addQuad(mb, vector3df(-0.45f, -0.5f, -0.45f), vector3df(0.45f, -0.5f, 0.45f), vector3df(0.45f, 0.5f, 0.45f), vector3df(-0.45f, 0.5f, -0.45f), vector3df(0.707f, 0, -0.707f));</div>
+<div class="line">addQuad(mb, vector3df(-0.45f, -0.5f, 0.45f), vector3df(0.45f, -0.5f, -0.45f), vector3df(0.45f, 0.5f, -0.45f), vector3df(-0.45f, 0.5f, 0.45f), vector3df(0.707f, 0, 0.707f));</div>
+<div class="line">s_Plant[0] = newMesh(mb);</div>
+<div class="line">s_Empty = newMesh(newBuffer(0)); <span class="comment">// Пустой меш: грань есть, но рисовать на ней нечего.</span></div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 1; i &lt; 7; i++) s_Plant[i] = s_Empty;</div>
+</div><!-- fragment --><p> Обе плоскости проходят внутри ячейки, значит, обе - в glues[0], а все шесть граней - один общий пустой меш. Один и тот же меш можно класть в несколько ячеек: склейка его только читает.</p>
+<p>Теперь сама getMeshVoxel(): </p><div class="fragment"><div class="line">IMesh* getMeshVoxel(VoxelForRendering* vxl)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = ((MyVoxelInfo*)vxl-&gt;getVoxelInfo())-&gt;s_Id;</div>
+<div class="line">    <span class="keywordflow">if</span>(<span class="keywordtype">id</span> == ID_STONE) <span class="keywordflow">return</span> getMeshCubeFaces(vxl, s_Face, vector3df(1, 1, 1)); <span class="comment">// Обычный куб (и маленький - тоже).</span></div>
+<div class="line">    IMesh* mesh = getMeshVoxelByGlue(vxl, <span class="keywordtype">id</span> == ID_SLAB ? s_Slab : (<span class="keywordtype">id</span> == ID_STAIRS ? s_Stairs : s_Plant));</div>
+<div class="line">    <span class="comment">// Склейка берёт меши &quot;как есть&quot;: во вложенном чанке (воксель меньше 1) уменьшаем сами.</span></div>
+<div class="line">    Vector3d&lt;float&gt; scale = vxl-&gt;getScale();</div>
+<div class="line">    <span class="keywordflow">if</span>(mesh &amp;&amp; scale.getX() != 1) s_MeshManipulator-&gt;scale(mesh, vector3df(scale.getX(), scale.getY(), scale.getZ()));</div>
+<div class="line">    <span class="keywordflow">return</span> mesh;</div>
+<div class="line">}</div>
+<div class="line"><span class="keywordtype">int</span> getMeshNumber(VoxelForRendering* vxl)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">return</span> ((MyVoxelInfo*)vxl-&gt;getVoxelInfo())-&gt;s_Id == ID_PLANT ? LEVEL_PLANTS : LEVEL_SOLID;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Камень - обычный куб из getMeshCubeFaces(): она сама учитывает размер вокселя, поэтому и маленький камень во вложенном чанке получится правильного размера. Остальное - склейка. Её результат - новый меш, и мы можем его менять: если воксель меньше 1 (он во вложенном чанке), уменьшаем меш манипулятором. Манипулятор меняет только вершины этого меша, поэтому вызывать его в потоке построения можно.</p>
+<p>Растения идут в свой уровень мешей. У их текстуры есть прозрачные пиксели, и им нужен материал EMT_TRANSPARENT_ALPHA_CHANNEL_REF: пиксель либо виден целиком, либо не рисуется совсем. Такой материал рисуется как непрозрачный и сортировки не требует. А ещё растение должно быть видно с обеих сторон, поэтому у его уровня мы выключим отсечение обратных сторон. Подробно об уровнях и прозрачности - в уроке 9.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut4_nested"></a>
+Вложенные чанки</h1>
+<p>Второй способ - разделить ячейку на маленькие ячейки. Вложенный чанк - это ChunkVoxelObject, который стоит в ячейке мира вместо блока и сам делится на ячейки (подробно - в уроке 13): </p><div class="fragment"><div class="line"><span class="comment">// Вложенный чанк 2x2x2: нижний слой из камня (полублок), с step == true - ещё и верх со стороны x+ (ступенька).</span></div>
+<div class="line">ChunkVoxelObject* makeNestedBlock(<span class="keywordtype">bool</span> step)</div>
+<div class="line">{</div>
+<div class="line">    ChunkVoxelObject* nested = <span class="keyword">new</span> ChunkVoxelObject();</div>
+<div class="line">    nested-&gt;setNumberOfPartitions(2);</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; 2; x++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; 2; z++)</div>
+<div class="line">        {</div>
+<div class="line">            nested-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, 0, z), <span class="keyword">new</span> MyBlock(ID_STONE), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">            <span class="keywordflow">if</span>(step &amp;&amp; x == 1) nested-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, 1, z), <span class="keyword">new</span> MyBlock(ID_STONE), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">        }</div>
+<div class="line">    <span class="keywordflow">return</span> nested;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Вложенный чанк можно заполнить до вставки в мир, а ставится он, как обычный блок, - например, через setSimpleVoxelObjectByGlobalVector(). Фабрике ничего особенного делать не нужно: каждый маленький кубик приходит в getMeshVoxel() как обычный воксель, только с размером 0.5.</p>
+<p>Зато видимость граней здесь точная, и без всякого тестера: ядро проверяет каждую маленькую ячейку, которая касается грани соседа. Под полублоком из маленьких кубиков верх пола закрыт, потому что все четыре маленькие ячейки над ним заняты камнем. Стенки между маленькими кубиками тоже не рисуются. А если вложенный чанк заполнен не целиком (как наш третий: маленький камень и маленькое растение), ядро видит пустые маленькие ячейки, и грань пола под ним видна.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut4_main"></a>
+Мир</h1>
+<div class="fragment"><div class="line">MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">factory-&gt;setNumberOfMeshesSceneNodeForChunk(2); <span class="comment">// Два уровня: камень и растения.</span></div>
+<div class="line">factory-&gt;setMaterialType(LEVEL_PLANTS, EMT_TRANSPARENT_ALPHA_CHANNEL_REF); <span class="comment">// Прозрачные пиксели - &quot;вырезаны&quot;.</span></div>
+<div class="line">factory-&gt;setPositionScale(16);</div>
+<div class="line">factory-&gt;setSScale(16);</div>
+<div class="line">isve-&gt;setFactoryChunkMeshSceneNode(factory);</div>
+<div class="line"><span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld();</div>
+<div class="line">isve-&gt;getWorld(<span class="keywordtype">id</span>)-&gt;setSimpleVoxelObjectTransparentTester(<span class="keyword">new</span> MyTransparentTester); <span class="comment">// Тестер удалит мир.</span></div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">int</span> level = 0; level &lt; 2; level++) factory-&gt;setMaterialFlag(level, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">factory-&gt;setMaterialFlag(LEVEL_PLANTS, <span class="keywordtype">id</span>, EMF_BACK_FACE_CULLING, <span class="keyword">false</span>); <span class="comment">// Растение видно с обеих сторон.</span></div>
+</div><!-- fragment --><p> Два уровня мешей: число уровней - первым, затем материал уровня растений. Тестер прозрачности ставим миру сразу после создания (до start(), пока потоков нет). Ставится он один раз, и мир удалит его сам.</p>
+<p>Дальше - каменный пол и наши блоки: </p><div class="fragment"><div class="line"><span class="comment">// Склейка из мешей (getMeshVoxelByGlue()).</span></div>
+<div class="line">isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(2, 1, 2), <span class="keyword">new</span> MyBlock(ID_SLAB));</div>
+<div class="line">isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(5, 1, 2), <span class="keyword">new</span> MyBlock(ID_SLAB)); <span class="comment">// Два полублока рядом.</span></div>
+<div class="line">isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(6, 1, 2), <span class="keyword">new</span> MyBlock(ID_SLAB));</div>
+<div class="line">isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(2, 1, 6), <span class="keyword">new</span> MyBlock(ID_STAIRS));</div>
+<div class="line">isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(9, 1, 2), <span class="keyword">new</span> MyBlock(ID_PLANT));</div>
+<div class="line">isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(10, 1, 4), <span class="keyword">new</span> MyBlock(ID_PLANT));</div>
+<div class="line"><span class="comment">// Вложенные чанки: полублок и ступенька из маленьких кубов, маленький камень с маленьким растением.</span></div>
+<div class="line">isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(2, 1, 10), makeNestedBlock(<span class="keyword">false</span>));</div>
+<div class="line">isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(5, 1, 10), makeNestedBlock(<span class="keyword">true</span>));</div>
+<div class="line">ChunkVoxelObject* nested = <span class="keyword">new</span> ChunkVoxelObject();</div>
+<div class="line">nested-&gt;setNumberOfPartitions(2);</div>
+<div class="line">nested-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">new</span> MyBlock(ID_STONE), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">nested-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(1, 0, 1), <span class="keyword">new</span> MyBlock(ID_PLANT), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(9, 1, 10), nested);</div>
+<div class="line">isve-&gt;addTaskUpdateChunks();</div>
+</div><!-- fragment --><p> Обратите внимание на маленькое растение: это склейка внутри вложенного чанка - здесь и пригождается уменьшение меша в getMeshVoxel().</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut4_compare"></a>
+Что выбрать</h1>
+<p>Склейка (getMeshVoxelByGlue()):</p><ul>
+<li>любая форма: диагонали, кресты растений, наклонные и повёрнутые части, модели;</li>
+<li>блок остаётся одним блоком: мало памяти, мало треугольников (верх полублока - один квадрат);</li>
+<li>текстура ложится естественно - как вы задали координаты;</li>
+<li>но видимость граней приблизительная: соседям приходится объявлять блок прозрачным, и рисуется немного лишних граней; геометрию частей нужно писать самим; часть блока нельзя сломать отдельно.</li>
+</ul>
+<p>Вложенные чанки:</p><ul>
+<li>точная видимость граней сама собой, фабрика не меняется;</li>
+<li>каждый маленький кубик - настоящий блок: его можно сломать или поставить отдельно, у него может быть своё освещение (в TestProject3 - режим маленьких блоков, клавиша C);</li>
+<li>но только формы из сетки кубиков; больше памяти (вложенный чанк и его ячейки на каждый блок) и больше треугольников; на маленьком кубике текстура сжимается целиком, если не пересчитать текстурные координаты (как это сделать - в уроке 13).</li>
+</ul>
+<p>Итого: для массовых декоративных блоков (полублоки, лестницы, заборы, растения, факелы) обычно лучше склейка, а для разрушаемых деталей и построек из маленьких блоков - вложенные чанки. Способы можно смешивать, как в нашем примере.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut4_errors"></a>
+Типичные ошибки</h1>
+<ul>
+<li>В ячейку грани положен NULL вместо пустого меша: как только грань станет видна, меш чанка не построится.</li>
+<li>Внутренняя часть блока (верх полублока, подступёнок, растение) положена в ячейку грани: она пропадает, когда рядом ставят блок.</li>
+<li>Нет тестера прозрачности: у соседей полублоков и растений дыры в гранях.</li>
+<li>Меши частей сделаны не в координатах вокселя (центр - начало координат, размер 1 при наших масштабах): блок сдвинут или огромный. Склейка ничего не сдвигает и не масштабирует.</li>
+<li>Склейка во вложенном чанке не уменьшена.</li>
+<li>Растение видно только с одной стороны: не выключено EMF_BACK_FACE_CULLING у его уровня (или прозрачные пиксели чёрные - не тот материал).</li>
+</ul>
+<p>Ну и напоследок ещё раз полный код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Debug;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">enum</span> { ID_STONE = 1, ID_SLAB = 2, ID_STAIRS = 3, ID_PLANT = 4 }; <span class="comment">// Типы блоков.</span></div>
+<div class="line"><span class="keyword">enum</span> { LEVEL_SOLID = 0, LEVEL_PLANTS = 1 }; <span class="comment">// Уровни мешей: камень и растения (у растений - прозрачные пиксели).</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">struct </span>MyVoxelInfo : VoxelInfo</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>MyBlock : <span class="keyword">public</span> SimpleVoxelObject</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyBlock(<span class="keywordtype">int</span> <span class="keywordtype">id</span>) : s_Id(id) { setTypeVoxel(Defines::CUSTOM_VOXEL); }</div>
+<div class="line">    VoxelInfo* getVoxelForRenderingInfo()</div>
+<div class="line">    {</div>
+<div class="line">        MyVoxelInfo* info = <span class="keyword">new</span> MyVoxelInfo;</div>
+<div class="line">        info-&gt;s_TypeVoxelInfo = CUSTOM_VOXEL_INFO;</div>
+<div class="line">        info-&gt;s_Id = s_Id;</div>
+<div class="line">        <span class="keywordflow">return</span> info;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getId() { <span class="keywordflow">return</span> s_Id; }</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Прозрачность для видимости граней: полублок, лестница и растение не закрывают грани соседей целиком.</span></div>
+<div class="line"><span class="keyword">class </span>MyTransparentTester : <span class="keyword">public</span> SimpleVoxelObjectTransparentTester</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="comment">// svo - сосед (всегда блок: не чанк и не NULL), parent - блок, грань которого проверяется (может быть NULL).</span></div>
+<div class="line">    <span class="keywordtype">bool</span> isTransparent(SimpleVoxelObject* svo, SimpleVoxelObject*)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">return</span> ((MyBlock*)svo)-&gt;getId() != ID_STONE; <span class="comment">// Непрозрачен только целый камень.</span></div>
+<div class="line">    }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Добавляет в мешбуфер квадрат p0-p1-p2-p3 (углы по кругу) лицом в сторону normal.</span></div>
+<div class="line"><span class="keywordtype">void</span> addQuad(SMeshBuffer* mb, vector3df p0, vector3df p1, vector3df p2, vector3df p3, vector3df normal)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">if</span>((p1 - p0).crossProduct(p2 - p0).dotProduct(normal) &lt; 0) { vector3df t = p1; p1 = p3; p3 = t; } <span class="comment">// Обход - лицом к normal.</span></div>
+<div class="line">    vector3df p[4] = { p0, p1, p2, p3 };</div>
+<div class="line">    u16 first = (u16)mb-&gt;Vertices.size();</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 4; i++)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="comment">// Текстурные координаты - по положению на грани: кусок грани берёт свой кусок текстуры (верх картинки - сверху).</span></div>
+<div class="line">        f32 u = p[i].X + 0.5f, v = p[i].Z + 0.5f;</div>
+<div class="line">        <span class="keywordflow">if</span>(fabsf(normal.X) &gt; 0.5f) { u = p[i].Z + 0.5f; v = 0.5f - p[i].Y; }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(fabsf(normal.Z) &gt; 0.5f) { v = 0.5f - p[i].Y; }</div>
+<div class="line">        mb-&gt;Vertices.push_back(S3DVertex(p[i], normal, SColor(255, 255, 255, 255), vector2df(u, v)));</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keyword">const</span> u16 indices[6] = { 0, 1, 2, 0, 2, 3 };</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 6; i++) mb-&gt;Indices.push_back(first + indices[i]);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Добавляет в мешбуфер грань face (порядок видимости: x+, z+, x-, z-, y+, y-) коробки от a до b.</span></div>
+<div class="line"><span class="keywordtype">void</span> addBoxFace(SMeshBuffer* mb, vector3df a, vector3df b, <span class="keywordtype">int</span> face)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">switch</span>(face)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">case</span> 0: addQuad(mb, vector3df(b.X, a.Y, a.Z), vector3df(b.X, a.Y, b.Z), vector3df(b.X, b.Y, b.Z), vector3df(b.X, b.Y, a.Z), vector3df(1, 0, 0)); <span class="keywordflow">break</span>;</div>
+<div class="line">        <span class="keywordflow">case</span> 1: addQuad(mb, vector3df(a.X, a.Y, b.Z), vector3df(b.X, a.Y, b.Z), vector3df(b.X, b.Y, b.Z), vector3df(a.X, b.Y, b.Z), vector3df(0, 0, 1)); <span class="keywordflow">break</span>;</div>
+<div class="line">        <span class="keywordflow">case</span> 2: addQuad(mb, vector3df(a.X, a.Y, a.Z), vector3df(a.X, a.Y, b.Z), vector3df(a.X, b.Y, b.Z), vector3df(a.X, b.Y, a.Z), vector3df(-1, 0, 0)); <span class="keywordflow">break</span>;</div>
+<div class="line">        <span class="keywordflow">case</span> 3: addQuad(mb, vector3df(a.X, a.Y, a.Z), vector3df(b.X, a.Y, a.Z), vector3df(b.X, b.Y, a.Z), vector3df(a.X, b.Y, a.Z), vector3df(0, 0, -1)); <span class="keywordflow">break</span>;</div>
+<div class="line">        <span class="keywordflow">case</span> 4: addQuad(mb, vector3df(a.X, b.Y, a.Z), vector3df(b.X, b.Y, a.Z), vector3df(b.X, b.Y, b.Z), vector3df(a.X, b.Y, b.Z), vector3df(0, 1, 0)); <span class="keywordflow">break</span>;</div>
+<div class="line">        <span class="keywordflow">case</span> 5: addQuad(mb, vector3df(a.X, a.Y, a.Z), vector3df(b.X, a.Y, a.Z), vector3df(b.X, a.Y, b.Z), vector3df(a.X, a.Y, b.Z), vector3df(0, -1, 0)); <span class="keywordflow">break</span>;</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Новый пустой мешбуфер с текстурой.</span></div>
+<div class="line">SMeshBuffer* newBuffer(ITexture* texture)</div>
+<div class="line">{</div>
+<div class="line">    SMeshBuffer* mb = <span class="keyword">new</span> SMeshBuffer;</div>
+<div class="line">    mb-&gt;Material.setTexture(0, texture);</div>
+<div class="line">    <span class="keywordflow">return</span> mb;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Меш из мешбуфера (пустой мешбуфер - пустой меш без мешбуферов). Мешбуфер забирает меш.</span></div>
+<div class="line">IMesh* newMesh(SMeshBuffer* mb)</div>
+<div class="line">{</div>
+<div class="line">    SMesh* mesh = <span class="keyword">new</span> SMesh;</div>
+<div class="line">    <span class="keywordflow">if</span>(mb-&gt;getVertexCount() &gt; 0)</div>
+<div class="line">    {</div>
+<div class="line">        mb-&gt;recalculateBoundingBox();</div>
+<div class="line">        mesh-&gt;addMeshBuffer(mb);</div>
+<div class="line">    }</div>
+<div class="line">    mb-&gt;drop();</div>
+<div class="line">    mesh-&gt;recalculateBoundingBox();</div>
+<div class="line">    <span class="keywordflow">return</span> mesh;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Текстура 16x16 из кода: камень - серая шахматка, растение - зелёные стебли на прозрачном фоне.</span></div>
+<div class="line">ITexture* makeTexture(IVideoDriver* driver, <span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keywordtype">bool</span> plant)</div>
+<div class="line">{</div>
+<div class="line">    IImage* image = driver-&gt;createImage(ECF_A8R8G8B8, dimension2d&lt;u32&gt;(16, 16));</div>
+<div class="line">    <span class="keywordflow">for</span>(u32 y = 0; y &lt; 16; y++)</div>
+<div class="line">        <span class="keywordflow">for</span>(u32 x = 0; x &lt; 16; x++)</div>
+<div class="line">        {</div>
+<div class="line">            SColor c = ((x / 4 + y / 4) % 2) ? SColor(255, 150, 150, 150) : SColor(255, 120, 120, 120);</div>
+<div class="line">            <span class="keywordflow">if</span>(plant) c = ((x == 7 || x == 8 || (x + y) % 6 == 0) &amp;&amp; y &gt; 2) ? SColor(255, 50, 160, 40) : SColor(0, 0, 0, 0);</div>
+<div class="line">            image-&gt;setPixel(x, y, c);</div>
+<div class="line">        }</div>
+<div class="line">    ITexture* texture = driver-&gt;addTexture(name, image);</div>
+<div class="line">    image-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> texture;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        IVideoDriver* driver = device-&gt;getVideoDriver();</div>
+<div class="line">        s_MeshManipulator = device-&gt;getSceneManager()-&gt;getMeshManipulator();</div>
+<div class="line">        ITexture* stone = makeTexture(driver, <span class="stringliteral">&quot;stone&quot;</span>, <span class="keyword">false</span>);</div>
+<div class="line">        ITexture* plant = makeTexture(driver, <span class="stringliteral">&quot;plant&quot;</span>, <span class="keyword">true</span>);</div>
+<div class="line">        s_Face = createFaceMesh();</div>
+<div class="line">        s_Face-&gt;getMeshBuffer(0)-&gt;getMaterial().setTexture(0, stone);</div>
+<div class="line">        <span class="keyword">const</span> vector3df low(-0.5f, -0.5f, -0.5f), high(0.5f, 0.5f, 0.5f);</div>
+<div class="line">        <span class="comment">// Полублок: коробка от низа до середины вокселя.</span></div>
+<div class="line">        <span class="keyword">const</span> vector3df slabhigh(0.5f, 0, 0.5f);</div>
+<div class="line">        SMeshBuffer* mb = newBuffer(stone);</div>
+<div class="line">        addBoxFace(mb, low, slabhigh, 4); <span class="comment">// Верх полублока лежит внутри вокселя - виден всегда: glues[0].</span></div>
+<div class="line">        s_Slab[0] = newMesh(mb);</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> face = 0; face &lt; 6; face++)</div>
+<div class="line">        {</div>
+<div class="line">            mb = newBuffer(stone);</div>
+<div class="line">            <span class="keywordflow">if</span>(face != 4) addBoxFace(mb, low, slabhigh, face); <span class="comment">// На границе вокселя сверху у полублока ничего нет - пустой меш.</span></div>
+<div class="line">            s_Slab[face + 1] = newMesh(mb);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="comment">// Лестница: нижняя половина целиком и верхняя четверть со стороны x+.</span></div>
+<div class="line">        <span class="keyword">const</span> vector3df steplow(0, 0, -0.5f);</div>
+<div class="line">        mb = newBuffer(stone);</div>
+<div class="line">        addBoxFace(mb, low, vector3df(0, 0, 0.5f), 4); <span class="comment">// Верх нижней ступеньки (внутри вокселя).</span></div>
+<div class="line">        addBoxFace(mb, steplow, high, 2); <span class="comment">// Подступёнок - вертикальная стенка внутри вокселя.</span></div>
+<div class="line">        s_Stairs[0] = newMesh(mb);</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> face = 0; face &lt; 6; face++)</div>
+<div class="line">        {</div>
+<div class="line">            mb = newBuffer(stone);</div>
+<div class="line">            <span class="keywordflow">if</span>(face != 4) addBoxFace(mb, low, slabhigh, face); <span class="comment">// Нижняя половина - все грани, кроме верха.</span></div>
+<div class="line">            <span class="keywordflow">if</span>(face != 2 &amp;&amp; face != 5) addBoxFace(mb, steplow, high, face); <span class="comment">// Верхняя четверть - грани на границе вокселя.</span></div>
+<div class="line">            s_Stairs[face + 1] = newMesh(mb);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="comment">// Растение &quot;крестом&quot;: два пересекающихся квадрата - glues[0], граней на границе вокселя нет.</span></div>
+<div class="line">        mb = newBuffer(plant);</div>
+<div class="line">        addQuad(mb, vector3df(-0.45f, -0.5f, -0.45f), vector3df(0.45f, -0.5f, 0.45f), vector3df(0.45f, 0.5f, 0.45f), vector3df(-0.45f, 0.5f, -0.45f), vector3df(0.707f, 0, -0.707f));</div>
+<div class="line">        addQuad(mb, vector3df(-0.45f, -0.5f, 0.45f), vector3df(0.45f, -0.5f, -0.45f), vector3df(0.45f, 0.5f, -0.45f), vector3df(-0.45f, 0.5f, 0.45f), vector3df(0.707f, 0, 0.707f));</div>
+<div class="line">        s_Plant[0] = newMesh(mb);</div>
+<div class="line">        s_Empty = newMesh(newBuffer(0)); <span class="comment">// Пустой меш: грань есть, но рисовать на ней нечего.</span></div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 1; i &lt; 7; i++) s_Plant[i] = s_Empty;</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory()</div>
+<div class="line">    {</div>
+<div class="line">        s_Face-&gt;drop();</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 7; i++) { s_Slab[i]-&gt;drop(); s_Stairs[i]-&gt;drop(); }</div>
+<div class="line">        s_Plant[0]-&gt;drop();</div>
+<div class="line">        s_Empty-&gt;drop();</div>
+<div class="line">    }</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordtype">int</span> <span class="keywordtype">id</span> = ((MyVoxelInfo*)vxl-&gt;getVoxelInfo())-&gt;s_Id;</div>
+<div class="line">        <span class="keywordflow">if</span>(<span class="keywordtype">id</span> == ID_STONE) <span class="keywordflow">return</span> getMeshCubeFaces(vxl, s_Face, vector3df(1, 1, 1)); <span class="comment">// Обычный куб (и маленький - тоже).</span></div>
+<div class="line">        IMesh* mesh = getMeshVoxelByGlue(vxl, <span class="keywordtype">id</span> == ID_SLAB ? s_Slab : (<span class="keywordtype">id</span> == ID_STAIRS ? s_Stairs : s_Plant));</div>
+<div class="line">        <span class="comment">// Склейка берёт меши &quot;как есть&quot;: во вложенном чанке (воксель меньше 1) уменьшаем сами.</span></div>
+<div class="line">        Vector3d&lt;float&gt; scale = vxl-&gt;getScale();</div>
+<div class="line">        <span class="keywordflow">if</span>(mesh &amp;&amp; scale.getX() != 1) s_MeshManipulator-&gt;scale(mesh, vector3df(scale.getX(), scale.getY(), scale.getZ()));</div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering* vxl)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">return</span> ((MyVoxelInfo*)vxl-&gt;getVoxelInfo())-&gt;s_Id == ID_PLANT ? LEVEL_PLANTS : LEVEL_SOLID;</div>
+<div class="line">    }</div>
+<div class="line">    IMesh* s_Face;</div>
+<div class="line">    IMesh* s_Slab[7];</div>
+<div class="line">    IMesh* s_Stairs[7];</div>
+<div class="line">    IMesh* s_Plant[7];</div>
+<div class="line">    IMesh* s_Empty;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Вложенный чанк 2x2x2: нижний слой из камня (полублок), с step == true - ещё и верх со стороны x+ (ступенька).</span></div>
+<div class="line">ChunkVoxelObject* makeNestedBlock(<span class="keywordtype">bool</span> step)</div>
+<div class="line">{</div>
+<div class="line">    ChunkVoxelObject* nested = <span class="keyword">new</span> ChunkVoxelObject();</div>
+<div class="line">    nested-&gt;setNumberOfPartitions(2);</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; 2; x++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; 2; z++)</div>
+<div class="line">        {</div>
+<div class="line">            nested-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, 0, z), <span class="keyword">new</span> MyBlock(ID_STONE), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">            <span class="keywordflow">if</span>(step &amp;&amp; x == 1) nested-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, 1, z), <span class="keyword">new</span> MyBlock(ID_STONE), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">        }</div>
+<div class="line">    <span class="keywordflow">return</span> nested;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(1280, 720));</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger;</div>
+<div class="line">    lgr-&gt;setPrintStandard(<span class="keyword">false</span>);</div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device, lgr);</div>
+<div class="line">    lgr-&gt;drop();</div>
+<div class="line">    MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">    factory-&gt;setNumberOfMeshesSceneNodeForChunk(2); <span class="comment">// Два уровня: камень и растения.</span></div>
+<div class="line">    factory-&gt;setMaterialType(LEVEL_PLANTS, EMT_TRANSPARENT_ALPHA_CHANNEL_REF); <span class="comment">// Прозрачные пиксели - &quot;вырезаны&quot;.</span></div>
+<div class="line">    factory-&gt;setPositionScale(16);</div>
+<div class="line">    factory-&gt;setSScale(16);</div>
+<div class="line">    isve-&gt;setFactoryChunkMeshSceneNode(factory);</div>
+<div class="line">    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld();</div>
+<div class="line">    isve-&gt;getWorld(<span class="keywordtype">id</span>)-&gt;setSimpleVoxelObjectTransparentTester(<span class="keyword">new</span> MyTransparentTester); <span class="comment">// Тестер удалит мир.</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> level = 0; level &lt; 2; level++) factory-&gt;setMaterialFlag(level, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">    factory-&gt;setMaterialFlag(LEVEL_PLANTS, <span class="keywordtype">id</span>, EMF_BACK_FACE_CULLING, <span class="keyword">false</span>); <span class="comment">// Растение видно с обеих сторон.</span></div>
+<div class="line">    isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">true</span>);</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; 16; x++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; 16; z++)</div>
+<div class="line">            isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(x, 0, z), <span class="keyword">new</span> MyBlock(ID_STONE)); <span class="comment">// Каменный пол.</span></div>
+<div class="line">    <span class="comment">// Склейка из мешей (getMeshVoxelByGlue()).</span></div>
+<div class="line">    isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(2, 1, 2), <span class="keyword">new</span> MyBlock(ID_SLAB));</div>
+<div class="line">    isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(5, 1, 2), <span class="keyword">new</span> MyBlock(ID_SLAB)); <span class="comment">// Два полублока рядом.</span></div>
+<div class="line">    isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(6, 1, 2), <span class="keyword">new</span> MyBlock(ID_SLAB));</div>
+<div class="line">    isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(2, 1, 6), <span class="keyword">new</span> MyBlock(ID_STAIRS));</div>
+<div class="line">    isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(9, 1, 2), <span class="keyword">new</span> MyBlock(ID_PLANT));</div>
+<div class="line">    isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(10, 1, 4), <span class="keyword">new</span> MyBlock(ID_PLANT));</div>
+<div class="line">    <span class="comment">// Вложенные чанки: полублок и ступенька из маленьких кубов, маленький камень с маленьким растением.</span></div>
+<div class="line">    isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(2, 1, 10), makeNestedBlock(<span class="keyword">false</span>));</div>
+<div class="line">    isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(5, 1, 10), makeNestedBlock(<span class="keyword">true</span>));</div>
+<div class="line">    ChunkVoxelObject* nested = <span class="keyword">new</span> ChunkVoxelObject();</div>
+<div class="line">    nested-&gt;setNumberOfPartitions(2);</div>
+<div class="line">    nested-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">new</span> MyBlock(ID_STONE), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">    nested-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(1, 0, 1), <span class="keyword">new</span> MyBlock(ID_PLANT), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">    isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(9, 1, 10), nested);</div>
+<div class="line">    isve-&gt;addTaskUpdateChunks();</div>
+<div class="line">    ICameraSceneNode* camera = device-&gt;getSceneManager()-&gt;addCameraSceneNodeFPS();</div>
+<div class="line">    camera-&gt;setPosition(vector3df(6, 6, -4));</div>
+<div class="line">    camera-&gt;setTarget(vector3df(6, 0, 6));</div>
+<div class="line">    isve-&gt;start();</div>
+<div class="line">    <span class="keywordflow">while</span>(isve-&gt;runIrrDevice())</div>
+<div class="line">    {</div>
+<div class="line">        isve-&gt;update();</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 120, 160, 220));</div>
+<div class="line">        device-&gt;getSceneManager()-&gt;drawAll();</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;endScene();</div>
+<div class="line">    }</div>
+<div class="line">    isve-&gt;stop();</div>
+<div class="line">    <span class="keyword">delete</span> isve;</div>
+<div class="line">    device-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="a_irr_simple_voxel_engine_8h_html"><div class="ttname"><a href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a></div><div class="ttdoc">Главный заголовочный файл. Необходимо присоединять только его к проекту.</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">SimpleVoxelEngine::IrrEngine</a></div><div class="ttdoc">Главное пространство имён IrrSimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:13</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:11</div></div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="tutorials.html">Уроки по врапперу IrrSimpleVoxelEngine.</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

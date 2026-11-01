@@ -3,7 +3,7 @@
  чтобы работать именно с ним. Начнём по порядку, подключим пространства имён и библиотеки:
  \code
  #include <SimpleVoxelEngine.h>
- #include <cstring> // Для работы с std::string.
+ #include <string> // Для работы с std::string.
  #include <map> // Для работы с std::map.
  #include <fstream> // Для работы с файловыми потоками.
 
@@ -86,7 +86,7 @@
     if(!filechunk) // Если не смогли, то...
     {
         WorkFunctions::FileFunctions::createFolders(folder, STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER); // Создадим все папки.
-        filechunk.open(filename.c_str(), ios::out|ios::app|ios::binary); // Откроем ещё раз.
+        filechunk.open(filename.c_str(), ios::out|ios::trunc|ios::binary); // Откроем ещё раз (файл перезаписывается с начала).
         if(!filechunk) // Если неудача, то выходим из функции сохранения.
         {
             s_Engine->registerEvent(EVENT_TYPE_ERROR, "Chunk voxel not saved. Error open file for write. File: " + filename);
@@ -147,16 +147,19 @@
     filechunk >> numberofnotnullsvos; // Прочитаем количество ненулевых вокселей в чанке
     if(numberofnotnullsvos != 0) // Если есть ненулевые воксели, то читаем дальше чанк
     {
-        cvo->setNumberOfNotNullSimpleVoxelObjects(numberofnotnullsvos); // Установим чанку количество ненулевых вокселей. При работе с данными напрямую
-                                                                        // этот параметр необходимо редактировать вручную
         SimpleVoxelObject** svos = cvo->getSimpleVoxelObjects(); // Получили массив указателей на SimpleVoxelObjects.
-        bool* svocachevisible = cvo->getReCalculateVisibleCacheSimpleVoxelObjects(); // Получим ещё и кэш видимости, чтобы потом устроить полный пересчёт.
+        bool* svorecalculate = cvo->getReCalculateVisibleCacheSimpleVoxelObjects(); // Получим ещё и флаги "пересчитать видимость" (это не сам кэш видимости).
+        unsigned int created = 0; // Сколько блоков мы реально создали: записанные как -1 (чужие объекты) не восстанавливаются.
         int numbofpart = cvo->getNumberOfPartitions(); // Получили размер ребра чанка.
         int id = 0; // Сюда будем читать ID.
         Block* block; // Переменная для хранения указателя на наш воксель.
         for(int i = 0; i < numbofpart * numbofpart * numbofpart; i++) // А вот и наш цикл.
         {
-            filechunk >> id;
+            if(!(filechunk >> id)) // Файл обрезан или испорчен - не продолжаем (иначе повторялся бы последний прочитанный ID).
+            {
+                s_Engine->registerEvent(EVENT_TYPE_ERROR, "Chunk voxel not loaded. File is damaged: " + filename);
+                return false; // Мир удалит недозагруженный чанк сам.
+            }
             if(id != -1 && id != 0) // Если блок известен и ненулевой
             {
                 block = new Block(id);
@@ -166,9 +169,12 @@
                     return false;
                 }
                 svos[i] = block;
-                svocachevisible[i] = true; // А вот и указываем, что надо пересчитать видимость.
+                svorecalculate[i] = true; // А вот и указываем, что надо пересчитать видимость.
+                created++;
             }
         }
+        cvo->setNumberOfNotNullSimpleVoxelObjects(created); // При работе с данными напрямую число ненулевых вокселей ставим сами -
+                                                           // по созданным блокам (движок после загрузки всё равно его проверит).
     }
     s_Engine->registerEvent(EVENT_TYPE_STANDARD, "Chunk voxel loaded. File: " + filename); // Отправим стандартное сообщение о загрузке чанка.
     filechunk.close();
@@ -263,7 +269,7 @@
  уже на плечи конечного пользователя движка. И напоследок полностью весь код:
  \code
     #include <SimpleVoxelEngine.h>
-    #include <cstring> // Для работы с std::string.
+    #include <string> // Для работы с std::string.
     #include <map> // Для работы с std::map.
     #include <fstream> // Для работы с файловыми потоками.
     using namespace SimpleVoxelEngine;
@@ -321,7 +327,7 @@
                 if(!filechunk) // Если не смогли, то...
                 {
                     WorkFunctions::FileFunctions::createFolders(folder, STRING_CONSTANTS::DEFAULT_FOLDER_SPLITTER); // Создадим все папки.
-                    filechunk.open(filename.c_str(), ios::out|ios::app|ios::binary); // Откроем ещё раз.
+                    filechunk.open(filename.c_str(), ios::out|ios::trunc|ios::binary); // Откроем ещё раз (файл перезаписывается с начала).
                     if(!filechunk) // Если неудача, то выходим из функции сохранения.
                     {
                         s_Engine->registerEvent(EVENT_TYPE_ERROR, "Chunk voxel not saved. Error open file for write. File: " + filename);
@@ -361,16 +367,19 @@
                filechunk >> numberofnotnullsvos; // Прочитаем количество ненулевых вокселей в чанке
                if(numberofnotnullsvos != 0) // Если есть ненулевые воксели, то читаем дальше чанк
                {
-                   cvo->setNumberOfNotNullSimpleVoxelObjects(numberofnotnullsvos); // Установим чанку количество ненулевых вокселей. При работе с данными напрямую
-                                                                                   // этот параметр необходимо редактировать вручную
                    SimpleVoxelObject** svos = cvo->getSimpleVoxelObjects(); // Получили массив указателей на SimpleVoxelObjects.
-                   bool* svocachevisible = cvo->getReCalculateVisibleCacheSimpleVoxelObjects(); // Получим ещё и кэш видимости, чтобы потом устроить полный пересчёт.
+                   bool* svorecalculate = cvo->getReCalculateVisibleCacheSimpleVoxelObjects(); // Получим ещё и флаги "пересчитать видимость" (это не сам кэш видимости).
+                   unsigned int created = 0; // Сколько блоков мы реально создали: записанные как -1 (чужие объекты) не восстанавливаются.
                    int numbofpart = cvo->getNumberOfPartitions(); // Получили размер ребра чанка.
                    int id = 0; // Сюда будем читать ID.
                    Block* block; // Переменная для хранения указателя на наш воксель.
                    for(int i = 0; i < numbofpart * numbofpart * numbofpart; i++) // А вот и наш цикл.
                    {
-                       filechunk >> id;
+                       if(!(filechunk >> id)) // Файл обрезан или испорчен - не продолжаем (иначе повторялся бы последний прочитанный ID).
+                       {
+                           s_Engine->registerEvent(EVENT_TYPE_ERROR, "Chunk voxel not loaded. File is damaged: " + filename);
+                           return false; // Мир удалит недозагруженный чанк сам.
+                       }
                        if(id != -1 && id != 0) // Если блок известен и ненулевой
                        {
                            block = new Block(id);
@@ -380,9 +389,12 @@
                                return false;
                            }
                            svos[i] = block;
-                           svocachevisible[i] = true; // А вот и указываем, что надо пересчитать видимость.
+                           svorecalculate[i] = true; // А вот и указываем, что надо пересчитать видимость.
+                           created++;
                        }
                    }
+                   cvo->setNumberOfNotNullSimpleVoxelObjects(created); // При работе с данными напрямую число ненулевых вокселей ставим сами -
+                                                                      // по созданным блокам (движок после загрузки всё равно его проверит).
                }
                s_Engine->registerEvent(EVENT_TYPE_STANDARD, "Chunk voxel loaded. File: " + filename); // Отправим стандартное сообщение о загрузке чанка.
                filechunk.close();

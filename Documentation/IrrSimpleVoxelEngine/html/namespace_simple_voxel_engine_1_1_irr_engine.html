@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>IrrSimpleVoxelEngine: Пространство имен SimpleVoxelEngine::IrrEngine</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,241 +23,354 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">IrrSimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Враппер для воксельного движка на irrlicht</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li><a href="pages.html"><span>Описания</span></a></li>
-      <li class="current"><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li><a href="namespacemembers.html"><span>Члены&#160;пространств&#160;имен</span></a></li>
-    </ul>
+  <div id="splitbar" class="ui-resizable-handle">
   </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('namespace_simple_voxel_engine_1_1_irr_engine.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Друзья</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#namespaces">Пространства имен</a> &#124;
-<a href="#nested-classes">Классы</a> &#124;
-<a href="#enum-members">Перечисления</a>  </div>
-  <div class="headertitle">
-<div class="title">Пространство имен SimpleVoxelEngine::IrrEngine</div>  </div>
+  <div class="headertitle"><div class="title">Пространство имен SimpleVoxelEngine::IrrEngine</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Главное пространство имён <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html" title="Движок. ">IrrSimpleVoxelEngine</a>.  
+<p>Главное пространство имён <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html" title="Движок.">IrrSimpleVoxelEngine</a>.  
 <a href="#details">Подробнее...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Пространства имен</h2></td></tr>
-<tr class="memitem:namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html">IrrSVEDefines</a></td></tr>
+<tr class="memitem:IrrSVEDefines" id="r_IrrSVEDefines"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines.html">IrrSVEDefines</a></td></tr>
 <tr class="memdesc:namespace_simple_voxel_engine_1_1_irr_engine_1_1_irr_s_v_e_defines"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пространство имён с предопределённым константами для работы движка. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types.html">ThreadSafeTypes</a></td></tr>
-<tr class="memdesc:namespace_simple_voxel_engine_1_1_irr_engine_1_1_thread_safe_types"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пространство имён с безопасными для потоковых операций типами. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Классы</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html">ChunksMeshBlock</a></td></tr>
+<tr class="memitem:ChunksMeshBlock" id="r_ChunksMeshBlock"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html">ChunksMeshBlock</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Класс, отвечающий за объединение чанков в общие блоки.  <a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_block.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html">ChunksMeshBlocksController</a></td></tr>
+<tr class="memitem:ChunksMeshBlocksController" id="r_ChunksMeshBlocksController"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html">ChunksMeshBlocksController</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Класс для обработки блоков чанков.  <a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunks_mesh_blocks_controller.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html">FactoryChunkMeshSceneNode</a></td></tr>
+<tr class="memitem:ChunkStreamingController" id="r_ChunkStreamingController"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html">ChunkStreamingController</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Контроллер стриминга чанков - "игрок" или "камера", вокруг которых загружаются и отрисовываются чанки.  <a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html#details">Подробнее...</a><br /></td></tr>
+<tr class="memitem:ChunkStreamingPool" id="r_ChunkStreamingPool"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html">ChunkStreamingPool</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Пул контроллеров стриминга чанков.  <a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#details">Подробнее...</a><br /></td></tr>
+<tr class="memitem:ChunkStreamingState" id="r_ChunkStreamingState"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html">ChunkStreamingState</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Состояние области контроллера стриминга (см. <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html#a7f1f1192f4ad4bd3fc9696830817fc7f" title="Состояние области контроллера.">ChunkStreamingPool::getState()</a>).  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html#details">Подробнее...</a><br /></td></tr>
+<tr class="memitem:FactoryChunkMeshSceneNode" id="r_FactoryChunkMeshSceneNode"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html">FactoryChunkMeshSceneNode</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Фабрика для управления Irrlicht-нодами чанков.  <a href="class_simple_voxel_engine_1_1_irr_engine_1_1_factory_chunk_mesh_scene_node.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html">IrrSimpleVoxelEngine</a></td></tr>
+<tr class="memitem:IrrSimpleVoxelEngine" id="r_IrrSimpleVoxelEngine"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html">IrrSimpleVoxelEngine</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Движок.  <a href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_lock_data.html">LockData</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Специальная структура для блокировки памяти для отсутствия конфликтов при работе потоков.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_lock_data.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_material_flag_definition.html">MaterialFlagDefinition</a></td></tr>
+<tr class="memitem:MaterialFlagDefinition" id="r_MaterialFlagDefinition"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_material_flag_definition.html">MaterialFlagDefinition</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Структра с определениями материалов Irrlicht.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_material_flag_definition.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_parameters_for_thread_function.html">ParametersForThreadFunction</a></td></tr>
+<tr class="memitem:ParametersForThreadFunction" id="r_ParametersForThreadFunction"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_parameters_for_thread_function.html">ParametersForThreadFunction</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Структура, которая содержит параметры, передаваемые в функцию пользователя, работающую в другом потоке. От неё необходимо наследоваться.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_parameters_for_thread_function.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task.html">Task</a></td></tr>
+<tr class="memitem:StreamChunkAction" id="r_StreamChunkAction"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_stream_chunk_action.html">StreamChunkAction</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Одно действие пула стриминга.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_stream_chunk_action.html#details">Подробнее...</a><br /></td></tr>
+<tr class="memitem:Task" id="r_Task"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task.html">Task</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Структра задания.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_chunks.html">TaskAddChunks</a></td></tr>
+<tr class="memitem:TaskAddChunks" id="r_TaskAddChunks"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_chunks.html">TaskAddChunks</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Задание на создание/загрузку чанков.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_chunks.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_tasks_chunks_for_update.html">TaskAddTasksChunksForUpdate</a></td></tr>
+<tr class="memitem:TaskAddTasksChunksForUpdate" id="r_TaskAddTasksChunksForUpdate"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_tasks_chunks_for_update.html">TaskAddTasksChunksForUpdate</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Задание на обновление чанков из очереди на обновление.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_add_tasks_chunks_for_update.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html">TaskDeleteChunks</a></td></tr>
+<tr class="memitem:TaskDeleteChunks" id="r_TaskDeleteChunks"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html">TaskDeleteChunks</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Задание на удаление чанков.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_chunks.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_simple_voxel_object.html">TaskDeleteSimpleVoxelObject</a></td></tr>
+<tr class="memitem:TaskDeleteSimpleVoxelObject" id="r_TaskDeleteSimpleVoxelObject"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_simple_voxel_object.html">TaskDeleteSimpleVoxelObject</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Задание на удаление SimpleVoxelObject.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_delete_simple_voxel_object.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_run_thread_function_with_parameters.html">TaskRunThreadFunctionWithParameters</a></td></tr>
+<tr class="memitem:TaskRunThreadFunctionWithParameters" id="r_TaskRunThreadFunctionWithParameters"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_run_thread_function_with_parameters.html">TaskRunThreadFunctionWithParameters</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Задание на запуск пользователеской функции с параметрами в другом потоке.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_run_thread_function_with_parameters.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_simple_voxel_object.html">TaskSetSimpleVoxelObject</a></td></tr>
+<tr class="memitem:TaskSaveChunks" id="r_TaskSaveChunks"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_save_chunks.html">TaskSaveChunks</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Задание на сохранение всех загруженных чанков мира.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_save_chunks.html#details">Подробнее...</a><br /></td></tr>
+<tr class="memitem:TaskSetSimpleVoxelObject" id="r_TaskSetSimpleVoxelObject"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_simple_voxel_object.html">TaskSetSimpleVoxelObject</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Задание на установку SimpleVoxelObject.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_simple_voxel_object.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_update_chunk.html">TaskUpdateChunk</a></td></tr>
+<tr class="memitem:TaskSetUserControllerForThread" id="r_TaskSetUserControllerForThread"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_user_controller_for_thread.html">TaskSetUserControllerForThread</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Задание на замену контроллера пользовательских функций.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_set_user_controller_for_thread.html#details">Подробнее...</a><br /></td></tr>
+<tr class="memitem:TaskStreamChunks" id="r_TaskStreamChunks"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_stream_chunks.html">TaskStreamChunks</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Задание пула стриминга: несколько действий по порядку.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_stream_chunks.html#details">Подробнее...</a><br /></td></tr>
+<tr class="memitem:TaskUpdateChunk" id="r_TaskUpdateChunk"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_update_chunk.html">TaskUpdateChunk</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Задание на обновление чанков.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_task_update_chunk.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_user_controller_for_thread.html">UserControllerForThread</a></td></tr>
+<tr class="memitem:UserControllerForThread" id="r_UserControllerForThread"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_user_controller_for_thread.html">UserControllerForThread</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Управляющий класс для работы пользовательской функции в другом потоке.  <a href="class_simple_voxel_engine_1_1_irr_engine_1_1_user_controller_for_thread.html#details">Подробнее...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:World3DInfo" id="r_World3DInfo"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_world3_d_info.html">World3DInfo</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Структура для хранения информации о положении мира и его чанков в пространстве.  <a href="struct_simple_voxel_engine_1_1_irr_engine_1_1_world3_d_info.html#details">Подробнее...</a><br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Перечисления</h2></td></tr>
-<tr class="memitem:a6ecf5f4da4c4405f8a2d7a9f76031f0b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#a6ecf5f4da4c4405f8a2d7a9f76031f0b">MODE_MAIN_THREAD</a> { <a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#a6ecf5f4da4c4405f8a2d7a9f76031f0ba3510cd8e93f9586470b335dd1dfa8d95">NORMAL</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#a6ecf5f4da4c4405f8a2d7a9f76031f0ba2d5626b17f8e271066380f7a4b7a5a86">STANDBY_THREADS</a>
+<tr class="memitem:aa86547f7717b96a87f885fe44a34a9ae" id="r_aa86547f7717b96a87f885fe44a34a9ae"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#aa86547f7717b96a87f885fe44a34a9ae">STREAMING_SHAPE</a> { <a class="el" href="#aa86547f7717b96a87f885fe44a34a9aea867998231931d07eb3b4e3d2dd9bb803">STREAMING_SHAPE_CUBOID</a>
+, <a class="el" href="#aa86547f7717b96a87f885fe44a34a9aea31ea212c071b6345c12ef0d82ef75b29">STREAMING_SHAPE_CYLINDER</a>
+, <a class="el" href="#aa86547f7717b96a87f885fe44a34a9aea2de0cb16b1cd5147e2cf3f94c6797b32">STREAMING_SHAPE_ELLIPSOID</a>
  }</td></tr>
-<tr class="memdesc:a6ecf5f4da4c4405f8a2d7a9f76031f0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Типы работы главного потока.  <a href="namespace_simple_voxel_engine_1_1_irr_engine.html#a6ecf5f4da4c4405f8a2d7a9f76031f0b">Подробнее...</a><br /></td></tr>
-<tr class="separator:a6ecf5f4da4c4405f8a2d7a9f76031f0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae55e1933edaf5aa6e189cbf4d9a8f066"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#ae55e1933edaf5aa6e189cbf4d9a8f066">TYPE_TASK</a> { <br />
-&#160;&#160;<a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#ae55e1933edaf5aa6e189cbf4d9a8f066ac752b31fd3f7caf6f69ca898ff0f81da">SET_SIMPLE_VOXEL_OBJECT</a>, 
-<b>DELETE_SIMPLE_VOXEL_OBJECT</b>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#ae55e1933edaf5aa6e189cbf4d9a8f066a6ba5e4ae495991f6463567fc99ff94ba">UPDATE_CHUNKS</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#ae55e1933edaf5aa6e189cbf4d9a8f066a2412502c7703c5863ed7f1996f4eb343">ADD_CHUNKS</a>, 
-<br />
-&#160;&#160;<a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#ae55e1933edaf5aa6e189cbf4d9a8f066a8efc925517b5db087c16b6add1d879bd">DELETE_CHUNKS</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#ae55e1933edaf5aa6e189cbf4d9a8f066a5821b0ea7d8a054a304b32c5c6dec4e2">STOP</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#ae55e1933edaf5aa6e189cbf4d9a8f066ae1800eb8ee4b19d5094ddee516460c37">ADD_TASK_UPDATE_CHUNKS_FROM_QUEUE_FOR_UPDATE</a>, 
-<a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#ae55e1933edaf5aa6e189cbf4d9a8f066aa3920505eb2b7ff1b10af9c05394c48b">RUN_THREAD_FUNCTION_WITH_PARAMETERS</a>
+<tr class="memdesc:aa86547f7717b96a87f885fe44a34a9ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Форма области чанков контроллера стриминга.  <a href="#aa86547f7717b96a87f885fe44a34a9ae">Подробнее...</a><br /></td></tr>
+<tr class="memitem:a74683c6e007ac3228fae6c9407708687" id="r_a74683c6e007ac3228fae6c9407708687"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a74683c6e007ac3228fae6c9407708687">STREAMING_POSITION_MODE</a> { <a class="el" href="#a74683c6e007ac3228fae6c9407708687a867fbec82a5a41eb666776a6c8742ae1">STREAMING_POSITION_NONE</a>
+, <a class="el" href="#a74683c6e007ac3228fae6c9407708687afaf535745f97ca18f646df0acb598aed">STREAMING_POSITION_CHUNK</a>
+, <a class="el" href="#a74683c6e007ac3228fae6c9407708687a7654b7b2f730ddf3bc317f89102190b0">STREAMING_POSITION_WORLD</a>
+, <a class="el" href="#a74683c6e007ac3228fae6c9407708687a8eb954b09c4fe88c8b0e72ccc87b4a41">STREAMING_POSITION_SCENE</a>
+ }</td></tr>
+<tr class="memdesc:a74683c6e007ac3228fae6c9407708687"><td class="mdescLeft">&#160;</td><td class="mdescRight">Как задано положение контроллера стриминга.  <a href="#a74683c6e007ac3228fae6c9407708687">Подробнее...</a><br /></td></tr>
+<tr class="memitem:ae55e1933edaf5aa6e189cbf4d9a8f066" id="r_ae55e1933edaf5aa6e189cbf4d9a8f066"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#ae55e1933edaf5aa6e189cbf4d9a8f066">TYPE_TASK</a> { <br />
+&#160;&#160;<a class="el" href="#ae55e1933edaf5aa6e189cbf4d9a8f066ac752b31fd3f7caf6f69ca898ff0f81da">SET_SIMPLE_VOXEL_OBJECT</a>
+, <a class="el" href="#ae55e1933edaf5aa6e189cbf4d9a8f066aff5d8dfe25500ea7d5471c4290fb4168">DELETE_SIMPLE_VOXEL_OBJECT</a>
+, <a class="el" href="#ae55e1933edaf5aa6e189cbf4d9a8f066a6ba5e4ae495991f6463567fc99ff94ba">UPDATE_CHUNKS</a>
+, <a class="el" href="#ae55e1933edaf5aa6e189cbf4d9a8f066a2412502c7703c5863ed7f1996f4eb343">ADD_CHUNKS</a>
+, <br />
+&#160;&#160;<a class="el" href="#ae55e1933edaf5aa6e189cbf4d9a8f066a8efc925517b5db087c16b6add1d879bd">DELETE_CHUNKS</a>
+, <a class="el" href="#ae55e1933edaf5aa6e189cbf4d9a8f066a5821b0ea7d8a054a304b32c5c6dec4e2">STOP</a>
+, <a class="el" href="#ae55e1933edaf5aa6e189cbf4d9a8f066ae1800eb8ee4b19d5094ddee516460c37">ADD_TASK_UPDATE_CHUNKS_FROM_QUEUE_FOR_UPDATE</a>
+, <a class="el" href="#ae55e1933edaf5aa6e189cbf4d9a8f066aa3920505eb2b7ff1b10af9c05394c48b">RUN_THREAD_FUNCTION_WITH_PARAMETERS</a>
+, <br />
+&#160;&#160;<a class="el" href="#ae55e1933edaf5aa6e189cbf4d9a8f066ae654a42e08a0b868b86080c445a0358c">SET_USER_CONTROLLER_FOR_THREAD</a>
+, <a class="el" href="#ae55e1933edaf5aa6e189cbf4d9a8f066ab58c109ce2bb1c217e4f9e03b33e4a97">SAVE_CHUNKS</a>
+, <a class="el" href="#ae55e1933edaf5aa6e189cbf4d9a8f066a6831c81ce41065925a4ca6e6301d27c3">STREAM_CHUNKS</a>
 <br />
  }</td></tr>
-<tr class="memdesc:ae55e1933edaf5aa6e189cbf4d9a8f066"><td class="mdescLeft">&#160;</td><td class="mdescRight">Типы заданий для рабочего потока.  <a href="namespace_simple_voxel_engine_1_1_irr_engine.html#ae55e1933edaf5aa6e189cbf4d9a8f066">Подробнее...</a><br /></td></tr>
-<tr class="separator:ae55e1933edaf5aa6e189cbf4d9a8f066"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ae55e1933edaf5aa6e189cbf4d9a8f066"><td class="mdescLeft">&#160;</td><td class="mdescRight">Типы заданий для рабочего потока.  <a href="#ae55e1933edaf5aa6e189cbf4d9a8f066">Подробнее...</a><br /></td></tr>
+<tr class="memitem:aa9222a7e17b78291dda436f10e65a06f" id="r_aa9222a7e17b78291dda436f10e65a06f"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#aa9222a7e17b78291dda436f10e65a06f">STREAM_CHUNK_ACTION</a> { <a class="el" href="#aa9222a7e17b78291dda436f10e65a06fa430ac89dc5e74942e3a95e0876a64ded">STREAM_CHUNK_LOAD</a>
+, <a class="el" href="#aa9222a7e17b78291dda436f10e65a06fa68b52507d4e2d5ce111676f5bd9d8931">STREAM_CHUNK_RENDER</a>
+, <a class="el" href="#aa9222a7e17b78291dda436f10e65a06fa6834f546f288ac7e2b52f69121dfbb73">STREAM_CHUNK_UNRENDER</a>
+, <a class="el" href="#aa9222a7e17b78291dda436f10e65a06fafd4e601ebc1ca065f3fc0c4193fff2b1">STREAM_CHUNK_UNLOAD</a>
+ }</td></tr>
+<tr class="memdesc:aa9222a7e17b78291dda436f10e65a06f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Действие пула стриминга над одним чанком.  <a href="#aa9222a7e17b78291dda436f10e65a06f">Подробнее...</a><br /></td></tr>
+<tr class="memitem:a6a2991bcbb3cd1f3d6673f7c32f58589" id="r_a6a2991bcbb3cd1f3d6673f7c32f58589"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a6a2991bcbb3cd1f3d6673f7c32f58589">STREAM_CHUNK_RESULT</a> { <a class="el" href="#a6a2991bcbb3cd1f3d6673f7c32f58589a71e228f9db57c23534ed4e0631353629">STREAM_CHUNK_DONE</a>
+, <a class="el" href="#a6a2991bcbb3cd1f3d6673f7c32f58589a6c919a38ab48aee6fecfed81a2d40c6e">STREAM_CHUNK_ALREADY</a>
+, <a class="el" href="#a6a2991bcbb3cd1f3d6673f7c32f58589a82acd99f8921becac5182c241d03cecd">STREAM_CHUNK_FAILED</a>
+ }</td></tr>
+<tr class="memdesc:a6a2991bcbb3cd1f3d6673f7c32f58589"><td class="mdescLeft">&#160;</td><td class="mdescRight">Результат действия пула стриминга.  <a href="#a6a2991bcbb3cd1f3d6673f7c32f58589">Подробнее...</a><br /></td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
-<div class="textblock"><p>Главное пространство имён <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html" title="Движок. ">IrrSimpleVoxelEngine</a>. </p>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Главное пространство имён <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html" title="Движок.">IrrSimpleVoxelEngine</a>. </p>
 <p>Здесь находятся все объекты и компоненты враппера. </p>
-</div><h2 class="groupheader">Перечисления</h2>
-<a class="anchor" id="a6ecf5f4da4c4405f8a2d7a9f76031f0b"></a>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Перечисления</h2>
+<a id="aa9222a7e17b78291dda436f10e65a06f" name="aa9222a7e17b78291dda436f10e65a06f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9222a7e17b78291dda436f10e65a06f">&#9670;&#160;</a></span>STREAM_CHUNK_ACTION</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#a6ecf5f4da4c4405f8a2d7a9f76031f0b">SimpleVoxelEngine::IrrEngine::MODE_MAIN_THREAD</a></td>
+          <td class="memname">enum <a class="el" href="#aa9222a7e17b78291dda436f10e65a06f">SimpleVoxelEngine::IrrEngine::STREAM_CHUNK_ACTION</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Типы работы главного потока. </p>
+<p>Действие пула стриминга над одним чанком. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a class="anchor" id="a6ecf5f4da4c4405f8a2d7a9f76031f0ba3510cd8e93f9586470b335dd1dfa8d95"></a>NORMAL&#160;</td><td class="fielddoc">
-<p>Стандартный режим. </p>
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="aa9222a7e17b78291dda436f10e65a06fa430ac89dc5e74942e3a95e0876a64ded" name="aa9222a7e17b78291dda436f10e65a06fa430ac89dc5e74942e3a95e0876a64ded"></a>STREAM_CHUNK_LOAD&#160;</td><td class="fielddoc"><p>Загрузить чанк в память (с диска или генератором). </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a6ecf5f4da4c4405f8a2d7a9f76031f0ba2d5626b17f8e271066380f7a4b7a5a86"></a>STANDBY_THREADS&#160;</td><td class="fielddoc">
-<p>Режим ожидания. Все задания добавляются в дополнительную очередь. После перехода в стандартный режим они заносятся в стандартную очередь. </p>
+<tr><td class="fieldname"><a id="aa9222a7e17b78291dda436f10e65a06fa68b52507d4e2d5ce111676f5bd9d8931" name="aa9222a7e17b78291dda436f10e65a06fa68b52507d4e2d5ce111676f5bd9d8931"></a>STREAM_CHUNK_RENDER&#160;</td><td class="fielddoc"><p>Поставить загруженный чанк в отрисовку. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa9222a7e17b78291dda436f10e65a06fa6834f546f288ac7e2b52f69121dfbb73" name="aa9222a7e17b78291dda436f10e65a06fa6834f546f288ac7e2b52f69121dfbb73"></a>STREAM_CHUNK_UNRENDER&#160;</td><td class="fielddoc"><p>Убрать чанк из отрисовки (данные остаются в памяти). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa9222a7e17b78291dda436f10e65a06fafd4e601ebc1ca065f3fc0c4193fff2b1" name="aa9222a7e17b78291dda436f10e65a06fafd4e601ebc1ca065f3fc0c4193fff2b1"></a>STREAM_CHUNK_UNLOAD&#160;</td><td class="fielddoc"><p>Выгрузить чанк из памяти (не отрисовываемый). </p>
 </td></tr>
 </table>
 
-<p>См. определение в файле <a class="el" href="_task_8h_source.html">Task.h</a> строка <a class="el" href="_task_8h_source.html#l00014">14</a></p>
+</div>
+</div>
+<a id="a6a2991bcbb3cd1f3d6673f7c32f58589" name="a6a2991bcbb3cd1f3d6673f7c32f58589"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a2991bcbb3cd1f3d6673f7c32f58589">&#9670;&#160;</a></span>STREAM_CHUNK_RESULT</h2>
 
-</div>
-</div>
-<a class="anchor" id="ae55e1933edaf5aa6e189cbf4d9a8f066"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="namespace_simple_voxel_engine_1_1_irr_engine.html#ae55e1933edaf5aa6e189cbf4d9a8f066">SimpleVoxelEngine::IrrEngine::TYPE_TASK</a></td>
+          <td class="memname">enum <a class="el" href="#a6a2991bcbb3cd1f3d6673f7c32f58589">SimpleVoxelEngine::IrrEngine::STREAM_CHUNK_RESULT</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Результат действия пула стриминга. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="a6a2991bcbb3cd1f3d6673f7c32f58589a71e228f9db57c23534ed4e0631353629" name="a6a2991bcbb3cd1f3d6673f7c32f58589a71e228f9db57c23534ed4e0631353629"></a>STREAM_CHUNK_DONE&#160;</td><td class="fielddoc"><p>Выполнено пулом. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6a2991bcbb3cd1f3d6673f7c32f58589a6c919a38ab48aee6fecfed81a2d40c6e" name="a6a2991bcbb3cd1f3d6673f7c32f58589a6c919a38ab48aee6fecfed81a2d40c6e"></a>STREAM_CHUNK_ALREADY&#160;</td><td class="fielddoc"><p>Делать нечего: чанк уже в нужном состоянии (например, его загрузили не через пул). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6a2991bcbb3cd1f3d6673f7c32f58589a82acd99f8921becac5182c241d03cecd" name="a6a2991bcbb3cd1f3d6673f7c32f58589a82acd99f8921becac5182c241d03cecd"></a>STREAM_CHUNK_FAILED&#160;</td><td class="fielddoc"><p>Не удалось (нет мира, чанк не загрузился или не сохранился). </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="a74683c6e007ac3228fae6c9407708687" name="a74683c6e007ac3228fae6c9407708687"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74683c6e007ac3228fae6c9407708687">&#9670;&#160;</a></span>STREAMING_POSITION_MODE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a74683c6e007ac3228fae6c9407708687">SimpleVoxelEngine::IrrEngine::STREAMING_POSITION_MODE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Как задано положение контроллера стриминга. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="a74683c6e007ac3228fae6c9407708687a867fbec82a5a41eb666776a6c8742ae1" name="a74683c6e007ac3228fae6c9407708687a867fbec82a5a41eb666776a6c8742ae1"></a>STREAMING_POSITION_NONE&#160;</td><td class="fielddoc"><p>Положение ещё не задано - контроллер ничего не загружает. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a74683c6e007ac3228fae6c9407708687afaf535745f97ca18f646df0acb598aed" name="a74683c6e007ac3228fae6c9407708687afaf535745f97ca18f646df0acb598aed"></a>STREAMING_POSITION_CHUNK&#160;</td><td class="fielddoc"><p>Задан чанк (setChunkPosition()). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a74683c6e007ac3228fae6c9407708687a7654b7b2f730ddf3bc317f89102190b0" name="a74683c6e007ac3228fae6c9407708687a7654b7b2f730ddf3bc317f89102190b0"></a>STREAMING_POSITION_WORLD&#160;</td><td class="fielddoc"><p>Задана точка в координатах мира (setWorldPosition()). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a74683c6e007ac3228fae6c9407708687a8eb954b09c4fe88c8b0e72ccc87b4a41" name="a74683c6e007ac3228fae6c9407708687a8eb954b09c4fe88c8b0e72ccc87b4a41"></a>STREAMING_POSITION_SCENE&#160;</td><td class="fielddoc"><p>Задана точка в координатах сцены Irrlicht (setScenePosition()). </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="aa86547f7717b96a87f885fe44a34a9ae" name="aa86547f7717b96a87f885fe44a34a9ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa86547f7717b96a87f885fe44a34a9ae">&#9670;&#160;</a></span>STREAMING_SHAPE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#aa86547f7717b96a87f885fe44a34a9ae">SimpleVoxelEngine::IrrEngine::STREAMING_SHAPE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Форма области чанков контроллера стриминга. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="aa86547f7717b96a87f885fe44a34a9aea867998231931d07eb3b4e3d2dd9bb803" name="aa86547f7717b96a87f885fe44a34a9aea867998231931d07eb3b4e3d2dd9bb803"></a>STREAMING_SHAPE_CUBOID&#160;</td><td class="fielddoc"><p>Кубоид: чанки, у которых |dx| &lt;= rx, |dy| &lt;= ry, |dz| &lt;= rz от центра. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa86547f7717b96a87f885fe44a34a9aea31ea212c071b6345c12ef0d82ef75b29" name="aa86547f7717b96a87f885fe44a34a9aea31ea212c071b6345c12ef0d82ef75b29"></a>STREAMING_SHAPE_CYLINDER&#160;</td><td class="fielddoc"><p>Цилиндр с вертикальной осью: круг (эллипс) по X и Z с радиусами rx и rz, по Y - |dy| &lt;= ry. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa86547f7717b96a87f885fe44a34a9aea2de0cb16b1cd5147e2cf3f94c6797b32" name="aa86547f7717b96a87f885fe44a34a9aea2de0cb16b1cd5147e2cf3f94c6797b32"></a>STREAMING_SHAPE_ELLIPSOID&#160;</td><td class="fielddoc"><p>Шар (эллипсоид) с радиусами rx, ry, rz; при одинаковых радиусах - шар. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="ae55e1933edaf5aa6e189cbf4d9a8f066" name="ae55e1933edaf5aa6e189cbf4d9a8f066"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae55e1933edaf5aa6e189cbf4d9a8f066">&#9670;&#160;</a></span>TYPE_TASK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#ae55e1933edaf5aa6e189cbf4d9a8f066">SimpleVoxelEngine::IrrEngine::TYPE_TASK</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Типы заданий для рабочего потока. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a class="anchor" id="ae55e1933edaf5aa6e189cbf4d9a8f066ac752b31fd3f7caf6f69ca898ff0f81da"></a>SET_SIMPLE_VOXEL_OBJECT&#160;</td><td class="fielddoc">
-<p>Установка SimpleVoxelObject. </p>
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="ae55e1933edaf5aa6e189cbf4d9a8f066ac752b31fd3f7caf6f69ca898ff0f81da" name="ae55e1933edaf5aa6e189cbf4d9a8f066ac752b31fd3f7caf6f69ca898ff0f81da"></a>SET_SIMPLE_VOXEL_OBJECT&#160;</td><td class="fielddoc"><p>Установка SimpleVoxelObject. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="ae55e1933edaf5aa6e189cbf4d9a8f066a6ba5e4ae495991f6463567fc99ff94ba"></a>UPDATE_CHUNKS&#160;</td><td class="fielddoc">
-<p>Удаление SimpleVoxelObject. </p>
+<tr><td class="fieldname"><a id="ae55e1933edaf5aa6e189cbf4d9a8f066aff5d8dfe25500ea7d5471c4290fb4168" name="ae55e1933edaf5aa6e189cbf4d9a8f066aff5d8dfe25500ea7d5471c4290fb4168"></a>DELETE_SIMPLE_VOXEL_OBJECT&#160;</td><td class="fielddoc"><p>Удаление SimpleVoxelObject. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="ae55e1933edaf5aa6e189cbf4d9a8f066a2412502c7703c5863ed7f1996f4eb343"></a>ADD_CHUNKS&#160;</td><td class="fielddoc">
-<p>Немедленное обновление чанков. </p>
+<tr><td class="fieldname"><a id="ae55e1933edaf5aa6e189cbf4d9a8f066a6ba5e4ae495991f6463567fc99ff94ba" name="ae55e1933edaf5aa6e189cbf4d9a8f066a6ba5e4ae495991f6463567fc99ff94ba"></a>UPDATE_CHUNKS&#160;</td><td class="fielddoc"><p>Немедленное обновление чанков. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="ae55e1933edaf5aa6e189cbf4d9a8f066a8efc925517b5db087c16b6add1d879bd"></a>DELETE_CHUNKS&#160;</td><td class="fielddoc">
-<p>Создание/загрузка чанков. </p>
+<tr><td class="fieldname"><a id="ae55e1933edaf5aa6e189cbf4d9a8f066a2412502c7703c5863ed7f1996f4eb343" name="ae55e1933edaf5aa6e189cbf4d9a8f066a2412502c7703c5863ed7f1996f4eb343"></a>ADD_CHUNKS&#160;</td><td class="fielddoc"><p>Создание/загрузка чанков. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="ae55e1933edaf5aa6e189cbf4d9a8f066a5821b0ea7d8a054a304b32c5c6dec4e2"></a>STOP&#160;</td><td class="fielddoc">
-<p>Удаление чанков из памяти. </p>
+<tr><td class="fieldname"><a id="ae55e1933edaf5aa6e189cbf4d9a8f066a8efc925517b5db087c16b6add1d879bd" name="ae55e1933edaf5aa6e189cbf4d9a8f066a8efc925517b5db087c16b6add1d879bd"></a>DELETE_CHUNKS&#160;</td><td class="fielddoc"><p>Удаление чанков из памяти. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="ae55e1933edaf5aa6e189cbf4d9a8f066ae1800eb8ee4b19d5094ddee516460c37"></a>ADD_TASK_UPDATE_CHUNKS_FROM_QUEUE_FOR_UPDATE&#160;</td><td class="fielddoc">
-<p>Остановка рабочего потока. </p>
+<tr><td class="fieldname"><a id="ae55e1933edaf5aa6e189cbf4d9a8f066a5821b0ea7d8a054a304b32c5c6dec4e2" name="ae55e1933edaf5aa6e189cbf4d9a8f066a5821b0ea7d8a054a304b32c5c6dec4e2"></a>STOP&#160;</td><td class="fielddoc"><p>Остановка рабочего потока. Ставит только <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a442381d59957fee048d13289e3f3d6cb" title="Функция для остановки движка.">IrrSimpleVoxelEngine::stop()</a>, через addMainTask() не ставить (в отладочной сборке, SVE_DEBUG_CHECKS, addMainTask() его отклоняет). </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="ae55e1933edaf5aa6e189cbf4d9a8f066aa3920505eb2b7ff1b10af9c05394c48b"></a>RUN_THREAD_FUNCTION_WITH_PARAMETERS&#160;</td><td class="fielddoc">
-<p>Обновить чанки, которые стоят в очереди на обновление. </p>
-<p>Запуск пользовательской функции с заданными параметрами в другом потоке. </p>
+<tr><td class="fieldname"><a id="ae55e1933edaf5aa6e189cbf4d9a8f066ae1800eb8ee4b19d5094ddee516460c37" name="ae55e1933edaf5aa6e189cbf4d9a8f066ae1800eb8ee4b19d5094ddee516460c37"></a>ADD_TASK_UPDATE_CHUNKS_FROM_QUEUE_FOR_UPDATE&#160;</td><td class="fielddoc"><p>Обновить чанки, которые стоят в очереди на обновление. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae55e1933edaf5aa6e189cbf4d9a8f066aa3920505eb2b7ff1b10af9c05394c48b" name="ae55e1933edaf5aa6e189cbf4d9a8f066aa3920505eb2b7ff1b10af9c05394c48b"></a>RUN_THREAD_FUNCTION_WITH_PARAMETERS&#160;</td><td class="fielddoc"><p>Запуск пользовательской функции с заданными параметрами в другом потоке. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae55e1933edaf5aa6e189cbf4d9a8f066ae654a42e08a0b868b86080c445a0358c" name="ae55e1933edaf5aa6e189cbf4d9a8f066ae654a42e08a0b868b86080c445a0358c"></a>SET_USER_CONTROLLER_FOR_THREAD&#160;</td><td class="fielddoc"><p>Установка контроллера пользовательских функций во время работы движка (ставит setUserControllerForThread()). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae55e1933edaf5aa6e189cbf4d9a8f066ab58c109ce2bb1c217e4f9e03b33e4a97" name="ae55e1933edaf5aa6e189cbf4d9a8f066ab58c109ce2bb1c217e4f9e03b33e4a97"></a>SAVE_CHUNKS&#160;</td><td class="fielddoc"><p>Сохранение всех загруженных чанков мира (см. <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#a70c571fdd50d12d7c826c9796f080183" title="Сохранение всех загруженных чанков мира. Потокобезопасная, можно вызывать в любой момент игры.">IrrSimpleVoxelEngine::saveAllChunks()</a>). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae55e1933edaf5aa6e189cbf4d9a8f066a6831c81ce41065925a4ca6e6301d27c3" name="ae55e1933edaf5aa6e189cbf4d9a8f066a6831c81ce41065925a4ca6e6301d27c3"></a>STREAM_CHUNKS&#160;</td><td class="fielddoc"><p>Действия пула стриминга чанков. Ставит только <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html" title="Пул контроллеров стриминга чанков.">ChunkStreamingPool</a>, вручную не ставить. </p>
 </td></tr>
 </table>
-
-<p>См. определение в файле <a class="el" href="_task_8h_source.html">Task.h</a> строка <a class="el" href="_task_8h_source.html#l00020">20</a></p>
 
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по IrrSimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:37. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Урок 7: Столкновения и выбор блоков.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IrrSimpleVoxelEngine
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tutorial7.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Урок 7: Столкновения и выбор блоков. </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>В этом уроке камера перестанет проходить сквозь блоки и начнёт стоять на полу, а мы научимся узнавать, на какой блок она смотрит. Сцена простая: каменный пол, лужа воды и каменный столб.</p>
+<h1 class="doxsection"><a class="anchor" id="tut7_idea"></a>
+Как это устроено в Irrlicht</h1>
+<p>И столкновения, и выбор лучом в Irrlicht работают через селекторы треугольников (ITriangleSelector): селектор знает треугольники меша ноды и умеет быстро найти те, что рядом с точкой или пересекаются с лучом.</p><ul>
+<li>Аниматор столкновений камеры (createCollisionResponseAnimator()) работает с одним селектором. Нод чанков много, поэтому все их селекторы складываются в один мета-селектор (IMetaTriangleSelector).</li>
+<li>Луч (ISceneCollisionManager::getSceneNodeAndCollisionPointFromRay()) перебирает ноды сцены и проверяет те, у которых задан свой селектор (node-&gt;setTriangleSelector()) и ID подходит под маску.</li>
+</ul>
+<p>Сложность в том, что ноды чанков создаёт и удаляет враппер, и делает это постоянно: каждая перестройка блока чанков (поставили блок, загрузился соседний чанк) создаёт новую ноду, а старую удаляет. Селектор старой ноды надо убрать, а для новой - создать. Для этого у фабрики есть onUpdateChunkMeshSceneNode().</p>
+<h1 class="doxsection"><a class="anchor" id="tut7_callback"></a>
+onUpdateChunkMeshSceneNode()</h1>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> onUpdateChunkMeshSceneNode(IMeshSceneNode* node, <span class="keywordtype">int</span> numbermesh, Vector3d&lt;int&gt; vectblock)</div>
+</div><!-- fragment --><p> Враппер вызывает её в главном потоке, внутри isve-&gt;update():</p><ul>
+<li>node != 0 - нода блока чанков vectblock на уровне numbermesh создана заново (или впервые);</li>
+<li>node == 0 - ноды больше нет (уровень блока стал пустым или чанки убраны из отрисовки). Вызывается она и при delete isve - по каждой ноде, с node == 0: так селекторы убираются и при выходе.</li>
+</ul>
+<p>Главное правило: к моменту вызова старая нода этого блока уже удалена. Поэтому селекторы храним не по указателю на ноду, а по ключу "уровень + координаты блока чанков", и старую ноду нигде не трогаем: её указатель уже недействителен. А селектор Irrlicht хранит указатель на свою ноду без ссылки (grab()) - если оставить его в мета-селекторе, первое же столкновение обратится к удалённой ноде, и программа упадёт. Удалять ноды чанков самим тоже нельзя - ими владеет враппер. </p><div class="fragment"><div class="line">std::map&lt;Vector3d&lt;int&gt;, ITriangleSelector*&gt; s_Selectors[NUMBER_OF_LEVELS]; <span class="comment">// Селектор каждой ноды: [уровень][координаты блока чанков].</span></div>
+</div><!-- fragment --><p> Сама функция: сначала убираем селектор старой ноды, потом, если нода есть, создаём новый. </p><div class="fragment"><div class="line">std::map&lt;Vector3d&lt;int&gt;, ITriangleSelector*&gt;::iterator it = s_Selectors[numbermesh].find(vectblock);</div>
+<div class="line"><span class="keywordflow">if</span>(it != s_Selectors[numbermesh].end()) <span class="comment">// Старой ноды уже нет - убираем её селектор.</span></div>
+<div class="line">{</div>
+<div class="line">    s_Meta-&gt;removeTriangleSelector(it-&gt;second); <span class="comment">// Селектора воды там нет - тогда просто ничего не произойдёт.</span></div>
+<div class="line">    it-&gt;second-&gt;drop();</div>
+<div class="line">    s_Selectors[numbermesh].erase(it);</div>
+<div class="line">}</div>
+<div class="line"><span class="keywordflow">if</span>(!node) <span class="keywordflow">return</span>;</div>
+<div class="line">ITriangleSelector* selector = getIrrlichtDevice()-&gt;getSceneManager()-&gt;createOctreeTriangleSelector(node-&gt;getMesh(), node);</div>
+<div class="line"><span class="keywordflow">if</span>(!selector) <span class="keywordflow">return</span>;</div>
+<div class="line">node-&gt;setTriangleSelector(selector); <span class="comment">// Для луча (getSceneNodeAndCollisionPointFromRay()).</span></div>
+<div class="line"><span class="keywordflow">if</span>(numbermesh == LEVEL_SOLID) s_Meta-&gt;addTriangleSelector(selector); <span class="comment">// Для столкновений камеры; сквозь воду можно ходить.</span></div>
+<div class="line">s_Selectors[numbermesh][vectblock] = selector;</div>
+</div><!-- fragment --><p> Счётчик ссылок: createOctreeTriangleSelector() даёт селектор со счётчиком 1 (это наша ссылка, её мы и отпускаем drop() при удалении), а setTriangleSelector() и addTriangleSelector() берут свои.</p>
+<p>Селектор-октодерево (createOctreeTriangleSelector()) быстрее простого (createTriangleSelector()) на больших мешах, а меш блока чанков большой. Создавая его, Irrlicht пишет в лог "Needed Xms to create OctreeTriangleSelector" - на каждую новую ноду. Если строки мешают, поднимите уровень лога Irrlicht (device-&gt;getLogger()-&gt;setLogLevel(ELL_WARNING)) или отфильтруйте их в обработчике событий, как это сделано в TestProject3/main.cpp.</p>
+<p>У воды селектор тоже есть (через него можно, например, узнать лучом, смотрит ли камера на воду), но в мета-селектор он не идёт - сквозь воду можно ходить. Мета-селектор создаём в main(), до start(), и отдаём фабрике: </p><div class="fragment"><div class="line">IMetaTriangleSelector* meta = smgr-&gt;createMetaTriangleSelector(); <span class="comment">// Все селекторы нод чанков - в одном.</span></div>
+<div class="line">MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve, meta);</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="tut7_ids"></a>
+ID нод</h1>
+<p>ID ноды в Irrlicht - число, и луч сравнивает его с маской побитово: нода проверяется, если ID &amp; маска != 0 (маска 0 - проверяются все ноды). Поэтому ID задают битовыми флагами: </p><div class="fragment"><div class="line"><span class="keyword">enum</span> NODE_IDS { ID_PICKABLE = 1, ID_WATER = 2 };</div>
+</div><!-- fragment --><p> ID нод чанков задаёт фабрика для уровня мешей мира - и уже созданным нодам, и всем будущим (главный поток, после addWorld()): </p><div class="fragment"><div class="line">factory-&gt;setID(LEVEL_SOLID, <span class="keywordtype">id</span>, ID_PICKABLE);</div>
+<div class="line">factory-&gt;setID(LEVEL_WATER, <span class="keywordtype">id</span>, ID_WATER); <span class="comment">// Луч с маской ID_PICKABLE проходит сквозь воду.</span></div>
+</div><!-- fragment --><p> Луч с маской ID_PICKABLE видит только твёрдые блоки: курсор "проходит" сквозь воду и стекло и находит блок за ними. А луч с маской ID_WATER найдёт только воду: </p><div class="fragment"><div class="line">collman-&gt;getSceneNodeAndCollisionPointFromRay(ray, point, triangle, ID_WATER, 0); <span class="comment">// (пример, не из полного кода)</span></div>
+</div><!-- fragment --><p> Кстати, у нод Irrlicht ID по умолчанию -1 - то есть все биты. Если у других нод сцены (модели, биллборды) есть свои селекторы, а луч не должен их ловить, дайте им ID без бита ID_PICKABLE (в TestProject3 так сделано у огонька-биллборда).</p>
+<p>Вода у нас полупрозрачная (EMT_TRANSPARENT_VERTEX_ALPHA на своём уровне мешей), а тестер прозрачности говорит движку, что вода не закрывает соседние блоки, - иначе верхней грани камня под водой не было бы в меше, и лучу нечего было бы найти. Подробно о прозрачности - в уроке 9.</p>
+<h1 class="doxsection"><a class="anchor" id="tut7_collision"></a>
+Столкновения камеры</h1>
+<p>Камера - обычная FPS-камера Irrlicht. Аниматор столкновений создаём, когда появились первые селекторы (то есть пол): </p><div class="fragment"><div class="line"><span class="keywordflow">if</span>(!collision &amp;&amp; meta-&gt;getSelectorCount() &gt; 0) <span class="comment">// Пол появился - теперь можно включать столкновения и гравитацию.</span></div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">// Эллипсоид камеры 0.3 x 0.8 x 0.3, гравитация вниз, глаза на 0.5 выше центра эллипсоида.</span></div>
+<div class="line">    collision = smgr-&gt;createCollisionResponseAnimator(meta, camera, vector3df(0.3f, 0.8f, 0.3f), vector3df(0, -0.1f, 0), vector3df(0, 0.5f, 0));</div>
+<div class="line">    camera-&gt;addAnimator(collision);</div>
+<div class="line">    collision-&gt;drop(); <span class="comment">// Аниматором владеет камера.</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Почему не сразу? Чанки строятся в фоне, и в первые кадры нод ещё нет. Аниматор с гравитацией, созданный раньше, уронил бы камеру сквозь ещё не построенный пол. В большом мире со стримингом ждите isAreaReady() (урок 6) и появления нод.</p>
+<p>Параметры аниматора: мета-селектор, камера, радиусы эллипсоида игрока (здесь - 0.6 блока в ширину и 1.6 в высоту), гравитация и сдвиг: эллипсоид - тело игрока, а камера (глаза) на 0.5 выше его центра. Гравитация в Irrlicht 1.8 считается так: скорость падения (в единицах за кадр) растёт на её величину каждую секунду, поэтому значение подбирается на глаз.</p>
+<p>Создаётся аниматор один раз: мета-селектор живой, и всё, что фабрика в него добавляет и убирает, аниматор видит сразу. Если камеру нужно перенести (телепорт), после camera-&gt;setPosition() вызовите collision-&gt;setTargetNode(camera) - иначе аниматор посчитает перенос движением и "протащит" камеру от старого места через стены.</p>
+<h1 class="doxsection"><a class="anchor" id="tut7_ray"></a>
+Луч и блок под курсором</h1>
+<p>Луч пускаем каждый кадр после drawAll() (к этому моменту положения нод обновлены): </p><div class="fragment"><div class="line">line3df ray; <span class="comment">// Луч на 30 блоков из камеры по направлению взгляда.</span></div>
+<div class="line">ray.start = camera-&gt;getPosition();</div>
+<div class="line"><span class="keyword">const</span> vector3df dir = (camera-&gt;getTarget() - ray.start).normalize();</div>
+<div class="line">ray.end = ray.start + dir * 30.0f;</div>
+<div class="line">vector3df point;</div>
+<div class="line">triangle3df triangle;</div>
+<div class="line"><span class="keywordflow">if</span>(collman-&gt;getSceneNodeAndCollisionPointFromRay(ray, point, triangle, ID_PICKABLE, 0))</div>
+</div><!-- fragment --><p> Функция возвращает ноду, в которую попал луч, точку попадания и треугольник - в координатах сцены. Нода чанка нам ничего не скажет (в ней сотни блоков), а вот по треугольнику враппер найдёт блок: </p><div class="fragment"><div class="line">target = isve-&gt;getAddressSimpleVoxelObjectByThreePoints(<span class="keywordtype">id</span>,</div>
+<div class="line">    Vector3d&lt;float&gt;(triangle.pointA.X, triangle.pointA.Y, triangle.pointA.Z),</div>
+<div class="line">    Vector3d&lt;float&gt;(triangle.pointB.X, triangle.pointB.Y, triangle.pointB.Z),</div>
+<div class="line">    Vector3d&lt;float&gt;(triangle.pointC.X, triangle.pointC.Y, triangle.pointC.Z),</div>
+<div class="line">    Vector3d&lt;float&gt;(dir.X, dir.Y, dir.Z), Vector3d&lt;float&gt;(ray.start.X, ray.start.Y, ray.start.Z));</div>
+<div class="line"><span class="keywordflow">if</span>(target &amp;&amp; target-&gt;getLastVectInd() &lt; 2) { <span class="keyword">delete</span> target; target = 0; } <span class="comment">// Только чанк - блок не найден.</span></div>
+</div><!-- fragment --><p> Параметры: мир, три вершины треугольника, направление взгляда (вектор, "торчащий" в блок) и позиция камеры. Враппер сам переводит точки из координат сцены в координаты мира (с учётом родительской ноды мира и сдвига - урок 12), так что мир можно двигать и вращать. Функция потокобезопасна.</p>
+<p>Результат - новый VoxelAddress, его нужно удалить самим (или отдать в setSimpleVoxelObject()/deleteSimpleVoxelObject() - тогда его забирает движок). Адрес - цепочка векторов: getVector(0) - чанк, getVector(1) - блок в чанке, дальше - блоки во вложенных чанках (урок 13). getLastVectInd() - число векторов; если он меньше 2, блок не найден (например, чанк не загружен). У нас адрес живёт один кадр: в начале следующего кадра мы его удаляем и ищем заново.</p>
+<p>Если передать направление наоборот (dir * -1), найдётся не сам блок, а соседняя с гранью ячейка - туда ставят новый блок. Установка и удаление блоков, а также getAddressSimpleVoxelObjectByPoint() (ячейка точно под точкой попадания, нужна для маленьких блоков) - в уроке 8.</p>
+<p>Найденный треугольник для наглядности обводим красным - в координатах сцены, поэтому матрица мира - единичная: </p><div class="fragment"><div class="line">driver-&gt;setTransform(ETS_WORLD, matrix4());</div>
+<div class="line">driver-&gt;setMaterial(wire);</div>
+<div class="line">driver-&gt;draw3DTriangle(triangle, SColor(255, 255, 0, 0)); <span class="comment">// Треугольник под курсором.</span></div>
+</div><!-- fragment --><p> А в заголовок окна выводим координаты чанка и блока.</p>
+<h1 class="doxsection"><a class="anchor" id="tut7_end"></a>
+Завершение</h1>
+<div class="fragment"><div class="line"><span class="keywordflow">if</span>(target) <span class="keyword">delete</span> target;</div>
+<div class="line">isve-&gt;stop();</div>
+<div class="line"><span class="keyword">delete</span> isve; <span class="comment">// Фабрика получит onUpdateChunkMeshSceneNode(0, ...) по каждой ноде - селекторы уберутся из meta.</span></div>
+</div><!-- fragment --><p> Мета-селектор создали мы - мы его и удаляем, но только после delete isve: при удалении движка фабрика ещё убирает из него свои селекторы. Устройство Irrlicht - последним. </p><div class="fragment"><div class="line">meta-&gt;drop(); <span class="comment">// Мета-селектор создали мы - мы его и удаляем (камера уже держит свою ссылку через аниматор).</span></div>
+<div class="line">device-&gt;drop();</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="tut7_errors"></a>
+Типичные ошибки</h1>
+<ul>
+<li>В onUpdateChunkMeshSceneNode() не обработан node == 0 или селектор ищется по указателю ноды - в мета-селекторе остаётся селектор удалённой ноды, и программа падает при столкновении (обычно сразу после правки блока).</li>
+<li>Попытка что-то сделать со старой нодой (remove(), drop(), getTriangleSelector()) - её уже нет.</li>
+<li>meta-&gt;drop() до delete isve - фабрика при удалении движка обратится к удалённому мета-селектору.</li>
+<li>Аниматор с гравитацией до появления пола - камера проваливается.</li>
+<li>Луч ловит воду или чужие ноды - не задан ID или маска (у нод по умолчанию ID -1, все биты).</li>
+<li>Забыли удалить адрес от getAddressSimpleVoxelObjectByThreePoints() - утечка памяти каждый кадр.</li>
+<li>Перенос камеры без setTargetNode() - камера "протаскивается" сквозь стены или застревает.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="tut7_check"></a>
+Как проверить</h1>
+<p>Проверка урока (AI/AITests/tutorials/diag_tut7.cpp) работает без окна (EDT_NULL) и ставит камеру сама: у каждой ноды чанка есть свой селектор, а в мета-селекторе - только селекторы твёрдых нод; луч сверху находит блок (12, 2, 12), сквозь воду - камень (3, 2, 3) под ней, а луч с маской ID_WATER - поверхность воды; после удаления блока нода пересоздаётся, селекторы снова совпадают с нодами, и луч находит блок под удалённым; камера упирается в столб и стоит на полу; после delete isve в мета-селекторе не остаётся ни одного селектора.</p>
+<p>Ну и напоследок ещё раз полный код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core;</div>
+<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
+<div class="line"><span class="keyword">using namespace </span>Additional;</div>
+<div class="line"><span class="keyword">using namespace </span>Defines;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">enum</span> BLOCKS { BLOCK_STONE = 0, BLOCK_WATER = 1 };</div>
+<div class="line"><span class="keyword">enum</span> LEVELS { LEVEL_SOLID = 0, LEVEL_WATER = 1, NUMBER_OF_LEVELS = 2 }; <span class="comment">// Уровни мешей: твёрдые блоки и вода.</span></div>
+<div class="line"><span class="comment">// ID нод - битовые флаги: луч с маской ID_PICKABLE ищет только ноды, у которых ID &amp; ID_PICKABLE != 0.</span></div>
+<div class="line"><span class="keyword">enum</span> NODE_IDS { ID_PICKABLE = 1, ID_WATER = 2 };</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">struct </span>BlockInfo : VoxelInfo</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>Block : <span class="keyword">public</span> SimpleVoxelObject</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    Block(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>) : s_Id(id) { setTypeVoxel(CUSTOM_VOXEL); }</div>
+<div class="line">    VoxelInfo* getVoxelForRenderingInfo()</div>
+<div class="line">    {</div>
+<div class="line">        BlockInfo* info = <span class="keyword">new</span> BlockInfo;</div>
+<div class="line">        info-&gt;s_TypeVoxelInfo = CUSTOM_VOXEL_INFO;</div>
+<div class="line">        info-&gt;s_Id = s_Id;</div>
+<div class="line">        <span class="keywordflow">return</span> info;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getId() { <span class="keywordflow">return</span> s_Id; }</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Вода прозрачна для соседей-не-воды: под водой видна (и есть в меше) верхняя грань камня.</span></div>
+<div class="line"><span class="keyword">class </span>MyTransparentTester : <span class="keyword">public</span> SimpleVoxelObjectTransparentTester</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> isTransparent(SimpleVoxelObject* svo, SimpleVoxelObject* parent)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span>(((Block*)svo)-&gt;getId() != BLOCK_WATER) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">        <span class="keywordflow">return</span> !parent || ((Block*)parent)-&gt;getId() != BLOCK_WATER;</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve, IMetaTriangleSelector* meta) :</div>
+<div class="line">        FactoryChunkMeshSceneNode(device, isve),</div>
+<div class="line">        s_Meta(meta)</div>
+<div class="line">    {</div>
+<div class="line">        s_Plane = createFaceMesh();</div>
+<div class="line">        s_MeshManipulator = device-&gt;getSceneManager()-&gt;getMeshManipulator();</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); }</div>
+<div class="line">    std::map&lt;Vector3d&lt;int&gt;, ITriangleSelector*&gt; s_Selectors[NUMBER_OF_LEVELS]; <span class="comment">// Селектор каждой ноды: [уровень][координаты блока чанков].</span></div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">bool</span> water = ((BlockInfo*)vxl-&gt;getVoxelInfo())-&gt;s_Id == BLOCK_WATER;</div>
+<div class="line">        IMesh* mesh = getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1));</div>
+<div class="line">        <span class="keywordflow">if</span>(mesh) s_MeshManipulator-&gt;setVertexColors(mesh, water ? SColor(128, 40, 80, 220) : SColor(255, 130, 130, 130));</div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering* vxl)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">return</span> ((BlockInfo*)vxl-&gt;getVoxelInfo())-&gt;s_Id == BLOCK_WATER ? LEVEL_WATER : LEVEL_SOLID;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// Главный поток, внутри isve-&gt;update() (и в delete isve): нода блока чанков создана заново (node != 0) или исчезла (node == 0).</span></div>
+<div class="line">    <span class="keywordtype">void</span> onUpdateChunkMeshSceneNode(IMeshSceneNode* node, <span class="keywordtype">int</span> numbermesh, Vector3d&lt;int&gt; vectblock)</div>
+<div class="line">    {</div>
+<div class="line">        std::map&lt;Vector3d&lt;int&gt;, ITriangleSelector*&gt;::iterator it = s_Selectors[numbermesh].find(vectblock);</div>
+<div class="line">        <span class="keywordflow">if</span>(it != s_Selectors[numbermesh].end()) <span class="comment">// Старой ноды уже нет - убираем её селектор.</span></div>
+<div class="line">        {</div>
+<div class="line">            s_Meta-&gt;removeTriangleSelector(it-&gt;second); <span class="comment">// Селектора воды там нет - тогда просто ничего не произойдёт.</span></div>
+<div class="line">            it-&gt;second-&gt;drop();</div>
+<div class="line">            s_Selectors[numbermesh].erase(it);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span>(!node) <span class="keywordflow">return</span>;</div>
+<div class="line">        ITriangleSelector* selector = getIrrlichtDevice()-&gt;getSceneManager()-&gt;createOctreeTriangleSelector(node-&gt;getMesh(), node);</div>
+<div class="line">        <span class="keywordflow">if</span>(!selector) <span class="keywordflow">return</span>;</div>
+<div class="line">        node-&gt;setTriangleSelector(selector); <span class="comment">// Для луча (getSceneNodeAndCollisionPointFromRay()).</span></div>
+<div class="line">        <span class="keywordflow">if</span>(numbermesh == LEVEL_SOLID) s_Meta-&gt;addTriangleSelector(selector); <span class="comment">// Для столкновений камеры; сквозь воду можно ходить.</span></div>
+<div class="line">        s_Selectors[numbermesh][vectblock] = selector;</div>
+<div class="line">    }</div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">    IMetaTriangleSelector* s_Meta;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(800, 600));</div>
+<div class="line">    ISceneManager* smgr = device-&gt;getSceneManager();</div>
+<div class="line">    IVideoDriver* driver = device-&gt;getVideoDriver();</div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device);</div>
+<div class="line">    IMetaTriangleSelector* meta = smgr-&gt;createMetaTriangleSelector(); <span class="comment">// Все селекторы нод чанков - в одном.</span></div>
+<div class="line">    MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve, meta);</div>
+<div class="line">    factory-&gt;setNumberOfMeshesSceneNodeForChunk(NUMBER_OF_LEVELS);</div>
+<div class="line">    factory-&gt;setMaterialType(LEVEL_WATER, EMT_TRANSPARENT_VERTEX_ALPHA); <span class="comment">// Вода - полупрозрачная (прозрачность - урок 9).</span></div>
+<div class="line">    factory-&gt;setPositionScale(16);</div>
+<div class="line">    factory-&gt;setSScale(16);</div>
+<div class="line">    isve-&gt;setFactoryChunkMeshSceneNode(factory);</div>
+<div class="line">    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld();</div>
+<div class="line">    isve-&gt;getWorld(<span class="keywordtype">id</span>)-&gt;setSimpleVoxelObjectTransparentTester(<span class="keyword">new</span> MyTransparentTester); <span class="comment">// Его удалит мир.</span></div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; NUMBER_OF_LEVELS; i++) factory-&gt;setMaterialFlag(i, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>);</div>
+<div class="line">    factory-&gt;setID(LEVEL_SOLID, <span class="keywordtype">id</span>, ID_PICKABLE);</div>
+<div class="line">    factory-&gt;setID(LEVEL_WATER, <span class="keywordtype">id</span>, ID_WATER); <span class="comment">// Луч с маской ID_PICKABLE проходит сквозь воду.</span></div>
+<div class="line">    isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(0, 0, 0), Vector3d&lt;int&gt;(0, 0, 0), <span class="keyword">true</span>);</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; 16; x++)</div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; 16; z++)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; 3; y++) <span class="comment">// Пол толщиной 3 блока.</span></div>
+<div class="line">                isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(x, y, z), <span class="keyword">new</span> Block(BLOCK_STONE));</div>
+<div class="line">            <span class="keywordflow">if</span>(x &gt;= 2 &amp;&amp; x &lt;= 5 &amp;&amp; z &gt;= 2 &amp;&amp; z &lt;= 5) <span class="comment">// Лужа на полу.</span></div>
+<div class="line">                isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(x, 3, z), <span class="keyword">new</span> Block(BLOCK_WATER));</div>
+<div class="line">        }</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 3; y &lt; 7; y++) <span class="comment">// Столб, в который можно упереться.</span></div>
+<div class="line">        isve-&gt;setSimpleVoxelObjectByGlobalVector(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(10, y, 8), <span class="keyword">new</span> Block(BLOCK_STONE));</div>
+<div class="line">    isve-&gt;addTaskUpdateChunks();</div>
+<div class="line"> </div>
+<div class="line">    ICameraSceneNode* camera = smgr-&gt;addCameraSceneNodeFPS(0, 100, 0.005f);</div>
+<div class="line">    camera-&gt;setPosition(vector3df(7, 4, 2));</div>
+<div class="line">    camera-&gt;setTarget(vector3df(10, 3, 8));</div>
+<div class="line">    camera-&gt;setNearValue(0.1f); <span class="comment">// Вплотную к блоку он не &quot;пропадает&quot;.</span></div>
+<div class="line">    ISceneNodeAnimatorCollisionResponse* collision = 0; <span class="comment">// Аниматор столкновений создадим, когда появится пол.</span></div>
+<div class="line">    ISceneCollisionManager* collman = smgr-&gt;getSceneCollisionManager();</div>
+<div class="line">    SMaterial wire; <span class="comment">// Материал для красного каркаса треугольника под курсором.</span></div>
+<div class="line">    wire.Wireframe = <span class="keyword">true</span>;</div>
+<div class="line">    wire.Lighting = <span class="keyword">false</span>;</div>
+<div class="line">    VoxelAddress* target = 0; <span class="comment">// Адрес блока под курсором (наш - удаляем сами).</span></div>
+<div class="line">    isve-&gt;start();</div>
+<div class="line">    <span class="keywordflow">while</span>(isve-&gt;runIrrDevice())</div>
+<div class="line">    {</div>
+<div class="line">        isve-&gt;update();</div>
+<div class="line">        <span class="keywordflow">if</span>(!collision &amp;&amp; meta-&gt;getSelectorCount() &gt; 0) <span class="comment">// Пол появился - теперь можно включать столкновения и гравитацию.</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="comment">// Эллипсоид камеры 0.3 x 0.8 x 0.3, гравитация вниз, глаза на 0.5 выше центра эллипсоида.</span></div>
+<div class="line">            collision = smgr-&gt;createCollisionResponseAnimator(meta, camera, vector3df(0.3f, 0.8f, 0.3f), vector3df(0, -0.1f, 0), vector3df(0, 0.5f, 0));</div>
+<div class="line">            camera-&gt;addAnimator(collision);</div>
+<div class="line">            collision-&gt;drop(); <span class="comment">// Аниматором владеет камера.</span></div>
+<div class="line">        }</div>
+<div class="line">        driver-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 100, 100, 140));</div>
+<div class="line">        smgr-&gt;drawAll();</div>
+<div class="line">        <span class="keywordflow">if</span>(target) { <span class="keyword">delete</span> target; target = 0; }</div>
+<div class="line">        line3df ray; <span class="comment">// Луч на 30 блоков из камеры по направлению взгляда.</span></div>
+<div class="line">        ray.start = camera-&gt;getPosition();</div>
+<div class="line">        <span class="keyword">const</span> vector3df dir = (camera-&gt;getTarget() - ray.start).normalize();</div>
+<div class="line">        ray.end = ray.start + dir * 30.0f;</div>
+<div class="line">        vector3df point;</div>
+<div class="line">        triangle3df triangle;</div>
+<div class="line">        <span class="keywordflow">if</span>(collman-&gt;getSceneNodeAndCollisionPointFromRay(ray, point, triangle, ID_PICKABLE, 0))</div>
+<div class="line">        {</div>
+<div class="line">            <span class="comment">// Блок по треугольнику: три вершины, направление взгляда и позиция камеры.</span></div>
+<div class="line">            target = isve-&gt;getAddressSimpleVoxelObjectByThreePoints(<span class="keywordtype">id</span>,</div>
+<div class="line">                Vector3d&lt;float&gt;(triangle.pointA.X, triangle.pointA.Y, triangle.pointA.Z),</div>
+<div class="line">                Vector3d&lt;float&gt;(triangle.pointB.X, triangle.pointB.Y, triangle.pointB.Z),</div>
+<div class="line">                Vector3d&lt;float&gt;(triangle.pointC.X, triangle.pointC.Y, triangle.pointC.Z),</div>
+<div class="line">                Vector3d&lt;float&gt;(dir.X, dir.Y, dir.Z), Vector3d&lt;float&gt;(ray.start.X, ray.start.Y, ray.start.Z));</div>
+<div class="line">            <span class="keywordflow">if</span>(target &amp;&amp; target-&gt;getLastVectInd() &lt; 2) { <span class="keyword">delete</span> target; target = 0; } <span class="comment">// Только чанк - блок не найден.</span></div>
+<div class="line">            <span class="keywordflow">if</span>(target)</div>
+<div class="line">            {</div>
+<div class="line">                driver-&gt;setTransform(ETS_WORLD, matrix4());</div>
+<div class="line">                driver-&gt;setMaterial(wire);</div>
+<div class="line">                driver-&gt;draw3DTriangle(triangle, SColor(255, 255, 0, 0)); <span class="comment">// Треугольник под курсором.</span></div>
+<div class="line">                <span class="keyword">const</span> Vector3d&lt;int&gt; c = target-&gt;getVector(0), b = target-&gt;getVector(1); <span class="comment">// Чанк и блок в чанке.</span></div>
+<div class="line">                stringw caption = L<span class="stringliteral">&quot;Chunk (&quot;</span>;</div>
+<div class="line">                caption += c.getX(); caption += L<span class="stringliteral">&quot;, &quot;</span>; caption += c.getY(); caption += L<span class="stringliteral">&quot;, &quot;</span>; caption += c.getZ();</div>
+<div class="line">                caption += L<span class="stringliteral">&quot;), block (&quot;</span>; caption += b.getX(); caption += L<span class="stringliteral">&quot;, &quot;</span>; caption += b.getY(); caption += L<span class="stringliteral">&quot;, &quot;</span>; caption += b.getZ();</div>
+<div class="line">                caption += L<span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line">                device-&gt;setWindowCaption(caption.c_str());</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">        driver-&gt;endScene();</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">if</span>(target) <span class="keyword">delete</span> target;</div>
+<div class="line">    isve-&gt;stop();</div>
+<div class="line">    <span class="keyword">delete</span> isve; <span class="comment">// Фабрика получит onUpdateChunkMeshSceneNode(0, ...) по каждой ноде - селекторы уберутся из meta.</span></div>
+<div class="line">    meta-&gt;drop(); <span class="comment">// Мета-селектор создали мы - мы его и удаляем (камера уже держит свою ссылку через аниматор).</span></div>
+<div class="line">    device-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="a_irr_simple_voxel_engine_8h_html"><div class="ttname"><a href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a></div><div class="ttdoc">Главный заголовочный файл. Необходимо присоединять только его к проекту.</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">SimpleVoxelEngine::IrrEngine</a></div><div class="ttdoc">Главное пространство имён IrrSimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:13</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:11</div></div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="tutorials.html">Уроки по врапперу IrrSimpleVoxelEngine.</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

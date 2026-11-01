@@ -11,7 +11,8 @@ namespace SimpleVoxelEngine
         //! Структура, которая содержит параметры, передаваемые в функцию пользователя, работающую в другом потоке. От неё необходимо наследоваться.
         struct ParametersForThreadFunction
         {
-            //...
+            //! Виртуальный деструктор: движок удаляет параметры через указатель на базовую структуру.
+            virtual ~ParametersForThreadFunction() {}
         };
         //! Задание на запуск пользователеской функции с параметрами в другом потоке.
         struct TaskRunThreadFunctionWithParameters : Task
@@ -39,6 +40,16 @@ namespace SimpleVoxelEngine
                 IrrSimpleVoxelEngine* getIrrSimpleVoxelEngine();
             private:
                 IrrSimpleVoxelEngine* s_ISVE;
+        };
+        //! Задание на замену контроллера пользовательских функций.
+        /*! Ставится IrrSimpleVoxelEngine::setUserControllerForThread(), если движок запущен: контроллер меняется
+        в потоке главной очереди между заданиями, поэтому уже поставленные функции выполнятся со старым контроллером,
+        а поставленные после - с новым.
+        */
+        struct TaskSetUserControllerForThread : Task
+        {
+            UserControllerForThread* s_UserControllerForThread; //!< Новый контроллер (может быть NULL - убрать контроллер).
+            bool s_DeleteByEngine; //!< Удаляет ли движок этот контроллер (см. IrrSimpleVoxelEngine::setUserControllerForThread()).
         };
     }
 }

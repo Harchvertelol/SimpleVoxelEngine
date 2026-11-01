@@ -1,0 +1,27 @@
+var classirr_1_1scene_1_1_c_batching_mesh =
+[
+    [ "CBatchingMesh", "classirr_1_1scene_1_1_c_batching_mesh.html#af11c3b5167830229a88ee0d935dc734e", null ],
+    [ "~CBatchingMesh", "classirr_1_1scene_1_1_c_batching_mesh.html#aed32c2b8932e5060c70b49285e9d0c08", null ],
+    [ "addMesh", "classirr_1_1scene_1_1_c_batching_mesh.html#a714698796dbe5678ed40c644d2986c21", null ],
+    [ "addMesh", "classirr_1_1scene_1_1_c_batching_mesh.html#a3105f30cfed220127dc6112ec888f57f", null ],
+    [ "addMeshBuffer", "classirr_1_1scene_1_1_c_batching_mesh.html#af9e2561bac6306325e4aa58d75faf0b9", null ],
+    [ "addMeshBuffer", "classirr_1_1scene_1_1_c_batching_mesh.html#a5c3db93f3b3b1c28a99975cc21ed382c", null ],
+    [ "clear", "classirr_1_1scene_1_1_c_batching_mesh.html#ae27f15a9680eeb08bd867827d32d98b0", null ],
+    [ "finalize", "classirr_1_1scene_1_1_c_batching_mesh.html#a0867957d15cba2e4d02bbbb3b58ba4d9", null ],
+    [ "getBoundingBox", "classirr_1_1scene_1_1_c_batching_mesh.html#af702b482bfaebe2d466b6c221d738fa6", null ],
+    [ "getMeshBuffer", "classirr_1_1scene_1_1_c_batching_mesh.html#aac303345538354a5e9302cb5c961ca0d", null ],
+    [ "getMeshBuffer", "classirr_1_1scene_1_1_c_batching_mesh.html#a1d1d5acb29cccd71e9eadfc9b81f91ca", null ],
+    [ "getMeshBufferCount", "classirr_1_1scene_1_1_c_batching_mesh.html#a9674877ae682d933265edc6e754b2827", null ],
+    [ "getSourceBuffer", "classirr_1_1scene_1_1_c_batching_mesh.html#a748b63a1e801ea791d21ffe94f8ba841", null ],
+    [ "getSourceBufferCount", "classirr_1_1scene_1_1_c_batching_mesh.html#a9562acc91de5d0d73700b8e3cf8ab4b3", null ],
+    [ "getSourceBufferMatrix", "classirr_1_1scene_1_1_c_batching_mesh.html#a9f607145d3cdc38b50376f70371e662f", null ],
+    [ "isDirty", "classirr_1_1scene_1_1_c_batching_mesh.html#ab07f538e2cde8fecc2de1d47bb684dee", null ],
+    [ "moveMesh", "classirr_1_1scene_1_1_c_batching_mesh.html#af2c8a3b9dffea225249b2c84b1575437", null ],
+    [ "moveMeshBuffer", "classirr_1_1scene_1_1_c_batching_mesh.html#a468a4ebaf0ec5f53f36f438579855775", null ],
+    [ "recalculateBoundingBox", "classirr_1_1scene_1_1_c_batching_mesh.html#a0ff1cf056c05adeb0cadbd071f44220c", null ],
+    [ "setBoundingBox", "classirr_1_1scene_1_1_c_batching_mesh.html#ac723d897f5a287a94c65fcd27ceba419", null ],
+    [ "setDirty", "classirr_1_1scene_1_1_c_batching_mesh.html#ad6773a576bf9c041c0e190fdd8d6c7d4", null ],
+    [ "setHardwareMappingHint", "classirr_1_1scene_1_1_c_batching_mesh.html#a8d6b43900f252cf61453bcd86165c94f", null ],
+    [ "setMaterialFlag", "classirr_1_1scene_1_1_c_batching_mesh.html#a1f9ede4f4f54878aa2a45333ec125899", null ],
+    [ "update", "classirr_1_1scene_1_1_c_batching_mesh.html#a8090af4c123d35b03654d80981a31e0b", null ]
+];

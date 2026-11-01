@@ -1,0 +1,456 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Урок 2: Свой воксель, генератор мира и настройка враппера.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IrrSimpleVoxelEngine
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tutorial2.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Урок 2: Свой воксель, генератор мира и настройка враппера. </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>В прошлом уроке мы поставили пол вручную, вокселями встроенного типа. Для игры этого мало: нужны свои типы блоков (трава, земля, камень...), мир, который создаётся сам, и сообщения движка, чтобы видеть ошибки. Этим и займёмся: напишем свой воксель, генератор холмистого мира, подключим логгер и разберём основные настройки враппера - потоки, уровни мешей, склейку чанков в ноды и материалы. В итоге получится остров 112x112 блоков с холмами.</p>
+<p>Многое здесь - это ядро <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>, и оно уже подробно описано в его уроках: свой тип вокселя - в уроке 3 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>, информация для отрисовки (VoxelInfo) - в уроке 5, генератор мира и логгер - в уроке 2. Здесь мы сосредоточимся на том, что добавляет враппер: в каком потоке что вызывается и как это всё настроить.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut2_include"></a>
+Подключаем</h1>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core; <span class="comment">// World, WorldGenerator, VoxelInfo, VoxelForRendering...</span></div>
+<div class="line"><span class="keyword">using namespace </span>Voxels; <span class="comment">// SimpleVoxelObject, ChunkVoxelObject.</span></div>
+<div class="line"><span class="keyword">using namespace </span>Additional; <span class="comment">// Vector3d.</span></div>
+<div class="line"><span class="keyword">using namespace </span>Debug; <span class="comment">// Logger.</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>; <span class="comment">// Враппер.</span></div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core; <span class="comment">// Irrlicht.</span></div>
+<div class="ttc" id="a_irr_simple_voxel_engine_8h_html"><div class="ttname"><a href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a></div><div class="ttdoc">Главный заголовочный файл. Необходимо присоединять только его к проекту.</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_irr_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">SimpleVoxelEngine::IrrEngine</a></div><div class="ttdoc">Главное пространство имён IrrSimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:13</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Пространство имён SimpleVoxelEngine.</div><div class="ttdef"><b>Определения</b> ChunksMeshBlock.h:11</div></div>
+</div><!-- fragment --><p> Пространство имён Debug нужно для логгера, cmath - для синусов генератора.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut2_voxel"></a>
+Свой воксель</h1>
+<p>Заведём три типа блоков и сам блок: </p><div class="fragment"><div class="line"><span class="comment">// Типы наших блоков.</span></div>
+<div class="line"><span class="keyword">enum</span> { ID_GRASS = 1, ID_EARTH = 2, ID_STONE = 3 };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Информация для отрисовки: копия того, что фабрике нужно знать о блоке.</span></div>
+<div class="line"><span class="keyword">struct </span>MyVoxelInfo : VoxelInfo</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Свой блок. Хранит только свой тип - положение и видимость граней хранит движок.</span></div>
+<div class="line"><span class="keyword">class </span>MyBlock : <span class="keyword">public</span> SimpleVoxelObject</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyBlock(<span class="keywordtype">int</span> <span class="keywordtype">id</span>) : s_Id(id) { setTypeVoxel(Defines::CUSTOM_VOXEL); } <span class="comment">// Все свои блоки - CUSTOM_VOXEL.</span></div>
+<div class="line">    <span class="comment">// Вызывается под блокировкой движка, когда строится меш чанка. Вернуть НОВЫЙ объект - его удалит движок.</span></div>
+<div class="line">    VoxelInfo* getVoxelForRenderingInfo()</div>
+<div class="line">    {</div>
+<div class="line">        MyVoxelInfo* info = <span class="keyword">new</span> MyVoxelInfo;</div>
+<div class="line">        info-&gt;s_TypeVoxelInfo = CUSTOM_VOXEL_INFO; <span class="comment">// Это наша собственная информация.</span></div>
+<div class="line">        info-&gt;s_Id = s_Id;</div>
+<div class="line">        <span class="keywordflow">return</span> info;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getId() { <span class="keywordflow">return</span> s_Id; }</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Блок наследуется от SimpleVoxelObject и получает тип CUSTOM_VOXEL - так ядро понимает, что это пользовательский воксель (подробно - в уроке 3 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>). Хранить в блоке положение не нужно: его знает ядро по адресу вокселя.</p>
+<p>Самое интересное - getVoxelForRenderingInfo(). Зачем вообще отдельная структура MyVoxelInfo, почему бы фабрике не читать сам блок? Дело в потоках. Когда враппер строит меш чанка, поток построения под блокировкой движка делает "снимок" чанка: для каждого видимого вокселя - позицию, видимость граней и результат getVoxelForRenderingInfo(). Потом блокировка снимается, и меш строится уже без неё - параллельно с тем, как главная очередь меняет мир. Блок к этому моменту может быть уже заменён или удалён, поэтому фабрика получает не сам блок, а копию нужных ей данных. Отсюда правила: возвращайте новый объект (его удалит движок), кладите в него копии данных, а не указатели на блок, и держите его маленьким - функция вызывается для каждого видимого вокселя при каждой перестройке чанка.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut2_generator"></a>
+Генератор мира</h1>
+<div class="fragment"><div class="line"><span class="comment">// Генератор мира: холмы из камня, земли и травы. Вызывается в потоке главной очереди под блокировкой движка.</span></div>
+<div class="line"><span class="keyword">class </span>MyWorldGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> sizechunk)</div>
+<div class="line">    {</div>
+<div class="line">        Vector3d&lt;int&gt; vc = chunk-&gt;getVoxelAddress()-&gt;getVector(0); <span class="comment">// Координаты чанка в мире.</span></div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; sizechunk; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; sizechunk; z++)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordtype">int</span> gx = vc.getX() * sizechunk + x; <span class="comment">// Глобальные координаты столбца.</span></div>
+<div class="line">                <span class="keywordtype">int</span> gz = vc.getZ() * sizechunk + z;</div>
+<div class="line">                <span class="keywordtype">int</span> height = 6 + (int)floor(3 * sin(gx * 0.3) + 3 * cos(gz * 0.25)); <span class="comment">// Высота земли: от 0 до 12.</span></div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; sizechunk; y++)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keywordtype">int</span> gy = vc.getY() * sizechunk + y;</div>
+<div class="line">                    <span class="keywordflow">if</span>(gy &gt; height) <span class="keywordflow">break</span>; <span class="comment">// Выше земли - воздух (пустые ячейки).</span></div>
+<div class="line">                    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = ID_STONE;</div>
+<div class="line">                    <span class="keywordflow">if</span>(gy == height) <span class="keywordtype">id</span> = ID_GRASS;</div>
+<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(gy &gt; height - 3) <span class="keywordtype">id</span> = ID_EARTH;</div>
+<div class="line">                    chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), <span class="keyword">new</span> MyBlock(<span class="keywordtype">id</span>), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Как устроен генератор, подробно рассказано в уроке 2 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>: generateChunk() получает пустой чанк и заполняет его, нулевой вектор адреса чанка - его координаты в мире. Мы считаем для каждого столбца высоту земли по глобальным координатам (поэтому холмы плавно продолжаются из чанка в чанк), сверху кладём траву, под ней три слоя земли, ниже - камень. Последнее false в setSimpleVoxelObject() говорит, что пересчитывать видимость соседей не нужно: при генерации весь чанк и так будет пересчитан.</p>
+<p>Что важно знать о генераторе во враппере:</p><ul>
+<li>Он вызывается в потоке главной очереди под блокировкой движка, когда addChunksForRendering() с load = true (или стриминг - урок 6) просит чанк, которого нет ни в памяти, ни в сохранении. Пока генератор работает, мир никто не меняет и меши не снимаются, так что с чанком можно работать напрямую.</li>
+<li>Поток главной очереди один, поэтому чанки генерируются по одному, а все остальные задания (установка блоков, клики игрока) ждут. Медленный генератор - медленная загрузка мира. Потоки построения мешей тут не помогают.</li>
+<li>Из генератора нельзя вызывать то, что ждёт другие потоки враппера (stop(), saveAllChunks(id, true)): поток ждал бы сам себя.</li>
+<li>Если мир нужен не бесконечным (например, высотой 16 чанков), у ядра есть границы мира - о них тоже в уроке 2 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>. За границей генератор даже не вызывается.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="irrtut2_factory"></a>
+Фабрика</h1>
+<p>Фабрика почти как в уроке 1, только цвет теперь зависит от типа блока: </p><div class="fragment"><div class="line"><span class="comment">// Фабрика: цвет блока - по его типу.</span></div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        s_Plane = createFaceMesh();</div>
+<div class="line">        s_MeshManipulator = device-&gt;getSceneManager()-&gt;getMeshManipulator();</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); }</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl) <span class="comment">// Потоки построения.</span></div>
+<div class="line">    {</div>
+<div class="line">        MyVoxelInfo* info = (MyVoxelInfo*)vxl-&gt;getVoxelInfo(); <span class="comment">// То, что вернула MyBlock::getVoxelForRenderingInfo().</span></div>
+<div class="line">        IMesh* mesh = getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1));</div>
+<div class="line">        SColor color(255, 128, 128, 128); <span class="comment">// Камень - серый.</span></div>
+<div class="line">        <span class="keywordflow">if</span>(info-&gt;s_Id == ID_GRASS) color.set(255, 60, 170, 60);</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(info-&gt;s_Id == ID_EARTH) color.set(255, 130, 90, 50);</div>
+<div class="line">        <span class="keywordflow">if</span>(mesh) s_MeshManipulator-&gt;setVertexColors(mesh, color);</div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering*) { <span class="keywordflow">return</span> 0; }</div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> vxl-&gt;getVoxelInfo() - это как раз тот объект, который вернула MyBlock::getVoxelForRenderingInfo(). Текстуры и разные грани - в следующем уроке.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut2_logger"></a>
+Логгер</h1>
+<div class="fragment"><div class="line">Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Логгер выводит сообщения движка в консоль.</span></div>
+<div class="line">lgr-&gt;setPrintStandard(<span class="keyword">false</span>); <span class="comment">// Обычных сообщений (загрузка чанков и т.п.) очень много - выключим их.</span></div>
+<div class="line">IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device, lgr);</div>
+<div class="line">lgr-&gt;drop(); <span class="comment">// Логгер теперь держит движок.</span></div>
+</div><!-- fragment --><p> Логгер передаётся в конструктор враппера. Движок берёт на него ссылку, поэтому свою мы сразу отпускаем (drop()). Сообщения бывают пяти типов: ошибки (Error), нарушения логики - то есть ошибки программиста, например настройка не вовремя (Logic violation), предупреждения (Warning), обычные (Standard) и информационные (Info). Каждый тип можно выключить: setPrintError(), setPrintLogicViolation(), setPrintWarning(), setPrintStandard(), setPrintInfo(). Обычных сообщений очень много (о каждом загруженном чанке, о каждом чанке, уже помеченном для обновления), поэтому их обычно выключают. А вот ошибки и нарушения логики выключать не советуем - это ваши главные подсказки.</p>
+<p>Особенность враппера: сообщения идут из разных потоков сразу (главного, главной очереди, потоков построения), и, чтобы строки не перемешивались, враппер переопределяет Engine::registerEvent() и выводит сообщения строго по одному. Выключенные типы сообщений отбрасываются сразу, без блокировки, так что выключенный вывод ничего не стоит. Подробнее (и как выводить лог, например, в файл) - в уроке 10.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut2_threads"></a>
+Потоки построения</h1>
+<div class="fragment"><div class="line">isve-&gt;setMaxNumberOfThreadAddChunks(4); <span class="comment">// Потоки построения новых чанков - до start().</span></div>
+<div class="line">isve-&gt;setMaxNumberOfThreadUpdateChunks(1); <span class="comment">// Потоки перестройки изменённых чанков - до start().</span></div>
+</div><!-- fragment --><p> У враппера два пула потоков построения мешей. Потоки "создания" строят меши только что добавленных чанков. Потоки "обновления" в первую очередь перестраивают изменённые чанки (чтобы поставленный блок появлялся сразу, даже пока грузится большой мир), а когда таких нет - помогают потокам создания. По умолчанию в каждом пуле по одному потоку. Менять число потоков можно только до start(): после запуска функции вернут false (с ошибкой в логе). Узнать текущие значения - getMaxNumberOfThreadAddChunks() и getMaxNumberOfThreadUpdateChunks().</p>
+<p>Сколько ставить? Обычно на один-два меньше числа ядер процессора: главному потоку тоже нужно время на рисование. Помните, что генерация мира идёт в одном потоке главной очереди, и потоки построения её не ускоряют. Подробнее о производительности - в уроке 14.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut2_settings"></a>
+Настройки фабрики</h1>
+<div class="fragment"><div class="line">MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">factory-&gt;setNumberOfMeshesSceneNodeForChunk(1); <span class="comment">// Число уровней мешей - ПЕРВЫМ из настроек уровней.</span></div>
+<div class="line">factory-&gt;setPositionScale(16); <span class="comment">// Масштабы - равны размеру чанка.</span></div>
+<div class="line">factory-&gt;setSScale(16);</div>
+<div class="line">factory-&gt;setSizeBlockChunks(2, 2, 2); <span class="comment">// Склеивать чанки в ноды по 2x2x2.</span></div>
+<div class="line">factory-&gt;setMaterialType(0, EMT_SOLID); <span class="comment">// Материал уровня 0 (EMT_SOLID и так стоит по умолчанию).</span></div>
+<div class="line">isve-&gt;setFactoryChunkMeshSceneNode(factory); <span class="comment">// Фабрику - до addWorld(). Теперь фабрика заморожена.</span></div>
+</div><!-- fragment --><p> Порядок здесь важен.</p>
+<p>setNumberOfMeshesSceneNodeForChunk() задаёт число уровней мешей. Уровень - часть меша чанка со своим материалом: например, 0 - непрозрачные блоки, 1 - стекло, 2 - вода (урок 9). Номер уровня каждого вокселя возвращает getMeshNumber() фабрики. Эта функция сбрасывает материалы и hardware mapping всех уровней, поэтому вызывайте её первой, до setMaterialType() и setHardwareMappingHint(). И только до setFactoryChunkMeshSceneNode(): у замороженной фабрики число уровней не меняется. По умолчанию уровень один.</p>
+<p>setPositionScale() и setSScale() - масштабы позиции и размера вокселей, о них мы говорили в уроке 1: они должны быть равны размеру чанка.</p>
+<p>setSizeBlockChunks(2, 2, 2) говорит, сколько соседних чанков склеивать в одну ноду Irrlicht (блок чанков). Зачем? Каждая нода - это отдельные вызовы отрисовки, и сотни маленьких нод рисуются медленнее, чем десятки больших. Но у больших блоков есть цена: при любом изменении чанка меш всего блока склеивается заново (меши самих чанков при этом не перестраиваются, только копируются), а прозрачные уровни сортируются точнее в маленьких блоках. По умолчанию блок - один чанк. Эта общая настройка - для всех миров и только до setFactoryChunkMeshSceneNode(). Если нужно разное для разных миров, общий размер не задавайте, а после addWorld() вызовите setSizeBlockChunks(id, x, y, z) для каждого мира (один раз, до первых мешей).</p>
+<p>setMaterialType(0, EMT_SOLID) - материал уровня 0 для миров, которые будут созданы. EMT_SOLID и так стоит по умолчанию, строка - для примера. Чтобы сменить материал уже созданного мира, есть setMaterialType(уровень, id, тип) (о прозрачных материалах - в уроке 9).</p>
+<p>Рядом с материалом стоят ещё две настройки уровня, которые в этом уроке нам не нужны. setHardwareMappingHint(уровень, способ, буфер) говорит Irrlicht, держать ли меши нод уровня в видеопамяти (например, EHM_STATIC), - так же, как setMaterialType(): без id - для будущих миров, с id - для созданного мира (об этом - в уроке 14). setID(уровень, id, номер) задаёт ID нодам уровня в мире - по нему удобно отличать ноды чанков, например, при выборе блока лучом (урок 7). Сколько уровней у фабрики, скажет getNumberOfMeshesSceneNodeForChunk().</p>
+<p>После setFactoryChunkMeshSceneNode() фабрика заморожена: число уровней, масштабы и общий размер блока больше не меняются (вызовы вернут false или просто ничего не сделают, а в лог попадёт нарушение логики).</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut2_world"></a>
+Мир</h1>
+<div class="fragment"><div class="line">WorldCreatingParameters wcp;</div>
+<div class="line">wcp.s_SizeChunk = 16; <span class="comment">// Ребро чанка в вокселях (16 - и так по умолчанию).</span></div>
+<div class="line"><span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld(wcp);</div>
+<div class="line">isve-&gt;getWorld(<span class="keywordtype">id</span>)-&gt;setWorldGenerator(<span class="keyword">new</span> MyWorldGenerator); <span class="comment">// Генератор удалит мир.</span></div>
+<div class="line">factory-&gt;setMultiplePartition(<span class="keywordtype">id</span>, <span class="keyword">true</span>); <span class="comment">// Все чанки разбиты одинаково - видимость граней считается быстрее.</span></div>
+<div class="line">factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>); <span class="comment">// Без света - виден цвет вершин.</span></div>
+</div><!-- fragment --><p> У addWorld() три варианта: без параметров (как в уроке 1), с параметрами WorldCreatingParameters (размер чанка и одинаковость разбиения) и с готовым объектом World, созданным для этого движка, - его враппер добавит к себе. Все три - только из главного потока и только после установки фабрики. Если меняете размер чанка, не забудьте, что масштабы фабрики должны быть равны ему.</p>
+<p>Генератор ставим миру сразу после создания. Мир становится его владельцем и удалит его сам. Обратите внимание: мы работаем с объектом World напрямую, в обход враппера. До start() так можно: потоков ещё нет. Во время работы прямой доступ к объектам ядра - только под блокировкой движка (урок 10).</p>
+<p>setMultiplePartition(id, true) сообщает, что все чанки мира разбиты одинаково (на getSizeChunk() ячеек по каждой оси) - тогда видимость граней на стыках чанков считается быстрым путём. Результат тот же, что и без неё, меняется только скорость. Наш генератор так и делает. Если у какого-то чанка окажется другое разбиение, для него просто будет использован медленный путь. Проверить значение можно функцией isMultiplePartition(id).</p>
+<p>setMaterialFlag() - флаги материала нод уровня в этом мире, как в уроке 1. Кроме освещения часто пригождаются EMF_BILINEAR_FILTER (сглаживание текстур), EMF_FOG_ENABLE (туман) и EMF_WIREFRAME (каркас - удобно при отладке: сразу видно, какие грани враппер нарисовал). Флаги ставятся из главного потока и сразу применяются и к уже созданным нодам.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut2_area"></a>
+Область чанков и запуск</h1>
+<div class="fragment"><div class="line">isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(-3, 0, -3), Vector3d&lt;int&gt;(3, 1, 3), <span class="keyword">true</span>); <span class="comment">// 7x2x7 чанков.</span></div>
+<div class="line">ICameraSceneNode* camera = device-&gt;getSceneManager()-&gt;addCameraSceneNodeFPS();</div>
+<div class="line">camera-&gt;setPosition(vector3df(0, 30, -50));</div>
+<div class="line">camera-&gt;setTarget(vector3df(0, 5, 0));</div>
+<div class="line">isve-&gt;start();</div>
+</div><!-- fragment --><p> Отрисовываем кубоид из 7x2x7 чанков. Чанки верхнего слоя (Y = 1) пустые - над землёй только воздух, но они загружены: когда мы будем ставить блоки (урок 8), им будет куда встать. Пустой чанк почти не занимает памяти, и меш его пуст.</p>
+<p>На краю области у соседних чанков нет данных в памяти, а грань, за которой незагруженный чанк, считается видимой. Поэтому остров окружён "стенками" из боковых граней - для острова это как раз то, что нужно. Если же область - часть большого мира, передайте loadframe = true (пятый параметр): тогда вокруг области загрузится рамка из чанков толщиной sizeframe (шестой параметр, по умолчанию 1). Рамка не рисуется, но благодаря ей грани на краю считаются правильно. Подгружать и выгружать чанки вокруг игрока удобнее стримингом - урок 6.</p>
+<p>Главный цикл - как в уроке 1: </p><div class="fragment"><div class="line"><span class="keywordflow">while</span>(isve-&gt;runIrrDevice())</div>
+<div class="line">{</div>
+<div class="line">    isve-&gt;update();</div>
+<div class="line">    device-&gt;getVideoDriver()-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 120, 160, 220));</div>
+<div class="line">    device-&gt;getSceneManager()-&gt;drawAll();</div>
+<div class="line">    device-&gt;getVideoDriver()-&gt;endScene();</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="irrtut2_stop"></a>
+Остановка и сохранение</h1>
+<div class="fragment"><div class="line">    isve-&gt;stop(); <span class="comment">// Дождались выполнения всех заданий и остановили потоки.</span></div>
+<div class="line">    <span class="comment">// Здесь мир можно сохранить: isve-&gt;getWorld(id)-&gt;saveAllChunks() (нужен контроллер сохранения - урок 3 SimpleVoxelEngine).</span></div>
+<div class="line">    <span class="keyword">delete</span> isve; <span class="comment">// Удалит фабрику, миры (и их генераторы).</span></div>
+<div class="line">    device-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> После stop() потоки враппера миром не пользуются, и с ним можно работать напрямую - например, сохранить все чанки через World::saveAllChunks(). Для этого миру нужен контроллер загрузки и сохранения (урок 3 <a class="el" href="namespace_simple_voxel_engine.html" title="Пространство имён SimpleVoxelEngine.">SimpleVoxelEngine</a>), у нас его нет, поэтому строка - только комментарий. Сохранять мир во время игры, не останавливая движок, можно функцией isve-&gt;saveAllChunks(id) - об этом в уроке 11.</p>
+<h1 class="doxsection"><a class="anchor" id="irrtut2_errors"></a>
+Типичные ошибки</h1>
+<ul>
+<li>setMaterialType() или setHardwareMappingHint() вызваны до setNumberOfMeshesSceneNodeForChunk() - настройки уровней сброшены.</li>
+<li>Настройки фабрики (масштабы, уровни, размер блока) заданы после setFactoryChunkMeshSceneNode(), число потоков - после start(): они не применились, в логе нарушение логики.</li>
+<li>Размер чанка в WorldCreatingParameters изменён, а масштабы фабрики - нет.</li>
+<li>getVoxelForRenderingInfo() отдаёт указатель на сам блок или его данные: фабрика читает их без блокировки, когда блок может быть уже удалён. Отдавайте копию.</li>
+<li>Генератор долгий: пока он работает, ждут все задания главной очереди.</li>
+<li>Прямой доступ к World во время работы движка без блокировки - случайные падения (урок 10).</li>
+</ul>
+<p>Ну и напоследок ещё раз полный код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;irrlicht.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_irr_simple_voxel_engine_8h.html">IrrSimpleVoxelEngine.h</a>&gt;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span>Core; <span class="comment">// World, WorldGenerator, VoxelInfo, VoxelForRendering...</span></div>
+<div class="line"><span class="keyword">using namespace </span>Voxels; <span class="comment">// SimpleVoxelObject, ChunkVoxelObject.</span></div>
+<div class="line"><span class="keyword">using namespace </span>Additional; <span class="comment">// Vector3d.</span></div>
+<div class="line"><span class="keyword">using namespace </span>Debug; <span class="comment">// Logger.</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a>; <span class="comment">// Враппер.</span></div>
+<div class="line"><span class="keyword">using namespace </span>irr; <span class="keyword">using namespace </span>scene; <span class="keyword">using namespace </span>video; <span class="keyword">using namespace </span>core; <span class="comment">// Irrlicht.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Типы наших блоков.</span></div>
+<div class="line"><span class="keyword">enum</span> { ID_GRASS = 1, ID_EARTH = 2, ID_STONE = 3 };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Информация для отрисовки: копия того, что фабрике нужно знать о блоке.</span></div>
+<div class="line"><span class="keyword">struct </span>MyVoxelInfo : VoxelInfo</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Свой блок. Хранит только свой тип - положение и видимость граней хранит движок.</span></div>
+<div class="line"><span class="keyword">class </span>MyBlock : <span class="keyword">public</span> SimpleVoxelObject</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyBlock(<span class="keywordtype">int</span> <span class="keywordtype">id</span>) : s_Id(id) { setTypeVoxel(Defines::CUSTOM_VOXEL); } <span class="comment">// Все свои блоки - CUSTOM_VOXEL.</span></div>
+<div class="line">    <span class="comment">// Вызывается под блокировкой движка, когда строится меш чанка. Вернуть НОВЫЙ объект - его удалит движок.</span></div>
+<div class="line">    VoxelInfo* getVoxelForRenderingInfo()</div>
+<div class="line">    {</div>
+<div class="line">        MyVoxelInfo* info = <span class="keyword">new</span> MyVoxelInfo;</div>
+<div class="line">        info-&gt;s_TypeVoxelInfo = CUSTOM_VOXEL_INFO; <span class="comment">// Это наша собственная информация.</span></div>
+<div class="line">        info-&gt;s_Id = s_Id;</div>
+<div class="line">        <span class="keywordflow">return</span> info;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getId() { <span class="keywordflow">return</span> s_Id; }</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="keywordtype">int</span> s_Id;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Генератор мира: холмы из камня, земли и травы. Вызывается в потоке главной очереди под блокировкой движка.</span></div>
+<div class="line"><span class="keyword">class </span>MyWorldGenerator : <span class="keyword">public</span> WorldGenerator</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">bool</span> generateChunk(ChunkVoxelObject* chunk, <span class="keywordtype">int</span> sizechunk)</div>
+<div class="line">    {</div>
+<div class="line">        Vector3d&lt;int&gt; vc = chunk-&gt;getVoxelAddress()-&gt;getVector(0); <span class="comment">// Координаты чанка в мире.</span></div>
+<div class="line">        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; sizechunk; x++)</div>
+<div class="line">            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> z = 0; z &lt; sizechunk; z++)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordtype">int</span> gx = vc.getX() * sizechunk + x; <span class="comment">// Глобальные координаты столбца.</span></div>
+<div class="line">                <span class="keywordtype">int</span> gz = vc.getZ() * sizechunk + z;</div>
+<div class="line">                <span class="keywordtype">int</span> height = 6 + (int)floor(3 * sin(gx * 0.3) + 3 * cos(gz * 0.25)); <span class="comment">// Высота земли: от 0 до 12.</span></div>
+<div class="line">                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> y = 0; y &lt; sizechunk; y++)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keywordtype">int</span> gy = vc.getY() * sizechunk + y;</div>
+<div class="line">                    <span class="keywordflow">if</span>(gy &gt; height) <span class="keywordflow">break</span>; <span class="comment">// Выше земли - воздух (пустые ячейки).</span></div>
+<div class="line">                    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = ID_STONE;</div>
+<div class="line">                    <span class="keywordflow">if</span>(gy == height) <span class="keywordtype">id</span> = ID_GRASS;</div>
+<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(gy &gt; height - 3) <span class="keywordtype">id</span> = ID_EARTH;</div>
+<div class="line">                    chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), <span class="keyword">new</span> MyBlock(<span class="keywordtype">id</span>), <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Фабрика: цвет блока - по его типу.</span></div>
+<div class="line"><span class="keyword">class </span>MyFactory : <span class="keyword">public</span> FactoryChunkMeshSceneNode</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyFactory(IrrlichtDevice* device, IrrSimpleVoxelEngine* isve) : FactoryChunkMeshSceneNode(device, isve)</div>
+<div class="line">    {</div>
+<div class="line">        s_Plane = createFaceMesh();</div>
+<div class="line">        s_MeshManipulator = device-&gt;getSceneManager()-&gt;getMeshManipulator();</div>
+<div class="line">    }</div>
+<div class="line">    ~MyFactory() { s_Plane-&gt;drop(); }</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    IMesh* getMeshVoxel(VoxelForRendering* vxl) <span class="comment">// Потоки построения.</span></div>
+<div class="line">    {</div>
+<div class="line">        MyVoxelInfo* info = (MyVoxelInfo*)vxl-&gt;getVoxelInfo(); <span class="comment">// То, что вернула MyBlock::getVoxelForRenderingInfo().</span></div>
+<div class="line">        IMesh* mesh = getMeshCubeFaces(vxl, s_Plane, vector3df(1, 1, 1));</div>
+<div class="line">        SColor color(255, 128, 128, 128); <span class="comment">// Камень - серый.</span></div>
+<div class="line">        <span class="keywordflow">if</span>(info-&gt;s_Id == ID_GRASS) color.set(255, 60, 170, 60);</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(info-&gt;s_Id == ID_EARTH) color.set(255, 130, 90, 50);</div>
+<div class="line">        <span class="keywordflow">if</span>(mesh) s_MeshManipulator-&gt;setVertexColors(mesh, color);</div>
+<div class="line">        <span class="keywordflow">return</span> mesh;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordtype">int</span> getMeshNumber(VoxelForRendering*) { <span class="keywordflow">return</span> 0; }</div>
+<div class="line">    IMesh* s_Plane;</div>
+<div class="line">    IMeshManipulator* s_MeshManipulator;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d&lt;u32&gt;(1280, 720));</div>
+<div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Логгер выводит сообщения движка в консоль.</span></div>
+<div class="line">    lgr-&gt;setPrintStandard(<span class="keyword">false</span>); <span class="comment">// Обычных сообщений (загрузка чанков и т.п.) очень много - выключим их.</span></div>
+<div class="line">    IrrSimpleVoxelEngine* isve = <span class="keyword">new</span> IrrSimpleVoxelEngine(device, lgr);</div>
+<div class="line">    lgr-&gt;drop(); <span class="comment">// Логгер теперь держит движок.</span></div>
+<div class="line">    isve-&gt;setMaxNumberOfThreadAddChunks(4); <span class="comment">// Потоки построения новых чанков - до start().</span></div>
+<div class="line">    isve-&gt;setMaxNumberOfThreadUpdateChunks(1); <span class="comment">// Потоки перестройки изменённых чанков - до start().</span></div>
+<div class="line"> </div>
+<div class="line">    MyFactory* factory = <span class="keyword">new</span> MyFactory(device, isve);</div>
+<div class="line">    factory-&gt;setNumberOfMeshesSceneNodeForChunk(1); <span class="comment">// Число уровней мешей - ПЕРВЫМ из настроек уровней.</span></div>
+<div class="line">    factory-&gt;setPositionScale(16); <span class="comment">// Масштабы - равны размеру чанка.</span></div>
+<div class="line">    factory-&gt;setSScale(16);</div>
+<div class="line">    factory-&gt;setSizeBlockChunks(2, 2, 2); <span class="comment">// Склеивать чанки в ноды по 2x2x2.</span></div>
+<div class="line">    factory-&gt;setMaterialType(0, EMT_SOLID); <span class="comment">// Материал уровня 0 (EMT_SOLID и так стоит по умолчанию).</span></div>
+<div class="line">    isve-&gt;setFactoryChunkMeshSceneNode(factory); <span class="comment">// Фабрику - до addWorld(). Теперь фабрика заморожена.</span></div>
+<div class="line"> </div>
+<div class="line">    WorldCreatingParameters wcp;</div>
+<div class="line">    wcp.s_SizeChunk = 16; <span class="comment">// Ребро чанка в вокселях (16 - и так по умолчанию).</span></div>
+<div class="line">    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = isve-&gt;addWorld(wcp);</div>
+<div class="line">    isve-&gt;getWorld(<span class="keywordtype">id</span>)-&gt;setWorldGenerator(<span class="keyword">new</span> MyWorldGenerator); <span class="comment">// Генератор удалит мир.</span></div>
+<div class="line">    factory-&gt;setMultiplePartition(<span class="keywordtype">id</span>, <span class="keyword">true</span>); <span class="comment">// Все чанки разбиты одинаково - видимость граней считается быстрее.</span></div>
+<div class="line">    factory-&gt;setMaterialFlag(0, <span class="keywordtype">id</span>, EMF_LIGHTING, <span class="keyword">false</span>); <span class="comment">// Без света - виден цвет вершин.</span></div>
+<div class="line"> </div>
+<div class="line">    isve-&gt;addChunksForRendering(<span class="keywordtype">id</span>, Vector3d&lt;int&gt;(-3, 0, -3), Vector3d&lt;int&gt;(3, 1, 3), <span class="keyword">true</span>); <span class="comment">// 7x2x7 чанков.</span></div>
+<div class="line">    ICameraSceneNode* camera = device-&gt;getSceneManager()-&gt;addCameraSceneNodeFPS();</div>
+<div class="line">    camera-&gt;setPosition(vector3df(0, 30, -50));</div>
+<div class="line">    camera-&gt;setTarget(vector3df(0, 5, 0));</div>
+<div class="line">    isve-&gt;start();</div>
+<div class="line">    <span class="keywordflow">while</span>(isve-&gt;runIrrDevice())</div>
+<div class="line">    {</div>
+<div class="line">        isve-&gt;update();</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;beginScene(<span class="keyword">true</span>, <span class="keyword">true</span>, SColor(255, 120, 160, 220));</div>
+<div class="line">        device-&gt;getSceneManager()-&gt;drawAll();</div>
+<div class="line">        device-&gt;getVideoDriver()-&gt;endScene();</div>
+<div class="line">    }</div>
+<div class="line">    isve-&gt;stop(); <span class="comment">// Дождались выполнения всех заданий и остановили потоки.</span></div>
+<div class="line">    <span class="comment">// Здесь мир можно сохранить: isve-&gt;getWorld(id)-&gt;saveAllChunks() (нужен контроллер сохранения - урок 3 SimpleVoxelEngine).</span></div>
+<div class="line">    <span class="keyword">delete</span> isve; <span class="comment">// Удалит фабрику, миры (и их генераторы).</span></div>
+<div class="line">    device-&gt;drop();</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="tutorials.html">Уроки по врапперу IrrSimpleVoxelEngine.</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

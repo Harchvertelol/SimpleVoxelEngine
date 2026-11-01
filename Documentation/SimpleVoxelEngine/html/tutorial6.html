@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>SimpleVoxelEngine: Урок 6: Работа с простейшим встроенным парсером ini-файлов.</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,65 +23,92 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">SimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Воксельный движок</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li class="current"><a href="pages.html"><span>Описания</span></a></li>
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tutorial6.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
-</div><!-- top -->
-<div class="header">
-  <div class="headertitle">
-<div class="title">Урок 6: Работа с простейшим встроенным парсером ini-файлов. </div>  </div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Урок 6: Работа с простейшим встроенным парсером ini-файлов. </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>Вместе с движок поставляется простейший парсер ini-файлов следующего формата: </p><div class="fragment"><div class="line">[mainvariable1]</div>
@@ -87,7 +117,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 <div class="line">secondvar3=value</div>
 <div class="line">secondvar4=value</div>
 <div class="line">secondvar5=value</div>
-<div class="line"></div>
+<div class="line"> </div>
 <div class="line">[mainvariable2]</div>
 <div class="line">secondvar1=value</div>
 <div class="line">secondvar2=value</div>
@@ -96,105 +126,133 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 <div class="line">secondvar5=value</div>
 <div class="line">...</div>
 </div><!-- fragment --><p> В этом уроке мы научимся с ним работать. В начале всё стандартно: подключим движок и пространства имён, при этом подключим дополнительно пространство имён нашего парсера: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a>&gt;</span></div>
-<div class="line"></div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span> <span class="comment">// Для использования std::cout.</span></div>
-<div class="line"></div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;cstdlib&gt;</span> <span class="comment">// Для функции atoi.</span></div>
-<div class="line"></div>
-<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
-<div class="line"><span class="keyword">using namespace </span>Core;</div>
-<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
-<div class="line"><span class="keyword">using namespace </span>Additional;</div>
-<div class="line"><span class="keyword">using namespace </span>Defines;</div>
-<div class="line"><span class="keyword">using namespace </span>Debug;</div>
-<div class="line"></div>
-<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_ini_parser.html">IniParser</a>; <span class="comment">// Подключим пространство имён нашего парсера.</span></div>
-<div class="line"></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_core.html">Core</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_voxels.html">Voxels</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_additional.html">Additional</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_defines.html">Defines</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_debug.html">Debug</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_ini_parser.html">IniParser</a>; <span class="comment">// Подключим пространство имён нашего парсера.</span></div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">using namespace </span>std; <span class="comment">// Для вывода на экран.</span></div>
+<div class="ttc" id="a_simple_voxel_engine_8h_html"><div class="ttname"><a href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a></div><div class="ttdoc">Главный заголовочный файл. Необходимо присоединять только его к проекту (так я хочу,...</div></div>
+<div class="ttc" id="anamespace_ini_parser_html"><div class="ttname"><a href="namespace_ini_parser.html">IniParser</a></div><div class="ttdoc">Пространство имён, содержащее парсер ini файлов.</div><div class="ttdef"><b>Определения</b> ParserInfoFile.h:9</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_additional_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_additional.html">SimpleVoxelEngine::Additional</a></div><div class="ttdoc">Дополнительные классы для использования в движке.</div><div class="ttdef"><b>Определения</b> ARGBColor.h:9</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_core_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a></div><div class="ttdoc">Ядро движка. Здесь находится все главные классы и компоненты.</div><div class="ttdef"><b>Определения</b> ARGBColorVoxel.h:10</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_debug_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_debug.html">SimpleVoxelEngine::Debug</a></div><div class="ttdoc">Отладочная часть движка. Здесь находится логгер.</div><div class="ttdef"><b>Определения</b> Logger.h:14</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_defines_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_defines.html">SimpleVoxelEngine::Defines</a></div><div class="ttdoc">Предопределённые константы и enum.</div><div class="ttdef"><b>Определения</b> Defines.h:21</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_voxels_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_voxels.html">SimpleVoxelEngine::Voxels</a></div><div class="ttdoc">Воксели.</div><div class="ttdef"><b>Определения</b> ARGBColorVoxel.h:22</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Главное пространство имён движка. Всё находится в нём.</div><div class="ttdef"><b>Определения</b> ARGBColor.h:7</div></div>
 </div><!-- fragment --><p> Объявим функцию main и экземпляр класса парсера для обработки заданного ini-файла: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">   ParserInfoFile prs; <span class="comment">// Создали экземпляр класса для обработки ini-файлов.</span></div>
+<div class="line">   <a class="code hl_class" href="class_ini_parser_1_1_parser_info_file.html">ParserInfoFile</a> prs; <span class="comment">// Создали экземпляр класса для обработки ini-файлов.</span></div>
+<div class="ttc" id="aclass_ini_parser_1_1_parser_info_file_html"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html">IniParser::ParserInfoFile</a></div><div class="ttdoc">Класс для обработки ini-файлов.</div><div class="ttdef"><b>Определения</b> ParserInfoFile.h:14</div></div>
 </div><!-- fragment --><p> Будем читать файл с именем voxelgame.ini, который лежит рядом с exe-файлом и имеет следующее содержимое: </p><div class="fragment"><div class="line">[main]</div>
 <div class="line">worldname=mysuperworld</div>
 <div class="line">sizeworldinchunks=25</div>
-<div class="line"></div>
+<div class="line"> </div>
 <div class="line">[gamemode]</div>
 <div class="line">admin=creative</div>
 <div class="line">player=survival</div>
 <div class="line">defaultmodeforall=player</div>
-<div class="line"></div>
+<div class="line"> </div>
 <div class="line">[other]</div>
 <div class="line">serverip=127.0.0.1</div>
 <div class="line">serverport=45678</div>
-</div><!-- fragment --><p> Ну что же, прочитаем его: </p><div class="fragment"><div class="line">PostParsingStruct* pps = prs.getParsedFromFile(<span class="stringliteral">&quot;voxelgame.ini&quot;</span>); <span class="comment">// Прочитали в pps все данные из файла.</span></div>
+</div><!-- fragment --><p> Ну что же, прочитаем его: </p><div class="fragment"><div class="line"><a class="code hl_class" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a>* pps = prs.<a class="code hl_function" href="class_ini_parser_1_1_parser_info_file.html#a7b9db8eab4e137fb66a3dee810e06571">getParsedFromFile</a>(<span class="stringliteral">&quot;voxelgame.ini&quot;</span>); <span class="comment">// Прочитали в pps все данные из файла.</span></div>
 <div class="line"><span class="keywordflow">if</span>(!pps) <span class="keywordflow">return</span> 1; <span class="comment">// Если файл не смогли открыть, то выходим из программы.</span></div>
-</div><!-- fragment --><p> Вот и всё. Теперь просто выведем часть данных на экран: </p><div class="fragment"><div class="line">cout &lt;&lt; pps-&gt;getValue(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;worldname&quot;</span>) &lt;&lt; endl;</div>
-<div class="line">cout &lt;&lt; pps-&gt;getValue(<span class="stringliteral">&quot;gamemode&quot;</span>, <span class="stringliteral">&quot;player&quot;</span>) &lt;&lt; endl;</div>
-<div class="line">cout &lt;&lt; pps-&gt;getValue(<span class="stringliteral">&quot;other&quot;</span>, <span class="stringliteral">&quot;serverip&quot;</span>) &lt;&lt; endl;</div>
-</div><!-- fragment --><p> Но что делать, если мы хотим поменять, к примеру, serverip? Или добавить какую-то новую переменную? Делаем это следующим образом: </p><div class="fragment"><div class="line">pps-&gt;setValue(<span class="stringliteral">&quot;other&quot;</span>, <span class="stringliteral">&quot;serverip&quot;</span>, <span class="stringliteral">&quot;192.168.0.100&quot;</span>); <span class="comment">// Поменяли существующую переменную.</span></div>
-<div class="line">pps-&gt;setValue(<span class="stringliteral">&quot;other&quot;</span>, <span class="stringliteral">&quot;secondserverip&quot;</span>, <span class="stringliteral">&quot;127.0.0.1&quot;</span>); <span class="comment">// Добавили новую переменную.</span></div>
-<div class="line">pps-&gt;setValue(<span class="stringliteral">&quot;client&quot;</span>, <span class="stringliteral">&quot;id&quot;</span>, <span class="stringliteral">&quot;124&quot;</span>); <span class="comment">// Добавили новую переменную в новый блок.</span></div>
-</div><!-- fragment --><p> Дальше возникает вопрос - а как работать с числовыми переменными, если они все имеют тип std::string? Ответ тоже прост - для этого с движком (и просто в STL) даются дополнительные функции преобразований: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> sizeworld = atoi(pps-&gt;getValue(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;sizeworldinchunks&quot;</span>).c_str()); <span class="comment">// Преобразовали std::string в int, при этом у std::string вызвали c_str() для преобразования в char*, так как функция atoi принимает char*, это функция из STL.</span></div>
+<div class="ttc" id="aclass_ini_parser_1_1_parser_info_file_html_a7b9db8eab4e137fb66a3dee810e06571"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#a7b9db8eab4e137fb66a3dee810e06571">IniParser::ParserInfoFile::getParsedFromFile</a></div><div class="ttdeci">PostParsingStruct * getParsedFromFile(std::string filename, bool log=true)</div><div class="ttdoc">Получение результата обработки из файла.</div></div>
+<div class="ttc" id="aclass_ini_parser_1_1_post_parsing_struct_html"><div class="ttname"><a href="class_ini_parser_1_1_post_parsing_struct.html">IniParser::PostParsingStruct</a></div><div class="ttdoc">Класс, который заполняется в результате обработки ini-файла.</div><div class="ttdef"><b>Определения</b> PostParsingStruct.h:14</div></div>
+</div><!-- fragment --><p> Вот и всё. Теперь просто выведем часть данных на экран: </p><div class="fragment"><div class="line">cout &lt;&lt; pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">getValue</a>(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;worldname&quot;</span>) &lt;&lt; endl;</div>
+<div class="line">cout &lt;&lt; pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">getValue</a>(<span class="stringliteral">&quot;gamemode&quot;</span>, <span class="stringliteral">&quot;player&quot;</span>) &lt;&lt; endl;</div>
+<div class="line">cout &lt;&lt; pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">getValue</a>(<span class="stringliteral">&quot;other&quot;</span>, <span class="stringliteral">&quot;serverip&quot;</span>) &lt;&lt; endl;</div>
+<div class="ttc" id="aclass_ini_parser_1_1_post_parsing_struct_html_acbb78a8441a3a8a778dea4e1ce51e696"><div class="ttname"><a href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">IniParser::PostParsingStruct::getValue</a></div><div class="ttdeci">std::string getValue(std::string A, std::string B)</div><div class="ttdoc">Получение значения переменной.</div></div>
+</div><!-- fragment --><p> Но что делать, если мы хотим поменять, к примеру, serverip? Или добавить какую-то новую переменную? Делаем это следующим образом: </p><div class="fragment"><div class="line">pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#a679faab2575223eb3616388bcc554c85">setValue</a>(<span class="stringliteral">&quot;other&quot;</span>, <span class="stringliteral">&quot;serverip&quot;</span>, <span class="stringliteral">&quot;192.168.0.100&quot;</span>); <span class="comment">// Поменяли существующую переменную.</span></div>
+<div class="line">pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#a679faab2575223eb3616388bcc554c85">setValue</a>(<span class="stringliteral">&quot;other&quot;</span>, <span class="stringliteral">&quot;secondserverip&quot;</span>, <span class="stringliteral">&quot;127.0.0.1&quot;</span>); <span class="comment">// Добавили новую переменную.</span></div>
+<div class="line">pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#a679faab2575223eb3616388bcc554c85">setValue</a>(<span class="stringliteral">&quot;client&quot;</span>, <span class="stringliteral">&quot;id&quot;</span>, <span class="stringliteral">&quot;124&quot;</span>); <span class="comment">// Добавили новую переменную в новый блок.</span></div>
+<div class="ttc" id="aclass_ini_parser_1_1_post_parsing_struct_html_a679faab2575223eb3616388bcc554c85"><div class="ttname"><a href="class_ini_parser_1_1_post_parsing_struct.html#a679faab2575223eb3616388bcc554c85">IniParser::PostParsingStruct::setValue</a></div><div class="ttdeci">void setValue(std::string A, std::string B, std::string C)</div><div class="ttdoc">Установка значения переменной.</div></div>
+</div><!-- fragment --><p> Дальше возникает вопрос - а как работать с числовыми переменными, если они все имеют тип std::string? Ответ тоже прост - для этого с движком (и просто в STL) даются дополнительные функции преобразований: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> sizeworld = atoi(pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">getValue</a>(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;sizeworldinchunks&quot;</span>).c_str()); <span class="comment">// Преобразовали std::string в int, при этом у std::string вызвали c_str() для преобразования в char*, так как функция atoi принимает char*, это функция из STL.</span></div>
 <div class="line">cout &lt;&lt; sizeworld &lt;&lt; endl;</div>
 <div class="line">sizeworld = 128;</div>
-<div class="line">pps-&gt;setValue(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;sizeworldinchunks&quot;</span>, <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(sizeworld)); <span class="comment">// Преобразовали int в std::string, используя фунцкию, идущую с движком.</span></div>
-<div class="line">cout &lt;&lt; pps-&gt;getValue(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;sizeworldinchunks&quot;</span>) &lt;&lt; endl;</div>
-</div><!-- fragment --><p> Так же есть возможность преобразовать PostParsingStruct в std::string с указанным разделителем переноса строк. Это нужно, к примеру, для пересылки пакетов по сети и так далее. Так же есть обратная конвертация, std::string в PostParsingStruct. Делается это следующим образом: </p><div class="fragment"><div class="line"><span class="keywordtype">string</span> str = prs.convertPostParsingStructToString(pps, <span class="stringliteral">&quot;;&quot;</span>); <span class="comment">// Разделять будем точкой с запятой.</span></div>
+<div class="line">pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#a679faab2575223eb3616388bcc554c85">setValue</a>(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;sizeworldinchunks&quot;</span>, <a class="code hl_function" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(sizeworld)); <span class="comment">// Преобразовали int в std::string, используя фунцкию, идущую с движком.</span></div>
+<div class="line">cout &lt;&lt; pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">getValue</a>(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;sizeworldinchunks&quot;</span>) &lt;&lt; endl;</div>
+<div class="ttc" id="anamespace_work_functions_1_1_convert_functions_html_ac81888ad93acc220392595e0ff3b9dc1"><div class="ttname"><a href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a></div><div class="ttdeci">std::string itos(int number)</div><div class="ttdoc">Конвертация int в string.</div></div>
+</div><!-- fragment --><p> Так же есть возможность преобразовать PostParsingStruct в std::string с указанным разделителем переноса строк. Это нужно, к примеру, для пересылки пакетов по сети и так далее. Так же есть обратная конвертация, std::string в PostParsingStruct. Делается это следующим образом: </p><div class="fragment"><div class="line"><span class="keywordtype">string</span> str = prs.<a class="code hl_function" href="class_ini_parser_1_1_parser_info_file.html#ac47c5803ba715a1d930ed71b1eb6e845">convertPostParsingStructToString</a>(pps, <span class="stringliteral">&quot;;&quot;</span>); <span class="comment">// Разделять будем точкой с запятой.</span></div>
 <div class="line">cout &lt;&lt; str &lt;&lt; endl; <span class="comment">// Посмотрим, что получилось.</span></div>
-<div class="line">PostParsingStruct* newpps = prs.getParsedFromString(str, <span class="stringliteral">&quot;;&quot;</span>); <span class="comment">// Получим информацию ini-файла из std::string, используя разделителем точку с запятой.</span></div>
+<div class="line"><a class="code hl_class" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a>* newpps = prs.<a class="code hl_function" href="class_ini_parser_1_1_parser_info_file.html#a844f79f5305cd24aab128fcfc899c24b">getParsedFromString</a>(str, <span class="stringliteral">&quot;;&quot;</span>); <span class="comment">// Получим информацию ini-файла из std::string, используя разделителем точку с запятой.</span></div>
 <div class="line"><span class="keyword">delete</span> pps; <span class="comment">// Удалим первую PostParsingStruct, так как зачем нам две дублирующие друг друга структуры.</span></div>
-</div><!-- fragment --><p> Ну и, чтобы увидеть окончательный результат всех манипуляций, запишем последнюю структуру в файл newvoxelgame.ini, удалим последнюю PostParsingStruct и завершим программу: </p><div class="fragment"><div class="line">   prs.writeParsedToFile(newpps, <span class="stringliteral">&quot;newvoxelgame.ini&quot;</span>);</div>
+<div class="ttc" id="aclass_ini_parser_1_1_parser_info_file_html_a844f79f5305cd24aab128fcfc899c24b"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#a844f79f5305cd24aab128fcfc899c24b">IniParser::ParserInfoFile::getParsedFromString</a></div><div class="ttdeci">PostParsingStruct * getParsedFromString(std::string str, std::string splitter)</div><div class="ttdoc">Получение результата обработки из строки.</div></div>
+<div class="ttc" id="aclass_ini_parser_1_1_parser_info_file_html_ac47c5803ba715a1d930ed71b1eb6e845"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#ac47c5803ba715a1d930ed71b1eb6e845">IniParser::ParserInfoFile::convertPostParsingStructToString</a></div><div class="ttdeci">std::string convertPostParsingStructToString(PostParsingStruct *pps, std::string splitter)</div><div class="ttdoc">Конвертация PostParsingStruct в строку.</div></div>
+</div><!-- fragment --><p> Ну и, чтобы увидеть окончательный результат всех манипуляций, запишем последнюю структуру в файл newvoxelgame.ini, удалим последнюю PostParsingStruct и завершим программу: </p><div class="fragment"><div class="line">   prs.<a class="code hl_function" href="class_ini_parser_1_1_parser_info_file.html#a62af083cc5d0505b5fa02893ca248448">writeParsedToFile</a>(newpps, <span class="stringliteral">&quot;newvoxelgame.ini&quot;</span>);</div>
 <div class="line">   <span class="keyword">delete</span> newpps;</div>
 <div class="line">   <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
+<div class="ttc" id="aclass_ini_parser_1_1_parser_info_file_html_a62af083cc5d0505b5fa02893ca248448"><div class="ttname"><a href="class_ini_parser_1_1_parser_info_file.html#a62af083cc5d0505b5fa02893ca248448">IniParser::ParserInfoFile::writeParsedToFile</a></div><div class="ttdeci">bool writeParsedToFile(PostParsingStruct *pps, std::string filename, bool log=true)</div><div class="ttdoc">Запись PostParsingStruct в файл.</div></div>
 </div><!-- fragment --><p> Результат можно посмотреть в файле newvoxelgame.ini около exe файла. Ну и напоследок весь код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a>&gt;</span></div>
-<div class="line"></div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span> <span class="comment">// Для использования std::cout.</span></div>
 <div class="line"><span class="preprocessor">#include &lt;cstdlib&gt;</span> <span class="comment">// Для функции atoi.</span></div>
-<div class="line"></div>
-<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
-<div class="line"><span class="keyword">using namespace </span>Core;</div>
-<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
-<div class="line"><span class="keyword">using namespace </span>Additional;</div>
-<div class="line"><span class="keyword">using namespace </span>Defines;</div>
-<div class="line"><span class="keyword">using namespace </span>Debug;</div>
-<div class="line"></div>
-<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_ini_parser.html">IniParser</a>; <span class="comment">// Подключим пространство имён нашего парсера.</span></div>
-<div class="line"></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_core.html">Core</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_voxels.html">Voxels</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_additional.html">Additional</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_defines.html">Defines</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_debug.html">Debug</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_ini_parser.html">IniParser</a>; <span class="comment">// Подключим пространство имён нашего парсера.</span></div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">using namespace </span>std; <span class="comment">// Для вывода на экран.</span></div>
-<div class="line"></div>
+<div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">    <a class="code" href="class_ini_parser_1_1_parser_info_file.html">ParserInfoFile</a> prs; <span class="comment">// Создали экземпляр класса для обработки ini-файлов.</span></div>
-<div class="line">    <a class="code" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a>* pps = prs.<a class="code" href="class_ini_parser_1_1_parser_info_file.html#a4258dc7dc8f167faa5cc89470594de13">getParsedFromFile</a>(<span class="stringliteral">&quot;voxelgame.ini&quot;</span>); <span class="comment">// Прочитали в pps все данные из файла.</span></div>
+<div class="line">    <a class="code hl_class" href="class_ini_parser_1_1_parser_info_file.html">ParserInfoFile</a> prs; <span class="comment">// Создали экземпляр класса для обработки ini-файлов.</span></div>
+<div class="line">    <a class="code hl_class" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a>* pps = prs.<a class="code hl_function" href="class_ini_parser_1_1_parser_info_file.html#a7b9db8eab4e137fb66a3dee810e06571">getParsedFromFile</a>(<span class="stringliteral">&quot;voxelgame.ini&quot;</span>); <span class="comment">// Прочитали в pps все данные из файла.</span></div>
 <div class="line">    <span class="keywordflow">if</span>(!pps) <span class="keywordflow">return</span> 1; <span class="comment">// Если файл не смогли открыть, то выходим из программы.</span></div>
-<div class="line">    cout &lt;&lt; pps-&gt;<a class="code" href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">getValue</a>(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;worldname&quot;</span>) &lt;&lt; endl;</div>
-<div class="line">    cout &lt;&lt; pps-&gt;<a class="code" href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">getValue</a>(<span class="stringliteral">&quot;gamemode&quot;</span>, <span class="stringliteral">&quot;player&quot;</span>) &lt;&lt; endl;</div>
-<div class="line">    cout &lt;&lt; pps-&gt;<a class="code" href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">getValue</a>(<span class="stringliteral">&quot;other&quot;</span>, <span class="stringliteral">&quot;serverip&quot;</span>) &lt;&lt; endl;</div>
-<div class="line">    pps-&gt;<a class="code" href="class_ini_parser_1_1_post_parsing_struct.html#a679faab2575223eb3616388bcc554c85">setValue</a>(<span class="stringliteral">&quot;other&quot;</span>, <span class="stringliteral">&quot;serverip&quot;</span>, <span class="stringliteral">&quot;192.168.0.100&quot;</span>); <span class="comment">// Поменяли существующую переменную.</span></div>
-<div class="line">    pps-&gt;<a class="code" href="class_ini_parser_1_1_post_parsing_struct.html#a679faab2575223eb3616388bcc554c85">setValue</a>(<span class="stringliteral">&quot;other&quot;</span>, <span class="stringliteral">&quot;secondserverip&quot;</span>, <span class="stringliteral">&quot;127.0.0.1&quot;</span>); <span class="comment">// Добавили новую переменную.</span></div>
-<div class="line">    pps-&gt;<a class="code" href="class_ini_parser_1_1_post_parsing_struct.html#a679faab2575223eb3616388bcc554c85">setValue</a>(<span class="stringliteral">&quot;client&quot;</span>, <span class="stringliteral">&quot;id&quot;</span>, <span class="stringliteral">&quot;124&quot;</span>); <span class="comment">// Добавили новую переменную в новый блок.</span></div>
-<div class="line">    <span class="keywordtype">int</span> sizeworld = atoi(pps-&gt;<a class="code" href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">getValue</a>(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;sizeworldinchunks&quot;</span>).c_str()); <span class="comment">// Преобразовали std::string в int, при этом у std::string вызвали c_str() для преобразования в char*, так как функция atoi принимает char*, это функция из STL.</span></div>
+<div class="line">    cout &lt;&lt; pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">getValue</a>(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;worldname&quot;</span>) &lt;&lt; endl;</div>
+<div class="line">    cout &lt;&lt; pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">getValue</a>(<span class="stringliteral">&quot;gamemode&quot;</span>, <span class="stringliteral">&quot;player&quot;</span>) &lt;&lt; endl;</div>
+<div class="line">    cout &lt;&lt; pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">getValue</a>(<span class="stringliteral">&quot;other&quot;</span>, <span class="stringliteral">&quot;serverip&quot;</span>) &lt;&lt; endl;</div>
+<div class="line">    pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#a679faab2575223eb3616388bcc554c85">setValue</a>(<span class="stringliteral">&quot;other&quot;</span>, <span class="stringliteral">&quot;serverip&quot;</span>, <span class="stringliteral">&quot;192.168.0.100&quot;</span>); <span class="comment">// Поменяли существующую переменную.</span></div>
+<div class="line">    pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#a679faab2575223eb3616388bcc554c85">setValue</a>(<span class="stringliteral">&quot;other&quot;</span>, <span class="stringliteral">&quot;secondserverip&quot;</span>, <span class="stringliteral">&quot;127.0.0.1&quot;</span>); <span class="comment">// Добавили новую переменную.</span></div>
+<div class="line">    pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#a679faab2575223eb3616388bcc554c85">setValue</a>(<span class="stringliteral">&quot;client&quot;</span>, <span class="stringliteral">&quot;id&quot;</span>, <span class="stringliteral">&quot;124&quot;</span>); <span class="comment">// Добавили новую переменную в новый блок.</span></div>
+<div class="line">    <span class="keywordtype">int</span> sizeworld = atoi(pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">getValue</a>(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;sizeworldinchunks&quot;</span>).c_str()); <span class="comment">// Преобразовали std::string в int, при этом у std::string вызвали c_str() для преобразования в char*, так как функция atoi принимает char*, это функция из STL.</span></div>
 <div class="line">    cout &lt;&lt; sizeworld &lt;&lt; endl;</div>
 <div class="line">    sizeworld = 128;</div>
-<div class="line">    pps-&gt;<a class="code" href="class_ini_parser_1_1_post_parsing_struct.html#a679faab2575223eb3616388bcc554c85">setValue</a>(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;sizeworldinchunks&quot;</span>, <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(sizeworld)); <span class="comment">// Преобразовали int в std::string, используя фунцкию, идущую с движком.</span></div>
-<div class="line">    cout &lt;&lt; pps-&gt;<a class="code" href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">getValue</a>(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;sizeworldinchunks&quot;</span>) &lt;&lt; endl;</div>
-<div class="line">    <span class="keywordtype">string</span> str = prs.<a class="code" href="class_ini_parser_1_1_parser_info_file.html#ac47c5803ba715a1d930ed71b1eb6e845">convertPostParsingStructToString</a>(pps, <span class="stringliteral">&quot;;&quot;</span>); <span class="comment">// Разделять будем точкой с запятой.</span></div>
+<div class="line">    pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#a679faab2575223eb3616388bcc554c85">setValue</a>(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;sizeworldinchunks&quot;</span>, <a class="code hl_function" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(sizeworld)); <span class="comment">// Преобразовали int в std::string, используя фунцкию, идущую с движком.</span></div>
+<div class="line">    cout &lt;&lt; pps-&gt;<a class="code hl_function" href="class_ini_parser_1_1_post_parsing_struct.html#acbb78a8441a3a8a778dea4e1ce51e696">getValue</a>(<span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;sizeworldinchunks&quot;</span>) &lt;&lt; endl;</div>
+<div class="line">    <span class="keywordtype">string</span> str = prs.<a class="code hl_function" href="class_ini_parser_1_1_parser_info_file.html#ac47c5803ba715a1d930ed71b1eb6e845">convertPostParsingStructToString</a>(pps, <span class="stringliteral">&quot;;&quot;</span>); <span class="comment">// Разделять будем точкой с запятой.</span></div>
 <div class="line">    cout &lt;&lt; str &lt;&lt; endl; <span class="comment">// Посмотрим, что получилось.</span></div>
-<div class="line">    <a class="code" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a>* newpps = prs.<a class="code" href="class_ini_parser_1_1_parser_info_file.html#a637dedc8e64b4004bed286ff73e4454a">getParsedFromString</a>(str, <span class="stringliteral">&quot;;&quot;</span>); <span class="comment">// Получим информацию ini-файла из std::string, используя разделителем точку с запятой.</span></div>
+<div class="line">    <a class="code hl_class" href="class_ini_parser_1_1_post_parsing_struct.html">PostParsingStruct</a>* newpps = prs.<a class="code hl_function" href="class_ini_parser_1_1_parser_info_file.html#a844f79f5305cd24aab128fcfc899c24b">getParsedFromString</a>(str, <span class="stringliteral">&quot;;&quot;</span>); <span class="comment">// Получим информацию ini-файла из std::string, используя разделителем точку с запятой.</span></div>
 <div class="line">    <span class="keyword">delete</span> pps; <span class="comment">// Удалим первую PostParsingStruct, так как зачем нам две дублирующие друг друга структуры.</span></div>
-<div class="line">    prs.<a class="code" href="class_ini_parser_1_1_parser_info_file.html#a62af083cc5d0505b5fa02893ca248448">writeParsedToFile</a>(newpps, <span class="stringliteral">&quot;newvoxelgame.ini&quot;</span>);</div>
+<div class="line">    prs.<a class="code hl_function" href="class_ini_parser_1_1_parser_info_file.html#a62af083cc5d0505b5fa02893ca248448">writeParsedToFile</a>(newpps, <span class="stringliteral">&quot;newvoxelgame.ini&quot;</span>);</div>
 <div class="line">    <span class="keyword">delete</span> newpps;</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> Вот и всё на этот раз. Спасибо за интерес к движку.<br />
+</div><!-- fragment --><p> Вот и всё на этот раз. Спасибо за интерес к движку.<br  />
  Автор: <b>Харч</b>. </p>
 </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:22. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="tutorials.html">Уроки по движку SimpleVoxelEngine.</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

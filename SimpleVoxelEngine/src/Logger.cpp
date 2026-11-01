@@ -8,6 +8,9 @@ using namespace SimpleVoxelEngine;
 using namespace Defines;
 using namespace Debug;
 
+//»зменено: блокировки вывода в логгере больше нет - €дро однопоточное. ≈сли движком пользуютс€ из нескольких потоков,
+//вывод сообщений по одному обеспечивает наследник движка, переопределив Engine::registerEvent() (сво€ блокировка).
+
 Logger::Logger():
     ReferenceCounter(),
     s_PrintError(true),
@@ -20,43 +23,44 @@ Logger::Logger():
 Logger::~Logger()
 {}
 
-void Logger::registerEventStandartConsole(EventType TypeEvent, std::string TextEvent, bool IsFatal)
+//»зменено: им€ - registerEventStandardConsole() (опечатка Standart).
+void Logger::registerEventStandardConsole(EventType TypeEvent, std::string TextEvent, bool IsFatal)
 {
-    if(TypeEvent == EVENT_TYPE_ERROR && s_PrintError)
+    if(!isPrinted(TypeEvent)) return; //—ообщение этого типа не выводитс€
+    //»зменено: один вывод вместо п€ти одинаковых веток; перед "Fatal!" точка ставитс€, только если
+    //сообщение ещЄ не кончаетс€ точкой или "!" (раньше получалось "Chunk is not loaded.. Fatal!").
+    const char* prefix = "Information: ";
+    switch(TypeEvent)
     {
-        std::cout<<"Error: "<<TextEvent;
-        if(IsFatal == true) std::cout<<". Fatal!";
-        std::cout<<std::endl;
+        case EVENT_TYPE_ERROR: prefix = "Error: "; break;
+        case EVENT_TYPE_LOGIC_VIOLATION: prefix = "Logic violation: "; break;
+        case EVENT_TYPE_WARNING: prefix = "Warning: "; break;
+        case EVENT_TYPE_STANDARD: prefix = "Standard: "; break;
+        case EVENT_TYPE_INFO: prefix = "Information: "; break;
     }
-    if(TypeEvent == EVENT_TYPE_LOGIC_VIOLATION && s_PrintLogicViolation)
+    const bool endsWithMark = !TextEvent.empty() && (TextEvent[TextEvent.size() - 1] == '.' || TextEvent[TextEvent.size() - 1] == '!');
+    std::cout<<prefix<<TextEvent;
+    if(IsFatal == true) std::cout<<(endsWithMark ? " Fatal!" : ". Fatal!");
+    std::cout<<std::endl;
+}
+
+//ƒобавлено: вывод€тс€ ли сообщени€ этого типа (дл€ registerEventStandardConsole() и Engine::isEventPrinted()).
+bool Logger::isPrinted(EventType TypeEvent) const
+{
+    switch(TypeEvent)
     {
-        std::cout<<"Logic violation: "<<TextEvent;
-        if(IsFatal == true) std::cout<<". Fatal!";
-        std::cout<<std::endl;
+        case EVENT_TYPE_ERROR: return s_PrintError;
+        case EVENT_TYPE_LOGIC_VIOLATION: return s_PrintLogicViolation;
+        case EVENT_TYPE_WARNING: return s_PrintWarning;
+        case EVENT_TYPE_STANDARD: return s_PrintStandard;
+        case EVENT_TYPE_INFO: return s_PrintInfo;
     }
-    if(TypeEvent == EVENT_TYPE_WARNING && s_PrintWarning)
-    {
-        std::cout<<"Warning: "<<TextEvent;
-        if(IsFatal == true) std::cout<<". Fatal!";
-        std::cout<<std::endl;
-    }
-    if(TypeEvent == EVENT_TYPE_STANDARD && s_PrintStandard)
-    {
-        std::cout<<"Standard: "<<TextEvent;
-        if(IsFatal == true) std::cout<<". Fatal!";
-        std::cout<<std::endl;
-    }
-    if(TypeEvent == EVENT_TYPE_INFO && s_PrintInfo)
-    {
-        std::cout<<"Information: "<<TextEvent;
-        if(IsFatal == true) std::cout<<". Fatal!";
-        std::cout<<std::endl;
-    }
+    return false;
 }
 
 void Logger::registerEvent(EventType TypeEvent, std::string TextEvent, bool IsFatal)
 {
-    registerEventStandartConsole(TypeEvent, TextEvent, IsFatal);
+    registerEventStandardConsole(TypeEvent, TextEvent, IsFatal);
 }
 
 void Logger::setPrintError(bool value)

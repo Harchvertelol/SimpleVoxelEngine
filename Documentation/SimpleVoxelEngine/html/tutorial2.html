@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>SimpleVoxelEngine: Урок 2: Генератор мира и система ведения логов.</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
-</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -20,75 +23,109 @@
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+ <tr id="projectrow">
+  <td id="projectalign">
    <div id="projectname">SimpleVoxelEngine
-   &#160;<span id="projectnumber">build 0.0.1</span>
    </div>
-   <div id="projectbrief">Воксельный движок</div>
   </td>
  </tr>
  </tbody>
 </table>
 </div>
 <!-- end header part -->
-<!-- Создано системой Doxygen 1.8.8 -->
+<!-- Создано системой Doxygen 1.18.0 -->
 <script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+let searchBox = new SearchBox("searchBox", "search/",'.html');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
-      <li class="current"><a href="pages.html"><span>Описания</span></a></li>
-      <li><a href="namespaces.html"><span>Пространства&#160;имен</span></a></li>
-      <li><a href="annotated.html"><span>Классы</span></a></li>
-      <li><a href="files.html"><span>Файлы</span></a></li>
-      <li>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
-          <img id="MSearchSelect" src="search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
           </span>
         </div>
-      </li>
-    </ul>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('tutorial2.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
 <!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Перечисления</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Элементы перечислений</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Страницы</a></div>
+<div id="MSearchSelectWindow">
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
-        name="MSearchResults" id="MSearchResults">
-</iframe>
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
 </div>
 
-</div><!-- top -->
-<div class="header">
-  <div class="headertitle">
-<div class="title">Урок 2: Генератор мира и система ведения логов. </div>  </div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Урок 2: Генератор мира и система ведения логов. </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>В прошлом уроке мы создали мир, но он был пустой. Так не годится, мы же хотим его чем-то заполнять, верно? И тут на помощь к нам приходит генератор мира. Давайте, собственно, и займёмся его созданием. Начнём стандартно, подключим наши заголовочные файлы, а так же подключим пространства имён, чтобы не писать их каждый раз заново: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a>&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
-<div class="line"><span class="keyword">using namespace </span>Core;</div>
-<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
-<div class="line"><span class="keyword">using namespace </span>Additional;</div>
-<div class="line"><span class="keyword">using namespace </span>Defines;</div>
-</div><!-- fragment --><p> Но при работе с движком хочется знать, какие происходят ошибки, да и вообще неплохо бы информацию от движка получать. Поэтому подключим систему ведения логов, ей требуется пространство имён Debug: </p><div class="fragment"><div class="line"><span class="keyword">using namespace </span>Debug;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_core.html">Core</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_voxels.html">Voxels</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_additional.html">Additional</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_defines.html">Defines</a>;</div>
+<div class="ttc" id="a_simple_voxel_engine_8h_html"><div class="ttname"><a href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a></div><div class="ttdoc">Главный заголовочный файл. Необходимо присоединять только его к проекту (так я хочу,...</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_additional_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_additional.html">SimpleVoxelEngine::Additional</a></div><div class="ttdoc">Дополнительные классы для использования в движке.</div><div class="ttdef"><b>Определения</b> ARGBColor.h:9</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_core_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_core.html">SimpleVoxelEngine::Core</a></div><div class="ttdoc">Ядро движка. Здесь находится все главные классы и компоненты.</div><div class="ttdef"><b>Определения</b> ARGBColorVoxel.h:10</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_defines_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_defines.html">SimpleVoxelEngine::Defines</a></div><div class="ttdoc">Предопределённые константы и enum.</div><div class="ttdef"><b>Определения</b> Defines.h:21</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_voxels_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_voxels.html">SimpleVoxelEngine::Voxels</a></div><div class="ttdoc">Воксели.</div><div class="ttdef"><b>Определения</b> ARGBColorVoxel.h:22</div></div>
+<div class="ttc" id="anamespace_simple_voxel_engine_html"><div class="ttname"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></div><div class="ttdoc">Главное пространство имён движка. Всё находится в нём.</div><div class="ttdef"><b>Определения</b> ARGBColor.h:7</div></div>
+</div><!-- fragment --><p> Но при работе с движком хочется знать, какие происходят ошибки, да и вообще неплохо бы информацию от движка получать. Поэтому подключим систему ведения логов, ей требуется пространство имён Debug: </p><div class="fragment"><div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_debug.html">Debug</a>;</div>
+<div class="ttc" id="anamespace_simple_voxel_engine_1_1_debug_html"><div class="ttname"><a href="namespace_simple_voxel_engine_1_1_debug.html">SimpleVoxelEngine::Debug</a></div><div class="ttdoc">Отладочная часть движка. Здесь находится логгер.</div><div class="ttdef"><b>Определения</b> Logger.h:14</div></div>
 </div><!-- fragment --><p> Как создать и подключить логгер - узнаем позже, а сейчас займёмся генератором мира. Для этого создадим класс, унаследовав его от WorldGenerator, который является абстрактным классом: </p><div class="fragment"><div class="line"><span class="keyword">class </span>MyWorldGenerator : <span class="keyword">public</span> WorldGenerator</div>
 <div class="line">{</div>
 <div class="line">   <span class="keyword">public</span>:</div>
@@ -116,49 +153,64 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 <div class="line">    }</div>
 <div class="line">    chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), argbcolorvoxel, <span class="keyword">true</span>, <span class="keyword">false</span>); <span class="comment">// true означает, что мы перезапишем объект, если он существует, а следующее false означает,</span></div>
 <div class="line">                                                                                      <span class="comment">// что мы не будем говорить движку пересчитывать видимость окружающих его вокселей, так как</span></div>
-<div class="line">                                                                                      <span class="comment">// при генерации мира это не нужно в связи с тем, что каждый воксель и так будет пересчитан.</span></div>
-<div class="line">                                                                                      <span class="comment">// Так необходимо делать только если вы получаете информацию для отрисовки чанка после</span></div>
-<div class="line">                                                                                      <span class="comment">// генерации всех чанков вокруг него, иначе будут ошибки.</span></div>
+<div class="line">                                                                                      <span class="comment">// при генерации мира это не нужно в связи с тем, что каждый воксель и так будет пересчитан</span></div>
+<div class="line">                                                                                      <span class="comment">// (а воксели соседних чанков на стыке движок пометит на пересчёт сам после генерации).</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><p> Вот и всё, вернём true и закроем описание класса: </p><div class="fragment"><div class="line">           <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+</div><!-- fragment --><p> Кстати, раз уж мы впервые вызвали registerEvent(), поясню все сообщения движка - и наши, и самого движка (о загрузке чанков, об ошибках и так далее) - идут через одну эту функцию класса Engine, а она передаёт их логгеру. Функция виртуальная, поэтому, если вам нужно что-то своё (например, записывать сообщения ещё и в файл), то можно унаследоваться от Engine и переопределить её (к примеру, если у вас много потоков, а функция вызывается из разных потоков, блокировать мьютексы). А если ничего не переопределять, всё работает "из коробки": сообщения просто выводит логгер. Выглядеть это может так: </p><div class="fragment"><div class="line"><span class="keyword">class </span>MyEngine : <span class="keyword">public</span> Engine</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span>:</div>
+<div class="line">       MyEngine(Logger* lgr): Engine(lgr) {}</div>
+<div class="line">       <span class="keywordtype">void</span> registerEvent(EventType TypeEvent, std::string TextEvent, <span class="keywordtype">bool</span> IsFatal = <span class="keyword">false</span>)</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">// Здесь можно записать сообщение в файл, отфильтровать его и т.д.</span></div>
+<div class="line">           Engine::registerEvent(TypeEvent, TextEvent, IsFatal); <span class="comment">// И отдать логгеру, как обычно.</span></div>
+<div class="line">       }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Если перед своей работой хочется узнать, выведет ли логгер сообщение такого типа (вдруг этот тип выключен), для этого есть isEventPrinted(). Но в этом уроке нам хватит и обычного Engine. Вот и всё, вернём true и закроем описание класса: </p><div class="fragment"><div class="line">           <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line">       }</div>
 <div class="line">};</div>
 </div><!-- fragment --><p> Остаётся ещё, конечно, вопрос, как же получить вектор чанка, который мы генерируем? Дело в том, что у класса ChunkVoxelObject есть метод getVoxelAddress(), который вернёт нам адрес чанка в мире, и, чтобы узнать вектор чанка, мы просто получаем нулевой вектор (chunk-&gt;getVoxelAddress()-&gt;getVector(0)). Подробнее об адресации вокселей мы расскажем в следующих уроках, а пока хватит и этих знаний. Ну и дело за малым - создать движок и подключить к нему созданный генератор и логгер и создать чанк, но при этом мы не хотим видеть стандартные сообщения логгера, как то про создание чанков и так далее, поэтому выключим их, всё остальное как в первом уроке: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">   Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Создали логгер.</span></div>
-<div class="line">   lgr-&gt;setPrintStandart(<span class="keyword">false</span>); <span class="comment">// Запретили вывод стандартных сообщений.</span></div>
+<div class="line">   lgr-&gt;setPrintStandard(<span class="keyword">false</span>); <span class="comment">// Запретили вывод стандартных сообщений.</span></div>
 <div class="line">   Engine* sve = <span class="keyword">new</span> Engine(lgr); <span class="comment">// Создали движок, дав ему логгер.</span></div>
 <div class="line">   lgr-&gt;drop(); <span class="comment">// Нам лично больше логгер не нужен, отдадим его на обеспечение движку.</span></div>
 <div class="line">   WorldCreatingParameters wcp;</div>
-<div class="line">   wcp.<a class="code" href="struct_simple_voxel_engine_1_1_core_1_1_world_creating_parameters.html#aecc3af27e658f5851c2d6fecf7d1b8df">s_SizeChunk</a> = 16;</div>
+<div class="line">   wcp.s_SizeChunk = 16;</div>
 <div class="line">   <span class="keywordtype">int</span> worldid = sve-&gt;addWorld(wcp);</div>
 <div class="line">   World* wrld = sve-&gt;getWorld(worldid); <span class="comment">// Получили мир по идентификатору.</span></div>
 </div><!-- fragment --><p> И вот тут мы создадим и подключим наш генератор и загрузим чанк, он будет сгенерирован с помощью нашего генератора: </p><div class="fragment"><div class="line">MyWorldGenerator* mywrldgen = <span class="keyword">new</span> MyWorldGenerator; <span class="comment">// Создали наш генератор.</span></div>
 <div class="line">wrld-&gt;setWorldGenerator(mywrldgen); <span class="comment">// Установили миру наш генератор.</span></div>
 <div class="line">wrld-&gt;loadChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Загрузили чанк.</span></div>
-</div><!-- fragment --><p> И давайте проверим действие нашего генератора: получим воксель с координатами (0, 0, 0) и выведем его цвет на экран с помощью логгера, а так как логгер воспринимает только std::string, то применим специальную функцию, идущую с движком, которая int преобразует в std::string. </p><div class="fragment"><div class="line">ChunkVoxelObject* chunk = wrld-&gt;getChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили чанк.</span></div>
+</div><!-- fragment --><p> Кстати, мир по умолчанию бесконечен во все стороны: генератор вызовется для любого чанка, который мы попросим загрузить. Но часто это не нужно - например, мы хотим мир высотой в 16 чанков, как в известных кубических играх. Для этого у мира есть границы: с каждой из 6 сторон можно указать крайний допустимый чанк (граница включительная), а можно оставить сторону без границы. Например, так: </p><div class="fragment"><div class="line">wrld-&gt;setChunksBounds(WORLD_AXIS_Y, 0, 15); <span class="comment">// По высоте существуют только чанки с Y от 0 до 15.</span></div>
+<div class="line">wrld-&gt;setChunksBounds(WORLD_AXIS_X, 100); <span class="comment">// По X - от -100 до 100 (симметрично, &quot;радиусом&quot;).</span></div>
+<div class="line">wrld-&gt;setChunksBound(WORLD_BOUND_Z_MIN, -50); <span class="comment">// По Z ограничим только одну сторону: снизу -50, а вверх мир бесконечен.</span></div>
+</div><!-- fragment --><p> Чанка за границей как будто нет, генератор для него даже не вызывается, loadChunk() для него вернёт false и запишет в лог сообщение о нарушении логики (просить один конкретный чанк, которого не может быть - ошибка), а на краю мира будет видна "стенка" из граней вокселей. Если же вы грузите чанки "вокруг игрока" и не хотите каждый раз проверять границы, есть два пути. Первый способ - функции для области: loadChunks() и progressiveLoadChunks() чанки за границей просто пропускают, без сообщений, загружается то, что в области может существовать. Второй способ - последний параметр loadChunk() и generateChunk() - с false чанк за границей молча даёт false. По умолчанию сообщение выводится - выключать его нужно сознательно: </p><div class="fragment"><div class="line">wrld-&gt;loadChunks(Vector3d&lt;int&gt;(0, 15, 0), 2); <span class="comment">// Чанки с Y больше 15 пропускаются молча.</span></div>
+<div class="line">wrld-&gt;loadChunk(Vector3d&lt;int&gt;(0, 20, 0), <span class="keyword">false</span>); <span class="comment">// За границей: false, но без сообщения в логе.</span></div>
+</div><!-- fragment --><p> Кстати, загрузка уже загруженного чанка через loadChunk() - тоже нарушение логики, а loadChunks() такие чанки молча пропускает. Граница не может оказаться за противоположной границей той же оси (минимум больше максимума) - такая установка не пройдёт: функция вернёт false, а в лог попадёт сообщение об ошибке логики. Чтобы передвинуть обе границы оси сразу, пользуйтесь setChunksBounds(). Снять границы можно с помощью removeChunksBound(), removeChunksBounds() и removeAllChunksBounds(), а узнать, лежит ли чанк внутри мира, можно с помощью isChunkInBounds(). Задавать границы лучше сразу после создания мира, до загрузки чанков, так как уже загруженные чанки за новой границей движок сам не выгружает. В нашем примере границы не нужны, так что оставим мир бесконечным. И давайте проверим действие нашего генератора: получим воксель с координатами (0, 0, 0) и выведем его цвет на экран с помощью логгера, а так как логгер воспринимает только std::string, то применим специальную функцию, идущую с движком, которая int преобразует в std::string. </p><div class="fragment"><div class="line">ChunkVoxelObject* chunk = wrld-&gt;getChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили чанк.</span></div>
 <div class="line"><span class="keywordflow">if</span>(!chunk) <span class="keywordflow">return</span> 1;</div>
 <div class="line">SimpleVoxelObject* svo = chunk-&gt;getSimpleVoxelObject(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили объект.</span></div>
-<div class="line"><span class="keywordflow">if</span>(!svo || svo-&gt;getTypeVoxel() != <a class="code" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a54d38305b02c53c7e79516eca37826e6">ARGBCOLOR</a>) <span class="keywordflow">return</span> 1; <span class="comment">// Проверили на ошибки.</span></div>
+<div class="line"><span class="keywordflow">if</span>(!svo || svo-&gt;getTypeVoxel() != ARGBCOLOR) <span class="keywordflow">return</span> 1; <span class="comment">// Проверили на ошибки.</span></div>
 <div class="line">ARGBColorVoxel* argbcolorvoxel = (ARGBColorVoxel*)svo; <span class="comment">// Привели типы.</span></div>
 <div class="line"><span class="keywordtype">int</span> a = argbcolorvoxel-&gt;getARGBColor().getA(); <span class="comment">// Получили цвета вокселя.</span></div>
 <div class="line"><span class="keywordtype">int</span> r = argbcolorvoxel-&gt;getARGBColor().getR();</div>
 <div class="line"><span class="keywordtype">int</span> g = argbcolorvoxel-&gt;getARGBColor().getG();</div>
 <div class="line"><span class="keywordtype">int</span> b = argbcolorvoxel-&gt;getARGBColor().getB();</div>
 <div class="line"><span class="comment">// Делаем тип WARNING, чтобы увидеть сообщение, так как стандартные мы отключили.</span></div>
-<div class="line">sve-&gt;registerEvent(EVENT_TYPE_WARNING, <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(a) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(r) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(g) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(b));</div>
+<div class="line">sve-&gt;registerEvent(EVENT_TYPE_WARNING, <a class="code hl_function" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(a) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code hl_function" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(r) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code hl_function" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(g) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code hl_function" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(b));</div>
+<div class="ttc" id="anamespace_work_functions_1_1_convert_functions_html_ac81888ad93acc220392595e0ff3b9dc1"><div class="ttname"><a href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a></div><div class="ttdeci">std::string itos(int number)</div><div class="ttdoc">Конвертация int в string.</div></div>
 </div><!-- fragment --><p> Ну вот и всё, осталось удалить движок и завершить программу: </p><div class="fragment"><div class="line">   <span class="keyword">delete</span> sve;</div>
 <div class="line">   <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p> Ну и напоследок ещё раз полный код: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="_simple_voxel_engine_8h.html">SimpleVoxelEngine.h</a>&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
-<div class="line"><span class="keyword">using namespace </span>Core;</div>
-<div class="line"><span class="keyword">using namespace </span>Voxels;</div>
-<div class="line"><span class="keyword">using namespace </span>Additional;</div>
-<div class="line"><span class="keyword">using namespace </span>Defines;</div>
-<div class="line"><span class="keyword">using namespace </span>Debug;</div>
-<div class="line"></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_core.html">Core</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_voxels.html">Voxels</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_additional.html">Additional</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_defines.html">Defines</a>;</div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_simple_voxel_engine_1_1_debug.html">Debug</a>;</div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">class </span>MyWorldGenerator : <span class="keyword">public</span> WorldGenerator</div>
 <div class="line">{</div>
 <div class="line">   <span class="keyword">public</span>:</div>
@@ -186,18 +238,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 <div class="line">                       }</div>
 <div class="line">                       chunk-&gt;setSimpleVoxelObject(Vector3d&lt;int&gt;(x, y, z), argbcolorvoxel, <span class="keyword">true</span>, <span class="keyword">false</span>); <span class="comment">// true означает, что мы перезапишем объект, если он существует, а следующее false означает,</span></div>
 <div class="line">                                                                                                         <span class="comment">// что мы не будем говорить движку пересчитывать видимость окружающих его вокселей, так как</span></div>
-<div class="line">                                                                                                         <span class="comment">// при генерации мира это не нужно в связи с тем, что каждый воксель и так будет пересчитан.</span></div>
-<div class="line">                                                                                                         <span class="comment">// Так необходимо делать только если вы получаете информацию для отрисовки чанка после</span></div>
-<div class="line">                                                                                                         <span class="comment">// генерации всех чанков вокруг него, иначе будут ошибки.</span></div>
+<div class="line">                                                                                                         <span class="comment">// при генерации мира это не нужно в связи с тем, что каждый воксель и так будет пересчитан</span></div>
+<div class="line">                                                                                                         <span class="comment">// (а воксели соседних чанков на стыке движок пометит на пересчёт сам после генерации).</span></div>
 <div class="line">                   }</div>
 <div class="line">            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line">       }</div>
 <div class="line">};</div>
-<div class="line"></div>
+<div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">    Logger* lgr = <span class="keyword">new</span> Logger; <span class="comment">// Создали логгер.</span></div>
-<div class="line">    lgr-&gt;setPrintStandart(<span class="keyword">false</span>); <span class="comment">// Запретили вывод стандартных сообщений.</span></div>
+<div class="line">    lgr-&gt;setPrintStandard(<span class="keyword">false</span>); <span class="comment">// Запретили вывод стандартных сообщений.</span></div>
 <div class="line">    Engine* sve = <span class="keyword">new</span> Engine(lgr); <span class="comment">// Создали движок, дав ему логгер.</span></div>
 <div class="line">    lgr-&gt;drop(); <span class="comment">// Нам лично больше логгер не нужен, отдадим его на обеспечение движку.</span></div>
 <div class="line">    WorldCreatingParameters wcp;</div>
@@ -210,25 +261,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 <div class="line">    ChunkVoxelObject* chunk = wrld-&gt;getChunk(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили чанк.</span></div>
 <div class="line">    <span class="keywordflow">if</span>(!chunk) <span class="keywordflow">return</span> 1;</div>
 <div class="line">    SimpleVoxelObject* svo = chunk-&gt;getSimpleVoxelObject(Vector3d&lt;int&gt;(0,0,0)); <span class="comment">// Получили объект.</span></div>
-<div class="line">    <span class="keywordflow">if</span>(!svo || svo-&gt;getTypeVoxel() != <a class="code" href="namespace_simple_voxel_engine_1_1_defines.html#a020fb55a33034c81354b5e182fe96920a54d38305b02c53c7e79516eca37826e6">ARGBCOLOR</a>) <span class="keywordflow">return</span> 1; <span class="comment">// Проверили на ошибки.</span></div>
+<div class="line">    <span class="keywordflow">if</span>(!svo || svo-&gt;getTypeVoxel() != ARGBCOLOR) <span class="keywordflow">return</span> 1; <span class="comment">// Проверили на ошибки.</span></div>
 <div class="line">    ARGBColorVoxel* argbcolorvoxel = (ARGBColorVoxel*)svo; <span class="comment">// Привели типы.</span></div>
 <div class="line">    <span class="keywordtype">int</span> a = argbcolorvoxel-&gt;getARGBColor().getA(); <span class="comment">// Получили цвета вокселя.</span></div>
 <div class="line">    <span class="keywordtype">int</span> r = argbcolorvoxel-&gt;getARGBColor().getR();</div>
 <div class="line">    <span class="keywordtype">int</span> g = argbcolorvoxel-&gt;getARGBColor().getG();</div>
 <div class="line">    <span class="keywordtype">int</span> b = argbcolorvoxel-&gt;getARGBColor().getB();</div>
 <div class="line">    <span class="comment">// Делаем тип WARNING, чтобы увидеть сообщение, так как стандартные мы отключили.</span></div>
-<div class="line">    sve-&gt;registerEvent(EVENT_TYPE_WARNING, <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(a) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(r) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(g) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(b));</div>
+<div class="line">    sve-&gt;registerEvent(EVENT_TYPE_WARNING, <a class="code hl_function" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(a) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code hl_function" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(r) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code hl_function" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(g) + <span class="stringliteral">&quot;, &quot;</span> + <a class="code hl_function" href="namespace_work_functions_1_1_convert_functions.html#ac81888ad93acc220392595e0ff3b9dc1">WorkFunctions::ConvertFunctions::itos</a>(b));</div>
 <div class="line">    <span class="keyword">delete</span> sve;</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> В общем, вот пока и всё на этот раз. Спасибо за интерес к движку.<br />
+</div><!-- fragment --><p> В общем, вот пока и всё на этот раз. Спасибо за интерес к движку.<br  />
  Автор: <b>Харч</b>. </p>
 </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Документация по SimpleVoxelEngine. Последние изменения: Чт 17 Сен 2015 12:55:22. Создано системой &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="tutorials.html">Уроки по движку SimpleVoxelEngine.</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
 </body>
 </html>

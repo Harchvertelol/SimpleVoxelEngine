@@ -1,0 +1,694 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IrrSimpleVoxelEngine: Класс SimpleVoxelEngine::IrrEngine::ChunkStreamingPool</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">IrrSimpleVoxelEngine
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Поиск" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html','','class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Класс SimpleVoxelEngine::IrrEngine::ChunkStreamingPool</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Пул контроллеров стриминга чанков.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_chunk_streaming_pool_8h_source.html">ChunkStreamingPool.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a364db84fb7807ef6746997d994b5adcf" id="r_a364db84fb7807ef6746997d994b5adcf"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html">ChunkStreamingController</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a364db84fb7807ef6746997d994b5adcf">addController</a> (const std::string &amp;name, int worldid)</td></tr>
+<tr class="memdesc:a364db84fb7807ef6746997d994b5adcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавление контроллера.  <br /></td></tr>
+<tr class="memitem:ab7cba0b56c2ef9bc7e2b9bbd68cc899a" id="r_ab7cba0b56c2ef9bc7e2b9bbd68cc899a"><td class="memItemLeft"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html">ChunkStreamingController</a> *&#160;</td><td class="memItemRight"><a class="el" href="#ab7cba0b56c2ef9bc7e2b9bbd68cc899a">getController</a> (const std::string &amp;name)</td></tr>
+<tr class="memdesc:ab7cba0b56c2ef9bc7e2b9bbd68cc899a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение контроллера.  <br /></td></tr>
+<tr class="memitem:aa20fbebb747edba51d061f6562a7acee" id="r_aa20fbebb747edba51d061f6562a7acee"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa20fbebb747edba51d061f6562a7acee">removeController</a> (const std::string &amp;name)</td></tr>
+<tr class="memdesc:aa20fbebb747edba51d061f6562a7acee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаление контроллера.  <br /></td></tr>
+<tr class="memitem:a1c8fc9abc8bb4cc220f8b496ff17ad91" id="r_a1c8fc9abc8bb4cc220f8b496ff17ad91"><td class="memItemLeft"><a id="a1c8fc9abc8bb4cc220f8b496ff17ad91" name="a1c8fc9abc8bb4cc220f8b496ff17ad91"></a>
+void&#160;</td><td class="memItemRight"><b>removeAllControllers</b> ()</td></tr>
+<tr class="memdesc:a1c8fc9abc8bb4cc220f8b496ff17ad91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаление всех контроллеров (их чанки выгружаются на следующих шагах). <br /></td></tr>
+<tr class="memitem:a3fcec1065736d3bfe60bee5703e574ce" id="r_a3fcec1065736d3bfe60bee5703e574ce"><td class="memItemLeft">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a3fcec1065736d3bfe60bee5703e574ce">getControllerNames</a> ()</td></tr>
+<tr class="memdesc:a3fcec1065736d3bfe60bee5703e574ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение имён всех контроллеров.  <br /></td></tr>
+<tr class="memitem:a7e58d846729bdbfcbd46963f21a87d63" id="r_a7e58d846729bdbfcbd46963f21a87d63"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7e58d846729bdbfcbd46963f21a87d63">step</a> ()</td></tr>
+<tr class="memdesc:a7e58d846729bdbfcbd46963f21a87d63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Шаг пула: вызывать каждый кадр в главном потоке.  <br /></td></tr>
+<tr class="memitem:a38f6e4118982e4526aebc2b857b55aa0" id="r_a38f6e4118982e4526aebc2b857b55aa0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a38f6e4118982e4526aebc2b857b55aa0">setMaxPendingActions</a> (int value)</td></tr>
+<tr class="memdesc:a38f6e4118982e4526aebc2b857b55aa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сколько действий пула может одновременно ждать в главной очереди.  <br /></td></tr>
+<tr class="memitem:a773cd8191cfcc7af2bab41a2d116249d" id="r_a773cd8191cfcc7af2bab41a2d116249d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a773cd8191cfcc7af2bab41a2d116249d">getMaxPendingActions</a> ()</td></tr>
+<tr class="memdesc:a773cd8191cfcc7af2bab41a2d116249d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение предела действий в очереди.  <br /></td></tr>
+<tr class="memitem:a46d0dd5b0463e8b5bafec1f71ea9e750" id="r_a46d0dd5b0463e8b5bafec1f71ea9e750"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a46d0dd5b0463e8b5bafec1f71ea9e750">setMaxLoadsPerStep</a> (int value)</td></tr>
+<tr class="memdesc:a46d0dd5b0463e8b5bafec1f71ea9e750"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сколько чанков за один шаг можно поставить на загрузку.  <br /></td></tr>
+<tr class="memitem:a06d9e2b42ba216e211dc15e8e84abf60" id="r_a06d9e2b42ba216e211dc15e8e84abf60"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a06d9e2b42ba216e211dc15e8e84abf60">getMaxLoadsPerStep</a> ()</td></tr>
+<tr class="memdesc:a06d9e2b42ba216e211dc15e8e84abf60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение предела загрузок за шаг.  <br /></td></tr>
+<tr class="memitem:af35549cddb6f9ebc61f5ad5508fdd861" id="r_af35549cddb6f9ebc61f5ad5508fdd861"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af35549cddb6f9ebc61f5ad5508fdd861">setMaxUnloadsPerStep</a> (int value)</td></tr>
+<tr class="memdesc:af35549cddb6f9ebc61f5ad5508fdd861"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сколько чанков за один шаг можно поставить на выгрузку (и убрать из отрисовки).  <br /></td></tr>
+<tr class="memitem:a2491cf07f1812424899e7515f9763911" id="r_a2491cf07f1812424899e7515f9763911"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a2491cf07f1812424899e7515f9763911">getMaxUnloadsPerStep</a> ()</td></tr>
+<tr class="memdesc:a2491cf07f1812424899e7515f9763911"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение предела выгрузок за шаг.  <br /></td></tr>
+<tr class="memitem:a5a2adcf075a241210909a79eeafff438" id="r_a5a2adcf075a241210909a79eeafff438"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5a2adcf075a241210909a79eeafff438">setSaveOnUnload</a> (bool value)</td></tr>
+<tr class="memdesc:a5a2adcf075a241210909a79eeafff438"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сохранять ли чанки при выгрузке.  <br /></td></tr>
+<tr class="memitem:a15ff107462ae1a196718c42453d2bed5" id="r_a15ff107462ae1a196718c42453d2bed5"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a15ff107462ae1a196718c42453d2bed5">getSaveOnUnload</a> ()</td></tr>
+<tr class="memdesc:a15ff107462ae1a196718c42453d2bed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сохраняются ли чанки при выгрузке.  <br /></td></tr>
+<tr class="memitem:a8e3659d5f4de5af4cab1d4bf025ea480" id="r_a8e3659d5f4de5af4cab1d4bf025ea480"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8e3659d5f4de5af4cab1d4bf025ea480">setRetryDelayMilliseconds</a> (irr::u32 ms)</td></tr>
+<tr class="memdesc:a8e3659d5f4de5af4cab1d4bf025ea480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Через сколько миллисекунд повторить загрузку (или выгрузку) чанка, которая не удалась.  <br /></td></tr>
+<tr class="memitem:aa1649ac9fb6d506c3c8eb340fe069e0c" id="r_aa1649ac9fb6d506c3c8eb340fe069e0c"><td class="memItemLeft">irr::u32&#160;</td><td class="memItemRight"><a class="el" href="#aa1649ac9fb6d506c3c8eb340fe069e0c">getRetryDelayMilliseconds</a> ()</td></tr>
+<tr class="memdesc:aa1649ac9fb6d506c3c8eb340fe069e0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение времени до повтора загрузки.  <br /></td></tr>
+<tr class="memitem:a689f1306d8b07a386a1b1fa3b215d58b" id="r_a689f1306d8b07a386a1b1fa3b215d58b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a689f1306d8b07a386a1b1fa3b215d58b">setRecheckIntervalMilliseconds</a> (irr::u32 ms)</td></tr>
+<tr class="memdesc:a689f1306d8b07a386a1b1fa3b215d58b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Как часто перепроверять, что на самом деле загружено, даже если контроллеры стоят на месте.  <br /></td></tr>
+<tr class="memitem:a47c9b0981edd9ffacb31b2f96203c288" id="r_a47c9b0981edd9ffacb31b2f96203c288"><td class="memItemLeft">irr::u32&#160;</td><td class="memItemRight"><a class="el" href="#a47c9b0981edd9ffacb31b2f96203c288">getRecheckIntervalMilliseconds</a> ()</td></tr>
+<tr class="memdesc:a47c9b0981edd9ffacb31b2f96203c288"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение интервала перепроверки.  <br /></td></tr>
+<tr class="memitem:a7f1f1192f4ad4bd3fc9696830817fc7f" id="r_a7f1f1192f4ad4bd3fc9696830817fc7f"><td class="memItemLeft"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html">ChunkStreamingState</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7f1f1192f4ad4bd3fc9696830817fc7f">getState</a> (const std::string &amp;name)</td></tr>
+<tr class="memdesc:a7f1f1192f4ad4bd3fc9696830817fc7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Состояние области контроллера.  <br /></td></tr>
+<tr class="memitem:accc620d712f34c5cadb16ec02c4aa927" id="r_accc620d712f34c5cadb16ec02c4aa927"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#accc620d712f34c5cadb16ec02c4aa927">isAreaReady</a> (const std::string &amp;name)</td></tr>
+<tr class="memdesc:accc620d712f34c5cadb16ec02c4aa927"><td class="mdescLeft">&#160;</td><td class="mdescRight">Готова ли область контроллера.  <br /></td></tr>
+<tr class="memitem:a980653439fc219dbf9ab9967d75ddd0a" id="r_a980653439fc219dbf9ab9967d75ddd0a"><td class="memItemLeft">std::set&lt; std::string &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a980653439fc219dbf9ab9967d75ddd0a">getChunkOwners</a> (int worldid, SimpleVoxelEngine::Additional::Vector3d&lt; int &gt; vect)</td></tr>
+<tr class="memdesc:a980653439fc219dbf9ab9967d75ddd0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Владельцы чанка.  <br /></td></tr>
+<tr class="memitem:ac29a12a2cadf984f987f07e57f17fa23" id="r_ac29a12a2cadf984f987f07e57f17fa23"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac29a12a2cadf984f987f07e57f17fa23">getPendingActions</a> ()</td></tr>
+<tr class="memdesc:ac29a12a2cadf984f987f07e57f17fa23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сколько действий пула ждёт в главной очереди.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
+Друзья</h2></td></tr>
+<tr class="memitem:a5791bcb519b34bef52eb9e63a214eb96" id="r_a5791bcb519b34bef52eb9e63a214eb96"><td class="memItemLeft"><a id="a5791bcb519b34bef52eb9e63a214eb96" name="a5791bcb519b34bef52eb9e63a214eb96"></a>
+class&#160;</td><td class="memItemRight"><b>IrrSimpleVoxelEngine</b></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Пул контроллеров стриминга чанков. </p>
+<p>Загружает, отрисовывает, убирает из отрисовки и выгружает чанки вокруг контроллеров (<a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html" title="Контроллер стриминга чанков - &quot;игрок&quot; или &quot;камера&quot;, вокруг которых загружаются и отрисовываются чанки...">ChunkStreamingController</a>) - игроков или камер. Пул один на движок: <a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_irr_simple_voxel_engine.html#aa9d42fcaddc1a196c456aa1643450528" title="Получение пула контроллеров стриминга чанков.">IrrSimpleVoxelEngine::getChunkStreamingPool()</a>. Использование: добавить контроллер (<a class="el" href="#a364db84fb7807ef6746997d994b5adcf" title="Добавление контроллера.">addController()</a>), настроить его форму и радиусы, каждый кадр задавать ему положение (например, setScenePosition(camera-&gt;getAbsolutePosition())) и вызывать <a class="el" href="#a7e58d846729bdbfcbd46963f21a87d63" title="Шаг пула: вызывать каждый кадр в главном потоке.">step()</a>. Шаг дешёвый: если ни один контроллер не сменил чанк и ничего не изменилось, он сразу возвращается. Как работает шаг: по областям всех контроллеров пул знает, каким чанкам кто нужен (у чанка может быть несколько владельцев), сравнивает это с тем, что на самом деле загружено и отрисовывается, и ставит в главную очередь задания: недостающие чанки - на загрузку ближние к контроллерам первыми, по одному чанку на задание (правки, сохранение и пользовательские функции встают между ними и не ждут всю область); загруженные чанки области - в отрисовку, когда у них загружены соседи; ненужные - из отрисовки и из памяти (с сохранением, <a class="el" href="#a5a2adcf075a241210909a79eeafff438" title="Сохранять ли чанки при выгрузке.">setSaveOnUnload()</a>). Число заданий за шаг и в очереди ограничено (<a class="el" href="#a38f6e4118982e4526aebc2b857b55aa0" title="Сколько действий пула может одновременно ждать в главной очереди.">setMaxPendingActions()</a> и др.) - очередь не растёт без предела. Чанки, загруженные или отрисованные не пулом (addChunksForRendering() и т.п.), пул не выгружает и не убирает из отрисовки. Если чанк пула выгрузили вручную, а он ещё нужен, пул загрузит его снова. Чанк, который не загрузился, пул пробует снова через <a class="el" href="#a8e3659d5f4de5af4cab1d4bf025ea480" title="Через сколько миллисекунд повторить загрузку (или выгрузку) чанка, которая не удалась.">setRetryDelayMilliseconds()</a>. Чанки за границами мира (World::setChunksBound()) не трогаются. Загрузку исполняет поток главной очереди (как и addChunksForRendering()), поэтому пока движок не запущен (start()) или остановлен, задания только ждут в очереди. Все функции пула - только из главного потока (в отладочной сборке SVE_DEBUG_CHECKS - проверка). </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
+<a id="a364db84fb7807ef6746997d994b5adcf" name="a364db84fb7807ef6746997d994b5adcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a364db84fb7807ef6746997d994b5adcf">&#9670;&#160;</a></span>addController()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html">ChunkStreamingController</a> * SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::addController </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>worldid</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавление контроллера. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Имя (идентификатор) контроллера, например имя игрока. Должно быть уникальным в пуле. </td></tr>
+    <tr><td class="paramname">worldid</td><td>Идентификатор мира, в котором работает контроллер. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает новый контроллер (им владеет пул) или NULL, если имя уже занято или мира нет. </dd></dl>
+
+</div>
+</div>
+<a id="a980653439fc219dbf9ab9967d75ddd0a" name="a980653439fc219dbf9ab9967d75ddd0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a980653439fc219dbf9ab9967d75ddd0a">&#9670;&#160;</a></span>getChunkOwners()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::set&lt; std::string &gt; SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getChunkOwners </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>worldid</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SimpleVoxelEngine::Additional::Vector3d&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>vect</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Владельцы чанка. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">worldid</td><td>Идентификатор мира. </td></tr>
+    <tr><td class="paramname">vect</td><td>Вектор (координаты) чанка. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает имена контроллеров, которым чанк нужен (в отрисовке или только в памяти). </dd></dl>
+
+</div>
+</div>
+<a id="ab7cba0b56c2ef9bc7e2b9bbd68cc899a" name="ab7cba0b56c2ef9bc7e2b9bbd68cc899a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7cba0b56c2ef9bc7e2b9bbd68cc899a">&#9670;&#160;</a></span>getController()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_controller.html">ChunkStreamingController</a> * SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getController </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение контроллера. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Имя контроллера. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает контроллер или NULL, если его нет. </dd></dl>
+
+</div>
+</div>
+<a id="a3fcec1065736d3bfe60bee5703e574ce" name="a3fcec1065736d3bfe60bee5703e574ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fcec1065736d3bfe60bee5703e574ce">&#9670;&#160;</a></span>getControllerNames()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::string &gt; SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getControllerNames </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение имён всех контроллеров. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает имена контроллеров пула. </dd></dl>
+
+</div>
+</div>
+<a id="a06d9e2b42ba216e211dc15e8e84abf60" name="a06d9e2b42ba216e211dc15e8e84abf60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06d9e2b42ba216e211dc15e8e84abf60">&#9670;&#160;</a></span>getMaxLoadsPerStep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getMaxLoadsPerStep </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение предела загрузок за шаг. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает предел. </dd></dl>
+
+</div>
+</div>
+<a id="a773cd8191cfcc7af2bab41a2d116249d" name="a773cd8191cfcc7af2bab41a2d116249d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a773cd8191cfcc7af2bab41a2d116249d">&#9670;&#160;</a></span>getMaxPendingActions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getMaxPendingActions </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение предела действий в очереди. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает предел. </dd></dl>
+
+</div>
+</div>
+<a id="a2491cf07f1812424899e7515f9763911" name="a2491cf07f1812424899e7515f9763911"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2491cf07f1812424899e7515f9763911">&#9670;&#160;</a></span>getMaxUnloadsPerStep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getMaxUnloadsPerStep </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение предела выгрузок за шаг. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает предел. </dd></dl>
+
+</div>
+</div>
+<a id="ac29a12a2cadf984f987f07e57f17fa23" name="ac29a12a2cadf984f987f07e57f17fa23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac29a12a2cadf984f987f07e57f17fa23">&#9670;&#160;</a></span>getPendingActions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getPendingActions </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Сколько действий пула ждёт в главной очереди. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает число действий. </dd></dl>
+
+</div>
+</div>
+<a id="a47c9b0981edd9ffacb31b2f96203c288" name="a47c9b0981edd9ffacb31b2f96203c288"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47c9b0981edd9ffacb31b2f96203c288">&#9670;&#160;</a></span>getRecheckIntervalMilliseconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">irr::u32 SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getRecheckIntervalMilliseconds </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение интервала перепроверки. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает время в миллисекундах. </dd></dl>
+
+</div>
+</div>
+<a id="aa1649ac9fb6d506c3c8eb340fe069e0c" name="aa1649ac9fb6d506c3c8eb340fe069e0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1649ac9fb6d506c3c8eb340fe069e0c">&#9670;&#160;</a></span>getRetryDelayMilliseconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">irr::u32 SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getRetryDelayMilliseconds </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение времени до повтора загрузки. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает время в миллисекундах. </dd></dl>
+
+</div>
+</div>
+<a id="a15ff107462ae1a196718c42453d2bed5" name="a15ff107462ae1a196718c42453d2bed5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15ff107462ae1a196718c42453d2bed5">&#9670;&#160;</a></span>getSaveOnUnload()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getSaveOnUnload </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Сохраняются ли чанки при выгрузке. </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если сохраняются. </dd></dl>
+
+</div>
+</div>
+<a id="a7f1f1192f4ad4bd3fc9696830817fc7f" name="a7f1f1192f4ad4bd3fc9696830817fc7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f1f1192f4ad4bd3fc9696830817fc7f">&#9670;&#160;</a></span>getState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_state.html">ChunkStreamingState</a> SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::getState </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Состояние области контроллера. </p>
+<p>Например, для экрана загрузки. Считается по текущему положению дел (под блокировкой движка). </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Имя контроллера. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает состояние (все нули, если контроллера нет или он ещё не сделал шаг с положением). </dd></dl>
+
+</div>
+</div>
+<a id="accc620d712f34c5cadb16ec02c4aa927" name="accc620d712f34c5cadb16ec02c4aa927"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accc620d712f34c5cadb16ec02c4aa927">&#9670;&#160;</a></span>isAreaReady()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::isAreaReady </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Готова ли область контроллера. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Имя контроллера. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если все чанки области загружены и отрисовываются (меши могут ещё строиться в фоне), false - если нет, контроллера нет или он ещё не сделал шаг с положением. </dd></dl>
+
+</div>
+</div>
+<a id="aa20fbebb747edba51d061f6562a7acee" name="aa20fbebb747edba51d061f6562a7acee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa20fbebb747edba51d061f6562a7acee">&#9670;&#160;</a></span>removeController()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::removeController </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Удаление контроллера. </p>
+<p>Чанки, которые больше никому не нужны, пул уберёт из отрисовки и выгрузит на следующих шагах. Указатель на контроллер после вызова недействителен. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Имя контроллера. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает false, если такого контроллера нет. </dd></dl>
+
+</div>
+</div>
+<a id="a46d0dd5b0463e8b5bafec1f71ea9e750" name="a46d0dd5b0463e8b5bafec1f71ea9e750"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46d0dd5b0463e8b5bafec1f71ea9e750">&#9670;&#160;</a></span>setMaxLoadsPerStep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::setMaxLoadsPerStep </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Сколько чанков за один шаг можно поставить на загрузку. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Предел (не меньше 1, по умолчанию 16). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a38f6e4118982e4526aebc2b857b55aa0" name="a38f6e4118982e4526aebc2b857b55aa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38f6e4118982e4526aebc2b857b55aa0">&#9670;&#160;</a></span>setMaxPendingActions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::setMaxPendingActions </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Сколько действий пула может одновременно ждать в главной очереди. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Предел (не меньше 1, по умолчанию 64). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af35549cddb6f9ebc61f5ad5508fdd861" name="af35549cddb6f9ebc61f5ad5508fdd861"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af35549cddb6f9ebc61f5ad5508fdd861">&#9670;&#160;</a></span>setMaxUnloadsPerStep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::setMaxUnloadsPerStep </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Сколько чанков за один шаг можно поставить на выгрузку (и убрать из отрисовки). </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Предел (не меньше 1, по умолчанию 16). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a689f1306d8b07a386a1b1fa3b215d58b" name="a689f1306d8b07a386a1b1fa3b215d58b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a689f1306d8b07a386a1b1fa3b215d58b">&#9670;&#160;</a></span>setRecheckIntervalMilliseconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::setRecheckIntervalMilliseconds </td>
+          <td>(</td>
+          <td class="paramtype">irr::u32</td>          <td class="paramname"><span class="paramname"><em>ms</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Как часто перепроверять, что на самом деле загружено, даже если контроллеры стоят на месте. </p>
+<p>Нужно, чтобы пул заметил изменения не через него (например, чанк выгрузили вручную). </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ms</td><td>Время (по умолчанию 1000). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8e3659d5f4de5af4cab1d4bf025ea480" name="a8e3659d5f4de5af4cab1d4bf025ea480"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e3659d5f4de5af4cab1d4bf025ea480">&#9670;&#160;</a></span>setRetryDelayMilliseconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::setRetryDelayMilliseconds </td>
+          <td>(</td>
+          <td class="paramtype">irr::u32</td>          <td class="paramname"><span class="paramname"><em>ms</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Через сколько миллисекунд повторить загрузку (или выгрузку) чанка, которая не удалась. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ms</td><td>Время (по умолчанию 2000). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5a2adcf075a241210909a79eeafff438" name="a5a2adcf075a241210909a79eeafff438"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a2adcf075a241210909a79eeafff438">&#9670;&#160;</a></span>setSaveOnUnload()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::setSaveOnUnload </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Сохранять ли чанки при выгрузке. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>true (по умолчанию) - сохранять через ChunksSaveLoadController мира. Если у мира контроллера сохранения нет, чанк выгружается без сохранения (сохранять некуда). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7e58d846729bdbfcbd46963f21a87d63" name="a7e58d846729bdbfcbd46963f21a87d63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e58d846729bdbfcbd46963f21a87d63">&#9670;&#160;</a></span>step()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleVoxelEngine::IrrEngine::ChunkStreamingPool::step </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Шаг пула: вызывать каждый кадр в главном потоке. </p>
+<p>Пересчитывает области контроллеров, сменивших чанк или настройки, и ставит задания загрузки и выгрузки. </p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>E:/NeuroCoding/Claude/MyVoxelWork/IrrSimpleVoxelEngine/include/<a class="el" href="_chunk_streaming_pool_8h_source.html">ChunkStreamingPool.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespace_simple_voxel_engine.html">SimpleVoxelEngine</a></li><li class="navelem"><a href="namespace_simple_voxel_engine_1_1_irr_engine.html">IrrEngine</a></li><li class="navelem"><a href="class_simple_voxel_engine_1_1_irr_engine_1_1_chunk_streaming_pool.html">ChunkStreamingPool</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>
